@@ -5347,6 +5347,57 @@
           "pA": "Write the population equation P in year t since 2020 in the form y = mx + c",
           "pB": "What is the population in 2030?",
           "pC": "When will the population reach 8,000?"
+        },
+        "q8": {
+          "title": "Admission Ticket Price",
+          "content": "Park admission fee: Rp5,000 per person + Rp10,000 parking fee.",
+          "pA": "Write the total cost equation C for n people in the form y = mx + c",
+          "pB": "What is the total cost for a family of 5?",
+          "pC": "If the family budget is Rp60,000, how many people can enter?"
+        },
+        "q9": {
+          "title": "Water Flow — Volume and Time",
+          "content": "A tank holds 500 litres. Water drains at a constant rate of 25 litres/minute.",
+          "pA": "Write the volume equation V after t minutes in the form y = mx + c",
+          "pB": "What is the volume after 10 minutes?",
+          "pC": "When will the tank be empty?",
+          "pD": "Draw the volume vs time graph. What type of gradient is it?"
+        },
+        "q10": {
+          "title": "Two-Fare Graph — Break-Even Point",
+          "content": "Fare A: Rp20,000 base + Rp10,000/km. Fare B: Rp40,000 base + Rp5,000/km.",
+          "pA": "Write the equations for Fare A and Fare B in the form y = mx + c.",
+          "pB": "At what distance (km) are both fares equal?",
+          "pC": "Beyond the break-even point, which fare is cheaper?"
+        },
+        "q11": {
+          "title": "TKA — Salary and Bonus",
+          "content": "An employee's salary: Rp2,000,000/month + Rp50,000 bonus per unit sold.",
+          "pA": "Write the total income equation G for u units in the form y = mx + c",
+          "pB": "What is the income from selling 30 units?",
+          "pC": "How many units must be sold to earn Rp4,500,000?"
+        },
+        "q12": {
+          "title": "ANBK — Contextual Line-Selection Problem",
+          "content": "An agricultural agency records corn harvest area (hectares) per year: 2019: 400, 2020: 450, 2021: 500, 2022: 550.",
+          "pA": "Does this data form a linear pattern? Explain!",
+          "pB": "Write the line equation (year as x, area as y) in the form y = mx + c",
+          "pC": "Predict the harvest area in 2025."
+        },
+        "q13": {
+          "title": "Phone Tariff",
+          "content": "Phone tariff: Rp500/minute for the first 10 minutes, then Rp300/minute.",
+          "pA": "What is the cost for a 10-minute call?",
+          "pB": "Write the cost equation B for t > 10 minutes in the form y = mx + c",
+          "pC": "What is the cost for a 25-minute call?"
+        },
+        "q14": {
+          "title": "Challenge — Real-World Mathematical Modelling",
+          "content": "Store A sells fruit: Rp20,000/kg + Rp20,000 delivery fee. Store B: Rp50,000 flat regardless of quantity.",
+          "pA": "Write the cost equations for Store A and Store B in the form y = mx + c.",
+          "pB": "At how many kg do both stores cost the same?",
+          "pC": "If buying 2 kg, which is cheaper? And if buying 4 kg?",
+          "pD": "Draw a graph for both stores and summarise your purchasing strategy."
         }
       }
     }

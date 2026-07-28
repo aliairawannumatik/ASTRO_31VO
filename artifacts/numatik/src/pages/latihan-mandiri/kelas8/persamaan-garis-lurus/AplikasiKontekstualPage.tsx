@@ -180,8 +180,8 @@ const AplikasiKontekstualPage = () => {
       ],
     }),
 
-    /* ── Q8–Q14: untranslated (Tahap 3) ─── */
-    Qf(8, "Harga Tiket Masuk", {
+    /* ── Q8: Harga Tiket Masuk ─── */
+    Qf(8, t(`${p}.q8.title`), {
       type: "mixed",
       diagram: {
         size: 260, range: 8, lightBg: true,
@@ -195,15 +195,16 @@ const AplikasiKontekstualPage = () => {
           { x: -3, y: 4, text: "sumbu-y: biaya (×5rb)", color: "rgba(0,0,0,0.45)", size: 8 },
         ],
       },
-      content: "Harga tiket masuk taman: Rp5.000 per orang + biaya parkir Rp10.000.",
+      content: t(`${p}.q8.content`),
       parts: [
-        { label: "a.", math: "\\text{Tulis total biaya } C \\text{ untuk } n \\text{ orang dalam bentuk persamaan garis } y = mx + c" },
-        { label: "b.", math: "\\text{Berapa total biaya untuk keluarga 5 orang?}" },
-        { label: "c.", text: "Jika anggaran keluarga Rp60.000, berapa banyak orang yang bisa masuk?" },
+        { label: "a.", text: t(`${p}.q8.pA`) },
+        { label: "b.", text: t(`${p}.q8.pB`) },
+        { label: "c.", text: t(`${p}.q8.pC`) },
       ],
     }),
 
-    Qf(9, "Debit Air — Volume dan Waktu", {
+    /* ── Q9: Debit Air — Volume dan Waktu ─── */
+    Qf(9, t(`${p}.q9.title`), {
       type: "mixed",
       diagram: {
         size: 260, range: 12, lightBg: true,
@@ -217,16 +218,17 @@ const AplikasiKontekstualPage = () => {
           { x: -6, y: 6, text: "sumbu-y: volume (×50L)", color: "rgba(0,0,0,0.45)", size: 8 },
         ],
       },
-      content: "Bak air berisi 500 liter. Air keluar dengan kecepatan konstan 25 liter/menit.",
+      content: t(`${p}.q9.content`),
       parts: [
-        { label: "a.", math: "\\text{Tulis persamaan volume } V \\text{ setelah } t \\text{ menit dalam bentuk persamaan garis } y = mx + c" },
-        { label: "b.", math: "\\text{Berapa volume setelah 10 menit?}" },
-        { label: "c.", math: "\\text{Kapan bak kosong?}" },
-        { label: "d.", text: "Gambarkan grafik volume vs waktu. Apa jenis gradiennya?" },
+        { label: "a.", text: t(`${p}.q9.pA`) },
+        { label: "b.", text: t(`${p}.q9.pB`) },
+        { label: "c.", text: t(`${p}.q9.pC`) },
+        { label: "d.", text: t(`${p}.q9.pD`) },
       ],
     }),
 
-    Qf(10, "Grafik Dua Tarif — Titik Kesamaan", {
+    /* ── Q10: Grafik Dua Tarif — Titik Kesamaan ─── */
+    Qf(10, t(`${p}.q10.title`), {
       type: "mixed",
       diagram: {
         size: 260, range: 6, lightBg: true,
@@ -236,15 +238,16 @@ const AplikasiKontekstualPage = () => {
         ],
         pts: [{ x: 4, y: 6, label: "Titik sama", color: "#ca8a04", labelPos: "tl" }],
       },
-      content: "Tarif A: Rp20.000 awal + Rp10.000/km. Tarif B: Rp40.000 awal + Rp5.000/km.",
+      content: t(`${p}.q10.content`),
       parts: [
-        { label: "a.", text: "Tulis persamaan tarif A dan tarif B dalam bentuk persamaan garis y = mx + c." },
-        { label: "b.", text: "Pada jarak berapa km kedua tarif sama?" },
-        { label: "c.", text: "Untuk jarak lebih dari titik kesamaan, tarif mana yang lebih murah?" },
+        { label: "a.", text: t(`${p}.q10.pA`) },
+        { label: "b.", text: t(`${p}.q10.pB`) },
+        { label: "c.", text: t(`${p}.q10.pC`) },
       ],
     }),
 
-    Qf(11, "TKA — Gaji dan Bonus", {
+    /* ── Q11: TKA — Gaji dan Bonus ─── */
+    Qf(11, t(`${p}.q11.title`), {
       type: "mixed",
       diagram: {
         size: 260, range: 8, lightBg: true,
@@ -258,15 +261,16 @@ const AplikasiKontekstualPage = () => {
           { x: -3, y: 5, text: "sumbu-y: gaji (×500rb)", color: "rgba(0,0,0,0.45)", size: 8 },
         ],
       },
-      content: "Gaji seorang karyawan: Rp2.000.000 per bulan + bonus Rp50.000 per unit terjual.",
+      content: t(`${p}.q11.content`),
       parts: [
-        { label: "a.", math: "\\text{Tulis persamaan total penghasilan } G \\text{ untuk } u \\text{ unit dalam bentuk persamaan garis } y = mx + c" },
-        { label: "b.", math: "\\text{Berapa penghasilan jika menjual 30 unit?}" },
-        { label: "c.", math: "\\text{Berapa unit harus dijual agar penghasilan Rp4.500.000?}" },
+        { label: "a.", text: t(`${p}.q11.pA`) },
+        { label: "b.", text: t(`${p}.q11.pB`) },
+        { label: "c.", text: t(`${p}.q11.pC`) },
       ],
     }),
 
-    Qf(12, "ANBK — Soal Kontekstual Pilih Garis", {
+    /* ── Q12: ANBK — Soal Kontekstual Pilih Garis ─── */
+    Qf(12, t(`${p}.q12.title`), {
       type: "mixed",
       diagram: {
         size: 260, range: 12, lightBg: true,
@@ -280,15 +284,16 @@ const AplikasiKontekstualPage = () => {
           { x: -6, y: 3, text: "sumbu-y: luas panen (×50ha)", color: "rgba(0,0,0,0.45)", size: 8 },
         ],
       },
-      content: "Dinas pertanian mencatat luas panen jagung (hektar) setiap tahun: 2019: 400, 2020: 450, 2021: 500, 2022: 550.",
+      content: t(`${p}.q12.content`),
       parts: [
-        { label: "a.", text: "Apakah data ini membentuk pola linier? Jelaskan!" },
-        { label: "b.", math: "\\text{Tuliskan persamaan garis (tahun sebagai } x, \\text{ luas sebagai } y\\text{) dalam bentuk } y = mx + c" },
-        { label: "c.", math: "\\text{Prediksi luas panen tahun 2025.}" },
+        { label: "a.", text: t(`${p}.q12.pA`) },
+        { label: "b.", text: t(`${p}.q12.pB`) },
+        { label: "c.", text: t(`${p}.q12.pC`) },
       ],
     }),
 
-    Qf(13, "Tarif Telepon", {
+    /* ── Q13: Tarif Telepon ─── */
+    Qf(13, t(`${p}.q13.title`), {
       type: "mixed",
       diagram: {
         size: 260, range: 10, lightBg: true,
@@ -305,15 +310,16 @@ const AplikasiKontekstualPage = () => {
           { x: -5, y: 5, text: "sumbu-y: biaya (×1rb)", color: "rgba(0,0,0,0.45)", size: 8 },
         ],
       },
-      content: "Tarif telepon: Rp500/menit untuk 10 menit pertama, kemudian Rp300/menit.",
+      content: t(`${p}.q13.content`),
       parts: [
-        { label: "a.", text: "Berapa biaya untuk percakapan 10 menit?" },
-        { label: "b.", math: "\\text{Tulis persamaan biaya } B \\text{ untuk } t > 10 \\text{ menit dalam bentuk persamaan garis } y = mx + c" },
-        { label: "c.", math: "\\text{Berapa biaya untuk percakapan 25 menit?}" },
+        { label: "a.", text: t(`${p}.q13.pA`) },
+        { label: "b.", text: t(`${p}.q13.pB`) },
+        { label: "c.", text: t(`${p}.q13.pC`) },
       ],
     }),
 
-    Qf(14, "Tantangan — Model Matematika Dunia Nyata", {
+    /* ── Q14: Tantangan — Model Matematika Dunia Nyata ─── */
+    Qf(14, t(`${p}.q14.title`), {
       type: "mixed",
       diagram: {
         size: 260, range: 6, lightBg: true,
@@ -325,12 +331,12 @@ const AplikasiKontekstualPage = () => {
           { x: 3, y: 5, label: "Sama", color: "#ca8a04", labelPos: "tl" },
         ],
       },
-      content: "Toko A menjual buah: Rp20.000/kg + Rp20.000 ongkos kirim. Toko B: Rp50.000 flat untuk berapapun kg.",
+      content: t(`${p}.q14.content`),
       parts: [
-        { label: "a.", text: "Tulis persamaan biaya Toko A dan Toko B dalam bentuk persamaan garis y = mx + c." },
-        { label: "b.", text: "Pada berapa kg pembelian biaya kedua toko sama?" },
-        { label: "c.", text: "Jika membeli 2 kg, mana yang lebih murah? Dan jika 4 kg?" },
-        { label: "d.", text: "Gambarkan grafik kedua toko dan beri kesimpulan strategi pembelian." },
+        { label: "a.", text: t(`${p}.q14.pA`) },
+        { label: "b.", text: t(`${p}.q14.pB`) },
+        { label: "c.", text: t(`${p}.q14.pC`) },
+        { label: "d.", text: t(`${p}.q14.pD`) },
       ],
     }),
   ];

@@ -5347,6 +5347,57 @@
           "pA": "Tulis persamaan populasi P pada tahun ke-t sejak 2020 dalam bentuk persamaan garis y = mx + c",
           "pB": "Berapa populasi pada tahun 2030?",
           "pC": "Kapan populasi mencapai 8.000 jiwa?"
+        },
+        "q8": {
+          "title": "Harga Tiket Masuk",
+          "content": "Harga tiket masuk taman: Rp5.000 per orang + biaya parkir Rp10.000.",
+          "pA": "Tulis total biaya C untuk n orang dalam bentuk persamaan garis y = mx + c",
+          "pB": "Berapa total biaya untuk keluarga 5 orang?",
+          "pC": "Jika anggaran keluarga Rp60.000, berapa banyak orang yang bisa masuk?"
+        },
+        "q9": {
+          "title": "Debit Air — Volume dan Waktu",
+          "content": "Bak air berisi 500 liter. Air keluar dengan kecepatan konstan 25 liter/menit.",
+          "pA": "Tulis persamaan volume V setelah t menit dalam bentuk persamaan garis y = mx + c",
+          "pB": "Berapa volume setelah 10 menit?",
+          "pC": "Kapan bak kosong?",
+          "pD": "Gambarkan grafik volume vs waktu. Apa jenis gradiennya?"
+        },
+        "q10": {
+          "title": "Grafik Dua Tarif — Titik Kesamaan",
+          "content": "Tarif A: Rp20.000 awal + Rp10.000/km. Tarif B: Rp40.000 awal + Rp5.000/km.",
+          "pA": "Tulis persamaan tarif A dan tarif B dalam bentuk persamaan garis y = mx + c.",
+          "pB": "Pada jarak berapa km kedua tarif sama?",
+          "pC": "Untuk jarak lebih dari titik kesamaan, tarif mana yang lebih murah?"
+        },
+        "q11": {
+          "title": "TKA — Gaji dan Bonus",
+          "content": "Gaji seorang karyawan: Rp2.000.000 per bulan + bonus Rp50.000 per unit terjual.",
+          "pA": "Tulis persamaan total penghasilan G untuk u unit dalam bentuk persamaan garis y = mx + c",
+          "pB": "Berapa penghasilan jika menjual 30 unit?",
+          "pC": "Berapa unit harus dijual agar penghasilan Rp4.500.000?"
+        },
+        "q12": {
+          "title": "ANBK — Soal Kontekstual Pilih Garis",
+          "content": "Dinas pertanian mencatat luas panen jagung (hektar) setiap tahun: 2019: 400, 2020: 450, 2021: 500, 2022: 550.",
+          "pA": "Apakah data ini membentuk pola linier? Jelaskan!",
+          "pB": "Tuliskan persamaan garis (tahun sebagai x, luas sebagai y) dalam bentuk y = mx + c",
+          "pC": "Prediksi luas panen tahun 2025."
+        },
+        "q13": {
+          "title": "Tarif Telepon",
+          "content": "Tarif telepon: Rp500/menit untuk 10 menit pertama, kemudian Rp300/menit.",
+          "pA": "Berapa biaya untuk percakapan 10 menit?",
+          "pB": "Tulis persamaan biaya B untuk t > 10 menit dalam bentuk persamaan garis y = mx + c",
+          "pC": "Berapa biaya untuk percakapan 25 menit?"
+        },
+        "q14": {
+          "title": "Tantangan — Model Matematika Dunia Nyata",
+          "content": "Toko A menjual buah: Rp20.000/kg + Rp20.000 ongkos kirim. Toko B: Rp50.000 flat untuk berapapun kg.",
+          "pA": "Tulis persamaan biaya Toko A dan Toko B dalam bentuk persamaan garis y = mx + c.",
+          "pB": "Pada berapa kg pembelian biaya kedua toko sama?",
+          "pC": "Jika membeli 2 kg, mana yang lebih murah? Dan jika 4 kg?",
+          "pD": "Gambarkan grafik kedua toko dan beri kesimpulan strategi pembelian."
         }
       }
     }
