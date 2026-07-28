@@ -19,7 +19,7 @@ const translations = {
     intro_p3: "25 kali perkalian",
     intro_p4: "! Tapi dengan sifat-sifat pangkat, kamu bisa selesaikan dalam hitungan detik. Sifat-sifat ini bukan sulap — semuanya punya logika yang bisa kamu turunkan sendiri.",
     intro_box: "Ada",
-    intro_box2: "9 sifat utama",
+    intro_box2: "8 sifat utama",
     intro_box3: "bilangan berpangkat. Kuasai semuanya dan kamu akan jago menyederhanakan ekspresi matematika yang tampak rumit sekalipun! 🚀",
     tip_learn: "Tips:",
     tip_learn2: "Pelajari",
@@ -128,7 +128,7 @@ const translations = {
     k9_note: "Tips:",
     k9_note2: "Kadang lebih mudah gabungkan basis dulu sebelum pangkatkan!",
     // Rangkuman
-    sec_rangkuman: "📊 Rangkuman 9 Sifat Bilangan Berpangkat",
+    sec_rangkuman: "📊 Rangkuman 8 Sifat Bilangan Berpangkat",
     col_no: "No",
     col_nama: "Nama",
     col_rumus: "Rumus",
@@ -232,7 +232,7 @@ const translations = {
     intro_p3: "25 multiplications",
     intro_p4: "! But with the laws of exponents, you can solve it in seconds. These aren't tricks — they all have logic you can derive yourself.",
     intro_box: "There are",
-    intro_box2: "9 main laws",
+    intro_box2: "8 main laws",
     intro_box3: "of exponents. Master them all and you'll simplify even complex-looking expressions easily! 🚀",
     tip_learn: "Tip:",
     tip_learn2: "Learn",
@@ -330,7 +330,7 @@ const translations = {
     k9_desc5: ". This is the reverse of Law 4!",
     k9_note: "Tip:",
     k9_note2: "Sometimes it's easier to combine the bases first before raising to the power!",
-    sec_rangkuman: "📊 Summary: 9 Laws of Exponents",
+    sec_rangkuman: "📊 Summary: 8 Laws of Exponents",
     col_no: "No",
     col_nama: "Name",
     col_rumus: "Formula",
@@ -423,7 +423,7 @@ const translations = {
     intro_p3: "25回の掛け算",
     intro_p4: "になる！でも指数法則を使えば数秒で解ける。これは魔法ではなく、すべて自分で導ける論理だ。",
     intro_box: "指数には",
-    intro_box2: "9つの主要な法則",
+    intro_box2: "8つの主要な法則",
     intro_box3: "がある。すべてマスターすれば、複雑な式もスラスラ簡略化できる！ 🚀",
     tip_learn: "ヒント：",
     tip_learn2: "",
@@ -521,7 +521,7 @@ const translations = {
     k9_desc5: "に書ける。法則4の逆！",
     k9_note: "ヒント：",
     k9_note2: "先に底を合わせてから累乗する方が楽なこともある！",
-    sec_rangkuman: "📊 まとめ：指数の9つの法則",
+    sec_rangkuman: "📊 まとめ：指数の8つの法則",
     col_no: "No",
     col_nama: "名前",
     col_rumus: "公式",
@@ -614,7 +614,7 @@ const SifatSifatOperasiPage = () => {
   const allSections = [
     "intro",
     "k1","c1","k2","c2","k3","c3","k4","c4",
-    "k5","c5","k6","c6","k7","c7","k8","c8","k9","c9",
+    "k5","c5","k6","c6","k7","c7","k8","c8",
     "rangkuman",
   ];
   const [expandedSections, setExpandedSections] = useState<string[]>(allSections);
@@ -1226,62 +1226,6 @@ const SifatSifatOperasiPage = () => {
             )}
           </div>
 
-          {/* ═══ SIFAT 9 ═══════════════════════════════════════════════════ */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="k9" icon={<Target className="w-5 h-5" />} iconColor="text-violet-400"
-              title={<span>📘 {t.sec_k9}: <InlineMath math="a^n \cdot b^n = (a \cdot b)^n" /></span>} />
-            {isOpen("k9") && (
-              <div className="px-5 pb-5 space-y-4">
-                <Box color="purple">
-                  <p className="font-body text-sm font-semibold text-purple-300 mb-2">{t.badge_intisari}</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
-                    {t.k9_desc} <strong className="text-purple-300">{t.k9_desc2}</strong>{t.k9_desc3} <strong className="text-purple-300">{t.k9_desc4}</strong>{t.k9_desc5}
-                  </p>
-                  <div className="bg-slate-900/60 rounded-lg p-3 mt-3 text-center">
-                    <BlockMath math="a^n \cdot b^n = (a \cdot b)^n" />
-                  </div>
-                  <p className="font-body text-xs text-white/50 mt-1">{t.s9_formula_note}</p>
-                </Box>
-                <Box color="yellow">
-                  <p className="font-body text-sm text-yellow-200"><strong>{t.k9_note}</strong> {t.k9_note2}</p>
-                </Box>
-              </div>
-            )}
-          </div>
-
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="c9" icon={<Calculator className="w-5 h-5" />} iconColor="text-violet-400"
-              title={<span>📝 {t.sec_c9}: <InlineMath math="a^n \cdot b^n" /></span>} />
-            {isOpen("c9") && (
-              <div className="px-5 pb-5 space-y-6">
-                <ExBlock level="easy" n={1}
-                  soal={<>{t.sederhanakan} <InlineMath math="3^4 \cdot 2^4" /></>}
-                  solution={<>
-                    <p>{t.k9_gabungkan}</p>
-                    <Dark><BlockMath math="3^4 \cdot 2^4 = (3 \cdot 2)^4 = 6^4 = 1296" /></Dark>
-                  </>}
-                />
-                <ExBlock level="med" n={2}
-                  soal={<>{t.sederhanakan} <InlineMath math="4^3 \cdot 25^3" /></>}
-                  solution={<>
-                    <p>{t.k9_gabungkan}</p>
-                    <Dark><BlockMath math="4^3 \cdot 25^3 = (4 \cdot 25)^3 = 100^3 = 1.000.000" /></Dark>
-                  </>}
-                />
-                <ExBlock level="hard" n={3}
-                  soal={<>{t.sederhanakan} <InlineMath math="8^5 \cdot \left(\dfrac{1}{2}\right)^5" /></>}
-                  solution={<>
-                    <p>{t.k9_gabungkan}</p>
-                    <Dark>
-                      <BlockMath math="8^5 \cdot \left(\frac{1}{2}\right)^5 = \left(8 \cdot \frac{1}{2}\right)^5 = 4^5 = 1024" />
-                    </Dark>
-                    <p>{t.k9_langsung}</p>
-                  </>}
-                />
-              </div>
-            )}
-          </div>
-
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-primary"
@@ -1307,7 +1251,6 @@ const SifatSifatOperasiPage = () => {
                         { nama: t.r6_nama, rumus: "a^0 = 1" },
                         { nama: t.r7_nama, rumus: "a^{-n} = \\frac{1}{a^n}" },
                         { nama: t.r8_nama, rumus: "a^{m/n} = \\sqrt[n]{a^m}" },
-                        { nama: t.r9_nama, rumus: "a^n \\cdot b^n = (ab)^n" },
                       ].map((row, i) => (
                         <tr key={i} className="border-b border-white/5">
                           <td className="py-2 pr-2 text-white/40">{i + 1}</td>
