@@ -5601,6 +5601,151 @@
         "i": "Persegi 14×14 cm dengan empat daun yang diarsir",
         "j": "Dua setengah lingkaran, diameter 26 cm dan 14 cm",
         "k": "Lingkaran dengan jari-jari 10 cm dan tembereng yang diarsir"
+      },
+      "sudutPusatKeliling": {
+        "h1": "SUDUT PUSAT DAN SUDUT KELILING",
+        "shared": {
+          "jika": "Jika ",
+          "tentukan": "tentukan ",
+          "Tentukan": "Tentukan ",
+          "dan": "dan ",
+          "pusat": "Pusat",
+          "keliling": "Keliling",
+          "busurSama": " (busur sama)"
+        },
+        "refBox": {
+          "label": "📐 Teorema Sudut Pusat & Keliling",
+          "card1n": "∠ keliling di busur sama",
+          "card1d": "Besar sudutnya sama",
+          "card2n": "∠ keliling pada diameter",
+          "card2d": "Selalu = 90°",
+          "card3n": "Segi-4 tali busur",
+          "card3d": "∠ berhadapan = 180°",
+          "card4n": "Sudut busur minor",
+          "card4d": "180° − sudut keliling normal"
+        },
+        "q1": {
+          "title": "Teorema Sudut Pusat = 2 × Sudut Keliling",
+          "labelTeorema": "Teorema:",
+          "c": {
+            "post": "tentukan busur AB (dalam derajat)."
+          }
+        },
+        "q2": {
+          "title": "Sudut Keliling Menghadap Diameter = 90°",
+          "pre": "Jika AB adalah diameter dan "
+        },
+        "q3": {
+          "title": "Soal UN — Menentukan Sudut yang Belum Diketahui",
+          "b": "Tentukan besar busur AB (derajat).",
+          "c": "Tentukan besar busur mayor AB (derajat)."
+        },
+        "q4": {
+          "title": "Sudut dalam Segitiga Berdasarkan Lingkaran",
+          "content": "Segitiga ABC tertulis dalam lingkaran. Pusat lingkaran O.",
+          "a": {
+            "pre": "Jika busur AB = busur BC = busur CA, berapakah "
+          },
+          "b": {
+            "pre": "Berapakah ",
+            "post": "(sudut keliling menghadap busur AB)?"
+          },
+          "c": "Segitiga ABC adalah segitiga apa? Jelaskan!"
+        },
+        "q5": {
+          "title": "Soal ANBK — Mencari Sudut x",
+          "content": "Sudut pusat ∠POQ = 4x. Sudut keliling ∠PRQ = (x + 20°).",
+          "a": {
+            "pre": "Gunakan teorema: ",
+            "post": "Buat persamaan."
+          },
+          "b": {
+            "pre": "Selesaikan persamaan untuk mendapatkan nilai "
+          },
+          "c": "Tentukan besar ∠POQ dan ∠PRQ."
+        },
+        "q6": {
+          "title": "Segi Empat Tali Busur (Cyclic Quadrilateral)",
+          "content": "ABCD adalah segi empat tali busur (semua titik pada lingkaran). Sifat: sudut yang berhadapan saling berpelurus.",
+          "c": "Apakah persegi panjang selalu merupakan segi empat tali busur? Mengapa?"
+        },
+        "q7": {
+          "title": "Soal UN — Sudut Keliling Dua Titik",
+          "content": "∠ACB = 48°. Titik D pada busur yang sama (busur mayor AB).",
+          "b": "Jika titik E juga berada pada busur mayor AB, berapa besar ∠AEB?",
+          "c": "Apakah sudut keliling bergantung pada posisi titik (selama di busur yang sama)?"
+        },
+        "q8": {
+          "title": "Sudut Keliling Menghadap Diameter",
+          "b": {
+            "post": "dalam segitiga PRQ."
+          },
+          "c": {
+            "post": "dalam segitiga PQS."
+          }
+        },
+        "q9": {
+          "title": "Soal UN — Sudut Tembereng",
+          "content": "∠ACB = 40°.",
+          "a": {
+            "post": "(sudut pusat)."
+          },
+          "b": "Tentukan busur AB (derajat).",
+          "c": "Tentukan sudut ∠ADB jika D berada pada busur yang sama dengan C (busur mayor AB)."
+        },
+        "q10": {
+          "title": "Soal ANBK — Mencari Semua Sudut",
+          "content": "A, B, C, D pada lingkaran. ∠AOB = ∠BOC = ∠COA = 120° (segitiga sama sisi). D di busur mayor AB.",
+          "a": {
+            "post": "(sudut keliling menghadap busur AB = 120°)."
+          },
+          "b": {
+            "post": "jika D di busur yang berbeda."
+          },
+          "c": "Tentukan besar sudut-sudut dalam segitiga ABC."
+        },
+        "q11": {
+          "title": "Soal UN — Segi Empat Tali Busur",
+          "content": "WXYZ adalah segi empat tali busur. ∠W = 75° dan ∠X = 110°.",
+          "c": "Apakah ∠W + ∠X + ∠Y + ∠Z = 360°? Verifikasi!"
+        },
+        "q12": {
+          "title": "Soal ANBK — Benar atau Salah",
+          "content": "Tentukan pernyataan BENAR (B) atau SALAH (S)!",
+          "p1": "Sudut pusat = 2 × sudut keliling yang menghadap busur yang sama. (B/S)",
+          "p2": "Semua sudut keliling yang menghadap busur yang sama memiliki besar yang sama. (B/S)",
+          "p3": "Sudut keliling yang menghadap diameter selalu 90°. (B/S)",
+          "p4": "Dalam segi empat tali busur, semua sudut besarnya 90°. (B/S)"
+        },
+        "q13": {
+          "title": "Mencari Sudut dengan Sifat Segitiga Sama Kaki",
+          "content": "OA = OB = OC = r (jari-jari). Maka OAC, OBC adalah segitiga sama kaki.",
+          "b": {
+            "post": "(segitiga OAC sama kaki)."
+          }
+        },
+        "q14": {
+          "title": "Soal UN — Sudut Keliling Tiga Titik",
+          "content": "∠PRQ = 65°, S juga pada busur yang sama dengan R (busur mayor PQ).",
+          "b": {
+            "pre": "Tentukan sudut pusat "
+          },
+          "c": "Berapa sudut keliling yang berbeda posisi, tetapi besarnya tetap sama menghadap busur PQ?"
+        },
+        "q15": {
+          "title": "Soal ANBK Gabungan — Sudut Pusat dan Keliling",
+          "content": "∠AOB = ∠BOC = ∠COA = 120°. D ada di busur mayor AB.",
+          "a": {
+            "pre": "Tentukan sudut keliling "
+          },
+          "b": {
+            "post": "(D di busur mayor AB)."
+          },
+          "c": "Berapa besar ∠ACB + ∠ADB? Apa yang bisa disimpulkan?",
+          "d": {
+            "pre": "Jika E di busur yang sama dengan C, apakah "
+          }
+        }
       }
     }
   },

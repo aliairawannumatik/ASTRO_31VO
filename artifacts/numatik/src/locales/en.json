@@ -5601,6 +5601,151 @@
         "i": "14×14 cm square with four leaf shapes (shaded)",
         "j": "Two semicircles with diameters 26 cm and 14 cm",
         "k": "Circle with radius 10 cm and a shaded segment"
+      },
+      "sudutPusatKeliling": {
+        "h1": "CENTRAL ANGLE AND INSCRIBED ANGLE",
+        "shared": {
+          "jika": "If ",
+          "tentukan": "find ",
+          "Tentukan": "Find ",
+          "dan": "and ",
+          "pusat": "Central",
+          "keliling": "Inscribed",
+          "busurSama": " (same arc)"
+        },
+        "refBox": {
+          "label": "📐 Central Angle & Inscribed Angle Theorems",
+          "card1n": "∠ inscribed on same arc",
+          "card1d": "Angles are equal",
+          "card2n": "∠ inscribed on diameter",
+          "card2d": "Always = 90°",
+          "card3n": "Cyclic quadrilateral",
+          "card3d": "Opposite ∠ = 180°",
+          "card4n": "Minor arc angle",
+          "card4d": "180° − normal inscribed angle"
+        },
+        "q1": {
+          "title": "Theorem: Central Angle = 2 × Inscribed Angle",
+          "labelTeorema": "Theorem:",
+          "c": {
+            "post": "find arc AB (in degrees)."
+          }
+        },
+        "q2": {
+          "title": "Inscribed Angle on Diameter = 90°",
+          "pre": "If AB is a diameter and "
+        },
+        "q3": {
+          "title": "National Exam — Finding the Unknown Angle",
+          "b": "Find the measure of arc AB (in degrees).",
+          "c": "Find the measure of major arc AB (in degrees)."
+        },
+        "q4": {
+          "title": "Triangle Angles Based on a Circle",
+          "content": "Triangle ABC is inscribed in a circle. Center of circle is O.",
+          "a": {
+            "pre": "If arc AB = arc BC = arc CA, what is "
+          },
+          "b": {
+            "pre": "What is ",
+            "post": "(inscribed angle facing arc AB)?"
+          },
+          "c": "What type of triangle is ABC? Explain!"
+        },
+        "q5": {
+          "title": "ANBK Problem — Finding Angle x",
+          "content": "Central angle ∠POQ = 4x. Inscribed angle ∠PRQ = (x + 20°).",
+          "a": {
+            "pre": "Use the theorem: ",
+            "post": "Write the equation."
+          },
+          "b": {
+            "pre": "Solve the equation to find the value of "
+          },
+          "c": "Find the measure of ∠POQ and ∠PRQ."
+        },
+        "q6": {
+          "title": "Cyclic Quadrilateral",
+          "content": "ABCD is a cyclic quadrilateral (all vertices on the circle). Property: opposite angles are supplementary.",
+          "c": "Is a rectangle always a cyclic quadrilateral? Why?"
+        },
+        "q7": {
+          "title": "National Exam — Inscribed Angle at Two Points",
+          "content": "∠ACB = 48°. Point D is on the same arc (major arc AB).",
+          "b": "If point E is also on major arc AB, what is ∠AEB?",
+          "c": "Does the inscribed angle depend on the position of the point (as long as it is on the same arc)?"
+        },
+        "q8": {
+          "title": "Inscribed Angle on a Diameter",
+          "b": {
+            "post": "in triangle PRQ."
+          },
+          "c": {
+            "post": "in triangle PQS."
+          }
+        },
+        "q9": {
+          "title": "National Exam — Segment Angle",
+          "content": "∠ACB = 40°.",
+          "a": {
+            "post": "(central angle)."
+          },
+          "b": "Find arc AB (in degrees).",
+          "c": "Find ∠ADB if D is on the same arc as C (major arc AB)."
+        },
+        "q10": {
+          "title": "ANBK Problem — Finding All Angles",
+          "content": "A, B, C, D are on the circle. ∠AOB = ∠BOC = ∠COA = 120° (equilateral triangle). D is on major arc AB.",
+          "a": {
+            "post": "(inscribed angle facing arc AB = 120°)."
+          },
+          "b": {
+            "post": "if D is on the different arc."
+          },
+          "c": "Find all angles in triangle ABC."
+        },
+        "q11": {
+          "title": "National Exam — Cyclic Quadrilateral",
+          "content": "WXYZ is a cyclic quadrilateral. ∠W = 75° and ∠X = 110°.",
+          "c": "Is ∠W + ∠X + ∠Y + ∠Z = 360°? Verify!"
+        },
+        "q12": {
+          "title": "ANBK Problem — True or False",
+          "content": "Determine whether each statement is TRUE (T) or FALSE (F)!",
+          "p1": "Central angle = 2 × inscribed angle facing the same arc. (T/F)",
+          "p2": "All inscribed angles facing the same arc have the same measure. (T/F)",
+          "p3": "An inscribed angle facing the diameter is always 90°. (T/F)",
+          "p4": "In a cyclic quadrilateral, all angles measure 90°. (T/F)"
+        },
+        "q13": {
+          "title": "Finding Angles Using Isosceles Triangle Property",
+          "content": "OA = OB = OC = r (radius). So triangles OAC and OBC are isosceles.",
+          "b": {
+            "post": "(isosceles triangle OAC)."
+          }
+        },
+        "q14": {
+          "title": "National Exam — Inscribed Angle at Three Points",
+          "content": "∠PRQ = 65°, S is also on the same arc as R (major arc PQ).",
+          "b": {
+            "pre": "Find the central angle "
+          },
+          "c": "How many inscribed angles in different positions have the same measure facing arc PQ?"
+        },
+        "q15": {
+          "title": "ANBK Combined Problem — Central and Inscribed Angles",
+          "content": "∠AOB = ∠BOC = ∠COA = 120°. D is on major arc AB.",
+          "a": {
+            "pre": "Find the inscribed angle "
+          },
+          "b": {
+            "post": "(D on major arc AB)."
+          },
+          "c": "What is ∠ACB + ∠ADB? What can you conclude?",
+          "d": {
+            "pre": "If E is on the same arc as C, is "
+          }
+        }
       }
     }
   },

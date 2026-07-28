@@ -1,0 +1,87 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Lingkaran" — index,
+UnsurUnsurPage.tsx, KaitanBangunDatarPage.tsx, BusurJuringPage.tsx,
+KelilingLuasPage.tsx, dan PenerapanKontekstualPage.tsx sudah selesai.
+Ini SUB-HALAMAN TERAKHIR: SudutPusatKelilingPage.tsx (15 soal,
+paling berat di topik ini — ~32 kasus \text{}).
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- Tidak ada isDark/useTheme — hardcode dark-only
+- CircleDiagram dipakai di 14 dari 15 soal (Q1-Q11, Q13-Q15) —
+  JANGAN disentuh komponennya, sudah dikonfirmasi aman (semua label
+  props universal/matematis)
+- Q2 sengaja tidak punya part "a." (langsung mulai dari "b.") — ini
+  SUDAH DIKONFIRMASI disengaja, JANGAN ditambahkan part "a." baru,
+  biarkan seperti aslinya
+- BlockMath dipakai untuk reference box teorema — formula pure math
+  jangan disentuh, tapi label di sekitarnya (termasuk yang di dalam
+  BlockMath seperti "\angle \text{Pusat} = 2 \times \angle
+  \text{Keliling} \text{ (busur sama)}") WAJIB ditangani dengan pola
+  interpolasi
+- Label "Teorema:" sebagai part.label di Q1 — WAJIB diterjemahkan
+  (mirip pola "Langkah N:" yang sudah dikonversi di topik lain)
+- WAJIB grep "\\text{" menyeluruh — investigasi awal bilang ~32
+  kasus (termasuk 1 di BlockMath reference box), verifikasi ulang
+  untuk akurasi
+
+TUGAS SEKARANG:
+Fokus HANYA ke sub-halaman: SudutPusatKelilingPage.tsx (15 soal).
+
+KONTEKS KHUSUS:
+- questions: Q[] saat ini di LUAR komponen — WAJIB dipindahkan ke
+  DALAM komponen (rename Q ke Qf kalau perlu):
+
+  const { t } = useTranslation();
+  const p = 'practice.lingkaran.sudutPusatKeliling';
+  const questions: Q[] = [
+    Qf(1, t(`${p}.q1.title`), { ... }),
+  ];
+
+- title, content, parts[].text — SEMUA WAJIB diterjemahkan via t()
+- Contoh kasus \text{} yang sudah terdeteksi (verifikasi ulang, ini
+  cuma sampel):
+  * "\text{Jika } \angle AOB = 80°, \text{ tentukan } \angle ACB."
+  * "\text{Jika } \angle ACB = 55°, \text{ tentukan busur AB (dalam
+    derajat).}"
+  Tangani dengan pola interpolasi yang sudah terbukti (t() di JS
+  dulu, interpolasi ke template literal), manfaatkan shared key untuk
+  frasa yang berulang (seperti "Jika"/"tentukan" yang kemungkinan
+  muncul berkali-kali)
+- Label "Teorema:" di Q1 → WAJIB t()
+- Reference box BlockMath teorema — tangani \text{Pusat}/\text{Keliling}
+  di dalamnya dengan interpolasi juga
+
+1. Pindahkan array questions ke dalam komponen
+2. Terjemahkan SEMUA teks: title, content, parts[].text, label
+   "Teorema:", reference box
+3. Tangani SEMUA kasus \text{} bahasa Indonesia yang ditemukan dari
+   grep menyeluruh (manfaatkan shared key untuk efisiensi)
+4. Terjemahkan h1 title dan badge jumlah soal
+5. Tambahkan translation key ke ketiga file locale (id, en, ja) di
+   bawah practice.lingkaran.sudutPusatKeliling.*
+6. JANGAN sentuh sub-halaman lain, halaman index, atau CircleDiagram.tsx
+7. JANGAN tambahkan part "a." baru di Q2
+
+VERIFIKASI:
+- Laporkan validasi teknis (tsc kalau tidak timeout, atau esbuild/
+  grep manual + skrip Node.js pengecek key coverage, HMR log)
+- Berikan tabel rincian key per soal (Q1-Q15)
+- Jalankan grep "\\text{" untuk verifikasi, laporkan JUMLAH TOTAL
+  kasus yang ditemukan dan ditangani (bandingkan dengan investigasi
+  awal ~32)
+- Konfirmasi eksplisit: SEMUA 15 soal sudah diterjemahkan, CircleDiagram
+  tidak disentuh, Q2 tidak ditambahkan part "a.", label "Teorema:"
+  diterjemahkan, reference box ditangani dengan benar
+- KONFIRMASI PALING PENTING DAN TERAKHIR: setelah ini selesai, apakah
+  SELURUH topik "Lingkaran" (index + 6 sub-halaman: 2+13+1+6+15+12 =
+  49 soal) sekarang 100% trilingual tanpa ada yang terlewat?
