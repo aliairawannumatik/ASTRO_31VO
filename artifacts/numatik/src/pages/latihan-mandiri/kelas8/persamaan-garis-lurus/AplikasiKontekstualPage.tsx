@@ -64,7 +64,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(4, "UN 2019 — Biaya Produksi", {
+  Q(3, "UN 2019 — Biaya Produksi", {
     type: "mixed",
     diagram: {
       size: 260, range: 6, lightBg: true,
@@ -87,7 +87,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(5, "Tabungan Bertambah Rutin", {
+  Q(4, "Tabungan Bertambah Rutin", {
     type: "mixed",
     diagram: {
       size: 260, range: 6, lightBg: true,
@@ -105,7 +105,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(6, "Penurunan Nilai Barang", {
+  Q(5, "Penurunan Nilai Barang", {
     type: "mixed",
     diagram: {
       size: 260, range: 8, lightBg: true,
@@ -128,7 +128,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(7, "Isi Bahan Bakar", {
+  Q(6, "Isi Bahan Bakar", {
     type: "mixed",
     diagram: {
       size: 260, range: 6, lightBg: true,
@@ -146,7 +146,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(8, "Grafik Populasi Linier", {
+  Q(7, "Grafik Populasi Linier", {
     type: "mixed",
     diagram: {
       size: 260, range: 8, lightBg: true,
@@ -168,7 +168,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(9, "Harga Tiket Masuk", {
+  Q(8, "Harga Tiket Masuk", {
     type: "mixed",
     diagram: {
       size: 260, range: 8, lightBg: true,
@@ -190,7 +190,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(10, "Debit Air — Volume dan Waktu", {
+  Q(9, "Debit Air — Volume dan Waktu", {
     type: "mixed",
     diagram: {
       size: 260, range: 12, lightBg: true,
@@ -213,7 +213,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(11, "Grafik Dua Tarif — Titik Kesamaan", {
+  Q(10, "Grafik Dua Tarif — Titik Kesamaan", {
     type: "mixed",
     diagram: {
       size: 260, range: 6, lightBg: true,
@@ -231,7 +231,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(12, "TKA — Gaji dan Bonus", {
+  Q(11, "TKA — Gaji dan Bonus", {
     type: "mixed",
     diagram: {
       size: 260, range: 8, lightBg: true,
@@ -253,7 +253,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(13, "ANBK — Soal Kontekstual Pilih Garis", {
+  Q(12, "ANBK — Soal Kontekstual Pilih Garis", {
     type: "mixed",
     diagram: {
       size: 260, range: 12, lightBg: true,
@@ -275,7 +275,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(14, "Tarif Telepon", {
+  Q(13, "Tarif Telepon", {
     type: "mixed",
     diagram: {
       size: 260, range: 10, lightBg: true,
@@ -300,7 +300,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(15, "Tantangan — Model Matematika Dunia Nyata", {
+  Q(14, "Tantangan — Model Matematika Dunia Nyata", {
     type: "mixed",
     diagram: {
       size: 260, range: 6, lightBg: true,
@@ -333,7 +333,7 @@ const AplikasiKontekstualPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 bg-purple-500/10 border border-purple-500/30 rounded-full px-4 py-1 mb-3">
-            <span className="text-purple-400 text-xs font-body">15 Soal Latihan</span>
+            <span className="text-purple-400 text-xs font-body">14 Soal Latihan</span>
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
             APLIKASI PERSAMAAN GARIS PADA SOAL KONTEKSTUAL
