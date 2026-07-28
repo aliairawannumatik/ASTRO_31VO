@@ -5584,6 +5584,23 @@
           "h": "A segment is bounded by two radii and one arc.",
           "i": "All chords in a circle have the same length."
         }
+      },
+      "kaitanBangunDatar": {
+        "h1": "CIRCLES & OTHER PLANE FIGURES",
+        "questionTitle": "Shaded Region",
+        "content": "Find the perimeter and area of the shaded region in each figure below.",
+        "backTo": "Circle",
+        "a": "28×14 cm rectangle with two semicircles cut from the left and right sides",
+        "b": "Quarter circle, radius 10 cm",
+        "c": "14×14 cm square with two quarter circles at the corners",
+        "d": "21×21 cm rectangle with a semicircle at the right end",
+        "e": "Semicircle and full circle, radius 10 cm",
+        "f": "14×14 cm square with a four-pointed star shape (shaded)",
+        "g": "28×14 cm rectangle with one large semicircle and two small semicircles",
+        "h": "7×7 cm square with two intersecting circle arcs forming a leaf shape (shaded)",
+        "i": "14×14 cm square with four leaf shapes (shaded)",
+        "j": "Two semicircles with diameters 26 cm and 14 cm",
+        "k": "Circle with radius 10 cm and a shaded segment"
       }
     }
   },

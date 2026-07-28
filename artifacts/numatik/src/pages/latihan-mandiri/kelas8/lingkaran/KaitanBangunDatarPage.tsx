@@ -7,23 +7,24 @@ import { Circle } from "lucide-react";
 
 type SubPart = { label: string; img: string; alt: string };
 
-const parts: SubPart[] = [
-  { label: "a.", img: "/soal-kaitan-k.png", alt: "Persegi panjang 28×14 cm dengan dua setengah lingkaran terpotong di sisi kiri dan kanan" },
-  { label: "b.", img: "/soal-kaitan-j.png", alt: "Seperempat lingkaran, jari-jari 10 cm" },
-  { label: "c.", img: "/soal-kaitan-i.png", alt: "Persegi 14×14 cm dengan dua seperempat lingkaran di sudut" },
-  { label: "d.", img: "/soal-kaitan-h.png", alt: "Persegi panjang 21×21 cm dengan setengah lingkaran di ujung kanan" },
-  { label: "e.", img: "/soal-kaitan-g.png", alt: "Setengah lingkaran dan lingkaran penuh, jari-jari 10 cm" },
-  { label: "f.", img: "/soal-kaitan-f.png", alt: "Persegi 14×14 cm dengan bintang empat sudut yang diarsir" },
-  { label: "g.", img: "/soal-kaitan-e.png", alt: "Persegi panjang 28×14 cm dengan setengah lingkaran besar dan dua setengah lingkaran kecil" },
-  { label: "h.", img: "/soal-kaitan-d.png", alt: "Persegi 7×7 cm dengan irisan dua lingkaran (daun) yang diarsir" },
-  { label: "i.", img: "/soal-kaitan-c.png", alt: "Persegi 14×14 cm dengan empat daun yang diarsir" },
-  { label: "j.", img: "/soal-kaitan-b.png", alt: "Dua setengah lingkaran, diameter 26 cm dan 14 cm" },
-  { label: "k.", img: "/soal-kaitan-a.png", alt: "Lingkaran dengan jari-jari 10 cm dan tembereng yang diarsir" },
-];
-
 const KaitanBangunDatarPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const p = 'practice.lingkaran.kaitanBangunDatar';
+
+  const parts: SubPart[] = [
+    { label: "a.", img: "/soal-kaitan-k.png", alt: t(`${p}.a`) },
+    { label: "b.", img: "/soal-kaitan-j.png", alt: t(`${p}.b`) },
+    { label: "c.", img: "/soal-kaitan-i.png", alt: t(`${p}.c`) },
+    { label: "d.", img: "/soal-kaitan-h.png", alt: t(`${p}.d`) },
+    { label: "e.", img: "/soal-kaitan-g.png", alt: t(`${p}.e`) },
+    { label: "f.", img: "/soal-kaitan-f.png", alt: t(`${p}.f`) },
+    { label: "g.", img: "/soal-kaitan-e.png", alt: t(`${p}.g`) },
+    { label: "h.", img: "/soal-kaitan-d.png", alt: t(`${p}.h`) },
+    { label: "i.", img: "/soal-kaitan-c.png", alt: t(`${p}.i`) },
+    { label: "j.", img: "/soal-kaitan-b.png", alt: t(`${p}.j`) },
+    { label: "k.", img: "/soal-kaitan-a.png", alt: t(`${p}.k`) },
+  ];
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -36,7 +37,7 @@ const KaitanBangunDatarPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-violet-300 text-center mb-1"
             style={{ textShadow: '0 0 20px rgba(167,139,250,0.7)' }}>
-            KAITAN LINGKARAN DENGAN BANGUN DATAR
+            {t(`${p}.h1`)}
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
@@ -57,19 +58,19 @@ const KaitanBangunDatarPage = () => {
               </div>
               <div className="flex-1 min-w-0">
                 <span className="text-violet-400 text-[10px] font-bold uppercase tracking-wider bg-violet-500/10 px-2 py-0.5 rounded inline-block mb-3">
-                  Daerah yang Diarsir
+                  {t(`${p}.questionTitle`)}
                 </span>
                 <p className="font-body text-sm text-white/90 leading-relaxed mb-4">
-                  Tentukanlah keliling dan luas daerah yang diarsir pada gambar berikut.
+                  {t(`${p}.content`)}
                 </p>
                 <div className="flex flex-col gap-5">
-                  {parts.map((p) => (
-                    <div key={p.label} className="bg-white/5 rounded-xl p-3">
-                      <span className="text-violet-300 text-xs font-bold mb-3 block">{p.label}</span>
+                  {parts.map((pt) => (
+                    <div key={pt.label} className="bg-white/5 rounded-xl p-3">
+                      <span className="text-violet-300 text-xs font-bold mb-3 block">{pt.label}</span>
                       <div className="flex justify-center bg-white/95 rounded-lg p-3 [@media(orientation:landscape)]:w-fit [@media(orientation:landscape)]:mx-auto">
                         <img
-                          src={p.img}
-                          alt={p.alt}
+                          src={pt.img}
+                          alt={pt.alt}
                           className="max-w-xs [@media(orientation:landscape)]:max-w-[180px] w-full object-contain"
                         />
                       </div>
@@ -84,7 +85,7 @@ const KaitanBangunDatarPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/lingkaran"); }}
             className="text-sm text-muted-foreground hover:text-violet-400 transition-colors cursor-pointer font-body">
-            {t('practice.backTo')} Lingkaran
+            {t('practice.backTo')} {t(`${p}.backTo`)}
           </button>
         </div>
       </div>

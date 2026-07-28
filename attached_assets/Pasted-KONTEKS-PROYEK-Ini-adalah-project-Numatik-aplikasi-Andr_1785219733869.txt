@@ -1,0 +1,62 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Lingkaran" — index
+dan UnsurUnsurPage.tsx sudah selesai.
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- Tidak ada isDark/useTheme — hardcode dark-only
+- File ini memakai <img> langsung (bukan CircleDiagram) — path
+  gambar TIDAK perlu diterjemahkan, tapi caption/alt text terkait
+  WAJIB diterjemahkan kalau ada teks Indonesia
+- Cek juga apakah ada reference box (seperti yang ditemukan di
+  UnsurUnsurPage kemarin, 8 item) yang tidak disebutkan di
+  investigasi awal — kalau ada, WAJIB diterjemahkan juga
+
+TUGAS SEKARANG:
+Fokus HANYA ke sub-halaman: KaitanBangunDatarPage.tsx (1 soal besar
+dengan 11 sub-bagian a-k, format berbeda dari halaman lain — bukan
+array questions biasa tapi parts: SubPart[]).
+
+KONTEKS KHUSUS:
+- Struktur soal saat ini di LUAR komponen — WAJIB dipindahkan ke
+  DALAM komponen (setelah useTranslation()), ikuti pola yang sudah
+  terbukti:
+
+  const { t } = useTranslation();
+  const p = 'practice.lingkaran.kaitanBangunDatar';
+  const parts: SubPart[] = [
+    { label: "a.", text: t(`${p}.a`) },
+    // ...
+  ];
+
+- title, content, parts[].text — SEMUA WAJIB diterjemahkan via t()
+- Berdasarkan investigasi awal, halaman ini TIDAK punya kasus \text{}
+  bahasa Indonesia — tapi tetap WAJIB grep "\\text{" untuk memastikan
+- Cek apakah ada label khusus (bukan cuma a-k) atau instruksi umum di
+  luar sub-bagian yang perlu diterjemahkan juga
+
+1. Pindahkan struktur soal (parts array) ke dalam komponen
+2. Terjemahkan SEMUA teks: title soal utama, content (kalau ada),
+   SEMUA 11 sub-bagian (a-k), caption gambar (kalau ada)
+3. Terjemahkan h1 title dan badge jumlah soal
+4. Tambahkan translation key ke ketiga file locale (id, en, ja) di
+   bawah practice.lingkaran.kaitanBangunDatar.*
+5. JANGAN sentuh sub-halaman lain, halaman index, atau CircleDiagram.tsx
+
+VERIFIKASI:
+- Laporkan validasi teknis (tsc kalau tidak timeout, atau esbuild/
+  grep manual + skrip Node.js pengecek key coverage, HMR log)
+- Berikan tabel rincian key per sub-bagian (a-k)
+- Jalankan grep "\\text{" untuk konfirmasi 0 kasus
+- Konfirmasi eksplisit: SEMUA 11 sub-bagian sudah diterjemahkan,
+  struktur soal sudah dipindahkan ke dalam komponen, tidak ada
+  reference box atau elemen lain yang terlewat
