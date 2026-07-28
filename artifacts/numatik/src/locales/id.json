@@ -5399,6 +5399,52 @@
           "pC": "Jika membeli 2 kg, mana yang lebih murah? Dan jika 4 kg?",
           "pD": "Gambarkan grafik kedua toko dan beri kesimpulan strategi pembelian."
         }
+      },
+      "hubungan2Garis": {
+        "h1": "HUBUNGAN DUA GARIS",
+        "grade": "Kelas 8 · Persamaan Garis Lurus · UN / TKA / ANBK",
+        "badgeSuffix": "Latihan",
+        "backTo": "Persamaan Garis Lurus",
+        "dan": "dan",
+        "sejajarSentence": "adalah garis sejajar.",
+        "tegakLurusSentence": "adalah garis tegak lurus.",
+        "q1": {
+          "title": "Garis Sejajar — Syarat Gradien",
+          "content": "Tentukan apakah setiap pasang garis berikut sejajar, tegak lurus, atau tidak keduanya:"
+        },
+        "q2": {
+          "title": "Garis Tegak Lurus — Syarat m₁ × m₂ = −1",
+          "content": "Periksa apakah setiap pasang garis berikut saling tegak lurus:"
+        },
+        "q3": {
+          "title": "Titik Potong Dua Garis (Metode Substitusi)",
+          "content": "Tentukan titik potong setiap pasang garis berikut:"
+        },
+        "q4": {
+          "title": "Dua Garis Sejajar — Tidak Ada Titik Potong",
+          "pA": "Hitung gradien masing-masing garis.",
+          "pB": "Mengapa dua garis sejajar tidak memiliki titik potong?",
+          "pC": "Berapa jarak vertikal antara kedua garis sejajar tersebut?"
+        },
+        "q5": {
+          "title": "Dua Garis Tegak Lurus — Berpotongan Membentuk Sudut Siku-Siku",
+          "pA": "Hitung gradien masing-masing garis.",
+          "pB": "Buktikan bahwa hasil kali kedua gradien sama dengan −1.",
+          "pC": "Tentukan koordinat titik potong Q kedua garis dari grafik."
+        },
+        "q6": {
+          "title": "ANBK — Garis Sejajar Benar atau Salah",
+          "content": "Tentukan pernyataan BENAR (B) atau SALAH (S):",
+          "p4": "Dua garis sejajar tidak pernah berpotongan."
+        },
+        "q7": {
+          "title": "Nilai k untuk Garis Sejajar",
+          "content": "Tentukan nilai k agar setiap pasang garis berikut sejajar:"
+        },
+        "q8": {
+          "title": "Nilai k untuk Garis Tegak Lurus",
+          "content": "Tentukan nilai k agar setiap pasang garis berikut tegak lurus:"
+        }
       }
     }
   },

@@ -5399,6 +5399,52 @@
           "pC": "If buying 2 kg, which is cheaper? And if buying 4 kg?",
           "pD": "Draw a graph for both stores and summarise your purchasing strategy."
         }
+      },
+      "hubungan2Garis": {
+        "h1": "RELATIONSHIP BETWEEN TWO LINES",
+        "grade": "Grade 8 · Equation of a Straight Line · National Exam / TKA / ANBK",
+        "badgeSuffix": "Practice",
+        "backTo": "Equation of a Straight Line",
+        "dan": "and",
+        "sejajarSentence": "are parallel lines.",
+        "tegakLurusSentence": "are perpendicular lines.",
+        "q1": {
+          "title": "Parallel Lines — Gradient Condition",
+          "content": "Determine whether each pair of lines is parallel, perpendicular, or neither:"
+        },
+        "q2": {
+          "title": "Perpendicular Lines — Condition m₁ × m₂ = −1",
+          "content": "Check whether each pair of lines is perpendicular to each other:"
+        },
+        "q3": {
+          "title": "Intersection of Two Lines (Substitution Method)",
+          "content": "Find the intersection point of each pair of lines:"
+        },
+        "q4": {
+          "title": "Parallel Lines — No Intersection Point",
+          "pA": "Calculate the gradient of each line.",
+          "pB": "Why do two parallel lines have no intersection point?",
+          "pC": "What is the vertical distance between the two parallel lines?"
+        },
+        "q5": {
+          "title": "Perpendicular Lines — Intersect at a Right Angle",
+          "pA": "Calculate the gradient of each line.",
+          "pB": "Prove that the product of both gradients equals −1.",
+          "pC": "Determine the coordinates of intersection point Q from the graph."
+        },
+        "q6": {
+          "title": "ANBK — Parallel Lines True or False",
+          "content": "Determine whether each statement is TRUE (T) or FALSE (F):",
+          "p4": "Two parallel lines never intersect."
+        },
+        "q7": {
+          "title": "Value of k for Parallel Lines",
+          "content": "Find the value of k so that each pair of lines is parallel:"
+        },
+        "q8": {
+          "title": "Value of k for Perpendicular Lines",
+          "content": "Find the value of k so that each pair of lines is perpendicular:"
+        }
       }
     }
   },
