@@ -5290,6 +5290,64 @@
           "collinear": "are collinear. Find the value of",
           "pHint": "Since the three points are collinear, the gradient between any two pairs of points on the line must be equal. Use the two fully known points to find the gradient, then use that gradient to find the variable at the third point."
         }
+      },
+      "aplikasiKontekstual": {
+        "h1": "CONTEXTUAL APPLICATIONS OF LINE EQUATIONS",
+        "grade": "Grade 8 · Equation of a Straight Line · National Exam / TKA / ANBK",
+        "badgeSuffix": "Practice",
+        "backTo": "Equation of a Straight Line",
+        "q1": {
+          "title": "Online Taxi Fare",
+          "content": "Online taxi fare: Rp10,000 base fee plus Rp10,000 per km.",
+          "pA": "Write the fare equation T = f(x) in the form y = mx + c",
+          "pB": "What is the fare for an 8 km trip?",
+          "pC": "How many km if the fare is Rp65,000?"
+        },
+        "q2": {
+          "title": "Mobile Data Package Price",
+          "content": "Data package price: Rp5,000 per GB plus Rp3,000 admin fee.",
+          "pA": "Write the price equation H for g GB in the form y = mx + c",
+          "pB": "What is the price for 10 GB?",
+          "pC": "How many GB can you get for Rp28,000?",
+          "pD": "Draw a graph showing the relationship between GB and price."
+        },
+        "q3": {
+          "title": "National Exam 2019 — Production Cost",
+          "content": "The production cost of x items is B(x) = 5000x + 200,000 (in rupiah).",
+          "pA": "The equation B(x) = 5000x + 200,000 is already in the form y = mx + c. What does 5000x represent?",
+          "pB": "What does 200,000 represent in this context?",
+          "pC": "What is the production cost for 100 items?",
+          "pD": "How many items can be produced with a budget of Rp950,000?"
+        },
+        "q4": {
+          "title": "Regular Savings Growth",
+          "content": "Riko saves Rp50,000/month. Initial savings: Rp50,000.",
+          "pA": "Write the savings equation T after n months in the form y = mx + c",
+          "pB": "How much is saved after 1 year?",
+          "pC": "When will savings reach Rp500,000?"
+        },
+        "q5": {
+          "title": "Depreciation of an Asset",
+          "content": "A laptop's initial value is Rp8,000,000. Its value decreases by Rp1,000,000 per year.",
+          "pA": "Write the value equation V after t years in the form y = mx + c",
+          "pB": "What is the laptop's value after 3 years?",
+          "pC": "When will the laptop's value reach Rp2,000,000?",
+          "pD": "Can the laptop's value become negative? Explain the model's limitations!"
+        },
+        "q6": {
+          "title": "Fuel Consumption",
+          "content": "A motorcycle tank holds 60 litres. Fuel consumption: 10 km per litre.",
+          "pA": "Write the remaining fuel equation S after travelling d km in the form y = mx + c",
+          "pB": "How much fuel remains after 250 km?",
+          "pC": "When does the tank run empty (S = 0)?"
+        },
+        "q7": {
+          "title": "Linear Population Graph",
+          "content": "A village's population in 2020 was 5,000. It grows by 200 people per year.",
+          "pA": "Write the population equation P in year t since 2020 in the form y = mx + c",
+          "pB": "What is the population in 2030?",
+          "pC": "When will the population reach 8,000?"
+        }
       }
     }
   },

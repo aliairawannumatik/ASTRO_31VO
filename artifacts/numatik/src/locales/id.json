@@ -5290,6 +5290,64 @@
           "collinear": "segaris. Tentukan nilai",
           "pHint": "Karena ketiga titik segaris, gradien antara dua pasang titik mana pun pada garis tersebut harus sama. Gunakan dua titik yang diketahui lengkap untuk mencari gradien, lalu gunakan gradien itu untuk mencari variabel pada titik ketiga."
         }
+      },
+      "aplikasiKontekstual": {
+        "h1": "APLIKASI PERSAMAAN GARIS PADA SOAL KONTEKSTUAL",
+        "grade": "Kelas 8 · Persamaan Garis Lurus · UN / TKA / ANBK",
+        "badgeSuffix": "Latihan",
+        "backTo": "Persamaan Garis Lurus",
+        "q1": {
+          "title": "Tarif Taksi Online",
+          "content": "Tarif taksi online: Rp10.000 biaya awal ditambah Rp10.000 per km.",
+          "pA": "Tuliskan persamaan tarif T = f(x) dalam bentuk persamaan garis y = mx + c",
+          "pB": "Berapa tarif untuk perjalanan 8 km?",
+          "pC": "Berapa km jika tarif Rp65.000?"
+        },
+        "q2": {
+          "title": "Harga Paket Data",
+          "content": "Harga paket data: Rp5.000 per GB ditambah biaya admin Rp3.000.",
+          "pA": "Tulis persamaan harga H untuk g GB dalam bentuk persamaan garis y = mx + c",
+          "pB": "Berapa harga untuk 10 GB?",
+          "pC": "Berapa GB yang didapat dengan Rp28.000?",
+          "pD": "Gambarkan grafik hubungan jumlah GB dan harga."
+        },
+        "q3": {
+          "title": "UN 2019 — Biaya Produksi",
+          "content": "Biaya produksi x barang adalah B(x) = 5000x + 200.000 (dalam rupiah).",
+          "pA": "Persamaan B(x) = 5000x + 200.000 sudah dalam bentuk y = mx + c. Apa yang dimaksud dengan 5000x?",
+          "pB": "Apa yang dimaksud dengan 200.000 dalam konteks ini?",
+          "pC": "Berapa biaya produksi 100 barang?",
+          "pD": "Berapa barang yang bisa diproduksi dengan anggaran Rp950.000?"
+        },
+        "q4": {
+          "title": "Tabungan Bertambah Rutin",
+          "content": "Riko menabung Rp50.000/bulan. Tabungan awal Rp50.000.",
+          "pA": "Tulis persamaan tabungan T setelah n bulan dalam bentuk persamaan garis y = mx + c",
+          "pB": "Berapa tabungan setelah 1 tahun?",
+          "pC": "Kapan tabungan mencapai Rp500.000?"
+        },
+        "q5": {
+          "title": "Penurunan Nilai Barang",
+          "content": "Nilai sebuah laptop mula-mula Rp8.000.000. Nilainya turun Rp1.000.000 per tahun.",
+          "pA": "Tulis persamaan nilai V setelah t tahun dalam bentuk persamaan garis y = mx + c",
+          "pB": "Berapa nilai laptop setelah 3 tahun?",
+          "pC": "Kapan nilai laptop menjadi Rp2.000.000?",
+          "pD": "Apakah nilai laptop bisa menjadi negatif? Jelaskan batasan modelnya!"
+        },
+        "q6": {
+          "title": "Isi Bahan Bakar",
+          "content": "Tangki sepeda motor berisi 60 liter. Konsumsi BBM 10 km per liter.",
+          "pA": "Tulis persamaan sisa BBM S setelah menempuh d km dalam bentuk persamaan garis y = mx + c",
+          "pB": "Berapa sisa BBM setelah 250 km?",
+          "pC": "Kapan tangki habis (S = 0)?"
+        },
+        "q7": {
+          "title": "Grafik Populasi Linier",
+          "content": "Populasi desa pada tahun 2020 adalah 5.000 jiwa. Bertambah 200 jiwa per tahun.",
+          "pA": "Tulis persamaan populasi P pada tahun ke-t sejak 2020 dalam bentuk persamaan garis y = mx + c",
+          "pB": "Berapa populasi pada tahun 2030?",
+          "pC": "Kapan populasi mencapai 8.000 jiwa?"
+        }
       }
     }
   },
