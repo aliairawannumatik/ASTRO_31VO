@@ -592,16 +592,6 @@ const PolaAritmetikaPage = () => {
                 />
               </div>
 
-              <div className="bg-slate-800/50 border border-cyan-500/30 rounded-xl p-4 text-center">
-                <p className="font-body text-xs text-white/60 mb-2">{t.formulaBoxLabel}</p>
-                <BlockMath math="\boxed{U_n = a + (n-1) \cdot b}" />
-                <div className="flex justify-center gap-4 mt-2 text-xs font-body flex-wrap">
-                  <span className="text-cyan-300"><InlineMath math="a" /> = {t.aLabel.split("= ")[1]}</span>
-                  <span className="text-green-300"><InlineMath math="b" /> = {t.bLabel.split("= ")[1]}</span>
-                  <span className="text-violet-300"><InlineMath math="n" /> = {t.nLabel.split("= ")[1]}</span>
-                </div>
-              </div>
-
               {/* Derivation */}
               <div className="bg-slate-800/40 border border-white/10 rounded-xl p-4 space-y-4 text-sm font-body">
                 <p className="text-white/80 font-semibold">{t.derivationTitle} <InlineMath math="U_n = a + (n-1)b" /> {t.derivationSuffix}</p>
