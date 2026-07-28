@@ -1,0 +1,67 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Lingkaran" — index,
+UnsurUnsurPage.tsx, KaitanBangunDatarPage.tsx, BusurJuringPage.tsx,
+dan SudutPusatKelilingPage.tsx SUDAH terverifikasi selesai (dengan
+bukti kode konkret, bukan cuma klaim). PENTING: KelilingLuasPage.tsx
+BELUM DIKERJAKAN SAMA SEKALI meskipun ada laporan lama yang salah
+mengklaim sudah selesai (65 key, dll) — itu HALUSINASI, abaikan
+sepenuhnya, kerjakan file ini benar-benar dari nol.
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- Tidak ada isDark/useTheme — hardcode dark-only
+- CircleDiagram dipakai di Q9 — JANGAN disentuh komponennya
+- BlockMath dipakai untuk reference box rumus K dan L
+- WAJIB baca isi lengkap file INI SENDIRI dulu (jangan asumsi dari
+  laporan lama), lalu grep "\\text{" untuk cek kasus KaTeX bahasa
+  Indonesia yang perlu ditangani
+- Setelah selesai, WAJIB tunjukkan BUKTI KONKRET (cuplikan kode
+  aktual before/after dan isi locale key langsung dari file, BUKAN
+  cuma tabel ringkasan klaim)
+
+TUGAS SEKARANG:
+Fokus HANYA ke sub-halaman: KelilingLuasPage.tsx (13 soal).
+
+LANGKAH:
+1. Baca isi lengkap file ini terlebih dahulu
+2. Pindahkan array questions ke DALAM komponen:
+
+   const { t } = useTranslation();
+   const p = 'practice.lingkaran.kelilingLuas';
+   const questions: Q[] = [
+     Qf(1, t(`${p}.q1.title`), { ... }),
+   ];
+
+3. Terjemahkan SEMUA teks: title, content, parts[].text
+4. Grep "\\text{" — tangani SEMUA kasus bahasa Indonesia yang
+   ditemukan dengan pola interpolasi (t() di JS dulu, interpolasi ke
+   template literal) atau konversi ke text: kalau memang kalimat
+   prosa penuh
+5. Q9 pakai CircleDiagram — JANGAN disentuh
+6. Cek reference box (BlockMath rumus K=2πr, L=πr²) — label di
+   sekitarnya (kalau ada teks Indonesia) WAJIB diterjemahkan, formula
+   itu sendiri jangan disentuh
+7. Terjemahkan h1 title dan badge jumlah soal
+8. Tambahkan translation key ke ketiga file locale (id, en, ja) di
+   bawah practice.lingkaran.kelilingLuas.*
+9. JANGAN sentuh sub-halaman lain atau halaman index
+
+VERIFIKASI:
+- Tunjukkan CUPLIKAN KODE AKTUAL (bukan cuma tabel) dari minimal 3
+  soal sebelum dan sesudah perubahan
+- Tunjukkan isi locale key yang benar-benar tertulis di id.json,
+  en.json, ja.json (cuplikan langsung, pakai cat/grep)
+- Hitung dan tunjukkan JUMLAH t() call di dalam array questions
+  (angka konkret, bukan estimasi)
+- Laporkan validasi teknis (tsc kalau tidak timeout, atau esbuild/
+  grep manual + skrip Node.js pengecek key coverage)
+- Konfirmasi eksplisit dengan bukti: SEMUA 13 soal sudah diterjemahkan

@@ -5602,6 +5602,100 @@
         "j": "Dua setengah lingkaran, diameter 26 cm dan 14 cm",
         "k": "Lingkaran dengan jari-jari 10 cm dan tembereng yang diarsir"
       },
+      "kelilingLuas": {
+        "h1": "KELILING DAN LUAS LINGKARAN",
+        "subtitle": "Kelas 8 · Lingkaran",
+        "refBoxTitle": "📐 Rumus Keliling dan Luas",
+        "refBoxCircLabel": "KELILING",
+        "refBoxAreaLabel": "LUAS",
+        "refBoxPi1": "jika r atau d habis dibagi 7",
+        "refBoxPi2": "jika bilangan lainnya",
+        "q1": {
+          "title": "Rumus Keliling Lingkaran",
+          "content": "Keliling lingkaran dihitung dengan rumus K = πd = 2πr, dengan π ≈ 22/7 atau π ≈ 3,14.",
+          "a": "Hitung keliling lingkaran dengan r = 7 cm.",
+          "b": "Hitung keliling lingkaran dengan r = 21 cm.",
+          "c": "Hitung keliling lingkaran dengan r = 10 cm."
+        },
+        "q2": {
+          "title": "Rumus Luas Lingkaran",
+          "content": "Luas lingkaran dihitung dengan rumus L = πr².",
+          "a": "Hitung luas lingkaran dengan r = 7 cm.",
+          "b": "Hitung luas lingkaran dengan r = 3,5 cm.",
+          "c": "Hitung luas lingkaran dengan d = 20 cm."
+        },
+        "q3": {
+          "title": "Mencari Jari-Jari dari Keliling",
+          "content": "Tentukan jari-jari lingkaran jika diketahui kelilingnya!"
+        },
+        "q4": {
+          "title": "Mencari Jari-Jari dari Luas",
+          "content": "Tentukan jari-jari lingkaran jika diketahui luasnya!"
+        },
+        "q5": {
+          "title": "Soal UN — Keliling Lingkaran dalam Konteks",
+          "content": "Sebuah kolam renang berbentuk lingkaran dengan diameter 14 m. Di sekeliling kolam akan dipasang pagar.",
+          "a": "Hitunglah keliling kolam. (π = 22/7)",
+          "b": "Jika pagar dijual Rp 75.000,00 per meter, berapakah biaya pemasangan pagar?",
+          "c": "Jika diameter diperbesar menjadi 21 m, berapa meter tambahan pagar yang diperlukan?"
+        },
+        "q6": {
+          "title": "Soal UN — Luas Lingkaran dalam Konteks",
+          "content": "Sebuah taman berbentuk lingkaran dengan jari-jari 21 m akan ditanami rumput. Harga rumput Rp 15.000,00 per m².",
+          "a": "Hitunglah luas taman. (π = 22/7)",
+          "b": "Berapakah biaya penanaman rumput?",
+          "c": "Jika jari-jari dikurangi 7 m, berapa luas taman yang baru?"
+        },
+        "q7": {
+          "title": "Perbandingan Keliling dan Luas",
+          "content": "Dua lingkaran dengan jari-jari r₁ = 4 cm dan r₂ = 8 cm.",
+          "a": "Berapakah perbandingan jari-jari r₁ : r₂?",
+          "b": "Berapakah perbandingan kelilingnya K₁ : K₂?",
+          "c": "Berapakah perbandingan luasnya L₁ : L₂?"
+        },
+        "q8": {
+          "title": "Jika Jari-Jari Diperbesar",
+          "content": "Lingkaran awal berjari-jari r. Jari-jari diperbesar menjadi 2r.",
+          "a": "Berapa kali keliling lingkaran baru dibanding lingkaran awal?",
+          "b": "Berapa kali luas lingkaran baru dibanding lingkaran awal?",
+          "c": "Jika r = 7 cm, hitung selisih luas lingkaran awal dan baru."
+        },
+        "q9": {
+          "title": "Luas Cincin (Daerah Anular)",
+          "content": "Dua lingkaran sepusat. Jari-jari luar R = 7 cm, jari-jari dalam r = 3 cm.",
+          "a": "Hitung luas lingkaran luar.",
+          "b": "Hitung luas lingkaran dalam.",
+          "c": "Hitung luas daerah yang diarsir (cincin/annulus)."
+        },
+        "q10": {
+          "title": "Soal TKA — Roda Berputar",
+          "content": "Sebuah roda sepeda berjari-jari 35 cm berputar dan menempuh jarak 88 meter.",
+          "a": "Hitung keliling roda.",
+          "b": "Berapa banyak roda berputar (rotasi) untuk menempuh jarak 88 m?",
+          "c": "Jika roda berputar 100 kali, berapa jarak yang ditempuh (dalam meter)?"
+        },
+        "q11": {
+          "title": "Soal UN — Taman Melingkar dengan Jalan",
+          "content": "Sebuah taman berbentuk lingkaran berjari-jari 28 m. Di luar taman dibuat jalan melingkar lebar 7 m.",
+          "a": "Tentukan jari-jari luar (taman + jalan).",
+          "b": "Hitung luas seluruhnya (taman + jalan).",
+          "c": "Hitung luas jalan saja."
+        },
+        "q12": {
+          "title": "Soal ANBK — Alun-Alun Melingkar",
+          "content": "Alun-alun kota berbentuk lingkaran berdiameter 70 m. Di sekelilingnya dipasang lampu setiap 5 m.",
+          "a": "Hitung keliling alun-alun. (π = 22/7)",
+          "b": "Berapa banyak lampu yang diperlukan?",
+          "c": "Jika biaya setiap lampu Rp 200.000,00, berapakah total biaya?"
+        },
+        "q13": {
+          "title": "Soal TKA — Lintasan Lari Melingkar",
+          "content": "Lintasan lari berbentuk lingkaran berjari-jari 50 m.",
+          "a": "Hitung keliling lintasan. (π = 3,14)",
+          "b": "Seorang atlet berlari 5 putaran. Berapa meter jarak yang ditempuh?",
+          "c": "Jika kecepatan lari 10 m/s, berapa detik untuk menyelesaikan 5 putaran?"
+        }
+      },
       "busurJuring": {
         "h1": "PANJANG BUSUR DAN LUAS JURING",
         "subtitle": "Kelas 8 · Lingkaran",

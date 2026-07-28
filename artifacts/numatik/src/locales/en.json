@@ -5602,6 +5602,100 @@
         "j": "Two semicircles with diameters 26 cm and 14 cm",
         "k": "Circle with radius 10 cm and a shaded segment"
       },
+      "kelilingLuas": {
+        "h1": "CIRCUMFERENCE AND AREA OF A CIRCLE",
+        "subtitle": "Grade 8 · Circles",
+        "refBoxTitle": "📐 Circumference and Area Formulas",
+        "refBoxCircLabel": "CIRCUMFERENCE",
+        "refBoxAreaLabel": "AREA",
+        "refBoxPi1": "when r or d is divisible by 7",
+        "refBoxPi2": "otherwise",
+        "q1": {
+          "title": "Circumference Formula",
+          "content": "The circumference of a circle is calculated using K = πd = 2πr, where π ≈ 22/7 or π ≈ 3.14.",
+          "a": "Find the circumference of a circle with r = 7 cm.",
+          "b": "Find the circumference of a circle with r = 21 cm.",
+          "c": "Find the circumference of a circle with r = 10 cm."
+        },
+        "q2": {
+          "title": "Circle Area Formula",
+          "content": "The area of a circle is calculated using L = πr².",
+          "a": "Find the area of a circle with r = 7 cm.",
+          "b": "Find the area of a circle with r = 3.5 cm.",
+          "c": "Find the area of a circle with d = 20 cm."
+        },
+        "q3": {
+          "title": "Finding Radius from Circumference",
+          "content": "Find the radius of the circle given its circumference."
+        },
+        "q4": {
+          "title": "Finding Radius from Area",
+          "content": "Find the radius of the circle given its area."
+        },
+        "q5": {
+          "title": "National Exam — Circumference in Context",
+          "content": "A circular swimming pool has a diameter of 14 m. A fence will be installed around the pool.",
+          "a": "Calculate the circumference of the pool. (π = 22/7)",
+          "b": "If the fence costs Rp 75,000.00 per metre, what is the total installation cost?",
+          "c": "If the diameter is increased to 21 m, how many additional metres of fence are needed?"
+        },
+        "q6": {
+          "title": "National Exam — Circle Area in Context",
+          "content": "A circular park with radius 21 m will be covered with grass. The grass costs Rp 15,000.00 per m².",
+          "a": "Calculate the area of the park. (π = 22/7)",
+          "b": "What is the cost of planting the grass?",
+          "c": "If the radius is reduced by 7 m, what is the new area of the park?"
+        },
+        "q7": {
+          "title": "Comparing Circumference and Area",
+          "content": "Two circles with radii r₁ = 4 cm and r₂ = 8 cm.",
+          "a": "What is the ratio of the radii r₁ : r₂?",
+          "b": "What is the ratio of their circumferences K₁ : K₂?",
+          "c": "What is the ratio of their areas L₁ : L₂?"
+        },
+        "q8": {
+          "title": "When the Radius is Enlarged",
+          "content": "A circle originally has radius r. The radius is enlarged to 2r.",
+          "a": "How many times greater is the circumference of the new circle compared to the original?",
+          "b": "How many times greater is the area of the new circle compared to the original?",
+          "c": "If r = 7 cm, find the difference in area between the original and new circle."
+        },
+        "q9": {
+          "title": "Ring Area (Annulus)",
+          "content": "Two concentric circles. Outer radius R = 7 cm, inner radius r = 3 cm.",
+          "a": "Find the area of the outer circle.",
+          "b": "Find the area of the inner circle.",
+          "c": "Find the area of the shaded region (ring/annulus)."
+        },
+        "q10": {
+          "title": "Advanced Exam — Rotating Wheel",
+          "content": "A bicycle wheel with radius 35 cm rolls and travels a distance of 88 metres.",
+          "a": "Find the circumference of the wheel.",
+          "b": "How many rotations does the wheel make to travel 88 m?",
+          "c": "If the wheel rotates 100 times, what distance is travelled (in metres)?"
+        },
+        "q11": {
+          "title": "National Exam — Circular Park with Path",
+          "content": "A circular park has radius 28 m. A circular path 7 m wide is built outside the park.",
+          "a": "Find the outer radius (park + path).",
+          "b": "Find the total area (park + path).",
+          "c": "Find the area of the path only."
+        },
+        "q12": {
+          "title": "Competency Exam — Circular Town Square",
+          "content": "A circular town square has a diameter of 70 m. Street lights are placed every 5 m around it.",
+          "a": "Calculate the circumference of the square. (π = 22/7)",
+          "b": "How many street lights are needed?",
+          "c": "If each street light costs Rp 200,000.00, what is the total cost?"
+        },
+        "q13": {
+          "title": "Advanced Exam — Circular Running Track",
+          "content": "A circular running track has a radius of 50 m.",
+          "a": "Calculate the circumference of the track. (π = 3.14)",
+          "b": "An athlete runs 5 laps. How many metres does the athlete travel?",
+          "c": "If the running speed is 10 m/s, how many seconds does it take to complete 5 laps?"
+        }
+      },
       "busurJuring": {
         "h1": "ARC LENGTH AND SECTOR AREA",
         "subtitle": "Grade 8 · Circles",

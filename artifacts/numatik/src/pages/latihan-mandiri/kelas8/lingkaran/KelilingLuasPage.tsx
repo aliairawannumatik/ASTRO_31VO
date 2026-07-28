@@ -16,155 +16,157 @@ type Q = {
   blockMath?: string;
   type: "essay" | "mixed" | "diagram-only";
 };
-const Q = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
-
-const questions: Q[] = [
-  Q(1, "Rumus Keliling Lingkaran", {
-    type: "essay",
-    content: "Keliling lingkaran dihitung dengan rumus K = πd = 2πr, dengan π ≈ 22/7 atau π ≈ 3,14.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung keliling lingkaran dengan } r = 7 \\text{ cm.}" },
-      { label: "b.", math: "\\text{Hitung keliling lingkaran dengan } r = 21 \\text{ cm.}" },
-      { label: "c.", math: "\\text{Hitung keliling lingkaran dengan } r = 10 \\text{ cm.}" },
-    ],
-  }),
-
-  Q(2, "Rumus Luas Lingkaran", {
-    type: "essay",
-    content: "Luas lingkaran dihitung dengan rumus L = πr².",
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas lingkaran dengan } r = 7 \\text{ cm.}" },
-      { label: "b.", math: "\\text{Hitung luas lingkaran dengan } r = 3{,}5 \\text{ cm.}" },
-      { label: "c.", math: "\\text{Hitung luas lingkaran dengan } d = 20 \\text{ cm.}" },
-    ],
-  }),
-
-  Q(3, "Mencari Jari-Jari dari Keliling", {
-    type: "essay",
-    content: "Tentukan jari-jari lingkaran jika diketahui kelilingnya!",
-    parts: [
-      { label: "a.", math: "K = 44 \\text{ cm}" },
-      { label: "b.", math: "K = 62{,}8 \\text{ cm}" },
-      { label: "c.", math: "K = 88 \\text{ cm}" },
-    ],
-  }),
-
-  Q(4, "Mencari Jari-Jari dari Luas", {
-    type: "essay",
-    content: "Tentukan jari-jari lingkaran jika diketahui luasnya!",
-    parts: [
-      { label: "a.", math: "L = 154 \\text{ cm}^2" },
-      { label: "b.", math: "L = 314 \\text{ cm}^2" },
-      { label: "c.", math: "L = 616 \\text{ cm}^2" },
-    ],
-  }),
-
-  Q(5, "Soal UN — Keliling Lingkaran dalam Konteks", {
-    type: "mixed",
-    content: "Sebuah kolam renang berbentuk lingkaran dengan diameter 14 m. Di sekeliling kolam akan dipasang pagar.",
-    parts: [
-      { label: "a.", math: "\\text{Hitunglah keliling kolam. (} \\pi = \\tfrac{22}{7})" },
-      { label: "b.", text: "Jika pagar dijual Rp 75.000,00 per meter, berapakah biaya pemasangan pagar?" },
-      { label: "c.", text: "Jika diameter diperbesar menjadi 21 m, berapa meter tambahan pagar yang diperlukan?" },
-    ],
-  }),
-
-  Q(6, "Soal UN — Luas Lingkaran dalam Konteks", {
-    type: "mixed",
-    content: "Sebuah taman berbentuk lingkaran dengan jari-jari 21 m akan ditanami rumput. Harga rumput Rp 15.000,00 per m².",
-    parts: [
-      { label: "a.", math: "\\text{Hitunglah luas taman. (} \\pi = \\tfrac{22}{7})" },
-      { label: "b.", text: "Berapakah biaya penanaman rumput?" },
-      { label: "c.", text: "Jika jari-jari dikurangi 7 m, berapa luas taman yang baru?" },
-    ],
-  }),
-
-  Q(7, "Perbandingan Keliling dan Luas", {
-    type: "essay",
-    content: "Dua lingkaran dengan jari-jari r₁ = 4 cm dan r₂ = 8 cm.",
-    parts: [
-      { label: "a.", text: "Berapakah perbandingan jari-jari r₁ : r₂?" },
-      { label: "b.", text: "Berapakah perbandingan kelilingnya K₁ : K₂?" },
-      { label: "c.", text: "Berapakah perbandingan luasnya L₁ : L₂?" },
-    ],
-  }),
-
-  Q(8, "Jika Jari-Jari Diperbesar", {
-    type: "essay",
-    content: "Lingkaran awal berjari-jari r. Jari-jari diperbesar menjadi 2r.",
-    parts: [
-      { label: "a.", text: "Berapa kali keliling lingkaran baru dibanding lingkaran awal?" },
-      { label: "b.", text: "Berapa kali luas lingkaran baru dibanding lingkaran awal?" },
-      { label: "c.", math: "\\text{Jika } r = 7 \\text{ cm, hitung selisih luas lingkaran awal dan baru.}" },
-    ],
-  }),
-
-  Q(9, "Luas Cincin (Daerah Anular)", {
-    type: "mixed",
-    diagram: {
-      size: 230,
-      extraCircles: [
-        { cx: 115, cy: 115, r: 80, color: "#60a5fa", fill: "rgba(56,189,248,0.08)" },
-        { cx: 115, cy: 115, r: 45, color: "#f472b6", fill: "rgba(2,8,23,0.95)" },
-      ],
-      extraLines: [
-        { x1: 115, y1: 115, x2: 195, y2: 115, color: "#60a5fa", label: "R=7" },
-        { x1: 115, y1: 115, x2: 115, y2: 70, color: "#f472b6", label: "r=3" },
-      ],
-      showCenter: true, centerLabel: "O",
-    },
-    content: "Dua lingkaran sepusat. Jari-jari luar R = 7 cm, jari-jari dalam r = 3 cm.",
-    parts: [
-      { label: "a.", text: "Hitung luas lingkaran luar." },
-      { label: "b.", text: "Hitung luas lingkaran dalam." },
-      { label: "c.", text: "Hitung luas daerah yang diarsir (cincin/annulus)." },
-    ],
-  }),
-
-  Q(10, "Soal TKA — Roda Berputar", {
-    type: "mixed",
-    content: "Sebuah roda sepeda berjari-jari 35 cm berputar dan menempuh jarak 88 meter.",
-    parts: [
-      { label: "a.", text: "Hitung keliling roda." },
-      { label: "b.", text: "Berapa banyak roda berputar (rotasi) untuk menempuh jarak 88 m?" },
-      { label: "c.", text: "Jika roda berputar 100 kali, berapa jarak yang ditempuh (dalam meter)?" },
-    ],
-  }),
-
-  Q(11, "Soal UN — Taman Melingkar dengan Jalan", {
-    type: "essay",
-    content: "Sebuah taman berbentuk lingkaran berjari-jari 28 m. Di luar taman dibuat jalan melingkar lebar 7 m.",
-    parts: [
-      { label: "a.", text: "Tentukan jari-jari luar (taman + jalan)." },
-      { label: "b.", text: "Hitung luas seluruhnya (taman + jalan)." },
-      { label: "c.", text: "Hitung luas jalan saja." },
-    ],
-  }),
-
-  Q(12, "Soal ANBK — Alun-Alun Melingkar", {
-    type: "essay",
-    content: "Alun-alun kota berbentuk lingkaran berdiameter 70 m. Di sekelilingnya dipasang lampu setiap 5 m.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung keliling alun-alun. (} \\pi = \\tfrac{22}{7})" },
-      { label: "b.", text: "Berapa banyak lampu yang diperlukan?" },
-      { label: "c.", text: "Jika biaya setiap lampu Rp 200.000,00, berapakah total biaya?" },
-    ],
-  }),
-
-  Q(13, "Soal TKA — Lintasan Lari Melingkar", {
-    type: "essay",
-    content: "Lintasan lari berbentuk lingkaran berjari-jari 50 m.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung keliling lintasan. (} \\pi = 3{,}14)" },
-      { label: "b.", text: "Seorang atlet berlari 5 putaran. Berapa meter jarak yang ditempuh?" },
-      { label: "c.", text: "Jika kecepatan lari 10 m/s, berapa detik untuk menyelesaikan 5 putaran?" },
-    ],
-  }),
-];
+const Qf = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 const KelilingLuasPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const lp = "practice.lingkaran.kelilingLuas";
+
+  const questions: Q[] = [
+    Qf(1, t(`${lp}.q1.title`), {
+      type: "essay",
+      content: t(`${lp}.q1.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q1.a`) },
+        { label: "b.", text: t(`${lp}.q1.b`) },
+        { label: "c.", text: t(`${lp}.q1.c`) },
+      ],
+    }),
+
+    Qf(2, t(`${lp}.q2.title`), {
+      type: "essay",
+      content: t(`${lp}.q2.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q2.a`) },
+        { label: "b.", text: t(`${lp}.q2.b`) },
+        { label: "c.", text: t(`${lp}.q2.c`) },
+      ],
+    }),
+
+    Qf(3, t(`${lp}.q3.title`), {
+      type: "essay",
+      content: t(`${lp}.q3.content`),
+      parts: [
+        { label: "a.", math: "K = 44 \\text{ cm}" },
+        { label: "b.", math: "K = 62{,}8 \\text{ cm}" },
+        { label: "c.", math: "K = 88 \\text{ cm}" },
+      ],
+    }),
+
+    Qf(4, t(`${lp}.q4.title`), {
+      type: "essay",
+      content: t(`${lp}.q4.content`),
+      parts: [
+        { label: "a.", math: "L = 154 \\text{ cm}^2" },
+        { label: "b.", math: "L = 314 \\text{ cm}^2" },
+        { label: "c.", math: "L = 616 \\text{ cm}^2" },
+      ],
+    }),
+
+    Qf(5, t(`${lp}.q5.title`), {
+      type: "mixed",
+      content: t(`${lp}.q5.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q5.a`) },
+        { label: "b.", text: t(`${lp}.q5.b`) },
+        { label: "c.", text: t(`${lp}.q5.c`) },
+      ],
+    }),
+
+    Qf(6, t(`${lp}.q6.title`), {
+      type: "mixed",
+      content: t(`${lp}.q6.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q6.a`) },
+        { label: "b.", text: t(`${lp}.q6.b`) },
+        { label: "c.", text: t(`${lp}.q6.c`) },
+      ],
+    }),
+
+    Qf(7, t(`${lp}.q7.title`), {
+      type: "essay",
+      content: t(`${lp}.q7.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q7.a`) },
+        { label: "b.", text: t(`${lp}.q7.b`) },
+        { label: "c.", text: t(`${lp}.q7.c`) },
+      ],
+    }),
+
+    Qf(8, t(`${lp}.q8.title`), {
+      type: "essay",
+      content: t(`${lp}.q8.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q8.a`) },
+        { label: "b.", text: t(`${lp}.q8.b`) },
+        { label: "c.", text: t(`${lp}.q8.c`) },
+      ],
+    }),
+
+    Qf(9, t(`${lp}.q9.title`), {
+      type: "mixed",
+      diagram: {
+        size: 230,
+        extraCircles: [
+          { cx: 115, cy: 115, r: 80, color: "#60a5fa", fill: "rgba(56,189,248,0.08)" },
+          { cx: 115, cy: 115, r: 45, color: "#f472b6", fill: "rgba(2,8,23,0.95)" },
+        ],
+        extraLines: [
+          { x1: 115, y1: 115, x2: 195, y2: 115, color: "#60a5fa", label: "R=7" },
+          { x1: 115, y1: 115, x2: 115, y2: 70, color: "#f472b6", label: "r=3" },
+        ],
+        showCenter: true, centerLabel: "O",
+      },
+      content: t(`${lp}.q9.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q9.a`) },
+        { label: "b.", text: t(`${lp}.q9.b`) },
+        { label: "c.", text: t(`${lp}.q9.c`) },
+      ],
+    }),
+
+    Qf(10, t(`${lp}.q10.title`), {
+      type: "mixed",
+      content: t(`${lp}.q10.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q10.a`) },
+        { label: "b.", text: t(`${lp}.q10.b`) },
+        { label: "c.", text: t(`${lp}.q10.c`) },
+      ],
+    }),
+
+    Qf(11, t(`${lp}.q11.title`), {
+      type: "essay",
+      content: t(`${lp}.q11.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q11.a`) },
+        { label: "b.", text: t(`${lp}.q11.b`) },
+        { label: "c.", text: t(`${lp}.q11.c`) },
+      ],
+    }),
+
+    Qf(12, t(`${lp}.q12.title`), {
+      type: "essay",
+      content: t(`${lp}.q12.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q12.a`) },
+        { label: "b.", text: t(`${lp}.q12.b`) },
+        { label: "c.", text: t(`${lp}.q12.c`) },
+      ],
+    }),
+
+    Qf(13, t(`${lp}.q13.title`), {
+      type: "essay",
+      content: t(`${lp}.q13.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q13.a`) },
+        { label: "b.", text: t(`${lp}.q13.b`) },
+        { label: "c.", text: t(`${lp}.q13.c`) },
+      ],
+    }),
+  ];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -176,9 +178,9 @@ const KelilingLuasPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-emerald-300 text-center mb-1"
             style={{ textShadow: '0 0 20px rgba(52,211,153,0.7)' }}>
-            KELILING DAN LUAS LINGKARAN
+            {t(`${lp}.h1`)}
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · {t('practice.breadcrumb')}</p>
+          <p className="text-white/50 text-xs text-center font-body">{t(`${lp}.subtitle`)} · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
             <span className="text-emerald-400 text-xs font-bold">📋 13 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
@@ -187,19 +189,19 @@ const KelilingLuasPage = () => {
         </div>
 
         <div className="mb-5 bg-emerald-900/20 border border-emerald-500/20 rounded-xl p-4">
-          <p className="text-emerald-300 text-xs font-bold mb-3">📐 Rumus Keliling dan Luas</p>
+          <p className="text-emerald-300 text-xs font-bold mb-3">{t(`${lp}.refBoxTitle`)}</p>
           <div className="grid grid-cols-1 gap-3">
             <div className="bg-white/5 rounded-xl p-3 text-center">
-              <p className="text-emerald-400 text-xs font-bold mb-2">KELILING</p>
+              <p className="text-emerald-400 text-xs font-bold mb-2">{t(`${lp}.refBoxCircLabel`)}</p>
               <BlockMath math="K = \pi d = 2\pi r" />
             </div>
             <div className="bg-white/5 rounded-xl p-3 text-center">
-              <p className="text-yellow-400 text-xs font-bold mb-2">LUAS</p>
+              <p className="text-yellow-400 text-xs font-bold mb-2">{t(`${lp}.refBoxAreaLabel`)}</p>
               <BlockMath math="L = \pi r^2 = \frac{1}{4}\pi d^2" />
             </div>
             <div className="bg-white/5 rounded-xl p-3 flex gap-4 justify-center text-xs font-body">
-              <span className="text-white/60"><span className="text-cyan-400 font-bold">π ≈ 22/7</span> jika r atau d habis dibagi 7</span>
-              <span className="text-white/60"><span className="text-pink-400 font-bold">π ≈ 3,14</span> jika bilangan lainnya</span>
+              <span className="text-white/60"><span className="text-cyan-400 font-bold">π ≈ 22/7</span> {t(`${lp}.refBoxPi1`)}</span>
+              <span className="text-white/60"><span className="text-pink-400 font-bold">π ≈ 3,14</span> {t(`${lp}.refBoxPi2`)}</span>
             </div>
           </div>
         </div>
@@ -228,12 +230,12 @@ const KelilingLuasPage = () => {
                     )}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
-                        {q.parts.map((p, pi) => (
+                        {q.parts.map((pt, pi) => (
                           <div key={pi} className="flex items-start gap-2 bg-white/5 rounded-lg px-3 py-2">
-                            <span className="text-emerald-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
-                            {p.math
-                              ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
-                              : <p className="font-body text-sm text-white/80 whitespace-pre-line">{p.text}</p>
+                            <span className="text-emerald-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{pt.label}</span>
+                            {pt.math
+                              ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={pt.math} /></div>
+                              : <p className="font-body text-sm text-white/80 whitespace-pre-line">{pt.text}</p>
                             }
                           </div>
                         ))}
