@@ -5517,6 +5517,73 @@
           "label": "APPLYING CIRCLE CONCEPTS TO REAL-WORLD PROBLEMS",
           "desc": "Wheels, pools, fields, clocks, pizza, satellites, drones, parks"
         }
+      },
+      "unsurUnsur": {
+        "h1": "PARTS OF A CIRCLE",
+        "refBoxTitle": "📌 Parts of a Circle",
+        "imgAlt": "Problem diagram",
+        "backTo": "Circle",
+        "refBox": {
+          "jarijari": {
+            "n": "Radius (r)",
+            "d": "Center to a point on the circle"
+          },
+          "diameter": {
+            "n": "Diameter (d)",
+            "d": "d = 2r, longest chord"
+          },
+          "busur": {
+            "n": "Arc",
+            "d": "Part of the circle's curved line"
+          },
+          "taliBusur": {
+            "n": "Chord",
+            "d": "Straight line connecting 2 points"
+          },
+          "apotema": {
+            "n": "Apothem",
+            "d": "Distance from center to chord"
+          },
+          "juring": {
+            "n": "Sector",
+            "d": "Region of 2 radii + arc"
+          },
+          "tembereng": {
+            "n": "Segment",
+            "d": "Region of chord + arc"
+          },
+          "sudutPusat": {
+            "n": "Central Angle",
+            "d": "Angle with vertex at center"
+          }
+        },
+        "q1": {
+          "title": "Parts of a Circle",
+          "a": "Identify all lines that are radii.",
+          "b": "Identify all lines that are diameters.",
+          "c": "Identify all lines that are chords.",
+          "d": "Which line represents the longest arc?",
+          "e": "Region I is …",
+          "f": "Region II is …",
+          "g": "Which is the largest sector?",
+          "h": "Line OE is …",
+          "i": "The longest chord is shown by …",
+          "j": "Name one central angle!",
+          "k": "Name one inscribed angle!"
+        },
+        "q2": {
+          "title": "Circle Elements — True or False",
+          "content": "Determine whether each statement is TRUE (T) or FALSE (F)!",
+          "a": "The radius of a circle equals half the length of its diameter.",
+          "b": "Every diameter of a circle is a chord.",
+          "c": "Every chord is a diameter of the circle.",
+          "d": "A chord that does not pass through the center is longer than the diameter.",
+          "e": "The diameter is the longest chord in a circle.",
+          "f": "The apothem is longer than the radius.",
+          "g": "A sector is bounded by two radii and one arc.",
+          "h": "A segment is bounded by two radii and one arc.",
+          "i": "All chords in a circle have the same length."
+        }
       }
     }
   },

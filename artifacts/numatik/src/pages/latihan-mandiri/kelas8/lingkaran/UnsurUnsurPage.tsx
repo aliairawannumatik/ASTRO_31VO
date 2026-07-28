@@ -18,7 +18,7 @@ type Q = {
   diff?: Diff;
   type: "essay" | "mixed" | "diagram-only";
 };
-const Q = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
+const Qf = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 const diffColor: Record<Diff, string> = {
   Mudah: "text-green-400 bg-green-500/10 border-green-500/30",
@@ -29,46 +29,57 @@ const diffColor: Record<Diff, string> = {
 
 const SOAL_IMG = "/soal-lingkaran-unsur.png";
 
-const questions: Q[] = [
-  Q(1, "Unsur-Unsur Lingkaran", {
-    type: "mixed", diff: "Mudah",
-    imageSrc: SOAL_IMG,
-    parts: [
-      { label: "a.", text: "Tentukanlah garis mana saja yang merupakan jari-jari?" },
-      { label: "b.", text: "Tentukanlah garis mana saja yang merupakan diameter?" },
-      { label: "c.", text: "Tentukanlah garis mana saja yang merupakan tali busur?" },
-      { label: "d.", text: "Garis manakah yang merupakan busur terpanjang?" },
-      { label: "e.", text: "Daerah I merupakan …" },
-      { label: "f.", text: "Daerah II merupakan …" },
-      { label: "g.", text: "Manakah yang merupakan juring terbesar?" },
-      { label: "h.", text: "Garis OE adalah …" },
-      { label: "i.", text: "Tali busur terpanjang ditunjukkan oleh …" },
-      { label: "j.", text: "Sebutkan salah satu sudut pusat!" },
-      { label: "k.", text: "Sebutkan salah satu sudut keliling!" },
-    ],
-  }),
-
-  Q(2, "Unsur Lingkaran — Benar atau Salah", {
-    type: "mixed", diff: "Sedang",
-    content: "Tentukan pernyataan berikut BENAR (B) atau SALAH (S)!",
-    parts: [
-      { label: "a.", text: "Panjang jari-jari lingkaran sama dengan setengah panjang diameter lingkaran itu." },
-      { label: "b.", text: "Setiap garis tengah lingkaran (diameter) adalah tali busur." },
-      { label: "c.", text: "Setiap tali busur merupakan garis tengah lingkaran." },
-      { label: "d.", text: "Panjang tali busur yang tidak melalui pusat lebih panjang dari diameter." },
-      { label: "e.", text: "Diameter adalah tali busur terpanjang dalam suatu lingkaran." },
-      { label: "f.", text: "Apotema lebih panjang dari jari-jari." },
-      { label: "g.", text: "Juring dibatasi oleh dua jari-jari dan satu busur." },
-      { label: "h.", text: "Tembereng dibatasi oleh dua jari-jari dan satu busur." },
-      { label: "i.", text: "Semua tali busur dalam satu lingkaran memiliki panjang yang sama." },
-    ],
-  }),
-
+const refBoxConfig = [
+  { key: "jarijari",   c: "text-cyan-400"   },
+  { key: "diameter",   c: "text-blue-400"   },
+  { key: "busur",      c: "text-yellow-400" },
+  { key: "taliBusur",  c: "text-pink-400"   },
+  { key: "apotema",    c: "text-violet-400" },
+  { key: "juring",     c: "text-orange-400" },
+  { key: "tembereng",  c: "text-green-400"  },
+  { key: "sudutPusat", c: "text-red-400"    },
 ];
 
 const UnsurUnsurLingkaranPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const p = 'practice.lingkaran.unsurUnsur';
+
+  const questions: Q[] = [
+    Qf(1, t(`${p}.q1.title`), {
+      type: "mixed", diff: "Mudah",
+      imageSrc: SOAL_IMG,
+      parts: [
+        { label: "a.", text: t(`${p}.q1.a`) },
+        { label: "b.", text: t(`${p}.q1.b`) },
+        { label: "c.", text: t(`${p}.q1.c`) },
+        { label: "d.", text: t(`${p}.q1.d`) },
+        { label: "e.", text: t(`${p}.q1.e`) },
+        { label: "f.", text: t(`${p}.q1.f`) },
+        { label: "g.", text: t(`${p}.q1.g`) },
+        { label: "h.", text: t(`${p}.q1.h`) },
+        { label: "i.", text: t(`${p}.q1.i`) },
+        { label: "j.", text: t(`${p}.q1.j`) },
+        { label: "k.", text: t(`${p}.q1.k`) },
+      ],
+    }),
+
+    Qf(2, t(`${p}.q2.title`), {
+      type: "mixed", diff: "Sedang",
+      content: t(`${p}.q2.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q2.a`) },
+        { label: "b.", text: t(`${p}.q2.b`) },
+        { label: "c.", text: t(`${p}.q2.c`) },
+        { label: "d.", text: t(`${p}.q2.d`) },
+        { label: "e.", text: t(`${p}.q2.e`) },
+        { label: "f.", text: t(`${p}.q2.f`) },
+        { label: "g.", text: t(`${p}.q2.g`) },
+        { label: "h.", text: t(`${p}.q2.h`) },
+        { label: "i.", text: t(`${p}.q2.i`) },
+      ],
+    }),
+  ];
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -81,7 +92,7 @@ const UnsurUnsurLingkaranPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-cyan-300 text-center mb-1"
             style={{ textShadow: '0 0 20px rgba(34,211,238,0.7)' }}>
-            UNSUR-UNSUR LINGKARAN
+            {t(`${p}.h1`)}
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
@@ -92,21 +103,12 @@ const UnsurUnsurLingkaranPage = () => {
         </div>
 
         <div className="mb-5 bg-cyan-900/20 border border-cyan-500/20 rounded-xl p-4">
-          <p className="text-cyan-300 text-xs font-bold mb-2">📌 Unsur-Unsur Lingkaran</p>
+          <p className="text-cyan-300 text-xs font-bold mb-2">{t(`${p}.refBoxTitle`)}</p>
           <div className="grid grid-cols-2 gap-2 text-xs font-body">
-            {[
-              { n: "Jari-jari (r)", d: "Pusat ke titik di lingkaran", c: "text-cyan-400" },
-              { n: "Diameter (d)", d: "d = 2r, tali busur terpanjang", c: "text-blue-400" },
-              { n: "Busur", d: "Bagian garis lengkung lingkaran", c: "text-yellow-400" },
-              { n: "Tali Busur", d: "Garis lurus hubungkan 2 titik", c: "text-pink-400" },
-              { n: "Apotema", d: "Jarak pusat ke tali busur", c: "text-violet-400" },
-              { n: "Juring", d: "Daerah 2 jari-jari + busur", c: "text-orange-400" },
-              { n: "Tembereng", d: "Daerah tali busur + busur", c: "text-green-400" },
-              { n: "Sudut Pusat", d: "Sudut dengan vertex di pusat", c: "text-red-400" },
-            ].map(r => (
-              <div key={r.n} className="bg-white/5 rounded-lg px-3 py-2">
-                <span className={`font-bold ${r.c}`}>{r.n}: </span>
-                <span className="text-white/60">{r.d}</span>
+            {refBoxConfig.map(r => (
+              <div key={r.key} className="bg-white/5 rounded-lg px-3 py-2">
+                <span className={`font-bold ${r.c}`}>{t(`${p}.refBox.${r.key}.n`)}: </span>
+                <span className="text-white/60">{t(`${p}.refBox.${r.key}.d`)}</span>
               </div>
             ))}
           </div>
@@ -138,7 +140,7 @@ const UnsurUnsurLingkaranPage = () => {
                     {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
                     {q.imageSrc && (
                       <div className="mb-3 flex justify-center rounded-xl overflow-hidden bg-white/95 p-3">
-                        <img src={q.imageSrc} alt="Gambar soal" className="max-w-[220px] w-full object-contain" />
+                        <img src={q.imageSrc} alt={t(`${p}.imgAlt`)} className="max-w-[220px] w-full object-contain" />
                       </div>
                     )}
                     {q.diagram && (
@@ -148,12 +150,12 @@ const UnsurUnsurLingkaranPage = () => {
                     )}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
-                        {q.parts.map((p, pi) => (
+                        {q.parts.map((pt, pi) => (
                           <div key={pi} className="flex items-start gap-2 bg-white/5 rounded-lg px-3 py-2">
-                            <span className="text-cyan-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
-                            {p.math
-                              ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
-                              : <p className="font-body text-sm text-white/80 whitespace-pre-line">{p.text}</p>
+                            <span className="text-cyan-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{pt.label}</span>
+                            {pt.math
+                              ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={pt.math} /></div>
+                              : <p className="font-body text-sm text-white/80 whitespace-pre-line">{pt.text}</p>
                             }
                           </div>
                         ))}
@@ -169,7 +171,7 @@ const UnsurUnsurLingkaranPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/lingkaran"); }}
             className="text-sm text-muted-foreground hover:text-cyan-400 transition-colors cursor-pointer font-body">
-            {t('practice.backTo')} Lingkaran
+            {t('practice.backTo')} {t(`${p}.backTo`)}
           </button>
         </div>
       </div>

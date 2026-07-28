@@ -1,0 +1,62 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Lingkaran" — index
+sudah selesai (practice.lingkaran.* sudah ada strukturnya untuk
+title, subtopics, dll).
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- Tidak ada isDark/useTheme — hardcode dark-only
+- CircleDiagram.tsx — sudah dikonfirmasi aman (semua label universal/
+  matematis), TAPI di halaman ini CircleDiagram diimpor tapi TIDAK
+  dipakai di questions (Q1 pakai imageSrc:, Q2 tidak ada diagram) —
+  biarkan import-nya seperti itu, jangan dihapus atau diubah
+
+TUGAS SEKARANG:
+Fokus HANYA ke sub-halaman: UnsurUnsurPage.tsx (2 soal).
+
+KONTEKS KHUSUS:
+- questions: Q[] saat ini di LUAR komponen — WAJIB dipindahkan ke
+  DALAM komponen (setelah useTranslation()), ikuti pola yang sudah
+  terbukti di topik-topik sebelumnya:
+
+  const { t } = useTranslation();
+  const p = 'practice.lingkaran.unsurUnsur';
+  const questions: Q[] = [
+    Qf(1, t(`${p}.q1.title`), { ... }),
+  ];
+
+  (Rename fungsi helper Q ke Qf kalau ada konflik nama dengan type Q)
+- title, content, parts[].text — SEMUA WAJIB diterjemahkan via t()
+- Q1 pakai imageSrc: (gambar statis) — path gambar TIDAK perlu
+  diterjemahkan, tapi kalau ada caption/alt text terkait gambar itu
+  yang berupa teks Indonesia, WAJIB diterjemahkan
+- Berdasarkan investigasi awal, halaman ini TIDAK punya kasus \text{}
+  bahasa Indonesia — tapi tetap WAJIB grep "\\text{" untuk memastikan
+  (di topik-topik lain, perkiraan awal sering meleset)
+- Cek juga import yang tidak terpakai (CircleDiagram, InlineMath) —
+  JANGAN dihapus, biarkan seperti kondisi asli
+
+1. Pindahkan array questions ke dalam komponen
+2. Terjemahkan SEMUA teks: title, content, parts[].text, caption
+   gambar (kalau ada)
+3. Terjemahkan h1 title dan badge jumlah soal
+4. Tambahkan translation key ke ketiga file locale (id, en, ja) di
+   bawah practice.lingkaran.unsurUnsur.*
+5. JANGAN sentuh sub-halaman lain, halaman index, atau CircleDiagram.tsx
+
+VERIFIKASI:
+- Laporkan validasi teknis (tsc kalau tidak timeout, atau esbuild/
+  grep manual + skrip Node.js pengecek key coverage, HMR log)
+- Berikan tabel rincian key per soal (Q1-Q2)
+- Jalankan grep "\\text{" untuk konfirmasi 0 kasus
+- Konfirmasi eksplisit: SEMUA 2 soal sudah diterjemahkan, questions
+  array sudah dipindahkan ke dalam komponen

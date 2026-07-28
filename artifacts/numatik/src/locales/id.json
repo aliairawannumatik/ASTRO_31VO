@@ -5517,6 +5517,73 @@
           "label": "PENERAPAN KONSEP LINGKARAN PADA PERMASALAHAN KONTEKSTUAL",
           "desc": "Roda, kolam, lapangan, jam, pizza, satelit, drone, taman"
         }
+      },
+      "unsurUnsur": {
+        "h1": "UNSUR-UNSUR LINGKARAN",
+        "refBoxTitle": "📌 Unsur-Unsur Lingkaran",
+        "imgAlt": "Gambar soal",
+        "backTo": "Lingkaran",
+        "refBox": {
+          "jarijari": {
+            "n": "Jari-jari (r)",
+            "d": "Pusat ke titik di lingkaran"
+          },
+          "diameter": {
+            "n": "Diameter (d)",
+            "d": "d = 2r, tali busur terpanjang"
+          },
+          "busur": {
+            "n": "Busur",
+            "d": "Bagian garis lengkung lingkaran"
+          },
+          "taliBusur": {
+            "n": "Tali Busur",
+            "d": "Garis lurus hubungkan 2 titik"
+          },
+          "apotema": {
+            "n": "Apotema",
+            "d": "Jarak pusat ke tali busur"
+          },
+          "juring": {
+            "n": "Juring",
+            "d": "Daerah 2 jari-jari + busur"
+          },
+          "tembereng": {
+            "n": "Tembereng",
+            "d": "Daerah tali busur + busur"
+          },
+          "sudutPusat": {
+            "n": "Sudut Pusat",
+            "d": "Sudut dengan vertex di pusat"
+          }
+        },
+        "q1": {
+          "title": "Unsur-Unsur Lingkaran",
+          "a": "Tentukanlah garis mana saja yang merupakan jari-jari?",
+          "b": "Tentukanlah garis mana saja yang merupakan diameter?",
+          "c": "Tentukanlah garis mana saja yang merupakan tali busur?",
+          "d": "Garis manakah yang merupakan busur terpanjang?",
+          "e": "Daerah I merupakan …",
+          "f": "Daerah II merupakan …",
+          "g": "Manakah yang merupakan juring terbesar?",
+          "h": "Garis OE adalah …",
+          "i": "Tali busur terpanjang ditunjukkan oleh …",
+          "j": "Sebutkan salah satu sudut pusat!",
+          "k": "Sebutkan salah satu sudut keliling!"
+        },
+        "q2": {
+          "title": "Unsur Lingkaran — Benar atau Salah",
+          "content": "Tentukan pernyataan berikut BENAR (B) atau SALAH (S)!",
+          "a": "Panjang jari-jari lingkaran sama dengan setengah panjang diameter lingkaran itu.",
+          "b": "Setiap garis tengah lingkaran (diameter) adalah tali busur.",
+          "c": "Setiap tali busur merupakan garis tengah lingkaran.",
+          "d": "Panjang tali busur yang tidak melalui pusat lebih panjang dari diameter.",
+          "e": "Diameter adalah tali busur terpanjang dalam suatu lingkaran.",
+          "f": "Apotema lebih panjang dari jari-jari.",
+          "g": "Juring dibatasi oleh dua jari-jari dan satu busur.",
+          "h": "Tembereng dibatasi oleh dua jari-jari dan satu busur.",
+          "i": "Semua tali busur dalam satu lingkaran memiliki panjang yang sama."
+        }
       }
     }
   },
