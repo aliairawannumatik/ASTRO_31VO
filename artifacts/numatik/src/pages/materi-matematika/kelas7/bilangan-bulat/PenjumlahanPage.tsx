@@ -816,6 +816,130 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
   );
 };
 
+/* ── Pola Percobaan: 2+2=4, 2+1=3, 2+0=2, 2+(-1)=1, 2+(-2)=0 ── */
+const POLA_ROWS = [
+  { bLabel: "2",    bColor: "#38bdf8", res: 4,  resColor: "#fbbf24" },
+  { bLabel: "1",    bColor: "#38bdf8", res: 3,  resColor: "#fbbf24" },
+  { bLabel: "0",    bColor: "#94a3b8", res: 2,  resColor: "#fbbf24" },
+  { bLabel: "(-1)", bColor: "#f87171", res: 1,  resColor: "#fbbf24" },
+  { bLabel: "(-2)", bColor: "#f87171", res: 0,  resColor: "#94a3b8" },
+];
+
+const PolaPercobaanAnim = () => {
+  const [step, setStep] = useState(0);
+
+  useEffect(() => {
+    const TOTAL = POLA_ROWS.length - 1; // 4 arc gaps
+    const CYCLE = TOTAL + 3;            // 4 show + 3 pause frames
+    let frame = 0;
+    const iv = setInterval(() => {
+      frame = (frame + 1) % CYCLE;
+      setStep(frame <= TOTAL ? frame : TOTAL);
+    }, 650);
+    return () => clearInterval(iv);
+  }, []);
+
+  const ROW_H = 58;
+  const SVG_W = 310;
+  const SVG_H = POLA_ROWS.length * ROW_H + 30;
+  const X2    = 44;
+  const XPLUS = 78;
+  const XB    = 132;
+  const XEQ   = 190;
+  const XRES  = 228;
+  const ARC_L_CX = XB - 34;
+  const ARC_R_CX = XRES + 34;
+
+  return (
+    <div className="rounded-xl border border-indigo-500/30 bg-slate-900/70 p-4 mb-4">
+      <p className="text-xs font-body text-indigo-300/80 mb-2 text-center font-semibold">
+        🔍 Perhatikan — apa yang terjadi saat bilangan kedua berkurang 1?
+      </p>
+      <div className="flex justify-center overflow-x-auto">
+        <svg viewBox={`0 0 ${SVG_W} ${SVG_H}`} width="100%" style={{ maxWidth: SVG_W, display: "block" }}>
+          <defs>
+            <style>{`
+              @keyframes arcAppearL {
+                from { stroke-dashoffset: 100; opacity: 0; }
+                to   { stroke-dashoffset: 0;   opacity: 1; }
+              }
+              @keyframes lblPopIn {
+                from { opacity: 0; transform: scale(0.4); }
+                to   { opacity: 1; transform: scale(1); }
+              }
+              .arc-l { stroke-dasharray: 100; pathLength: 100; animation: arcAppearL 0.55s cubic-bezier(0.22,1,0.36,1) both; }
+              .lbl-in { animation: lblPopIn 0.35s cubic-bezier(0.34,1.56,0.64,1) 0.28s both; transform-box: fill-box; transform-origin: center; }
+            `}</style>
+            <marker id="pola-arr-l" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
+              <polygon points="0 0,7 3,0 6" fill="#818cf8"/>
+            </marker>
+            <marker id="pola-arr-r" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
+              <polygon points="0 0,7 3,0 6" fill="#34d399"/>
+            </marker>
+          </defs>
+
+          {/* rows */}
+          {POLA_ROWS.map(({ bLabel, bColor, res, resColor }, i) => {
+            const y = 18 + i * ROW_H + ROW_H / 2;
+            return (
+              <g key={i}>
+                <text x={X2}   y={y + 7} textAnchor="middle" fontSize="22" fontWeight="bold" fill="#c084fc" fontFamily="monospace">2</text>
+                <text x={XPLUS} y={y + 7} textAnchor="middle" fontSize="22" fontWeight="bold" fill="#ffffff70" fontFamily="monospace">+</text>
+                <text x={XB}   y={y + 7} textAnchor="middle" fontSize="20" fontWeight="bold" fill={bColor}   fontFamily="monospace"
+                  style={{ filter: `drop-shadow(0 0 5px ${bColor}99)` }}>{bLabel}</text>
+                <text x={XEQ}  y={y + 7} textAnchor="middle" fontSize="22" fontWeight="bold" fill="#ffffff70" fontFamily="monospace">=</text>
+                <text x={XRES} y={y + 7} textAnchor="middle" fontSize="22" fontWeight="bold" fill={resColor} fontFamily="monospace"
+                  style={{ filter: `drop-shadow(0 0 6px ${resColor}99)` }}>{res}</text>
+              </g>
+            );
+          })}
+
+          {/* arcs between rows — appear one by one */}
+          {Array.from({ length: POLA_ROWS.length - 1 }, (_, i) => {
+            if (i >= step) return null;
+            const y1  = 18 + i * ROW_H + ROW_H / 2 + 15;
+            const y2  = 18 + (i + 1) * ROW_H + ROW_H / 2 - 15;
+            const mid = (y1 + y2) / 2;
+            return (
+              <g key={`a${i}`}>
+                {/* left arc — b side */}
+                <path d={`M ${XB} ${y1} Q ${ARC_L_CX} ${mid} ${XB} ${y2}`}
+                  fill="none" stroke="#818cf8" strokeWidth="2.5" strokeLinecap="round"
+                  pathLength="100" className="arc-l"
+                  markerEnd="url(#pola-arr-l)"
+                  style={{ filter: "drop-shadow(0 0 5px #818cf8aa)" }}
+                />
+                <text x={ARC_L_CX - 10} y={mid + 5} textAnchor="middle" fontSize="11"
+                  fontWeight="bold" fill="#a5b4fc" fontFamily="monospace" className="lbl-in">−1</text>
+
+                {/* right arc — result side */}
+                <path d={`M ${XRES} ${y1} Q ${ARC_R_CX} ${mid} ${XRES} ${y2}`}
+                  fill="none" stroke="#34d399" strokeWidth="2.5" strokeLinecap="round"
+                  pathLength="100" className="arc-l"
+                  markerEnd="url(#pola-arr-r)"
+                  style={{ filter: "drop-shadow(0 0 5px #34d39988)" }}
+                />
+                <text x={ARC_R_CX + 10} y={mid + 5} textAnchor="middle" fontSize="11"
+                  fontWeight="bold" fill="#6ee7b7" fontFamily="monospace" className="lbl-in">−1</text>
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+      <div className="flex justify-center gap-6 mt-1 text-xs font-body">
+        <span className="flex items-center gap-1 text-indigo-300">
+          <svg width="18" height="8"><path d="M 0 4 Q 9 0 18 4" fill="none" stroke="#818cf8" strokeWidth="2"/></svg>
+          bilangan ke-2 berkurang 1
+        </span>
+        <span className="flex items-center gap-1 text-emerald-300">
+          <svg width="18" height="8"><path d="M 0 4 Q 9 0 18 4" fill="none" stroke="#34d399" strokeWidth="2"/></svg>
+          hasil berkurang 1
+        </span>
+      </div>
+    </div>
+  );
+};
+
 const PenjumlahanBilanganBulatPage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
@@ -1601,6 +1725,8 @@ const PenjumlahanBilanganBulatPage = () => {
                 <DirectionDemoSVG lightMode={lightMode} />
 
                 <InteraktifPenjumlahan lightMode={lightMode} />
+
+                <PolaPercobaanAnim />
 
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 mt-4">
                   <p className="font-body text-sm font-semibold text-purple-300 mb-3">{c.formulaTitle}</p>
