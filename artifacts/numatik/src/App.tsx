@@ -221,6 +221,7 @@ const TKALatihan2Page = lazy(() => import("./pages/tka/TKALatihan2Page"));
 const TKALatihan3Page = lazy(() => import("./pages/tka/TKALatihan3Page"));
 const TKALatihan4Page = lazy(() => import("./pages/tka/TKALatihan4Page"));
 const TKALatihan5Page = lazy(() => import("./pages/tka/TKALatihan5Page"));
+const TKASoalAsli2025Page = lazy(() => import("./pages/tka/TKASoalAsli2025Page"));
 const TKATipsPage = lazy(() => import("./pages/tka/TKATipsPage"));
 const TKAModulPemantapanPage = lazy(() => import("./pages/tka/TKAModulPemantapanPage"));
 const TKAPemantapanBilanganBulatPage = lazy(() => import("./pages/tka/modul-pemantapan/BilanganBulatPage"));
@@ -1149,6 +1150,7 @@ const AppInner = () => {
           <Route path="/tka/paket-3" element={<TKALatihan3Page />} />
           <Route path="/tka/paket-4" element={<TKALatihan4Page />} />
           <Route path="/tka/paket-5" element={<TKALatihan5Page />} />
+          <Route path="/tka/soal-asli-2025" element={<TKASoalAsli2025Page />} />
           <Route path="/tka/modul-pemantapan" element={<TKAModulPemantapanPage />} />
           <Route path="/tka/modul-pemantapan/bilangan-bulat" element={<TKAPemantapanBilanganBulatPage />} />
           <Route path="/tka/modul-pemantapan/bilangan-rasional" element={<TKAPemantapanBilanganRasionalPage />} />

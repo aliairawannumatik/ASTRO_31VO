@@ -4,7 +4,7 @@ import PageNavigation from "@/components/PageNavigation";
 import {
   Brain, ChevronRight, FileText, Lightbulb, BookOpen, Target,
   ChevronDown, ChevronUp, Info, Layers, Award, BarChart2, ExternalLink,
-  Clock, Zap, CheckCircle2, Coffee, Pencil, AlertTriangle, Star,
+  Clock, Zap, CheckCircle2, Coffee, Pencil, AlertTriangle, Star, Trophy,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
@@ -442,6 +442,37 @@ const TKAPage = () => {
               </InfoSection>
             </div>
           )}
+        </div>
+
+        {/* ── Soal TKA Asli 2025 ── */}
+        <div className="mb-6 animate-slide-up" style={{ animationDelay: "0.08s" }}>
+          <button
+            onClick={() => { playPopSound(); navigate("/tka/soal-asli-2025"); }}
+            className="w-full flex items-center justify-between gap-3 px-5 py-4 rounded-xl border cursor-pointer
+              bg-gradient-to-r from-amber-500/20 via-yellow-500/10 to-orange-500/10
+              border-amber-400/50 hover:border-amber-400/80
+              hover:from-amber-500/30 hover:via-yellow-500/15 hover:to-orange-500/15
+              shadow-lg shadow-amber-500/10 hover:shadow-amber-500/20
+              transition-all duration-200 active:scale-[0.99]"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-amber-500/25 border border-amber-400/50 flex items-center justify-center shrink-0">
+                <Trophy className="w-5 h-5 text-amber-300" />
+              </div>
+              <div className="text-left">
+                <span className="font-display text-sm font-bold text-amber-100 tracking-wide block leading-tight">
+                  SOAL TKA MATEMATIKA 2025 - 2026 ASLI
+                </span>
+                <span className="text-[10px] font-body text-amber-400/70 leading-none">30 Soal · Soal Resmi · Tahun 2025</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+              <span className="hidden sm:inline-flex text-[10px] font-body font-bold text-amber-300 bg-amber-500/15 border border-amber-400/30 px-2 py-0.5 rounded-full tracking-wider">
+                ASLI
+              </span>
+              <ChevronRight className="w-4 h-4 text-amber-300" />
+            </div>
+          </button>
         </div>
 
         {/* ── Modul Pemantapan (toggle) ── */}
