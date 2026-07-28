@@ -16,170 +16,181 @@ type Q = {
   img?: string; imgAlt?: string; imgCaption?: string;
   type: "essay" | "mixed";
 };
-const Q = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
-
-const questions: Q[] = [
-  Q(1, "Roda Sepeda", {
-    type: "mixed",
-    img: "/soal-roda-sepeda.png",
-    imgAlt: "Roda sepeda dengan jari-jari 35 cm",
-    imgCaption: "https://www.cycle-eirin.com/wordpress",
-    content: "Roda sepeda berjari-jari 35 cm berputar di jalan.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung keliling roda. (} \\pi = \\tfrac{22}{7})" },
-      { label: "b.", text: "Jika roda berputar 100 kali, berapa meter jarak yang ditempuh?" },
-      { label: "c.", text: "Berapa banyak putaran roda untuk menempuh jarak 1,1 km?" },
-    ],
-  }),
-
-  Q(2, "Kolam Renang Melingkar", {
-    type: "essay",
-    img: "/soal-kolam-renang.png",
-    imgAlt: "Kolam renang berbentuk lingkaran tampak atas",
-    imgCaption: "https://www.bing.com/images/create",
-    content: "Sebuah kolam renang berbentuk lingkaran berdiameter 28 m. Di sekeliling kolam dibuat jalan setapak lebar 3,5 m.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas kolam renang. (} \\pi = \\tfrac{22}{7})" },
-      { label: "b.", text: "Hitung luas jalan setapak (cincin di luar kolam)." },
-      { label: "c.", text: "Jika paving jalan seharga Rp 80.000/m², berapa total biaya pembuatan jalan?" },
-    ],
-  }),
-
-  Q(3, "Jam Dinding", {
-    type: "mixed",
-    img: "/soal-jam-dinding.png",
-    imgAlt: "Jam dinding berbentuk lingkaran",
-    imgCaption: "https://www.bing.com/images/create",
-    content: "Jam dinding berbentuk lingkaran. Jarum menit panjang 21 cm, jarum jam panjang 14 cm.",
-    parts: [
-      { label: "a.", text: "Berapa jarak yang ditempuh ujung jarum menit dalam 1 jam?" },
-      { label: "b.", text: "Berapa jarak yang ditempuh ujung jarum jam dalam 12 jam?" },
-      { label: "c.", text: "Perbandingan kecepatan ujung jarum menit : ujung jarum jam = ?" },
-    ],
-  }),
-
-  Q(4, "Pizza Melingkar", {
-    type: "mixed",
-    img: "/soal-pizza.png",
-    imgAlt: "Pizza melingkar dibagi menjadi 6 potongan sama besar",
-    imgCaption: "https://www.bing.com/images/create",
-    content: "Pizza berbentuk lingkaran berjari-jari 21 cm dibagi menjadi 6 bagian sama besar untuk 6 orang.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas seluruh pizza. (} \\pi = \\tfrac{22}{7})" },
-      { label: "b.", text: "Hitung luas setiap potongan pizza." },
-      { label: "c.", text: "Jika harga pizza Rp 126.000, berapa harga per potongan?" },
-    ],
-  }),
-
-  Q(5, "Taman Kota Melingkar", {
-    type: "essay",
-    img: "/soal-taman-kota.png",
-    imgAlt: "Taman kota berbentuk lingkaran tampak atas",
-    imgCaption: "https://www.bing.com/images/create",
-    content: "Taman kota berbentuk lingkaran berjari-jari 70 m. Sekeliling taman akan dipasangi pagar dengan harga Rp 250.000 per meter.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung keliling taman. (} \\pi = \\tfrac{22}{7})" },
-      { label: "b.", text: "Hitung biaya total pemasangan pagar." },
-      { label: "c.", text: "Jika taman akan ditanami rumput seharga Rp 50.000/m², berapa total biayanya?" },
-    ],
-  }),
-
-  Q(6, "Lapangan Lari Melingkar", {
-    type: "essay",
-    img: "/soal-lintasan-lari.png",
-    imgAlt: "Lintasan lari berbentuk melingkar tampak samping",
-    imgCaption: "https://www.bing.com/images/create",
-    content: "Lintasan lari berbentuk lingkaran berjari-jari 63 m. Seorang atlet berlari 5 kali putaran setiap hari selama 7 hari.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung keliling lintasan. (} \\pi = \\tfrac{22}{7})" },
-      { label: "b.", text: "Berapa meter total lintasan yang ditempuh atlet dalam sehari?" },
-      { label: "c.", text: "Berapa km total lintasan selama 7 hari?" },
-    ],
-  }),
-
-  Q(7, "Soal UN — Drum Silinder", {
-    type: "essay",
-    img: "/image_1778761973928.png",
-    imgAlt: "Nelayan melempar jaring ikan berbentuk lingkaran dari perahu",
-    imgCaption: "https://www.bing.com/images/create",
-    content: "Jaring ikan berbentuk lingkaran. Jika diameter jaring 14 m, dan nelayan melempar jaring setiap 10 menit.",
-    parts: [
-      { label: "a.", text: "Berapa luas area yang tertutup jaring setiap kali dilempar?" },
-      { label: "b.", text: "Dalam 1 jam, berapa kali jaring dilempar?" },
-      { label: "c.", text: "Jika setiap 10 m² menghasilkan 2 kg ikan rata-rata, berapa kg ikan dalam 1 jam?" },
-    ],
-  }),
-
-  Q(8, "Soal ANBK — Penangkap Ikan Jaring Melingkar", {
-    type: "essay",
-    img: "/image_1778762091357.png",
-    imgAlt: "Meja makan berbentuk lingkaran dengan taplak meja putih",
-    imgCaption: "https://www.bing.com/images/create",
-    content: "Meja makan berbentuk lingkaran dengan diameter 1,4 m akan dilapisi taplak meja. Taplak menjuntai 20 cm di setiap sisi.",
-    parts: [
-      { label: "a.", text: "Tentukan diameter taplak meja." },
-      { label: "b.", text: "Hitung luas taplak meja." },
-      { label: "c.", text: "Hitung luas meja asli. Berapa persen taplak lebih luas dari meja?" },
-    ],
-  }),
-
-  Q(9, "Meja Makan Melingkar", {
-    type: "essay",
-    img: "/image_1778762340281.png",
-    imgAlt: "Diagram geometri orbit satelit mengelilingi bumi",
-    imgCaption: "https://www.bing.com/images/create",
-    content: "Satelit mengorbit bumi pada ketinggian 7.000 km. Jari-jari bumi ≈ 6.400 km. Orbit dianggap melingkar.",
-    parts: [
-      { label: "a.", text: "Tentukan jari-jari orbit satelit dari pusat bumi." },
-      { label: "b.", math: "\\text{Hitung keliling orbit satelit. (} \\pi = 3{,}14)" },
-      { label: "c.", text: "Jika satelit mengorbit dengan kecepatan 7 km/s, berapa detik untuk satu putaran penuh?" },
-    ],
-  }),
-
-  Q(10, "Ban Mobil", {
-    type: "essay",
-    img: "/image_1778762645992.png",
-    imgAlt: "Ban mobil melingkar di jalan basah malam hari",
-    imgCaption: "https://www.bing.com/images/create",
-    content: "Ban mobil memiliki jari-jari luar 35 cm. Mobil bergerak sejauh 440 m.",
-    parts: [
-      { label: "a.", text: "Hitung keliling ban." },
-      { label: "b.", text: "Berapa kali ban berputar selama 440 m?" },
-      { label: "c.", text: "Jika ban berputar 400 rpm (rotasi per menit), berapa kecepatan mobil dalam km/jam?" },
-    ],
-  }),
-
-  Q(11, "Soal UN — Kolam Ikan", {
-    type: "essay",
-    img: "/image_1778762749930.png",
-    imgAlt: "Kolam ikan berbentuk lingkaran tampak atas dengan pemilik memberi pakan",
-    imgCaption: "https://www.bing.com/images/create",
-    content: "Kolam ikan berbentuk lingkaran dengan diameter 14 m. Pemilik ingin memberi pakan ikan yang disebar merata.",
-    parts: [
-      { label: "a.", text: "Hitung luas permukaan kolam." },
-      { label: "b.", text: "Jika 1 kg pakan untuk 10 m², berapa kg pakan yang diperlukan?" },
-      { label: "c.", text: "Jika harga pakan Rp 25.000/kg, berapa biaya pakan sekali memberi makan?" },
-    ],
-  }),
-
-  Q(12, "Soal ANBK Gabungan — Desain Taman Terpadu", {
-    type: "mixed",
-    img: "/image_1778763445513.png",
-    imgAlt: "Desain taman terpadu 3 zona: kolam (r=3,5 m), taman bunga (r=7,7 m), lintasan jogging (r=12,6 m)",
-    imgCaption: "https://www.bing.com/images/create",
-    content: "Taman terpadu 3 zona:\n• Kolam: r = 3,5 m\n• Taman Bunga: r = 7,7 m (annulus)\n• Lintasan Jogging: r = 12,6 m (annulus)\n(π = 22/7)",
-    parts: [
-      { label: "a.", text: "Hitung luas Kolam." },
-      { label: "b.", text: "Hitung luas Taman Bunga (antara kolam dan r = 7,7 m)." },
-      { label: "c.", text: "Hitung luas Lintasan Jogging (antara r = 7,7 m dan r = 12,6 m)." },
-      { label: "d.", text: "Jika biaya per m²: kolam Rp 500rb, taman Rp 200rb, jogging Rp 150rb — berapa total anggaran?" },
-    ],
-  }),
-];
+const Qf = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 const PenerapanKontekstualPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const lp = "practice.lingkaran.penerapanKontekstual";
+
+  const refFormulas = [
+    { n: t(`${lp}.refKeliling`),     d: "K = 2πr = πd",       c: "text-cyan-400" },
+    { n: t(`${lp}.refLuas`),         d: "L = πr²",             c: "text-emerald-400" },
+    { n: t(`${lp}.refPanjangBusur`), d: "(α/360°) × 2πr",      c: "text-yellow-400" },
+    { n: t(`${lp}.refLuasJuring`),   d: "(α/360°) × πr²",      c: "text-violet-400" },
+    { n: t(`${lp}.refLuasAnnulus`),  d: "π(R² − r²)",          c: "text-orange-400" },
+    { n: "π ≈ 22/7",                 d: t(`${lp}.refPiNote`),   c: "text-pink-400" },
+  ];
+
+  const questions: Q[] = [
+    Qf(1, t(`${lp}.q1.title`), {
+      type: "mixed",
+      img: "/soal-roda-sepeda.png",
+      imgAlt: t(`${lp}.q1.imgAlt`),
+      imgCaption: "https://www.cycle-eirin.com/wordpress",
+      content: t(`${lp}.q1.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q1.a`) },
+        { label: "b.", text: t(`${lp}.q1.b`) },
+        { label: "c.", text: t(`${lp}.q1.c`) },
+      ],
+    }),
+
+    Qf(2, t(`${lp}.q2.title`), {
+      type: "essay",
+      img: "/soal-kolam-renang.png",
+      imgAlt: t(`${lp}.q2.imgAlt`),
+      imgCaption: "https://www.bing.com/images/create",
+      content: t(`${lp}.q2.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q2.a`) },
+        { label: "b.", text: t(`${lp}.q2.b`) },
+        { label: "c.", text: t(`${lp}.q2.c`) },
+      ],
+    }),
+
+    Qf(3, t(`${lp}.q3.title`), {
+      type: "mixed",
+      img: "/soal-jam-dinding.png",
+      imgAlt: t(`${lp}.q3.imgAlt`),
+      imgCaption: "https://www.bing.com/images/create",
+      content: t(`${lp}.q3.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q3.a`) },
+        { label: "b.", text: t(`${lp}.q3.b`) },
+        { label: "c.", text: t(`${lp}.q3.c`) },
+      ],
+    }),
+
+    Qf(4, t(`${lp}.q4.title`), {
+      type: "mixed",
+      img: "/soal-pizza.png",
+      imgAlt: t(`${lp}.q4.imgAlt`),
+      imgCaption: "https://www.bing.com/images/create",
+      content: t(`${lp}.q4.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q4.a`) },
+        { label: "b.", text: t(`${lp}.q4.b`) },
+        { label: "c.", text: t(`${lp}.q4.c`) },
+      ],
+    }),
+
+    Qf(5, t(`${lp}.q5.title`), {
+      type: "essay",
+      img: "/soal-taman-kota.png",
+      imgAlt: t(`${lp}.q5.imgAlt`),
+      imgCaption: "https://www.bing.com/images/create",
+      content: t(`${lp}.q5.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q5.a`) },
+        { label: "b.", text: t(`${lp}.q5.b`) },
+        { label: "c.", text: t(`${lp}.q5.c`) },
+      ],
+    }),
+
+    Qf(6, t(`${lp}.q6.title`), {
+      type: "essay",
+      img: "/soal-lintasan-lari.png",
+      imgAlt: t(`${lp}.q6.imgAlt`),
+      imgCaption: "https://www.bing.com/images/create",
+      content: t(`${lp}.q6.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q6.a`) },
+        { label: "b.", text: t(`${lp}.q6.b`) },
+        { label: "c.", text: t(`${lp}.q6.c`) },
+      ],
+    }),
+
+    Qf(7, t(`${lp}.q7.title`), {
+      type: "essay",
+      img: "/image_1778761973928.png",
+      imgAlt: t(`${lp}.q7.imgAlt`),
+      imgCaption: "https://www.bing.com/images/create",
+      content: t(`${lp}.q7.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q7.a`) },
+        { label: "b.", text: t(`${lp}.q7.b`) },
+        { label: "c.", text: t(`${lp}.q7.c`) },
+      ],
+    }),
+
+    Qf(8, t(`${lp}.q8.title`), {
+      type: "essay",
+      img: "/image_1778762091357.png",
+      imgAlt: t(`${lp}.q8.imgAlt`),
+      imgCaption: "https://www.bing.com/images/create",
+      content: t(`${lp}.q8.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q8.a`) },
+        { label: "b.", text: t(`${lp}.q8.b`) },
+        { label: "c.", text: t(`${lp}.q8.c`) },
+      ],
+    }),
+
+    Qf(9, t(`${lp}.q9.title`), {
+      type: "essay",
+      img: "/image_1778762340281.png",
+      imgAlt: t(`${lp}.q9.imgAlt`),
+      imgCaption: "https://www.bing.com/images/create",
+      content: t(`${lp}.q9.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q9.a`) },
+        { label: "b.", text: t(`${lp}.q9.b`) },
+        { label: "c.", text: t(`${lp}.q9.c`) },
+      ],
+    }),
+
+    Qf(10, t(`${lp}.q10.title`), {
+      type: "essay",
+      img: "/image_1778762645992.png",
+      imgAlt: t(`${lp}.q10.imgAlt`),
+      imgCaption: "https://www.bing.com/images/create",
+      content: t(`${lp}.q10.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q10.a`) },
+        { label: "b.", text: t(`${lp}.q10.b`) },
+        { label: "c.", text: t(`${lp}.q10.c`) },
+      ],
+    }),
+
+    Qf(11, t(`${lp}.q11.title`), {
+      type: "essay",
+      img: "/image_1778762749930.png",
+      imgAlt: t(`${lp}.q11.imgAlt`),
+      imgCaption: "https://www.bing.com/images/create",
+      content: t(`${lp}.q11.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q11.a`) },
+        { label: "b.", text: t(`${lp}.q11.b`) },
+        { label: "c.", text: t(`${lp}.q11.c`) },
+      ],
+    }),
+
+    Qf(12, t(`${lp}.q12.title`), {
+      type: "mixed",
+      img: "/image_1778763445513.png",
+      imgAlt: t(`${lp}.q12.imgAlt`),
+      imgCaption: "https://www.bing.com/images/create",
+      content: t(`${lp}.q12.content`),
+      parts: [
+        { label: "a.", text: t(`${lp}.q12.a`) },
+        { label: "b.", text: t(`${lp}.q12.b`) },
+        { label: "c.", text: t(`${lp}.q12.c`) },
+        { label: "d.", text: t(`${lp}.q12.d`) },
+      ],
+    }),
+  ];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -191,9 +202,9 @@ const PenerapanKontekstualPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-rose-300 text-center mb-1"
             style={{ textShadow: '0 0 20px rgba(251,113,133,0.7)' }}>
-            PENERAPAN KONSEP LINGKARAN
+            {t(`${lp}.h1`)}
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · {t('practice.breadcrumb')}</p>
+          <p className="text-white/50 text-xs text-center font-body">{t(`${lp}.subtitle`)} · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-rose-500/10 border border-rose-500/30 rounded-lg px-4 py-2">
             <span className="text-rose-400 text-xs font-bold">📋 {questions.length} {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
@@ -202,16 +213,9 @@ const PenerapanKontekstualPage = () => {
         </div>
 
         <div className="mb-5 bg-rose-900/20 border border-rose-500/20 rounded-xl p-4">
-          <p className="text-rose-300 text-xs font-bold mb-2">🌍 Rumus untuk Penerapan Kontekstual</p>
+          <p className="text-rose-300 text-xs font-bold mb-2">{t(`${lp}.refBoxTitle`)}</p>
           <div className="grid grid-cols-2 gap-2 text-xs font-body">
-            {[
-              { n: "Keliling", d: "K = 2πr = πd", c: "text-cyan-400" },
-              { n: "Luas", d: "L = πr²", c: "text-emerald-400" },
-              { n: "Panjang Busur", d: "(α/360°) × 2πr", c: "text-yellow-400" },
-              { n: "Luas Juring", d: "(α/360°) × πr²", c: "text-violet-400" },
-              { n: "Luas Annulus", d: "π(R² − r²)", c: "text-orange-400" },
-              { n: "π ≈ 22/7", d: "jika r atau d kelipatan 7", c: "text-pink-400" },
-            ].map(r => (
+            {refFormulas.map(r => (
               <div key={r.n} className="bg-white/5 rounded-lg px-3 py-2">
                 <span className={`font-bold ${r.c}`}>{r.n}: </span>
                 <span className="text-white/60">{r.d}</span>
@@ -255,12 +259,12 @@ const PenerapanKontekstualPage = () => {
                     )}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
-                        {q.parts.map((p, pi) => (
+                        {q.parts.map((pt, pi) => (
                           <div key={pi} className="flex items-start gap-2 bg-white/5 rounded-lg px-3 py-2">
-                            <span className="text-rose-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
-                            {p.math
-                              ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
-                              : <p className="font-body text-sm text-white/80 whitespace-pre-line">{p.text}</p>
+                            <span className="text-rose-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{pt.label}</span>
+                            {pt.math
+                              ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={pt.math} /></div>
+                              : <p className="font-body text-sm text-white/80 whitespace-pre-line">{pt.text}</p>
                             }
                           </div>
                         ))}

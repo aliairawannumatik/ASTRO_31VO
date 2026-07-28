@@ -5867,6 +5867,114 @@
             "pre": "Jika E di busur yang sama dengan C, apakah "
           }
         }
+      },
+      "penerapanKontekstual": {
+        "h1": "PENERAPAN KONSEP LINGKARAN",
+        "subtitle": "Kelas 8 · Lingkaran",
+        "refBoxTitle": "🌍 Rumus untuk Penerapan Kontekstual",
+        "refKeliling": "Keliling",
+        "refLuas": "Luas",
+        "refPanjangBusur": "Panjang Busur",
+        "refLuasJuring": "Luas Juring",
+        "refLuasAnnulus": "Luas Annulus",
+        "refPiNote": "jika r atau d kelipatan 7",
+        "q1": {
+          "title": "Roda Sepeda",
+          "content": "Roda sepeda berjari-jari 35 cm berputar di jalan.",
+          "imgAlt": "Roda sepeda dengan jari-jari 35 cm",
+          "a": "Hitung keliling roda. (π = 22/7)",
+          "b": "Jika roda berputar 100 kali, berapa meter jarak yang ditempuh?",
+          "c": "Berapa banyak putaran roda untuk menempuh jarak 1,1 km?"
+        },
+        "q2": {
+          "title": "Kolam Renang Melingkar",
+          "content": "Sebuah kolam renang berbentuk lingkaran berdiameter 28 m. Di sekeliling kolam dibuat jalan setapak lebar 3,5 m.",
+          "imgAlt": "Kolam renang berbentuk lingkaran tampak atas",
+          "a": "Hitung luas kolam renang. (π = 22/7)",
+          "b": "Hitung luas jalan setapak (cincin di luar kolam).",
+          "c": "Jika paving jalan seharga Rp 80.000/m², berapa total biaya pembuatan jalan?"
+        },
+        "q3": {
+          "title": "Jam Dinding",
+          "content": "Jam dinding berbentuk lingkaran. Jarum menit panjang 21 cm, jarum jam panjang 14 cm.",
+          "imgAlt": "Jam dinding berbentuk lingkaran",
+          "a": "Berapa jarak yang ditempuh ujung jarum menit dalam 1 jam?",
+          "b": "Berapa jarak yang ditempuh ujung jarum jam dalam 12 jam?",
+          "c": "Perbandingan kecepatan ujung jarum menit : ujung jarum jam = ?"
+        },
+        "q4": {
+          "title": "Pizza Melingkar",
+          "content": "Pizza berbentuk lingkaran berjari-jari 21 cm dibagi menjadi 6 bagian sama besar untuk 6 orang.",
+          "imgAlt": "Pizza melingkar dibagi menjadi 6 potongan sama besar",
+          "a": "Hitung luas seluruh pizza. (π = 22/7)",
+          "b": "Hitung luas setiap potongan pizza.",
+          "c": "Jika harga pizza Rp 126.000, berapa harga per potongan?"
+        },
+        "q5": {
+          "title": "Taman Kota Melingkar",
+          "content": "Taman kota berbentuk lingkaran berjari-jari 70 m. Sekeliling taman akan dipasangi pagar dengan harga Rp 250.000 per meter.",
+          "imgAlt": "Taman kota berbentuk lingkaran tampak atas",
+          "a": "Hitung keliling taman. (π = 22/7)",
+          "b": "Hitung biaya total pemasangan pagar.",
+          "c": "Jika taman akan ditanami rumput seharga Rp 50.000/m², berapa total biayanya?"
+        },
+        "q6": {
+          "title": "Lapangan Lari Melingkar",
+          "content": "Lintasan lari berbentuk lingkaran berjari-jari 63 m. Seorang atlet berlari 5 kali putaran setiap hari selama 7 hari.",
+          "imgAlt": "Lintasan lari berbentuk melingkar tampak samping",
+          "a": "Hitung keliling lintasan. (π = 22/7)",
+          "b": "Berapa meter total lintasan yang ditempuh atlet dalam sehari?",
+          "c": "Berapa km total lintasan selama 7 hari?"
+        },
+        "q7": {
+          "title": "Soal UN — Drum Silinder",
+          "content": "Jaring ikan berbentuk lingkaran. Jika diameter jaring 14 m, dan nelayan melempar jaring setiap 10 menit.",
+          "imgAlt": "Nelayan melempar jaring ikan berbentuk lingkaran dari perahu",
+          "a": "Berapa luas area yang tertutup jaring setiap kali dilempar?",
+          "b": "Dalam 1 jam, berapa kali jaring dilempar?",
+          "c": "Jika setiap 10 m² menghasilkan 2 kg ikan rata-rata, berapa kg ikan dalam 1 jam?"
+        },
+        "q8": {
+          "title": "Soal ANBK — Penangkap Ikan Jaring Melingkar",
+          "content": "Meja makan berbentuk lingkaran dengan diameter 1,4 m akan dilapisi taplak meja. Taplak menjuntai 20 cm di setiap sisi.",
+          "imgAlt": "Meja makan berbentuk lingkaran dengan taplak meja putih",
+          "a": "Tentukan diameter taplak meja.",
+          "b": "Hitung luas taplak meja.",
+          "c": "Hitung luas meja asli. Berapa persen taplak lebih luas dari meja?"
+        },
+        "q9": {
+          "title": "Meja Makan Melingkar",
+          "content": "Satelit mengorbit bumi pada ketinggian 7.000 km. Jari-jari bumi ≈ 6.400 km. Orbit dianggap melingkar.",
+          "imgAlt": "Diagram geometri orbit satelit mengelilingi bumi",
+          "a": "Tentukan jari-jari orbit satelit dari pusat bumi.",
+          "b": "Hitung keliling orbit satelit. (π = 3,14)",
+          "c": "Jika satelit mengorbit dengan kecepatan 7 km/s, berapa detik untuk satu putaran penuh?"
+        },
+        "q10": {
+          "title": "Ban Mobil",
+          "content": "Ban mobil memiliki jari-jari luar 35 cm. Mobil bergerak sejauh 440 m.",
+          "imgAlt": "Ban mobil melingkar di jalan basah malam hari",
+          "a": "Hitung keliling ban.",
+          "b": "Berapa kali ban berputar selama 440 m?",
+          "c": "Jika ban berputar 400 rpm (rotasi per menit), berapa kecepatan mobil dalam km/jam?"
+        },
+        "q11": {
+          "title": "Soal UN — Kolam Ikan",
+          "content": "Kolam ikan berbentuk lingkaran dengan diameter 14 m. Pemilik ingin memberi pakan ikan yang disebar merata.",
+          "imgAlt": "Kolam ikan berbentuk lingkaran tampak atas dengan pemilik memberi pakan",
+          "a": "Hitung luas permukaan kolam.",
+          "b": "Jika 1 kg pakan untuk 10 m², berapa kg pakan yang diperlukan?",
+          "c": "Jika harga pakan Rp 25.000/kg, berapa biaya pakan sekali memberi makan?"
+        },
+        "q12": {
+          "title": "Soal ANBK Gabungan — Desain Taman Terpadu",
+          "content": "Taman terpadu 3 zona:\n• Kolam: r = 3,5 m\n• Taman Bunga: r = 7,7 m (annulus)\n• Lintasan Jogging: r = 12,6 m (annulus)\n(π = 22/7)",
+          "imgAlt": "Desain taman terpadu 3 zona: kolam (r=3,5 m), taman bunga (r=7,7 m), lintasan jogging (r=12,6 m)",
+          "a": "Hitung luas Kolam.",
+          "b": "Hitung luas Taman Bunga (antara kolam dan r = 7,7 m).",
+          "c": "Hitung luas Lintasan Jogging (antara r = 7,7 m dan r = 12,6 m).",
+          "d": "Jika biaya per m²: kolam Rp 500rb, taman Rp 200rb, jogging Rp 150rb — berapa total anggaran?"
+        }
       }
     }
   },

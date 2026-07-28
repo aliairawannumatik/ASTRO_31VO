@@ -5867,6 +5867,114 @@
             "pre": "If E is on the same arc as C, is "
           }
         }
+      },
+      "penerapanKontekstual": {
+        "h1": "APPLYING CIRCLE CONCEPTS",
+        "subtitle": "Grade 8 · Circles",
+        "refBoxTitle": "🌍 Formulas for Contextual Applications",
+        "refKeliling": "Circumference",
+        "refLuas": "Area",
+        "refPanjangBusur": "Arc Length",
+        "refLuasJuring": "Sector Area",
+        "refLuasAnnulus": "Annulus Area",
+        "refPiNote": "when r or d is a multiple of 7",
+        "q1": {
+          "title": "Bicycle Wheel",
+          "content": "A bicycle wheel with radius 35 cm rolls along the road.",
+          "imgAlt": "Bicycle wheel with radius 35 cm",
+          "a": "Calculate the circumference of the wheel. (π = 22/7)",
+          "b": "If the wheel rotates 100 times, what distance (in metres) is covered?",
+          "c": "How many rotations does the wheel need to travel 1.1 km?"
+        },
+        "q2": {
+          "title": "Circular Swimming Pool",
+          "content": "A circular swimming pool has a diameter of 28 m. A footpath 3.5 m wide is built around the pool.",
+          "imgAlt": "Circular swimming pool seen from above",
+          "a": "Calculate the area of the swimming pool. (π = 22/7)",
+          "b": "Find the area of the footpath (ring outside the pool).",
+          "c": "If paving costs Rp 80,000/m², what is the total cost of building the path?"
+        },
+        "q3": {
+          "title": "Wall Clock",
+          "content": "A circular wall clock. The minute hand is 21 cm long, and the hour hand is 14 cm long.",
+          "imgAlt": "Circular wall clock",
+          "a": "How far does the tip of the minute hand travel in 1 hour?",
+          "b": "How far does the tip of the hour hand travel in 12 hours?",
+          "c": "What is the speed ratio of the tip of the minute hand to the hour hand?"
+        },
+        "q4": {
+          "title": "Circular Pizza",
+          "content": "A circular pizza with radius 21 cm is divided into 6 equal slices for 6 people.",
+          "imgAlt": "Circular pizza divided into 6 equal slices",
+          "a": "Calculate the total area of the pizza. (π = 22/7)",
+          "b": "Find the area of each pizza slice.",
+          "c": "If the pizza costs Rp 126,000, what is the price per slice?"
+        },
+        "q5": {
+          "title": "Circular City Park",
+          "content": "A circular city park has radius 70 m. A fence costing Rp 250,000 per metre will be installed around the park.",
+          "imgAlt": "Circular city park seen from above",
+          "a": "Calculate the circumference of the park. (π = 22/7)",
+          "b": "Find the total cost of installing the fence.",
+          "c": "If grass costing Rp 50,000/m² is planted in the park, what is the total cost?"
+        },
+        "q6": {
+          "title": "Circular Running Track",
+          "content": "A circular running track has radius 63 m. An athlete runs 5 laps every day for 7 days.",
+          "imgAlt": "Circular running track seen from the side",
+          "a": "Calculate the circumference of the track. (π = 22/7)",
+          "b": "How many metres does the athlete run in total in one day?",
+          "c": "What is the total distance (in km) over 7 days?"
+        },
+        "q7": {
+          "title": "National Exam — Cylinder Drum",
+          "content": "A circular fishing net has a diameter of 14 m. A fisherman casts the net every 10 minutes.",
+          "imgAlt": "Fisherman casting a circular fishing net from a boat",
+          "a": "What area is covered by the net each time it is cast?",
+          "b": "In 1 hour, how many times is the net cast?",
+          "c": "If every 10 m² yields an average of 2 kg of fish, how many kg of fish are caught in 1 hour?"
+        },
+        "q8": {
+          "title": "Competency Exam — Round Fishing Net",
+          "content": "A circular dining table with diameter 1.4 m will be covered with a tablecloth. The tablecloth hangs 20 cm on each side.",
+          "imgAlt": "Circular dining table with white tablecloth",
+          "a": "Find the diameter of the tablecloth.",
+          "b": "Find the area of the tablecloth.",
+          "c": "Find the area of the original table. By what percentage is the tablecloth larger than the table?"
+        },
+        "q9": {
+          "title": "Circular Dining Table",
+          "content": "A satellite orbits Earth at an altitude of 7,000 km. Earth's radius ≈ 6,400 km. The orbit is assumed circular.",
+          "imgAlt": "Geometric diagram of a satellite orbiting Earth",
+          "a": "Find the orbital radius of the satellite from Earth's centre.",
+          "b": "Calculate the circumference of the satellite's orbit. (π = 3.14)",
+          "c": "If the satellite orbits at a speed of 7 km/s, how many seconds does one full orbit take?"
+        },
+        "q10": {
+          "title": "Car Tyre",
+          "content": "A car tyre has an outer radius of 35 cm. The car travels a distance of 440 m.",
+          "imgAlt": "Circular car tyre on a wet road at night",
+          "a": "Find the circumference of the tyre.",
+          "b": "How many times does the tyre rotate over 440 m?",
+          "c": "If the tyre rotates at 400 rpm (rotations per minute), what is the car's speed in km/h?"
+        },
+        "q11": {
+          "title": "National Exam — Fish Pond",
+          "content": "A circular fish pond has a diameter of 14 m. The owner wants to spread fish feed evenly.",
+          "imgAlt": "Circular fish pond seen from above with owner feeding fish",
+          "a": "Find the surface area of the pond.",
+          "b": "If 1 kg of feed covers 10 m², how many kg of feed are needed?",
+          "c": "If feed costs Rp 25,000/kg, what is the total feeding cost per session?"
+        },
+        "q12": {
+          "title": "Combined Competency Exam — Integrated Park Design",
+          "content": "Integrated park with 3 zones:\n• Pond: r = 3.5 m\n• Flower Garden: r = 7.7 m (annulus)\n• Jogging Track: r = 12.6 m (annulus)\n(π = 22/7)",
+          "imgAlt": "Integrated park design with 3 zones: pond (r=3.5 m), flower garden (r=7.7 m), jogging track (r=12.6 m)",
+          "a": "Find the area of the Pond.",
+          "b": "Find the area of the Flower Garden (between the pond and r = 7.7 m).",
+          "c": "Find the area of the Jogging Track (between r = 7.7 m and r = 12.6 m).",
+          "d": "If the cost per m² is: pond Rp 500,000, garden Rp 200,000, jogging track Rp 150,000 — what is the total budget?"
+        }
       }
     }
   },
