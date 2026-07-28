@@ -1,0 +1,61 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Pola Bilangan",
+"Koordinat Kartesius", "Relasi dan Fungsi", "SPLDV", dan "Persamaan
+Garis Lurus" di Kelas 8 sudah selesai 100% trilingual (termasuk
+perbaikan celah label CoordPlane yang tampil di grafik). Sekarang
+lanjut topik berikutnya di Kelas 8: "Lingkaran".
+
+TUGAS SEKARANG — investigasi saja, JANGAN ubah kode apa pun:
+Topik "Lingkaran" di Kelas 8 Tugas-Latihan Mandiri.
+
+1. Cari halaman/komponen untuk topik ini
+2. Laporkan:
+   - Apakah topik ini punya beberapa sub-halaman, atau cuma satu
+     halaman?
+   - Kalau ada beberapa sub-halaman, sebutkan nama file dan nama
+     masing-masing sub-topiknya, plus jumlah soal tiap halaman
+   - Cek juga apakah ada file "orphan" (ada di folder tapi tidak
+     di-route dari index/hub)
+   - Cek apakah index/hub page menampilkan jumlah soal yang benar
+     (cocok dengan isi file aktual) — laporkan kalau ada mismatch,
+     dan cek juga apakah ada soal yang hilang/loncat nomornya
+     (seperti kasus Q3 hilang di AplikasiKontekstualPage kemarin)
+   - Apakah soal-soalnya berbentuk array data (dengan JSX/string
+     sebagai value, di-render via .map(), pakai helper function
+     seperti Q()/Qf()) atau komponen JSX inline biasa?
+   - Apakah array questions sudah di dalam komponen (bisa akses t())
+     atau masih di level modul (perlu dipindahkan)?
+   - Apakah ada sistem cards, isDark/useTheme, atau format flat
+     hardcode dark-only?
+   - Apakah ada pola khusus:
+     * Diagram/gambar lingkaran (SVG, <img>, atau komponen reusable
+       seperti CoordPlane) — untuk visualisasi jari-jari, diameter,
+       busur, juring, tembereng, sudut pusat/keliling, garis
+       singgung, dll — berapa banyak soal yang pakai?
+     * KALAU ada komponen diagram yang dipakai (SVG custom atau
+       reusable), cek juga apakah komponen itu menerima PROPS LABEL
+       berisi teks Indonesia yang tampil di layar (seperti kasus
+       CoordPlane kemarin) — ini penting untuk dicek dari awal supaya
+       tidak jadi celah tersembunyi lagi
+     * Notasi matematika (π, rumus keliling 2πr, luas πr², sudut,
+       dll) — InlineMath, BlockMath, atau campur teks biasa?
+     * Label "Langkah N:" sebagai part.label terpisah?
+     * Tabel, pilihan ganda A/B/C/D, soal cerita/word problem, dll?
+   - Apakah komponennya sudah pakai useTranslation() (walau minimal)
+     atau full hardcode?
+   - CEK MENYELURUH dengan grep "\\text{" di SETIAP file untuk
+     memastikan tidak ada kasus \text{} bahasa Indonesia yang
+     terlewat — JANGAN cuma laporkan perkiraan jumlah, pastikan
+     akurat (di topik-topik sebelumnya perkiraan awal sering meleset
+     jauh dari jumlah aktual)
+
+JANGAN edit file apa pun, JANGAN install package, JANGAN jalankan build.
+Ini murni laporan/assessment saja.
