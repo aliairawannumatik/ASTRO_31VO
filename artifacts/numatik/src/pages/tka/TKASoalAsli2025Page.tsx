@@ -775,8 +775,8 @@ const TKASoalAsli2025Page = () => {
             </div>
             <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-3 font-body text-xs space-y-1 text-white/80">
               <p>• <span className="text-cyan-300 font-bold">Rino</span> membeli <span className="text-amber-300">4 buku tulis</span> dan <span className="text-amber-300">3 pulpen</span></p>
-              <p>• <span className="text-cyan-300 font-bold">Tiko</span> membeli <span className="text-amber-300">dua kali lipat</span> dari masing-masing jumlah Rino → 8 buku, 6 pulpen</p>
-              <p>• <span className="text-cyan-300 font-bold">Bayu</span> membeli <span className="text-amber-300">tiga kali lipat</span> dari masing-masing jumlah Rino → 12 buku, 9 pulpen</p>
+              <p>• <span className="text-cyan-300 font-bold">Tiko</span> membeli <span className="text-amber-300">dua kali lipat</span> dari masing-masing jumlah Rino</p>
+              <p>• <span className="text-cyan-300 font-bold">Bayu</span> membeli <span className="text-amber-300">tiga kali lipat</span> dari masing-masing jumlah Rino</p>
             </div>
             <p className="font-body text-white/80 text-sm mb-3">
               Jika harga 1 buku = <InlineMath math="x" /> dan 1 pulpen = <InlineMath math="y" />, bagaimana kalimat matematika total harga ketiganya?
