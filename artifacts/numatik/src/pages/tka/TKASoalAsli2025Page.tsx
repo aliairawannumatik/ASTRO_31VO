@@ -1396,16 +1396,7 @@ const TKASoalAsli2025Page = () => {
             <div className="mb-3 flex justify-center">
               <img src="/tka-2025-soal28.png" alt="Figur Saka 8 buah dan Kirana 12 buah soal 28" className="max-w-full rounded-lg border border-white/10" />
             </div>
-            <div className="grid grid-cols-2 gap-3 mb-3 font-body text-xs">
-              <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-3 text-center">
-                <p className="text-blue-300 font-bold text-lg">8</p>
-                <p className="text-white/70">figur Saka</p>
-              </div>
-              <div className="bg-pink-900/20 border border-pink-500/30 rounded-lg p-3 text-center">
-                <p className="text-pink-300 font-bold text-lg">12</p>
-                <p className="text-white/70">figur Kirana</p>
-              </div>
-            </div>
+
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Riana mengambil <span className="text-amber-300 font-bold">3 kotak secara acak</span> dan mendapat <span className="text-blue-300 font-bold">1 Saka + 2 Kirana</span>. Kemudian, <span className="text-cyan-300 font-bold">Santi</span> akan mengambil 1 kotak misteri. Berapakah peluang Santi mendapatkan <span className="text-blue-300 font-bold">Saka</span>?
             </p>
