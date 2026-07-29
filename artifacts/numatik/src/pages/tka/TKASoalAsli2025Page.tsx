@@ -315,9 +315,6 @@ const TKASoalAsli2025Page = () => {
               Jika Rina menginginkan cashback lebih dari Rp10.000,00, voucher mana sajakah yang harus ia pilih?
             </p>
             <p className="text-cyan-300 text-xs font-body font-semibold mb-2">Klik pada setiap pilihan jawaban yang benar! Jawaban benar lebih dari satu.</p>
-            <div className="mb-3 flex justify-center">
-              <img src="/tka-2025-soal3abc.jpeg" alt="Tabel voucher cashback soal 2" className="max-w-full rounded-lg border border-white/10" />
-            </div>
             <ComplexMCQ qn={2} items={[
               { text: "Voucher A", benar: true },
               { text: "Voucher B", benar: false },
