@@ -1005,7 +1005,7 @@ const TKASoalAsli2025Page = () => {
           <Soal n={19} elemen="Geometri dan Pengukuran" subelemen="Objek Geometri">
             <p className="font-body text-white/90 text-sm font-bold mb-2">Pagar Tangga</p>
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
-              Pak Anton baru saja membangun rumah. Berikut adalah gambar tangga Pak Anton.
+              Pak Anton baru saja membangun rumah. Ada beberapa bagian dalam rumahnya yang belum terpasang. Salah satunya adalah pagar tangga. Pagar tangga berfungsi untuk pegangan saat naik maupun turun tangga. Berikut adalah gambar tangga Pak Anton.
             </p>
             <div className="mb-3 flex justify-center">
               <img src="/tka-2025-soal19.png" alt="Gambar tangga Pak Anton soal 19" className="max-w-full rounded-lg border border-white/10" />
