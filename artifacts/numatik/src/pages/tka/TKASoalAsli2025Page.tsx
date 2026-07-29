@@ -347,9 +347,6 @@ const TKASoalAsli2025Page = () => {
               untuk mendapatkan cashback terbesar!
             </p>
             <p className="text-violet-300 text-xs font-body font-semibold mb-2">Klik pada kotak yang sesuai!</p>
-            <div className="mb-3 flex justify-center">
-              <img src="/tka-2025-soal3abc.jpeg" alt="Tabel voucher cashback soal 3" className="max-w-full rounded-lg border border-white/10" />
-            </div>
             <div className="overflow-x-auto">
               <table className="w-full text-xs font-body border-collapse">
                 <thead>
@@ -360,10 +357,14 @@ const TKASoalAsli2025Page = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {[1, 2, 3].map(i => (
-                    <tr key={i}>
-                      <td className="border border-white/10 px-3 py-3 text-white/40 italic text-xs">
-                        [Pernyataan {i} — lihat dokumen soal asli]
+                  {[
+                    { n: 1, img: "/tka-2025-soal3-p1.png", alt: "Pernyataan 1 soal 3" },
+                    { n: 2, img: "/tka-2025-soal3-p2.png", alt: "Pernyataan 2 soal 3" },
+                    { n: 3, img: "/tka-2025-soal3-p3.png", alt: "Pernyataan 3 soal 3" },
+                  ].map(({ n, img, alt }) => (
+                    <tr key={n}>
+                      <td className="border border-white/10 px-3 py-2">
+                        <img src={img} alt={alt} className="max-w-full rounded-lg border border-white/10" />
                       </td>
                       <td className="border border-white/10 px-2 py-2 text-center">
                         <div className="w-full py-1 rounded text-center text-xs font-bold bg-white/5 text-white/20">○</div>
