@@ -207,7 +207,9 @@ const TKASoalAsli2025Page = () => {
         digital. Beberapa penjual juga sering kali memberikan cashback dalam bentuk produk
         hingga voucher. Berikut beberapa penawaran cashback yang ada di aplikasi belanja online Rina.
       </p>
-      <ImageNote text="Tabel voucher cashback (Voucher A, B, C, D beserta nilainya) tersedia pada dokumen soal asli." />
+      <div className="mb-3 flex justify-center">
+        <img src="/tka-2025-soal3abc.jpeg" alt="Tabel voucher cashback soal 2 & 3" className="max-w-full rounded-lg border border-white/10" />
+      </div>
       <p className="text-white/70 text-xs font-body leading-relaxed mb-2">
         <span className="text-cyan-300 font-bold">Cashback 25% s/d 100RB</span> artinya uang yang dikembalikan sebanyak 25% dari total belanjaan dan tidak lebih dari Rp100.000,00.
       </p>
@@ -313,7 +315,9 @@ const TKASoalAsli2025Page = () => {
               Jika Rina menginginkan cashback lebih dari Rp10.000,00, voucher mana sajakah yang harus ia pilih?
             </p>
             <p className="text-cyan-300 text-xs font-body font-semibold mb-2">Klik pada setiap pilihan jawaban yang benar! Jawaban benar lebih dari satu.</p>
-            <ImageNote text="Lihat tabel voucher cashback (Voucher A, B, C, D beserta nilai persentase dan batas maksimalnya) pada dokumen soal asli untuk menentukan jawaban." />
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal3abc.jpeg" alt="Tabel voucher cashback soal 2" className="max-w-full rounded-lg border border-white/10" />
+            </div>
             <ComplexMCQ qn={2} items={[
               { text: "Voucher A", benar: true },
               { text: "Voucher B", benar: false },
@@ -346,7 +350,9 @@ const TKASoalAsli2025Page = () => {
               untuk mendapatkan cashback terbesar!
             </p>
             <p className="text-violet-300 text-xs font-body font-semibold mb-2">Klik pada kotak yang sesuai!</p>
-            <ImageNote text="Pernyataan pada tabel (baris 1, 2, 3) beserta tabel voucher tersedia pada dokumen soal asli." />
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal3abc.jpeg" alt="Tabel voucher cashback soal 3" className="max-w-full rounded-lg border border-white/10" />
+            </div>
             <div className="overflow-x-auto">
               <table className="w-full text-xs font-body border-collapse">
                 <thead>
@@ -450,7 +456,9 @@ const TKASoalAsli2025Page = () => {
               penyimpanan makanan di dalam lemari pendingin menurut Departemen Pertanian Amerika
               Serikat (FDA).
             </p>
-            <ImageNote text="Gambar tabel suhu penyimpanan FDA (menampilkan suhu untuk berbagai jenis makanan termasuk daging unggas) tersedia pada dokumen soal asli." />
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal5.png" alt="Tabel suhu penyimpanan FDA soal 5" className="max-w-full rounded-lg border border-white/10" />
+            </div>
             <div className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 mb-3 text-xs font-body text-white/60">
               <p><span className="text-white/80 font-semibold">Catatan:</span> Daging unggas = daging ayam, merpati, dsb. Daging merah = daging sapi, kambing, dsb.</p>
             </div>
@@ -561,7 +569,9 @@ const TKASoalAsli2025Page = () => {
               Tarif pemakaian air berdasarkan banyak air yang digunakan dengan pemasangan awal
               dapat dilihat pada grafik berikut.
             </p>
-            <ImageNote text="Grafik fungsi linear tarif pemakaian air PDAM tersedia pada dokumen soal asli." />
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal8.png" alt="Grafik tarif pemakaian air PDAM soal 8" className="max-w-full rounded-lg border border-white/10" />
+            </div>
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Seseorang menghabiskan biaya{" "}
               <span className="text-amber-300 font-bold">Rp920.000,00</span> dalam 1 bulan
@@ -610,7 +620,9 @@ const TKASoalAsli2025Page = () => {
               jenis tanaman. Setelah melihat tanamannya tumbuh subur, ia berencana untuk menanam
               pohon mangga di pekarangan tersebut. Berikut adalah peta pekarangan rumah Ayunda.
             </p>
-            <ImageNote text="Peta pekarangan (koordinat kartesius dengan posisi tanaman dan lokasi 1, 3, 4) tersedia pada dokumen soal asli." />
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal9.png" alt="Peta pekarangan koordinat kartesius soal 9" className="max-w-full rounded-lg border border-white/10" />
+            </div>
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Dalam menentukan lokasi penanaman, Ayunda harus mempertimbangkan beberapa faktor
               penting yaitu ketersediaan sinar matahari dan kualitas tanah. Berdasarkan beberapa
@@ -718,6 +730,9 @@ const TKASoalAsli2025Page = () => {
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Berikut merupakan harga jajanan tradisional kue putu mayang dan kue pancong yang dijual di sebuah bazar makanan.
             </p>
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal11.png" alt="Gambar kue putu mayang dan kue pancong soal 11" className="max-w-full rounded-lg border border-white/10" />
+            </div>
             <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-3 font-body text-sm space-y-1">
               <div className="flex items-center gap-2 text-white/80">
                 <span className="text-green-300">●</span>
@@ -764,6 +779,9 @@ const TKASoalAsli2025Page = () => {
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Rino, Tiko, dan Bayu pergi ke toko buku untuk membeli buku tulis dan pulpen. Keterangan pembelian:
             </p>
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal12.png" alt="Keterangan pembelian buku soal 12" className="max-w-full rounded-lg border border-white/10" />
+            </div>
             <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-3 font-body text-xs space-y-1 text-white/80">
               <p>• <span className="text-cyan-300 font-bold">Rino</span> membeli <span className="text-amber-300">4 buku tulis</span> dan <span className="text-amber-300">3 pulpen</span></p>
               <p>• <span className="text-cyan-300 font-bold">Tiko</span> membeli <span className="text-amber-300">dua kali lipat</span> dari masing-masing jumlah Rino → 8 buku, 6 pulpen</p>
@@ -834,6 +852,9 @@ const TKASoalAsli2025Page = () => {
           {/* ══════════════ BACAAN 2 (Soal 14 & 15) ══════════════ */}
           <div className="rounded-xl border border-blue-500/30 bg-blue-950/20 p-4 mb-4">
             <p className="text-blue-300 font-display font-bold text-xs mb-2">📖 BACAAN 2 — untuk menjawab Soal Nomor 14 dan 15</p>
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-bacaan2.png" alt="Bacaan 2 pola batu bata" className="max-w-full rounded-lg border border-white/10" />
+            </div>
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Suatu kompleks X memiliki kebiasaan membuat pagar rumah dengan desain yang unik. Desain pagar disusun menggunakan <span className="text-amber-300 font-bold">2 jenis batu bata</span> berbentuk segitiga (▲) dan persegi panjang (▬), membentuk pola bertingkat.
             </p>
@@ -969,7 +990,9 @@ const TKASoalAsli2025Page = () => {
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Perhatikan gambar jaring-jaring prisma segitiga berikut.
             </p>
-            <ImageNote text="Gambar jaring-jaring prisma segitiga dengan 4 sisi tegak bernomor 1–4 dan sisi tutup ABC tersedia pada dokumen soal asli." />
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal17.png" alt="Jaring-jaring prisma segitiga soal 17" className="max-w-full rounded-lg border border-white/10" />
+            </div>
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Sisi tutup pada prisma adalah <span className="text-amber-300 font-bold">sisi ABC</span>. Rusuk <span className="text-cyan-300 font-bold">AC</span> pada sisi tutup akan berhimpit dengan salah satu rusuk pada sisi tegak prisma nomor …
             </p>
@@ -1045,28 +1068,8 @@ const TKASoalAsli2025Page = () => {
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Pak Anton baru saja membangun rumah. Berikut adalah gambar tangga Pak Anton.
             </p>
-            <div className="bg-white/5 border border-white/10 rounded-lg p-4 mb-3 flex justify-center">
-              <svg viewBox="0 0 260 200" className="w-64 h-48 font-body">
-                {/* Staircase steps (6 steps) */}
-                {[0,1,2,3,4,5].map(i => (
-                  <g key={i}>
-                    <rect x={20 + i*35} y={170 - i*25} width={35} height={25}
-                      fill="rgba(100,120,150,0.3)" stroke="#94a3b8" strokeWidth="1" />
-                  </g>
-                ))}
-                {/* Diagonal dashed pagar line */}
-                <line x1="20" y1="170" x2="230" y2="20" stroke="#fbbf24" strokeWidth="2" strokeDasharray="6,3" />
-                {/* 150cm label */}
-                <line x1="20" y1="183" x2="230" y2="183" stroke="#94a3b8" strokeWidth="1" />
-                <text x="105" y="197" fill="#94a3b8" fontSize="11" fontFamily="serif" textAnchor="middle">150 cm</text>
-                {/* Arrow heads for 150cm */}
-                <text x="14" y="187" fill="#94a3b8" fontSize="10">←</text>
-                <text x="220" y="187" fill="#94a3b8" fontSize="10">→</text>
-                {/* Step height label */}
-                <text x="238" y="108" fill="#e2e8f0" fontSize="10" fontFamily="serif">25 cm</text>
-                <text x="238" y="119" fill="#e2e8f0" fontSize="10" fontFamily="serif">per anak</text>
-                <text x="238" y="130" fill="#e2e8f0" fontSize="10" fontFamily="serif">tangga</text>
-              </svg>
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal19.png" alt="Gambar tangga Pak Anton soal 19" className="max-w-full rounded-lg border border-white/10" />
             </div>
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Gambar garis putus-putus adalah rancangan pagar tangga. Setiap anak tangga memiliki tinggi yang sama yaitu <span className="text-amber-300 font-bold">25 cm</span>. Tersedia 4 jenis bahan:
@@ -1135,27 +1138,8 @@ const TKASoalAsli2025Page = () => {
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Perhatikan gambar juring pada lingkaran di bawah ini.
             </p>
-            <div className="bg-white/5 border border-white/10 rounded-lg p-4 mb-3 flex justify-center">
-              <svg viewBox="0 0 220 220" className="w-48 h-48">
-                {/* Circle */}
-                <circle cx="110" cy="110" r="90" fill="none" stroke="#475569" strokeWidth="1.5" />
-                {/* Sector A (tan/beige) — 255° from 160° to 55° (clockwise = reflex) */}
-                <path d="M110,110 L110,20 A90,90 0 1,0 42,155 Z" fill="rgba(180,140,80,0.35)" stroke="#b8860b" strokeWidth="1" />
-                {/* Sector B (blue) — 70° from 340° to 50° */}
-                <path d="M110,110 L110,20 A90,90 0 0,1 196,141 Z" fill="rgba(59,130,246,0.4)" stroke="#3b82f6" strokeWidth="1" />
-                {/* Sector C (small, green) — 35° from 190° to 225° */}
-                <path d="M110,110 L42,155 A90,90 0 0,1 47,200 Z" fill="rgba(74,222,128,0.35)" stroke="#22c55e" strokeWidth="1" />
-                {/* Labels */}
-                <text x="75" y="95" fill="#fbbf24" fontSize="16" fontWeight="bold" fontFamily="serif">A</text>
-                <text x="148" y="90" fill="#60a5fa" fontSize="16" fontWeight="bold" fontFamily="serif">B</text>
-                <text x="65" y="178" fill="#86efac" fontSize="14" fontWeight="bold" fontFamily="serif">C</text>
-                {/* Angle labels */}
-                <text x="128" y="62" fill="#60a5fa" fontSize="10" fontFamily="serif">70°</text>
-                <text x="80" y="168" fill="#86efac" fontSize="10" fontFamily="serif">35°</text>
-                {/* Radius label */}
-                <text x="148" y="58" fill="#94a3b8" fontSize="9" fontFamily="serif">14 cm</text>
-                <line x1="110" y1="110" x2="196" y2="141" stroke="#94a3b8" strokeWidth="0.8" strokeDasharray="3,2" />
-              </svg>
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal21.png" alt="Gambar juring lingkaran soal 21" className="max-w-full rounded-lg border border-white/10" />
             </div>
             <p className="font-body text-white/80 text-sm mb-3">Manakah pernyataan yang benar terkait luas juring A, B, dan C?</p>
             <MCQ qn={21} correct={0} cols={1} options={[
