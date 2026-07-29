@@ -725,21 +725,14 @@ const TKASoalAsli2025Page = () => {
           {/* ══════════════ SOAL 11 ══════════════ */}
           <Soal n={11} elemen="Aljabar" subelemen="Persamaan dan Pertidaksamaan Linear">
             <p className="font-body text-white/90 text-sm font-bold mb-2">Jajanan Tradisional</p>
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-2">
+              Jajanan tradisional merupakan makanan khas dari nenek moyang dan biasanya digunakan untuk acara atau tradisi. Seiring berjalannya waktu, jajanan tradisional bisa dijumpai dan ditemukan setiap hari tidak hanya saat acara tertentu.
+            </p>
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Berikut merupakan harga jajanan tradisional kue putu mayang dan kue pancong yang dijual di sebuah bazar makanan.
             </p>
             <div className="mb-3 flex justify-center">
               <img src="/tka-2025-soal11.png" alt="Gambar kue putu mayang dan kue pancong soal 11" className="max-w-full rounded-lg border border-white/10" />
-            </div>
-            <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-3 font-body text-sm space-y-1">
-              <div className="flex items-center gap-2 text-white/80">
-                <span className="text-green-300">●</span>
-                <span><span className="text-green-300 font-bold">2 kotak putu mayang</span> + <span className="text-red-300 font-bold">3 kotak pancong</span> = <span className="text-amber-300 font-bold">Rp58.000</span></span>
-              </div>
-              <div className="flex items-center gap-2 text-white/80">
-                <span className="text-green-300">●</span>
-                <span><span className="text-green-300 font-bold">3 kotak putu mayang</span> + <span className="text-red-300 font-bold">2 kotak pancong</span> = <span className="text-amber-300 font-bold">Rp62.000</span></span>
-              </div>
             </div>
             <p className="font-body text-white/80 text-sm mb-3">
               Berapa harga <span className="text-amber-300 font-bold">3 kotak kue putu mayang</span> dan <span className="text-amber-300 font-bold">1 kotak kue pancong</span>?
