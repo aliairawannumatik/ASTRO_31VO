@@ -1391,7 +1391,7 @@ const TKASoalAsli2025Page = () => {
           {/* ══════════════ SOAL 28 ══════════════ */}
           <Soal n={28} elemen="Data dan Peluang" subelemen="Peluang">
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
-              Suatu paket terdiri dari <span className="text-amber-300 font-bold">20 kotak misteri</span> berisi patung figur karakter Saka dan Kirana:
+              Suatu paket terdiri dari <span className="text-amber-300 font-bold">20 kotak misteri</span>. Kotak misteri tersebut berisi patung figur karakter yang bernama <span className="text-blue-300 font-bold">Saka</span> dan <span className="text-pink-300 font-bold">Kirana</span>. Berikut ini banyak paket figur karakter yang tersedia dalam satu paket.
             </p>
             <div className="mb-3 flex justify-center">
               <img src="/tka-2025-soal28.png" alt="Figur Saka 8 buah dan Kirana 12 buah soal 28" className="max-w-full rounded-lg border border-white/10" />
