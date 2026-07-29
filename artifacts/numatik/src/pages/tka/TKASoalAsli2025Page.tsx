@@ -1293,7 +1293,7 @@ const TKASoalAsli2025Page = () => {
           {/* ══════════════ SOAL 26 ══════════════ */}
           <Soal n={26} elemen="Data dan Peluang" subelemen="Data">
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
-              Tory kecanduan bermain game online. Selama <span className="text-amber-300 font-bold">12 minggu</span>, waktu bermain Tory dipantau. Berikut data durasi (jam) per minggu:
+              Tory suka sekali bermain game online. Dia selalu mengabaikan batasan waktu dalam bermain game online. Belakangan ini Tory sering merasa gelisah dan mudah marah apabila tidak diijinkan bermain. Dia juga sering merasakan sakit mata dan pusing. Dokter mengatakan bahwa Tory telah kecanduan bermain game online. Tory harus berusaha perlahan-lahan mengontrol waktu bermainnya. Dokter mengatakan bahwa batas waktu maksimal Tory diperbolehkan bermain adalah <span className="text-amber-300 font-bold">7 jam dalam satu minggu</span>. Selama <span className="text-amber-300 font-bold">12 minggu</span>, waktu bermain game Tory terus dipantau oleh kedua orang tuanya dan dilaporkan ke dokter.
             </p>
             <div className="mb-3 flex justify-center">
               <img src="/tka-2025-soal26.png" alt="Diagram batang durasi Tory bermain game soal 26" className="max-w-full rounded-lg border border-white/10" />
