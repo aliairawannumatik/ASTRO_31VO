@@ -1326,6 +1326,9 @@ const TKASoalAsli2025Page = () => {
               Selama <span className="text-amber-300 font-bold">12 minggu</span>, waktu bermain game Tory terus dipantau oleh kedua orang tuanya dan dilaporkan ke dokter.
             </p>
             <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal27-bar.png" alt="Diagram batang durasi Tory bermain game online setiap minggu soal 27" className="max-w-full rounded-lg border border-white/10" />
+            </div>
+            <div className="mb-3 flex justify-center">
               <img src="/tka-2025-soal27.png" alt="Diagram fase penyembuhan soal 27" className="max-w-full rounded-lg border border-white/10" />
             </div>
             <p className="font-body text-white/80 text-sm mb-2">Apakah yang terjadi pada Tory selama fase penyembuhan? <span className="text-amber-300 text-xs">(Jawaban benar lebih dari satu)</span></p>
