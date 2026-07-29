@@ -1328,6 +1328,9 @@ const TKASoalAsli2025Page = () => {
             <div className="mb-3 flex justify-center">
               <img src="/tka-2025-soal27-bar.png" alt="Diagram batang durasi Tory bermain game online setiap minggu soal 27" className="max-w-full rounded-lg border border-white/10" />
             </div>
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Dokter dan orang tua Tory memahami bahwa tidak mudah menghilangkan kecanduan bermain game online, namun mereka ingin terus memantau bagaimana perkembangan Tory. Dokter membuat skema sebagai berikut.
+            </p>
             <div className="mb-3 flex justify-center">
               <img src="/tka-2025-soal27.png" alt="Diagram fase penyembuhan soal 27" className="max-w-full rounded-lg border border-white/10" />
             </div>
