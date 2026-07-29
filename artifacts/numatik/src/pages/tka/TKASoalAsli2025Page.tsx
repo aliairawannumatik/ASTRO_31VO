@@ -242,9 +242,8 @@ const TKASoalAsli2025Page = () => {
             <div className="bg-white/5 rounded-lg p-2"><span className="text-white/40">Mata Pelajaran:</span><span className="text-white ml-1">Matematika</span></div>
             <div className="bg-white/5 rounded-lg p-2"><span className="text-white/40">Jenjang:</span><span className="text-white ml-1">SMP/MTs</span></div>
             <div className="bg-white/5 rounded-lg p-2 col-span-2 flex items-center gap-2">
-              <span className="text-white/40">Progress:</span>
-              <span className="text-amber-300 font-bold ml-1">Soal 1 – 30</span>
-              <span className="text-white/30">dari 30 soal (Lengkap)</span>
+              <span className="text-white/40">Banyak soal:</span>
+              <span className="text-amber-300 font-bold ml-1">30</span>
             </div>
           </div>
         </div>
@@ -1481,22 +1480,12 @@ const TKASoalAsli2025Page = () => {
 
           {/* ══════════════ SOAL 30 ══════════════ */}
           <Soal n={30} elemen="Data dan Peluang" subelemen="Peluang">
-            <div className="mb-3 flex justify-center">
-              <img src="/tka-2025-soal30.png" alt="Guru ujian matematika kode soal A B atau C soal 30" className="max-w-full rounded-lg border border-white/10" />
-            </div>
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Seorang guru menyiapkan sejumlah kertas soal ujian yang digulung dan dimasukkan ke dalam sebuah kotak. Setiap kertas berisi kode soal <span className="text-amber-300 font-bold">A, B, atau C</span>.
             </p>
-            <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-3 font-body text-xs text-white/80 space-y-1">
-              <p>• Jumlah kertas kode A <span className="text-amber-300 font-bold">lebih sedikit</span> dari kode B</p>
-              <p>• Guru mengambil <span className="text-amber-300 font-bold">3 kertas berkode sama</span> dari kotak</p>
-              <p>• Sisa kertas di kotak menjadi <span className="text-amber-300 font-bold">28 lembar</span></p>
-              <p>• Kertas kode B <span className="text-amber-300 font-bold">lebih banyak</span> dari kode C setelah pengambilan</p>
-              <p>• Jika diambil 1 kertas secara acak: P(kode C) = <InlineMath math="\frac{2}{7}" /></p>
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal30.png" alt="Guru ujian matematika kode soal A B atau C soal 30" className="max-w-full rounded-lg border border-white/10" />
             </div>
-            <p className="font-body text-white/80 text-sm mb-3">
-              Berapakah kemungkinan jumlah kertas soal ujian kode B mula-mula? <span className="text-amber-300 text-xs">(Jawaban benar lebih dari satu)</span>
-            </p>
             <ComplexMCQ qn={30} items={[
               {
                 text: "10 lembar",
