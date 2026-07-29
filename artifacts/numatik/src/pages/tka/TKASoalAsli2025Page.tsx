@@ -1334,7 +1334,24 @@ const TKASoalAsli2025Page = () => {
             <div className="mb-3 flex justify-center">
               <img src="/tka-2025-soal27.png" alt="Diagram fase penyembuhan soal 27" className="max-w-full rounded-lg border border-white/10" />
             </div>
-            <p className="font-body text-white/80 text-sm mb-2">Apakah yang terjadi pada Tory selama fase penyembuhan? <span className="text-amber-300 text-xs">(Jawaban benar lebih dari satu)</span></p>
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-2">
+              Dokter memantau dan membandingkan rata-rata jam bermain game online setiap 4 minggu dan menyebutnya sebagai <span className="text-amber-300 font-bold">fase</span>.
+            </p>
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-2">
+              <span className="text-cyan-300 font-bold">Fase pertama</span> membandingkan rata-rata jam bermain pada 4 minggu pertama dengan rata-rata jam bermain pada 4 minggu kedua.
+            </p>
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-2">
+              <span className="text-cyan-300 font-bold">Fase kedua</span> membandingkan rata-rata jam bermain pada 4 minggu kedua dengan rata-rata jam bermain pada 4 minggu ketiga.
+            </p>
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-2">
+              <span className="text-cyan-300 font-bold">Fase akhir</span> membandingkan rata-rata jam bermain pada 4 minggu ketiga dengan batas waktu maksimal yang disarankan.
+            </p>
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Hal tersebut dilakukan untuk melihat perkembangan kebiasaan Tory dalam bermain game online. Apakah yang terjadi pada Tory selama fase penyembuhan?
+            </p>
+            <p className="font-body text-white/80 text-sm mb-2">
+              <span className="text-amber-300 text-xs font-bold">Pilihlah semua jawaban benar! Jawaban benar lebih dari satu.</span>
+            </p>
             <ComplexMCQ qn={27} items={[
               {
                 text: "Fase pertama berkurang 5,5 jam.",
