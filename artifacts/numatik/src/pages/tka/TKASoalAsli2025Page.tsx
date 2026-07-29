@@ -236,7 +236,7 @@ const TKASoalAsli2025Page = () => {
             </div>
             <h1 className="font-display text-lg font-bold text-amber-200 mb-1">TES KEMAMPUAN AKADEMIK (TKA)</h1>
             <p className="font-body text-white/60 text-xs mb-0.5">MATEMATIKA — SMP/MTs/Sederajat</p>
-            <p className="font-display text-xl font-bold text-amber-300">TAHUN 2025</p>
+            <p className="font-display text-xl font-bold text-amber-300">TAHUN 2025 – 2026</p>
           </div>
           <div className="grid grid-cols-2 gap-2 text-left text-xs font-body">
             <div className="bg-white/5 rounded-lg p-2"><span className="text-white/40">Mata Pelajaran:</span><span className="text-white ml-1">Matematika</span></div>
@@ -245,7 +245,6 @@ const TKASoalAsli2025Page = () => {
               <span className="text-white/40">Progress:</span>
               <span className="text-amber-300 font-bold ml-1">Soal 1 – 30</span>
               <span className="text-white/30">dari 30 soal (Lengkap)</span>
-              <span className="ml-auto text-amber-400/70 text-[10px]">Soal 11–30 segera ditambahkan</span>
             </div>
           </div>
         </div>
@@ -1452,22 +1451,17 @@ const TKASoalAsli2025Page = () => {
                       <td className="border border-white/10 px-3 py-1.5 text-center">{sisa}</td>
                     </tr>
                   ))}
-                  <tr className="bg-white/5 text-amber-300 font-bold">
-                    <td className="border border-white/10 px-3 py-1.5">Total</td>
-                    <td className="border border-white/10 px-3 py-1.5 text-center">100</td>
-                    <td className="border border-white/10 px-3 py-1.5 text-center">—</td>
-                  </tr>
                 </tbody>
               </table>
             </div>
             <p className="font-body text-white/80 text-sm mb-3">
-              Jika dilakukan pengamatan pada satu telur yang dipilih secara acak, berapakah peluang telur tersebut akan menetas dalam <span className="text-amber-300 font-bold">10 hari ke depan</span>?
+              Diketahui telur-telur tersebut diletakkan secara acak di dalam mesin. Jika dilakukan pengamatan pada satu telur yang dipilih secara acak, berapakah peluang telur tersebut akan menetas dalam <span className="text-amber-300 font-bold">10 hari ke depan</span>?
             </p>
             <MCQ qn={29} correct={0} options={[
-              "A. 3/20",
-              "B. 1/15",
-              "C. 1/10",
-              "D. 1/8",
+              <span key="a">A. <InlineMath math="\dfrac{3}{20}" /></span>,
+              <span key="b">B. <InlineMath math="\dfrac{1}{15}" /></span>,
+              <span key="c">C. <InlineMath math="\dfrac{1}{10}" /></span>,
+              <span key="d">D. <InlineMath math="\dfrac{1}{8}" /></span>,
             ]} />
             <PembahasanBtn n={29} />
             {expandedPembahasan.has(29) && (

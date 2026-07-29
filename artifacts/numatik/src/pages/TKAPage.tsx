@@ -345,7 +345,7 @@ const TKAPage = () => {
                 <span className="font-display text-sm font-bold text-amber-100 tracking-wide block leading-tight">
                   SOAL DAN PEMBAHASAN TKA MATEMATIKA 2025 - 2026
                 </span>
-                <span className="text-[10px] font-body text-amber-400/70 leading-none">30 Soal · Soal Resmi · Tahun 2025</span>
+                <span className="text-[10px] font-body text-amber-400/70 leading-none">30 Soal · Soal Resmi · Tahun 2025 - 2026</span>
               </div>
             </div>
             <div className="flex items-center gap-2 shrink-0">
