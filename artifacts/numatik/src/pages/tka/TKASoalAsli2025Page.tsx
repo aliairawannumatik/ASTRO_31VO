@@ -847,20 +847,6 @@ const TKASoalAsli2025Page = () => {
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Suatu kompleks X memiliki kebiasaan membuat pagar rumah dengan desain yang unik. Hampir seluruh warga kompleks X menyusun pagar membentuk pola barisan. Desain pagar rumah tersebut disusun menggunakan <span className="text-amber-300 font-bold">2 jenis batu bata</span>, yang jika dilihat dari depan batu bata tersebut terlihat berbentuk segitiga dan persegi panjang. Batu bata tersebut disusun membentuk pola seperti gambar di bawah.
             </p>
-            <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-2 font-body text-xs text-white/80">
-              <p className="text-amber-300 font-bold mb-2">Pola pada setiap tingkat:</p>
-              <div className="grid grid-cols-3 gap-2 text-center">
-                {[1,2,3].map(k => (
-                  <div key={k} className="bg-white/5 rounded-lg py-2">
-                    <p className="text-cyan-300 font-bold text-xs">Tingkat {k}</p>
-                    <p className="text-white/70 text-[10px] mt-1">{k} segitiga ▲</p>
-                    <p className="text-white/70 text-[10px]">{k+1} persegi panjang ▬</p>
-                    <p className="text-amber-300 text-[10px] font-bold">{2*k+1} batu bata</p>
-                  </div>
-                ))}
-              </div>
-              <p className="text-white/50 text-[10px] mt-2 text-center">Pola: tingkat ke-n → n segitiga + (n+1) persegi = (2n+1) batu bata</p>
-            </div>
           </div>
 
           {/* ══════════════ SOAL 14 ══════════════ */}
