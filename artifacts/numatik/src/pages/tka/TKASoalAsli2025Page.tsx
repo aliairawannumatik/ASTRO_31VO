@@ -1401,10 +1401,10 @@ const TKASoalAsli2025Page = () => {
               Riana mengambil <span className="text-amber-300 font-bold">3 kotak secara acak</span> dan mendapat <span className="text-blue-300 font-bold">1 Saka + 2 Kirana</span>. Kemudian, <span className="text-cyan-300 font-bold">Santi</span> akan mengambil 1 kotak misteri. Berapakah peluang Santi mendapatkan <span className="text-blue-300 font-bold">Saka</span>?
             </p>
             <MCQ qn={28} correct={3} options={[
-              "A. 7/20",
-              "B. 8/20",
-              "C. 8/17",
-              "D. 7/17",
+              <span key="a">A. <InlineMath math="\dfrac{7}{20}" /></span>,
+              <span key="b">B. <InlineMath math="\dfrac{8}{20}" /></span>,
+              <span key="c">C. <InlineMath math="\dfrac{8}{17}" /></span>,
+              <span key="d">D. <InlineMath math="\dfrac{7}{17}" /></span>,
             ]} />
             <PembahasanBtn n={28} />
             {expandedPembahasan.has(28) && (
