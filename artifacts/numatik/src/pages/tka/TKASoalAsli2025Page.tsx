@@ -88,7 +88,22 @@ const TKASoalAsli2025Page = () => {
           else cls += "bg-red-900/30 border-red-500/50 text-red-300";
           return (
             <div key={i} className={cls} onClick={() => selectComplexAnswer(qn, i)}>
-              <span>{item.text}</span>
+              <div className="flex items-center gap-2">
+                <span className={`shrink-0 w-4 h-4 rounded border flex items-center justify-center transition-all ${
+                  !isClicked
+                    ? "border-white/30 bg-white/5"
+                    : item.benar
+                    ? "border-green-400 bg-green-500/30"
+                    : "border-red-400 bg-red-500/30"
+                }`}>
+                  {isClicked && (
+                    <svg viewBox="0 0 10 10" className="w-2.5 h-2.5">
+                      <polyline points="1.5,5 4,7.5 8.5,2.5" stroke={item.benar ? "#4ade80" : "#f87171"} strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  )}
+                </span>
+                <span>{item.text}</span>
+              </div>
               {isClicked && item.benar && <span className="ml-2 text-green-400 font-bold shrink-0">✓ Benar!</span>}
               {isClicked && !item.benar && <span className="ml-2 text-red-400 font-bold shrink-0">✗ Salah</span>}
             </div>
