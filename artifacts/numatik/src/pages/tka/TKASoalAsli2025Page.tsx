@@ -1426,6 +1426,9 @@ const TKASoalAsli2025Page = () => {
           {/* ══════════════ SOAL 29 ══════════════ */}
           <Soal n={29} elemen="Data dan Peluang" subelemen="Peluang">
             <p className="font-body text-white/90 text-sm font-bold mb-2">Mesin Tetas Telur</p>
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Mesin tetas telur adalah sebuah alat yang digunakan untuk membantu proses penetasan telur. Cara kerja alat atau mesin ini adalah melakukan proses pengeraman tanpa induk dengan menggunakan sebuah lampu pijar. Mesin ini dilengkapi dengan motor yang berfungsi untuk meratakan proses pemanasan telur agar telur dapat menetas secara maksimal. Mesin ini umumnya hanya bisa digunakan untuk menetaskan telur unggas seperti telur ayam, puyuh, bebek, dan entok.
+            </p>
             <div className="mb-3 flex justify-center">
               <img src="/tka-2025-soal29.png" alt="Gambar mesin tetas telur soal 29" className="max-w-full rounded-lg border border-white/10" />
             </div>
