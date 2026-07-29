@@ -1486,6 +1486,16 @@ const TKASoalAsli2025Page = () => {
             <div className="mb-3 flex justify-center">
               <img src="/tka-2025-soal30.png" alt="Guru ujian matematika kode soal A B atau C soal 30" className="max-w-full rounded-lg border border-white/10" />
             </div>
+            <div className="bg-cyan-900/15 border border-cyan-500/30 rounded-xl p-4 mb-3">
+              <p className="text-cyan-400 text-[10px] font-body font-bold uppercase tracking-wider mb-2">Salinan teks dari gambar</p>
+              <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+                Diketahui bahwa jumlah kertas berkode A lebih sedikit daripada kertas berkode B. Guru kemudian mengambil 3 kertas dengan kode yang sama dari dalam kotak. Setelah pengambilan, jumlah seluruh kertas yang tersisa di dalam kotak menjadi <span className="text-amber-300 font-bold">28 lembar</span> dan jumlah kertas berkode B lebih banyak daripada kertas berkode C. Jika kemudian diambil satu kertas secara acak dari kotak tersebut, diketahui bahwa peluang terambilnya kertas berkode C yaitu <InlineMath math="\dfrac{2}{7}" />.
+              </p>
+              <p className="font-body text-white/80 text-sm mb-1">
+                Berdasarkan informasi tersebut, berapakah kemungkinan jumlah kertas soal ujian kode B mula-mula?
+              </p>
+              <p className="font-body text-amber-300 text-xs">Pilihlah semua jawaban benar! Jawaban benar lebih dari satu.</p>
+            </div>
             <ComplexMCQ qn={30} items={[
               {
                 text: "10 lembar",
