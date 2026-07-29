@@ -1199,9 +1199,11 @@ const TKASoalAsli2025Page = () => {
 
           {/* ══════════════ SOAL 24 ══════════════ */}
           <Soal n={24} elemen="Geometri dan Pengukuran" subelemen="Pengukuran">
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-2">
+              Hari ini di toko Pak Dodi kedatangan dua pelanggan minyak curah yakni Pak Angga dan Bu Susi. Pak Angga dan Bu Susi membawa jeriken untuk wadah minyak dalam jumlah banyak. Jeriken minyak Pak Angga berukuran <span className="text-amber-300 font-bold">25 liter</span>, jeriken minyak milik Bu Susi berukuran <span className="text-cyan-300 font-bold">30 liter</span>. Pak Dodi memiliki persediaan <span className="text-green-300 font-bold">1 tangki minyak jenis A</span> dan <span className="text-green-300 font-bold">1 tangki minyak jenis B</span>. Pak Angga dan Bu Susi membeli <span className="text-green-300 font-bold">seluruh</span> minyak tersebut sehingga tidak ada lagi sisa minyak di tangki. Seluruh jeriken yang dibawa berisi penuh dan masing-masing mendapatkan kedua jenis minyak.
+            </p>
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
-              <span className="text-amber-300 italic">(Perhatikan Bacaan 3)</span><br />
-              Pak Angga dan Bu Susi membeli <span className="text-green-300 font-bold">seluruh</span> minyak dari kedua tangki. Jeriken Pak Angga berukuran <span className="text-amber-300 font-bold">25 liter</span>, jeriken Bu Susi berukuran <span className="text-cyan-300 font-bold">30 liter</span>. Masing-masing mendapatkan kedua jenis minyak. Semua jeriken terisi penuh dan tidak ada sisa.
+              Bagaimana kemungkinan perbandingan banyaknya jeriken Pak Angga dan Bu Susi? <span className="text-amber-300 text-xs">Tentukan <strong>Mungkin</strong> atau <strong>Tidak Mungkin</strong> pada setiap pernyataan berikut!</span>
             </p>
             <CategoryTable
               qn={24}
