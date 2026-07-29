@@ -1402,6 +1402,9 @@ const TKASoalAsli2025Page = () => {
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Suatu paket terdiri dari <span className="text-amber-300 font-bold">20 kotak misteri</span> berisi patung figur karakter Saka dan Kirana:
             </p>
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal28.png" alt="Figur Saka 8 buah dan Kirana 12 buah soal 28" className="max-w-full rounded-lg border border-white/10" />
+            </div>
             <div className="grid grid-cols-2 gap-3 mb-3 font-body text-xs">
               <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-3 text-center">
                 <p className="text-blue-300 font-bold text-lg">8</p>
@@ -1499,6 +1502,9 @@ const TKASoalAsli2025Page = () => {
 
           {/* ══════════════ SOAL 30 ══════════════ */}
           <Soal n={30} elemen="Data dan Peluang" subelemen="Peluang">
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal30.png" alt="Guru ujian matematika kode soal A B atau C soal 30" className="max-w-full rounded-lg border border-white/10" />
+            </div>
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Seorang guru menyiapkan sejumlah kertas soal ujian yang digulung dan dimasukkan ke dalam sebuah kotak. Setiap kertas berisi kode soal <span className="text-amber-300 font-bold">A, B, atau C</span>.
             </p>
