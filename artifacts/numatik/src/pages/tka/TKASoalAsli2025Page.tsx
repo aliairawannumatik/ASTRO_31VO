@@ -1148,23 +1148,6 @@ const TKASoalAsli2025Page = () => {
             <div className="mb-3 flex justify-center">
               <img src="/tka-2025-bacaan3.png" alt="Bacaan 3 tangki minyak goreng" className="max-w-full rounded-lg border border-white/10" />
             </div>
-            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
-              Pak Dodi adalah pemasok minyak goreng curah di Pasar Maju. Terdapat dua jenis minyak yakni <span className="text-amber-300 font-bold">jenis A</span> dan <span className="text-cyan-300 font-bold">jenis B</span>, dimasukkan dalam tangki berikut:
-            </p>
-            <div className="grid grid-cols-2 gap-3 font-body text-xs">
-              <div className="bg-amber-900/20 border border-amber-500/30 rounded-lg p-3">
-                <p className="text-amber-300 font-bold mb-1">Tangki Jenis A</p>
-                <p className="text-white/70">6 dm × 2 m × 0,8 m</p>
-                <p className="text-white/70">= 6 dm × 20 dm × 8 dm</p>
-                <p className="text-amber-300 font-bold mt-1">= 960 dm³ = 960 liter</p>
-              </div>
-              <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-3">
-                <p className="text-cyan-300 font-bold mb-1">Tangki Jenis B</p>
-                <p className="text-white/70">8 dm × 2,2 m × 1 m</p>
-                <p className="text-white/70">= 8 dm × 22 dm × 10 dm</p>
-                <p className="text-cyan-300 font-bold mt-1">= 1.760 dm³ = 1.760 liter</p>
-              </div>
-            </div>
           </div>
 
           {/* ══════════════ SOAL 23 ══════════════ */}
