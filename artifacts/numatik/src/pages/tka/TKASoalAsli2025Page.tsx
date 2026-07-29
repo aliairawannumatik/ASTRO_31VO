@@ -458,7 +458,7 @@ const TKASoalAsli2025Page = () => {
               <img src="/tka-2025-soal5.png" alt="Tabel suhu penyimpanan FDA soal 5" className="max-w-full rounded-lg border border-white/10" />
             </div>
             <div className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 mb-3 text-xs font-body text-white/60">
-              <p><span className="text-white/80 font-semibold">Catatan:</span> Daging unggas = daging ayam, merpati, dsb. Daging merah = daging sapi, kambing, dsb.</p>
+              <p><span className="text-white/80 font-semibold">Catatan:</span> daging unggas adalah daging yang berasal dari burung ternak seperti ayam, merpati dan sebagainya. Daging merah adalah daging yang berasal dari mamalia ternak seperti sapi, kambing dan sebagainya.</p>
             </div>
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Berdasarkan saran FDA, berapa suhu lemari pendingin yang direkomendasikan untuk menyimpan daging ayam?
