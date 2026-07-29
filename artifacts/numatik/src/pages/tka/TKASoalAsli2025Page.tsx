@@ -519,7 +519,9 @@ const TKASoalAsli2025Page = () => {
             <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
               Perhatikan diagram panah berikut ini.
             </p>
-            <ImageNote text="Tiga diagram panah (Diagram 1, Diagram 2, Diagram 3) tersedia pada dokumen soal asli." />
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal7.png" alt="Tiga diagram panah soal 7" className="max-w-full rounded-lg border border-white/10" />
+            </div>
             <p className="font-body text-white/80 text-sm mb-2">
               Apakah diagram 1, diagram 2, dan diagram 3 merupakan fungsi?
               Tentukan <span className="text-cyan-300 font-bold">Fungsi</span> atau{" "}
@@ -661,25 +663,31 @@ const TKASoalAsli2025Page = () => {
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Manakah garis bilangan yang menunjukkan himpunan penyelesaian dari pertidaksamaan tersebut?
             </p>
-            <ImageNote text="Pilihan A, B, C, D berupa gambar garis bilangan tersedia pada dokumen soal asli. Himpunan penyelesaian: x ≤ −2 (lingkaran tertutup di −2, garis ke kiri)." />
             <div className="grid grid-cols-2 gap-2">
-              {["A", "B", "C", "D"].map((opt, i) => (
+              {(["A","B","C","D"] as const).map((opt, i) => (
                 <div
                   key={i}
-                  className={`border rounded-lg px-3 py-3 text-xs font-body transition-all flex items-center justify-between cursor-pointer
+                  className={`border rounded-lg p-2 text-xs font-body transition-all flex flex-col items-center gap-1 cursor-pointer
                     ${selectedAnswers[10] === i
                       ? i === 1
-                        ? "bg-green-900/30 border-green-500/50 text-green-300 font-bold"
-                        : "bg-red-900/30 border-red-500/50 text-red-300"
-                      : "bg-white/5 border-white/10 text-white/80 hover:bg-white/10 hover:border-amber-500/40 active:scale-95"
+                        ? "bg-green-900/30 border-green-500/50"
+                        : "bg-red-900/30 border-red-500/50"
+                      : "bg-white/5 border-white/10 hover:bg-white/10 hover:border-amber-500/40 active:scale-95"
                     }
-                    ${selectedAnswers[10] !== undefined && i === 1 ? "bg-green-900/30 border-green-500/50 text-green-300 font-bold" : ""}
+                    ${selectedAnswers[10] !== undefined && i === 1 ? "bg-green-900/30 border-green-500/50" : ""}
                   `}
                   onClick={() => selectAnswer(10, i)}
                 >
-                  <span>{opt}. [Garis bilangan — lihat soal asli]</span>
-                  {selectedAnswers[10] !== undefined && i === 1 && <span className="text-green-400 font-bold shrink-0 ml-2">✓</span>}
-                  {selectedAnswers[10] === i && i !== 1 && <span className="text-red-400 font-bold shrink-0 ml-2">✗</span>}
+                  <img
+                    src={`/tka-2025-soal10${opt.toLowerCase()}.png`}
+                    alt={`Pilihan ${opt} soal 10`}
+                    className="w-full rounded"
+                  />
+                  <div className="flex items-center justify-between w-full px-1">
+                    <span className={`font-bold ${selectedAnswers[10] === i ? (i === 1 ? "text-green-300" : "text-red-300") : "text-white/70"}`}>{opt}.</span>
+                    {selectedAnswers[10] !== undefined && i === 1 && <span className="text-green-400 font-bold">✓</span>}
+                    {selectedAnswers[10] === i && i !== 1 && <span className="text-red-400 font-bold">✗</span>}
+                  </div>
                 </div>
               ))}
             </div>
@@ -1100,7 +1108,9 @@ const TKASoalAsli2025Page = () => {
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Perhatikan dua segitiga kongruen pada koordinat kartesius berikut.
             </p>
-            <ImageNote text="Gambar koordinat kartesius dengan segitiga PQR dan segitiga KLM (kongruen) tersedia pada dokumen soal asli." />
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal20.png" alt="Koordinat kartesius segitiga PQR dan KLM soal 20" className="max-w-full rounded-lg border border-white/10" />
+            </div>
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Diketahui titik <span className="text-amber-300 font-bold">Q = titik K</span>. Segitiga PQR akan ditranslasikan oleh{" "}
               <InlineMath math="T = (-4, -2)" />. Bayangan segitiga PQR dan segitiga KLM akan saling …
@@ -1361,13 +1371,34 @@ const TKASoalAsli2025Page = () => {
             <p className="font-body text-white/80 text-sm mb-3">
               Berdasarkan data di atas, diagram garis manakah yang menunjukkan penyajian data dari salah satu hasil produksi karet atau kelapa di Indonesia?
             </p>
-            <ImageNote text="Pilihan A, B, C, D berupa gambar diagram garis tersedia pada dokumen soal asli. Data karet turun konsisten (3,68→2,60), data kelapa relatif stabil (2,81–2,90)." />
-            <MCQ qn={25} correct={1} options={[
-              "A. Diagram (fluktuatif turun-naik)",
-              "B. Diagram (konsisten menurun — sesuai data karet)",
-              "C. Diagram (bergelombang naik-turun besar)",
-              "D. Diagram (relatif datar)",
-            ]} />
+            <div className="grid grid-cols-2 gap-2 mb-3">
+              {(["A","B","C","D"] as const).map((opt, i) => (
+                <div
+                  key={i}
+                  className={`border rounded-lg p-2 text-xs font-body transition-all flex flex-col items-center gap-1 cursor-pointer
+                    ${selectedAnswers[25] === i
+                      ? i === 1
+                        ? "bg-green-900/30 border-green-500/50"
+                        : "bg-red-900/30 border-red-500/50"
+                      : "bg-white/5 border-white/10 hover:bg-white/10 hover:border-amber-500/40 active:scale-95"
+                    }
+                    ${selectedAnswers[25] !== undefined && i === 1 ? "bg-green-900/30 border-green-500/50" : ""}
+                  `}
+                  onClick={() => selectAnswer(25, i)}
+                >
+                  <img
+                    src={`/tka-2025-soal25${opt.toLowerCase()}.png`}
+                    alt={`Pilihan ${opt} soal 25`}
+                    className="w-full rounded"
+                  />
+                  <div className="flex items-center justify-between w-full px-1">
+                    <span className={`font-bold ${selectedAnswers[25] === i ? (i === 1 ? "text-green-300" : "text-red-300") : "text-white/70"}`}>{opt}.</span>
+                    {selectedAnswers[25] !== undefined && i === 1 && <span className="text-green-400 font-bold">✓</span>}
+                    {selectedAnswers[25] === i && i !== 1 && <span className="text-red-400 font-bold">✗</span>}
+                  </div>
+                </div>
+              ))}
+            </div>
             <PembahasanBtn n={25} />
             {expandedPembahasan.has(25) && (
               <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-2 text-xs font-body">
