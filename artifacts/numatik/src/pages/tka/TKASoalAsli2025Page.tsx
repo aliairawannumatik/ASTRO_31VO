@@ -208,7 +208,7 @@ const TKASoalAsli2025Page = () => {
         hingga voucher. Berikut beberapa penawaran cashback yang ada di aplikasi belanja online Rina.
       </p>
       <div className="mb-3 flex justify-center">
-        <img src="/tka-2025-soal3abc.jpeg" alt="Tabel voucher cashback soal 2 & 3" className="max-w-full rounded-lg border border-white/10" />
+        <img src="/tka-2025-bacaan1.png" alt="Tabel voucher cashback Bacaan 1" className="max-w-full rounded-lg border border-white/10" />
       </div>
       <p className="text-white/70 text-xs font-body leading-relaxed mb-2">
         <span className="text-cyan-300 font-bold">Cashback 25% s/d 100RB</span> artinya uang yang dikembalikan sebanyak 25% dari total belanjaan dan tidak lebih dari Rp100.000,00.
@@ -817,10 +817,8 @@ const TKASoalAsli2025Page = () => {
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Naura menggunakan operator seluler "Nusantara Mobile". Naura menuliskan pilihan paket kuota dan harganya dalam bentuk himpunan pasangan berurutan:
             </p>
-            <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-3 text-center">
-              <p className="font-body text-xs text-amber-300 font-bold mb-1">Paket Kuota Internet Nusantara Mobile</p>
-              <p className="font-body text-sm text-white/90 font-mono">{"{(5, 14.000), (10, 23.000), (20, 41.000), (25, 50.000)}"}</p>
-              <p className="font-body text-[10px] text-white/50 mt-1">(kuota dalam GB, harga dalam Rupiah)</p>
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal13.png" alt="Paket kuota Nusantara Mobile soal 13" className="max-w-full rounded-lg border border-white/10" />
             </div>
             <p className="font-body text-white/80 text-sm mb-3">
               Jika <InlineMath math="x" /> adalah paket kuota dalam GB, rumus fungsi <InlineMath math="f(x)" /> yang menyatakan harga paket kuota adalah …
@@ -942,24 +940,8 @@ const TKASoalAsli2025Page = () => {
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Garis AB dan garis PQ berpotongan di titik Q. Sudut yang terbentuk:
             </p>
-            <div className="bg-white/5 border border-white/10 rounded-lg p-4 mb-3 flex justify-center">
-              <svg viewBox="0 0 260 160" className="w-56 h-36 font-body">
-                {/* Line AB horizontal */}
-                <line x1="20" y1="110" x2="240" y2="110" stroke="#94a3b8" strokeWidth="2" />
-                {/* Line PQ going upper-right from Q */}
-                <line x1="130" y1="110" x2="190" y2="20" stroke="#94a3b8" strokeWidth="2" />
-                {/* 72° arc (left side of PQ from AB) */}
-                <path d="M 85 110 A 45 45 0 0 1 113 75" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
-                <text x="72" y="95" fill="#fbbf24" fontSize="11" fontFamily="serif">72°</text>
-                {/* (4x+12)° arc (right side of PQ from AB) */}
-                <path d="M 165 110 A 35 35 0 0 0 148 78" fill="none" stroke="#86efac" strokeWidth="1.5" />
-                <text x="155" y="95" fill="#86efac" fontSize="10" fontFamily="serif">(4x+12)°</text>
-                {/* Labels */}
-                <text x="12" y="104" fill="#94a3b8" fontSize="13" fontFamily="serif">A</text>
-                <text x="233" y="104" fill="#94a3b8" fontSize="13" fontFamily="serif">B</text>
-                <text x="127" y="122" fill="#94a3b8" fontSize="13" fontFamily="serif">Q</text>
-                <text x="188" y="16" fill="#94a3b8" fontSize="13" fontFamily="serif">P</text>
-              </svg>
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal16.png" alt="Garis AB dan PQ berpotongan soal 16" className="max-w-full rounded-lg border border-white/10" />
             </div>
             <p className="font-body text-white/80 text-sm mb-3">Nilai <InlineMath math="x" /> yang tepat adalah …</p>
             <MCQ qn={16} correct={1} options={[
@@ -1016,28 +998,8 @@ const TKASoalAsli2025Page = () => {
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Perhatikan gambar dua garis sejajar <InlineMath math="p \parallel q" /> yang dipotong transversal berikut ini.
             </p>
-            <div className="bg-white/5 border border-white/10 rounded-lg p-4 mb-3 flex justify-center">
-              <svg viewBox="0 0 260 180" className="w-56 h-40 font-body">
-                {/* Line p (upper) */}
-                <line x1="20" y1="50" x2="240" y2="50" stroke="#60a5fa" strokeWidth="2" />
-                <text x="5" y="54" fill="#60a5fa" fontSize="12" fontFamily="serif" fontStyle="italic">p</text>
-                {/* Line q (lower) */}
-                <line x1="20" y1="140" x2="240" y2="140" stroke="#60a5fa" strokeWidth="2" />
-                <text x="5" y="144" fill="#60a5fa" fontSize="12" fontFamily="serif" fontStyle="italic">q</text>
-                {/* Left transversal: p to between */}
-                <line x1="70" y1="50" x2="130" y2="95" stroke="#e2e8f0" strokeWidth="2" />
-                {/* Right transversal: between to q */}
-                <line x1="130" y1="95" x2="190" y2="140" stroke="#e2e8f0" strokeWidth="2" />
-                {/* 68° at p */}
-                <path d="M 90 50 A 22 22 0 0 0 75 66" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
-                <text x="94" y="67" fill="#fbbf24" fontSize="11" fontFamily="serif">68°</text>
-                {/* b° at middle vertex */}
-                <path d="M 113 88 A 18 18 0 0 0 147 88" fill="none" stroke="#f87171" strokeWidth="1.5" />
-                <text x="123" y="83" fill="#f87171" fontSize="11" fontFamily="serif" fontStyle="italic">b°</text>
-                {/* 46° at q */}
-                <path d="M 175 140 A 20 20 0 0 0 162 124" fill="none" stroke="#86efac" strokeWidth="1.5" />
-                <text x="176" y="128" fill="#86efac" fontSize="11" fontFamily="serif">46°</text>
-              </svg>
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal18.png" alt="Dua garis sejajar p dan q dipotong transversal soal 18" className="max-w-full rounded-lg border border-white/10" />
             </div>
             <p className="font-body text-white/80 text-sm mb-3">Berdasarkan gambar tersebut, berapa nilai <InlineMath math="b" />?</p>
             <MCQ qn={18} correct={1} options={[
@@ -1170,17 +1132,8 @@ const TKASoalAsli2025Page = () => {
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Perhatikan dua persegi panjang berikut.
             </p>
-            <div className="bg-white/5 border border-white/10 rounded-lg p-4 mb-3 flex items-end justify-center gap-8">
-              {/* Big rectangle */}
-              <div className="relative">
-                <div className="w-12 h-20 bg-amber-500/30 border border-amber-400/60 rounded-sm" />
-                <span className="absolute -left-7 top-1/2 -translate-y-1/2 text-white/70 text-[10px] font-body">20 cm</span>
-              </div>
-              {/* Small rectangle */}
-              <div className="relative">
-                <div className="w-7 h-5 bg-amber-500/20 border border-amber-400/40 rounded-sm" />
-                <span className="absolute -right-7 top-1/2 -translate-y-1/2 text-white/70 text-[10px] font-body">5 cm</span>
-              </div>
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal22.png" alt="Dua persegi panjang sebangun soal 22" className="max-w-full rounded-lg border border-white/10" />
             </div>
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Diketahui luas persegi panjang yang lebih besar adalah <span className="text-amber-300 font-bold">320 cm²</span> dan kedua persegi panjang tersebut <span className="text-cyan-300 font-bold">sebangun</span>. Berapakah keliling persegi panjang yang lebih kecil?
@@ -1212,6 +1165,9 @@ const TKASoalAsli2025Page = () => {
           {/* ══════════════ BACAAN 3 (Soal 23 & 24) ══════════════ */}
           <div className="rounded-xl border border-blue-500/30 bg-blue-950/20 p-4 mb-4">
             <p className="text-blue-300 font-display font-bold text-xs mb-2">📖 BACAAN 3 — untuk menjawab Soal Nomor 23 dan 24</p>
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-bacaan3.png" alt="Bacaan 3 tangki minyak goreng" className="max-w-full rounded-lg border border-white/10" />
+            </div>
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Pak Dodi adalah pemasok minyak goreng curah di Pasar Maju. Terdapat dua jenis minyak yakni <span className="text-amber-300 font-bold">jenis A</span> dan <span className="text-cyan-300 font-bold">jenis B</span>, dimasukkan dalam tangki berikut:
             </p>
@@ -1326,31 +1282,8 @@ const TKASoalAsli2025Page = () => {
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Berikut adalah data produksi karet dan kelapa di Indonesia (dalam juta ton):
             </p>
-            <div className="overflow-x-auto mb-3">
-              <table className="w-full text-xs font-body border-collapse">
-                <thead>
-                  <tr className="bg-amber-900/30 text-amber-300">
-                    <th className="border border-white/10 px-2 py-1.5 text-left">Tahun</th>
-                    {[2018,2019,2020,2021,2022,2023,2024].map(y=>(
-                      <th key={y} className="border border-white/10 px-2 py-1.5 text-center">{y}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="text-white/80">
-                    <td className="border border-white/10 px-2 py-1.5 text-amber-300 font-bold">Karet</td>
-                    {["3,68","3,50","3,30","3,12","2,95","2,75","2,60"].map((v,i)=>(
-                      <td key={i} className="border border-white/10 px-2 py-1.5 text-center">{v}</td>
-                    ))}
-                  </tr>
-                  <tr className="text-white/80 bg-white/3">
-                    <td className="border border-white/10 px-2 py-1.5 text-cyan-300 font-bold">Kelapa</td>
-                    {["2,83","2,83","2,81","2,85","2,86","2,90","2,89"].map((v,i)=>(
-                      <td key={i} className="border border-white/10 px-2 py-1.5 text-center">{v}</td>
-                    ))}
-                  </tr>
-                </tbody>
-              </table>
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal25-tabel.png" alt="Tabel produksi karet dan kelapa 2018-2024 soal 25" className="max-w-full rounded-lg border border-white/10" />
             </div>
             <p className="font-body text-white/80 text-sm mb-3">
               Berdasarkan data di atas, diagram garis manakah yang menunjukkan penyajian data dari salah satu hasil produksi karet atau kelapa di Indonesia?
@@ -1397,24 +1330,8 @@ const TKASoalAsli2025Page = () => {
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Tory kecanduan bermain game online. Selama <span className="text-amber-300 font-bold">12 minggu</span>, waktu bermain Tory dipantau. Berikut data durasi (jam) per minggu:
             </p>
-            <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-3">
-              <div className="flex gap-1.5 items-end justify-center h-20 mb-1">
-                {[22,20,18,20,14,16,14,14,12,14,10,12].map((v,i)=>(
-                  <div key={i} className="flex flex-col items-center gap-0.5 flex-1">
-                    <span className="text-[8px] text-white/60 font-body">{v}</span>
-                    <div
-                      className="w-full rounded-t-sm bg-gradient-to-t from-green-600/70 to-green-400/70 border-t border-green-400/50"
-                      style={{ height: `${(v/22)*60}px` }}
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="flex gap-1.5 justify-center">
-                {[1,2,3,4,5,6,7,8,9,10,11,12].map(i=>(
-                  <span key={i} className="text-[7px] text-white/40 font-body flex-1 text-center">{i}</span>
-                ))}
-              </div>
-              <p className="text-[9px] text-white/40 text-center mt-0.5 font-body">Minggu ke-</p>
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal26.png" alt="Diagram batang durasi Tory bermain game soal 26" className="max-w-full rounded-lg border border-white/10" />
             </div>
             <p className="font-body text-white/80 text-sm mb-3">
               Dalam 12 minggu terakhir, Tory paling sering menghabiskan waktu bermain game online setiap minggunya yaitu selama …
@@ -1440,20 +1357,8 @@ const TKASoalAsli2025Page = () => {
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Dokter memantau durasi Tory bermain game tiap 4 minggu (fase). Batas waktu maksimal = <span className="text-red-300 font-bold">7 jam/minggu</span>.
             </p>
-            <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-3 text-xs font-body">
-              <div className="grid grid-cols-3 gap-2 text-center">
-                {[
-                  { label:"Fase 1 (M1–4)", data:[22,20,18,20], mean:20 },
-                  { label:"Fase 2 (M5–8)", data:[14,16,14,14], mean:14.5 },
-                  { label:"Fase 3 (M9–12)", data:[12,14,10,12], mean:12 },
-                ].map((f,i)=>(
-                  <div key={i} className="bg-white/5 rounded-lg p-2">
-                    <p className="text-cyan-300 font-bold text-[10px]">{f.label}</p>
-                    <p className="text-white/60 text-[9px] mt-0.5">{f.data.join(", ")}</p>
-                    <p className="text-amber-300 font-bold text-[11px] mt-1">Rata-rata: {f.mean} jam</p>
-                  </div>
-                ))}
-              </div>
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal27.png" alt="Diagram fase penyembuhan soal 27" className="max-w-full rounded-lg border border-white/10" />
             </div>
             <p className="font-body text-white/80 text-sm mb-2">Apakah yang terjadi pada Tory selama fase penyembuhan? <span className="text-amber-300 text-xs">(Jawaban benar lebih dari satu)</span></p>
             <ComplexMCQ qn={27} items={[
@@ -1536,6 +1441,9 @@ const TKASoalAsli2025Page = () => {
           {/* ══════════════ SOAL 29 ══════════════ */}
           <Soal n={29} elemen="Data dan Peluang" subelemen="Peluang">
             <p className="font-body text-white/90 text-sm font-bold mb-2">Mesin Tetas Telur</p>
+            <div className="mb-3 flex justify-center">
+              <img src="/tka-2025-soal29.png" alt="Gambar mesin tetas telur soal 29" className="max-w-full rounded-lg border border-white/10" />
+            </div>
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
               Mesin tetas telur menetaskan telur dalam <span className="text-amber-300 font-bold">18 hari</span>. Saat ini terdapat telur puyuh di dalam mesin dengan rincian:
             </p>
