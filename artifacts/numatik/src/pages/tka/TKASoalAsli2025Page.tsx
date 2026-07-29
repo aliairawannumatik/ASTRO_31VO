@@ -1142,6 +1142,9 @@ const TKASoalAsli2025Page = () => {
           {/* ══════════════ BACAAN 3 (Soal 23 & 24) ══════════════ */}
           <div className="rounded-xl border border-blue-500/30 bg-blue-950/20 p-4 mb-4">
             <p className="text-blue-300 font-display font-bold text-xs mb-2">📖 BACAAN 3 — untuk menjawab Soal Nomor 23 dan 24</p>
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Pak Dodi adalah pemasok minyak goreng curah di Pasar Maju. Minyak goreng curah adalah minyak goreng tanpa kemasan khusus dan tidak memiliki label atau merek. Terdapat dua jenis minyak goreng curah yang dijual Pak Dodi yakni jenis A dan jenis B. Masing-masing jenis minyak goreng dimasukkan dalam tangki berikut.
+            </p>
             <div className="mb-3 flex justify-center">
               <img src="/tka-2025-bacaan3.png" alt="Bacaan 3 tangki minyak goreng" className="max-w-full rounded-lg border border-white/10" />
             </div>
