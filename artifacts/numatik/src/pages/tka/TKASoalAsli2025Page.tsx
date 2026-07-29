@@ -241,7 +241,7 @@ const TKASoalAsli2025Page = () => {
             <div className="bg-white/5 rounded-lg p-2"><span className="text-white/40">Jenjang:</span><span className="text-white ml-1">SMP/MTs</span></div>
             <div className="bg-white/5 rounded-lg p-2 col-span-2 flex items-center gap-2">
               <span className="text-white/40">Progress:</span>
-              <span className="text-amber-300 font-bold ml-1">Soal 1 – 10</span>
+              <span className="text-amber-300 font-bold ml-1">Soal 1 – 20</span>
               <span className="text-white/30">dari 30 soal</span>
               <span className="ml-auto text-amber-400/70 text-[10px]">Soal 11–30 segera ditambahkan</span>
             </div>
@@ -704,10 +704,426 @@ const TKASoalAsli2025Page = () => {
 
         </div>
 
+          {/* ══════════════ SOAL 11 ══════════════ */}
+          <Soal n={11} elemen="Aljabar" subelemen="Persamaan dan Pertidaksamaan Linear">
+            <p className="font-body text-white/90 text-sm font-bold mb-2">Jajanan Tradisional</p>
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Berikut merupakan harga jajanan tradisional kue putu mayang dan kue pancong yang dijual di sebuah bazar makanan.
+            </p>
+            <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-3 font-body text-sm space-y-1">
+              <div className="flex items-center gap-2 text-white/80">
+                <span className="text-green-300">●</span>
+                <span><span className="text-green-300 font-bold">2 kotak putu mayang</span> + <span className="text-red-300 font-bold">3 kotak pancong</span> = <span className="text-amber-300 font-bold">Rp58.000</span></span>
+              </div>
+              <div className="flex items-center gap-2 text-white/80">
+                <span className="text-green-300">●</span>
+                <span><span className="text-green-300 font-bold">3 kotak putu mayang</span> + <span className="text-red-300 font-bold">2 kotak pancong</span> = <span className="text-amber-300 font-bold">Rp62.000</span></span>
+              </div>
+            </div>
+            <p className="font-body text-white/80 text-sm mb-3">
+              Berapa harga <span className="text-amber-300 font-bold">3 kotak kue putu mayang</span> dan <span className="text-amber-300 font-bold">1 kotak kue pancong</span>?
+            </p>
+            <MCQ qn={11} correct={3} options={[
+              "A. Rp10.000,00",
+              "B. Rp14.000,00",
+              "C. Rp44.000,00",
+              "D. Rp52.000,00",
+            ]} />
+            <PembahasanBtn n={11} />
+            {expandedPembahasan.has(11) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-3 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: D (Rp52.000,00)</div>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-2">📋 Penyelesaian (SPLDV)</p>
+                  <p className="text-white/70 mb-1">Misal: p = harga putu mayang, c = harga pancong</p>
+                  <div className="ml-2 space-y-1">
+                    <div className="my-1"><BlockMath math="2p + 3c = 58.000 \quad \cdots (1)" /></div>
+                    <div className="my-1"><BlockMath math="3p + 2c = 62.000 \quad \cdots (2)" /></div>
+                  </div>
+                  <p className="text-white/70 mt-2 mb-1">Eliminasi: (1)×3 − (2)×2:</p>
+                  <div className="ml-2 space-y-1">
+                    <div className="my-1"><BlockMath math="9c - 4c = 174.000 - 124.000 \Rightarrow 5c = 50.000 \Rightarrow c = 10.000" /></div>
+                    <div className="my-1"><BlockMath math="2p + 3(10.000) = 58.000 \Rightarrow p = 14.000" /></div>
+                    <div className="my-1"><BlockMath math="3p + c = 3(14.000) + 10.000 = 42.000 + 10.000 = 52.000" /></div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Soal>
+
+          {/* ══════════════ SOAL 12 ══════════════ */}
+          <Soal n={12} elemen="Aljabar" subelemen="Bentuk Aljabar">
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Rino, Tiko, dan Bayu pergi ke toko buku untuk membeli buku tulis dan pulpen. Keterangan pembelian:
+            </p>
+            <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-3 font-body text-xs space-y-1 text-white/80">
+              <p>• <span className="text-cyan-300 font-bold">Rino</span> membeli <span className="text-amber-300">4 buku tulis</span> dan <span className="text-amber-300">3 pulpen</span></p>
+              <p>• <span className="text-cyan-300 font-bold">Tiko</span> membeli <span className="text-amber-300">dua kali lipat</span> dari masing-masing jumlah Rino → 8 buku, 6 pulpen</p>
+              <p>• <span className="text-cyan-300 font-bold">Bayu</span> membeli <span className="text-amber-300">tiga kali lipat</span> dari masing-masing jumlah Rino → 12 buku, 9 pulpen</p>
+            </div>
+            <p className="font-body text-white/80 text-sm mb-3">
+              Jika harga 1 buku = <InlineMath math="x" /> dan 1 pulpen = <InlineMath math="y" />, bagaimana kalimat matematika total harga ketiganya?
+            </p>
+            <MCQ qn={12} correct={0} options={[
+              "A. 24x + 18y",
+              "B. 20x + 15y",
+              "C. 12x + 9y",
+              "D. 4x + 3y",
+            ]} />
+            <PembahasanBtn n={12} />
+            {expandedPembahasan.has(12) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-3 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: A (24x + 18y)</div>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-2">📋 Penyelesaian</p>
+                  <div className="ml-2 space-y-1 text-white/70">
+                    <p>Total buku: 4 + 8 + 12 = <span className="text-amber-300 font-bold">24</span></p>
+                    <p>Total pulpen: 3 + 6 + 9 = <span className="text-amber-300 font-bold">18</span></p>
+                    <div className="my-1"><BlockMath math="\text{Total} = 24x + 18y" /></div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Soal>
+
+          {/* ══════════════ SOAL 13 ══════════════ */}
+          <Soal n={13} elemen="Aljabar" subelemen="Fungsi">
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Naura menggunakan operator seluler "Nusantara Mobile". Naura menuliskan pilihan paket kuota dan harganya dalam bentuk himpunan pasangan berurutan:
+            </p>
+            <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-3 text-center">
+              <p className="font-body text-xs text-amber-300 font-bold mb-1">Paket Kuota Internet Nusantara Mobile</p>
+              <p className="font-body text-sm text-white/90 font-mono">{"{(5, 14.000), (10, 23.000), (20, 41.000), (25, 50.000)}"}</p>
+              <p className="font-body text-[10px] text-white/50 mt-1">(kuota dalam GB, harga dalam Rupiah)</p>
+            </div>
+            <p className="font-body text-white/80 text-sm mb-3">
+              Jika <InlineMath math="x" /> adalah paket kuota dalam GB, rumus fungsi <InlineMath math="f(x)" /> yang menyatakan harga paket kuota adalah …
+            </p>
+            <MCQ qn={13} correct={3} cols={1} options={[
+              "A.  f(x) = 2.000x + 4.000",
+              "B.  f(x) = 2.000x + 1.000",
+              "C.  f(x) = 1.800x + 9.000",
+              "D.  f(x) = 1.800x + 5.000",
+            ]} />
+            <PembahasanBtn n={13} />
+            {expandedPembahasan.has(13) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-3 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: D — f(x) = 1.800x + 5.000</div>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-2">📋 Penyelesaian</p>
+                  <div className="ml-2 space-y-1">
+                    <p className="text-white/70">Gradien (slope):</p>
+                    <div className="my-1"><BlockMath math="m = \frac{23.000 - 14.000}{10 - 5} = \frac{9.000}{5} = 1.800" /></div>
+                    <p className="text-white/70">Nilai b (konstanta):</p>
+                    <div className="my-1"><BlockMath math="14.000 = 1.800(5) + b \Rightarrow b = 14.000 - 9.000 = 5.000" /></div>
+                    <p className="text-white/70">Verifikasi: f(20) = 1800(20)+5000 = 41.000 ✓, f(25) = 1800(25)+5000 = 50.000 ✓</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Soal>
+
+          {/* ══════════════ BACAAN 2 (Soal 14 & 15) ══════════════ */}
+          <div className="rounded-xl border border-blue-500/30 bg-blue-950/20 p-4 mb-4">
+            <p className="text-blue-300 font-display font-bold text-xs mb-2">📖 BACAAN 2 — untuk menjawab Soal Nomor 14 dan 15</p>
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Suatu kompleks X memiliki kebiasaan membuat pagar rumah dengan desain yang unik. Desain pagar disusun menggunakan <span className="text-amber-300 font-bold">2 jenis batu bata</span> berbentuk segitiga (▲) dan persegi panjang (▬), membentuk pola bertingkat.
+            </p>
+            <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-2 font-body text-xs text-white/80">
+              <p className="text-amber-300 font-bold mb-2">Pola pada setiap tingkat:</p>
+              <div className="grid grid-cols-3 gap-2 text-center">
+                {[1,2,3].map(k => (
+                  <div key={k} className="bg-white/5 rounded-lg py-2">
+                    <p className="text-cyan-300 font-bold text-xs">Tingkat {k}</p>
+                    <p className="text-white/70 text-[10px] mt-1">{k} segitiga ▲</p>
+                    <p className="text-white/70 text-[10px]">{k+1} persegi panjang ▬</p>
+                    <p className="text-amber-300 text-[10px] font-bold">{2*k+1} batu bata</p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-white/50 text-[10px] mt-2 text-center">Pola: tingkat ke-n → n segitiga + (n+1) persegi = (2n+1) batu bata</p>
+            </div>
+          </div>
+
+          {/* ══════════════ SOAL 14 ══════════════ */}
+          <Soal n={14} elemen="Aljabar" subelemen="Barisan dan Deret">
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              <span className="text-amber-300 italic">(Perhatikan Bacaan 2)</span><br />
+              Jika ingin dibuat pagar dengan <span className="text-amber-300 font-bold">10 tingkat</span> susunan batu bata, berapakah jumlah total batu bata (segitiga maupun persegi panjang) yang ada pada <span className="text-amber-300 font-bold">tingkat ke-10</span> dari pagar tersebut?
+            </p>
+            <MCQ qn={14} correct={3} options={[
+              "A. 10 batu bata",
+              "B. 11 batu bata",
+              "C. 20 batu bata",
+              "D. 21 batu bata",
+            ]} />
+            <PembahasanBtn n={14} />
+            {expandedPembahasan.has(14) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-3 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: D (21 batu bata)</div>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-2">📋 Penyelesaian</p>
+                  <div className="ml-2 space-y-1">
+                    <p className="text-white/70">Pola: tingkat ke-n = n segitiga + (n+1) persegi = 2n+1 batu bata</p>
+                    <div className="my-1"><BlockMath math="\text{Tingkat ke-10} = 2(10) + 1 = 21" /></div>
+                    <p className="text-white/70">→ 10 segitiga + 11 persegi panjang = 21 batu bata</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Soal>
+
+          {/* ══════════════ SOAL 15 ══════════════ */}
+          <Soal n={15} elemen="Aljabar" subelemen="Barisan dan Deret">
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              <span className="text-amber-300 italic">(Perhatikan Bacaan 2)</span><br />
+              Dua pagar yang sama persis dengan masing-masing memiliki <span className="text-amber-300 font-bold">9 tingkat</span> akan dibangun. Tetapi hanya ada persediaan sebanyak <span className="text-green-300 font-bold">60 batu bata segitiga</span> dan <span className="text-purple-300 font-bold">80 batu bata persegi panjang</span>. Apakah jumlah kedua jenis batu bata tersebut cukup untuk membuat kedua pagar?
+            </p>
+            <TrueFalseTable qn={15} rows={[
+              { key: "a", text: <span>Diperlukan tambahan <span className="text-amber-300 font-bold">15</span> batu bata segitiga.</span> },
+              { key: "b", text: <span>Diperlukan tambahan <span className="text-amber-300 font-bold">28</span> batu bata persegi panjang.</span> },
+              { key: "c", text: <span>Diperlukan tambahan total sebanyak <span className="text-amber-300 font-bold">43</span> batu bata baik segitiga maupun persegi panjang.</span> },
+            ]} correctKey={{ a: "Salah", b: "Benar", c: "Salah" }} />
+            <PembahasanBtn n={15} />
+            {expandedPembahasan.has(15) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-3 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Salah / Benar / Salah</div>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-2">📋 Penyelesaian</p>
+                  <div className="ml-2 space-y-2 text-white/70">
+                    <div>
+                      <p className="font-bold text-white/80">Segitiga per pagar (9 tingkat): <InlineMath math="1+2+\cdots+9 = \frac{9 \cdot 10}{2} = 45" /></p>
+                      <p>Untuk 2 pagar = 90 segitiga. Kurang = 90 − 60 = <span className="text-red-300 font-bold">30</span> (bukan 15 → Salah)</p>
+                    </div>
+                    <div>
+                      <p className="font-bold text-white/80">Persegi panjang per pagar: <InlineMath math="2+3+\cdots+10 = \frac{9(2+10)}{2} = 54" /></p>
+                      <p>Untuk 2 pagar = 108 persegi. Kurang = 108 − 80 = <span className="text-green-300 font-bold">28</span> (Benar)</p>
+                    </div>
+                    <div>
+                      <p>Total tambahan = 30 + 28 = <span className="text-red-300 font-bold">58</span> (bukan 43 → Salah)</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Soal>
+
+          {/* ══════════════ SOAL 16 ══════════════ */}
+          <Soal n={16} elemen="Geometri dan Pengukuran" subelemen="Objek Geometri">
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Garis AB dan garis PQ berpotongan di titik Q. Sudut yang terbentuk:
+            </p>
+            <div className="bg-white/5 border border-white/10 rounded-lg p-4 mb-3 flex justify-center">
+              <svg viewBox="0 0 260 160" className="w-56 h-36 font-body">
+                {/* Line AB horizontal */}
+                <line x1="20" y1="110" x2="240" y2="110" stroke="#94a3b8" strokeWidth="2" />
+                {/* Line PQ going upper-right from Q */}
+                <line x1="130" y1="110" x2="190" y2="20" stroke="#94a3b8" strokeWidth="2" />
+                {/* 72° arc (left side of PQ from AB) */}
+                <path d="M 85 110 A 45 45 0 0 1 113 75" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
+                <text x="72" y="95" fill="#fbbf24" fontSize="11" fontFamily="serif">72°</text>
+                {/* (4x+12)° arc (right side of PQ from AB) */}
+                <path d="M 165 110 A 35 35 0 0 0 148 78" fill="none" stroke="#86efac" strokeWidth="1.5" />
+                <text x="155" y="95" fill="#86efac" fontSize="10" fontFamily="serif">(4x+12)°</text>
+                {/* Labels */}
+                <text x="12" y="104" fill="#94a3b8" fontSize="13" fontFamily="serif">A</text>
+                <text x="233" y="104" fill="#94a3b8" fontSize="13" fontFamily="serif">B</text>
+                <text x="127" y="122" fill="#94a3b8" fontSize="13" fontFamily="serif">Q</text>
+                <text x="188" y="16" fill="#94a3b8" fontSize="13" fontFamily="serif">P</text>
+              </svg>
+            </div>
+            <p className="font-body text-white/80 text-sm mb-3">Nilai <InlineMath math="x" /> yang tepat adalah …</p>
+            <MCQ qn={16} correct={1} options={[
+              "A. 15°",
+              "B. 24°",
+              "C. 69°",
+              "D. 96°",
+            ]} />
+            <PembahasanBtn n={16} />
+            {expandedPembahasan.has(16) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-3 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B (x = 24°)</div>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-2">📋 Penyelesaian</p>
+                  <p className="text-white/70 mb-1">Sudut 72° dan (4x+12)° berpelurus (membentuk garis lurus AB):</p>
+                  <div className="ml-2 space-y-1">
+                    <div className="my-1"><BlockMath math="72° + (4x + 12)° = 180°" /></div>
+                    <div className="my-1"><BlockMath math="4x + 84 = 180" /></div>
+                    <div className="my-1"><BlockMath math="4x = 96 \Rightarrow x = 24°" /></div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Soal>
+
+          {/* ══════════════ SOAL 17 ══════════════ */}
+          <Soal n={17} elemen="Geometri dan Pengukuran" subelemen="Objek Geometri">
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Perhatikan gambar jaring-jaring prisma segitiga berikut.
+            </p>
+            <ImageNote text="Gambar jaring-jaring prisma segitiga dengan 4 sisi tegak bernomor 1–4 dan sisi tutup ABC tersedia pada dokumen soal asli." />
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Sisi tutup pada prisma adalah <span className="text-amber-300 font-bold">sisi ABC</span>. Rusuk <span className="text-cyan-300 font-bold">AC</span> pada sisi tutup akan berhimpit dengan salah satu rusuk pada sisi tegak prisma nomor …
+            </p>
+            <MCQ qn={17} correct={1} options={[
+              "A. 1",
+              "B. 2",
+              "C. 3",
+              "D. 4",
+            ]} />
+            <PembahasanBtn n={17} />
+            {expandedPembahasan.has(17) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-2 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B (Sisi tegak nomor 2)</div>
+                <p className="text-white/60">Saat jaring-jaring dilipat menjadi prisma, rusuk AC pada sisi tutup berhimpit dengan rusuk pada sisi tegak nomor 2 yang berbagi titik sudut A dan C. Lihat posisi sisi tegak pada jaring-jaring soal asli.</p>
+              </div>
+            )}
+          </Soal>
+
+          {/* ══════════════ SOAL 18 ══════════════ */}
+          <Soal n={18} elemen="Geometri dan Pengukuran" subelemen="Objek Geometri">
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Perhatikan gambar dua garis sejajar <InlineMath math="p \parallel q" /> yang dipotong transversal berikut ini.
+            </p>
+            <div className="bg-white/5 border border-white/10 rounded-lg p-4 mb-3 flex justify-center">
+              <svg viewBox="0 0 260 180" className="w-56 h-40 font-body">
+                {/* Line p (upper) */}
+                <line x1="20" y1="50" x2="240" y2="50" stroke="#60a5fa" strokeWidth="2" />
+                <text x="5" y="54" fill="#60a5fa" fontSize="12" fontFamily="serif" fontStyle="italic">p</text>
+                {/* Line q (lower) */}
+                <line x1="20" y1="140" x2="240" y2="140" stroke="#60a5fa" strokeWidth="2" />
+                <text x="5" y="144" fill="#60a5fa" fontSize="12" fontFamily="serif" fontStyle="italic">q</text>
+                {/* Left transversal: p to between */}
+                <line x1="70" y1="50" x2="130" y2="95" stroke="#e2e8f0" strokeWidth="2" />
+                {/* Right transversal: between to q */}
+                <line x1="130" y1="95" x2="190" y2="140" stroke="#e2e8f0" strokeWidth="2" />
+                {/* 68° at p */}
+                <path d="M 90 50 A 22 22 0 0 0 75 66" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
+                <text x="94" y="67" fill="#fbbf24" fontSize="11" fontFamily="serif">68°</text>
+                {/* b° at middle vertex */}
+                <path d="M 113 88 A 18 18 0 0 0 147 88" fill="none" stroke="#f87171" strokeWidth="1.5" />
+                <text x="123" y="83" fill="#f87171" fontSize="11" fontFamily="serif" fontStyle="italic">b°</text>
+                {/* 46° at q */}
+                <path d="M 175 140 A 20 20 0 0 0 162 124" fill="none" stroke="#86efac" strokeWidth="1.5" />
+                <text x="176" y="128" fill="#86efac" fontSize="11" fontFamily="serif">46°</text>
+              </svg>
+            </div>
+            <p className="font-body text-white/80 text-sm mb-3">Berdasarkan gambar tersebut, berapa nilai <InlineMath math="b" />?</p>
+            <MCQ qn={18} correct={1} options={[
+              "A. 46",
+              "B. 68",
+              "C. 112",
+              "D. 134",
+            ]} />
+            <PembahasanBtn n={18} />
+            {expandedPembahasan.has(18) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-3 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B (b = 68°)</div>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-2">📋 Penyelesaian</p>
+                  <div className="ml-2 space-y-1 text-white/70">
+                    <p>Karena <InlineMath math="p \parallel q" />, sudut 68° dan sudut di bawah garis p (sudut dalam berseberangan) adalah sama besar.</p>
+                    <p>Sudut <InlineMath math="b°" /> merupakan sudut dalam berseberangan (Z-angle / alternate interior angle) dengan sudut 68° pada garis p.</p>
+                    <div className="my-1"><BlockMath math="b = 68°" /></div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Soal>
+
+          {/* ══════════════ SOAL 19 ══════════════ */}
+          <Soal n={19} elemen="Geometri dan Pengukuran" subelemen="Objek Geometri">
+            <p className="font-body text-white/90 text-sm font-bold mb-2">Pagar Tangga</p>
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Pak Anton baru saja membangun rumah. Berikut adalah gambar tangga Pak Anton.
+            </p>
+            <div className="bg-white/5 border border-white/10 rounded-lg p-4 mb-3 flex justify-center">
+              <svg viewBox="0 0 260 200" className="w-64 h-48 font-body">
+                {/* Staircase steps (6 steps) */}
+                {[0,1,2,3,4,5].map(i => (
+                  <g key={i}>
+                    <rect x={20 + i*35} y={170 - i*25} width={35} height={25}
+                      fill="rgba(100,120,150,0.3)" stroke="#94a3b8" strokeWidth="1" />
+                  </g>
+                ))}
+                {/* Diagonal dashed pagar line */}
+                <line x1="20" y1="170" x2="230" y2="20" stroke="#fbbf24" strokeWidth="2" strokeDasharray="6,3" />
+                {/* 150cm label */}
+                <line x1="20" y1="183" x2="230" y2="183" stroke="#94a3b8" strokeWidth="1" />
+                <text x="105" y="197" fill="#94a3b8" fontSize="11" fontFamily="serif" textAnchor="middle">150 cm</text>
+                {/* Arrow heads for 150cm */}
+                <text x="14" y="187" fill="#94a3b8" fontSize="10">←</text>
+                <text x="220" y="187" fill="#94a3b8" fontSize="10">→</text>
+                {/* Step height label */}
+                <text x="238" y="108" fill="#e2e8f0" fontSize="10" fontFamily="serif">25 cm</text>
+                <text x="238" y="119" fill="#e2e8f0" fontSize="10" fontFamily="serif">per anak</text>
+                <text x="238" y="130" fill="#e2e8f0" fontSize="10" fontFamily="serif">tangga</text>
+              </svg>
+            </div>
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Gambar garis putus-putus adalah rancangan pagar tangga. Setiap anak tangga memiliki tinggi yang sama yaitu <span className="text-amber-300 font-bold">25 cm</span>. Tersedia 4 jenis bahan:
+            </p>
+            <div className="grid grid-cols-2 gap-2 mb-3 text-xs font-body text-white/70">
+              <div className="bg-white/5 border border-white/10 rounded-lg p-2">🪵 Kayu jati: <span className="text-amber-300">6 m</span></div>
+              <div className="bg-white/5 border border-white/10 rounded-lg p-2">🪵 Kayu meranti: <span className="text-amber-300">4 m</span></div>
+              <div className="bg-white/5 border border-white/10 rounded-lg p-2">⚙️ Besi: <span className="text-amber-300">5,5 m</span></div>
+              <div className="bg-white/5 border border-white/10 rounded-lg p-2">🔩 Aluminium: <span className="text-amber-300">4,5 m</span></div>
+            </div>
+            <p className="font-body text-white/80 text-sm mb-3">
+              Jenis bahan apa yang harus dipilih Pak Anton agar <span className="text-green-300 font-bold">cukup</span> untuk membuat pagar tangga dan memiliki <span className="text-cyan-300 font-bold">sisa paling sedikit</span>?
+            </p>
+            <MCQ qn={19} correct={1} cols={1} options={[
+              "A. Pagar kayu jati (6 m)",
+              "B. Pagar kayu meranti (4 m)",
+              "C. Pagar besi (5,5 m)",
+              "D. Pagar aluminium (4,5 m)",
+            ]} />
+            <PembahasanBtn n={19} />
+            {expandedPembahasan.has(19) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-3 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B (Pagar kayu meranti 4 m)</div>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-2">📋 Penyelesaian (Teorema Pythagoras)</p>
+                  <div className="ml-2 space-y-1 text-white/70">
+                    <p>Horizontal (alas) = 150 cm, Vertikal (tinggi) = 6 × 25 = 150 cm</p>
+                    <div className="my-1"><BlockMath math="\text{Pagar} = \sqrt{150^2 + 150^2} = 150\sqrt{2} \approx 212 \text{ cm} = 2{,}12 \text{ m}" /></div>
+                    <p>Semua pilihan ≥ 4 m cukup. Sisa paling sedikit = yang terpendek dari pilihan yang cukup:</p>
+                    <p>4 m − 2,12 m = <span className="text-green-300 font-bold">1,88 m</span> (paling kecil) → <span className="text-amber-300 font-bold">Kayu meranti (4 m)</span></p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Soal>
+
+          {/* ══════════════ SOAL 20 ══════════════ */}
+          <Soal n={20} elemen="Geometri dan Pengukuran" subelemen="Transformasi Geometri">
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Perhatikan dua segitiga kongruen pada koordinat kartesius berikut.
+            </p>
+            <ImageNote text="Gambar koordinat kartesius dengan segitiga PQR dan segitiga KLM (kongruen) tersedia pada dokumen soal asli." />
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Diketahui titik <span className="text-amber-300 font-bold">Q = titik K</span>. Segitiga PQR akan ditranslasikan oleh{" "}
+              <InlineMath math="T = (-4, -2)" />. Bayangan segitiga PQR dan segitiga KLM akan saling …
+            </p>
+            <MCQ qn={20} correct={3} options={[
+              "A. Tegak lurus",
+              "B. Berpotongan",
+              "C. Sejajar",
+              "D. Berhimpit",
+            ]} />
+            <PembahasanBtn n={20} />
+            {expandedPembahasan.has(20) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-2 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: D (Berhimpit)</div>
+                <p className="text-white/70">Karena Q = K dan translasi T = (−4, −2) memindahkan segitiga PQR sehingga Q' bertepatan dengan K, dan kedua segitiga kongruen, maka bayangan PQR (yaitu P'Q'R') akan <span className="text-amber-300 font-bold">berhimpit</span> dengan segitiga KLM.</p>
+              </div>
+            )}
+          </Soal>
+
         {/* ── Footer ── */}
         <div className="mt-8 bg-amber-900/15 border border-amber-500/20 rounded-xl p-4 text-center">
-          <p className="text-amber-300 font-display font-bold text-sm mb-1">📋 Soal 1 – 10 dari 30 Soal</p>
-          <p className="text-white/50 text-xs font-body">Soal 11 – 30 akan segera ditambahkan. Sumber: Soal Asli TKA Matematika SMP Tahun 2025.</p>
+          <p className="text-amber-300 font-display font-bold text-sm mb-1">📋 Soal 1 – 20 dari 30 Soal</p>
+          <p className="text-white/50 text-xs font-body">Soal 21 – 30 akan segera ditambahkan. Sumber: Soal Asli TKA Matematika SMP Tahun 2025.</p>
         </div>
 
         <div className="mt-6 text-center">
