@@ -845,7 +845,7 @@ const TKASoalAsli2025Page = () => {
               <img src="/tka-2025-bacaan2.png" alt="Bacaan 2 pola batu bata" className="max-w-full rounded-lg border border-white/10" />
             </div>
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
-              Suatu kompleks X memiliki kebiasaan membuat pagar rumah dengan desain yang unik. Desain pagar disusun menggunakan <span className="text-amber-300 font-bold">2 jenis batu bata</span> berbentuk segitiga (▲) dan persegi panjang (▬), membentuk pola bertingkat.
+              Suatu kompleks X memiliki kebiasaan membuat pagar rumah dengan desain yang unik. Hampir seluruh warga kompleks X menyusun pagar membentuk pola barisan. Desain pagar rumah tersebut disusun menggunakan <span className="text-amber-300 font-bold">2 jenis batu bata</span>, yang jika dilihat dari depan batu bata tersebut terlihat berbentuk segitiga dan persegi panjang. Batu bata tersebut disusun membentuk pola seperti gambar di bawah.
             </p>
             <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-2 font-body text-xs text-white/80">
               <p className="text-amber-300 font-bold mb-2">Pola pada setiap tingkat:</p>
