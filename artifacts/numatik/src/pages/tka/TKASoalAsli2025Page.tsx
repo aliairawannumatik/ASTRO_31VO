@@ -1433,7 +1433,7 @@ const TKASoalAsli2025Page = () => {
               <img src="/tka-2025-soal29.png" alt="Gambar mesin tetas telur soal 29" className="max-w-full rounded-lg border border-white/10" />
             </div>
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
-              Mesin tetas telur menetaskan telur dalam <span className="text-amber-300 font-bold">18 hari</span>. Saat ini terdapat telur puyuh di dalam mesin dengan rincian:
+              Penetasan berlangsung selama <span className="text-amber-300 font-bold">18 hari</span> terhitung dari awal masuknya telur ke dalam mesin tetas. Dilakukan pengamatan terhadap beberapa telur puyuh dengan usia yang berbeda-beda. Berikut rincian usia telur di mesin tetas tersebut saat ini.
             </p>
             <div className="overflow-x-auto mb-3">
               <table className="w-full text-xs font-body border-collapse">
