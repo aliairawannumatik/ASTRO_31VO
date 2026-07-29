@@ -241,8 +241,8 @@ const TKASoalAsli2025Page = () => {
             <div className="bg-white/5 rounded-lg p-2"><span className="text-white/40">Jenjang:</span><span className="text-white ml-1">SMP/MTs</span></div>
             <div className="bg-white/5 rounded-lg p-2 col-span-2 flex items-center gap-2">
               <span className="text-white/40">Progress:</span>
-              <span className="text-amber-300 font-bold ml-1">Soal 1 – 20</span>
-              <span className="text-white/30">dari 30 soal</span>
+              <span className="text-amber-300 font-bold ml-1">Soal 1 – 30</span>
+              <span className="text-white/30">dari 30 soal (Lengkap)</span>
               <span className="ml-auto text-amber-400/70 text-[10px]">Soal 11–30 segera ditambahkan</span>
             </div>
           </div>
@@ -1120,10 +1120,518 @@ const TKASoalAsli2025Page = () => {
             )}
           </Soal>
 
+          {/* ══════════════ SOAL 21 ══════════════ */}
+          <Soal n={21} elemen="Geometri dan Pengukuran" subelemen="Pengukuran">
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Perhatikan gambar juring pada lingkaran di bawah ini.
+            </p>
+            <div className="bg-white/5 border border-white/10 rounded-lg p-4 mb-3 flex justify-center">
+              <svg viewBox="0 0 220 220" className="w-48 h-48">
+                {/* Circle */}
+                <circle cx="110" cy="110" r="90" fill="none" stroke="#475569" strokeWidth="1.5" />
+                {/* Sector A (tan/beige) — 255° from 160° to 55° (clockwise = reflex) */}
+                <path d="M110,110 L110,20 A90,90 0 1,0 42,155 Z" fill="rgba(180,140,80,0.35)" stroke="#b8860b" strokeWidth="1" />
+                {/* Sector B (blue) — 70° from 340° to 50° */}
+                <path d="M110,110 L110,20 A90,90 0 0,1 196,141 Z" fill="rgba(59,130,246,0.4)" stroke="#3b82f6" strokeWidth="1" />
+                {/* Sector C (small, green) — 35° from 190° to 225° */}
+                <path d="M110,110 L42,155 A90,90 0 0,1 47,200 Z" fill="rgba(74,222,128,0.35)" stroke="#22c55e" strokeWidth="1" />
+                {/* Labels */}
+                <text x="75" y="95" fill="#fbbf24" fontSize="16" fontWeight="bold" fontFamily="serif">A</text>
+                <text x="148" y="90" fill="#60a5fa" fontSize="16" fontWeight="bold" fontFamily="serif">B</text>
+                <text x="65" y="178" fill="#86efac" fontSize="14" fontWeight="bold" fontFamily="serif">C</text>
+                {/* Angle labels */}
+                <text x="128" y="62" fill="#60a5fa" fontSize="10" fontFamily="serif">70°</text>
+                <text x="80" y="168" fill="#86efac" fontSize="10" fontFamily="serif">35°</text>
+                {/* Radius label */}
+                <text x="148" y="58" fill="#94a3b8" fontSize="9" fontFamily="serif">14 cm</text>
+                <line x1="110" y1="110" x2="196" y2="141" stroke="#94a3b8" strokeWidth="0.8" strokeDasharray="3,2" />
+              </svg>
+            </div>
+            <p className="font-body text-white/80 text-sm mb-3">Manakah pernyataan yang benar terkait luas juring A, B, dan C?</p>
+            <MCQ qn={21} correct={0} cols={1} options={[
+              "A. Luas juring B dua kali dari luas juring C.",
+              "B. Luas juring C setengah dari luas juring A.",
+              "C. Luas juring A tiga kali dari luas juring B.",
+              "D. Luas juring B dua kali dari luas juring A.",
+            ]} />
+            <PembahasanBtn n={21} />
+            {expandedPembahasan.has(21) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-3 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: A (Luas juring B = 2 × luas juring C)</div>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-2">📋 Penyelesaian</p>
+                  <div className="ml-2 space-y-1 text-white/70">
+                    <p>Sudut juring: B = 70°, C = 35°, A = 360° − 70° − 35° = 255°</p>
+                    <p>Luas juring ∝ sudut pusat</p>
+                    <div className="my-1"><BlockMath math="\frac{\text{Luas B}}{\text{Luas C}} = \frac{70°}{35°} = 2" /></div>
+                    <p>→ Luas juring B = <span className="text-green-300 font-bold">2 × Luas juring C</span> ✓</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Soal>
+
+          {/* ══════════════ SOAL 22 ══════════════ */}
+          <Soal n={22} elemen="Geometri dan Pengukuran" subelemen="Pengukuran">
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Perhatikan dua persegi panjang berikut.
+            </p>
+            <div className="bg-white/5 border border-white/10 rounded-lg p-4 mb-3 flex items-end justify-center gap-8">
+              {/* Big rectangle */}
+              <div className="relative">
+                <div className="w-12 h-20 bg-amber-500/30 border border-amber-400/60 rounded-sm" />
+                <span className="absolute -left-7 top-1/2 -translate-y-1/2 text-white/70 text-[10px] font-body">20 cm</span>
+              </div>
+              {/* Small rectangle */}
+              <div className="relative">
+                <div className="w-7 h-5 bg-amber-500/20 border border-amber-400/40 rounded-sm" />
+                <span className="absolute -right-7 top-1/2 -translate-y-1/2 text-white/70 text-[10px] font-body">5 cm</span>
+              </div>
+            </div>
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Diketahui luas persegi panjang yang lebih besar adalah <span className="text-amber-300 font-bold">320 cm²</span> dan kedua persegi panjang tersebut <span className="text-cyan-300 font-bold">sebangun</span>. Berapakah keliling persegi panjang yang lebih kecil?
+            </p>
+            <MCQ qn={22} correct={1} options={[
+              "A. 9 cm",
+              "B. 18 cm",
+              "C. 20 cm",
+              "D. 72 cm",
+            ]} />
+            <PembahasanBtn n={22} />
+            {expandedPembahasan.has(22) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-3 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B (18 cm)</div>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-2">📋 Penyelesaian</p>
+                  <div className="ml-2 space-y-1">
+                    <p className="text-white/70">Persegi besar: tinggi = 20 cm, luas = 320 cm²</p>
+                    <div className="my-1"><BlockMath math="\text{Lebar besar} = \frac{320}{20} = 16 \text{ cm}" /></div>
+                    <p className="text-white/70">Skala kesebangunan: <InlineMath math="k = \frac{5}{20} = \frac{1}{4}" /></p>
+                    <p className="text-white/70">Persegi kecil: lebar = 16 × ¼ = 4 cm, tinggi = 5 cm</p>
+                    <div className="my-1"><BlockMath math="K = 2(5 + 4) = 18 \text{ cm}" /></div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Soal>
+
+          {/* ══════════════ BACAAN 3 (Soal 23 & 24) ══════════════ */}
+          <div className="rounded-xl border border-blue-500/30 bg-blue-950/20 p-4 mb-4">
+            <p className="text-blue-300 font-display font-bold text-xs mb-2">📖 BACAAN 3 — untuk menjawab Soal Nomor 23 dan 24</p>
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Pak Dodi adalah pemasok minyak goreng curah di Pasar Maju. Terdapat dua jenis minyak yakni <span className="text-amber-300 font-bold">jenis A</span> dan <span className="text-cyan-300 font-bold">jenis B</span>, dimasukkan dalam tangki berikut:
+            </p>
+            <div className="grid grid-cols-2 gap-3 font-body text-xs">
+              <div className="bg-amber-900/20 border border-amber-500/30 rounded-lg p-3">
+                <p className="text-amber-300 font-bold mb-1">Tangki Jenis A</p>
+                <p className="text-white/70">6 dm × 2 m × 0,8 m</p>
+                <p className="text-white/70">= 6 dm × 20 dm × 8 dm</p>
+                <p className="text-amber-300 font-bold mt-1">= 960 dm³ = 960 liter</p>
+              </div>
+              <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-3">
+                <p className="text-cyan-300 font-bold mb-1">Tangki Jenis B</p>
+                <p className="text-white/70">8 dm × 2,2 m × 1 m</p>
+                <p className="text-white/70">= 8 dm × 22 dm × 10 dm</p>
+                <p className="text-cyan-300 font-bold mt-1">= 1.760 dm³ = 1.760 liter</p>
+              </div>
+            </div>
+          </div>
+
+          {/* ══════════════ SOAL 23 ══════════════ */}
+          <Soal n={23} elemen="Geometri dan Pengukuran" subelemen="Pengukuran">
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              <span className="text-amber-300 italic">(Perhatikan Bacaan 3)</span><br />
+              Minyak jenis B pada tangki yang berisi penuh akan dikemas ke botol dan jeriken. Sebanyak <span className="text-amber-300 font-bold">300 botol berukuran 2 liter</span> diisi minyak curah jenis B. Sisa minyak dikemas ke dalam <span className="text-cyan-300 font-bold">jeriken berukuran 5 liter</span>.
+            </p>
+            <p className="font-body text-white/80 text-sm mb-3">Bagaimana perbandingan banyak kemasan botol dan jeriken? <span className="text-amber-300 text-xs">(Pilih semua jawaban benar!)</span></p>
+            <ComplexMCQ qn={23} items={[
+              {
+                text: "Jumlah kemasan botol lebih banyak daripada jeriken.",
+                correct: true,
+                explanation: "300 botol > 232 jeriken ✓",
+              },
+              {
+                text: "Total kemasan botol dan jeriken yang terisi adalah 532.",
+                correct: true,
+                explanation: "300 + 232 = 532 ✓",
+              },
+              {
+                text: "Sisa minyak di tangki cukup untuk mengisi 1 kemasan botol.",
+                correct: false,
+                explanation: "Sisa minyak = 0 (1160 ÷ 5 = 232 pas, tidak ada sisa) ✗",
+              },
+              {
+                text: "Banyak kemasan jeriken yang terisi minyak adalah 332.",
+                correct: false,
+                explanation: "Jeriken = 232, bukan 332 ✗",
+              },
+            ]} />
+            <PembahasanBtn n={23} />
+            {expandedPembahasan.has(23) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-3 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Pernyataan 1 dan 2 Benar</div>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-2">📋 Penyelesaian</p>
+                  <div className="ml-2 space-y-1 text-white/70">
+                    <p>Volume tangki B = 1.760 L</p>
+                    <p>Botol: 300 × 2 = 600 L terpakai</p>
+                    <p>Sisa untuk jeriken: 1.760 − 600 = <span className="text-amber-300">1.160 L</span></p>
+                    <div className="my-1"><BlockMath math="\text{Jeriken} = \frac{1.160}{5} = 232 \text{ buah}" /></div>
+                    <p>Total kemasan: 300 + 232 = <span className="text-green-300 font-bold">532</span>, botol (300) &gt; jeriken (232) ✓</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Soal>
+
+          {/* ══════════════ SOAL 24 ══════════════ */}
+          <Soal n={24} elemen="Geometri dan Pengukuran" subelemen="Pengukuran">
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              <span className="text-amber-300 italic">(Perhatikan Bacaan 3)</span><br />
+              Pak Angga dan Bu Susi membeli <span className="text-green-300 font-bold">seluruh</span> minyak dari kedua tangki. Jeriken Pak Angga berukuran <span className="text-amber-300 font-bold">25 liter</span>, jeriken Bu Susi berukuran <span className="text-cyan-300 font-bold">30 liter</span>. Masing-masing mendapatkan kedua jenis minyak. Semua jeriken terisi penuh dan tidak ada sisa.
+            </p>
+            <CategoryTable
+              qn={24}
+              colA="Mungkin"
+              colB="Tidak Mungkin"
+              rows={[
+                { key: "r1", text: <span>Bu Susi membawa 32 jeriken minyak jenis A dan 22 jeriken minyak jenis B.</span> },
+                { key: "r2", text: <span>Pak Angga membawa 24 jeriken minyak jenis A dan 44 jeriken minyak jenis B.</span> },
+                { key: "r3", text: <span>Bu Susi membawa 21 jeriken minyak jenis A dan Pak Angga membawa 40 jeriken minyak jenis B.</span> },
+              ]}
+              correctKey={{ r1: "Tidak Mungkin", r2: "Mungkin", r3: "Tidak Mungkin" }}
+            />
+            <PembahasanBtn n={24} />
+            {expandedPembahasan.has(24) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-3 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Tidak Mungkin / Mungkin / Tidak Mungkin</div>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-2">📋 Penyelesaian</p>
+                  <div className="ml-2 space-y-2 text-white/70">
+                    <div>
+                      <p className="font-bold text-white/80">Pernyataan 1 (Bu Susi: 32 jar A + 22 jar B):</p>
+                      <p>A Bu Susi = 32 × 30 = 960 L → Pak Angga dapat 0 L jenis A. Melanggar syarat "masing-masing mendapat kedua jenis" → <span className="text-red-300">Tidak Mungkin</span></p>
+                    </div>
+                    <div>
+                      <p className="font-bold text-white/80">Pernyataan 2 (Pak Angga: 24 jar A + 44 jar B):</p>
+                      <p>A: 24×25=600L, Bu Susi A: (960−600)/30=12 jeriken ✓</p>
+                      <p>B: 44×25=1100L, Bu Susi B: (1760−1100)/30=22 jeriken ✓ → <span className="text-green-300">Mungkin</span></p>
+                    </div>
+                    <div>
+                      <p className="font-bold text-white/80">Pernyataan 3 (Bu Susi: 21 jar A, Pak Angga: 40 jar B):</p>
+                      <p>A Bu Susi=21×30=630L, Pak Angga A=(960−630)/25=330/25=13,2 (bukan bilangan bulat) → <span className="text-red-300">Tidak Mungkin</span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Soal>
+
+          {/* ══════════════ SOAL 25 ══════════════ */}
+          <Soal n={25} elemen="Data dan Peluang" subelemen="Data">
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Berikut adalah data produksi karet dan kelapa di Indonesia (dalam juta ton):
+            </p>
+            <div className="overflow-x-auto mb-3">
+              <table className="w-full text-xs font-body border-collapse">
+                <thead>
+                  <tr className="bg-amber-900/30 text-amber-300">
+                    <th className="border border-white/10 px-2 py-1.5 text-left">Tahun</th>
+                    {[2018,2019,2020,2021,2022,2023,2024].map(y=>(
+                      <th key={y} className="border border-white/10 px-2 py-1.5 text-center">{y}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="text-white/80">
+                    <td className="border border-white/10 px-2 py-1.5 text-amber-300 font-bold">Karet</td>
+                    {["3,68","3,50","3,30","3,12","2,95","2,75","2,60"].map((v,i)=>(
+                      <td key={i} className="border border-white/10 px-2 py-1.5 text-center">{v}</td>
+                    ))}
+                  </tr>
+                  <tr className="text-white/80 bg-white/3">
+                    <td className="border border-white/10 px-2 py-1.5 text-cyan-300 font-bold">Kelapa</td>
+                    {["2,83","2,83","2,81","2,85","2,86","2,90","2,89"].map((v,i)=>(
+                      <td key={i} className="border border-white/10 px-2 py-1.5 text-center">{v}</td>
+                    ))}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="font-body text-white/80 text-sm mb-3">
+              Berdasarkan data di atas, diagram garis manakah yang menunjukkan penyajian data dari salah satu hasil produksi karet atau kelapa di Indonesia?
+            </p>
+            <ImageNote text="Pilihan A, B, C, D berupa gambar diagram garis tersedia pada dokumen soal asli. Data karet turun konsisten (3,68→2,60), data kelapa relatif stabil (2,81–2,90)." />
+            <MCQ qn={25} correct={1} options={[
+              "A. Diagram (fluktuatif turun-naik)",
+              "B. Diagram (konsisten menurun — sesuai data karet)",
+              "C. Diagram (bergelombang naik-turun besar)",
+              "D. Diagram (relatif datar)",
+            ]} />
+            <PembahasanBtn n={25} />
+            {expandedPembahasan.has(25) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-2 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B (diagram karet — konsisten menurun)</div>
+                <p className="text-white/70">Data karet turun <span className="text-amber-300">monoton</span> setiap tahun: 3,68 → 3,50 → 3,30 → 3,12 → 2,95 → 2,75 → 2,60. Diagram B yang menunjukkan garis turun terus-menerus adalah yang benar.</p>
+              </div>
+            )}
+          </Soal>
+
+          {/* ══════════════ SOAL 26 ══════════════ */}
+          <Soal n={26} elemen="Data dan Peluang" subelemen="Data">
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Tory kecanduan bermain game online. Selama <span className="text-amber-300 font-bold">12 minggu</span>, waktu bermain Tory dipantau. Berikut data durasi (jam) per minggu:
+            </p>
+            <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-3">
+              <div className="flex gap-1.5 items-end justify-center h-20 mb-1">
+                {[22,20,18,20,14,16,14,14,12,14,10,12].map((v,i)=>(
+                  <div key={i} className="flex flex-col items-center gap-0.5 flex-1">
+                    <span className="text-[8px] text-white/60 font-body">{v}</span>
+                    <div
+                      className="w-full rounded-t-sm bg-gradient-to-t from-green-600/70 to-green-400/70 border-t border-green-400/50"
+                      style={{ height: `${(v/22)*60}px` }}
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="flex gap-1.5 justify-center">
+                {[1,2,3,4,5,6,7,8,9,10,11,12].map(i=>(
+                  <span key={i} className="text-[7px] text-white/40 font-body flex-1 text-center">{i}</span>
+                ))}
+              </div>
+              <p className="text-[9px] text-white/40 text-center mt-0.5 font-body">Minggu ke-</p>
+            </div>
+            <p className="font-body text-white/80 text-sm mb-3">
+              Dalam 12 minggu terakhir, Tory paling sering menghabiskan waktu bermain game online setiap minggunya yaitu selama …
+            </p>
+            <MCQ qn={26} correct={1} options={[
+              "A. 10 jam",
+              "B. 14 jam",
+              "C. 20 jam",
+              "D. 22 jam",
+            ]} />
+            <PembahasanBtn n={26} />
+            {expandedPembahasan.has(26) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-2 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B (14 jam)</div>
+                <p className="text-white/70">Data: 22, 20, 18, 20, <span className="text-amber-300 font-bold">14</span>, 16, <span className="text-amber-300 font-bold">14</span>, <span className="text-amber-300 font-bold">14</span>, 12, <span className="text-amber-300 font-bold">14</span>, 10, 12</p>
+                <p className="text-white/70"><span className="text-amber-300 font-bold">Modus = 14</span> (muncul 4 kali — paling sering)</p>
+              </div>
+            )}
+          </Soal>
+
+          {/* ══════════════ SOAL 27 ══════════════ */}
+          <Soal n={27} elemen="Data dan Peluang" subelemen="Data">
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Dokter memantau durasi Tory bermain game tiap 4 minggu (fase). Batas waktu maksimal = <span className="text-red-300 font-bold">7 jam/minggu</span>.
+            </p>
+            <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-3 text-xs font-body">
+              <div className="grid grid-cols-3 gap-2 text-center">
+                {[
+                  { label:"Fase 1 (M1–4)", data:[22,20,18,20], mean:20 },
+                  { label:"Fase 2 (M5–8)", data:[14,16,14,14], mean:14.5 },
+                  { label:"Fase 3 (M9–12)", data:[12,14,10,12], mean:12 },
+                ].map((f,i)=>(
+                  <div key={i} className="bg-white/5 rounded-lg p-2">
+                    <p className="text-cyan-300 font-bold text-[10px]">{f.label}</p>
+                    <p className="text-white/60 text-[9px] mt-0.5">{f.data.join(", ")}</p>
+                    <p className="text-amber-300 font-bold text-[11px] mt-1">Rata-rata: {f.mean} jam</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <p className="font-body text-white/80 text-sm mb-2">Apakah yang terjadi pada Tory selama fase penyembuhan? <span className="text-amber-300 text-xs">(Jawaban benar lebih dari satu)</span></p>
+            <ComplexMCQ qn={27} items={[
+              {
+                text: "Fase pertama berkurang 5,5 jam.",
+                correct: true,
+                explanation: "Rata-rata Fase 1 (20) → Fase 2 (14,5): berkurang 5,5 jam ✓",
+              },
+              {
+                text: "Fase kedua berkurang 2,25 jam.",
+                correct: false,
+                explanation: "Fase 2 (14,5) → Fase 3 (12): berkurang 2,5 jam, bukan 2,25 ✗",
+              },
+              {
+                text: "Fase akhir berkurang 5,25 jam.",
+                correct: false,
+                explanation: "Fase 3 (12) → batas (7): berkurang 5 jam, bukan 5,25 ✗",
+              },
+              {
+                text: "Fase penyembuhan berkurang 8 jam.",
+                correct: true,
+                explanation: "Total turun dari Fase 1 (20) ke Fase 3 (12) = berkurang 8 jam ✓",
+              },
+            ]} />
+            <PembahasanBtn n={27} />
+            {expandedPembahasan.has(27) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-3 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Pernyataan 1 dan 4 Benar</div>
+                <div className="ml-2 space-y-1 text-white/70">
+                  <p>• Fase 1→2: 20 − 14,5 = <span className="text-green-300 font-bold">5,5 jam</span> ✓</p>
+                  <p>• Fase 2→3: 14,5 − 12 = 2,5 jam (bukan 2,25) ✗</p>
+                  <p>• Fase 3→batas: 12 − 7 = 5 jam (bukan 5,25) ✗</p>
+                  <p>• Total Fase 1→3: 20 − 12 = <span className="text-green-300 font-bold">8 jam</span> ✓</p>
+                </div>
+              </div>
+            )}
+          </Soal>
+
+          {/* ══════════════ SOAL 28 ══════════════ */}
+          <Soal n={28} elemen="Data dan Peluang" subelemen="Peluang">
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Suatu paket terdiri dari <span className="text-amber-300 font-bold">20 kotak misteri</span> berisi patung figur karakter Saka dan Kirana:
+            </p>
+            <div className="grid grid-cols-2 gap-3 mb-3 font-body text-xs">
+              <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-3 text-center">
+                <p className="text-blue-300 font-bold text-lg">8</p>
+                <p className="text-white/70">figur Saka</p>
+              </div>
+              <div className="bg-pink-900/20 border border-pink-500/30 rounded-lg p-3 text-center">
+                <p className="text-pink-300 font-bold text-lg">12</p>
+                <p className="text-white/70">figur Kirana</p>
+              </div>
+            </div>
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Riana mengambil <span className="text-amber-300 font-bold">3 kotak secara acak</span> dan mendapat <span className="text-blue-300 font-bold">1 Saka + 2 Kirana</span>. Kemudian, <span className="text-cyan-300 font-bold">Santi</span> akan mengambil 1 kotak misteri. Berapakah peluang Santi mendapatkan <span className="text-blue-300 font-bold">Saka</span>?
+            </p>
+            <MCQ qn={28} correct={3} options={[
+              "A. 7/20",
+              "B. 8/20",
+              "C. 8/17",
+              "D. 7/17",
+            ]} />
+            <PembahasanBtn n={28} />
+            {expandedPembahasan.has(28) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-3 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: D (7/17)</div>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-2">📋 Penyelesaian</p>
+                  <div className="ml-2 space-y-1 text-white/70">
+                    <p>Setelah Riana ambil 1 Saka + 2 Kirana:</p>
+                    <p>Sisa kotak: 20 − 3 = <span className="text-amber-300">17 kotak</span></p>
+                    <p>Sisa Saka: 8 − 1 = <span className="text-blue-300">7 Saka</span></p>
+                    <div className="my-1"><BlockMath math="P(\text{Saka}) = \frac{7}{17}" /></div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Soal>
+
+          {/* ══════════════ SOAL 29 ══════════════ */}
+          <Soal n={29} elemen="Data dan Peluang" subelemen="Peluang">
+            <p className="font-body text-white/90 text-sm font-bold mb-2">Mesin Tetas Telur</p>
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Mesin tetas telur menetaskan telur dalam <span className="text-amber-300 font-bold">18 hari</span>. Saat ini terdapat telur puyuh di dalam mesin dengan rincian:
+            </p>
+            <div className="overflow-x-auto mb-3">
+              <table className="w-full text-xs font-body border-collapse">
+                <thead>
+                  <tr className="bg-amber-900/30 text-amber-300">
+                    <th className="border border-white/10 px-3 py-1.5 text-left">Usia Telur di Dalam Mesin</th>
+                    <th className="border border-white/10 px-3 py-1.5 text-center">Banyak Telur</th>
+                    <th className="border border-white/10 px-3 py-1.5 text-center">Sisa hari tetas</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[["2 hari", "20", "16 hari"],["4 hari","35","14 hari"],["6 hari","30","12 hari"],["8 hari","15","10 hari"]].map(([usia,n,sisa],i)=>(
+                    <tr key={i} className={i===3 ? "bg-green-900/20 text-green-300 font-bold" : "text-white/80"}>
+                      <td className="border border-white/10 px-3 py-1.5">{usia}</td>
+                      <td className="border border-white/10 px-3 py-1.5 text-center">{n}</td>
+                      <td className="border border-white/10 px-3 py-1.5 text-center">{sisa}</td>
+                    </tr>
+                  ))}
+                  <tr className="bg-white/5 text-amber-300 font-bold">
+                    <td className="border border-white/10 px-3 py-1.5">Total</td>
+                    <td className="border border-white/10 px-3 py-1.5 text-center">100</td>
+                    <td className="border border-white/10 px-3 py-1.5 text-center">—</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="font-body text-white/80 text-sm mb-3">
+              Jika dilakukan pengamatan pada satu telur yang dipilih secara acak, berapakah peluang telur tersebut akan menetas dalam <span className="text-amber-300 font-bold">10 hari ke depan</span>?
+            </p>
+            <MCQ qn={29} correct={0} options={[
+              "A. 3/20",
+              "B. 1/15",
+              "C. 1/10",
+              "D. 1/8",
+            ]} />
+            <PembahasanBtn n={29} />
+            {expandedPembahasan.has(29) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-3 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: A (3/20)</div>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-2">📋 Penyelesaian</p>
+                  <div className="ml-2 space-y-1 text-white/70">
+                    <p>Telur menetas dalam ≤ 10 hari → sisa hari tetas ≤ 10</p>
+                    <p>→ Hanya telur berusia <span className="text-green-300 font-bold">8 hari</span> (sisa 10 hari) yang memenuhi syarat: <span className="text-amber-300 font-bold">15 telur</span></p>
+                    <div className="my-1"><BlockMath math="P = \frac{15}{100} = \frac{3}{20}" /></div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Soal>
+
+          {/* ══════════════ SOAL 30 ══════════════ */}
+          <Soal n={30} elemen="Data dan Peluang" subelemen="Peluang">
+            <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
+              Seorang guru menyiapkan sejumlah kertas soal ujian yang digulung dan dimasukkan ke dalam sebuah kotak. Setiap kertas berisi kode soal <span className="text-amber-300 font-bold">A, B, atau C</span>.
+            </p>
+            <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-3 font-body text-xs text-white/80 space-y-1">
+              <p>• Jumlah kertas kode A <span className="text-amber-300 font-bold">lebih sedikit</span> dari kode B</p>
+              <p>• Guru mengambil <span className="text-amber-300 font-bold">3 kertas berkode sama</span> dari kotak</p>
+              <p>• Sisa kertas di kotak menjadi <span className="text-amber-300 font-bold">28 lembar</span></p>
+              <p>• Kertas kode B <span className="text-amber-300 font-bold">lebih banyak</span> dari kode C setelah pengambilan</p>
+              <p>• Jika diambil 1 kertas secara acak: P(kode C) = <InlineMath math="\frac{2}{7}" /></p>
+            </div>
+            <p className="font-body text-white/80 text-sm mb-3">
+              Berapakah kemungkinan jumlah kertas soal ujian kode B mula-mula? <span className="text-amber-300 text-xs">(Jawaban benar lebih dari satu)</span>
+            </p>
+            <ComplexMCQ qn={30} items={[
+              {
+                text: "10 lembar",
+                correct: false,
+                explanation: "B=10 → A+10+8=31, A=13. Tapi A<B syaratnya 13<10 ✗",
+              },
+              {
+                text: "11 lembar",
+                correct: false,
+                explanation: "B=11 → B−3=8=C, syarat B−3>C tidak terpenuhi (8≯8) ✗",
+              },
+              {
+                text: "12 lembar",
+                correct: true,
+                explanation: "B=12 → A=11, C=8. A<B: 11<12 ✓, B−3=9>8=C ✓",
+              },
+              {
+                text: "14 lembar",
+                correct: true,
+                explanation: "B=14 → A=9, C=8. A<B: 9<14 ✓, B−3=11>8=C ✓",
+              },
+            ]} />
+            <PembahasanBtn n={30} />
+            {expandedPembahasan.has(30) && (
+              <div className="mt-3 rounded-xl border border-amber-500/30 bg-amber-950/20 p-4 space-y-3 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: 12 lembar dan 14 lembar</div>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-2">📋 Penyelesaian</p>
+                  <div className="ml-2 space-y-1 text-white/70">
+                    <p>Total awal: A + B + C = 28 + 3 = <span className="text-amber-300">31</span></p>
+                    <p>P(C setelah) = C/28 = 2/7 → <span className="text-amber-300">C = 8</span></p>
+                    <p>A + B = 31 − 8 = 23, dengan A &lt; B dan B−3 &gt; 8 → B &gt; 11</p>
+                    <p>B ≥ 12. Dari pilihan: <span className="text-green-300 font-bold">B = 12</span> (A=11) dan <span className="text-green-300 font-bold">B = 14</span> (A=9) keduanya valid ✓</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Soal>
+
         {/* ── Footer ── */}
-        <div className="mt-8 bg-amber-900/15 border border-amber-500/20 rounded-xl p-4 text-center">
-          <p className="text-amber-300 font-display font-bold text-sm mb-1">📋 Soal 1 – 20 dari 30 Soal</p>
-          <p className="text-white/50 text-xs font-body">Soal 21 – 30 akan segera ditambahkan. Sumber: Soal Asli TKA Matematika SMP Tahun 2025.</p>
+        <div className="mt-8 bg-green-900/20 border border-green-500/30 rounded-xl p-4 text-center">
+          <p className="text-green-300 font-display font-bold text-sm mb-1">✅ Semua 30 Soal Lengkap!</p>
+          <p className="text-white/50 text-xs font-body">Sumber: Soal Asli TKA Matematika SMP Tahun 2025.</p>
         </div>
 
         <div className="mt-6 text-center">
