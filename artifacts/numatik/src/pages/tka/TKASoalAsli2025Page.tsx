@@ -1245,7 +1245,7 @@ const TKASoalAsli2025Page = () => {
           {/* ══════════════ SOAL 25 ══════════════ */}
           <Soal n={25} elemen="Data dan Peluang" subelemen="Data">
             <p className="font-body text-white/80 text-sm leading-relaxed mb-3">
-              Berikut adalah data produksi karet dan kelapa di Indonesia (dalam juta ton):
+              Karet dan kelapa sangat penting bagi banyak industri di dunia, mulai dari ban hingga makanan. Indonesia adalah penghasil utama keduanya, dan meskipun ada tantangan dalam produksi, kedua komoditas ini tetap penting untuk ekonomi Indonesia dan pasokan global. Berikut adalah data produksi karet dan kelapa di Indonesia.
             </p>
             <div className="mb-3 flex justify-center">
               <img src="/tka-2025-soal25-tabel.png" alt="Tabel produksi karet dan kelapa 2018-2024 soal 25" className="max-w-full rounded-lg border border-white/10" />
