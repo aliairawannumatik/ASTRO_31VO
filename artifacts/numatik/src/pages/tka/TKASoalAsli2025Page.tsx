@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -15,6 +15,7 @@ const TKASoalAsli2025Page = () => {
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, number>>({});
   const [selectedComplexAnswers, setSelectedComplexAnswers] = useState<Record<number, Set<number>>>({});
   const [selectedCategory, setSelectedCategory] = useState<Record<string, string>>({});
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const togglePembahasan = (n: number) => {
     setExpandedPembahasan(prev => {
@@ -44,6 +45,91 @@ const TKASoalAsli2025Page = () => {
     if (selectedCategory[key] !== undefined) return;
     playPopSound();
     setSelectedCategory(prev => ({ ...prev, [key]: choice }));
+  };
+
+  // ─── Export handlers ─────────────────────────────────────────────
+  const handleCetakPDF = () => {
+    const existing = document.getElementById("__tka_print_style__");
+    if (existing) existing.remove();
+    const style = document.createElement("style");
+    style.id = "__tka_print_style__";
+    style.textContent = `
+      @media print {
+        @page { size: 21.5cm 33cm; margin: 3cm; }
+        body { visibility: hidden !important; }
+        #tka-print-area { visibility: visible !important; position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; }
+        #tka-print-area * { visibility: visible !important; }
+        body, #tka-print-area, #tka-print-area * {
+          font-family: Arial, sans-serif !important;
+          font-size: 11pt !important;
+          text-align: justify !important;
+          color: #000 !important;
+          background: #fff !important;
+          border-color: #ccc !important;
+          box-shadow: none !important;
+          text-shadow: none !important;
+        }
+        .no-print { display: none !important; }
+      }
+    `;
+    document.head.appendChild(style);
+    window.print();
+    setTimeout(() => { document.getElementById("__tka_print_style__")?.remove(); }, 1500);
+  };
+
+  const handleCetakWord = () => {
+    const content = contentRef.current;
+    if (!content) return;
+
+    // Gather KaTeX CSS from document stylesheets
+    const katexCss = Array.from(document.styleSheets)
+      .map(ss => {
+        try { return Array.from(ss.cssRules).map(r => r.cssText).join("\n"); }
+        catch { return ""; }
+      })
+      .filter(t => t.includes("katex"))
+      .join("\n");
+
+    const html = `<html xmlns:o='urn:schemas-microsoft-com:office:office'
+  xmlns:w='urn:schemas-microsoft-com:office:word'
+  xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+  <meta charset='utf-8'>
+  <title>TKA Matematika 2025-2026</title>
+  <!--[if gte mso 9]><xml>
+    <w:WordDocument>
+      <w:View>Print</w:View>
+      <w:Zoom>100</w:Zoom>
+      <w:DoNotOptimizeForBrowser/>
+    </w:WordDocument>
+  </xml><![endif]-->
+  <style>
+    @page { size: 21.5cm 33cm; margin: 3cm 3cm 3cm 3cm; }
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 11pt;
+      text-align: justify;
+      color: #000;
+      background: #fff;
+    }
+    * { font-family: Arial, sans-serif; font-size: 11pt; color: #000; background: transparent; }
+    img { max-width: 100%; }
+    .no-print { display: none !important; }
+    ${katexCss}
+  </style>
+</head>
+<body>${content.innerHTML}</body>
+</html>`;
+
+    const blob = new Blob([html], { type: "application/msword" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "TKA-Matematika-2025-2026.doc";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   // ─── Outer background based on theme ─────────────────────────────
@@ -332,8 +418,8 @@ const TKASoalAsli2025Page = () => {
   return (
     <div className={`relative min-h-screen flex flex-col items-center overflow-x-hidden overflow-y-auto ${outerBg}`}>
       {isDark && <Starfield />}
-      <PageNavigation />
-      <div className="relative z-10 max-w-3xl w-full px-4 py-10">
+      <div className="no-print"><PageNavigation /></div>
+      <div id="tka-print-area" ref={contentRef} className="relative z-10 max-w-3xl w-full px-4 py-10">
 
         {/* ── Header ── */}
         <div className={`relative backdrop-blur border border-amber-500/30 rounded-2xl p-5 mb-6 ${isDark ? "bg-card/80" : "bg-white shadow-sm"}`}>
@@ -371,6 +457,34 @@ const TKASoalAsli2025Page = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* ── Tombol Cetak ── */}
+        <div className="no-print flex gap-3 mb-6">
+          <button
+            onClick={handleCetakPDF}
+            className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border font-body font-bold text-sm
+              bg-red-600 hover:bg-red-700 active:bg-red-800 border-red-500 text-white
+              shadow-md shadow-red-500/30 hover:shadow-red-600/40
+              transition-all duration-200 active:scale-[0.98] cursor-pointer"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            Cetak PDF
+          </button>
+          <button
+            onClick={handleCetakWord}
+            className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border font-body font-bold text-sm
+              bg-blue-600 hover:bg-blue-700 active:bg-blue-800 border-blue-500 text-white
+              shadow-md shadow-blue-500/30 hover:shadow-blue-600/40
+              transition-all duration-200 active:scale-[0.98] cursor-pointer"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Cetak Word
+          </button>
         </div>
 
         {/* ── Petunjuk ── */}
