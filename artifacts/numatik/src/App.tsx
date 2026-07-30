@@ -777,6 +777,7 @@ const GabunganMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/ban
 const HimpunanMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/HimpunanPage"));
 const PengertianKeanggotaanHimpunanPage = lazy(() => import("./pages/materi-matematika/kelas7/himpunan/PengertianKeanggotaanPage"));
 const JenisHimpunanPage = lazy(() => import("./pages/materi-matematika/kelas7/himpunan/JenisHimpunanPage"));
+const OperasiHimpunanMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/himpunan/OperasiHimpunanPage"));
 const DiagramVennPage = lazy(() => import("./pages/materi-matematika/kelas7/himpunan/DiagramVennPage"));
 const PemecahanMasalahHimpunanPage = lazy(() => import("./pages/materi-matematika/kelas7/himpunan/PemecahanMasalahHimpunanPage"));
 
@@ -1631,6 +1632,7 @@ const AppInner = () => {
           <Route path="/materi-matematika/kelas-7/himpunan" element={<HimpunanMMK7Page />} />
           <Route path="/materi-matematika/kelas-7/himpunan/pengertian-keanggotaan" element={<PengertianKeanggotaanHimpunanPage />} />
           <Route path="/materi-matematika/kelas-7/himpunan/jenis-himpunan" element={<JenisHimpunanPage />} />
+          <Route path="/materi-matematika/kelas-7/himpunan/operasi-himpunan" element={<OperasiHimpunanMMK7Page />} />
           <Route path="/materi-matematika/kelas-7/himpunan/diagram-venn" element={<DiagramVennPage />} />
           <Route path="/materi-matematika/kelas-7/himpunan/pemecahan-masalah" element={<PemecahanMasalahHimpunanPage />} />
           <Route path="/materi-matematika/kelas-8/pola-bilangan" element={<PolaBilanganMMK8Page />} />
