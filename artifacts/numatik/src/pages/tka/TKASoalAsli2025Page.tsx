@@ -689,21 +689,21 @@ const TKASoalAsli2025Page = () => {
                 { key: "d2", text: "Diagram 2" },
                 { key: "d3", text: "Diagram 3" },
               ]}
-              correctKey={{ d1: "Bukan Fungsi", d2: "Fungsi", d3: "Fungsi" }}
+              correctKey={{ d1: "Bukan Fungsi", d2: "Bukan Fungsi", d3: "Fungsi" }}
             />
             <PembahasanBtn n={7} />
             {expandedPembahasan.has(7) && (
               <div className="mt-3 space-y-2">
-                <PBJawaban>Diagram 1: Bukan Fungsi · Diagram 2: Fungsi · Diagram 3: Fungsi</PBJawaban>
+                <PBJawaban>Diagram 1: Bukan Fungsi · Diagram 2: Bukan Fungsi · Diagram 3: Fungsi</PBJawaban>
                 <PBKonsep>
-                  <p><span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Fungsi</span>: setiap anggota domain (himpunan asal) dipetakan ke <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>tepat SATU</span> anggota kodomain</p>
-                  <p><span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>Bukan Fungsi</span>: ada anggota domain yang dipetakan ke <span className={`font-bold`}>lebih dari satu</span> kodomain ATAU tidak dipetakan sama sekali</p>
-                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: "1 input → 1 output" = Fungsi. "1 input → 2+ output" = Bukan Fungsi</p>
+                  <p><span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Fungsi</span>: setiap anggota domain dipetakan ke <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>tepat SATU</span> anggota kodomain</p>
+                  <p><span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>Bukan Fungsi</span>: ada domain yang <span className="font-bold">tidak dipetakan sama sekali</span>, atau dipetakan ke <span className="font-bold">lebih dari satu</span> kodomain</p>
+                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Cek dua syarat — setiap domain harus punya panah, dan panah harus tepat satu.</p>
                 </PBKonsep>
                 <PBSteps>
-                  <S n={1}><p><span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>Diagram 1 — Bukan Fungsi:</span> ada anggota domain yang memiliki lebih dari satu panah ke kodomain → tidak memenuhi syarat fungsi</p></S>
-                  <S n={2}><p><span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Diagram 2 — Fungsi:</span> setiap anggota domain memiliki tepat satu panah ke kodomain ✓</p></S>
-                  <S n={3}><p><span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Diagram 3 — Fungsi:</span> setiap anggota domain memiliki tepat satu panah ke kodomain ✓ (boleh ada kodomain yang tidak terpilih)</p></S>
+                  <S n={1}><p><span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>Diagram 1 — Bukan Fungsi:</span> anggota domain <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>9</span> tidak memiliki pasangan/panah → ada domain yang tidak terpetakan ✗</p></S>
+                  <S n={2}><p><span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>Diagram 2 — Bukan Fungsi:</span> anggota domain <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>13</span> memiliki 2 pasangan/panah → satu domain dipetakan ke lebih dari satu kodomain ✗</p></S>
+                  <S n={3}><p><span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Diagram 3 — Fungsi:</span> setiap anggota domain memiliki tepat satu panah ke kodomain ✓</p></S>
                 </PBSteps>
               </div>
             )}
