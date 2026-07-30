@@ -6010,6 +6010,53 @@
             "desc": "L = 2d + 2πr (equal radii), L ≈ 2d + π(R+r) (unequal), 3+ circles"
           }
         }
+      },
+      "menghitungPanjang": {
+        "h1": "CALCULATING THE LENGTH OF A TANGENT LINE",
+        "formulaBoxTitle": "📌 Formula: Length of Tangent from an External Point",
+        "ptDesc": "Length of tangent line",
+        "opDesc": "Distance from point P to centre",
+        "rDesc": "Radius of the circle",
+        "diffMudah": "Easy",
+        "diffSedang": "Medium",
+        "diffSulit": "Hard",
+        "luasText": "Area",
+        "layangText": "Kite area",
+        "taliBusurText": "Chord",
+        "kelilingKecilText": "Small wheel circumference",
+        "kelilingBesarText": "Large wheel circumference",
+        "backToTopic": "Tangent Lines to a Circle",
+        "q1": {
+          "title": "Calculating the Length of a Tangent",
+          "content": "Look at the diagram! AP is a tangent to the circle centred at O. The radius OA = 15 cm and the distance OP = 39 cm. Calculate the length of tangent AP!",
+          "pc": "Calculate the area of triangle OAP!"
+        },
+        "q2": {
+          "title": "Finding the Distance from a Point to the Centre",
+          "content": "In the diagram, KA is a tangent to the circle centred at O, with A as the point of tangency. KA = 40 cm and radius OA = 30 cm. Calculate the length of KO!",
+          "pc": "Calculate the area of triangle KOA!"
+        },
+        "q3": {
+          "title": "Area of a Trapezoid from a Tangent",
+          "content": "In the diagram, EF is a tangent to the circle centred at O at point C, and EF // OD. EC = 16 cm and OD = OC = 12 cm. Calculate the area of trapezoid ECOD!",
+          "pa": "State the lengths of both parallel sides of trapezoid ECOD and its height!"
+        },
+        "q4": {
+          "title": "Two Tangents from an External Point",
+          "content": "In the diagram, AB and AC are tangents to the circle centred at O. Radius OB = OC = 24 cm and AO = 40 cm. Calculate:"
+        },
+        "q5": {
+          "title": "Tangent Lengths in a Kite",
+          "content": "In the diagram, PQ and PR are tangents to the circle centred at O. Radius OQ = OR = 15 cm and OP = 25 cm. Calculate:"
+        },
+        "q6": {
+          "title": "Radius, Kite, and Chord",
+          "content": "On a circle centred at O, point K lies outside the circle with KL and KM as tangents. OK = 50 cm and KL = 40 cm. Calculate:"
+        },
+        "q7": {
+          "title": "Tangent in a Belt-and-Pulley System",
+          "content": "Two circular pulleys in a machine have radii 7 cm (small pulley) and 21 cm (large pulley). The distance between the two axles = 50 cm. A belt wraps around both pulleys at the points of tangency A and B. Calculate:"
+        }
       }
     }
   },

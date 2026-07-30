@@ -6010,6 +6010,53 @@
             "desc": "L = 2d + 2πr (sama besar), L ≈ 2d + π(R+r) (beda besar), 3+ lingkaran"
           }
         }
+      },
+      "menghitungPanjang": {
+        "h1": "MENGHITUNG PANJANG GARIS SINGGUNG",
+        "formulaBoxTitle": "📌 Rumus Panjang Garis Singgung dari Titik Luar",
+        "ptDesc": "Panjang garis singgung",
+        "opDesc": "Jarak titik P ke pusat",
+        "rDesc": "Jari-jari lingkaran",
+        "diffMudah": "Mudah",
+        "diffSedang": "Sedang",
+        "diffSulit": "Sulit",
+        "luasText": "Luas",
+        "layangText": "Luas layang-layang",
+        "taliBusurText": "Tali busur",
+        "kelilingKecilText": "Keliling roda kecil",
+        "kelilingBesarText": "Keliling roda besar",
+        "backToTopic": "Garis Singgung Lingkaran",
+        "q1": {
+          "title": "Menghitung Panjang Garis Singgung",
+          "content": "Perhatikan gambar! AP adalah garis singgung lingkaran berpusat O. Panjang jari-jari OA = 15 cm dan jarak OP = 39 cm. Hitunglah panjang garis singgung AP!",
+          "pc": "Hitunglah luas segitiga OAP!"
+        },
+        "q2": {
+          "title": "Mencari Jarak Titik ke Pusat Lingkaran",
+          "content": "Pada gambar di atas, KA adalah garis singgung lingkaran berpusat O dengan A sebagai titik singgung. Panjang KA = 40 cm dan jari-jari OA = 30 cm. Hitunglah panjang KO!",
+          "pc": "Hitunglah luas segitiga KOA!"
+        },
+        "q3": {
+          "title": "Luas Trapesium dari Garis Singgung",
+          "content": "Pada gambar, EF adalah garis singgung lingkaran berpusat O di titik C, dan EF // OD. Panjang EC = 16 cm dan OD = OC = 12 cm. Hitunglah luas trapesium ECOD!",
+          "pa": "Sebutkan panjang kedua sisi sejajar trapesium ECOD dan tingginya!"
+        },
+        "q4": {
+          "title": "Dua Garis Singgung dari Titik Luar",
+          "content": "Pada gambar di atas, AB dan AC adalah garis singgung lingkaran berpusat O. Jari-jari OB = OC = 24 cm dan panjang AO = 40 cm. Hitunglah:"
+        },
+        "q5": {
+          "title": "Panjang Garis Singgung pada Layang-layang",
+          "content": "Pada gambar, PQ dan PR adalah garis singgung lingkaran berpusat O. Jari-jari OQ = OR = 15 cm dan panjang OP = 25 cm. Hitunglah:"
+        },
+        "q6": {
+          "title": "Jari-jari, Layang-layang, dan Tali Busur",
+          "content": "Pada lingkaran berpusat O, titik K berada di luar lingkaran dengan KL dan KM sebagai garis singgung. Panjang OK = 50 cm dan KL = 40 cm. Hitunglah:"
+        },
+        "q7": {
+          "title": "Garis Singgung pada Sistem Roda-Sabuk",
+          "content": "Dua roda pada sebuah mesin berbentuk lingkaran dengan jari-jari masing-masing 7 cm (roda kecil) dan 21 cm (roda besar). Jarak antara kedua poros = 50 cm. Sebuah sabuk melilit kedua roda pada titik singgung A dan B. Hitunglah:"
+        }
       }
     }
   },

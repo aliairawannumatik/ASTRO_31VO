@@ -184,80 +184,6 @@ type Q = {
 };
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
-const questions: Q[] = [
-  Qn(1, "Menghitung Panjang Garis Singgung", {
-    difficulty: "Mudah",
-    diagram: <SvgSatu />,
-    content: "Perhatikan gambar! AP adalah garis singgung lingkaran berpusat O. Panjang jari-jari OA = 15 cm dan jarak OP = 39 cm. Hitunglah panjang garis singgung AP!",
-    parts: [
-      { label: "a.", math: "AP^2 = OP^2 - OA^2 = 39^2 - 15^2 = \\ldots" },
-      { label: "b.", math: "AP = \\sqrt{\\ldots} = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Hitunglah luas segitiga OAP!" },
-    ],
-  }),
-  Qn(2, "Mencari Jarak Titik ke Pusat Lingkaran", {
-    difficulty: "Mudah",
-    diagram: <SvgDua />,
-    content: "Pada gambar di atas, KA adalah garis singgung lingkaran berpusat O dengan A sebagai titik singgung. Panjang KA = 40 cm dan jari-jari OA = 30 cm. Hitunglah panjang KO!",
-    parts: [
-      { label: "a.", math: "KO^2 = KA^2 + OA^2 = 40^2 + 30^2 = \\ldots" },
-      { label: "b.", math: "KO = \\sqrt{\\ldots} = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Hitunglah luas segitiga KOA!" },
-    ],
-  }),
-  Qn(3, "Luas Trapesium dari Garis Singgung", {
-    difficulty: "Sedang",
-    diagram: <SvgTiga />,
-    content: "Pada gambar, EF adalah garis singgung lingkaran berpusat O di titik C, dan EF // OD. Panjang EC = 16 cm dan OD = OC = 12 cm. Hitunglah luas trapesium ECOD!",
-    parts: [
-      { label: "a.", text: "Sebutkan panjang kedua sisi sejajar trapesium ECOD dan tingginya!" },
-      { label: "b.", math: "EO = \\sqrt{EC^2 + OC^2} = \\sqrt{16^2 + 12^2} = \\ldots \\text{ cm}" },
-      { label: "c.", math: "\\text{Luas} = \\tfrac{1}{2}(EC + OD) \\times OC = \\tfrac{1}{2}(16 + 12) \\times 12 = \\ldots \\text{ cm}^2" },
-    ],
-  }),
-  Qn(4, "Dua Garis Singgung dari Titik Luar", {
-    difficulty: "Sedang",
-    diagram: <SvgEmpat />,
-    content: "Pada gambar di atas, AB dan AC adalah garis singgung lingkaran berpusat O. Jari-jari OB = OC = 24 cm dan panjang AO = 40 cm. Hitunglah:",
-    parts: [
-      { label: "a.", math: "AB = \\sqrt{AO^2 - OB^2} = \\sqrt{40^2 - 24^2} = \\ldots \\text{ cm}" },
-      { label: "b.", math: "\\text{Luas } \\triangle ABO = \\tfrac{1}{2} \\times OB \\times AB = \\ldots \\text{ cm}^2" },
-      { label: "c.", math: "\\text{Luas layang-layang } ABOC = 2 \\times \\text{Luas } \\triangle ABO = \\ldots \\text{ cm}^2" },
-      { label: "d.", math: "\\text{Tali busur } BC = 2 \\times OB \\times \\sin(\\angle BOA) = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(5, "Panjang Garis Singgung pada Layang-layang", {
-    difficulty: "Sedang",
-    diagram: <SvgLima />,
-    content: "Pada gambar, PQ dan PR adalah garis singgung lingkaran berpusat O. Jari-jari OQ = OR = 15 cm dan panjang OP = 25 cm. Hitunglah:",
-    parts: [
-      { label: "a.", math: "PQ = \\sqrt{OP^2 - OQ^2} = \\sqrt{25^2 - 15^2} = \\ldots \\text{ cm}" },
-      { label: "b.", math: "QR = \\frac{2 \\times OQ \\times PQ}{OP} = \\frac{2 \\times 15 \\times \\ldots}{25} = \\ldots \\text{ cm}" },
-      { label: "c.", math: "\\text{Luas layang-layang } OQPR = \\tfrac{1}{2} \\times OP \\times QR = \\ldots \\text{ cm}^2" },
-    ],
-  }),
-  Qn(6, "Jari-jari, Layang-layang, dan Tali Busur", {
-    difficulty: "Sedang",
-    diagram: <SvgEnam />,
-    content: "Pada lingkaran berpusat O, titik K berada di luar lingkaran dengan KL dan KM sebagai garis singgung. Panjang OK = 50 cm dan KL = 40 cm. Hitunglah:",
-    parts: [
-      { label: "a.", math: "r = OL = \\sqrt{OK^2 - KL^2} = \\sqrt{50^2 - 40^2} = \\ldots \\text{ cm}" },
-      { label: "b.", math: "\\text{Luas layang-layang } LOMK = 2 \\times \\tfrac{1}{2} \\times OL \\times KL = \\ldots \\text{ cm}^2" },
-      { label: "c.", math: "\\text{Tali busur } LM = \\frac{2 \\times OL \\times KL}{OK} = \\frac{2 \\times \\ldots \\times 40}{50} = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(7, "Garis Singgung pada Sistem Roda-Sabuk", {
-    difficulty: "Sulit",
-    diagram: <SvgTujuh />,
-    content: "Dua roda pada sebuah mesin berbentuk lingkaran dengan jari-jari masing-masing 7 cm (roda kecil) dan 21 cm (roda besar). Jarak antara kedua poros = 50 cm. Sebuah sabuk melilit kedua roda pada titik singgung A dan B. Hitunglah:",
-    parts: [
-      { label: "a.", math: "AB = \\sqrt{d^2 - (r_2 - r_1)^2} = \\sqrt{50^2 - (21-7)^2} = \\sqrt{2500 - 196} = \\ldots \\text{ cm}" },
-      { label: "b.", math: "\\text{Keliling roda kecil} = 2 \\times \\frac{22}{7} \\times 7 = \\ldots \\text{ cm}" },
-      { label: "c.", math: "\\text{Keliling roda besar} = 2 \\times \\frac{22}{7} \\times 21 = \\ldots \\text{ cm}" },
-    ],
-  }),
-];
-
 const diffColor: Record<string, string> = {
   Mudah: "bg-amber-500/20 text-amber-300 border-amber-400/40",
   Sedang: "bg-orange-500/20 text-orange-300 border-orange-400/40",
@@ -268,6 +194,96 @@ const MenghitungPanjangPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { isDark } = useTheme();
+
+  const p = 'practice.garisSinggungLingkaran.menghitungPanjang';
+
+  // Interpolation variables for language-specific \text{} in math formulas
+  const luasText = t(`${p}.luasText`);
+  const layangText = t(`${p}.layangText`);
+  const taliBusurText = t(`${p}.taliBusurText`);
+  const kelilingKecilText = t(`${p}.kelilingKecilText`);
+  const kelilingBesarText = t(`${p}.kelilingBesarText`);
+
+  const diffLabels: Record<string, string> = {
+    Mudah: t(`${p}.diffMudah`),
+    Sedang: t(`${p}.diffSedang`),
+    Sulit: t(`${p}.diffSulit`),
+  };
+
+  const questions: Q[] = [
+    Qn(1, t(`${p}.q1.title`), {
+      difficulty: "Mudah",
+      diagram: <SvgSatu />,
+      content: t(`${p}.q1.content`),
+      parts: [
+        { label: "a.", math: "AP^2 = OP^2 - OA^2 = 39^2 - 15^2 = \\ldots" },
+        { label: "b.", math: "AP = \\sqrt{\\ldots} = \\ldots \\text{ cm}" },
+        { label: "c.", text: t(`${p}.q1.pc`) },
+      ],
+    }),
+    Qn(2, t(`${p}.q2.title`), {
+      difficulty: "Mudah",
+      diagram: <SvgDua />,
+      content: t(`${p}.q2.content`),
+      parts: [
+        { label: "a.", math: "KO^2 = KA^2 + OA^2 = 40^2 + 30^2 = \\ldots" },
+        { label: "b.", math: "KO = \\sqrt{\\ldots} = \\ldots \\text{ cm}" },
+        { label: "c.", text: t(`${p}.q2.pc`) },
+      ],
+    }),
+    Qn(3, t(`${p}.q3.title`), {
+      difficulty: "Sedang",
+      diagram: <SvgTiga />,
+      content: t(`${p}.q3.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q3.pa`) },
+        { label: "b.", math: "EO = \\sqrt{EC^2 + OC^2} = \\sqrt{16^2 + 12^2} = \\ldots \\text{ cm}" },
+        { label: "c.", math: `\\text{${luasText}} = \\tfrac{1}{2}(EC + OD) \\times OC = \\tfrac{1}{2}(16 + 12) \\times 12 = \\ldots \\text{ cm}^2` },
+      ],
+    }),
+    Qn(4, t(`${p}.q4.title`), {
+      difficulty: "Sedang",
+      diagram: <SvgEmpat />,
+      content: t(`${p}.q4.content`),
+      parts: [
+        { label: "a.", math: "AB = \\sqrt{AO^2 - OB^2} = \\sqrt{40^2 - 24^2} = \\ldots \\text{ cm}" },
+        { label: "b.", math: `\\text{${luasText}} \\triangle ABO = \\tfrac{1}{2} \\times OB \\times AB = \\ldots \\text{ cm}^2` },
+        { label: "c.", math: `\\text{${layangText}} ABOC = 2 \\times \\text{${luasText}} \\triangle ABO = \\ldots \\text{ cm}^2` },
+        { label: "d.", math: `\\text{${taliBusurText}} BC = 2 \\times OB \\times \\sin(\\angle BOA) = \\ldots \\text{ cm}` },
+      ],
+    }),
+    Qn(5, t(`${p}.q5.title`), {
+      difficulty: "Sedang",
+      diagram: <SvgLima />,
+      content: t(`${p}.q5.content`),
+      parts: [
+        { label: "a.", math: "PQ = \\sqrt{OP^2 - OQ^2} = \\sqrt{25^2 - 15^2} = \\ldots \\text{ cm}" },
+        { label: "b.", math: "QR = \\frac{2 \\times OQ \\times PQ}{OP} = \\frac{2 \\times 15 \\times \\ldots}{25} = \\ldots \\text{ cm}" },
+        { label: "c.", math: `\\text{${layangText}} OQPR = \\tfrac{1}{2} \\times OP \\times QR = \\ldots \\text{ cm}^2` },
+      ],
+    }),
+    Qn(6, t(`${p}.q6.title`), {
+      difficulty: "Sedang",
+      diagram: <SvgEnam />,
+      content: t(`${p}.q6.content`),
+      parts: [
+        { label: "a.", math: "r = OL = \\sqrt{OK^2 - KL^2} = \\sqrt{50^2 - 40^2} = \\ldots \\text{ cm}" },
+        { label: "b.", math: `\\text{${layangText}} LOMK = 2 \\times \\tfrac{1}{2} \\times OL \\times KL = \\ldots \\text{ cm}^2` },
+        { label: "c.", math: `\\text{${taliBusurText}} LM = \\frac{2 \\times OL \\times KL}{OK} = \\frac{2 \\times \\ldots \\times 40}{50} = \\ldots \\text{ cm}` },
+      ],
+    }),
+    Qn(7, t(`${p}.q7.title`), {
+      difficulty: "Sulit",
+      diagram: <SvgTujuh />,
+      content: t(`${p}.q7.content`),
+      parts: [
+        { label: "a.", math: "AB = \\sqrt{d^2 - (r_2 - r_1)^2} = \\sqrt{50^2 - (21-7)^2} = \\sqrt{2500 - 196} = \\ldots \\text{ cm}" },
+        { label: "b.", math: `\\text{${kelilingKecilText}} = 2 \\times \\frac{22}{7} \\times 7 = \\ldots \\text{ cm}` },
+        { label: "c.", math: `\\text{${kelilingBesarText}} = 2 \\times \\frac{22}{7} \\times 21 = \\ldots \\text{ cm}` },
+      ],
+    }),
+  ];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -279,9 +295,9 @@ const MenghitungPanjangPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-orange-300 text-center mb-1"
             style={{ textShadow: '0 0 20px rgba(251,146,60,0.7)' }}>
-            MENGHITUNG PANJANG GARIS SINGGUNG
+            {t(`${p}.h1`)}
           </h1>
-          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>Kelas 8 · Garis Singgung Lingkaran · {t('practice.breadcrumb')}</p>
+          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>Kelas 8 · {t(`${p}.backToTopic`)} · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
             <span className="text-orange-400 text-xs font-bold">📋 7 {t('practice.suffixSoal')}</span>
             <span className={`${isDark ? "text-white/30" : "text-gray-400"} text-xs`}>·</span>
@@ -290,15 +306,15 @@ const MenghitungPanjangPage = () => {
         </div>
 
         <div className={`mb-5 ${isDark ? "bg-orange-900/20" : "bg-orange-50"} border border-orange-500/20 rounded-xl p-4`}>
-          <p className="text-orange-300 text-xs font-bold mb-2">📌 Rumus Panjang Garis Singgung dari Titik Luar</p>
+          <p className="text-orange-300 text-xs font-bold mb-2">{t(`${p}.formulaBoxTitle`)}</p>
           <div className={`${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-3 mb-2 flex justify-center`}>
             <BlockMath math="PT = \sqrt{OP^2 - r^2}" />
           </div>
           <div className="grid grid-cols-3 gap-2 text-xs">
             {[
-              { l: "PT", v: "Panjang garis singgung" },
-              { l: "OP", v: "Jarak titik P ke pusat" },
-              { l: "r", v: "Jari-jari lingkaran" },
+              { l: "PT", v: t(`${p}.ptDesc`) },
+              { l: "OP", v: t(`${p}.opDesc`) },
+              { l: "r", v: t(`${p}.rDesc`) },
             ].map(x => (
               <div key={x.l} className={`${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-2 py-2 text-center`}>
                 <span className="text-orange-400 font-bold block">{x.l}</span>
@@ -327,7 +343,7 @@ const MenghitungPanjangPage = () => {
                       </span>
                       {q.difficulty && (
                         <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${diffColor[q.difficulty]}`}>
-                          {q.difficulty}
+                          {diffLabels[q.difficulty]}
                         </span>
                       )}
                     </div>
@@ -356,7 +372,7 @@ const MenghitungPanjangPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/garis-singgung-lingkaran"); }}
             className="text-sm text-muted-foreground hover:text-orange-400 transition-colors cursor-pointer font-body">
-            {t('practice.backTo')} Garis Singgung Lingkaran
+            {t('practice.backTo')} {t(`${p}.backToTopic`)}
           </button>
         </div>
       </div>
