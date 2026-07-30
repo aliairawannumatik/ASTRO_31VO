@@ -5,65 +5,62 @@ import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import { ChevronRight } from "lucide-react";
 
-const subtopics = [
+const BASE = "practice.garisSinggungLingkaran.index";
+
+const subtopicsConfig = [
   {
-    label: "PENGERTIAN DAN SIFAT GARIS SINGGUNG LINGKARAN",
+    key: "pengertian",
     path: "/latihan-mandiri/kelas-8/garis-singgung-lingkaran/pengertian",
-    soal: 40,
+    soal: 5,
     gradient: "from-emerald-900/40 to-teal-900/30",
     border: "border-emerald-500/30",
     badge: "bg-emerald-500/20 text-emerald-300 border-emerald-400/40",
     iconColor: "text-emerald-400",
     leftBar: "from-emerald-400 to-teal-500",
-    desc: "Definisi, sifat tegak lurus, 1 atau 2 garis singgung, PA = PB dari titik luar",
     emoji: "⭕",
   },
   {
-    label: "MENGHITUNG PANJANG GARIS SINGGUNG DARI TITIK DI LUAR LINGKARAN",
+    key: "menghitungPanjang",
     path: "/latihan-mandiri/kelas-8/garis-singgung-lingkaran/menghitung-panjang",
-    soal: 40,
+    soal: 7,
     gradient: "from-orange-900/40 to-amber-900/30",
     border: "border-orange-500/30",
     badge: "bg-orange-500/20 text-orange-300 border-orange-400/40",
     iconColor: "text-orange-400",
     leftBar: "from-orange-400 to-amber-500",
-    desc: "PT = √(OP² − r²), mencari r, mencari OP, soal cerita kontekstual",
     emoji: "📏",
   },
   {
-    label: "GARIS SINGGUNG PERSEKUTUAN LUAR (GSPL)",
+    key: "gspl",
     path: "/latihan-mandiri/kelas-8/garis-singgung-lingkaran/gspl",
-    soal: 40,
+    soal: 11,
     gradient: "from-cyan-900/40 to-blue-900/30",
     border: "border-cyan-500/30",
     badge: "bg-cyan-500/20 text-cyan-300 border-cyan-400/40",
     iconColor: "text-cyan-400",
     leftBar: "from-cyan-400 to-blue-500",
-    desc: "d_GSPL = √(p² − (R−r)²), mencari p, R, r, soal sabuk luar",
     emoji: "↔️",
   },
   {
-    label: "GARIS SINGGUNG PERSEKUTUAN DALAM (GSPD)",
+    key: "gspd",
     path: "/latihan-mandiri/kelas-8/garis-singgung-lingkaran/gspd",
-    soal: 40,
+    soal: 4,
     gradient: "from-rose-900/40 to-pink-900/30",
     border: "border-rose-500/30",
     badge: "bg-rose-500/20 text-rose-300 border-rose-400/40",
     iconColor: "text-rose-400",
     leftBar: "from-rose-400 to-pink-500",
-    desc: "d_GSPD = √(p² − (R+r)²), titik silang, sabuk silang (rantai)",
     emoji: "✖️",
   },
   {
-    label: "SABUK LILITAN MINIMAL (PENERAPAN)",
+    key: "sabukLilitan",
     path: "/latihan-mandiri/kelas-8/garis-singgung-lingkaran/sabuk-lilitan",
-    soal: 40,
+    soal: 9,
     gradient: "from-violet-900/40 to-purple-900/30",
     border: "border-violet-500/30",
     badge: "bg-violet-500/20 text-violet-300 border-violet-400/40",
     iconColor: "text-violet-400",
     leftBar: "from-violet-400 to-purple-500",
-    desc: "L = 2d + 2πr (sama besar), L ≈ 2d + π(R+r) (beda besar), 3+ lingkaran",
     emoji: "🔗",
   },
 ];
@@ -71,6 +68,12 @@ const subtopics = [
 const GarisSinggungLingkaranPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const subtopics = subtopicsConfig.map((s) => ({
+    ...s,
+    label: t(`${BASE}.subtopics.${s.key}.label`),
+    desc:  t(`${BASE}.subtopics.${s.key}.desc`),
+  }));
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -83,12 +86,12 @@ const GarisSinggungLingkaranPage = () => {
             <span className="text-3xl">📐</span>
           </div>
           <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-1 text-center">
-            GARIS SINGGUNG LINGKARAN
+            {t(`${BASE}.title`)}
           </h1>
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · {t('practice.breadcrumb')}</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">200 {t('practice.suffixSoalTotal')} · Dilengkapi Diagram SVG & LaTeX</span>
+            <span className="text-white/70 text-xs font-body">36 {t('practice.suffixSoalTotal')} · {t(`${BASE}.enrichmentBadge`)}</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
@@ -96,7 +99,7 @@ const GarisSinggungLingkaranPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
           {subtopics.map((s, i) => (
             <button
-              key={s.label}
+              key={s.key}
               onClick={() => { playPopSound(); navigate(s.path); }}
               className="group relative rounded-2xl overflow-hidden text-left transition-all duration-300 hover:scale-[1.01] animate-slide-up"
               style={{ animationDelay: `${i * 0.07}s` }}
@@ -126,13 +129,13 @@ const GarisSinggungLingkaranPage = () => {
         </div>
 
         <div className="mt-6 bg-white/5 border border-white/10 rounded-xl p-4">
-          <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">🎯 Rumus-Rumus Penting</p>
+          <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">{t(`${BASE}.featureBoxTitle`)}</p>
           <div className="grid grid-cols-2 gap-2 text-xs font-body">
             {[
-              { f: "PT = √(OP²−r²)", l: "Garis singgung dari luar" },
-              { f: "PA = PB", l: "Dua singgung dari satu titik" },
-              { f: "d_GSPL = √(p²−(R−r)²)", l: "Persekutuan luar" },
-              { f: "d_GSPD = √(p²−(R+r)²)", l: "Persekutuan dalam" },
+              { f: "PT = √(OP²−r²)", l: t(`${BASE}.formula.tangentFromOuter`) },
+              { f: "PA = PB", l: t(`${BASE}.formula.twoTangentsOnePoint`) },
+              { f: "d_GSPL = √(p²−(R−r)²)", l: t(`${BASE}.formula.outerCommon`) },
+              { f: "d_GSPD = √(p²−(R+r)²)", l: t(`${BASE}.formula.innerCommon`) },
             ].map(x => (
               <div key={x.f} className="bg-white/5 rounded-lg px-3 py-2">
                 <p className="text-cyan-300 font-bold text-[10px]">{x.f}</p>

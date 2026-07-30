@@ -5977,6 +5977,39 @@
       "shared": {
         "tangentLabel": "Tangent Line",
         "tangentPointLabel": "tangent point"
+      },
+      "index": {
+        "title": "TANGENT LINES TO A CIRCLE",
+        "enrichmentBadge": "With SVG Diagrams & LaTeX",
+        "featureBoxTitle": "🎯 Key Formulas",
+        "formula": {
+          "tangentFromOuter": "Tangent from external point",
+          "twoTangentsOnePoint": "Two tangents from one point",
+          "outerCommon": "External common tangent",
+          "innerCommon": "Internal common tangent"
+        },
+        "subtopics": {
+          "pengertian": {
+            "label": "DEFINITION AND PROPERTIES OF TANGENT LINES TO A CIRCLE",
+            "desc": "Definition, perpendicularity, 1 or 2 tangents, PA = PB from external point"
+          },
+          "menghitungPanjang": {
+            "label": "CALCULATING THE LENGTH OF A TANGENT FROM AN EXTERNAL POINT",
+            "desc": "PT = √(OP² − r²), find r, find OP, contextual word problems"
+          },
+          "gspl": {
+            "label": "EXTERNAL COMMON TANGENT (ECT)",
+            "desc": "d_ECT = √(p² − (R−r)²), find p, R, r, outer belt problems"
+          },
+          "gspd": {
+            "label": "INTERNAL COMMON TANGENT (ICT)",
+            "desc": "d_ICT = √(p² − (R+r)²), intersection point, crossed belt (chain)"
+          },
+          "sabukLilitan": {
+            "label": "MINIMUM BELT LENGTH (APPLICATION)",
+            "desc": "L = 2d + 2πr (equal radii), L ≈ 2d + π(R+r) (unequal), 3+ circles"
+          }
+        }
       }
     }
   },

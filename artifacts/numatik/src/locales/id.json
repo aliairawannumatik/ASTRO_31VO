@@ -5977,6 +5977,39 @@
       "shared": {
         "tangentLabel": "Garis Singgung",
         "tangentPointLabel": "titik singgung"
+      },
+      "index": {
+        "title": "GARIS SINGGUNG LINGKARAN",
+        "enrichmentBadge": "Dilengkapi Diagram SVG & LaTeX",
+        "featureBoxTitle": "🎯 Rumus-Rumus Penting",
+        "formula": {
+          "tangentFromOuter": "Garis singgung dari luar",
+          "twoTangentsOnePoint": "Dua singgung dari satu titik",
+          "outerCommon": "Persekutuan luar",
+          "innerCommon": "Persekutuan dalam"
+        },
+        "subtopics": {
+          "pengertian": {
+            "label": "PENGERTIAN DAN SIFAT GARIS SINGGUNG LINGKARAN",
+            "desc": "Definisi, sifat tegak lurus, 1 atau 2 garis singgung, PA = PB dari titik luar"
+          },
+          "menghitungPanjang": {
+            "label": "MENGHITUNG PANJANG GARIS SINGGUNG DARI TITIK DI LUAR LINGKARAN",
+            "desc": "PT = √(OP² − r²), mencari r, mencari OP, soal cerita kontekstual"
+          },
+          "gspl": {
+            "label": "GARIS SINGGUNG PERSEKUTUAN LUAR (GSPL)",
+            "desc": "d_GSPL = √(p² − (R−r)²), mencari p, R, r, soal sabuk luar"
+          },
+          "gspd": {
+            "label": "GARIS SINGGUNG PERSEKUTUAN DALAM (GSPD)",
+            "desc": "d_GSPD = √(p² − (R+r)²), titik silang, sabuk silang (rantai)"
+          },
+          "sabukLilitan": {
+            "label": "SABUK LILITAN MINIMAL (PENERAPAN)",
+            "desc": "L = 2d + 2πr (sama besar), L ≈ 2d + π(R+r) (beda besar), 3+ lingkaran"
+          }
+        }
       }
     }
   },

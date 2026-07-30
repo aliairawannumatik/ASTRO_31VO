@@ -5977,6 +5977,39 @@
       "shared": {
         "tangentLabel": "接線",
         "tangentPointLabel": "接点"
+      },
+      "index": {
+        "title": "円の接線",
+        "enrichmentBadge": "SVGダイアグラム・LaTeX付き",
+        "featureBoxTitle": "🎯 重要な公式",
+        "formula": {
+          "tangentFromOuter": "外部点からの接線",
+          "twoTangentsOnePoint": "1点からの2本の接線",
+          "outerCommon": "外接共通接線",
+          "innerCommon": "内接共通接線"
+        },
+        "subtopics": {
+          "pengertian": {
+            "label": "円の接線の定義と性質",
+            "desc": "定義、垂直性、1本または2本の接線、外部点からPA = PB"
+          },
+          "menghitungPanjang": {
+            "label": "外部点からの接線の長さの計算",
+            "desc": "PT = √(OP² − r²)、rを求める、OPを求める、文章題"
+          },
+          "gspl": {
+            "label": "外接共通接線（GSPL）",
+            "desc": "d_GSPL = √(p² − (R−r)²)、p、R、rを求める、外側ベルト問題"
+          },
+          "gspd": {
+            "label": "内接共通接線（GSPD）",
+            "desc": "d_GSPD = √(p² − (R+r)²)、交点、たすき掛けベルト（チェーン）"
+          },
+          "sabukLilitan": {
+            "label": "最短ベルト長（応用）",
+            "desc": "L = 2d + 2πr（同径）、L ≈ 2d + π(R+r)（異径）、3円以上"
+          }
+        }
       }
     }
   },
