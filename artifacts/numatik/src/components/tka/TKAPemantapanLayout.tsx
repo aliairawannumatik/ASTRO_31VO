@@ -17,9 +17,17 @@ export interface MateriSection {
 
 export interface LatihanSoal {
   no: number;
+  /** "pg" = pilihan ganda biasa | "pgk" = PG Kompleks 4 pernyataan | "pgkbs" = PG Benar-Salah 3 pernyataan */
+  type?: "pg" | "pgk" | "pgkbs";
   soal: string;
-  options: string[];
+  /** PG & PGK: opsi A-D (combo untuk PGK) */
+  options?: string[];
+  /** PG & PGK: huruf jawaban benar (A/B/C/D) */
   jawaban?: string;
+  /** PGK: 4 pernyataan | PGKBS: 3 pernyataan */
+  pernyataan?: string[];
+  /** PGKBS: array ["B"|"S"] untuk tiap pernyataan */
+  jawabanBS?: ("B" | "S")[];
   pembahasan?: string;
 }
 
@@ -52,6 +60,28 @@ const SECTION_COLORS = [
 
 const optionLetters = ['A', 'B', 'C', 'D', 'E'];
 
+/* ── Type badge config ── */
+const TYPE_BADGE: Record<string, { label: string; color: string; bg: string; border: string }> = {
+  pg: {
+    label: "PG",
+    color: "text-violet-300",
+    bg: "rgba(139,92,246,0.15)",
+    border: "rgba(139,92,246,0.35)",
+  },
+  pgk: {
+    label: "PG Kompleks",
+    color: "text-amber-300",
+    bg: "rgba(245,158,11,0.15)",
+    border: "rgba(245,158,11,0.35)",
+  },
+  pgkbs: {
+    label: "PG Benar-Salah",
+    color: "text-cyan-300",
+    bg: "rgba(6,182,212,0.15)",
+    border: "rgba(6,182,212,0.35)",
+  },
+};
+
 const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materiSections, latihanDasar }: Props) => {
   const navigate = useNavigate();
   const { theme } = useTheme();
@@ -60,7 +90,10 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
   const [expandedSections, setExpandedSections] = useState<number[]>(() =>
     Array.from({ length: materiSections.length }, (_, i) => i)
   );
+  /* PG & PGK: stores selected letter (A/B/C/D) per soal.no */
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string>>({});
+  /* PGKBS: stores ["B"|"S"|null, ...] per soal.no */
+  const [pgkbsAnswers, setPgkbsAnswers] = useState<Record<number, ("B" | "S" | null)[]>>({});
   const [revealedAnswers, setRevealedAnswers] = useState<Set<number>>(new Set());
 
   const toggleSection = (idx: number) => {
@@ -74,6 +107,16 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
     if (revealedAnswers.has(soalNo)) return;
     playPopSound();
     setSelectedAnswers(prev => ({ ...prev, [soalNo]: letter }));
+  };
+
+  const handleSelectBS = (soalNo: number, idx: number, val: "B" | "S", count: number) => {
+    if (revealedAnswers.has(soalNo)) return;
+    playPopSound();
+    setPgkbsAnswers(prev => {
+      const current: ("B" | "S" | null)[] = prev[soalNo] ? [...prev[soalNo]] : Array(count).fill(null);
+      current[idx] = val;
+      return { ...prev, [soalNo]: current };
+    });
   };
 
   const handleReveal = (soalNo: number) => {
@@ -97,11 +140,22 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
       delete next[soalNo];
       return next;
     });
+    setPgkbsAnswers(prev => {
+      const next = { ...prev };
+      delete next[soalNo];
+      return next;
+    });
   };
 
-  const correctCount = latihanDasar.filter(s =>
-    revealedAnswers.has(s.no) && selectedAnswers[s.no] === s.jawaban
-  ).length;
+  const isCorrectForSoal = (s: LatihanSoal): boolean => {
+    if (!revealedAnswers.has(s.no)) return false;
+    if (s.type === "pgkbs") {
+      return (s.jawabanBS?.every((ans, i) => pgkbsAnswers[s.no]?.[i] === ans) ?? false);
+    }
+    return selectedAnswers[s.no] === s.jawaban;
+  };
+
+  const correctCount = latihanDasar.filter(isCorrectForSoal).length;
   const answeredCount = revealedAnswers.size;
 
   return (
@@ -150,6 +204,16 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                   style={{ background: "rgba(139,92,246,0.15)", borderColor: "rgba(139,92,246,0.35)", color: "#c4b5fd" }}>
                   ✏️ {latihanDasar.length} Soal Latihan
                 </span>
+              </div>
+
+              {/* ── Type legend ── */}
+              <div className="mt-3 flex gap-2 flex-wrap justify-center">
+                {Object.values(TYPE_BADGE).map(b => (
+                  <span key={b.label} className={`text-[9px] font-body px-2.5 py-0.5 rounded-full border font-semibold ${b.color}`}
+                    style={{ background: b.bg, borderColor: b.border }}>
+                    {b.label}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
@@ -230,7 +294,6 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                     <div className="px-6 pb-5 pt-1 border-t border-white/5 animate-slide-up">
                       {section.jsx && <div className="mb-3">{section.jsx}</div>}
                       <div className="font-body text-sm text-white/80 leading-relaxed space-y-0.5">
-
                         {section.content.split('\n').map((line, i) => {
                           const trimmed = line.trim();
                           const imgMatch = trimmed.match(/^\[IMAGE:([^|]+)(?:\|(\w+))?\]$/);
@@ -316,40 +379,39 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
 
             <div className="space-y-4">
               {latihanDasar.map((soal, qi) => {
+                const type = soal.type ?? "pg";
                 const selected = selectedAnswers[soal.no];
                 const isRevealed = revealedAnswers.has(soal.no);
-                const isCorrect = selected === soal.jawaban;
+                const bsArr = pgkbsAnswers[soal.no] ?? Array(soal.pernyataan?.length ?? 3).fill(null);
+                const bsAllAnswered = type === "pgkbs"
+                  ? bsArr.length === (soal.pernyataan?.length ?? 3) && bsArr.every(a => a !== null)
+                  : false;
+                const hasAnswered = type === "pgkbs" ? bsAllAnswered : !!selected;
+                const isCorrect = type === "pgkbs"
+                  ? (soal.jawabanBS?.every((ans, i) => bsArr[i] === ans) ?? false)
+                  : selected === soal.jawaban;
+                const typeBadge = TYPE_BADGE[type];
 
                 return (
                   <div key={soal.no} className="relative rounded-2xl overflow-hidden"
                     style={isWhite ? {
                       background: "var(--bg-card)",
                       border: isRevealed
-                        ? isCorrect
-                          ? "1px solid rgba(34,197,94,0.45)"
-                          : "1px solid rgba(239,68,68,0.45)"
-                        : selected
-                          ? "1px solid rgba(33,150,243,0.45)"
-                          : "1px solid rgba(0,0,0,0.08)",
+                        ? isCorrect ? "1px solid rgba(34,197,94,0.45)" : "1px solid rgba(239,68,68,0.45)"
+                        : hasAnswered ? "1px solid rgba(33,150,243,0.45)" : "1px solid rgba(0,0,0,0.08)",
                     } : {
                       background: "linear-gradient(135deg, rgba(20,20,40,0.95) 0%, rgba(15,10,30,0.98) 100%)",
                       border: isRevealed
-                        ? isCorrect
-                          ? "1px solid rgba(34,197,94,0.4)"
-                          : "1px solid rgba(239,68,68,0.4)"
-                        : selected
-                          ? "1px solid rgba(99,102,241,0.45)"
-                          : "1px solid rgba(255,255,255,0.08)",
+                        ? isCorrect ? "1px solid rgba(34,197,94,0.4)" : "1px solid rgba(239,68,68,0.4)"
+                        : hasAnswered ? "1px solid rgba(99,102,241,0.45)" : "1px solid rgba(255,255,255,0.08)",
                       boxShadow: isRevealed
-                        ? isCorrect
-                          ? "0 4px 20px rgba(34,197,94,0.1)"
-                          : "0 4px 20px rgba(239,68,68,0.1)"
+                        ? isCorrect ? "0 4px 20px rgba(34,197,94,0.1)" : "0 4px 20px rgba(239,68,68,0.1)"
                         : "0 4px 20px rgba(0,0,0,0.3)",
                     }}>
 
-                    {/* Question number bar */}
-                    <div className="flex items-center gap-3 px-5 pt-4 pb-3">
-                      <span className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold font-display"
+                    {/* ── Question header: number + type badge + soal text ── */}
+                    <div className="flex items-start gap-3 px-5 pt-4 pb-2">
+                      <span className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold font-display mt-0.5"
                         style={{
                           background: "linear-gradient(135deg, rgba(99,102,241,0.4), rgba(139,92,246,0.2))",
                           border: "1px solid rgba(167,139,250,0.3)",
@@ -357,29 +419,55 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                         }}>
                         {qi + 1}
                       </span>
-                      <div className="font-body text-sm text-white/90 leading-relaxed flex-1">
-                        {soal.soal.split('\n').map((line, lineIdx) => {
-                          const imgMatch = line.match(/^\[IMAGE:([^|]+)(?:\|(\w+))?\]$/);
-                          if (imgMatch) {
-                            const sizeClass = imgMatch[2] === 'small' ? 'max-w-[160px]' : 'max-w-sm w-full';
+                      <div className="flex-1 min-w-0">
+                        {/* Type badge */}
+                        <span className={`inline-block text-[9px] font-bold font-display px-2 py-0.5 rounded-full mb-1.5 ${typeBadge.color}`}
+                          style={{ background: typeBadge.bg, border: `1px solid ${typeBadge.border}` }}>
+                          {typeBadge.label}
+                        </span>
+                        {/* Soal text */}
+                        <div className="font-body text-sm text-white/90 leading-relaxed">
+                          {soal.soal.split('\n').map((line, lineIdx) => {
+                            const imgMatch = line.match(/^\[IMAGE:([^|]+)(?:\|(\w+))?\]$/);
+                            if (imgMatch) {
+                              const sizeClass = imgMatch[2] === 'small' ? 'max-w-[160px]' : 'max-w-sm w-full';
+                              return (
+                                <div key={lineIdx} className="my-2 flex justify-center">
+                                  <img src={imgMatch[1]} alt={`Soal ${soal.no}`} className={`${sizeClass} rounded-xl`} />
+                                </div>
+                              );
+                            }
                             return (
-                              <div key={lineIdx} className="my-2 flex justify-center">
-                                <img src={imgMatch[1]} alt={`Soal ${soal.no}`} className={`${sizeClass} rounded-xl`} />
-                              </div>
+                              <span key={lineIdx}>
+                                {lineIdx > 0 && <br />}
+                                {renderWithLatex(line)}
+                              </span>
                             );
-                          }
-                          return (
-                            <span key={lineIdx}>
-                              {lineIdx > 0 && <br />}
-                              {renderWithLatex(line)}
-                            </span>
-                          );
-                        })}
+                          })}
+                        </div>
                       </div>
                     </div>
 
-                    {/* Answer options */}
-                    {soal.options.length > 0 && (
+                    {/* ── PGK: numbered pernyataan list ── */}
+                    {(type === "pgk") && soal.pernyataan && (
+                      <div className="px-5 pb-2 space-y-1.5 ml-11">
+                        {soal.pernyataan.map((p, pi) => (
+                          <div key={pi} className="flex items-start gap-2 text-xs font-body text-white/80 leading-relaxed">
+                            <span className="flex-shrink-0 w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-bold font-display mt-0.5"
+                              style={{ background: "rgba(245,158,11,0.15)", border: "1px solid rgba(245,158,11,0.3)", color: "#fcd34d" }}>
+                              {pi + 1}
+                            </span>
+                            <span>{renderWithLatex(p)}</span>
+                          </div>
+                        ))}
+                        <p className="text-[11px] font-body text-amber-300/60 mt-2 italic">
+                          Pernyataan yang <span className="font-bold not-italic text-amber-300/80">BENAR</span> adalah ...
+                        </p>
+                      </div>
+                    )}
+
+                    {/* ── PG & PGK: A-D combo options grid ── */}
+                    {(type === "pg" || type === "pgk") && soal.options && soal.options.length > 0 && (
                       <div className="px-5 pb-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {soal.options.map((opt, j) => {
                           const letter = optionLetters[j];
@@ -398,34 +486,22 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                           if (isRevealed) {
                             if (isThisCorrect) {
                               optStyle = isWhite ? {
-                                background: "#dcfce7",
-                                border: "1px solid rgba(34,197,94,0.5)",
-                                color: "#15803d",
+                                background: "#dcfce7", border: "1px solid rgba(34,197,94,0.5)", color: "#15803d",
                               } : {
-                                background: "rgba(34,197,94,0.15)",
-                                border: "1px solid rgba(34,197,94,0.5)",
-                                color: "#86efac",
+                                background: "rgba(34,197,94,0.15)", border: "1px solid rgba(34,197,94,0.5)", color: "#86efac",
                               };
                             } else if (isSelected && !isThisCorrect) {
                               optStyle = isWhite ? {
-                                background: "#fef2f2",
-                                border: "1px solid rgba(239,68,68,0.4)",
-                                color: "#dc2626",
+                                background: "#fef2f2", border: "1px solid rgba(239,68,68,0.4)", color: "#dc2626",
                               } : {
-                                background: "rgba(239,68,68,0.12)",
-                                border: "1px solid rgba(239,68,68,0.4)",
-                                color: "#fca5a5",
+                                background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.4)", color: "#fca5a5",
                               };
                             }
                           } else if (isSelected) {
                             optStyle = isWhite ? {
-                              background: "#eff6ff",
-                              border: "1px solid rgba(33,150,243,0.5)",
-                              color: "#1d4ed8",
+                              background: "#eff6ff", border: "1px solid rgba(33,150,243,0.5)", color: "#1d4ed8",
                             } : {
-                              background: "rgba(99,102,241,0.2)",
-                              border: "1px solid rgba(99,102,241,0.6)",
-                              color: "#c7d2fe",
+                              background: "rgba(99,102,241,0.2)", border: "1px solid rgba(99,102,241,0.6)", color: "#c7d2fe",
                             };
                           }
 
@@ -435,10 +511,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                               onClick={() => handleSelectAnswer(soal.no, letter)}
                               disabled={isRevealed}
                               className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-left transition-all duration-200 text-xs font-body"
-                              style={{
-                                ...optStyle,
-                                cursor: isRevealed ? "default" : "pointer",
-                              }}
+                              style={{ ...optStyle, cursor: isRevealed ? "default" : "pointer" }}
                             >
                               <span className="flex-shrink-0 w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-bold font-display"
                                 style={{
@@ -446,9 +519,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                                     ? "rgba(34,197,94,0.3)"
                                     : isRevealed && isSelected && !isThisCorrect
                                       ? "rgba(239,68,68,0.3)"
-                                      : isSelected
-                                        ? "rgba(99,102,241,0.4)"
-                                        : "rgba(255,255,255,0.08)",
+                                      : isSelected ? "rgba(99,102,241,0.4)" : "rgba(255,255,255,0.08)",
                                   color: "inherit",
                                 }}>
                                 {letter}
@@ -461,30 +532,134 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                                 }
                                 return <span className="leading-snug">{renderWithLatex(opt.replace(/^[A-E]\.\s*/, ''))}</span>;
                               })()}
-                              {isRevealed && isThisCorrect && (
-                                <CheckCircle2 className="w-3.5 h-3.5 shrink-0 ml-auto text-green-400" />
-                              )}
-                              {isRevealed && isSelected && !isThisCorrect && (
-                                <XCircle className="w-3.5 h-3.5 shrink-0 ml-auto text-red-400" />
-                              )}
+                              {isRevealed && isThisCorrect && <CheckCircle2 className="w-3.5 h-3.5 shrink-0 ml-auto text-green-400" />}
+                              {isRevealed && isSelected && !isThisCorrect && <XCircle className="w-3.5 h-3.5 shrink-0 ml-auto text-red-400" />}
                             </button>
                           );
                         })}
                       </div>
                     )}
 
-                    {/* Action row */}
+                    {/* ── PGKBS: pernyataan + B/S buttons ── */}
+                    {type === "pgkbs" && soal.pernyataan && (
+                      <div className="px-5 pb-3 ml-11">
+                        <div className="rounded-xl overflow-hidden border"
+                          style={{ borderColor: "rgba(6,182,212,0.2)", background: "rgba(6,182,212,0.04)" }}>
+                          {/* Header row */}
+                          <div className="grid grid-cols-[1fr_auto_auto] gap-0 border-b"
+                            style={{ borderColor: "rgba(6,182,212,0.15)" }}>
+                            <div className="px-3 py-1.5 text-[9px] font-bold font-display tracking-widest uppercase text-cyan-400/60">Pernyataan</div>
+                            <div className="w-14 text-center py-1.5 text-[9px] font-bold font-display tracking-widest uppercase text-emerald-400/60">Benar</div>
+                            <div className="w-14 text-center py-1.5 text-[9px] font-bold font-display tracking-widest uppercase text-rose-400/60">Salah</div>
+                          </div>
+                          {/* Pernyataan rows */}
+                          {soal.pernyataan.map((p, pi) => {
+                            const userAns = bsArr[pi];
+                            const correctAns = soal.jawabanBS?.[pi];
+                            const rowCorrect = isRevealed && userAns === correctAns;
+                            const rowWrong = isRevealed && userAns !== correctAns;
+
+                            return (
+                              <div key={pi}
+                                className={`grid grid-cols-[1fr_auto_auto] gap-0 ${pi < soal.pernyataan!.length - 1 ? "border-b" : ""}`}
+                                style={{
+                                  borderColor: "rgba(6,182,212,0.1)",
+                                  background: isRevealed
+                                    ? rowCorrect ? "rgba(34,197,94,0.06)" : "rgba(239,68,68,0.06)"
+                                    : "transparent",
+                                }}>
+                                {/* Statement text */}
+                                <div className="px-3 py-2.5 flex items-center gap-2 min-w-0">
+                                  <span className="flex-shrink-0 w-4.5 h-4.5 rounded flex items-center justify-center text-[9px] font-bold font-display"
+                                    style={{ background: "rgba(6,182,212,0.15)", color: "#67e8f9" }}>
+                                    {pi + 1}
+                                  </span>
+                                  <span className="font-body text-xs text-white/80 leading-snug flex-1 min-w-0">
+                                    {renderWithLatex(p)}
+                                  </span>
+                                  {isRevealed && (
+                                    rowCorrect
+                                      ? <CheckCircle2 className="w-3.5 h-3.5 shrink-0 text-green-400" />
+                                      : <XCircle className="w-3.5 h-3.5 shrink-0 text-red-400" />
+                                  )}
+                                </div>
+                                {/* Benar button */}
+                                <div className="w-14 flex items-center justify-center py-2">
+                                  <button
+                                    disabled={isRevealed}
+                                    onClick={() => handleSelectBS(soal.no, pi, "B", soal.pernyataan!.length)}
+                                    className="w-8 h-7 rounded-lg text-[10px] font-bold font-display transition-all duration-150"
+                                    style={
+                                      isRevealed
+                                        ? correctAns === "B"
+                                          ? { background: "rgba(34,197,94,0.3)", border: "1px solid rgba(34,197,94,0.6)", color: "#86efac", cursor: "default" }
+                                          : userAns === "B"
+                                            ? { background: "rgba(239,68,68,0.2)", border: "1px solid rgba(239,68,68,0.4)", color: "#fca5a5", cursor: "default" }
+                                            : { background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.25)", cursor: "default" }
+                                        : userAns === "B"
+                                          ? { background: "rgba(34,197,94,0.2)", border: "1px solid rgba(34,197,94,0.5)", color: "#86efac", cursor: "pointer" }
+                                          : { background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.4)", cursor: "pointer" }
+                                    }>
+                                    B
+                                  </button>
+                                </div>
+                                {/* Salah button */}
+                                <div className="w-14 flex items-center justify-center py-2">
+                                  <button
+                                    disabled={isRevealed}
+                                    onClick={() => handleSelectBS(soal.no, pi, "S", soal.pernyataan!.length)}
+                                    className="w-8 h-7 rounded-lg text-[10px] font-bold font-display transition-all duration-150"
+                                    style={
+                                      isRevealed
+                                        ? correctAns === "S"
+                                          ? { background: "rgba(239,68,68,0.3)", border: "1px solid rgba(239,68,68,0.6)", color: "#fca5a5", cursor: "default" }
+                                          : userAns === "S"
+                                            ? { background: "rgba(239,68,68,0.2)", border: "1px solid rgba(239,68,68,0.4)", color: "#fca5a5", cursor: "default" }
+                                            : { background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.25)", cursor: "default" }
+                                        : userAns === "S"
+                                          ? { background: "rgba(239,68,68,0.2)", border: "1px solid rgba(239,68,68,0.5)", color: "#fca5a5", cursor: "pointer" }
+                                          : { background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.4)", cursor: "pointer" }
+                                    }>
+                                    S
+                                  </button>
+                                </div>
+                              </div>
+                            );
+                          })}
+                          {/* PGKBS reveal answer row */}
+                          {isRevealed && soal.jawabanBS && (
+                            <div className="px-3 py-2 border-t flex items-center gap-2"
+                              style={{ borderColor: "rgba(6,182,212,0.15)", background: "rgba(6,182,212,0.06)" }}>
+                              <span className="text-[9px] font-body text-cyan-400/60">Kunci:</span>
+                              {soal.jawabanBS.map((ans, i) => (
+                                <span key={i} className="text-[10px] font-bold font-display px-2 py-0.5 rounded-md"
+                                  style={{
+                                    background: ans === "B" ? "rgba(34,197,94,0.2)" : "rgba(239,68,68,0.2)",
+                                    color: ans === "B" ? "#86efac" : "#fca5a5",
+                                    border: `1px solid ${ans === "B" ? "rgba(34,197,94,0.35)" : "rgba(239,68,68,0.35)"}`,
+                                  }}>
+                                  ({i + 1}) {ans}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* ── Action row ── */}
                     <div className="px-5 pb-4 flex items-center justify-between gap-3">
                       {!isRevealed ? (
                         <button
                           onClick={() => handleReveal(soal.no)}
-                          disabled={!selected}
+                          disabled={!hasAnswered}
                           className="font-display text-xs px-4 py-2 rounded-lg cursor-pointer transition-all duration-200 font-bold"
-                          style={selected ? {
+                          style={hasAnswered ? {
                             background: "linear-gradient(135deg, rgba(99,102,241,0.7), rgba(139,92,246,0.5))",
                             color: "var(--text-primary)",
                             border: "1px solid rgba(167,139,250,0.4)",
                             boxShadow: "0 2px 10px rgba(99,102,241,0.3)",
+                            cursor: "pointer",
                           } : {
                             background: "var(--btn-bg)",
                             color: "var(--text-secondary)",
@@ -497,11 +672,11 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                         <div className="flex items-center gap-2">
                           {isCorrect ? (
                             <span className="flex items-center gap-1.5 text-xs font-bold text-green-400 font-display">
-                              <CheckCircle2 className="w-4 h-4" /> Jawaban Benar!
+                              <CheckCircle2 className="w-4 h-4" /> Semua Benar!
                             </span>
                           ) : (
                             <span className="flex items-center gap-1.5 text-xs font-bold text-red-400 font-display">
-                              <XCircle className="w-4 h-4" /> Jawaban Salah
+                              <XCircle className="w-4 h-4" /> Ada yang Salah
                             </span>
                           )}
                         </div>
@@ -517,7 +692,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                       )}
                     </div>
 
-                    {/* Pembahasan */}
+                    {/* ── Pembahasan ── */}
                     {isRevealed && soal.pembahasan && (
                       <div className="mx-4 mb-4 rounded-xl p-4 animate-slide-up"
                         style={{
@@ -533,13 +708,25 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                             <span key={i}>{i > 0 && <br />}{renderWithLatex(line)}</span>
                           ))}
                         </div>
-                        {soal.jawaban && (
-                          <div className="mt-2.5 flex items-center gap-2">
+                        {(soal.jawaban || soal.jawabanBS) && (
+                          <div className="mt-2.5 flex items-center gap-2 flex-wrap">
                             <span className="text-[10px] font-body text-white/40">Kunci jawaban:</span>
-                            <span className="font-display text-xs font-bold px-2.5 py-0.5 rounded-lg text-green-300"
-                              style={{ background: "rgba(34,197,94,0.15)", border: "1px solid rgba(34,197,94,0.3)" }}>
-                              {soal.jawaban}
-                            </span>
+                            {soal.jawaban && (
+                              <span className="font-display text-xs font-bold px-2.5 py-0.5 rounded-lg text-green-300"
+                                style={{ background: "rgba(34,197,94,0.15)", border: "1px solid rgba(34,197,94,0.3)" }}>
+                                {soal.jawaban}
+                              </span>
+                            )}
+                            {soal.jawabanBS && soal.jawabanBS.map((ans, i) => (
+                              <span key={i} className="font-display text-xs font-bold px-2.5 py-0.5 rounded-lg"
+                                style={{
+                                  background: ans === "B" ? "rgba(34,197,94,0.15)" : "rgba(239,68,68,0.15)",
+                                  border: `1px solid ${ans === "B" ? "rgba(34,197,94,0.3)" : "rgba(239,68,68,0.3)"}`,
+                                  color: ans === "B" ? "#86efac" : "#fca5a5",
+                                }}>
+                                ({i + 1}) {ans}
+                              </span>
+                            ))}
                           </div>
                         )}
                       </div>
