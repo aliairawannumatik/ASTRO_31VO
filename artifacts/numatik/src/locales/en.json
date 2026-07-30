@@ -3237,17 +3237,13 @@
           "label": "REPRESENTING SETS, EMPTY SET AND UNIVERSAL SET",
           "desc": "Set-builder notation, listing members, empty set (∅), universal set (S)"
         },
-        "diagramVenn": {
-          "label": "VENN DIAGRAMS",
-          "desc": "Reading and drawing Venn diagrams, finding members from a Venn diagram"
-        },
         "himpunanBagian": {
           "label": "SUBSETS",
           "desc": "Subset notation ⊂ and ⊄, finding subsets, number of subsets = 2ⁿ"
         },
-        "operasiHimpunan": {
-          "label": "SET OPERATIONS",
-          "desc": "Intersection (∩), union (∪), difference (−), complement (Aᶜ), set word problems"
+        "operasiVennKontekstual": {
+          "label": "SET OPERATIONS, VENN DIAGRAM AND CONTEXTUAL PROBLEM SOLVING RELATED TO SETS",
+          "desc": "Set operations (∩, ∪, −, ᶜ), Venn diagrams, and contextual problem solving"
         }
       },
       "pengertianKeanggotaan": {

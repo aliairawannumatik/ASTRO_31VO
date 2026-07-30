@@ -3237,17 +3237,13 @@
           "label": "集合の表し方・空集合・全体集合",
           "desc": "集合の内包表記、要素の列挙、空集合（∅）、全体集合（S）"
         },
-        "diagramVenn": {
-          "label": "ベン図",
-          "desc": "ベン図の読み方と書き方、ベン図から要素を求める"
-        },
         "himpunanBagian": {
           "label": "部分集合",
           "desc": "部分集合の記号 ⊂ と ⊄、部分集合の個数 = 2ⁿ"
         },
-        "operasiHimpunan": {
-          "label": "集合の演算",
-          "desc": "共通部分（∩）、和集合（∪）、差集合（−）、補集合（Aᶜ）、文章題"
+        "operasiVennKontekstual": {
+          "label": "集合の演算・ベン図・集合を使った文脈的な問題解決",
+          "desc": "集合の演算（∩, ∪, −, ᶜ）、ベン図、文脈的な問題解決"
         }
       },
       "pengertianKeanggotaan": {

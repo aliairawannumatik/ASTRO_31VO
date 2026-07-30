@@ -3,15 +3,14 @@ import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
-import { Info, List, CircleDot, GitBranch, Combine, ChevronRight } from "lucide-react";
+import { Info, List, GitBranch, Combine, ChevronRight } from "lucide-react";
 
 /* ── Visual config (non-translatable) ────────────────────── */
 const subtopicsConfig = [
-  { key: "pengertianKeanggotaan", path: "/latihan-mandiri/kelas-7/himpunan/pengertian-keanggotaan", soal: 15, icon: Info,      gradient: "from-blue-900/40 to-indigo-900/30",   border: "border-blue-500/30",   badge: "bg-blue-500/20 text-blue-300 border-blue-400/40",     iconBg: "bg-blue-500/20",   iconColor: "text-blue-400",   leftBar: "from-blue-400 to-indigo-500" },
-  { key: "menyatakanHimpunan",    path: "/latihan-mandiri/kelas-7/himpunan/menyatakan-himpunan",    soal: 15, icon: List,      gradient: "from-violet-900/40 to-purple-900/30", border: "border-violet-500/30", badge: "bg-violet-500/20 text-violet-300 border-violet-400/40", iconBg: "bg-violet-500/20", iconColor: "text-violet-400", leftBar: "from-violet-400 to-purple-500" },
-  { key: "diagramVenn",           path: "/latihan-mandiri/kelas-7/himpunan/diagram-venn",           soal: 15, icon: CircleDot, gradient: "from-emerald-900/40 to-teal-900/30",   border: "border-emerald-500/30", badge: "bg-emerald-500/20 text-emerald-300 border-emerald-400/40", iconBg: "bg-emerald-500/20", iconColor: "text-emerald-400", leftBar: "from-emerald-400 to-teal-500" },
-  { key: "himpunanBagian",        path: "/latihan-mandiri/kelas-7/himpunan/himpunan-bagian",        soal: 15, icon: GitBranch, gradient: "from-orange-900/40 to-amber-900/30",   border: "border-orange-500/30", badge: "bg-orange-500/20 text-orange-300 border-orange-400/40", iconBg: "bg-orange-500/20", iconColor: "text-orange-400", leftBar: "from-orange-400 to-amber-500" },
-  { key: "operasiHimpunan",       path: "/latihan-mandiri/kelas-7/himpunan/operasi-himpunan",       soal: 15, icon: Combine,   gradient: "from-rose-900/40 to-pink-900/30",     border: "border-rose-500/30",   badge: "bg-rose-500/20 text-rose-300 border-rose-400/40",     iconBg: "bg-rose-500/20",   iconColor: "text-rose-400",   leftBar: "from-rose-400 to-pink-500" },
+  { key: "pengertianKeanggotaan",  path: "/latihan-mandiri/kelas-7/himpunan/pengertian-keanggotaan", soal: 15, icon: Info,      gradient: "from-blue-900/40 to-indigo-900/30",   border: "border-blue-500/30",   badge: "bg-blue-500/20 text-blue-300 border-blue-400/40",     iconBg: "bg-blue-500/20",   iconColor: "text-blue-400",   leftBar: "from-blue-400 to-indigo-500" },
+  { key: "menyatakanHimpunan",     path: "/latihan-mandiri/kelas-7/himpunan/menyatakan-himpunan",    soal: 15, icon: List,      gradient: "from-violet-900/40 to-purple-900/30", border: "border-violet-500/30", badge: "bg-violet-500/20 text-violet-300 border-violet-400/40", iconBg: "bg-violet-500/20", iconColor: "text-violet-400", leftBar: "from-violet-400 to-purple-500" },
+  { key: "himpunanBagian",         path: "/latihan-mandiri/kelas-7/himpunan/himpunan-bagian",        soal: 15, icon: GitBranch, gradient: "from-orange-900/40 to-amber-900/30",   border: "border-orange-500/30", badge: "bg-orange-500/20 text-orange-300 border-orange-400/40", iconBg: "bg-orange-500/20", iconColor: "text-orange-400", leftBar: "from-orange-400 to-amber-500" },
+  { key: "operasiVennKontekstual", path: "/latihan-mandiri/kelas-7/himpunan/operasi-himpunan",       soal: 15, icon: Combine,   gradient: "from-rose-900/40 to-pink-900/30",     border: "border-rose-500/30",   badge: "bg-rose-500/20 text-rose-300 border-rose-400/40",     iconBg: "bg-rose-500/20",   iconColor: "text-rose-400",   leftBar: "from-rose-400 to-pink-500" },
 ];
 
 const HimpunanPage = () => {

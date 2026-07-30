@@ -3237,17 +3237,13 @@
           "label": "MENYATAKAN SUATU HIMPUNAN, HIMPUNAN KOSONG DAN HIMPUNAN SEMESTA",
           "desc": "Notasi pembentuk himpunan, mendaftar anggota, himpunan kosong (∅), semesta (S)"
         },
-        "diagramVenn": {
-          "label": "DIAGRAM VENN",
-          "desc": "Membaca dan membuat diagram Venn, menentukan anggota dari diagram Venn"
-        },
         "himpunanBagian": {
           "label": "HIMPUNAN BAGIAN",
           "desc": "Notasi ⊂ dan ⊄, menentukan himpunan bagian, banyak himpunan bagian = 2ⁿ"
         },
-        "operasiHimpunan": {
-          "label": "OPERASI HIMPUNAN",
-          "desc": "Irisan (∩), gabungan (∪), selisih (−), komplemen (Aᶜ), soal cerita himpunan"
+        "operasiVennKontekstual": {
+          "label": "OPERASI HIMPUNAN, DIAGRAM VENN DAN PEMECAHAN MASALAH KONTEKSTUAL YANG BERKAITAN DENGAN HIMPUNAN",
+          "desc": "Operasi himpunan (∩, ∪, −, ᶜ), diagram Venn, dan pemecahan masalah kontekstual himpunan"
         }
       },
       "pengertianKeanggotaan": {
