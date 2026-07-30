@@ -478,17 +478,17 @@ const TKASoalAsli2025Page = () => {
               {
                 key: "p1",
                 correct: "benar",
-                text: <span>Untuk checkout sebesar <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp50.000</span>, voucher yang tepat untuk mendapat cashback terbesar adalah <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Voucher D</span>.</span>,
+                text: <img src="/tka-2025-soal3-p1.png" alt="Pernyataan 1 soal 3" className="max-w-full rounded-lg border border-white/10" />,
               },
               {
                 key: "p2",
                 correct: "salah",
-                text: <span>Untuk checkout sebesar <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp200.000</span>, voucher yang tepat untuk mendapat cashback terbesar adalah <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Voucher B</span>.</span>,
+                text: <img src="/tka-2025-soal3-p2.png" alt="Pernyataan 2 soal 3" className="max-w-full rounded-lg border border-white/10" />,
               },
               {
                 key: "p3",
                 correct: "salah",
-                text: <span>Untuk checkout sebesar <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp2.500.000</span>, voucher yang tepat untuk mendapat cashback terbesar adalah <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Voucher A</span>.</span>,
+                text: <img src="/tka-2025-soal3-p3.png" alt="Pernyataan 3 soal 3" className="max-w-full rounded-lg border border-white/10" />,
               },
             ]} />
             <PembahasanBtn n={3} />
