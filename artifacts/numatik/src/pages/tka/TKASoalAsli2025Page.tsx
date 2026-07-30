@@ -440,25 +440,25 @@ const TKASoalAsli2025Page = () => {
             <ComplexMCQ qn={2} items={[
               { text: "Voucher A", benar: true },
               { text: "Voucher B", benar: false },
-              { text: "Voucher C", benar: true },
-              { text: "Voucher D", benar: false },
+              { text: "Voucher C", benar: false },
+              { text: "Voucher D", benar: true },
             ]} />
             <PembahasanBtn n={2} />
             {expandedPembahasan.has(2) && (
               <div className="mt-3 space-y-2">
-                <PBJawaban>A dan C (Voucher A dan Voucher C)</PBJawaban>
+                <PBJawaban>A dan D (Voucher A dan Voucher D)</PBJawaban>
                 <PBKonsep>
                   <p>Cashback = rate% × nominal belanjaan, maksimal dibatasi cap voucher</p>
                   <p>Agar cashback &gt; Rp10.000 dari belanjaan <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp50.000</span>:</p>
                   <div className="my-1"><BlockMath math="\text{rate} \times 50.000 > 10.000 \Rightarrow \text{rate} > 20\%" /></div>
-                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Langsung cek apakah rate voucher &gt; 20% — tidak perlu hitung semuanya!</p>
+                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Cek rate &gt; 20%, lalu pastikan cap ≥ Rp10.000 agar cashback tidak terpotong.</p>
                 </PBKonsep>
                 <PBSteps>
                   <S n={1}><p>Syarat: cashback &gt; Rp10.000 untuk belanjaan Rp50.000</p></S>
-                  <S n={2}><p><span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Voucher A:</span> rate 25% × Rp50.000 = Rp12.500 &gt; Rp10.000 ✓</p></S>
-                  <S n={3}><p><span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>Voucher B:</span> rate ≤ 20%, cashback ≤ Rp10.000 ✗</p></S>
-                  <S n={4}><p><span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Voucher C:</span> rate &gt; 20%, cashback &gt; Rp10.000 ✓</p></S>
-                  <S n={5}><p><span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>Voucher D:</span> cashback tepat Rp10.000 (tidak lebih dari) ✗</p></S>
+                  <S n={2}><p><span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Voucher A:</span> 25% × Rp50.000 = Rp12.500, cap Rp100.000 → cashback <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp12.500</span> &gt; Rp10.000 ✓</p></S>
+                  <S n={3}><p><span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>Voucher B:</span> 5% × Rp50.000 = Rp2.500, cap Rp200.000 → cashback <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp2.500</span> &lt; Rp10.000 ✗</p></S>
+                  <S n={4}><p><span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>Voucher C:</span> 10% × Rp50.000 = Rp5.000, cap Rp20.000 → cashback <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp5.000</span> &lt; Rp10.000 ✗</p></S>
+                  <S n={5}><p><span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Voucher D:</span> 40% × Rp50.000 = Rp20.000, cap Rp20.000 → cashback <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp20.000</span> &gt; Rp10.000 ✓</p></S>
                 </PBSteps>
               </div>
             )}
