@@ -1,27 +1,28 @@
 kind = "web"
-    previewPath = "/"
-    title = "Numatik"
-    version = "1.0.0"
-    id = "artifacts/numatik"
-    router = "path"
+      previewPath = "/"
+      title = "Numatik"
+      version = "1.0.0"
+      id = "artifacts/numatik"
+      router = "path"
 
-    [[services]]
-    name = "web"
-    paths = [ "/" ]
-    localPort = 5000
+      [[services]]
+      name = "web"
+      paths = [ "/" ]
+      localPort = 5000
 
-    [services.development]
-    run = "pnpm --filter @workspace/numatik run dev"
+      [services.development]
+      run = "pnpm --filter @workspace/numatik run dev"
 
-    [services.production]
-    build = [ "pnpm", "--filter", "@workspace/numatik", "run", "build" ]
-    serve = "static"
-    publicDir = "artifacts/numatik/dist/public"
+      [services.production]
+      build = [ "pnpm", "--filter", "@workspace/numatik", "run", "build" ]
+      serve = "static"
+      publicDir = "artifacts/numatik/dist/public"
 
-    [[services.production.rewrites]]
-    from = "/*"
-    to = "/index.html"
+      [[services.production.rewrites]]
+      from = "/*"
+      to = "/index.html"
 
-    [services.env]
-    PORT = "5000"
-    BASE_PATH = "/"
+      [services.env]
+      PORT = "5000"
+      BASE_PATH = "/"
+    

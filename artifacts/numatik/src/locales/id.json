@@ -6117,6 +6117,40 @@
           "title": "Panjang Rantai Gir Sepeda Motor",
           "content": "Gambar di atas menunjukkan dua gir sepeda motor yang dihubungkan oleh rantai. Diameter gir besar (Q₁) adalah 24 cm dan diameter gir kecil (Q₂) adalah 12 cm, sedangkan jarak antara kedua pusat gir adalah 42 cm. Hitunglah panjang rantai dari titik singgung A ke titik singgung B pada bagian lurus atas!"
         }
+      },
+      "gspd": {
+        "h1": "GARIS SINGGUNG PERSEKUTUAN DALAM (GSPD)",
+        "subtitle": "Kelas 8 · Garis Singgung Lingkaran",
+        "formulaBoxTitle": "📌 Rumus Garis Singgung Persekutuan Dalam",
+        "legendP": "Jarak antar pusat O₁O₂",
+        "legendRr": "Jumlah kedua jari-jari",
+        "legendSyaratL": "Syarat ada:",
+        "legendRelation": "Selalu berlaku",
+        "diffMudah": "Mudah",
+        "diffSedang": "Sedang",
+        "diffSulit": "Sulit",
+        "backToTopic": "Garis Singgung Lingkaran",
+        "q1": {
+          "title": "Pengertian GSPD",
+          "content": "Garis Singgung Persekutuan Dalam (GSPD) adalah garis yang menyinggung dua lingkaran dari antara kedua pusat, sehingga memotong ruas garis O₁O₂.",
+          "pa": "Jelaskan mengapa GSPD 'memotong' garis O₁O₂ sedangkan GSPL tidak.",
+          "pb": "Berapa banyak GSPD yang dapat dibuat pada dua lingkaran yang terpisah?",
+          "pc": "Kapan dua lingkaran tidak memiliki GSPD?"
+        },
+        "q2": {
+          "title": "Rumus GSPD",
+          "pa": "Mengapa pada rumus GSPD digunakan (R + r) bukan (R − r)?",
+          "pb": "Jika p = 17, R = 8, r = 4, hitung d_GSPD",
+          "pc": "Bandingkan rumus GSPL dan GSPD. Apa perbedaannya?"
+        },
+        "q3": {
+          "title": "GSPD – Titik Silang X",
+          "content": "GSPD memotong garis pusat O₁O₂ di titik X. Perbandingan O₁X : XO₂ = R : r."
+        },
+        "q4": {
+          "title": "GSPD – Soal TKA Final",
+          "content": "Dua lingkaran R = 8, r = 6, p = 30. Hitung: GSPD, GSPL, selisihnya, dan sudut yang dibentuk GSPD dengan O₁O₂."
+        }
       }
     }
   },

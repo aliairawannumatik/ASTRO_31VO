@@ -6117,6 +6117,40 @@
           "title": "Length of a Motorbike Chain Drive",
           "content": "The figure above shows two motorbike sprockets connected by a chain. The diameter of the large sprocket (Q₁) is 24 cm and the diameter of the small sprocket (Q₂) is 12 cm, while the distance between the two centers is 42 cm. Calculate the length of the chain from tangent point A to tangent point B on the straight upper portion!"
         }
+      },
+      "gspd": {
+        "h1": "INTERNAL COMMON TANGENT (ICT)",
+        "subtitle": "Grade 8 · Tangent Lines to a Circle",
+        "formulaBoxTitle": "📌 Internal Common Tangent Formula",
+        "legendP": "Distance between centers O₁O₂",
+        "legendRr": "Sum of both radii",
+        "legendSyaratL": "Exists when:",
+        "legendRelation": "Always holds",
+        "diffMudah": "Easy",
+        "diffSedang": "Medium",
+        "diffSulit": "Hard",
+        "backToTopic": "Tangent Lines to a Circle",
+        "q1": {
+          "title": "Definition of ICT",
+          "content": "An Internal Common Tangent (ICT) is a line tangent to two circles from between the two centers, thus intersecting segment O₁O₂.",
+          "pa": "Explain why the ICT 'crosses' line O₁O₂ while the ECT does not.",
+          "pb": "How many ICTs can be drawn for two separate circles?",
+          "pc": "When do two circles have no ICT?"
+        },
+        "q2": {
+          "title": "ICT Formula",
+          "pa": "Why does the ICT formula use (R + r) instead of (R − r)?",
+          "pb": "If p = 17, R = 8, r = 4, find d_ICT",
+          "pc": "Compare the ECT and ICT formulas. What is the difference?"
+        },
+        "q3": {
+          "title": "ICT – Intersection Point X",
+          "content": "The ICT intersects the line of centers O₁O₂ at point X. The ratio O₁X : XO₂ = R : r."
+        },
+        "q4": {
+          "title": "ICT – Final Exam Problem",
+          "content": "Two circles: R = 8, r = 6, p = 30. Find: ICT, ECT, their difference, and the angle the ICT makes with O₁O₂."
+        }
       }
     }
   },
