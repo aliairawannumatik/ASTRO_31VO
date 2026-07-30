@@ -336,7 +336,12 @@ const TKASoalAsli2025Page = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
 
         {/* ── Header ── */}
-        <div className={`backdrop-blur border border-amber-500/30 rounded-2xl p-5 mb-6 ${isDark ? "bg-card/80" : "bg-white shadow-sm"}`}>
+        <div className={`relative backdrop-blur border border-amber-500/30 rounded-2xl p-5 mb-6 ${isDark ? "bg-card/80" : "bg-white shadow-sm"}`}>
+          <img
+            src="/logo-numatik.png"
+            alt="Numatik"
+            className="absolute top-3 left-3 w-10 h-10 object-contain"
+          />
           <div className="text-center mb-4">
             <div className="inline-flex items-center gap-2 bg-amber-500/15 border border-amber-400/40 rounded-full px-4 py-1 mb-3">
               <span className="text-amber-400 text-[10px] font-body font-bold uppercase tracking-widest">✦ SOAL ASLI ✦</span>
@@ -1747,7 +1752,6 @@ const TKASoalAsli2025Page = () => {
 
         {/* ── Footer ── */}
         <div className={`mt-8 border rounded-xl p-4 text-center ${isDark ? "bg-green-900/20 border-green-500/30" : "bg-green-50 border-green-300"}`}>
-          <p className={`font-display font-bold text-sm mb-1 ${isDark ? "text-green-300" : "text-green-700"}`}>✅ Semua 30 Soal Lengkap!</p>
           <p className={`text-xs font-body ${isDark ? "text-white/50" : "text-gray-500"}`}>Sumber: Soal Asli TKA Matematika SMP Tahun 2025.</p>
         </div>
 
