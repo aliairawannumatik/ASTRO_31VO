@@ -607,7 +607,7 @@ const TKASoalAsli2025Page = () => {
             <p className={`font-body text-sm leading-relaxed mb-3 ${isDark ? "text-white/80" : "text-gray-700"}`}>
               Berdasarkan saran FDA, berapa suhu lemari pendingin yang direkomendasikan untuk menyimpan daging ayam?
             </p>
-            <MCQ qn={5} correct={0} cols={1} options={[
+            <MCQ qn={5} correct={2} cols={1} options={[
               "A. 18 derajat di bawah 0 °C",
               "B. 18 derajat di atas 0 °C",
               "C. 19 derajat di bawah 0 °C",
@@ -616,18 +616,15 @@ const TKASoalAsli2025Page = () => {
             <PembahasanBtn n={5} />
             {expandedPembahasan.has(5) && (
               <div className="mt-3 space-y-2">
-                <PBJawaban>A. 18 derajat di bawah 0 °C</PBJawaban>
+                <PBJawaban>C. 19 derajat di bawah 0 °C</PBJawaban>
                 <PBKonsep>
-                  <p>Konversi suhu Fahrenheit (°F) ke Celsius (°C):</p>
-                  <div className="my-1"><BlockMath math="°C = \frac{(°F - 32) \times 5}{9}" /></div>
-                  <p>Daging unggas (ayam): FDA merekomendasikan <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>0°F atau di bawahnya</span></p>
-                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Hafalkan 0°F ≈ −18°C dan 32°F = 0°C (titik beku air)</p>
+                  <p>Daging ayam termasuk <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>daging unggas</span>. Baca suhu penyimpanan daging unggas langsung dari tabel FDA pada gambar.</p>
+                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Suhu di bawah 0°C berarti negatif — "19 derajat di bawah 0°C" = −19°C.</p>
                 </PBKonsep>
                 <PBSteps>
-                  <S n={1}><p>Dari grafik FDA, suhu penyimpanan daging ayam = <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>0°F</span></p></S>
-                  <S n={2}><p>Konversi ke Celsius:</p></S>
-                  <div className="ml-7"><BlockMath math="°C = \frac{(0 - 32) \times 5}{9} = \frac{-160}{9} \approx -17{,}8°C \approx -18°C" /></div>
-                  <S n={3}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>−18°C = 18 derajat di BAWAH 0°C ✓</p></S>
+                  <S n={1}><p>Daging ayam = daging unggas (poultry)</p></S>
+                  <S n={2}><p>Dari tabel FDA: suhu penyimpanan daging unggas = <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>−19°C</span></p></S>
+                  <S n={3}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>−19°C = 19 derajat di BAWAH 0°C → Jawaban C ✓</p></S>
                 </PBSteps>
               </div>
             )}
