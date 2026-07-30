@@ -10,10 +10,19 @@ import "katex/dist/katex.min.css";
 const BilanganBulatPage = () => {
   const navigate = useNavigate();
   const { isDark, theme } = useTheme();
+  const [activeTab, setActiveTab]                   = useState<"materi" | "soal">("materi");
+  const [expandedMateri, setExpandedMateri]         = useState<number[]>([0, 1, 2, 3, 4]);
   const [expandedPembahasan, setExpandedPembahasan] = useState<Set<number>>(new Set());
   const [selectedAnswers, setSelectedAnswers]       = useState<Record<number, number>>({});
   const [selectedComplex, setSelectedComplex]       = useState<Record<number, Set<number>>>({});
   const [selectedTF, setSelectedTF]                 = useState<Record<string, string>>({});
+
+  const toggleMateri = (idx: number) => {
+    playPopSound();
+    setExpandedMateri(prev =>
+      prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]
+    );
+  };
 
   const togglePembahasan = (n: number) => {
     setExpandedPembahasan(prev => {
@@ -309,8 +318,168 @@ const BilanganBulatPage = () => {
           </ul>
         </div>
 
+        {/* ── Tab Switcher ── */}
+        <div className={`flex gap-2 mb-6 p-1 rounded-xl ${isDark ? "bg-white/4 border border-white/8" : "bg-gray-100 border border-gray-200"}`}>
+          {([
+            { key: "materi" as const, label: "📘 Ringkasan Materi" },
+            { key: "soal"   as const, label: "✏️ Latihan Soal" },
+          ] as const).map(tab => (
+            <button
+              key={tab.key}
+              onClick={() => { playPopSound(); setActiveTab(tab.key); }}
+              className="flex-1 font-display text-xs py-2.5 px-3 rounded-lg cursor-pointer transition-all duration-200 font-bold"
+              style={activeTab === tab.key ? {
+                background: "linear-gradient(135deg, rgba(99,102,241,0.6), rgba(139,92,246,0.4))",
+                color: "#e0e7ff",
+                boxShadow: "0 2px 12px rgba(99,102,241,0.3)",
+                border: "1px solid rgba(167,139,250,0.4)",
+              } : {
+                color: isDark ? "rgba(255,255,255,0.45)" : "#6b7280",
+                background: "transparent",
+                border: "1px solid transparent",
+              }}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* ── Ringkasan Materi ── */}
+        {activeTab === "materi" && (
+          <div className="space-y-3">
+            {([
+              {
+                heading: "A. Pengertian Bilangan Bulat",
+                content: [
+                  "Bilangan bulat adalah himpunan yang terdiri dari bilangan bulat negatif, nol, dan bilangan bulat positif.",
+                  "Notasi: ℤ = {…, −3, −2, −1, 0, 1, 2, 3, …}",
+                  "",
+                  "Himpunan bagian bilangan bulat:",
+                  "• Bilangan bulat positif: {1, 2, 3, …} = bilangan asli",
+                  "• Bilangan cacah: {0, 1, 2, 3, …} ⊂ ℤ",
+                  "• Bilangan bulat negatif: {−1, −2, −3, …}",
+                  "",
+                  "Di garis bilangan: makin ke kanan → makin besar.",
+                  "Contoh: −5 < −2 < 0 < 3 < 7",
+                ],
+              },
+              {
+                heading: "B. Nilai Mutlak",
+                content: [
+                  "Nilai mutlak |a| menyatakan jarak bilangan a dari 0 pada garis bilangan (selalu ≥ 0).",
+                  "",
+                  "Definisi:",
+                  "• |a| = a,  jika a ≥ 0",
+                  "• |a| = −a, jika a < 0",
+                  "",
+                  "Contoh: |−7| = 7,  |5| = 5,  |0| = 0",
+                  "",
+                  "💡 Trik: Nilai mutlak = 'buang' tanda minusnya.",
+                ],
+              },
+              {
+                heading: "C. Penjumlahan & Pengurangan",
+                content: [
+                  "Aturan tanda penjumlahan:",
+                  "• (+) + (+) = (+)  →  3 + 5 = 8",
+                  "• (−) + (−) = (−)  →  −3 + (−5) = −8",
+                  "• Beda tanda → ambil selisih nilai mutlak, tanda = tanda yang lebih besar",
+                  "  Contoh: −8 + 3 = −5  (karena |−8| > |3|, hasilnya negatif)",
+                  "",
+                  "Pengurangan → ubah ke penjumlahan:",
+                  "a − b = a + (−b)",
+                  "Contoh: 5 − (−3) = 5 + 3 = 8",
+                ],
+              },
+              {
+                heading: "D. Perkalian & Pembagian",
+                content: [
+                  "Aturan tanda perkalian/pembagian:",
+                  "• (+) × (+) = (+)  →  4 × 3 = 12",
+                  "• (−) × (−) = (+)  →  −4 × (−3) = 12",
+                  "• (+) × (−) = (−)  →  4 × (−3) = −12",
+                  "• (−) × (+) = (−)  →  −4 × 3 = −12",
+                  "",
+                  "Aturan yang sama berlaku untuk pembagian (÷).",
+                  "",
+                  "Khusus: 0 × a = 0  dan  0 ÷ a = 0  (untuk a ≠ 0)",
+                  "",
+                  "Pangkat bilangan negatif:",
+                  "• Pangkat genap  → hasil positif: (−2)² = 4",
+                  "• Pangkat ganjil → hasil negatif: (−2)³ = −8",
+                ],
+              },
+              {
+                heading: "E. Urutan Operasi Hitung (Ka–Pa–Ka–Ta)",
+                content: [
+                  "Urutan pengerjaan operasi hitung campuran:",
+                  "",
+                  "① Ka — Kurung  ( ) dulu",
+                  "② Pa — Pangkat / Akar",
+                  "③ Ka — Kali (×) dan Bagi (÷) dari kiri ke kanan",
+                  "④ Ta — Tambah (+) dan Kurang (−) dari kiri ke kanan",
+                  "",
+                  "💡 Ingat: Kali dan Bagi punya prioritas SAMA → kerjakan dari kiri!",
+                  "   Begitu pula Tambah dan Kurang.",
+                  "",
+                  "Contoh: −18 + 42 ÷ (−6) × 3",
+                  "= −18 + (−7) × 3",
+                  "= −18 + (−21)",
+                  "= −39",
+                ],
+              },
+            ] as { heading: string; content: string[] }[]).map((sec, idx) => {
+              const isOpen = expandedMateri.includes(idx);
+              const colors = [
+                { border: "border-indigo-400/50",  badge: "bg-indigo-500/30 text-indigo-200 border-indigo-400/40"  },
+                { border: "border-violet-400/50",  badge: "bg-violet-500/30 text-violet-200 border-violet-400/40"  },
+                { border: "border-purple-400/50",  badge: "bg-purple-500/30 text-purple-200 border-purple-400/40"  },
+                { border: "border-fuchsia-400/50", badge: "bg-fuchsia-500/30 text-fuchsia-200 border-fuchsia-400/40" },
+                { border: "border-sky-400/50",     badge: "bg-sky-500/30 text-sky-200 border-sky-400/40"           },
+              ];
+              const c = colors[idx % colors.length];
+              return (
+                <div key={idx} className={`relative rounded-2xl overflow-hidden border transition-all duration-300 ${c.border} ${
+                  isDark
+                    ? isOpen ? "bg-gradient-to-br from-indigo-950/60 to-slate-900/95" : "bg-white/3"
+                    : isOpen ? "bg-indigo-50 shadow-sm" : "bg-white border-gray-200"
+                }`}>
+                  {isOpen && <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl bg-gradient-to-b from-indigo-500 to-violet-600" />}
+                  <button onClick={() => toggleMateri(idx)} className="w-full flex items-center gap-3 px-5 py-4 cursor-pointer text-left group pl-6">
+                    <span className={`flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold border ${c.badge}`}>
+                      {String.fromCharCode(65 + idx)}
+                    </span>
+                    <span className={`font-display text-sm font-bold flex-1 leading-snug transition-colors ${isDark ? "text-white/90 group-hover:text-white" : "text-gray-800 group-hover:text-indigo-700"}`}>
+                      {sec.heading}
+                    </span>
+                    <span className={`shrink-0 transition-colors ${isDark ? "text-white/30 group-hover:text-white/60" : "text-gray-400 group-hover:text-gray-600"}`}>
+                      {isOpen ? "▲" : "▼"}
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <div className={`px-6 pb-5 pt-1 border-t space-y-1 font-body text-sm leading-relaxed ${isDark ? "border-white/5 text-white/80" : "border-indigo-100 text-gray-700"}`}>
+                      {sec.content.map((line, li) =>
+                        line === "" ? <div key={li} className="h-1" /> : <div key={li}>{line}</div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+            <div className={`mt-2 px-4 py-3 rounded-xl flex items-center gap-2.5 ${isDark ? "bg-indigo-500/6 border border-indigo-500/20" : "bg-indigo-50 border border-indigo-200"}`}>
+              <span className="text-amber-400">💡</span>
+              <p className={`font-body text-xs leading-relaxed ${isDark ? "text-white/50" : "text-gray-500"}`}>
+                Pelajari semua materi di atas, lalu uji pemahamanmu di tab{" "}
+                <button onClick={() => { playPopSound(); setActiveTab("soal"); }} className={`font-semibold underline cursor-pointer ${isDark ? "text-violet-300" : "text-indigo-600"}`}>
+                  Latihan Soal
+                </button>.
+              </p>
+            </div>
+          </div>
+        )}
+
         {/* ── Soal-Soal ── */}
-        <div className="flex flex-col gap-5">
+        {activeTab === "soal" && <div className="flex flex-col gap-5">
 
           {/* ══ SOAL 1 — PGS ══ */}
           <Soal n={1} tipe="PGS">
@@ -761,7 +930,7 @@ const BilanganBulatPage = () => {
             )}
           </Soal>
 
-        </div>{/* end soal-soal */}
+        </div>}{/* end soal-soal */}
 
         {/* ── Footer ── */}
         <div className={`mt-8 border rounded-xl p-4 text-center ${isDark ? "bg-blue-900/20 border-blue-500/30" : "bg-blue-50 border-blue-300"}`}>
