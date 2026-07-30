@@ -1,0 +1,60 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Lingkaran" di Kelas 8
+sudah selesai 100% trilingual (terverifikasi dengan bukti konkret,
+bukan cuma klaim). Sekarang lanjut topik berikutnya: "Garis Singgung
+Lingkaran".
+
+TUGAS SEKARANG — investigasi saja, JANGAN ubah kode apa pun:
+Topik "Garis Singgung Lingkaran" di Kelas 8 Tugas-Latihan Mandiri.
+
+1. Cari halaman/komponen untuk topik ini
+2. Laporkan dengan BUKTI KONKRET (nomor baris, cuplikan kode aktual
+   — bukan cuma ringkasan/perkiraan):
+   - Apakah topik ini punya beberapa sub-halaman, atau cuma satu
+     halaman?
+   - Kalau ada beberapa sub-halaman, sebutkan nama file, nama
+     sub-topiknya, dan HITUNG LANGSUNG jumlah soal tiap halaman
+     (tunjukkan cara hitungnya: jumlah entri Qf()/Q() di array, atau
+     .length array, dengan nomor baris)
+   - Cek file "orphan" (ada di folder tapi tidak di-route)
+   - Cek apakah index/hub page menampilkan jumlah soal yang benar
+     (cocok dengan hasil hitungan langsung dari poin di atas)
+   - Apakah soal-soalnya array data (.map(), helper Q()/Qf()) atau
+     JSX inline?
+   - Apakah array questions sudah di dalam komponen (akses t()) atau
+     masih di level modul?
+   - Apakah ada isDark/useTheme atau format flat dark-only?
+   - Diagram/gambar (SVG, <img>, atau komponen reusable seperti
+     CircleDiagram) untuk visualisasi garis singgung, segitiga
+     siku-siku, jarak pusat-ke-pusat, dll — berapa banyak soal yang
+     pakai, dan KALAU ada komponen diagram reusable, cek juga apakah
+     ia menerima props label teks Indonesia yang tampil di layar
+     (seperti kasus CoordPlane dulu) — WAJIB dicek dari awal
+   - Notasi matematika (rumus panjang garis singgung, Pythagoras,
+     lingkaran luar/dalam, garis singgung persekutuan dalam/luar) —
+     InlineMath, BlockMath, atau campur teks?
+   - Label "Langkah N:" atau "Teorema:" sebagai part.label?
+   - Tabel, pilihan ganda A/B/C/D, soal cerita?
+   - Status useTranslation() — sudah dipakai untuk apa saja?
+   - CEK MENYELURUH dengan grep "\\text{" di SETIAP file, laporkan
+     JUMLAH AKTUAL (bukan perkiraan) — di topik-topik sebelumnya,
+     perkiraan awal SERING meleset jauh dari jumlah aktual
+
+PENTING — INTEGRITAS LAPORAN:
+Laporkan HANYA apa yang benar-benar kamu baca dan verifikasi dari
+kode. JANGAN membuat klaim tentang status "sudah selesai" atau
+"trilingual" untuk bagian manapun kecuali kamu benar-benar melihat
+buktinya (t() calls aktual, locale key aktual di file JSON). Kalau
+tidak yakin atau belum sempat cek sesuatu, katakan demikian secara
+eksplisit daripada menebak.
+
+JANGAN edit file apa pun, JANGAN install package, JANGAN jalankan build.
+Ini murni laporan/assessment saja.
