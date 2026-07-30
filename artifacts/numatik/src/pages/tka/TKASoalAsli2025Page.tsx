@@ -474,52 +474,54 @@ const TKASoalAsli2025Page = () => {
               untuk mendapatkan cashback terbesar!
             </p>
             <p className={`text-xs font-body font-semibold mb-2 ${isDark ? "text-violet-300" : "text-violet-600"}`}>Klik pada kotak yang sesuai!</p>
-            <div className="overflow-x-auto">
-              <table className="w-full text-xs font-body border-collapse">
-                <thead>
-                  <tr className={isDark ? "bg-white/10" : "bg-gray-100"}>
-                    <th className={`border px-3 py-2 text-left ${isDark ? "border-white/20 text-white" : "border-gray-300 text-gray-700"}`}>Pernyataan</th>
-                    <th className={`border px-3 py-2 text-center w-20 ${isDark ? "border-white/20 text-white" : "border-gray-300 text-gray-700"}`}>Benar</th>
-                    <th className={`border px-3 py-2 text-center w-20 ${isDark ? "border-white/20 text-white" : "border-gray-300 text-gray-700"}`}>Salah</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    { n: 1, img: "/tka-2025-soal3-p1.png", alt: "Pernyataan 1 soal 3" },
-                    { n: 2, img: "/tka-2025-soal3-p2.png", alt: "Pernyataan 2 soal 3" },
-                    { n: 3, img: "/tka-2025-soal3-p3.png", alt: "Pernyataan 3 soal 3" },
-                  ].map(({ n, img, alt }) => (
-                    <tr key={n}>
-                      <td className={`border px-3 py-2 ${isDark ? "border-white/10" : "border-gray-200"}`}>
-                        <img src={img} alt={alt} className="max-w-full rounded-lg border border-white/10" />
-                      </td>
-                      <td className={`border px-2 py-2 text-center ${isDark ? "border-white/10" : "border-gray-200"}`}>
-                        <div className={`w-full py-1 rounded text-center text-xs font-bold ${isDark ? "bg-white/5 text-white/20" : "bg-gray-50 text-gray-400 border border-gray-200"}`}>○</div>
-                      </td>
-                      <td className={`border px-2 py-2 text-center ${isDark ? "border-white/10" : "border-gray-200"}`}>
-                        <div className={`w-full py-1 rounded text-center text-xs font-bold ${isDark ? "bg-white/5 text-white/20" : "bg-gray-50 text-gray-400 border border-gray-200"}`}>○</div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <TrueFalseTable qn={3} rows={[
+              {
+                key: "p1",
+                correct: "benar",
+                text: <span>Untuk checkout sebesar <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp50.000</span>, voucher yang tepat untuk mendapat cashback terbesar adalah <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Voucher D</span>.</span>,
+              },
+              {
+                key: "p2",
+                correct: "salah",
+                text: <span>Untuk checkout sebesar <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp200.000</span>, voucher yang tepat untuk mendapat cashback terbesar adalah <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Voucher B</span>.</span>,
+              },
+              {
+                key: "p3",
+                correct: "salah",
+                text: <span>Untuk checkout sebesar <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp2.500.000</span>, voucher yang tepat untuk mendapat cashback terbesar adalah <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Voucher A</span>.</span>,
+              },
+            ]} />
             <PembahasanBtn n={3} />
             {expandedPembahasan.has(3) && (
               <div className="mt-3 space-y-2">
-                <PBJawaban>Lihat pernyataan pada gambar soal (bergantung data tabel voucher)</PBJawaban>
+                <PBJawaban>Benar / Salah / Salah</PBJawaban>
                 <PBKonsep>
-                  <p>Untuk mendapat cashback terbesar, bandingkan hasil cashback setiap voucher untuk nominal transaksi tertentu:</p>
-                  <div className="my-1"><BlockMath math="\text{cashback}_i = \min(\text{rate}_i \times \text{belanjaan},\; \text{cap}_i)" /></div>
-                  <p>Pilih voucher dengan cashback terbesar dari perhitungan di atas</p>
-                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Kalau belanjaan besar, voucher dengan cap tinggi biasanya lebih menguntungkan</p>
+                  <p>Untuk mendapat cashback terbesar, bandingkan ketiga voucher yang tersedia (A, B, D):</p>
+                  <div className="my-1"><BlockMath math="\text{cashback} = \min(\text{rate} \times \text{belanjaan},\; \text{cap})" /></div>
+                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Belanjaan kecil → pilih rate tinggi; belanjaan besar → cap tinggi lebih menguntungkan.</p>
                 </PBKonsep>
                 <PBSteps>
-                  <S n={1}><p>Identifikasi nominal transaksi di setiap pernyataan</p></S>
-                  <S n={2}><p>Hitung cashback Voucher A: rate_A × nominal, dibatasi cap_A</p></S>
-                  <S n={3}><p>Hitung cashback Voucher B: rate_B × nominal, dibatasi cap_B</p></S>
-                  <S n={4}><p>Hitung cashback Voucher D: rate_D × nominal, dibatasi cap_D</p></S>
-                  <S n={5}><p>Bandingkan ketiga hasil → tentukan voucher dengan cashback terbesar → cek apakah pernyataan benar/salah</p></S>
+                  <S n={1}><p className="font-bold">Pernyataan 1 — Rp50.000 → Voucher D?</p></S>
+                  <S n={2}><div className={`text-xs space-y-0.5 pl-1 ${isDark ? "text-white/80" : "text-gray-700"}`}>
+                    <p>A: 25% × 50.000 = <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp12.500</span> (di bawah cap Rp100.000)</p>
+                    <p>B: 5% × 50.000 = <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp2.500</span> (di bawah cap Rp200.000)</p>
+                    <p>D: 40% × 50.000 = <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp20.000</span> (= cap Rp20.000) ← terbesar ✓</p>
+                    <p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>→ Voucher D memberikan cashback terbesar. BENAR ✓</p>
+                  </div></S>
+                  <S n={3}><p className="font-bold">Pernyataan 2 — Rp200.000 → Voucher B?</p></S>
+                  <S n={4}><div className={`text-xs space-y-0.5 pl-1 ${isDark ? "text-white/80" : "text-gray-700"}`}>
+                    <p>A: 25% × 200.000 = <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp50.000</span> (di bawah cap Rp100.000) ← terbesar</p>
+                    <p>B: 5% × 200.000 = <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp10.000</span> (di bawah cap Rp200.000)</p>
+                    <p>D: 40% × 200.000 = 80.000 → dibatasi cap <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp20.000</span></p>
+                    <p className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>→ Voucher A (Rp50.000) lebih besar dari B (Rp10.000). SALAH ✗</p>
+                  </div></S>
+                  <S n={5}><p className="font-bold">Pernyataan 3 — Rp2.500.000 → Voucher A?</p></S>
+                  <S n={6}><div className={`text-xs space-y-0.5 pl-1 ${isDark ? "text-white/80" : "text-gray-700"}`}>
+                    <p>A: 25% × 2.500.000 = 625.000 → dibatasi cap <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp100.000</span></p>
+                    <p>B: 5% × 2.500.000 = 125.000 → di bawah cap Rp200.000 → <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp125.000</span> ← terbesar</p>
+                    <p>D: 40% × 2.500.000 = 1.000.000 → dibatasi cap <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Rp20.000</span></p>
+                    <p className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>→ Voucher B (Rp125.000) lebih besar dari A (Rp100.000). SALAH ✗</p>
+                  </div></S>
                 </PBSteps>
               </div>
             )}
