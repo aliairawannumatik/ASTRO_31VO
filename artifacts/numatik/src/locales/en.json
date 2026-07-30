@@ -5972,6 +5972,12 @@
           "d": "If the cost per m² is: pond Rp 500,000, garden Rp 200,000, jogging track Rp 150,000 — what is the total budget?"
         }
       }
+    },
+    "garisSinggungLingkaran": {
+      "shared": {
+        "tangentLabel": "Tangent Line",
+        "tangentPointLabel": "tangent point"
+      }
     }
   },
   "settings": {

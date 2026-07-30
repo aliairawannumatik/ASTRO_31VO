@@ -19,9 +19,11 @@ type GSLDiagramProps = {
   values?: Record<string, number>;
   color?: string;
   title?: string;
+  tangentLabel?: string;
+  beltLabel?: string;
 };
 
-const GSLDiagram = ({ variant, size = 240, labels = {}, values = {}, color = "#38bdf8", title }: GSLDiagramProps) => {
+const GSLDiagram = ({ variant, size = 240, labels = {}, values = {}, color = "#38bdf8", title, tangentLabel = "Garis Singgung", beltLabel = "Sabuk" }: GSLDiagramProps) => {
   const { isDark } = useTheme();
   const svgBg = isDark ? "rgba(2,8,23,0.95)" : "rgba(241,245,249,0.97)";
   const r = values.r ?? 65;
@@ -55,7 +57,7 @@ const GSLDiagram = ({ variant, size = 240, labels = {}, values = {}, color = "#3
             <circle cx={tangentX} cy={cy} r={3.5} fill="#f472b6" stroke="var(--icon-stroke)" strokeWidth="1" />
             <text x={tangentX + 7} y={cy + 5} fill="#f472b6" fontSize="12" fontWeight="bold">{labels.T ?? "T"}</text>
             <text x={(cx + tangentX) / 2} y={cy - 8} fill="#60a5fa" fontSize="11" fontWeight="bold">{labels.r ?? "r"}</text>
-            <text x={tangentX + 10} y={cy - r * 0.8} fill="#f472b6" fontSize="11" fontWeight="bold">Garis Singgung</text>
+            <text x={tangentX + 10} y={cy - r * 0.8} fill="#f472b6" fontSize="11" fontWeight="bold">{tangentLabel}</text>
             <text x={tangentX + 5} y={cy - 20} fill="#facc15" fontSize="10">90°</text>
           </svg>
         );
@@ -266,7 +268,7 @@ const GSLDiagram = ({ variant, size = 240, labels = {}, values = {}, color = "#3
             <text x={cx2 - 6} y={cy + 18} fill="#94a3b8" fontSize="12" fontWeight="bold">{labels.O2 ?? "O₂"}</text>
             <text x={(cx1 + cx2) / 2} y={cy + 14} fill="#94a3b8" fontSize="10" fontWeight="bold">{labels.d ?? "d"}</text>
             <text x={cx1 + 5} y={cy - rr / 2} fill={color} fontSize="10" fontWeight="bold">{labels.r ?? "r"}</text>
-            <text x={cx1 + 6} y={cy - rr - 8} fill="#facc15" fontSize="10" fontWeight="bold">Sabuk</text>
+            <text x={cx1 + 6} y={cy - rr - 8} fill="#facc15" fontSize="10" fontWeight="bold">{beltLabel}</text>
           </svg>
         );
       }

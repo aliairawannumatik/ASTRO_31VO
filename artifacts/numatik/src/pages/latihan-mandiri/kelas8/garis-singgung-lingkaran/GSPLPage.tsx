@@ -81,7 +81,7 @@ const DiagramGSPLDuaLingkaran = ({
   );
 };
 
-const DiagramBersinggungLuar = ({ size = 240 }: { size?: number }) => {
+const DiagramBersinggungLuar = ({ size = 240, tangentPointLabel = "titik singgung" }: { size?: number; tangentPointLabel?: string }) => {
   const { isDark } = useTheme();
   const bgFill = isDark ? "rgba(2,8,23,0.97)" : "rgba(241,245,249,0.97)";
   const r1 = 36;
@@ -112,7 +112,7 @@ const DiagramBersinggungLuar = ({ size = 240 }: { size?: number }) => {
       <line x1={ax2} y1={ay2} x2={bx2} y2={by2} stroke="#34d399" strokeWidth="2.2" />
       <line x1={cx1} y1={cy} x2={cx2} y2={cy} stroke="#94a3b8" strokeWidth="1.2" strokeDasharray="4,3" />
       <circle cx={tx} cy={ty} r={3} fill="#facc15" stroke="var(--icon-stroke)" strokeWidth="1" />
-      <text x={tx - 4} y={ty + 16} fill="#facc15" fontSize="9" fontFamily="sans-serif">titik singgung</text>
+      <text x={tx - 4} y={ty + 16} fill="#facc15" fontSize="9" fontFamily="sans-serif">{tangentPointLabel}</text>
       <circle cx={cx1} cy={cy} r={3.5} fill="#94a3b8" stroke="var(--icon-stroke)" strokeWidth="1" />
       <text x={cx1 - 8} y={cy + 17} fill="#94a3b8" fontSize="12" fontWeight="bold" fontFamily="serif">P</text>
       <circle cx={cx2} cy={cy} r={3.5} fill="#94a3b8" stroke="var(--icon-stroke)" strokeWidth="1" />
@@ -196,115 +196,6 @@ const DiagramGir = ({ size = 280 }: { size?: number }) => {
   );
 };
 
-const questions: Q[] = [
-  Qn(1, "Mencari Panjang GSPL dari Gambar", {
-    difficulty: "Mudah",
-    diagram: <DiagramGSPLDuaLingkaran r1px={62} r2px={28} size={240}
-      labelP="M" labelQ="N" labelA="A" labelB="B"
-      labelPA="MA = 9 cm" labelQB="NB = 4 cm" labelPQ="MN = 13 cm" />,
-    content: "Pada gambar di atas, jari-jari lingkaran berpusat di M adalah MA = 9 cm, jari-jari lingkaran berpusat di N adalah NB = 4 cm, dan jarak kedua pusat MN = 13 cm. Hitunglah panjang garis singgung persekutuan luar AB!",
-    parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{MN^2 - (MA - NB)^2} = \\sqrt{13^2 - (9-4)^2}" },
-      { label: "b.", math: "= \\sqrt{169 - 25} = \\sqrt{144}" },
-      { label: "c.", math: "AB = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(2, "Mencari Jarak Pusat (GSPD diketahui)", {
-    difficulty: "Mudah",
-    content: "Panjang garis singgung persekutuan dalam dua lingkaran adalah 24 cm. Kedua jari-jari lingkaran tersebut masing-masing 10 cm dan 8 cm. Berapakah jarak antara kedua pusat lingkaran itu?",
-    parts: [
-      { label: "a.", math: "d_{GSPD}^2 = p^2 - (R + r)^2 \\Rightarrow 24^2 = p^2 - (10+8)^2" },
-      { label: "b.", math: "576 = p^2 - 324 \\Rightarrow p^2 = 900" },
-      { label: "c.", math: "p = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(3, "Mencari Jari-Jari yang Tidak Diketahui (GSPD)", {
-    difficulty: "Mudah",
-    content: "Panjang garis singgung persekutuan dalam dua lingkaran adalah 20 cm dan jarak antara kedua pusatnya adalah 25 cm. Jika panjang salah satu jari-jari lingkaran adalah 9 cm, tentukan panjang jari-jari lingkaran yang lain!",
-    parts: [
-      { label: "a.", math: "d_{GSPD}^2 = p^2 - (R + r)^2 \\Rightarrow 400 = 625 - (R + r)^2" },
-      { label: "b.", math: "(R + r)^2 = 225 \\Rightarrow R + r = 15" },
-      { label: "c.", math: "r = 15 - 9 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(4, "Mencari Jari-Jari dengan Perbandingan (GSPD)", {
-    difficulty: "Sedang",
-    content: "Jarak antara dua pusat lingkaran adalah 25 cm dan panjang garis singgung persekutuan dalamnya adalah 20 cm. Jika jari-jari lingkaran pertama adalah 2 kali jari-jari lingkaran kedua, hitunglah panjang jari-jari lingkaran pertama!",
-    parts: [
-      { label: "a.", math: "(R + r)^2 = p^2 - d_{GSPD}^2 = 625 - 400 = 225 \\Rightarrow R + r = 15" },
-      { label: "b.", math: "R = 2r \\Rightarrow 2r + r = 15 \\Rightarrow r = 5" },
-      { label: "c.", math: "R = 2 \\times 5 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(5, "Mencari Panjang GSPL dari Gambar (2)", {
-    difficulty: "Mudah",
-    diagram: <DiagramGSPLDuaLingkaran r1px={65} r2px={26} size={240}
-      labelP="P" labelQ="Q" labelA="A" labelB="B"
-      labelPA="PA = 15 cm" labelQB="QB = 6 cm" labelPQ="PQ = 25 cm" />,
-    content: "Pada gambar di atas, jari-jari lingkaran berpusat di P adalah PA = 15 cm, jari-jari lingkaran berpusat di Q adalah QB = 6 cm, dan jarak PQ = 25 cm. Hitunglah panjang garis singgung persekutuan luar AB!",
-    parts: [
-      { label: "a.", math: "AB = \\sqrt{PQ^2 - (PA - QB)^2} = \\sqrt{25^2 - (15-6)^2}" },
-      { label: "b.", math: "= \\sqrt{625 - 81} = \\sqrt{544}" },
-      { label: "c.", math: "AB = 4\\sqrt{34} \\approx \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(6, "Mencari Jarak Pusat dari GSPL", {
-    difficulty: "Sedang",
-    content: "Panjang jari-jari dua buah lingkaran masing-masing 25 cm dan 7 cm. Diketahui panjang garis singgung persekutuan luarnya adalah 24 cm. Hitunglah jarak antara kedua pusat lingkaran tersebut!",
-    parts: [
-      { label: "a.", math: "d_{GSPL}^2 = p^2 - (R - r)^2 \\Rightarrow 24^2 = p^2 - (25-7)^2" },
-      { label: "b.", math: "576 = p^2 - 324 \\Rightarrow p^2 = 900" },
-      { label: "c.", math: "p = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(7, "GSPL pada Dua Lingkaran yang Bersinggungan Luar", {
-    difficulty: "Sedang",
-    diagram: <DiagramBersinggungLuar size={240} />,
-    content: "Gambar di atas menunjukkan dua lingkaran yang saling bersinggungan secara luar. AB adalah garis singgung persekutuan luar kedua lingkaran tersebut, dengan panjang AP = 3 cm dan BQ = 12 cm. Hitunglah panjang AB!",
-    parts: [
-      { label: "a.", math: "\\text{Karena bersinggungan luar: } PQ = AP + BQ = 3 + 12 = 15 \\text{ cm}" },
-      { label: "b.", math: "AB = \\sqrt{PQ^2 - (AP - BQ)^2} = \\sqrt{15^2 - (12-3)^2} = \\sqrt{225 - 81}" },
-      { label: "c.", math: "AB = \\sqrt{144} = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(8, "Mencari Jari-Jari yang Tidak Diketahui (GSPL)", {
-    difficulty: "Sedang",
-    content: "Panjang garis singgung persekutuan luar dua lingkaran adalah 24 cm. Jarak kedua pusat lingkaran adalah 26 cm dan salah satu jari-jarinya adalah 5 cm. Hitunglah panjang jari-jari lingkaran yang lain!",
-    parts: [
-      { label: "a.", math: "d_{GSPL}^2 = p^2 - (R - r)^2 \\Rightarrow 576 = 676 - (R - 5)^2" },
-      { label: "b.", math: "(R - 5)^2 = 100 \\Rightarrow R - 5 = 10" },
-      { label: "c.", math: "R = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(9, "Mencari GSPD dan GSPL", {
-    difficulty: "Sedang",
-    content: "Jarak antara dua pusat lingkaran adalah 20 cm. Panjang jari-jari masing-masing lingkaran adalah 8 cm dan 4 cm. Hitunglah panjang:\na. garis singgung persekutuan dalam,\nb. garis singgung persekutuan luar.",
-    parts: [
-      { label: "a.", math: "d_{GSPD} = \\sqrt{20^2 - (8+4)^2} = \\sqrt{400 - 144} = \\sqrt{256} = \\ldots \\text{ cm}" },
-      { label: "b.", math: "d_{GSPL} = \\sqrt{20^2 - (8-4)^2} = \\sqrt{400 - 16} = \\sqrt{384} = 8\\sqrt{6} \\approx \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(10, "Hubungan GSPL dan GSPD", {
-    difficulty: "Sulit",
-    content: "Panjang jari-jari dua buah lingkaran masing-masing 6 cm dan 4 cm. Panjang garis singgung persekutuan luarnya adalah √2 kali panjang garis singgung persekutuan dalamnya. Hitunglah jarak antara kedua pusat lingkaran tersebut!",
-    parts: [
-      { label: "a.", math: "d_{GSPL}^2 = 2 \\cdot d_{GSPD}^2 \\Rightarrow p^2 - (6-4)^2 = 2\\left[p^2 - (6+4)^2\\right]" },
-      { label: "b.", math: "p^2 - 4 = 2p^2 - 200 \\Rightarrow p^2 = 196" },
-      { label: "c.", math: "p = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(11, "Panjang Rantai Gir Sepeda Motor", {
-    difficulty: "Sulit",
-    diagram: <DiagramGir size={260} />,
-    content: "Gambar di atas menunjukkan dua gir sepeda motor yang dihubungkan oleh rantai. Diameter gir besar (Q₁) adalah 24 cm dan diameter gir kecil (Q₂) adalah 12 cm, sedangkan jarak antara kedua pusat gir adalah 42 cm. Hitunglah panjang rantai dari titik singgung A ke titik singgung B pada bagian lurus atas!",
-    parts: [
-      { label: "a.", math: "r_1 = 12 \\text{ cm},\\; r_2 = 6 \\text{ cm},\\; d = 42 \\text{ cm}" },
-      { label: "b.", math: "AB = \\sqrt{d^2 - (r_1 - r_2)^2} = \\sqrt{42^2 - (12-6)^2} = \\sqrt{1764 - 36}" },
-      { label: "c.", math: "AB = \\sqrt{1728} = 24\\sqrt{3} \\approx \\ldots \\text{ cm}" },
-    ],
-  }),
-];
-
 const diffColor: Record<string, string> = {
   Mudah: "bg-cyan-500/20 text-cyan-300 border-cyan-400/40",
   Sedang: "bg-blue-500/20 text-blue-300 border-blue-400/40",
@@ -315,6 +206,116 @@ const GSPLPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { isDark } = useTheme();
+
+  const questions: Q[] = [
+    Qn(1, "Mencari Panjang GSPL dari Gambar", {
+      difficulty: "Mudah",
+      diagram: <DiagramGSPLDuaLingkaran r1px={62} r2px={28} size={240}
+        labelP="M" labelQ="N" labelA="A" labelB="B"
+        labelPA="MA = 9 cm" labelQB="NB = 4 cm" labelPQ="MN = 13 cm" />,
+      content: "Pada gambar di atas, jari-jari lingkaran berpusat di M adalah MA = 9 cm, jari-jari lingkaran berpusat di N adalah NB = 4 cm, dan jarak kedua pusat MN = 13 cm. Hitunglah panjang garis singgung persekutuan luar AB!",
+      parts: [
+        { label: "a.", math: "d_{GSPL} = \\sqrt{MN^2 - (MA - NB)^2} = \\sqrt{13^2 - (9-4)^2}" },
+        { label: "b.", math: "= \\sqrt{169 - 25} = \\sqrt{144}" },
+        { label: "c.", math: "AB = \\ldots \\text{ cm}" },
+      ],
+    }),
+    Qn(2, "Mencari Jarak Pusat (GSPD diketahui)", {
+      difficulty: "Mudah",
+      content: "Panjang garis singgung persekutuan dalam dua lingkaran adalah 24 cm. Kedua jari-jari lingkaran tersebut masing-masing 10 cm dan 8 cm. Berapakah jarak antara kedua pusat lingkaran itu?",
+      parts: [
+        { label: "a.", math: "d_{GSPD}^2 = p^2 - (R + r)^2 \\Rightarrow 24^2 = p^2 - (10+8)^2" },
+        { label: "b.", math: "576 = p^2 - 324 \\Rightarrow p^2 = 900" },
+        { label: "c.", math: "p = \\ldots \\text{ cm}" },
+      ],
+    }),
+    Qn(3, "Mencari Jari-Jari yang Tidak Diketahui (GSPD)", {
+      difficulty: "Mudah",
+      content: "Panjang garis singgung persekutuan dalam dua lingkaran adalah 20 cm dan jarak antara kedua pusatnya adalah 25 cm. Jika panjang salah satu jari-jari lingkaran adalah 9 cm, tentukan panjang jari-jari lingkaran yang lain!",
+      parts: [
+        { label: "a.", math: "d_{GSPD}^2 = p^2 - (R + r)^2 \\Rightarrow 400 = 625 - (R + r)^2" },
+        { label: "b.", math: "(R + r)^2 = 225 \\Rightarrow R + r = 15" },
+        { label: "c.", math: "r = 15 - 9 = \\ldots \\text{ cm}" },
+      ],
+    }),
+    Qn(4, "Mencari Jari-Jari dengan Perbandingan (GSPD)", {
+      difficulty: "Sedang",
+      content: "Jarak antara dua pusat lingkaran adalah 25 cm dan panjang garis singgung persekutuan dalamnya adalah 20 cm. Jika jari-jari lingkaran pertama adalah 2 kali jari-jari lingkaran kedua, hitunglah panjang jari-jari lingkaran pertama!",
+      parts: [
+        { label: "a.", math: "(R + r)^2 = p^2 - d_{GSPD}^2 = 625 - 400 = 225 \\Rightarrow R + r = 15" },
+        { label: "b.", math: "R = 2r \\Rightarrow 2r + r = 15 \\Rightarrow r = 5" },
+        { label: "c.", math: "R = 2 \\times 5 = \\ldots \\text{ cm}" },
+      ],
+    }),
+    Qn(5, "Mencari Panjang GSPL dari Gambar (2)", {
+      difficulty: "Mudah",
+      diagram: <DiagramGSPLDuaLingkaran r1px={65} r2px={26} size={240}
+        labelP="P" labelQ="Q" labelA="A" labelB="B"
+        labelPA="PA = 15 cm" labelQB="QB = 6 cm" labelPQ="PQ = 25 cm" />,
+      content: "Pada gambar di atas, jari-jari lingkaran berpusat di P adalah PA = 15 cm, jari-jari lingkaran berpusat di Q adalah QB = 6 cm, dan jarak PQ = 25 cm. Hitunglah panjang garis singgung persekutuan luar AB!",
+      parts: [
+        { label: "a.", math: "AB = \\sqrt{PQ^2 - (PA - QB)^2} = \\sqrt{25^2 - (15-6)^2}" },
+        { label: "b.", math: "= \\sqrt{625 - 81} = \\sqrt{544}" },
+        { label: "c.", math: "AB = 4\\sqrt{34} \\approx \\ldots \\text{ cm}" },
+      ],
+    }),
+    Qn(6, "Mencari Jarak Pusat dari GSPL", {
+      difficulty: "Sedang",
+      content: "Panjang jari-jari dua buah lingkaran masing-masing 25 cm dan 7 cm. Diketahui panjang garis singgung persekutuan luarnya adalah 24 cm. Hitunglah jarak antara kedua pusat lingkaran tersebut!",
+      parts: [
+        { label: "a.", math: "d_{GSPL}^2 = p^2 - (R - r)^2 \\Rightarrow 24^2 = p^2 - (25-7)^2" },
+        { label: "b.", math: "576 = p^2 - 324 \\Rightarrow p^2 = 900" },
+        { label: "c.", math: "p = \\ldots \\text{ cm}" },
+      ],
+    }),
+    Qn(7, "GSPL pada Dua Lingkaran yang Bersinggungan Luar", {
+      difficulty: "Sedang",
+      diagram: <DiagramBersinggungLuar size={240} tangentPointLabel={t('practice.garisSinggungLingkaran.shared.tangentPointLabel')} />,
+      content: "Gambar di atas menunjukkan dua lingkaran yang saling bersinggungan secara luar. AB adalah garis singgung persekutuan luar kedua lingkaran tersebut, dengan panjang AP = 3 cm dan BQ = 12 cm. Hitunglah panjang AB!",
+      parts: [
+        { label: "a.", math: "\\text{Karena bersinggungan luar: } PQ = AP + BQ = 3 + 12 = 15 \\text{ cm}" },
+        { label: "b.", math: "AB = \\sqrt{PQ^2 - (AP - BQ)^2} = \\sqrt{15^2 - (12-3)^2} = \\sqrt{225 - 81}" },
+        { label: "c.", math: "AB = \\sqrt{144} = \\ldots \\text{ cm}" },
+      ],
+    }),
+    Qn(8, "Mencari Jari-Jari yang Tidak Diketahui (GSPL)", {
+      difficulty: "Sedang",
+      content: "Panjang garis singgung persekutuan luar dua lingkaran adalah 24 cm. Jarak kedua pusat lingkaran adalah 26 cm dan salah satu jari-jarinya adalah 5 cm. Hitunglah panjang jari-jari lingkaran yang lain!",
+      parts: [
+        { label: "a.", math: "d_{GSPL}^2 = p^2 - (R - r)^2 \\Rightarrow 576 = 676 - (R - 5)^2" },
+        { label: "b.", math: "(R - 5)^2 = 100 \\Rightarrow R - 5 = 10" },
+        { label: "c.", math: "R = \\ldots \\text{ cm}" },
+      ],
+    }),
+    Qn(9, "Mencari GSPD dan GSPL", {
+      difficulty: "Sedang",
+      content: "Jarak antara dua pusat lingkaran adalah 20 cm. Panjang jari-jari masing-masing lingkaran adalah 8 cm dan 4 cm. Hitunglah panjang:\na. garis singgung persekutuan dalam,\nb. garis singgung persekutuan luar.",
+      parts: [
+        { label: "a.", math: "d_{GSPD} = \\sqrt{20^2 - (8+4)^2} = \\sqrt{400 - 144} = \\sqrt{256} = \\ldots \\text{ cm}" },
+        { label: "b.", math: "d_{GSPL} = \\sqrt{20^2 - (8-4)^2} = \\sqrt{400 - 16} = \\sqrt{384} = 8\\sqrt{6} \\approx \\ldots \\text{ cm}" },
+      ],
+    }),
+    Qn(10, "Hubungan GSPL dan GSPD", {
+      difficulty: "Sulit",
+      content: "Panjang jari-jari dua buah lingkaran masing-masing 6 cm dan 4 cm. Panjang garis singgung persekutuan luarnya adalah √2 kali panjang garis singgung persekutuan dalamnya. Hitunglah jarak antara kedua pusat lingkaran tersebut!",
+      parts: [
+        { label: "a.", math: "d_{GSPL}^2 = 2 \\cdot d_{GSPD}^2 \\Rightarrow p^2 - (6-4)^2 = 2\\left[p^2 - (6+4)^2\\right]" },
+        { label: "b.", math: "p^2 - 4 = 2p^2 - 200 \\Rightarrow p^2 = 196" },
+        { label: "c.", math: "p = \\ldots \\text{ cm}" },
+      ],
+    }),
+    Qn(11, "Panjang Rantai Gir Sepeda Motor", {
+      difficulty: "Sulit",
+      diagram: <DiagramGir size={260} />,
+      content: "Gambar di atas menunjukkan dua gir sepeda motor yang dihubungkan oleh rantai. Diameter gir besar (Q₁) adalah 24 cm dan diameter gir kecil (Q₂) adalah 12 cm, sedangkan jarak antara kedua pusat gir adalah 42 cm. Hitunglah panjang rantai dari titik singgung A ke titik singgung B pada bagian lurus atas!",
+      parts: [
+        { label: "a.", math: "r_1 = 12 \\text{ cm},\\; r_2 = 6 \\text{ cm},\\; d = 42 \\text{ cm}" },
+        { label: "b.", math: "AB = \\sqrt{d^2 - (r_1 - r_2)^2} = \\sqrt{42^2 - (12-6)^2} = \\sqrt{1764 - 36}" },
+        { label: "c.", math: "AB = \\sqrt{1728} = 24\\sqrt{3} \\approx \\ldots \\text{ cm}" },
+      ],
+    }),
+  ];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />

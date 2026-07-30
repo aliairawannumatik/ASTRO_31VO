@@ -5972,6 +5972,12 @@
           "d": "1 m² あたりの費用が：池 Rp 500,000、花壇 Rp 200,000、ジョギングコース Rp 150,000 の場合、合計予算はいくらですか？"
         }
       }
+    },
+    "garisSinggungLingkaran": {
+      "shared": {
+        "tangentLabel": "接線",
+        "tangentPointLabel": "接点"
+      }
     }
   },
   "settings": {

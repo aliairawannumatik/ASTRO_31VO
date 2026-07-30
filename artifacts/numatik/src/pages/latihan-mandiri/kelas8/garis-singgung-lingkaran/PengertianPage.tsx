@@ -18,58 +18,6 @@ type Q = {
 };
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
-const questions: Q[] = [
-  Qn(1, "Definisi Garis Singgung Lingkaran", {
-    difficulty: "Mudah",
-    diagram: <GSLDiagram variant="tangent-basic" size={220} />,
-    content: "Perhatikan gambar di atas. Garis singgung lingkaran adalah garis yang menyentuh lingkaran hanya di satu titik.",
-    parts: [
-      { label: "a.", text: "Apa yang dimaksud dengan garis singgung lingkaran?" },
-      { label: "b.", text: "Berapa banyak titik persekutuan antara garis singgung dan lingkaran?" },
-      { label: "c.", text: "Apa nama titik pertemuan antara garis singgung dan lingkaran?" },
-    ],
-  }),
-  Qn(2, "Sifat Tegak Lurus Garis Singgung", {
-    difficulty: "Mudah",
-    diagram: <GSLDiagram variant="tangent-basic" size={220} color="#34d399" />,
-    content: "Sifat penting: Garis singgung lingkaran tegak lurus dengan jari-jari yang ditarik ke titik singgung.",
-    parts: [
-      { label: "a.", text: "Jika T adalah titik singgung dan O pusat lingkaran, bagaimana hubungan OT dengan garis singgung?" },
-      { label: "b.", math: "\\text{Berapa besar sudut antara OT dan garis singgung di titik T?}" },
-      { label: "c.", text: "Mengapa sifat tegak lurus ini penting dalam menyelesaikan soal?" },
-    ],
-  }),
-  Qn(7, "Segitiga yang Dibentuk Garis Singgung", {
-    difficulty: "Sedang",
-    diagram: <GSLDiagram variant="tangent-right-angle" size={220} color="#fb923c" />,
-    content: "Titik P di luar lingkaran, T titik singgung, O pusat. Segitiga OTP terbentuk.",
-    parts: [
-      { label: "a.", math: "\\angle OTP = 90^\\circ. \\text{ Jenis segitiga OTP adalah ...}" },
-      { label: "b.", math: "\\text{Gunakan Pythagoras: } PT^2 = OP^2 - OT^2" },
-      { label: "c.", math: "\\text{Jika } OT = 6, OP = 10, \\text{ maka } PT = \\ldots" },
-    ],
-  }),
-  Qn(14, "Jumlah Sudut dalam Segiempat Tali Busur", {
-    difficulty: "Sulit",
-    content: "Titik A, B, C, D terletak pada lingkaran. ABCD adalah segiempat tali busur.",
-    parts: [
-      { label: "a.", math: "\\angle A + \\angle C = \\ldots ^\\circ" },
-      { label: "b.", math: "\\angle B + \\angle D = \\ldots ^\\circ" },
-      { label: "c.", text: "Bagaimana hubungan ini berkaitan dengan sifat garis singgung lingkaran?" },
-    ],
-  }),
-  Qn(35, "Sudut pada Segitiga OTP", {
-    difficulty: "Sedang",
-    diagram: <GSLDiagram variant="tangent-angle" size={220} color="#f472b6" />,
-    content: "Dari P ke lingkaran O, garis singgung PT dengan ∠TPO = 35°.",
-    parts: [
-      { label: "a.", math: "\\angle OTP = 90^\\circ" },
-      { label: "b.", math: "\\angle TOP = 180^\\circ - 90^\\circ - 35^\\circ = \\ldots ^\\circ" },
-      { label: "c.", math: "\\tan 35^\\circ = \\frac{OT}{PT} \\Rightarrow \\text{ jika } OT = r, \\text{ maka } PT = \\frac{r}{\\tan 35^\\circ}" },
-    ],
-  }),
-];
-
 const diffColor: Record<string, string> = {
   Mudah: "bg-emerald-500/20 text-emerald-300 border-emerald-400/40",
   Sedang: "bg-amber-500/20 text-amber-300 border-amber-400/40",
@@ -79,6 +27,59 @@ const diffColor: Record<string, string> = {
 const PengertianPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const questions: Q[] = [
+    Qn(1, "Definisi Garis Singgung Lingkaran", {
+      difficulty: "Mudah",
+      diagram: <GSLDiagram variant="tangent-basic" size={220} tangentLabel={t('practice.garisSinggungLingkaran.shared.tangentLabel')} />,
+      content: "Perhatikan gambar di atas. Garis singgung lingkaran adalah garis yang menyentuh lingkaran hanya di satu titik.",
+      parts: [
+        { label: "a.", text: "Apa yang dimaksud dengan garis singgung lingkaran?" },
+        { label: "b.", text: "Berapa banyak titik persekutuan antara garis singgung dan lingkaran?" },
+        { label: "c.", text: "Apa nama titik pertemuan antara garis singgung dan lingkaran?" },
+      ],
+    }),
+    Qn(2, "Sifat Tegak Lurus Garis Singgung", {
+      difficulty: "Mudah",
+      diagram: <GSLDiagram variant="tangent-basic" size={220} color="#34d399" tangentLabel={t('practice.garisSinggungLingkaran.shared.tangentLabel')} />,
+      content: "Sifat penting: Garis singgung lingkaran tegak lurus dengan jari-jari yang ditarik ke titik singgung.",
+      parts: [
+        { label: "a.", text: "Jika T adalah titik singgung dan O pusat lingkaran, bagaimana hubungan OT dengan garis singgung?" },
+        { label: "b.", math: "\\text{Berapa besar sudut antara OT dan garis singgung di titik T?}" },
+        { label: "c.", text: "Mengapa sifat tegak lurus ini penting dalam menyelesaikan soal?" },
+      ],
+    }),
+    Qn(7, "Segitiga yang Dibentuk Garis Singgung", {
+      difficulty: "Sedang",
+      diagram: <GSLDiagram variant="tangent-right-angle" size={220} color="#fb923c" />,
+      content: "Titik P di luar lingkaran, T titik singgung, O pusat. Segitiga OTP terbentuk.",
+      parts: [
+        { label: "a.", math: "\\angle OTP = 90^\\circ. \\text{ Jenis segitiga OTP adalah ...}" },
+        { label: "b.", math: "\\text{Gunakan Pythagoras: } PT^2 = OP^2 - OT^2" },
+        { label: "c.", math: "\\text{Jika } OT = 6, OP = 10, \\text{ maka } PT = \\ldots" },
+      ],
+    }),
+    Qn(14, "Jumlah Sudut dalam Segiempat Tali Busur", {
+      difficulty: "Sulit",
+      content: "Titik A, B, C, D terletak pada lingkaran. ABCD adalah segiempat tali busur.",
+      parts: [
+        { label: "a.", math: "\\angle A + \\angle C = \\ldots ^\\circ" },
+        { label: "b.", math: "\\angle B + \\angle D = \\ldots ^\\circ" },
+        { label: "c.", text: "Bagaimana hubungan ini berkaitan dengan sifat garis singgung lingkaran?" },
+      ],
+    }),
+    Qn(35, "Sudut pada Segitiga OTP", {
+      difficulty: "Sedang",
+      diagram: <GSLDiagram variant="tangent-angle" size={220} color="#f472b6" />,
+      content: "Dari P ke lingkaran O, garis singgung PT dengan ∠TPO = 35°.",
+      parts: [
+        { label: "a.", math: "\\angle OTP = 90^\\circ" },
+        { label: "b.", math: "\\angle TOP = 180^\\circ - 90^\\circ - 35^\\circ = \\ldots ^\\circ" },
+        { label: "c.", math: "\\tan 35^\\circ = \\frac{OT}{PT} \\Rightarrow \\text{ jika } OT = r, \\text{ maka } PT = \\frac{r}{\\tan 35^\\circ}" },
+      ],
+    }),
+  ];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />

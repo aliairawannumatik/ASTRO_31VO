@@ -5972,6 +5972,12 @@
           "d": "Jika biaya per m²: kolam Rp 500rb, taman Rp 200rb, jogging Rp 150rb — berapa total anggaran?"
         }
       }
+    },
+    "garisSinggungLingkaran": {
+      "shared": {
+        "tangentLabel": "Garis Singgung",
+        "tangentPointLabel": "titik singgung"
+      }
     }
   },
   "settings": {
