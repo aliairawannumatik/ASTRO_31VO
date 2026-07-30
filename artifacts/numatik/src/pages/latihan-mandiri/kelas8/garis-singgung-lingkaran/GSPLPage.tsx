@@ -202,112 +202,121 @@ const diffColor: Record<string, string> = {
   Sulit: "bg-violet-500/20 text-violet-300 border-violet-400/40",
 };
 
+const p = 'practice.garisSinggungLingkaran.gspl';
+
 const GSPLPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { isDark } = useTheme();
 
+  const karenaText = t(`${p}.q7.karena`);
+  const diffLabels: Record<string, string> = {
+    Mudah: t(`${p}.diffMudah`),
+    Sedang: t(`${p}.diffSedang`),
+    Sulit: t(`${p}.diffSulit`),
+  };
+
   const questions: Q[] = [
-    Qn(1, "Mencari Panjang GSPL dari Gambar", {
+    Qn(1, t(`${p}.q1.title`), {
       difficulty: "Mudah",
       diagram: <DiagramGSPLDuaLingkaran r1px={62} r2px={28} size={240}
         labelP="M" labelQ="N" labelA="A" labelB="B"
         labelPA="MA = 9 cm" labelQB="NB = 4 cm" labelPQ="MN = 13 cm" />,
-      content: "Pada gambar di atas, jari-jari lingkaran berpusat di M adalah MA = 9 cm, jari-jari lingkaran berpusat di N adalah NB = 4 cm, dan jarak kedua pusat MN = 13 cm. Hitunglah panjang garis singgung persekutuan luar AB!",
+      content: t(`${p}.q1.content`),
       parts: [
         { label: "a.", math: "d_{GSPL} = \\sqrt{MN^2 - (MA - NB)^2} = \\sqrt{13^2 - (9-4)^2}" },
         { label: "b.", math: "= \\sqrt{169 - 25} = \\sqrt{144}" },
         { label: "c.", math: "AB = \\ldots \\text{ cm}" },
       ],
     }),
-    Qn(2, "Mencari Jarak Pusat (GSPD diketahui)", {
+    Qn(2, t(`${p}.q2.title`), {
       difficulty: "Mudah",
-      content: "Panjang garis singgung persekutuan dalam dua lingkaran adalah 24 cm. Kedua jari-jari lingkaran tersebut masing-masing 10 cm dan 8 cm. Berapakah jarak antara kedua pusat lingkaran itu?",
+      content: t(`${p}.q2.content`),
       parts: [
         { label: "a.", math: "d_{GSPD}^2 = p^2 - (R + r)^2 \\Rightarrow 24^2 = p^2 - (10+8)^2" },
         { label: "b.", math: "576 = p^2 - 324 \\Rightarrow p^2 = 900" },
         { label: "c.", math: "p = \\ldots \\text{ cm}" },
       ],
     }),
-    Qn(3, "Mencari Jari-Jari yang Tidak Diketahui (GSPD)", {
+    Qn(3, t(`${p}.q3.title`), {
       difficulty: "Mudah",
-      content: "Panjang garis singgung persekutuan dalam dua lingkaran adalah 20 cm dan jarak antara kedua pusatnya adalah 25 cm. Jika panjang salah satu jari-jari lingkaran adalah 9 cm, tentukan panjang jari-jari lingkaran yang lain!",
+      content: t(`${p}.q3.content`),
       parts: [
         { label: "a.", math: "d_{GSPD}^2 = p^2 - (R + r)^2 \\Rightarrow 400 = 625 - (R + r)^2" },
         { label: "b.", math: "(R + r)^2 = 225 \\Rightarrow R + r = 15" },
         { label: "c.", math: "r = 15 - 9 = \\ldots \\text{ cm}" },
       ],
     }),
-    Qn(4, "Mencari Jari-Jari dengan Perbandingan (GSPD)", {
+    Qn(4, t(`${p}.q4.title`), {
       difficulty: "Sedang",
-      content: "Jarak antara dua pusat lingkaran adalah 25 cm dan panjang garis singgung persekutuan dalamnya adalah 20 cm. Jika jari-jari lingkaran pertama adalah 2 kali jari-jari lingkaran kedua, hitunglah panjang jari-jari lingkaran pertama!",
+      content: t(`${p}.q4.content`),
       parts: [
         { label: "a.", math: "(R + r)^2 = p^2 - d_{GSPD}^2 = 625 - 400 = 225 \\Rightarrow R + r = 15" },
         { label: "b.", math: "R = 2r \\Rightarrow 2r + r = 15 \\Rightarrow r = 5" },
         { label: "c.", math: "R = 2 \\times 5 = \\ldots \\text{ cm}" },
       ],
     }),
-    Qn(5, "Mencari Panjang GSPL dari Gambar (2)", {
+    Qn(5, t(`${p}.q5.title`), {
       difficulty: "Mudah",
       diagram: <DiagramGSPLDuaLingkaran r1px={65} r2px={26} size={240}
         labelP="P" labelQ="Q" labelA="A" labelB="B"
         labelPA="PA = 15 cm" labelQB="QB = 6 cm" labelPQ="PQ = 25 cm" />,
-      content: "Pada gambar di atas, jari-jari lingkaran berpusat di P adalah PA = 15 cm, jari-jari lingkaran berpusat di Q adalah QB = 6 cm, dan jarak PQ = 25 cm. Hitunglah panjang garis singgung persekutuan luar AB!",
+      content: t(`${p}.q5.content`),
       parts: [
         { label: "a.", math: "AB = \\sqrt{PQ^2 - (PA - QB)^2} = \\sqrt{25^2 - (15-6)^2}" },
         { label: "b.", math: "= \\sqrt{625 - 81} = \\sqrt{544}" },
         { label: "c.", math: "AB = 4\\sqrt{34} \\approx \\ldots \\text{ cm}" },
       ],
     }),
-    Qn(6, "Mencari Jarak Pusat dari GSPL", {
+    Qn(6, t(`${p}.q6.title`), {
       difficulty: "Sedang",
-      content: "Panjang jari-jari dua buah lingkaran masing-masing 25 cm dan 7 cm. Diketahui panjang garis singgung persekutuan luarnya adalah 24 cm. Hitunglah jarak antara kedua pusat lingkaran tersebut!",
+      content: t(`${p}.q6.content`),
       parts: [
         { label: "a.", math: "d_{GSPL}^2 = p^2 - (R - r)^2 \\Rightarrow 24^2 = p^2 - (25-7)^2" },
         { label: "b.", math: "576 = p^2 - 324 \\Rightarrow p^2 = 900" },
         { label: "c.", math: "p = \\ldots \\text{ cm}" },
       ],
     }),
-    Qn(7, "GSPL pada Dua Lingkaran yang Bersinggungan Luar", {
+    Qn(7, t(`${p}.q7.title`), {
       difficulty: "Sedang",
       diagram: <DiagramBersinggungLuar size={240} tangentPointLabel={t('practice.garisSinggungLingkaran.shared.tangentPointLabel')} />,
-      content: "Gambar di atas menunjukkan dua lingkaran yang saling bersinggungan secara luar. AB adalah garis singgung persekutuan luar kedua lingkaran tersebut, dengan panjang AP = 3 cm dan BQ = 12 cm. Hitunglah panjang AB!",
+      content: t(`${p}.q7.content`),
       parts: [
-        { label: "a.", math: "\\text{Karena bersinggungan luar: } PQ = AP + BQ = 3 + 12 = 15 \\text{ cm}" },
+        { label: "a.", math: `\\text{${karenaText}} PQ = AP + BQ = 3 + 12 = 15 \\text{ cm}` },
         { label: "b.", math: "AB = \\sqrt{PQ^2 - (AP - BQ)^2} = \\sqrt{15^2 - (12-3)^2} = \\sqrt{225 - 81}" },
         { label: "c.", math: "AB = \\sqrt{144} = \\ldots \\text{ cm}" },
       ],
     }),
-    Qn(8, "Mencari Jari-Jari yang Tidak Diketahui (GSPL)", {
+    Qn(8, t(`${p}.q8.title`), {
       difficulty: "Sedang",
-      content: "Panjang garis singgung persekutuan luar dua lingkaran adalah 24 cm. Jarak kedua pusat lingkaran adalah 26 cm dan salah satu jari-jarinya adalah 5 cm. Hitunglah panjang jari-jari lingkaran yang lain!",
+      content: t(`${p}.q8.content`),
       parts: [
         { label: "a.", math: "d_{GSPL}^2 = p^2 - (R - r)^2 \\Rightarrow 576 = 676 - (R - 5)^2" },
         { label: "b.", math: "(R - 5)^2 = 100 \\Rightarrow R - 5 = 10" },
         { label: "c.", math: "R = \\ldots \\text{ cm}" },
       ],
     }),
-    Qn(9, "Mencari GSPD dan GSPL", {
+    Qn(9, t(`${p}.q9.title`), {
       difficulty: "Sedang",
-      content: "Jarak antara dua pusat lingkaran adalah 20 cm. Panjang jari-jari masing-masing lingkaran adalah 8 cm dan 4 cm. Hitunglah panjang:\na. garis singgung persekutuan dalam,\nb. garis singgung persekutuan luar.",
+      content: t(`${p}.q9.content`),
       parts: [
         { label: "a.", math: "d_{GSPD} = \\sqrt{20^2 - (8+4)^2} = \\sqrt{400 - 144} = \\sqrt{256} = \\ldots \\text{ cm}" },
         { label: "b.", math: "d_{GSPL} = \\sqrt{20^2 - (8-4)^2} = \\sqrt{400 - 16} = \\sqrt{384} = 8\\sqrt{6} \\approx \\ldots \\text{ cm}" },
       ],
     }),
-    Qn(10, "Hubungan GSPL dan GSPD", {
+    Qn(10, t(`${p}.q10.title`), {
       difficulty: "Sulit",
-      content: "Panjang jari-jari dua buah lingkaran masing-masing 6 cm dan 4 cm. Panjang garis singgung persekutuan luarnya adalah √2 kali panjang garis singgung persekutuan dalamnya. Hitunglah jarak antara kedua pusat lingkaran tersebut!",
+      content: t(`${p}.q10.content`),
       parts: [
         { label: "a.", math: "d_{GSPL}^2 = 2 \\cdot d_{GSPD}^2 \\Rightarrow p^2 - (6-4)^2 = 2\\left[p^2 - (6+4)^2\\right]" },
         { label: "b.", math: "p^2 - 4 = 2p^2 - 200 \\Rightarrow p^2 = 196" },
         { label: "c.", math: "p = \\ldots \\text{ cm}" },
       ],
     }),
-    Qn(11, "Panjang Rantai Gir Sepeda Motor", {
+    Qn(11, t(`${p}.q11.title`), {
       difficulty: "Sulit",
       diagram: <DiagramGir size={260} />,
-      content: "Gambar di atas menunjukkan dua gir sepeda motor yang dihubungkan oleh rantai. Diameter gir besar (Q₁) adalah 24 cm dan diameter gir kecil (Q₂) adalah 12 cm, sedangkan jarak antara kedua pusat gir adalah 42 cm. Hitunglah panjang rantai dari titik singgung A ke titik singgung B pada bagian lurus atas!",
+      content: t(`${p}.q11.content`),
       parts: [
         { label: "a.", math: "r_1 = 12 \\text{ cm},\\; r_2 = 6 \\text{ cm},\\; d = 42 \\text{ cm}" },
         { label: "b.", math: "AB = \\sqrt{d^2 - (r_1 - r_2)^2} = \\sqrt{42^2 - (12-6)^2} = \\sqrt{1764 - 36}" },
@@ -327,27 +336,27 @@ const GSPLPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-cyan-300 text-center mb-1"
             style={{ textShadow: '0 0 20px rgba(56,189,248,0.7)' }}>
-            GARIS SINGGUNG PERSEKUTUAN LUAR (GSPL)
+            {t(`${p}.h1`)}
           </h1>
-          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>Kelas 8 · Garis Singgung Lingkaran · {t('practice.breadcrumb')}</p>
+          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>{t(`${p}.subtitle`)} · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
             <span className="text-cyan-400 text-xs font-bold">📋 11 {t('practice.suffixSoal')}</span>
             <span className={`${isDark ? "text-white/30" : "text-gray-400"} text-xs`}>·</span>
-            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>UN / ANBK / Terapan</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>{t(`${p}.tagLine`)}</span>
           </div>
         </div>
 
         <div className={`mb-5 ${isDark ? "bg-cyan-900/20" : "bg-cyan-50"} border border-cyan-500/20 rounded-xl p-4`}>
-          <p className="text-cyan-300 text-xs font-bold mb-2">📌 Rumus Garis Singgung Persekutuan</p>
+          <p className="text-cyan-300 text-xs font-bold mb-2">{t(`${p}.formulaBoxTitle`)}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-2">
             <div className={`${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-3`}>
-              <p className="text-cyan-300 text-[10px] font-bold mb-1">GSPL (Luar)</p>
+              <p className="text-cyan-300 text-[10px] font-bold mb-1">{t(`${p}.gsplLabel`)}</p>
               <div className="flex justify-center">
                 <BlockMath math="d_{\text{GSPL}} = \sqrt{p^2 - (R - r)^2}" />
               </div>
             </div>
             <div className={`${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-3`}>
-              <p className="text-violet-300 text-[10px] font-bold mb-1">GSPD (Dalam)</p>
+              <p className="text-violet-300 text-[10px] font-bold mb-1">{t(`${p}.gspdLabel`)}</p>
               <div className="flex justify-center">
                 <BlockMath math="d_{\text{GSPD}} = \sqrt{p^2 - (R + r)^2}" />
               </div>
@@ -355,10 +364,10 @@ const GSPLPage = () => {
           </div>
           <div className="grid grid-cols-2 gap-2 text-xs">
             {[
-              { l: "p", v: "Jarak antar pusat" },
-              { l: "R", v: "Jari-jari lingkaran besar" },
-              { l: "r", v: "Jari-jari lingkaran kecil" },
-              { l: "d", v: "Panjang garis singgung" },
+              { l: "p", v: t(`${p}.legendP`) },
+              { l: "R", v: t(`${p}.legendR`) },
+              { l: "r", v: t(`${p}.legendR2`) },
+              { l: "d", v: t(`${p}.legendD`) },
             ].map(x => (
               <div key={x.l} className={`${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-2 py-2`}>
                 <span className="text-cyan-400 font-bold">{x.l}: </span>
@@ -387,7 +396,7 @@ const GSPLPage = () => {
                       </span>
                       {q.difficulty && (
                         <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${diffColor[q.difficulty]}`}>
-                          {q.difficulty}
+                          {diffLabels[q.difficulty]}
                         </span>
                       )}
                     </div>
@@ -400,12 +409,12 @@ const GSPLPage = () => {
                     {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
-                        {q.parts.map((p, pi) => (
-                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? (isDark ? 'bg-white/5' : 'bg-gray-50') : 'bg-transparent px-0'}`}>
-                            {p.label && <span className="text-cyan-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>}
-                            {p.math
-                              ? <div className={`${isDark ? "text-white" : "text-gray-900"} text-sm overflow-x-auto`}><InlineMath math={p.math} /></div>
-                              : <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{p.text}</p>
+                        {q.parts.map((part, pi) => (
+                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${part.label ? (isDark ? 'bg-white/5' : 'bg-gray-50') : 'bg-transparent px-0'}`}>
+                            {part.label && <span className="text-cyan-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{part.label}</span>}
+                            {part.math
+                              ? <div className={`${isDark ? "text-white" : "text-gray-900"} text-sm overflow-x-auto`}><InlineMath math={part.math} /></div>
+                              : <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{part.text}</p>
                             }
                           </div>
                         ))}

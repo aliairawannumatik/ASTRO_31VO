@@ -6057,6 +6057,66 @@
           "title": "Garis Singgung pada Sistem Roda-Sabuk",
           "content": "Dua roda pada sebuah mesin berbentuk lingkaran dengan jari-jari masing-masing 7 cm (roda kecil) dan 21 cm (roda besar). Jarak antara kedua poros = 50 cm. Sebuah sabuk melilit kedua roda pada titik singgung A dan B. Hitunglah:"
         }
+      },
+      "gspl": {
+        "h1": "GARIS SINGGUNG PERSEKUTUAN LUAR (GSPL)",
+        "subtitle": "Kelas 8 · Garis Singgung Lingkaran",
+        "tagLine": "UN / ANBK / Terapan",
+        "formulaBoxTitle": "📌 Rumus Garis Singgung Persekutuan",
+        "gsplLabel": "GSPL (Luar)",
+        "gspdLabel": "GSPD (Dalam)",
+        "legendP": "Jarak antar pusat",
+        "legendR": "Jari-jari lingkaran besar",
+        "legendR2": "Jari-jari lingkaran kecil",
+        "legendD": "Panjang garis singgung",
+        "diffMudah": "Mudah",
+        "diffSedang": "Sedang",
+        "diffSulit": "Sulit",
+        "q1": {
+          "title": "Mencari Panjang GSPL dari Gambar",
+          "content": "Pada gambar di atas, jari-jari lingkaran berpusat di M adalah MA = 9 cm, jari-jari lingkaran berpusat di N adalah NB = 4 cm, dan jarak kedua pusat MN = 13 cm. Hitunglah panjang garis singgung persekutuan luar AB!"
+        },
+        "q2": {
+          "title": "Mencari Jarak Pusat (GSPD diketahui)",
+          "content": "Panjang garis singgung persekutuan dalam dua lingkaran adalah 24 cm. Kedua jari-jari lingkaran tersebut masing-masing 10 cm dan 8 cm. Berapakah jarak antara kedua pusat lingkaran itu?"
+        },
+        "q3": {
+          "title": "Mencari Jari-Jari yang Tidak Diketahui (GSPD)",
+          "content": "Panjang garis singgung persekutuan dalam dua lingkaran adalah 20 cm dan jarak antara kedua pusatnya adalah 25 cm. Jika panjang salah satu jari-jari lingkaran adalah 9 cm, tentukan panjang jari-jari lingkaran yang lain!"
+        },
+        "q4": {
+          "title": "Mencari Jari-Jari dengan Perbandingan (GSPD)",
+          "content": "Jarak antara dua pusat lingkaran adalah 25 cm dan panjang garis singgung persekutuan dalamnya adalah 20 cm. Jika jari-jari lingkaran pertama adalah 2 kali jari-jari lingkaran kedua, hitunglah panjang jari-jari lingkaran pertama!"
+        },
+        "q5": {
+          "title": "Mencari Panjang GSPL dari Gambar (2)",
+          "content": "Pada gambar di atas, jari-jari lingkaran berpusat di P adalah PA = 15 cm, jari-jari lingkaran berpusat di Q adalah QB = 6 cm, dan jarak PQ = 25 cm. Hitunglah panjang garis singgung persekutuan luar AB!"
+        },
+        "q6": {
+          "title": "Mencari Jarak Pusat dari GSPL",
+          "content": "Panjang jari-jari dua buah lingkaran masing-masing 25 cm dan 7 cm. Diketahui panjang garis singgung persekutuan luarnya adalah 24 cm. Hitunglah jarak antara kedua pusat lingkaran tersebut!"
+        },
+        "q7": {
+          "title": "GSPL pada Dua Lingkaran yang Bersinggungan Luar",
+          "content": "Gambar di atas menunjukkan dua lingkaran yang saling bersinggungan secara luar. AB adalah garis singgung persekutuan luar kedua lingkaran tersebut, dengan panjang AP = 3 cm dan BQ = 12 cm. Hitunglah panjang AB!",
+          "karena": "Karena bersinggungan luar: "
+        },
+        "q8": {
+          "title": "Mencari Jari-Jari yang Tidak Diketahui (GSPL)",
+          "content": "Panjang garis singgung persekutuan luar dua lingkaran adalah 24 cm. Jarak kedua pusat lingkaran adalah 26 cm dan salah satu jari-jarinya adalah 5 cm. Hitunglah panjang jari-jari lingkaran yang lain!"
+        },
+        "q9": {
+          "title": "Mencari GSPD dan GSPL",
+          "content": "Jarak antara dua pusat lingkaran adalah 20 cm. Panjang jari-jari masing-masing lingkaran adalah 8 cm dan 4 cm. Hitunglah panjang:\na. garis singgung persekutuan dalam,\nb. garis singgung persekutuan luar."
+        },
+        "q10": {
+          "title": "Hubungan GSPL dan GSPD",
+          "content": "Panjang jari-jari dua buah lingkaran masing-masing 6 cm dan 4 cm. Panjang garis singgung persekutuan luarnya adalah √2 kali panjang garis singgung persekutuan dalamnya. Hitunglah jarak antara kedua pusat lingkaran tersebut!"
+        },
+        "q11": {
+          "title": "Panjang Rantai Gir Sepeda Motor",
+          "content": "Gambar di atas menunjukkan dua gir sepeda motor yang dihubungkan oleh rantai. Diameter gir besar (Q₁) adalah 24 cm dan diameter gir kecil (Q₂) adalah 12 cm, sedangkan jarak antara kedua pusat gir adalah 42 cm. Hitunglah panjang rantai dari titik singgung A ke titik singgung B pada bagian lurus atas!"
+        }
       }
     }
   },

@@ -6057,6 +6057,66 @@
           "title": "Tangent in a Belt-and-Pulley System",
           "content": "Two circular pulleys in a machine have radii 7 cm (small pulley) and 21 cm (large pulley). The distance between the two axles = 50 cm. A belt wraps around both pulleys at the points of tangency A and B. Calculate:"
         }
+      },
+      "gspl": {
+        "h1": "EXTERNAL COMMON TANGENT (ECT)",
+        "subtitle": "Grade 8 · Tangent Lines to a Circle",
+        "tagLine": "National Exam / Applied",
+        "formulaBoxTitle": "📌 Common Tangent Formulas",
+        "gsplLabel": "ECT (External)",
+        "gspdLabel": "ICT (Internal)",
+        "legendP": "Distance between centers",
+        "legendR": "Radius of larger circle",
+        "legendR2": "Radius of smaller circle",
+        "legendD": "Length of common tangent",
+        "diffMudah": "Easy",
+        "diffSedang": "Medium",
+        "diffSulit": "Hard",
+        "q1": {
+          "title": "Finding ECT Length from a Diagram",
+          "content": "In the figure above, the radius of the circle centered at M is MA = 9 cm, the radius of the circle centered at N is NB = 4 cm, and the distance between the two centers is MN = 13 cm. Calculate the length of the external common tangent AB!"
+        },
+        "q2": {
+          "title": "Finding the Distance Between Centers (ICT given)",
+          "content": "The length of the internal common tangent of two circles is 24 cm. The radii of the two circles are 10 cm and 8 cm respectively. What is the distance between the two centers?"
+        },
+        "q3": {
+          "title": "Finding an Unknown Radius (ICT)",
+          "content": "The length of the internal common tangent of two circles is 20 cm and the distance between their centers is 25 cm. If the radius of one circle is 9 cm, find the radius of the other circle!"
+        },
+        "q4": {
+          "title": "Finding Radii Using a Ratio (ICT)",
+          "content": "The distance between two circle centers is 25 cm and the length of the internal common tangent is 20 cm. If the radius of the first circle is twice the radius of the second circle, calculate the radius of the first circle!"
+        },
+        "q5": {
+          "title": "Finding ECT Length from a Diagram (2)",
+          "content": "In the figure above, the radius of the circle centered at P is PA = 15 cm, the radius of the circle centered at Q is QB = 6 cm, and the distance PQ = 25 cm. Calculate the length of the external common tangent AB!"
+        },
+        "q6": {
+          "title": "Finding the Distance Between Centers from ECT",
+          "content": "The radii of two circles are 25 cm and 7 cm respectively. The length of their external common tangent is 24 cm. Calculate the distance between the two centers!"
+        },
+        "q7": {
+          "title": "ECT of Two Externally Tangent Circles",
+          "content": "The figure above shows two circles that are externally tangent to each other. AB is the external common tangent of the two circles, with AP = 3 cm and BQ = 12 cm. Calculate the length of AB!",
+          "karena": "Since externally tangent: "
+        },
+        "q8": {
+          "title": "Finding an Unknown Radius (ECT)",
+          "content": "The length of the external common tangent of two circles is 24 cm. The distance between the two centers is 26 cm and one radius is 5 cm. Calculate the length of the other radius!"
+        },
+        "q9": {
+          "title": "Finding Both ICT and ECT",
+          "content": "The distance between two circle centers is 20 cm. The radii of the circles are 8 cm and 4 cm respectively. Calculate the length of:\na. the internal common tangent,\nb. the external common tangent."
+        },
+        "q10": {
+          "title": "Relationship Between ECT and ICT",
+          "content": "The radii of two circles are 6 cm and 4 cm respectively. The length of the external common tangent is √2 times the length of the internal common tangent. Calculate the distance between the two centers!"
+        },
+        "q11": {
+          "title": "Length of a Motorbike Chain Drive",
+          "content": "The figure above shows two motorbike sprockets connected by a chain. The diameter of the large sprocket (Q₁) is 24 cm and the diameter of the small sprocket (Q₂) is 12 cm, while the distance between the two centers is 42 cm. Calculate the length of the chain from tangent point A to tangent point B on the straight upper portion!"
+        }
       }
     }
   },
