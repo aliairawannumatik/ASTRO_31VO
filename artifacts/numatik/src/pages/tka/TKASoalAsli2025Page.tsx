@@ -478,17 +478,17 @@ const TKASoalAsli2025Page = () => {
               {
                 key: "p1",
                 correct: "benar",
-                text: <img src="/tka-2025-soal3-p1.png" alt="Pernyataan 1 soal 3" className="max-w-full rounded-lg border border-white/10" />,
+                text: <img src="/tka-2025-soal3-p1.png" alt="Pernyataan 1 soal 3" className="landscape-full max-w-full rounded-lg border border-white/10" />,
               },
               {
                 key: "p2",
                 correct: "salah",
-                text: <img src="/tka-2025-soal3-p2.png" alt="Pernyataan 2 soal 3" className="max-w-full rounded-lg border border-white/10" />,
+                text: <img src="/tka-2025-soal3-p2.png" alt="Pernyataan 2 soal 3" className="landscape-full max-w-full rounded-lg border border-white/10" />,
               },
               {
                 key: "p3",
                 correct: "salah",
-                text: <img src="/tka-2025-soal3-p3.png" alt="Pernyataan 3 soal 3" className="max-w-full rounded-lg border border-white/10" />,
+                text: <img src="/tka-2025-soal3-p3.png" alt="Pernyataan 3 soal 3" className="landscape-full max-w-full rounded-lg border border-white/10" />,
               },
             ]} />
             <PembahasanBtn n={3} />
@@ -673,7 +673,7 @@ const TKASoalAsli2025Page = () => {
               Perhatikan diagram panah berikut ini.
             </p>
             <div className="mb-3 flex justify-center">
-              <img src="/tka-2025-soal7.png" alt="Tiga diagram panah soal 7" className="max-w-full rounded-lg border border-white/10" />
+              <img src="/tka-2025-soal7.png" alt="Tiga diagram panah soal 7" className="landscape-full max-w-full rounded-lg border border-white/10" />
             </div>
             <p className={`font-body text-sm mb-2 ${isDark ? "text-white/80" : "text-gray-700"}`}>
               Apakah diagram 1, diagram 2, dan diagram 3 merupakan fungsi?
@@ -767,7 +767,7 @@ const TKASoalAsli2025Page = () => {
               pohon mangga di pekarangan tersebut. Berikut adalah peta pekarangan rumah Ayunda.
             </p>
             <div className="mb-3 flex justify-center">
-              <img src="/tka-2025-soal9.png" alt="Peta pekarangan koordinat kartesius soal 9" className="max-w-full rounded-lg border border-white/10" />
+              <img src="/tka-2025-soal9.png" alt="Peta pekarangan koordinat kartesius soal 9" className="landscape-full max-w-full rounded-lg border border-white/10" />
             </div>
             <p className={`font-body text-sm leading-relaxed mb-3 ${isDark ? "text-white/80" : "text-gray-700"}`}>
               Dalam menentukan lokasi penanaman, Ayunda harus mempertimbangkan beberapa faktor
@@ -844,7 +844,7 @@ const TKASoalAsli2025Page = () => {
                   <img
                     src={`/tka-2025-soal10${opt.toLowerCase()}.png`}
                     alt={`Pilihan ${opt} soal 10`}
-                    className="w-full rounded"
+                    className="landscape-full w-full rounded"
                   />
                   <div className="flex items-center justify-between w-full px-1">
                     <span className={`font-bold ${selectedAnswers[10] === i ? (i === 0 ? (isDark ? "text-green-300" : "text-green-600") : (isDark ? "text-red-300" : "text-red-600")) : (isDark ? "text-white/70" : "text-gray-600")}`}>{opt}.</span>
@@ -889,7 +889,7 @@ const TKASoalAsli2025Page = () => {
               Berikut merupakan harga jajanan tradisional kue putu mayang dan kue pancong yang dijual di sebuah bazar makanan.
             </p>
             <div className="mb-3 flex justify-center">
-              <img src="/tka-2025-soal11.png" alt="Gambar kue putu mayang dan kue pancong soal 11" className="max-w-full rounded-lg border border-white/10" />
+              <img src="/tka-2025-soal11.png" alt="Gambar kue putu mayang dan kue pancong soal 11" className="landscape-full max-w-full rounded-lg border border-white/10" />
             </div>
             <p className={`font-body text-sm mb-3 ${isDark ? "text-white/80" : "text-gray-700"}`}>
               Berapa harga <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>3 kotak kue putu mayang</span> dan <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>1 kotak kue pancong</span>?
@@ -978,7 +978,7 @@ const TKASoalAsli2025Page = () => {
               Naura menggunakan operator seluler "Nusantara Mobile". Naura menuliskan pilihan paket kuota dan harganya dalam bentuk himpunan pasangan berurutan:
             </p>
             <div className="mb-3 flex justify-center">
-              <img src="/tka-2025-soal13.png" alt="Paket kuota Nusantara Mobile soal 13" className="max-w-full rounded-lg border border-white/10" />
+              <img src="/tka-2025-soal13.png" alt="Paket kuota Nusantara Mobile soal 13" className="landscape-full max-w-full rounded-lg border border-white/10" />
             </div>
             <p className={`font-body text-sm mb-3 ${isDark ? "text-white/80" : "text-gray-700"}`}>
               Jika <InlineMath math="x" /> adalah paket kuota dalam GB, rumus fungsi <InlineMath math="f(x)" /> yang menyatakan harga paket kuota adalah …
@@ -1263,7 +1263,7 @@ const TKASoalAsli2025Page = () => {
               Perhatikan dua segitiga kongruen pada koordinat kartesius berikut.
             </p>
             <div className="mb-3 flex justify-center">
-              <img src="/tka-2025-soal20.png" alt="Koordinat kartesius segitiga PQR dan KLM soal 20" className="max-w-full rounded-lg border border-white/10" />
+              <img src="/tka-2025-soal20.png" alt="Koordinat kartesius segitiga PQR dan KLM soal 20" className="landscape-full max-w-full rounded-lg border border-white/10" />
             </div>
             <p className={`font-body text-sm leading-relaxed mb-3 ${isDark ? "text-white/80" : "text-gray-700"}`}>
               Diketahui titik <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Q = titik K</span>. Segitiga PQR akan ditranslasikan oleh{" "}
@@ -1495,7 +1495,7 @@ const TKASoalAsli2025Page = () => {
                   `}
                   onClick={() => selectAnswer(25, i)}
                 >
-                  <img src={`/tka-2025-soal25${opt.toLowerCase()}.png`} alt={`Pilihan ${opt} soal 25`} className="w-full rounded" />
+                  <img src={`/tka-2025-soal25${opt.toLowerCase()}.png`} alt={`Pilihan ${opt} soal 25`} className="landscape-full w-full rounded" />
                   <div className="flex items-center justify-between w-full px-1">
                     <span className={`font-bold ${selectedAnswers[25] === i ? (i === 3 ? (isDark ? "text-green-300" : "text-green-600") : (isDark ? "text-red-300" : "text-red-600")) : (isDark ? "text-white/70" : "text-gray-600")}`}>{opt}.</span>
                     {selectedAnswers[25] !== undefined && i === 3 && <span className={`font-bold ${isDark ? "text-green-400" : "text-green-600"}`}>✓</span>}
@@ -1543,7 +1543,7 @@ const TKASoalAsli2025Page = () => {
               Tory suka sekali bermain game online. Dia selalu mengabaikan batasan waktu dalam bermain game online. Belakangan ini Tory sering merasa gelisah dan mudah marah apabila tidak diijinkan bermain. Dia juga sering merasakan sakit mata dan pusing. Dokter mengatakan bahwa Tory telah kecanduan bermain game online. Tory harus berusaha perlahan-lahan mengontrol waktu bermainnya. Dokter mengatakan bahwa batas waktu maksimal Tory diperbolehkan bermain adalah <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>7 jam dalam satu minggu</span>. Selama <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>12 minggu</span>, waktu bermain game Tory terus dipantau oleh kedua orang tuanya dan dilaporkan ke dokter.
             </p>
             <div className="mb-3 flex justify-center">
-              <img src="/tka-2025-soal26.png" alt="Diagram batang durasi Tory bermain game soal 26" className="max-w-full rounded-lg border border-white/10" />
+              <img src="/tka-2025-soal26.png" alt="Diagram batang durasi Tory bermain game soal 26" className="landscape-full max-w-full rounded-lg border border-white/10" />
             </div>
             <p className={`font-body text-sm mb-3 ${isDark ? "text-white/80" : "text-gray-700"}`}>
               Dalam 12 minggu terakhir, Tory paling sering menghabiskan waktu bermain game online setiap minggunya yaitu selama …
@@ -1588,13 +1588,13 @@ const TKASoalAsli2025Page = () => {
               Selama <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>12 minggu</span>, waktu bermain game Tory terus dipantau oleh kedua orang tuanya dan dilaporkan ke dokter.
             </p>
             <div className="mb-3 flex justify-center">
-              <img src="/tka-2025-soal27-bar.png" alt="Diagram batang durasi Tory bermain game soal 27" className="max-w-full rounded-lg border border-white/10" />
+              <img src="/tka-2025-soal27-bar.png" alt="Diagram batang durasi Tory bermain game soal 27" className="landscape-full max-w-full rounded-lg border border-white/10" />
             </div>
             <p className={`font-body text-sm leading-relaxed mb-3 ${isDark ? "text-white/80" : "text-gray-700"}`}>
               Dokter dan orang tua Tory memahami bahwa tidak mudah menghilangkan kecanduan bermain game online, namun mereka ingin terus memantau bagaimana perkembangan Tory. Dokter membuat skema sebagai berikut.
             </p>
             <div className="mb-3 flex justify-center">
-              <img src="/tka-2025-soal27.png" alt="Diagram fase penyembuhan soal 27" className="max-w-full rounded-lg border border-white/10" />
+              <img src="/tka-2025-soal27.png" alt="Diagram fase penyembuhan soal 27" className="landscape-full max-w-full rounded-lg border border-white/10" />
             </div>
             <p className={`font-body text-sm leading-relaxed mb-2 ${isDark ? "text-white/80" : "text-gray-700"}`}>
               Dokter memantau dan membandingkan rata-rata jam bermain game online setiap 4 minggu dan menyebutnya sebagai <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>fase</span>.

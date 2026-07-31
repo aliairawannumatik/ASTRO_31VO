@@ -4422,9 +4422,9 @@ html.light-mode .bg-slate-900\/90 .bg-yellow-500\/10 {
   stroke: rgba(15,23,42,0.12) !important;
 }
 
-/* TKA Soal Asli 2025 — landscape: shrink content images to 50% */
+/* TKA Soal Asli 2025 — landscape: shrink content images to 50%, except exempted ones */
 @media (orientation: landscape) {
-  .tka-soal-asli-page img:not([class*="absolute"]):not([class*="w-10"]) {
+  .tka-soal-asli-page img:not(.landscape-full):not([class*="absolute"]):not([class*="w-10"]) {
     max-width: 50% !important;
   }
 }
