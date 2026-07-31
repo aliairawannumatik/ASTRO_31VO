@@ -1269,7 +1269,7 @@ const TKASoalAsli2025Page = () => {
               Diketahui titik <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Q = titik K</span>. Segitiga PQR akan ditranslasikan oleh{" "}
               <InlineMath math="T = (-4, -2)" />. Bayangan segitiga PQR dan segitiga KLM akan saling …
             </p>
-            <MCQ qn={20} correct={3} options={[
+            <MCQ qn={20} correct={2} options={[
               "A. Tegak lurus",
               "B. Berpotongan",
               "C. Sejajar",
@@ -1278,18 +1278,30 @@ const TKASoalAsli2025Page = () => {
             <PembahasanBtn n={20} />
             {expandedPembahasan.has(20) && (
               <div className="mt-3 space-y-2">
-                <PBJawaban>D. Berhimpit</PBJawaban>
+                <PBJawaban>C. Sejajar</PBJawaban>
                 <PBKonsep>
                   <p><span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Translasi</span> T=(a,b): setiap titik (x,y) dipindah ke (x+a, y+b)</p>
-                  <p>Dua bangun <span className={`font-bold`}>berhimpit</span> jika setiap titik yang bersesuaian berada di posisi yang tepat sama</p>
-                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Jika Q=K dan translasi T memindahkan Q ke posisi L, serta PQR kongruen dengan KLM, maka P'Q'R' ≡ LKM ≡ KLM (berhimpit)</p>
+                  <p>Dua bangun <span className={`font-bold`}>sejajar</span> jika sisi-sisi yang bersesuaian memiliki gradien yang sama tetapi posisinya tidak bertumpuk</p>
+                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Hitung koordinat bayangan P'Q'R', lalu bandingkan gradien sisi-sisinya dengan gradien sisi-sisi KLM</p>
                 </PBKonsep>
                 <PBSteps>
-                  <S n={1}><p>Q = K berarti mereka berada di titik koordinat yang sama</p></S>
-                  <S n={2}><p>Misalkan Q = K = (4, 2). Setelah translasi T=(-4,-2):</p></S>
-                  <div className="ml-7"><BlockMath math="Q' = (4+(-4),\; 2+(-2)) = (0, 0)" /></div>
-                  <S n={3}><p>Karena PQR dan KLM kongruen dan Q=K, translasi T=(-4,-2) memindahkan setiap titik PQR tepat ke posisi titik-titik KLM yang bersesuaian</p></S>
-                  <S n={4}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Bayangan P'Q'R' menempati posisi yang sama persis dengan KLM → Berhimpit ✓</p></S>
+                  <S n={1}><p>Koordinat dari gambar: <InlineMath math="P(-6,9),\ Q(0,7),\ R(-3,4)" /> dan <InlineMath math="K(0,7),\ L(6,5),\ M(3,2)" /></p></S>
+                  <S n={2}><p>Translasi <InlineMath math="T=(-4,-2)" /> pada setiap titik segitiga PQR:</p></S>
+                  <div className="ml-7"><BlockMath math="P'=(-6-4,\;9-2)=(-10,7),\quad Q'=(0-4,\;7-2)=(-4,5),\quad R'=(-3-4,\;4-2)=(-7,2)" /></div>
+                  <S n={3}><p>Hitung gradien sisi-sisi <InlineMath math="\Delta P'Q'R'" />:</p></S>
+                  <div className="ml-7 space-y-1">
+                    <BlockMath math="m_{P'Q'} = \frac{5-7}{-4-(-10)} = \frac{-2}{6} = -\tfrac{1}{3}" />
+                    <BlockMath math="m_{Q'R'} = \frac{2-5}{-7-(-4)} = \frac{-3}{-3} = 1" />
+                    <BlockMath math="m_{P'R'} = \frac{2-7}{-7-(-10)} = \frac{-5}{3}" />
+                  </div>
+                  <S n={4}><p>Hitung gradien sisi-sisi <InlineMath math="\Delta KLM" />:</p></S>
+                  <div className="ml-7 space-y-1">
+                    <BlockMath math="m_{KL} = \frac{5-7}{6-0} = \frac{-2}{6} = -\tfrac{1}{3}" />
+                    <BlockMath math="m_{ML} = \frac{5-2}{6-3} = \frac{3}{3} = 1" />
+                    <BlockMath math="m_{KM} = \frac{2-7}{3-0} = -\tfrac{5}{3}" />
+                  </div>
+                  <S n={5}><p>Seluruh gradien sisi yang bersesuaian sama (<InlineMath math="m_{P'Q'}=m_{KL}" />, <InlineMath math="m_{Q'R'}=m_{ML}" />, <InlineMath math="m_{P'R'}=m_{KM}" />) dan kedua segitiga <span className={`font-bold`}>tidak bertumpuk</span></p></S>
+                  <S n={6}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Bayangan P'Q'R' sejajar dengan segitiga KLM ✓</p></S>
                 </PBSteps>
               </div>
             )}
