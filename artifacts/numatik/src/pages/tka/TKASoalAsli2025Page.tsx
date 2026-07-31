@@ -894,7 +894,7 @@ const TKASoalAsli2025Page = () => {
             <p className={`font-body text-sm mb-3 ${isDark ? "text-white/80" : "text-gray-700"}`}>
               Berapa harga <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>3 kotak kue putu mayang</span> dan <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>1 kotak kue pancong</span>?
             </p>
-            <MCQ qn={11} correct={3} options={[
+            <MCQ qn={11} correct={2} options={[
               "A. Rp10.000,00",
               "B. Rp14.000,00",
               "C. Rp44.000,00",
@@ -903,7 +903,7 @@ const TKASoalAsli2025Page = () => {
             <PembahasanBtn n={11} />
             {expandedPembahasan.has(11) && (
               <div className="mt-3 space-y-2">
-                <PBJawaban>D. Rp52.000,00</PBJawaban>
+                <PBJawaban>C. Rp44.000,00</PBJawaban>
                 <PBKonsep>
                   <p><span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>SPLDV</span> (Sistem Persamaan Linear Dua Variabel)</p>
                   <p>Metode Eliminasi: kalikan persamaan agar koefisien salah satu variabel sama, lalu kurangkan</p>
@@ -912,13 +912,13 @@ const TKASoalAsli2025Page = () => {
                 </PBKonsep>
                 <PBSteps>
                   <S n={1}><p>Misalkan: p = harga putu mayang, c = harga pancong (per kotak)</p></S>
-                  <S n={2}><div><BlockMath math="2p + 3c = 58.000 \quad\cdots(1)" /></div></S>
-                  <S n={3}><div><BlockMath math="3p + 2c = 62.000 \quad\cdots(2)" /></div></S>
-                  <S n={4}><p>Eliminasi: (1)×3 − (2)×2:</p></S>
-                  <div className="ml-7"><BlockMath math="6p + 9c - 6p - 4c = 174.000 - 124.000" /></div>
-                  <div className="ml-7"><BlockMath math="5c = 50.000 \Rightarrow c = 10.000" /></div>
-                  <S n={5}><p>Substitusi c ke (1): <InlineMath math="2p + 30.000 = 58.000 \Rightarrow p = 14.000" /></p></S>
-                  <S n={6}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>3p + c = 3×14.000 + 10.000 = 42.000 + 10.000 = <span className="underline">Rp52.000</span> ✓</p></S>
+                  <S n={2}><div><BlockMath math="3p + 2c = 58.000 \quad\cdots(1)" /></div></S>
+                  <S n={3}><div><BlockMath math="2p + 3c = 62.000 \quad\cdots(2)" /></div></S>
+                  <S n={4}><p>Eliminasi variabel p — (1)×2 − (2)×3:</p></S>
+                  <div className="ml-7"><BlockMath math="6p + 4c - 6p - 9c = 116.000 - 186.000" /></div>
+                  <div className="ml-7"><BlockMath math="-5c = -70.000 \Rightarrow c = 14.000" /></div>
+                  <S n={5}><p>Substitusi c ke (1): <InlineMath math="3p + 28.000 = 58.000 \Rightarrow p = 10.000" /></p></S>
+                  <S n={6}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>3p + c = 3×10.000 + 14.000 = 30.000 + 14.000 = <span className="underline">Rp44.000</span> ✓</p></S>
                 </PBSteps>
               </div>
             )}
