@@ -1171,7 +1171,7 @@ const TKASoalAsli2025Page = () => {
               <img src="/tka-2025-soal18.png" alt="Dua garis sejajar p dan q dipotong transversal soal 18" className="max-w-full rounded-lg border border-white/10" />
             </div>
             <p className={`font-body text-sm mb-3 ${isDark ? "text-white/80" : "text-gray-700"}`}>Berdasarkan gambar tersebut, berapa nilai <InlineMath math="b" />?</p>
-            <MCQ qn={18} correct={1} options={[
+            <MCQ qn={18} correct={0} options={[
               "A. 46",
               "B. 68",
               "C. 112",
@@ -1180,18 +1180,19 @@ const TKASoalAsli2025Page = () => {
             <PembahasanBtn n={18} />
             {expandedPembahasan.has(18) && (
               <div className="mt-3 space-y-2">
-                <PBJawaban>B. b = 68°</PBJawaban>
+                <PBJawaban>A. b = 46°</PBJawaban>
                 <PBKonsep>
                   <p>Sifat garis sejajar dipotong transversal:</p>
-                  <p>• <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Sudut dalam berseberangan</span> (Z-angle / alternate interior): <span className={`font-bold`}>sama besar</span></p>
-                  <p>• <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Sudut sehadap</span> (F-angle / corresponding): sama besar</p>
-                  <p>• <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Sudut dalam sepihak</span> (co-interior): berpelurus (jumlah 180°)</p>
-                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Bayangkan huruf Z, F, C di antara dua garis sejajar untuk identifikasi jenis sudut</p>
+                  <p>• <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Sudut sehadap</span> (F-angle / corresponding): <span className={`font-bold`}>sama besar</span></p>
+                  <p>• <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Sudut bertolak belakang</span>: sama besar</p>
+                  <p>• Sudut <InlineMath math="68^\circ" /> pada gambar merupakan <span className={`font-bold ${isDark ? "text-rose-300" : "text-rose-500"}`}>pengecoh</span> — tidak digunakan dalam penyelesaian</p>
+                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Ikuti jalur sudut dari <InlineMath math="46^\circ" /> → sehadap ke garis p → bertolak belakang ke posisi b°</p>
                 </PBKonsep>
                 <PBSteps>
-                  <S n={1}><p>Diketahui <InlineMath math="p \parallel q" /> dipotong transversal</p></S>
-                  <S n={2}><p>Sudut 68° pada garis p dan sudut b° pada garis q merupakan <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>sudut dalam berseberangan</span> (Z-angle)</p></S>
-                  <S n={3}><div><BlockMath math="b = 68° \checkmark" /></div></S>
+                  <S n={1}><p>Diketahui <InlineMath math="p \parallel q" /> dipotong garis transversal. Sudut <InlineMath math="46^\circ" /> berada di posisi kanan-atas pada perpotongan dengan garis <InlineMath math="q" /></p></S>
+                  <S n={2}><p>Karena <InlineMath math="p \parallel q" />, sudut di posisi kanan-atas pada perpotongan dengan garis <InlineMath math="p" /> adalah <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>sudut sehadap</span> → besarnya juga <InlineMath math="46^\circ" /></p></S>
+                  <S n={3}><p>Sudut <InlineMath math="b^\circ" /> berada di posisi kiri-bawah pada perpotongan yang sama (garis <InlineMath math="p" />). Sudut kiri-bawah dan kanan-atas adalah <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>sudut bertolak belakang</span> → sama besar</p></S>
+                  <S n={4}><div><BlockMath math="b = 46^\circ \checkmark" /></div></S>
                 </PBSteps>
               </div>
             )}
