@@ -10,8 +10,8 @@ import "katex/dist/katex.min.css";
 const BilanganBulatPage = () => {
   const navigate = useNavigate();
   const { isDark, theme } = useTheme();
-  const [activeTab, setActiveTab]                   = useState<"materi" | "soal">("materi");
-  const [expandedMateri, setExpandedMateri]         = useState<number[]>([0, 1, 2, 3, 4]);
+  const [activeTab, setActiveTab]                   = useState<"materi" | "telaah" | "soal">("materi");
+  const [expandedMateri, setExpandedMateri]         = useState<number[]>([0, 1, 2, 3, 4, 5, 6, 7]);
   const [expandedPembahasan, setExpandedPembahasan] = useState<Set<number>>(new Set());
   const [selectedAnswers, setSelectedAnswers]       = useState<Record<number, number>>({});
   const [selectedComplex, setSelectedComplex]       = useState<Record<number, Set<number>>>({});
@@ -118,6 +118,30 @@ const BilanganBulatPage = () => {
       <div className="flex-1">{children}</div>
     </div>
   );
+
+  // ── telaah soal wrapper (display num separate from internal qn offset) ─
+  const TelaahSoal = ({ num, tipe, children }: { num: number; tipe: "PGS" | "MCMA" | "BS"; children: React.ReactNode }) => {
+    const tipeColor =
+      tipe === "PGS"  ? (isDark ? "bg-sky-500/20 text-sky-300 border-sky-500/40"       : "bg-sky-100 text-sky-700 border-sky-300") :
+      tipe === "MCMA" ? (isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/40"  : "bg-amber-100 text-amber-700 border-amber-300") :
+                        (isDark ? "bg-rose-500/20 text-rose-300 border-rose-500/40"     : "bg-rose-100 text-rose-700 border-rose-300");
+    const tipeLabel =
+      tipe === "PGS"  ? "Pilihan Ganda" :
+      tipe === "MCMA" ? "PG Kompleks – lebih dari 1 jawaban" :
+                        "PG Kompleks – Benar / Salah";
+    return (
+      <div className={`rounded-xl p-5 ${
+        isDark ? "bg-card/70 backdrop-blur border border-border" : "bg-white border border-gray-200 shadow-sm"
+      }`}>
+        <div className="flex items-center gap-2 mb-3">
+          <span className="bg-emerald-500/20 text-emerald-400 font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">{num}</span>
+          <span className={`text-[10px] font-body font-bold rounded-full px-2.5 py-0.5 border ${tipeColor}`}>{tipe}</span>
+          <span className={`text-[9px] font-body ${isDark ? "text-white/35" : "text-gray-400"}`}>{tipeLabel}</span>
+        </div>
+        {children}
+      </div>
+    );
+  };
 
   // ── question wrapper ─────────────────────────────────────────────────
   const Soal = ({ n, tipe, children }: { n: number; tipe: "PGS" | "MCMA" | "BS"; children: React.ReactNode }) => {
@@ -322,6 +346,7 @@ const BilanganBulatPage = () => {
         <div className={`flex gap-2 mb-6 p-1 rounded-xl ${isDark ? "bg-white/4 border border-white/8" : "bg-gray-100 border border-gray-200"}`}>
           {([
             { key: "materi" as const, label: "📘 Ringkasan Materi" },
+            { key: "telaah" as const, label: "🔍 Telaah Soal" },
             { key: "soal"   as const, label: "✏️ Latihan Soal" },
           ] as const).map(tab => (
             <button
@@ -349,83 +374,119 @@ const BilanganBulatPage = () => {
           <div className="space-y-3">
             {([
               {
-                heading: "A. Pengertian Bilangan Bulat",
+                heading: "A. Jenis-Jenis Bilangan",
                 content: [
-                  "Bilangan bulat adalah himpunan yang terdiri dari bilangan bulat negatif, nol, dan bilangan bulat positif.",
-                  "Notasi: ℤ = {…, −3, −2, −1, 0, 1, 2, 3, …}",
+                  "Jenis-jenis bilangan, antara lain sebagai berikut.",
+                  "• Bilangan asli dinyatakan dalam {1, 2, 3, 4, 5, …}",
+                  "• Bilangan cacah dinyatakan dalam {0, 1, 2, 3, 4, 5, …}",
+                  "• Bilangan bulat dinyatakan dalam {…, −4, −3, −2, −1, 0, 1, 2, 3, 4, …}",
+                  "• Bilangan rasional: dapat dinyatakan dalam bentuk a/b, dengan a dan b bilangan bulat serta b ≠ 0",
+                  "• Bilangan irasional: tidak dapat dinyatakan dalam bentuk a/b, dengan a dan b bilangan bulat serta b ≠ 0",
+                ],
+              },
+              {
+                heading: "B. Pengertian Bilangan Bulat",
+                content: [
+                  "Bilangan bulat adalah himpunan bilangan yang terdiri atas bilangan bulat positif, nol, dan bilangan bulat negatif.",
+                  "Bilangan bulat dapat digambarkan pada garis bilangan.",
                   "",
-                  "Himpunan bagian bilangan bulat:",
-                  "• Bilangan bulat positif: {1, 2, 3, …} = bilangan asli",
-                  "• Bilangan cacah: {0, 1, 2, 3, …} ⊂ ℤ",
-                  "• Bilangan bulat negatif: {−1, −2, −3, …}",
+                  "• Bilangan bulat positif: nilainya lebih dari 0 atau letaknya di sebelah kanan 0 pada garis bilangan.",
+                  "• Bilangan bulat negatif: nilainya kurang dari 0 atau letaknya di sebelah kiri 0 pada garis bilangan.",
+                  "• Bilangan nol disebut bilangan netral, yaitu bilangan yang tidak positif maupun negatif.",
                   "",
                   "Di garis bilangan: makin ke kanan → makin besar.",
-                  "Contoh: −5 < −2 < 0 < 3 < 7",
+                  "Contoh: −6 < −2 < 0 < 3 (urutan dari kiri ke kanan)",
                 ],
               },
               {
-                heading: "B. Nilai Mutlak",
+                heading: "C. Membandingkan Bilangan Bulat",
                 content: [
-                  "Nilai mutlak |a| menyatakan jarak bilangan a dari 0 pada garis bilangan (selalu ≥ 0).",
+                  "Membandingkan dua bilangan bulat berarti menentukan hubungan nilai antara kedua bilangan tersebut dengan kata 'lebih dari', 'kurang dari', atau 'sama dengan'.",
                   "",
-                  "Definisi:",
-                  "• |a| = a,  jika a ≥ 0",
-                  "• |a| = −a, jika a < 0",
+                  "• Lambang membandingkan: lebih dari (>), kurang dari (<), sama dengan (=)",
+                  "• Pada garis bilangan, nilai di sebelah kiri lebih kecil daripada nilai di sebelah kanan.",
                   "",
-                  "Contoh: |−7| = 7,  |5| = 5,  |0| = 0",
-                  "",
-                  "💡 Trik: Nilai mutlak = 'buang' tanda minusnya.",
+                  "Contoh:",
+                  "Bandingkan −4 dengan 2.",
+                  "Pada garis bilangan, −4 berada di sebelah kiri 2.",
+                  "Jadi, −4 kurang dari 2, ditulis −4 < 2.",
                 ],
               },
               {
-                heading: "C. Penjumlahan & Pengurangan",
+                heading: "D. Sifat-Sifat Operasi Hitung Bilangan Bulat",
                 content: [
-                  "Aturan tanda penjumlahan:",
-                  "• (+) + (+) = (+)  →  3 + 5 = 8",
-                  "• (−) + (−) = (−)  →  −3 + (−5) = −8",
-                  "• Beda tanda → ambil selisih nilai mutlak, tanda = tanda yang lebih besar",
-                  "  Contoh: −8 + 3 = −5  (karena |−8| > |3|, hasilnya negatif)",
+                  "Operasi hitung bilangan bulat meliputi penjumlahan, pengurangan, perkalian, dan pembagian.",
+                  "Misalkan a, b, dan c adalah bilangan bulat. Sifat-sifatnya:",
                   "",
-                  "Pengurangan → ubah ke penjumlahan:",
-                  "a − b = a + (−b)",
-                  "Contoh: 5 − (−3) = 5 + 3 = 8",
+                  "a. Tertutup terhadap penjumlahan, pengurangan, dan perkalian.",
+                  "   Artinya, hasil dari a+b, a−b, dan a×b juga merupakan bilangan bulat.",
+                  "",
+                  "b. Komutatif terhadap penjumlahan dan perkalian:",
+                  "   a + b = b + a  dan  a × b = b × a",
+                  "",
+                  "c. Unsur identitas penjumlahan (0) dan perkalian (1):",
+                  "   a + 0 = 0 + a = a  dan  a × 1 = 1 × a = a",
+                  "",
+                  "d. Asosiatif terhadap penjumlahan dan perkalian:",
+                  "   (a+b)+c = a+(b+c)  dan  (a×b)×c = a×(b×c)",
+                  "",
+                  "e. Distributif perkalian terhadap penjumlahan dan pengurangan:",
+                  "   a×(b+c) = (a×b)+(a×c)  dan  a×(b−c) = (a×b)−(a×c)",
                 ],
               },
               {
-                heading: "D. Perkalian & Pembagian",
+                heading: "E. Operasi Hitung Campuran Bilangan Bulat",
                 content: [
-                  "Aturan tanda perkalian/pembagian:",
-                  "• (+) × (+) = (+)  →  4 × 3 = 12",
-                  "• (−) × (−) = (+)  →  −4 × (−3) = 12",
-                  "• (+) × (−) = (−)  →  4 × (−3) = −12",
-                  "• (−) × (+) = (−)  →  −4 × 3 = −12",
+                  "Aturan urutan pengerjaan operasi hitung campuran bilangan bulat:",
                   "",
-                  "Aturan yang sama berlaku untuk pembagian (÷).",
+                  "a. Dahulukan operasi hitung yang terdapat di dalam tanda kurung.",
+                  "b. Jika terdapat perkalian/pembagian dan penjumlahan/pengurangan, kerjakan perkalian atau pembagian terlebih dahulu.",
+                  "c. Jika hanya terdapat penjumlahan dan pengurangan, kerjakan berurutan dari kiri ke kanan.",
+                  "d. Jika hanya terdapat perkalian dan pembagian, kerjakan berurutan dari kiri ke kanan.",
                   "",
-                  "Khusus: 0 × a = 0  dan  0 ÷ a = 0  (untuk a ≠ 0)",
-                  "",
-                  "Pangkat bilangan negatif:",
-                  "• Pangkat genap  → hasil positif: (−2)² = 4",
-                  "• Pangkat ganjil → hasil negatif: (−2)³ = −8",
+                  "💡 Ingat urutan Ka–Pa–Ka–Ta:",
+                  "   Kurung → Pangkat/Akar → Kali/Bagi (kiri ke kanan) → Tambah/Kurang (kiri ke kanan)",
                 ],
               },
               {
-                heading: "E. Urutan Operasi Hitung (Ka–Pa–Ka–Ta)",
+                heading: "F. Menyelesaikan Masalah Bilangan Bulat",
                 content: [
-                  "Urutan pengerjaan operasi hitung campuran:",
+                  "Langkah-langkah menyelesaikan permasalahan yang berkaitan dengan bilangan bulat:",
                   "",
-                  "① Ka — Kurung  ( ) dulu",
-                  "② Pa — Pangkat / Akar",
-                  "③ Ka — Kali (×) dan Bagi (÷) dari kiri ke kanan",
-                  "④ Ta — Tambah (+) dan Kurang (−) dari kiri ke kanan",
+                  "a. Pahami isi soal dan identifikasi informasi yang diketahui.",
+                  "b. Buatlah kalimat matematika yang sesuai dengan permasalahan.",
+                  "c. Selesaikan kalimat matematika yang diperoleh.",
+                  "d. Jawablah soal sesuai pertanyaan yang diminta.",
+                ],
+              },
+              {
+                heading: "G. Faktorisasi Prima",
+                content: [
+                  "Faktorisasi prima adalah proses memecah sebuah bilangan menjadi perkalian dari faktor-faktor bilangan prima.",
+                  "Cara: bagi bilangan secara berulang menggunakan bilangan prima (2, 3, 5, 7, …) hingga hasilnya 1.",
                   "",
-                  "💡 Ingat: Kali dan Bagi punya prioritas SAMA → kerjakan dari kiri!",
-                  "   Begitu pula Tambah dan Kurang.",
+                  "Contoh: Tentukan faktorisasi prima dari 18.",
+                  "18 ÷ 2 = 9",
+                  " 9 ÷ 3 = 3",
+                  " 3 ÷ 3 = 1",
+                  "Faktor prima dari 18: angka 2 sebanyak 1 faktor, angka 3 sebanyak 2 faktor.",
+                  "Jadi, faktorisasi prima 18 = 2 × 3².",
+                ],
+              },
+              {
+                heading: "H. Estimasi/Perkiraan Hasil Perhitungan",
+                content: [
+                  "Estimasi adalah memperkirakan hasil operasi hitung bilangan bulat secara cepat dan masuk akal, tanpa menghitung secara tepat.",
                   "",
-                  "Contoh: −18 + 42 ÷ (−6) × 3",
-                  "= −18 + (−7) × 3",
-                  "= −18 + (−21)",
-                  "= −39",
+                  "Cara memperkirakan hasil operasi hitung bilangan bulat:",
+                  "1. Bulatkan bilangan ke puluhan, ratusan, ribuan, atau nilai terdekat.",
+                  "2. Lakukan operasi (penjumlahan, pengurangan, atau perkalian) pada bilangan hasil pembulatan.",
+                  "",
+                  "Estimasi dianggap baik jika hasil perkiraan mendekati hasil yang sebenarnya.",
+                  "",
+                  "Contoh:",
+                  "Harga sebuah baju Rp83.600. Lebih dekat dibulatkan menjadi Rp84.000 daripada Rp80.000.",
+                  "Pembulatan ini dilakukan untuk mempermudah perhitungan.",
                 ],
               },
             ] as { heading: string; content: string[] }[]).map((sec, idx) => {
@@ -475,6 +536,260 @@ const BilanganBulatPage = () => {
                 </button>.
               </p>
             </div>
+          </div>
+        )}
+
+        {/* ── Telaah Soal ── */}
+        {activeTab === "telaah" && (
+          <div className="flex flex-col gap-5">
+            {/* header telaah */}
+            <div className={`border rounded-xl p-4 ${isDark ? "bg-emerald-900/15 border-emerald-500/25" : "bg-emerald-50 border-emerald-300"}`}>
+              <p className={`font-body text-xs font-bold mb-1 ${isDark ? "text-emerald-300" : "text-emerald-700"}`}>🔍 TELAAH SOAL — BILANGAN BULAT</p>
+              <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-600"}`}>
+                Soal-soal berikut disertai pembahasan lengkap untuk membantumu memahami pola soal TKA. Klik jawaban lalu buka pembahasan.
+              </p>
+            </div>
+
+            {/* ══ TELAAH 1 — PGS ══ */}
+            <TelaahSoal num={1} tipe="PGS">
+              <p className={qText}>
+                Perhatikan garis bilangan berikut. Garis bilangan dimulai dari 0, dilanjutkan ke kanan sejauh 9 satuan, kemudian ke kiri sejauh 13 satuan.
+                Operasi bilangan bulat yang digambarkan pada garis bilangan tersebut adalah ....
+              </p>
+              <MCQ qn={51} correct={2} options={[
+                <span key="a">A. <InlineMath math="-9 - 4 = -4" /></span>,
+                <span key="b">B. <InlineMath math="-4 - 2 = -4" /></span>,
+                <span key="c">C. <InlineMath math="9 - 13 = -4" /></span>,
+                <span key="d">D. <InlineMath math="9 - 4 = 5" /></span>,
+              ]} />
+              <PembahasanBtn n={51} />
+              {expandedPembahasan.has(51) && (
+                <div className="mt-3 space-y-2">
+                  <PBJawaban>C. 9 − 13 = −4</PBJawaban>
+                  <PBKonsep>
+                    <p>Garis bilangan dimulai dari 0, lalu ke kanan 9 satuan (posisi 9), kemudian ke kiri 13 satuan.</p>
+                    <p>Gerakan ke kanan = penjumlahan (+), gerakan ke kiri = pengurangan (−).</p>
+                    <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: perhatikan arah panah dari titik awal sampai titik akhir, bukan hanya titik akhirnya.</p>
+                  </PBKonsep>
+                  <PBSteps>
+                    <S n={1}><p>Mulai dari 0, ke kanan 9 satuan → posisi 9.</p></S>
+                    <S n={2}><p>Dari posisi 9, ke kiri 13 satuan → posisi <InlineMath math="9 - 13 = -4" />.</p></S>
+                    <S n={3}><p>Titik akhir di −4 pada garis bilangan. Operasi yang digambarkan: <InlineMath math="9 - 13 = -4" /> ✓</p></S>
+                  </PBSteps>
+                </div>
+              )}
+            </TelaahSoal>
+
+            {/* ══ TELAAH 2 — MCMA ══ */}
+            <TelaahSoal num={2} tipe="MCMA">
+              <p className={qText}>
+                Diketahui bilangan <InlineMath math="a = -4" />, <InlineMath math="b = 7" />, dan <InlineMath math="c = -9" />.
+                Berdasarkan informasi tersebut, pilihlah semua jawaban yang benar. Jawaban benar lebih dari satu.
+              </p>
+              <p className={`${hint} ${isDark ? "text-amber-300" : "text-amber-600"}`}>Jawaban benar lebih dari satu.</p>
+              <MCMA qn={52} items={[
+                { text: <span>Hasil dari <InlineMath math="a - b" /> sama dengan <InlineMath math="b - a" /> sehingga berlaku sifat komutatif.</span>, benar: false },
+                { text: <span>Hasil <InlineMath math="(a+b)+c" /> sama dengan <InlineMath math="a+(b+c)" /> sehingga berlaku sifat asosiatif.</span>, benar: true },
+                { text: <span>Hasil <InlineMath math="a + b - c" /> berupa bilangan bulat sehingga berlaku sifat tertutup.</span>, benar: true },
+                { text: <span>Hasil <InlineMath math="a \times (b-c)" /> sama dengan <InlineMath math="(a-b) \times (a-c)" /> sehingga berlaku sifat distributif.</span>, benar: false },
+              ]} />
+              <PembahasanBtn n={52} />
+              {expandedPembahasan.has(52) && (
+                <div className="mt-3 space-y-2">
+                  <PBJawaban>Pernyataan (2) dan (3) benar</PBJawaban>
+                  <PBKonsep>
+                    <p>Sifat komutatif berlaku untuk penjumlahan dan perkalian, tetapi <span className="font-bold">tidak</span> untuk pengurangan.</p>
+                    <p>Sifat distributif: <InlineMath math="a \times (b-c) = (a\times b)-(a\times c)" />, bukan <InlineMath math="(a-b)\times(a-c)" />.</p>
+                  </PBKonsep>
+                  <PBSteps>
+                    <S n={1}><p>(1) <InlineMath math="a-b=-4-7=-11" />, <InlineMath math="b-a=7-(-4)=11" /> → tidak sama → <span className={`font-bold ${isDark?"text-red-300":"text-red-600"}`}>SALAH ✗</span></p></S>
+                    <S n={2}><p>(2) <InlineMath math="(a+b)+c=(-4+7)+(-9)=3-9=-6" />, <InlineMath math="a+(b+c)=-4+(7-9)=-4+(-2)=-6" /> → sama → <span className={`font-bold ${isDark?"text-green-300":"text-green-700"}`}>BENAR ✓</span></p></S>
+                    <S n={3}><p>(3) <InlineMath math="a+b-c=-4+7-(-9)=-4+7+9=12" /> → bilangan bulat → <span className={`font-bold ${isDark?"text-green-300":"text-green-700"}`}>BENAR ✓</span></p></S>
+                    <S n={4}><p>(4) <InlineMath math="a\times(b-c)=-4\times16=-64" />, <InlineMath math="(a-b)\times(a-c)=-11\times5=-55" /> → tidak sama → <span className={`font-bold ${isDark?"text-red-300":"text-red-600"}`}>SALAH ✗</span></p></S>
+                  </PBSteps>
+                </div>
+              )}
+            </TelaahSoal>
+
+            {/* ══ TELAAH 3 — MCMA ══ */}
+            <TelaahSoal num={3} tipe="MCMA">
+              <p className={qText}>
+                Dalam suatu kompetisi futsal, skor yang diperoleh tim adalah: menang = 3 poin, seri = 1 poin, dan kalah = 0 poin.
+                Tabel berikut menunjukkan hasil pertandingan dari empat tim dalam kompetisi tersebut.
+              </p>
+              <div className="overflow-x-auto mb-3">
+                <table className={`w-full text-xs font-body border-collapse rounded-lg overflow-hidden`}>
+                  <thead>
+                    <tr className={isDark ? "bg-white/10" : "bg-gray-100"}>
+                      {["Nama Tim","Main","Menang","Kalah","Seri","Selisih Gol"].map(h => (
+                        <th key={h} className={`border px-2 py-2 text-center ${isDark ? "border-white/20 text-white" : "border-gray-300 text-gray-700"}`}>{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ["Elang Merah","3","2","0","1","3"],
+                      ["Singa Biru","3","1","0","2","2"],
+                      ["Merpati Hijau","3","0","1","2","−1"],
+                      ["Kancil Emas","3","0","2","1","−4"],
+                    ].map((row,i) => (
+                      <tr key={i} className={i%2===0 ? (isDark?"bg-white/3":"bg-gray-50") : ""}>
+                        {row.map((cell,j) => (
+                          <td key={j} className={`border px-2 py-2 text-center ${isDark ? "border-white/10 text-white/80" : "border-gray-200 text-gray-700"} ${j===0?"text-left font-semibold":""}`}>{cell}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className={`font-body text-xs mb-3 ${isDark ? "text-white/60" : "text-gray-500"}`}>
+                Dua tim dengan skor poin tertinggi akan bertanding untuk memperebutkan juara 1. Pilihlah semua jawaban yang benar.
+              </p>
+              <p className={`${hint} ${isDark ? "text-amber-300" : "text-amber-600"}`}>Jawaban benar lebih dari satu.</p>
+              <MCMA qn={53} items={[
+                { text: "Jumlah skor yang diperoleh tim Elang Merah adalah 7.", benar: true },
+                { text: "Jumlah skor yang diperoleh tim Singa Biru adalah 6.", benar: false },
+                { text: "Jumlah skor tim Merpati Hijau dan Kancil Emas adalah sama, yaitu 1.", benar: false },
+                { text: "Tim Elang Merah dan tim Singa Biru akan bertanding memperebutkan juara 1.", benar: true },
+              ]} />
+              <PembahasanBtn n={53} />
+              {expandedPembahasan.has(53) && (
+                <div className="mt-3 space-y-2">
+                  <PBJawaban>Pernyataan (1) dan (4) benar</PBJawaban>
+                  <PBKonsep>
+                    <p>Skor total = (Menang × 3) + (Kalah × 0) + (Seri × 1)</p>
+                    <p>Dua tim dengan total skor tertinggi maju ke final memperebutkan juara 1.</p>
+                  </PBKonsep>
+                  <PBSteps>
+                    <S n={1}><p>Elang Merah: <InlineMath math="(2\times3)+(0\times0)+(1\times1)=6+0+1=7" /> → <span className={`font-bold ${isDark?"text-green-300":"text-green-700"}`}>BENAR ✓</span></p></S>
+                    <S n={2}><p>Singa Biru: <InlineMath math="(1\times3)+(0\times0)+(2\times1)=3+0+2=5" /> → bukan 6 → <span className={`font-bold ${isDark?"text-red-300":"text-red-600"}`}>SALAH ✗</span></p></S>
+                    <S n={3}><p>Merpati Hijau: <InlineMath math="(0\times3)+(1\times0)+(2\times1)=2" />, Kancil Emas: <InlineMath math="(0\times3)+(2\times0)+(1\times1)=1" /> → tidak sama → <span className={`font-bold ${isDark?"text-red-300":"text-red-600"}`}>SALAH ✗</span></p></S>
+                    <S n={4}><p>Skor tertinggi: Elang Merah (7) dan Singa Biru (5) → maju ke final → <span className={`font-bold ${isDark?"text-green-300":"text-green-700"}`}>BENAR ✓</span></p></S>
+                  </PBSteps>
+                </div>
+              )}
+            </TelaahSoal>
+
+            {/* ══ TELAAH 4 — PGS ══ */}
+            <TelaahSoal num={4} tipe="PGS">
+              <p className={qText}>
+                Diketahui <InlineMath math="-2 \times (5 + a) - 18 : 3 = 4" />. Nilai <InlineMath math="a" /> adalah ....
+              </p>
+              <MCQ qn={54} correct={0} options={[
+                "A. −10", "B. −7", "C. −3", "D. 2"
+              ]} />
+              <PembahasanBtn n={54} />
+              {expandedPembahasan.has(54) && (
+                <div className="mt-3 space-y-2">
+                  <PBJawaban>A. −10</PBJawaban>
+                  <PBKonsep>
+                    <p>Selesaikan urutan operasi: dahulukan tanda kurung, lalu bagi, kemudian kerjakan persamaan.</p>
+                    <p>Isolasi variabel <InlineMath math="a" /> langkah demi langkah.</p>
+                    <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: hitung dulu bagian yang tidak mengandung variabel, baru isolasi variabel-nya.</p>
+                  </PBKonsep>
+                  <PBSteps>
+                    <S n={1}><p>Hitung bagian pembagian terlebih dahulu: <InlineMath math="18 : 3 = 6" /></p></S>
+                    <S n={2}><p>Persamaan menjadi: <InlineMath math="-2 \times (5+a) - 6 = 4" /></p></S>
+                    <S n={3}><p>Pindahkan: <InlineMath math="-2 \times (5+a) = 4 + 6 = 10" /></p></S>
+                    <S n={4}><p>Bagi kedua ruas: <InlineMath math="5 + a = 10 \div (-2) = -5" /></p></S>
+                    <S n={5}><div><BlockMath math="a = -5 - 5 = -10" /></div></S>
+                  </PBSteps>
+                </div>
+              )}
+            </TelaahSoal>
+
+            {/* ══ TELAAH 5 — BS ══ */}
+            <TelaahSoal num={5} tipe="BS">
+              <p className={qText}>
+                Sebuah termometer menunjukkan suhu ruangan sebesar <span className={`font-bold ${isDark?"text-amber-300":"text-amber-600"}`}>31°C</span> pada pukul 15.00.
+                Perubahan waktu akan memengaruhi besar suhu ruangan.
+                Berdasarkan informasi tersebut, tentukan <span className={`font-bold ${isDark?"text-green-300":"text-green-600"}`}>Benar</span> atau{" "}
+                <span className={`font-bold ${isDark?"text-red-300":"text-red-600"}`}>Salah</span> untuk setiap pernyataan berikut.
+              </p>
+              <TFTable qn={55} rows={[
+                { key:"a", text: <span>Suhu ruangan pada pukul 19.00 turun <InlineMath math="2°C" /> menjadi <InlineMath math="29°C" />.</span>, correct: "Benar" },
+                { key:"b", text: <span>Setelah 6 jam, suhu ruangan berkurang <InlineMath math="3°C" /> sehingga besar suhu ruangan pada pukul 22.00 adalah <InlineMath math="28°C" />.</span>, correct: "Salah" },
+                { key:"c", text: <span>Suhu ruangan turun <InlineMath math="1°C" /> setiap 2 jam sampai dengan pukul 01.00 sehingga besar suhu pada pukul 01.00 adalah <InlineMath math="26°C" />.</span>, correct: "Benar" },
+              ]} />
+              <PembahasanBtn n={55} />
+              {expandedPembahasan.has(55) && (
+                <div className="mt-3 space-y-2">
+                  <PBJawaban>(a) Benar &nbsp;|&nbsp; (b) Salah &nbsp;|&nbsp; (c) Benar</PBJawaban>
+                  <PBKonsep>
+                    <p>Suhu turun = pengurangan (−). Hitung selang waktu dari pukul awal.</p>
+                    <p>Pernyataan (b): 6 jam setelah pukul 15.00 adalah pukul 21.00, bukan 22.00.</p>
+                    <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: perhatikan selisih waktu (jam) dengan teliti sebelum menghitung suhu.</p>
+                  </PBKonsep>
+                  <PBSteps>
+                    <S n={1}><p>(a) <InlineMath math="31°C - 2°C = 29°C" /> → <span className={`font-bold ${isDark?"text-green-300":"text-green-700"}`}>BENAR ✓</span></p></S>
+                    <S n={2}><p>(b) 6 jam setelah 15.00 = <span className="font-bold">21.00</span>, bukan 22.00 → <span className={`font-bold ${isDark?"text-red-300":"text-red-600"}`}>SALAH ✗</span></p></S>
+                    <S n={3}><p>(c) Dari 15.00 s.d. 01.00 = 10 jam → <InlineMath math="10 \div 2 = 5" /> kali turun → <InlineMath math="31 - (5 \times 1) = 26°C" /> → <span className={`font-bold ${isDark?"text-green-300":"text-green-700"}`}>BENAR ✓</span></p></S>
+                  </PBSteps>
+                </div>
+              )}
+            </TelaahSoal>
+
+            {/* ══ TELAAH 6 — PGS ══ */}
+            <TelaahSoal num={6} tipe="PGS">
+              <p className={qText}>
+                Faktorisasi prima dari 1.350 adalah ....
+              </p>
+              <MCQ qn={56} correct={1} options={[
+                <span key="a">A. <InlineMath math="2 \times 3^2 \times 5^2" /></span>,
+                <span key="b">B. <InlineMath math="2 \times 3^3 \times 5^2" /></span>,
+                <span key="c">C. <InlineMath math="3^3 \times 5^2" /></span>,
+                <span key="d">D. <InlineMath math="2^2 \times 3 \times 5^2" /></span>,
+              ]} />
+              <PembahasanBtn n={56} />
+              {expandedPembahasan.has(56) && (
+                <div className="mt-3 space-y-2">
+                  <PBJawaban><span>B. <InlineMath math="2 \times 3^3 \times 5^2" /></span></PBJawaban>
+                  <PBKonsep>
+                    <p>Bagi bilangan secara berulang dimulai dari bilangan prima terkecil (2, 3, 5, …).</p>
+                    <p>Lanjutkan hingga hasil baginya adalah 1.</p>
+                  </PBKonsep>
+                  <PBSteps>
+                    <S n={1}><p><InlineMath math="1.350 \div 2 = 675" /></p></S>
+                    <S n={2}><p><InlineMath math="675 \div 3 = 225" /></p></S>
+                    <S n={3}><p><InlineMath math="225 \div 3 = 75" /></p></S>
+                    <S n={4}><p><InlineMath math="75 \div 3 = 25" /></p></S>
+                    <S n={5}><p><InlineMath math="25 \div 5 = 5" />, <InlineMath math="5 \div 5 = 1" /></p></S>
+                    <S n={6}><div><BlockMath math="1.350 = 2 \times 3^3 \times 5^2" /></div></S>
+                  </PBSteps>
+                </div>
+              )}
+            </TelaahSoal>
+
+            {/* ══ TELAAH 7 — PGS ══ */}
+            <TelaahSoal num={7} tipe="PGS">
+              <p className={qText}>
+                Pak Budi akan membeli 3 lusin botol minuman untuk hadiah kepada para peserta. Ia menghubungi toko untuk menanyakan harganya.
+                Harga sebuah botol minuman adalah Rp4.900. Tanpa menggunakan kalkulator, Pak Budi ingin menyiapkan uang agar tidak kurang.
+                Perkiraan besar uang yang harus disiapkan Pak Budi adalah ....
+              </p>
+              <MCQ qn={57} correct={2} options={[
+                "A. Rp150.000", "B. Rp175.000", "C. Rp200.000", "D. Rp225.000"
+              ]} />
+              <PembahasanBtn n={57} />
+              {expandedPembahasan.has(57) && (
+                <div className="mt-3 space-y-2">
+                  <PBJawaban>C. Rp200.000</PBJawaban>
+                  <PBKonsep>
+                    <p>Untuk mempercepat estimasi tanpa kalkulator, bulatkan jumlah barang dan harga ke nilai terdekat yang mudah dihitung.</p>
+                    <p>Bulatkan ke atas agar uang yang disiapkan tidak kurang.</p>
+                    <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: 1 lusin = 12 buah. Bulatkan jumlah, lalu bulatkan harga, baru kalikan.</p>
+                  </PBKonsep>
+                  <PBSteps>
+                    <S n={1}><p>Banyak botol yang dibeli: <InlineMath math="3 \times 12 = 36" /> buah.</p></S>
+                    <S n={2}><p>Bulatkan ke atas: <InlineMath math="36 \approx 40" /> buah.</p></S>
+                    <S n={3}><p>Harga per botol: Rp4.900 → dibulatkan ke Rp5.000.</p></S>
+                    <S n={4}><div><BlockMath math="40 \times Rp5.000 = Rp200.000" /></div></S>
+                    <S n={5}><p>Uang yang perlu disiapkan Pak Budi sekitar <span className="font-bold">Rp200.000</span>.</p></S>
+                  </PBSteps>
+                </div>
+              )}
+            </TelaahSoal>
+
           </div>
         )}
 
