@@ -330,7 +330,7 @@ const TKASoalAsli2025Page = () => {
   );
 
   return (
-    <div className={`relative min-h-screen flex flex-col items-center overflow-x-hidden overflow-y-auto ${outerBg}`}>
+    <div className={`tka-soal-asli-page relative min-h-screen flex flex-col items-center overflow-x-hidden overflow-y-auto ${outerBg}`}>
       {isDark && <Starfield />}
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">

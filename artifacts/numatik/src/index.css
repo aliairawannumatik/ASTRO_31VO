@@ -4421,3 +4421,10 @@ html.light-mode .bg-slate-900\/90 .bg-yellow-500\/10 {
 .theme-sunset .lm-kkg-svg line[stroke="rgba(255,255,255,0.1)"] {
   stroke: rgba(15,23,42,0.12) !important;
 }
+
+/* TKA Soal Asli 2025 — landscape: shrink content images to 50% */
+@media (orientation: landscape) {
+  .tka-soal-asli-page img:not([class*="absolute"]):not([class*="w-10"]) {
+    max-width: 50% !important;
+  }
+}
