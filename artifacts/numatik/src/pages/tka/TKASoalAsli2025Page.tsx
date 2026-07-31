@@ -789,26 +789,27 @@ const TKASoalAsli2025Page = () => {
                 { key: "c2", text: <span>Koordinat (−2, 9)</span> },
                 { key: "c3", text: <span>Koordinat (−9, −9)</span> },
               ]}
-              correctKey={{ c1: "Bisa ditanami", c2: "Tidak bisa", c3: "Tidak bisa" }}
+              correctKey={{ c1: "Bisa ditanami", c2: "Tidak bisa", c3: "Bisa ditanami" }}
             />
             <PembahasanBtn n={9} />
             {expandedPembahasan.has(9) && (
               <div className="mt-3 space-y-2">
-                <PBJawaban>(9,−2): Bisa · (−2,9): Tidak bisa · (−9,−9): Tidak bisa</PBJawaban>
+                <PBJawaban>(9,−2): Bisa · (−2,9): Tidak bisa · (−9,−9): Bisa</PBJawaban>
                 <PBKonsep>
-                  <p>Sistem koordinat Kartesius membagi bidang menjadi 4 kuadran:</p>
+                  <p>Dari peta, setiap lokasi sesuai dengan kuadran koordinat Kartesius:</p>
                   <div className={`grid grid-cols-2 gap-1 my-1 text-[11px] font-mono ${isDark ? "" : "text-gray-700"}`}>
-                    <div className={`p-1 rounded ${isDark ? "bg-white/5" : "bg-gray-100"}`}>Kuadran I: (+,+)</div>
-                    <div className={`p-1 rounded ${isDark ? "bg-white/5" : "bg-gray-100"}`}>Kuadran II: (−,+)</div>
-                    <div className={`p-1 rounded ${isDark ? "bg-white/5" : "bg-gray-100"}`}>Kuadran IV: (+,−)</div>
-                    <div className={`p-1 rounded ${isDark ? "bg-white/5" : "bg-gray-100"}`}>Kuadran III: (−,−)</div>
+                    <div className={`p-1 rounded ${isDark ? "bg-orange-900/40" : "bg-orange-100"}`}>Lokasi 1 = Kuadran I: (+,+)</div>
+                    <div className={`p-1 rounded ${isDark ? "bg-yellow-900/40" : "bg-yellow-100"}`}>Lokasi 2 = Kuadran II: (−,+)</div>
+                    <div className={`p-1 rounded ${isDark ? "bg-green-900/40" : "bg-green-100"}`}>Lokasi 3 = Kuadran III: (−,−)</div>
+                    <div className={`p-1 rounded ${isDark ? "bg-cyan-900/40" : "bg-cyan-100"}`}>Lokasi 4 = Kuadran IV: (+,−)</div>
                   </div>
-                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Lihat tanda (x,y) → tentukan kuadran → cek apakah termasuk lokasi 1/3/4</p>
+                  <p>Ayunda menanam di <strong>Lokasi 1, 3, dan 4</strong> = Kuadran I, III, dan IV (lahan kosong).</p>
+                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Lihat tanda (x,y) → tentukan kuadran → cocokkan dengan lokasi 1, 3, atau 4</p>
                 </PBKonsep>
                 <PBSteps>
-                  <S n={1}><p><span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>(9,−2)</span>: x&gt;0, y&lt;0 → Kuadran IV = Lokasi 1, dan koordinat ini kosong → <span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Bisa ditanami ✓</span></p></S>
-                  <S n={2}><p><span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>(−2,9)</span>: x&lt;0, y&gt;0 → Kuadran II = bukan lokasi 1/3/4 → <span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>Tidak bisa ✗</span></p></S>
-                  <S n={3}><p><span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>(−9,−9)</span>: x&lt;0, y&lt;0 → Kuadran III = bukan lokasi 1/3/4 → <span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>Tidak bisa ✗</span></p></S>
+                  <S n={1}><p><span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>(9,−2)</span>: x&gt;0, y&lt;0 → Kuadran IV = <strong>Lokasi 4</strong> ✓, lahan kosong → <span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Bisa ditanami ✓</span></p></S>
+                  <S n={2}><p><span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>(−2,9)</span>: x&lt;0, y&gt;0 → Kuadran II = <strong>Lokasi 2</strong> ✗, bukan lokasi 1/3/4 → <span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>Tidak bisa ✗</span></p></S>
+                  <S n={3}><p><span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>(−9,−9)</span>: x&lt;0, y&lt;0 → Kuadran III = <strong>Lokasi 3</strong> ✓, lahan kosong → <span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Bisa ditanami ✓</span></p></S>
                 </PBSteps>
               </div>
             )}
