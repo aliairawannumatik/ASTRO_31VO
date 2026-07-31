@@ -987,16 +987,19 @@ const TKASoalAsli2025Page = () => {
                 <PBKonsep>
                   <p>Fungsi linear: <InlineMath math="f(x) = mx + c" /></p>
                   <p>Gradien (m): <InlineMath math="m = \dfrac{y_2 - y_1}{x_2 - x_1}" /> (kenaikan per unit)</p>
-                  <p>Konstanta (c): nilai saat x = 0, dicari dengan substitusi salah satu titik</p>
+                  <p>Persamaan garis: <InlineMath math="y - y_1 = m(x - x_1)" /> — substitusi titik dan m untuk mencari persamaan</p>
                   <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Gunakan 2 titik terdekat untuk mengurangi kesalahan hitung. Verifikasi dengan titik ketiga!</p>
                 </PBKonsep>
                 <PBSteps>
                   <S n={1}><p>Ambil 2 titik: <InlineMath math="(5, 14.000)" /> dan <InlineMath math="(10, 23.000)" /></p></S>
                   <S n={2}><p>Hitung gradien:</p></S>
                   <div className="ml-7"><BlockMath math="m = \frac{23.000 - 14.000}{10 - 5} = \frac{9.000}{5} = 1.800" /></div>
-                  <S n={3}><p>Cari konstanta c dari titik (5, 14.000):</p></S>
-                  <div className="ml-7"><BlockMath math="14.000 = 1.800(5) + c \Rightarrow c = 14.000 - 9.000 = 5.000" /></div>
-                  <S n={4}><p>Verifikasi: f(20) = 1800(20)+5000 = 41.000 ✓, f(25) = 50.000 ✓</p></S>
+                  <S n={3}><p>Gunakan rumus <InlineMath math="y - y_1 = m(x - x_1)" /> dengan titik <InlineMath math="(5,\; 14.000)" />:</p></S>
+                  <div className="ml-7"><BlockMath math="y - 14.000 = 1.800(x - 5)" /></div>
+                  <div className="ml-7"><BlockMath math="y - 14.000 = 1.800x - 9.000" /></div>
+                  <div className="ml-7"><BlockMath math="y = 1.800x - 9.000 + 14.000" /></div>
+                  <div className="ml-7"><BlockMath math="y = 1.800x + 5.000" /></div>
+                  <S n={4}><p>Verifikasi: f(20) = 1.800(20)+5.000 = 41.000 ✓, f(25) = 50.000 ✓</p></S>
                   <S n={5}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>f(x) = 1.800x + 5.000 ✓</p></S>
                 </PBSteps>
               </div>
