@@ -916,28 +916,16 @@ const TKASoalAsli2025Page = () => {
                   <S n={3}><div><BlockMath math="2p + 3c = 62.000 \quad\cdots(2)" /></div></S>
                   <S n={4}><p>Eliminasi variabel p — kalikan (1)×2 dan (2)×3, lalu kurangkan:</p></S>
                   <div className="ml-7 overflow-x-auto">
-                    <BlockMath math={
-                      `\\begin{array}{r@{}l@{\\;}c@{\\;}r@{}l}
-                        3p + 2c & {}= 58.000 & |{\\times}2| & 6p + 4c & {}= 116.000 \\\\
-                        2p + 3c & {}= 62.000 & |{\\times}3| & 6p + 9c & {}= 186.000 \\quad (-) \\\\
-                        \\hline
-                        & & & {-5c} & {}= {-70.000} \\\\
-                        & & & c & {}= \\dfrac{-70.000}{-5} \\\\[4pt]
-                        & & & c & {}= 14.000
-                      \\end{array}`
-                    } />
+                    <BlockMath math="3p + 2c = 58.000 \quad |\times 2 \quad \Rightarrow \quad 6p + 4c = 116.000" />
+                    <BlockMath math="2p + 3c = 62.000 \quad |\times 3 \quad \Rightarrow \quad 6p + 9c = 186.000 \quad (-)" />
+                    <div className={`border-t my-1 ${isDark ? "border-white/40" : "border-gray-500"}`} />
+                    <BlockMath math="-5c = -70.000" />
+                    <BlockMath math="c = \dfrac{-70.000}{-5}" />
+                    <BlockMath math="c = 14.000" />
                   </div>
                   <S n={5}><p>Substitusi <InlineMath math="c = 14.000" /> ke persamaan (1):</p></S>
                   <div className="ml-7 overflow-x-auto">
-                    <BlockMath math={
-                      `\\begin{array}{r@{}l}
-                        3p + 28.000 & {}= 58.000 \\\\
-                        3p & {}= 58.000 - 28.000 \\\\
-                        3p & {}= 30.000 \\\\
-                        p  & {}= \\dfrac{30.000}{3} \\\\[4pt]
-                        p  & {}= 10.000
-                      \\end{array}`
-                    } />
+                    <BlockMath math="\begin{array}{rl} 3p + 28.000 &= 58.000 \\ 3p &= 58.000 - 28.000 \\ 3p &= 30.000 \\ p &= \dfrac{30.000}{3} \\[6pt] p &= 10.000 \end{array}" />
                   </div>
                   <S n={6}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>3p + c = 3×10.000 + 14.000 = 30.000 + 14.000 = <span className="underline">Rp44.000</span> ✓</p></S>
                 </PBSteps>
