@@ -932,11 +932,7 @@ const TKASoalAsli2025Page = () => {
             <div className="mb-3 flex justify-center">
               <img src="/tka-2025-soal12.png" alt="Keterangan pembelian buku soal 12" className="max-w-full rounded-lg border border-white/10" />
             </div>
-            <div className={`border rounded-lg p-3 mb-3 font-body text-xs space-y-1 ${isDark ? "bg-white/5 border-white/10 text-white/80" : "bg-gray-50 border-gray-200 text-gray-700"}`}>
-              <p>• <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Rino</span> membeli <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>4 buku tulis</span> dan <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>3 pulpen</span></p>
-              <p>• <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Tiko</span> membeli <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>dua kali lipat</span> dari masing-masing jumlah Rino</p>
-              <p>• <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Bayu</span> membeli <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>tiga kali lipat</span> dari masing-masing jumlah Rino</p>
-            </div>
+
             <p className={`font-body text-sm mb-3 ${isDark ? "text-white/80" : "text-gray-700"}`}>
               Jika harga 1 buku = <InlineMath math="x" /> dan 1 pulpen = <InlineMath math="y" />, bagaimana kalimat matematika total harga ketiganya?
             </p>
