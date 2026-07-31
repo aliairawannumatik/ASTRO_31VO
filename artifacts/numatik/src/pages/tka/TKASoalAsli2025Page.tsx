@@ -914,10 +914,31 @@ const TKASoalAsli2025Page = () => {
                   <S n={1}><p>Misalkan: p = harga putu mayang, c = harga pancong (per kotak)</p></S>
                   <S n={2}><div><BlockMath math="3p + 2c = 58.000 \quad\cdots(1)" /></div></S>
                   <S n={3}><div><BlockMath math="2p + 3c = 62.000 \quad\cdots(2)" /></div></S>
-                  <S n={4}><p>Eliminasi variabel p — (1)×2 − (2)×3:</p></S>
-                  <div className="ml-7"><BlockMath math="6p + 4c - 6p - 9c = 116.000 - 186.000" /></div>
-                  <div className="ml-7"><BlockMath math="-5c = -70.000 \Rightarrow c = 14.000" /></div>
-                  <S n={5}><p>Substitusi c ke (1): <InlineMath math="3p + 28.000 = 58.000 \Rightarrow p = 10.000" /></p></S>
+                  <S n={4}><p>Eliminasi variabel p — kalikan (1)×2 dan (2)×3, lalu kurangkan:</p></S>
+                  <div className="ml-7 overflow-x-auto">
+                    <BlockMath math={
+                      `\\begin{array}{r@{}l@{\\;}c@{\\;}r@{}l}
+                        3p + 2c & {}= 58.000 & |{\\times}2| & 6p + 4c & {}= 116.000 \\\\
+                        2p + 3c & {}= 62.000 & |{\\times}3| & 6p + 9c & {}= 186.000 \\quad (-) \\\\
+                        \\hline
+                        & & & {-5c} & {}= {-70.000} \\\\
+                        & & & c & {}= \\dfrac{-70.000}{-5} \\\\[4pt]
+                        & & & c & {}= 14.000
+                      \\end{array}`
+                    } />
+                  </div>
+                  <S n={5}><p>Substitusi <InlineMath math="c = 14.000" /> ke persamaan (1):</p></S>
+                  <div className="ml-7 overflow-x-auto">
+                    <BlockMath math={
+                      `\\begin{array}{r@{}l}
+                        3p + 28.000 & {}= 58.000 \\\\
+                        3p & {}= 58.000 - 28.000 \\\\
+                        3p & {}= 30.000 \\\\
+                        p  & {}= \\dfrac{30.000}{3} \\\\[4pt]
+                        p  & {}= 10.000
+                      \\end{array}`
+                    } />
+                  </div>
                   <S n={6}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>3p + c = 3×10.000 + 14.000 = 30.000 + 14.000 = <span className="underline">Rp44.000</span> ✓</p></S>
                 </PBSteps>
               </div>
