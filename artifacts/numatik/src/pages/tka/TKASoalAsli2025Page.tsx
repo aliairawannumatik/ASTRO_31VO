@@ -1761,33 +1761,49 @@ const TKASoalAsli2025Page = () => {
             </div>
             <ComplexMCQ qn={30} items={[
               { text: "10 lembar", benar: false },
-              { text: "11 lembar", benar: false },
+              { text: "11 lembar", benar: true },
               { text: "12 lembar", benar: true },
               { text: "14 lembar", benar: true },
             ]} />
             <PembahasanBtn n={30} />
             {expandedPembahasan.has(30) && (
               <div className="mt-3 space-y-2">
-                <PBJawaban>12 lembar dan 14 lembar</PBJawaban>
+                <PBJawaban>11 lembar, 12 lembar, dan 14 lembar</PBJawaban>
                 <PBKonsep>
-                  <p>Gabungan <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>sistem persamaan</span> + <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>peluang</span></p>
-                  <p>Dari P(C) dan total setelah pengambilan → cari C</p>
-                  <p>Dari total awal → cari A+B</p>
-                  <p>Gunakan syarat: A&lt;B dan B−3&gt;C untuk membatasi nilai B</p>
-                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Cari C dari peluang, lalu A+B dari selisih. Gunakan syarat-syarat untuk menyaring nilai B yang valid</p>
+                  <p>Gabungan <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>peluang</span> + <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>analisis per kasus</span></p>
+                  <p>3 kertas yang diambil bisa berkode A, B, <em>atau</em> C — setiap kemungkinan menghasilkan kondisi awal berbeda</p>
+                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Tentukan C' dan A'+B' dari kondisi akhir, lalu uji 3 kemungkinan kode yang diambil guru</p>
                 </PBKonsep>
                 <PBSteps>
-                  <S n={1}><p>Total awal: A + B + C = 28 + 3 = <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>31</span> (3 kertas diambil, sisa 28)</p></S>
-                  <S n={2}><p>P(C setelah) = C/28 = 2/7 → <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>C = 8</span></p></S>
-                  <S n={3}><p>A + B = 31 − 8 = <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>23</span></p></S>
-                  <S n={4}><p>Syarat: A &lt; B dan B−3 &gt; 8 (B lebih banyak dari C=8 setelah 3 diambil)</p></S>
-                  <S n={5}><div className={`p-2 rounded-lg text-xs ${isDark ? "bg-white/5" : "bg-gray-100"}`}>
-                    <p>B−3 &gt; 8 → B &gt; 11 → <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>B ≥ 12</span></p>
-                    <p>A = 23−B &gt; 0 → B &lt; 23, dan A &lt; B → 23−B &lt; B → B &gt; 11,5 → B ≥ 12</p>
-                  </div></S>
-                  <S n={6}><p><span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>B=12</span>: A=11. Cek: 11&lt;12 ✓, 12−3=9&gt;8 ✓ → <strong>Valid</strong></p></S>
-                  <S n={7}><p><span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>B=14</span>: A=9. Cek: 9&lt;14 ✓, 14−3=11&gt;8 ✓ → <strong>Valid</strong></p></S>
-                  <S n={8}><p>B=13: A=10. Cek: 10&lt;13 ✓, 13−3=10&gt;8 ✓ → Valid (tapi bukan pilihan yang ada)</p></S>
+                  <S n={1}><p><span className={`font-bold`}>Kondisi akhir (setelah pengambilan):</span> total sisa = 28, <InlineMath math="P(C)=\tfrac{2}{7}" /></p></S>
+                  <div className="ml-7"><BlockMath math="C' = 28 \times \frac{2}{7} = 8 \text{ lembar},\quad A' + B' = 28 - 8 = 20" /></div>
+                  <S n={2}><p>Syarat sisa: <InlineMath math="B' > C' = 8" />, dan substitusi <InlineMath math="A' = 20 - B'" /></p></S>
+
+                  <S n={3}><p className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Kemungkinan 1 — Guru mengambil 3 kertas kode C:</p></S>
+                  <div className={`ml-4 p-2 rounded-lg text-xs space-y-1 ${isDark ? "bg-white/5" : "bg-gray-100"}`}>
+                    <p>Mula-mula: <InlineMath math="C_0 = 8+3=11,\ B_0 = B',\ A_0 = 20-B'" /></p>
+                    <p>Syarat <InlineMath math="A_0 < B_0" />: <InlineMath math="20-B' < B' \Rightarrow B' > 10" /></p>
+                    <p>Uji <InlineMath math="B_0 = B' = 11" />: <InlineMath math="A_0=9,\ B_0=11,\ C_0=11" /> → <InlineMath math="9 < 11" /> ✓ dan sisa <InlineMath math="B'=11 > C'=8" /> ✓</p>
+                    <p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>→ B₀ = 11 lembar MUNGKIN ✓</p>
+                  </div>
+
+                  <S n={4}><p className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Kemungkinan 2 — Guru mengambil 3 kertas kode B:</p></S>
+                  <div className={`ml-4 p-2 rounded-lg text-xs space-y-1 ${isDark ? "bg-white/5" : "bg-gray-100"}`}>
+                    <p>Mula-mula: <InlineMath math="B_0 = B'+3,\ C_0=8,\ A_0=20-B'" /></p>
+                    <p>Syarat <InlineMath math="A_0 < B_0" />: <InlineMath math="20-B' < B'+3 \Rightarrow B' > 8{,}5 \Rightarrow B' \ge 9" /></p>
+                    <p>Uji <InlineMath math="B' = 9 \Rightarrow B_0 = 12" />: <InlineMath math="A_0=11,\ B_0=12,\ C_0=8" /> → <InlineMath math="11 < 12" /> ✓ dan sisa <InlineMath math="B'=9 > 8" /> ✓ &nbsp;<span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>→ 12 lembar MUNGKIN ✓</span></p>
+                    <p>Uji <InlineMath math="B' = 11 \Rightarrow B_0 = 14" />: <InlineMath math="A_0=9,\ B_0=14,\ C_0=8" /> → <InlineMath math="9 < 14" /> ✓ dan sisa <InlineMath math="B'=11 > 8" /> ✓ &nbsp;<span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>→ 14 lembar MUNGKIN ✓</span></p>
+                  </div>
+
+                  <S n={5}><p className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>Kemungkinan 3 — Guru mengambil 3 kertas kode A:</p></S>
+                  <div className={`ml-4 p-2 rounded-lg text-xs space-y-1 ${isDark ? "bg-white/5" : "bg-gray-100"}`}>
+                    <p>Mula-mula: <InlineMath math="A_0 = A'+3 = 23-B',\ B_0=B',\ C_0=8" /></p>
+                    <p>Syarat <InlineMath math="A_0 < B_0" />: <InlineMath math="23-B' < B' \Rightarrow B' > 11{,}5 \Rightarrow B' \ge 12" /></p>
+                    <p>B₀ = 12 atau 14 → sudah tercakup di Kemungkinan 2</p>
+                  </div>
+
+                  <S n={6}><p>Uji <span className={`font-bold ${isDark ? "text-rose-300" : "text-rose-500"}`}>B₀ = 10</span>: Kemungkinan 1 → <InlineMath math="B'=10 \le 10" /> ✗ · Kemungkinan 2 → <InlineMath math="B'=7 < 9" /> ✗ · Kemungkinan 3 → tidak memenuhi → <span className={`font-bold ${isDark ? "text-rose-300" : "text-rose-500"}`}>10 lembar TIDAK MUNGKIN ✗</span></p></S>
+                  <S n={7}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Jawaban yang memenuhi: 11 lembar, 12 lembar, dan 14 lembar ✓</p></S>
                 </PBSteps>
               </div>
             )}
