@@ -1316,7 +1316,7 @@ const TKASoalAsli2025Page = () => {
               <img src="/tka-2025-soal21.png" alt="Gambar juring lingkaran soal 21" className="max-w-full rounded-lg border border-white/10" />
             </div>
             <p className={`font-body text-sm mb-3 ${isDark ? "text-white/80" : "text-gray-700"}`}>Manakah pernyataan yang benar terkait luas juring A, B, dan C?</p>
-            <MCQ qn={21} correct={0} cols={1} options={[
+            <MCQ qn={21} correct={1} cols={1} options={[
               "A. Luas juring B dua kali dari luas juring C.",
               "B. Luas juring C setengah dari luas juring A.",
               "C. Luas juring A tiga kali dari luas juring B.",
@@ -1325,19 +1325,20 @@ const TKASoalAsli2025Page = () => {
             <PembahasanBtn n={21} />
             {expandedPembahasan.has(21) && (
               <div className="mt-3 space-y-2">
-                <PBJawaban>A. Luas juring B = 2 × luas juring C</PBJawaban>
+                <PBJawaban>B. Luas juring C setengah dari luas juring A</PBJawaban>
                 <PBKonsep>
                   <p>Luas juring: <InlineMath math="L = \dfrac{\alpha}{360°} \times \pi r^2" /></p>
                   <p>Perbandingan luas juring = perbandingan sudut pusat (jika jari-jari sama)</p>
                   <div className="my-1"><BlockMath math="\frac{L_{\text{juring P}}}{L_{\text{juring Q}}} = \frac{\alpha_P}{\alpha_Q}" /></div>
-                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Tidak perlu hitung luas sebenarnya! Langsung bandingkan sudut saja</p>
+                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Tidak perlu hitung luas sebenarnya — langsung bandingkan sudut pusatnya</p>
                 </PBKonsep>
                 <PBSteps>
-                  <S n={1}><p>Dari gambar: sudut juring B = 70°, juring C = 35°, juring A = 360°−70°−35° = 255°</p></S>
-                  <S n={2}><p>Cek pilihan A: <InlineMath math="\dfrac{L_B}{L_C} = \dfrac{70°}{35°} = 2" /> → Luas B = 2 × Luas C ✓</p></S>
-                  <S n={3}><p>Cek pilihan B: <InlineMath math="\dfrac{L_C}{L_A} = \dfrac{35°}{255°} \neq \dfrac{1}{2}" /> ✗</p></S>
-                  <S n={4}><p>Cek pilihan C: <InlineMath math="\dfrac{L_A}{L_B} = \dfrac{255°}{70°} \neq 3" /> ✗</p></S>
-                  <S n={5}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Pilihan A benar: Luas juring B = 2 × Luas juring C ✓</p></S>
+                  <S n={1}><p>Sudut pusat dari gambar: Juring A = <InlineMath math="70^\circ" />, Juring B = <InlineMath math="90^\circ" /> (siku-siku), Juring C = <InlineMath math="35^\circ" /></p></S>
+                  <S n={2}><p>Cek pilihan A: <InlineMath math="2 \times \alpha_C = 2 \times 35^\circ = 70^\circ \neq 90^\circ = \alpha_B" /> → <span className={`font-bold ${isDark ? "text-rose-300" : "text-rose-500"}`}>Salah ✗</span></p></S>
+                  <S n={3}><p>Cek pilihan B: <InlineMath math="\dfrac{\alpha_C}{\alpha_A} = \dfrac{35^\circ}{70^\circ} = \dfrac{1}{2}" /> → Luas C = ½ × Luas A → <span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Benar ✓</span></p></S>
+                  <S n={4}><p>Cek pilihan C: <InlineMath math="3 \times \alpha_B = 3 \times 90^\circ = 270^\circ \neq 70^\circ = \alpha_A" /> → <span className={`font-bold ${isDark ? "text-rose-300" : "text-rose-500"}`}>Salah ✗</span></p></S>
+                  <S n={5}><p>Cek pilihan D: <InlineMath math="2 \times \alpha_A = 2 \times 70^\circ = 140^\circ \neq 90^\circ = \alpha_B" /> → <span className={`font-bold ${isDark ? "text-rose-300" : "text-rose-500"}`}>Salah ✗</span></p></S>
+                  <S n={6}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Luas juring C = setengah dari luas juring A ✓</p></S>
                 </PBSteps>
               </div>
             )}
