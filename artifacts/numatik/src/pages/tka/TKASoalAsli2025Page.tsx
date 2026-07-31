@@ -731,27 +731,28 @@ const TKASoalAsli2025Page = () => {
               <span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>Salah</span> pada setiap pernyataan berikut!
             </p>
             <TrueFalseTable qn={8} rows={[
-              { key: "a", text: <span>Jumlah pemakaian air mencapai 60 m³.</span>, correct: "salah" },
+              { key: "a", text: <span>Jumlah pemakaian air mencapai 60 m³.</span>, correct: "benar" },
               { key: "b", text: <span>Orang tersebut akan menghabiskan biaya sebesar Rp120.000,00 jika tanpa pemasangan baru.</span>, correct: "benar" },
-              { key: "c", text: <span>Tarif dapat mencapai 1 juta jika pemakaian air kurang dari 90 m³ dengan pemasangan baru.</span>, correct: "benar" },
+              { key: "c", text: <span>Tarif dapat mencapai 1 juta jika pemakaian air kurang dari 90 m³ dengan pemasangan baru.</span>, correct: "salah" },
             ]} />
             <PembahasanBtn n={8} />
             {expandedPembahasan.has(8) && (
               <div className="mt-3 space-y-2">
-                <PBJawaban>Salah / Benar / Benar</PBJawaban>
+                <PBJawaban>Benar / Benar / Salah</PBJawaban>
                 <PBKonsep>
-                  <p>Total biaya dengan pemasangan baru:</p>
-                  <div className="my-1"><BlockMath math="\text{Total} = \text{Biaya Pemasangan} + \text{Biaya Pemakaian Air}" /></div>
-                  <p>Biaya pemakaian air (tanpa pemasangan) dapat dihitung dari selisih:</p>
-                  <div className="my-1"><BlockMath math="\text{Biaya Air} = \text{Total} - \text{Rp800.000}" /></div>
-                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Pisahkan biaya tetap (pemasangan) dari biaya variabel (pemakaian)</p>
+                  <p>Dari grafik, tarif PDAM mengikuti fungsi linear:</p>
+                  <div className="my-1"><BlockMath math="T(x) = 800.000 + 2.000x" /></div>
+                  <p>dengan <em>x</em> = banyak air (m³). Saat x = 0 → Rp800.000; setiap 10 m³ tambah Rp20.000 → kenaikan Rp2.000/m³.</p>
+                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Gradien grafik = selisih tarif ÷ selisih volume = (820.000 − 800.000) ÷ 10 = 2.000/m³</p>
                 </PBKonsep>
                 <PBSteps>
-                  <S n={1}><p>Hitung biaya pemakaian air saja (tanpa pemasangan):</p></S>
-                  <div className="ml-7"><BlockMath math="\text{Biaya Air} = \text{Rp}920.000 - \text{Rp}800.000 = \text{Rp}120.000" /></div>
-                  <S n={2}><p><span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>② BENAR</span> — Biaya tanpa pemasangan = Rp120.000 ✓</p></S>
-                  <S n={3}><p><span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>① SALAH</span> — Dari grafik, Rp120.000 biaya air tidak tercapai di pemakaian 60 m³ (harus baca grafik untuk konfirmasi nilai tepatnya) ✗</p></S>
-                  <S n={4}><p><span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>③ BENAR</span> — Total Rp1.000.000 dengan pemasangan → biaya air = Rp200.000. Berdasarkan grafik, Rp200.000 tercapai saat pemakaian &lt;90 m³ ✓</p></S>
+                  <S n={1}><p>Tentukan pemakaian air dari total tagihan Rp920.000:</p></S>
+                  <div className="ml-7"><BlockMath math="920.000 = 800.000 + 2.000x \Rightarrow 2.000x = 120.000 \Rightarrow x = 60 \text{ m}^3" /></div>
+                  <S n={2}><p><span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>① BENAR</span> — Pemakaian air = 60 m³ ✓</p></S>
+                  <S n={3}><p><span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>② BENAR</span> — Biaya air tanpa pemasangan = 2.000 × 60 = Rp120.000 ✓</p></S>
+                  <S n={4}><p>Cek pernyataan ③: berapa m³ agar tarif = Rp1.000.000?</p></S>
+                  <div className="ml-7"><BlockMath math="1.000.000 = 800.000 + 2.000x \Rightarrow x = \frac{200.000}{2.000} = 100 \text{ m}^3" /></div>
+                  <S n={5}><p><span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>③ SALAH</span> — Dibutuhkan 100 m³ untuk mencapai Rp1.000.000, bukan kurang dari 90 m³ ✗</p></S>
                 </PBSteps>
               </div>
             )}
