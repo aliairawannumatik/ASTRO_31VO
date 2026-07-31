@@ -832,12 +832,12 @@ const TKASoalAsli2025Page = () => {
                   key={i}
                   className={`border rounded-lg p-2 text-xs font-body transition-all flex flex-col items-center gap-1 cursor-pointer
                     ${selectedAnswers[10] === i
-                      ? i === 1
+                      ? i === 0
                         ? isDark ? "bg-green-900/30 border-green-500/50" : "bg-green-50 border-green-400"
                         : isDark ? "bg-red-900/30 border-red-500/50" : "bg-red-50 border-red-400"
                       : isDark ? "bg-white/5 border-white/10 hover:bg-white/10 hover:border-amber-500/40 active:scale-95" : "bg-gray-50 border-gray-300 hover:bg-amber-50 hover:border-amber-400 active:scale-95"
                     }
-                    ${selectedAnswers[10] !== undefined && i === 1 ? (isDark ? "bg-green-900/30 border-green-500/50" : "bg-green-50 border-green-400") : ""}
+                    ${selectedAnswers[10] !== undefined && i === 0 ? (isDark ? "bg-green-900/30 border-green-500/50" : "bg-green-50 border-green-400") : ""}
                   `}
                   onClick={() => selectAnswer(10, i)}
                 >
@@ -847,9 +847,9 @@ const TKASoalAsli2025Page = () => {
                     className="w-full rounded"
                   />
                   <div className="flex items-center justify-between w-full px-1">
-                    <span className={`font-bold ${selectedAnswers[10] === i ? (i === 1 ? (isDark ? "text-green-300" : "text-green-600") : (isDark ? "text-red-300" : "text-red-600")) : (isDark ? "text-white/70" : "text-gray-600")}`}>{opt}.</span>
-                    {selectedAnswers[10] !== undefined && i === 1 && <span className={`font-bold ${isDark ? "text-green-400" : "text-green-600"}`}>✓</span>}
-                    {selectedAnswers[10] === i && i !== 1 && <span className={`font-bold ${isDark ? "text-red-400" : "text-red-500"}`}>✗</span>}
+                    <span className={`font-bold ${selectedAnswers[10] === i ? (i === 0 ? (isDark ? "text-green-300" : "text-green-600") : (isDark ? "text-red-300" : "text-red-600")) : (isDark ? "text-white/70" : "text-gray-600")}`}>{opt}.</span>
+                    {selectedAnswers[10] !== undefined && i === 0 && <span className={`font-bold ${isDark ? "text-green-400" : "text-green-600"}`}>✓</span>}
+                    {selectedAnswers[10] === i && i !== 0 && <span className={`font-bold ${isDark ? "text-red-400" : "text-red-500"}`}>✗</span>}
                   </div>
                 </div>
               ))}
@@ -857,7 +857,7 @@ const TKASoalAsli2025Page = () => {
             <PembahasanBtn n={10} />
             {expandedPembahasan.has(10) && (
               <div className="mt-3 space-y-2">
-                <PBJawaban>B — garis bilangan dengan <InlineMath math="x \leq -2" /> (lingkaran tertutup di −2, arsiran ke kiri)</PBJawaban>
+                <PBJawaban>A — garis bilangan dengan <InlineMath math="x \leq -2" /> (lingkaran tertutup di −2, arsiran ke kiri)</PBJawaban>
                 <PBKonsep>
                   <p>Pertidaksamaan linear: perlakukan seperti persamaan (kumpulkan variabel di satu sisi)</p>
                   <p className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>⚠️ Aturan penting:</p>
@@ -871,7 +871,7 @@ const TKASoalAsli2025Page = () => {
                   <S n={3}><div><BlockMath math="5x \leq -10" /></div></S>
                   <S n={4}><p>Bagi kedua sisi dengan 5 (positif, tanda tidak berubah):</p></S>
                   <div className="ml-7"><BlockMath math="x \leq -2" /></div>
-                  <S n={5}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Garis bilangan: ● tertutup di −2, arsiran ke kiri (−∞) → Jawaban B ✓</p></S>
+                  <S n={5}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Garis bilangan: ● tertutup di −2, arsiran ke kiri (−∞) → Jawaban A ✓</p></S>
                 </PBSteps>
               </div>
             )}
