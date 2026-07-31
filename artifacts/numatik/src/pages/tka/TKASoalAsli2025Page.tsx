@@ -1219,7 +1219,7 @@ const TKASoalAsli2025Page = () => {
             <p className={`font-body text-sm mb-3 ${isDark ? "text-white/80" : "text-gray-700"}`}>
               Jenis bahan apa yang harus dipilih Pak Anton agar <span className={`font-bold ${isDark ? "text-green-300" : "text-green-600"}`}>cukup</span> untuk membuat pagar tangga dan memiliki <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>sisa paling sedikit</span>?
             </p>
-            <MCQ qn={19} correct={1} cols={1} options={[
+            <MCQ qn={19} correct={2} cols={1} options={[
               "A. Pagar kayu jati (6 m)",
               "B. Pagar kayu meranti (4 m)",
               "C. Pagar besi (5,5 m)",
@@ -1228,20 +1228,30 @@ const TKASoalAsli2025Page = () => {
             <PembahasanBtn n={19} />
             {expandedPembahasan.has(19) && (
               <div className="mt-3 space-y-2">
-                <PBJawaban>B. Pagar kayu meranti (4 m)</PBJawaban>
+                <PBJawaban>C. Pagar besi (5,5 m)</PBJawaban>
                 <PBKonsep>
-                  <p><span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Teorema Pythagoras</span>: pada segitiga siku-siku, <InlineMath math="c = \sqrt{a^2 + b^2}" /></p>
-                  <p>Pagar tangga = diagonal dari sisi horizontal (alas) dan vertikal (tinggi)</p>
-                  <p>Pilih bahan: <span className="font-bold">(1) panjang ≥ diagonal</span> DAN <span className="font-bold">(2) sisa sesedikit mungkin</span></p>
-                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Hitung diagonal dulu → eliminasi yang tidak cukup → ambil yang terpendek dari yang cukup</p>
+                  <p><span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Teorema Pythagoras</span>: <InlineMath math="c = \sqrt{a^2 + b^2}" /></p>
+                  <p>Pagar tangga = sisi miring segitiga siku-siku (alas × tinggi tangga)</p>
+                  <p>Terdapat <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>2 pagar</span> (sisi kiri + kanan) → kebutuhan total = 2 × panjang 1 pagar</p>
+                  <p>Pilih bahan: <span className="font-bold">(1) total panjang ≥ kebutuhan</span> DAN <span className="font-bold">(2) sisa sesedikit mungkin</span></p>
+                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Hitung kebutuhan total dulu → eliminasi yang tidak cukup → pilih sisa paling kecil dari yang cukup</p>
                 </PBKonsep>
                 <PBSteps>
-                  <S n={1}><p>Tangga 6 anak (dari gambar), tiap anak 25 cm:</p></S>
-                  <S n={2}><p>Panjang horizontal (alas) = 6 × 25 = 150 cm, Tinggi vertikal = 6 × 25 = 150 cm</p></S>
-                  <S n={3}><p>Hitung panjang pagar (diagonal):</p></S>
-                  <div className="ml-7"><BlockMath math="\text{Pagar} = \sqrt{150^2 + 150^2} = 150\sqrt{2} \approx 212 \text{ cm} = 2{,}12 \text{ m}" /></div>
-                  <S n={4}><p>Semua pilihan (4m, 4,5m, 5,5m, 6m) ≥ 2,12m → semua cukup</p></S>
-                  <S n={5}><p>Sisa terkecil = panjang terpendek yang cukup: <span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>4m − 2,12m = 1,88m (paling kecil) → Kayu meranti ✓</span></p></S>
+                  <S n={1}><p>Jumlah anak tangga = 8, tinggi tiap anak = 25 cm → <span className={`font-bold`}>tinggi total</span> <InlineMath math="h = 8 \times 25 = 200\text{ cm} = 2\text{ m}" /></p></S>
+                  <S n={2}><p>Alas tangga = 6 × 25 = 150 cm = 1,5 m (6 injakan horizontal)</p></S>
+                  <S n={3}><p>Hitung panjang 1 pagar (sisi miring) dengan Pythagoras:</p></S>
+                  <div className="ml-7"><BlockMath math="\text{1 pagar} = \sqrt{1{,}5^2 + 2^2} = \sqrt{2{,}25 + 4} = \sqrt{6{,}25} = 2{,}5\text{ m}" /></div>
+                  <S n={4}><p>Total kebutuhan bahan (2 pagar):</p></S>
+                  <div className="ml-7"><BlockMath math="\text{Total} = 2 \times 2{,}5\text{ m} = 5\text{ m}" /></div>
+                  <S n={5}><p>Analisis pilihan bahan:</p>
+                    <ul className={`ml-4 mt-1 space-y-1 text-xs ${isDark ? "text-white/70" : "text-gray-600"}`}>
+                      <li>🪵 Kayu meranti (4 m): <span className={`font-bold ${isDark ? "text-rose-300" : "text-rose-500"}`}>tidak cukup</span> (4 m &lt; 5 m)</li>
+                      <li>🔩 Aluminium (4,5 m): <span className={`font-bold ${isDark ? "text-rose-300" : "text-rose-500"}`}>tidak cukup</span> (4,5 m &lt; 5 m)</li>
+                      <li>🪵 Kayu jati (6 m): cukup, sisa = 6 − 5 = <span className="font-bold">1 m</span></li>
+                      <li>⚙️ Besi (5,5 m): cukup, sisa = 5,5 − 5 = <span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>0,5 m ← paling sedikit ✓</span></li>
+                    </ul>
+                  </S>
+                  <S n={6}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Pilihan terbaik: Besi (5,5 m) — cukup dengan sisa paling sedikit ✓</p></S>
                 </PBSteps>
               </div>
             )}
