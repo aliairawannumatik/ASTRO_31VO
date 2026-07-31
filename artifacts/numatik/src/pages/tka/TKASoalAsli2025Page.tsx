@@ -1486,20 +1486,20 @@ const TKASoalAsli2025Page = () => {
                   key={i}
                   className={`border rounded-lg p-2 text-xs font-body transition-all flex flex-col items-center gap-1 cursor-pointer
                     ${selectedAnswers[25] === i
-                      ? i === 1
+                      ? i === 3
                         ? isDark ? "bg-green-900/30 border-green-500/50" : "bg-green-50 border-green-400"
                         : isDark ? "bg-red-900/30 border-red-500/50" : "bg-red-50 border-red-400"
                       : isDark ? "bg-white/5 border-white/10 hover:bg-white/10 hover:border-amber-500/40 active:scale-95" : "bg-gray-50 border-gray-300 hover:bg-amber-50 hover:border-amber-400 active:scale-95"
                     }
-                    ${selectedAnswers[25] !== undefined && i === 1 ? (isDark ? "bg-green-900/30 border-green-500/50" : "bg-green-50 border-green-400") : ""}
+                    ${selectedAnswers[25] !== undefined && i === 3 ? (isDark ? "bg-green-900/30 border-green-500/50" : "bg-green-50 border-green-400") : ""}
                   `}
                   onClick={() => selectAnswer(25, i)}
                 >
                   <img src={`/tka-2025-soal25${opt.toLowerCase()}.png`} alt={`Pilihan ${opt} soal 25`} className="w-full rounded" />
                   <div className="flex items-center justify-between w-full px-1">
-                    <span className={`font-bold ${selectedAnswers[25] === i ? (i === 1 ? (isDark ? "text-green-300" : "text-green-600") : (isDark ? "text-red-300" : "text-red-600")) : (isDark ? "text-white/70" : "text-gray-600")}`}>{opt}.</span>
-                    {selectedAnswers[25] !== undefined && i === 1 && <span className={`font-bold ${isDark ? "text-green-400" : "text-green-600"}`}>✓</span>}
-                    {selectedAnswers[25] === i && i !== 1 && <span className={`font-bold ${isDark ? "text-red-400" : "text-red-500"}`}>✗</span>}
+                    <span className={`font-bold ${selectedAnswers[25] === i ? (i === 3 ? (isDark ? "text-green-300" : "text-green-600") : (isDark ? "text-red-300" : "text-red-600")) : (isDark ? "text-white/70" : "text-gray-600")}`}>{opt}.</span>
+                    {selectedAnswers[25] !== undefined && i === 3 && <span className={`font-bold ${isDark ? "text-green-400" : "text-green-600"}`}>✓</span>}
+                    {selectedAnswers[25] === i && i !== 3 && <span className={`font-bold ${isDark ? "text-red-400" : "text-red-500"}`}>✗</span>}
                   </div>
                 </div>
               ))}
@@ -1507,21 +1507,31 @@ const TKASoalAsli2025Page = () => {
             <PembahasanBtn n={25} />
             {expandedPembahasan.has(25) && (
               <div className="mt-3 space-y-2">
-                <PBJawaban>B — diagram karet (garis turun konsisten setiap tahun)</PBJawaban>
+                <PBJawaban>D — diagram garis data produksi Karet (tren turun konsisten 2018–2024)</PBJawaban>
                 <PBKonsep>
-                  <p>Diagram garis menampilkan perubahan data dari waktu ke waktu</p>
-                  <p>Identifikasi tren: <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>naik</span>, <span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>turun</span>, atau <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>fluktuatif</span></p>
-                  <p>Cocokkan tren diagram dengan tren data tabel</p>
-                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Cari ciri khas data — apakah selalu turun, selalu naik, atau naik-turun? Lalu cocokkan dengan diagram</p>
+                  <p>Diagram garis yang benar harus memiliki <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>skala sumbu Y</span> yang sesuai rentang data dan <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>titik-titik</span> yang cocok dengan nilai di tabel</p>
+                  <p>Karet: rentang 2,60–3,68 (tren turun) · Kelapa: rentang 2,81–2,90 (hampir stabil)</p>
+                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Periksa skala sumbu Y dulu — eliminasi yang tidak cocok rentangnya, lalu cocokkan titik-titik datanya</p>
                 </PBKonsep>
                 <PBSteps>
-                  <S n={1}><p>Baca data karet 2018–2024 dari tabel:</p></S>
-                  <div className={`ml-7 p-2 rounded-lg text-xs font-mono ${isDark ? "bg-white/5" : "bg-gray-100"}`}>
-                    3,68 → 3,50 → 3,30 → 3,12 → 2,95 → 2,75 → 2,60
+                  <S n={1}><p>Data dari tabel (2018–2024):</p></S>
+                  <div className={`ml-7 p-2 rounded-lg text-xs font-mono space-y-1 ${isDark ? "bg-white/5" : "bg-gray-100"}`}>
+                    <div>Karet: 3,68 → 3,50 → 3,30 → 3,12 → 2,95 → 2,75 → 2,60</div>
+                    <div>Kelapa: 2,83 → 2,83 → 2,81 → 2,85 → 2,86 → 2,90 → 2,89</div>
                   </div>
-                  <S n={2}><p>Tren karet: <span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>TURUN MONOTON</span> setiap tahun tanpa kenaikan sama sekali</p></S>
-                  <S n={3}><p>Diagram B menunjukkan garis yang terus menurun tanpa fluktuasi → cocok dengan data karet</p></S>
-                  <S n={4}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Jawaban B ✓</p></S>
+                  <S n={2}><p>Analisis pilihan berdasarkan skala sumbu Y:</p>
+                    <ul className={`ml-4 mt-1 space-y-1 text-xs ${isDark ? "text-white/70" : "text-gray-600"}`}>
+                      <li><span className={`font-bold`}>Grafik A &amp; B</span> (skala ≈ 5,4–6,6): rentang ini tidak cocok dengan data karet maupun kelapa → <span className={`font-bold ${isDark ? "text-rose-300" : "text-rose-500"}`}>eliminasi</span></li>
+                      <li><span className={`font-bold`}>Grafik C</span> (skala ≈ 2,8–2,91): rentang terlalu sempit, titik-titiknya tidak sesuai data kelapa maupun karet → <span className={`font-bold ${isDark ? "text-rose-300" : "text-rose-500"}`}>eliminasi</span></li>
+                      <li><span className={`font-bold`}>Grafik D</span> (skala 0–4): mencakup rentang 2,60–3,68 dari data karet ✓</li>
+                    </ul>
+                  </S>
+                  <S n={3}><p>Cek titik-titik Grafik D terhadap data karet:</p></S>
+                  <div className={`ml-7 p-2 rounded-lg text-xs font-mono ${isDark ? "bg-white/5" : "bg-gray-100"}`}>
+                    2018: 3,68 · 2019: 3,50 · 2020: 3,30 · 2021: 3,12 · 2022: 2,95 · 2023: 2,75 · 2024: 2,60
+                  </div>
+                  <S n={4}><p>Tren <span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>turun monoton</span> setiap tahun — sesuai sempurna dengan Grafik D</p></S>
+                  <S n={5}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Grafik D menyajikan data produksi Karet di Indonesia ✓</p></S>
                 </PBSteps>
               </div>
             )}
