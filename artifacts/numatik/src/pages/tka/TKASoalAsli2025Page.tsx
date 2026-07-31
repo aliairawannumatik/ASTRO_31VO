@@ -1141,22 +1141,22 @@ const TKASoalAsli2025Page = () => {
             <p className={`font-body text-sm leading-relaxed mb-3 ${isDark ? "text-white/80" : "text-gray-700"}`}>
               Sisi tutup pada prisma adalah <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>sisi ABC</span>. Rusuk <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>AC</span> pada sisi tutup akan berhimpit dengan salah satu rusuk pada sisi tegak prisma nomor …
             </p>
-            <MCQ qn={17} correct={1} options={["A. 1", "B. 2", "C. 3", "D. 4"]} />
+            <MCQ qn={17} correct={2} options={["A. 1", "B. 2", "C. 3", "D. 4"]} />
             <PembahasanBtn n={17} />
             {expandedPembahasan.has(17) && (
               <div className="mt-3 space-y-2">
-                <PBJawaban>B. Sisi tegak nomor 2</PBJawaban>
+                <PBJawaban>C. Sisi tegak nomor 3</PBJawaban>
                 <PBKonsep>
                   <p>Saat jaring-jaring dilipat menjadi bangun ruang:</p>
-                  <p>• Rusuk pada sisi tutup berhimpit dengan rusuk pada sisi tegak yang <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>bersebelahan langsung</span> di jaring-jaring</p>
-                  <p>• Sisi tutup ABC: rusuk AB, BC, CA masing-masing bertemu dengan sisi tegak berbeda</p>
-                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Bayangkan lipat jaring-jaring secara bertahap dari sisi tutup ke sisi tegak</p>
+                  <p>• Rusuk pada sisi tutup berhimpit dengan rusuk pada sisi tegak yang <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>bersebelahan langsung dengannya</span> di jaring-jaring</p>
+                  <p>• Perhatikan: sisi nomor <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>2 adalah sisi alas</span>, bukan sisi tegak</p>
+                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Identifikasi dulu mana sisi alas dan mana sisi tegak, lalu cari sisi tegak yang berbagi rusuk dengan sisi tutup ABC</p>
                 </PBKonsep>
                 <PBSteps>
-                  <S n={1}><p>Perhatikan posisi sisi tegak di jaring-jaring: nomor 1, 2, 3 mengelilingi sisi alas</p></S>
-                  <S n={2}><p>Sisi tutup ABC diletakkan di atas. Rusuk AC pada sisi tutup bersebelahan dengan sisi tegak nomor 2 dalam jaring-jaring</p></S>
-                  <S n={3}><p>Saat dilipat: sisi tegak 2 terangkat → rusuknya bertemu dengan rusuk AC pada sisi tutup</p></S>
-                  <S n={4}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Rusuk AC berhimpit dengan rusuk pada sisi tegak nomor 2 ✓</p></S>
+                  <S n={1}><p>Identifikasi sisi-sisi dalam jaring-jaring: sisi nomor <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>2 adalah alas</span>, sisi nomor 1, 3, dan 4 adalah sisi tegak</p></S>
+                  <S n={2}><p>Sisi tutup ABC berada di atas. Perhatikan rusuk AC — rusuk ini bersebelahan langsung dengan sisi tegak nomor <span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>3</span> dalam jaring-jaring</p></S>
+                  <S n={3}><p>Saat dilipat: sisi tegak nomor 3 terangkat → rusuknya yang berbagi rusuk AC akan bertemu dan berhimpit dengan rusuk AC pada sisi tutup</p></S>
+                  <S n={4}><p className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>Rusuk AC berhimpit dengan rusuk pada sisi tegak nomor 3 ✓</p></S>
                 </PBSteps>
               </div>
             )}
