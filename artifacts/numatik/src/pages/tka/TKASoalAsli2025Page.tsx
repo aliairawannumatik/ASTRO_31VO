@@ -1366,17 +1366,17 @@ const TKASoalAsli2025Page = () => {
               <div className="mt-3 space-y-2">
                 <PBJawaban>B. 18 cm</PBJawaban>
                 <PBKonsep>
-                  <p><span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Kesebangunan</span>: dua bangun sebangun jika sudut-sudutnya sama dan sisi-sisi bersesuaiannya sebanding</p>
-                  <p>Jika skala = k, maka: <InlineMath math="\dfrac{\text{sisi kecil}}{\text{sisi besar}} = k" /></p>
-                  <p>Keliling bangun sebangun: <InlineMath math="K_{\text{kecil}} = k \times K_{\text{besar}}" /></p>
-                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Temukan satu sisi yang diketahui di kedua bangun untuk menentukan skala k</p>
+                  <p><span className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>Kesebangunan</span>: dua bangun sebangun jika sisi-sisi bersesuaiannya sebanding</p>
+                  <div className="my-1"><BlockMath math="\frac{p_1}{p_2} = \frac{l_1}{l_2}" /></div>
+                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: Cari lebar besar dari luas → gunakan perbandingan sisi untuk cari lebar kecil → hitung keliling</p>
                 </PBKonsep>
                 <PBSteps>
-                  <S n={1}><p>Persegi besar: tinggi = 20 cm (dari gambar), luas = 320 cm²</p></S>
-                  <S n={2}><div><BlockMath math="\text{Lebar besar} = \frac{320}{20} = 16 \text{ cm}" /></div></S>
-                  <S n={3}><p>Skala: <InlineMath math="k = \dfrac{5}{20} = \dfrac{1}{4}" /> (tinggi kecil = 5 cm dari gambar)</p></S>
-                  <S n={4}><p>Lebar kecil: <InlineMath math="16 \times \dfrac{1}{4} = 4 \text{ cm}" /></p></S>
-                  <S n={5}><div><BlockMath math="K_{\text{kecil}} = 2(5 + 4) = 2 \times 9 = 18 \text{ cm}\checkmark" /></div></S>
+                  <S n={1}><p>Diketahui: <InlineMath math="p_1 = 20\text{ cm}" />, luas besar = 320 cm². Cari lebar persegi panjang besar:</p></S>
+                  <div className="ml-7"><BlockMath math="l_1 = \frac{320}{20} = 16\text{ cm}" /></div>
+                  <S n={2}><p>Dari gambar: <InlineMath math="p_2 = 5\text{ cm}" />. Gunakan perbandingan kesebangunan untuk mencari <InlineMath math="l_2" />:</p></S>
+                  <div className="ml-7"><BlockMath math="\frac{p_1}{p_2} = \frac{l_1}{l_2} \implies \frac{20}{5} = \frac{16}{l_2} \implies 4 = \frac{16}{l_2} \implies l_2 = \frac{16}{4} = 4\text{ cm}" /></div>
+                  <S n={3}><p>Ukuran persegi panjang kecil: <InlineMath math="5\text{ cm} \times 4\text{ cm}" />. Hitung keliling:</p></S>
+                  <div className="ml-7"><BlockMath math="K = 2 \times (p_2 + l_2) = 2 \times (5 + 4) = 2 \times 9 = 18\text{ cm}\checkmark" /></div>
                 </PBSteps>
               </div>
             )}
