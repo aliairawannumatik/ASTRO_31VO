@@ -258,6 +258,13 @@ const BertingkatRingkasan = (
         <span className="font-body font-semibold text-white">Langkah-Langkah Penyelesaian</span>
       </div>
       <div className="px-5 pb-5 space-y-4">
+        <p className="font-body text-sm text-white/80 leading-relaxed">
+          Perbandingan bertingkat <span className="text-white/50">(compound ratio)</span> adalah perbandingan yang menggabungkan dua perbandingan terpisah melalui satu variabel perantara yang sama.
+        </p>
+        <p className="font-body text-sm text-white/70">
+          Contoh: <InlineMath math="A : B = 2 : 3" /> dan <InlineMath math="B : C = 4 : 5" /><br />
+          Karena B menjadi perantara, keduanya digabung menjadi <InlineMath math="A : B : C = 8 : 12 : 15" />
+        </p>
         <div className="bg-slate-800/50 rounded-lg p-4">
           <div className="space-y-3 font-body text-sm text-white/80">
             {[
@@ -292,7 +299,7 @@ const materiSections: MateriSection[] = [
   },
   {
     heading: "C. Proporsi dan Perbandingan Bertingkat",
-    content: `Perbandingan bertingkat (compound ratio) adalah perbandingan yang menggabungkan dua perbandingan terpisah melalui satu variabel perantara yang sama.\n\nContoh: A : B = 2 : 3 dan B : C = 4 : 5\nKarena B menjadi perantara, keduanya digabung menjadi A : B : C = 8 : 12 : 15`,
+    content: ``,
     jsxAfter: BertingkatRingkasan,
   },
   {
