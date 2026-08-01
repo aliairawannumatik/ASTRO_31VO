@@ -12,7 +12,7 @@ const SenilaiRingkasan = (
     <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
       <div className="flex items-center gap-3 px-5 py-4">
         <svg className="w-5 h-5 text-green-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-        <span className="font-body font-semibold text-white">Ringkasan Intisari: Perbandingan Senilai</span>
+        <span className="font-body font-semibold text-white">Perbandingan Senilai</span>
       </div>
       <div className="px-5 pb-5 space-y-4">
         <p className="font-body text-sm text-white/80 leading-relaxed">
@@ -107,7 +107,7 @@ const SenilaiRingkasan = (
     <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
       <div className="flex items-center gap-3 px-5 py-4">
         <svg className="w-5 h-5 text-red-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-        <span className="font-body font-semibold text-white">Ringkasan Intisari: Perbandingan Berbalik Nilai</span>
+        <span className="font-body font-semibold text-white">Perbandingan Berbalik Nilai</span>
       </div>
       <div className="px-5 pb-5 space-y-4">
         <p className="font-body text-sm text-white/80 leading-relaxed">
@@ -311,7 +311,7 @@ const materiSections: MateriSection[] = [
   },
   {
     heading: "B. Jenis-Jenis Perbandingan",
-    content: `1. Perbandingan Senilai (Seharga / Sebanding)\nPerbandingan senilai adalah perbandingan dua besaran yang jika salah satunya bertambah, maka yang lain juga bertambah secara tetap.\n\nContoh:\n- Jumlah barang bertambah → harga total bertambah\n- Waktu kerja bertambah → hasil kerja bertambah\n\nRumus:\n$\\frac{a_1}{a_2} = \\frac{b_1}{b_2}$\n\n2. Perbandingan Berbalik Nilai\nPerbandingan berbalik nilai adalah perbandingan dua besaran di mana jika satu bertambah, yang lain justru berkurang.\n\nContoh:\n- Banyak pekerja bertambah → waktu kerja berkurang\n- Kecepatan bertambah → waktu tempuh berkurang\n\nRumus:\n$\\frac{a_1}{a_2} = \\frac{b_2}{b_1}$`,
+    content: ``,
     jsxAfter: SenilaiRingkasan,
   },
   {
