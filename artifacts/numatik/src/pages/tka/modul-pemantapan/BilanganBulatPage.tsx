@@ -383,11 +383,11 @@ const BilanganBulatPage = () => {
                 </div>
                 <span className="font-body text-[10px] font-bold tracking-[0.2em] uppercase"
                   style={{ color: isDark ? "rgba(167,139,250,0.7)" : "rgba(255,255,255,1)" }}>
-                  Modul Pemantapan TKA
+                  MODUL PEMANTAPAN TKA MATEMATIKA
                 </span>
               </div>
-              <h1 className="font-display text-xl md:text-2xl font-bold text-white mb-1 leading-tight"
-                style={{ textShadow: isDark ? "0 0 40px rgba(167,139,250,0.5)" : "0 1px 4px rgba(0,0,0,0.25)" }}>
+              <h1 className="font-display text-xl md:text-2xl font-bold mb-1 leading-tight"
+                style={{ color: "#ffffff", textShadow: isDark ? "0 0 40px rgba(167,139,250,0.5)" : "0 1px 4px rgba(0,0,0,0.3)" }}>
                 BILANGAN BULAT
               </h1>
               <p className="font-body text-[11px] mb-4"
@@ -422,14 +422,24 @@ const BilanganBulatPage = () => {
               </div>
 
             </div>
+
+            {/* ── Author strip ── */}
+            <div className="px-6 py-3 flex items-center justify-center gap-2 border-t"
+              style={{
+                borderColor: isDark ? "rgba(167,139,250,0.2)" : "rgba(255,255,255,0.35)",
+                background: isDark ? "rgba(99,102,241,0.08)" : "rgba(0,0,0,0.12)",
+              }}>
+              <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                style={{ color: isDark ? "#a5b4fc" : "rgba(255,255,255,0.85)" }}>
+                <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+              </svg>
+              <span className="font-body text-sm font-semibold tracking-wide"
+                style={{ color: isDark ? "#c4b5fd" : "#ffffff" }}>
+                oleh Irawan Sutiawan, M.Pd
+              </span>
+            </div>
           </div>
         </div>
-
-        {/* ── Author byline ── */}
-        <p className="text-center font-body text-[12px] font-semibold -mt-3 mb-5"
-          style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.45)" }}>
-          Oleh : Irawan Sutiawan, M.Pd
-        </p>
 
         {/* ── Tab Switcher ── */}
         <div className={`flex gap-2 mb-6 p-1 rounded-xl ${isDark ? "bg-white/4 border border-white/8" : "bg-gray-100 border border-gray-200"}`}>

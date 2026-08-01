@@ -179,17 +179,16 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                   <BookMarked className="w-4.5 h-4.5 text-violet-300" />
                 </div>
                 <span className="font-body text-[10px] font-bold tracking-[0.2em] uppercase text-violet-400/70">
-                  Modul Pemantapan TKA
+                  MODUL PEMANTAPAN TKA MATEMATIKA
                 </span>
               </div>
 
-              <h1 className="font-display text-xl md:text-2xl font-bold text-white mb-1 leading-tight"
-                style={{ textShadow: "0 0 40px rgba(167,139,250,0.5)" }}>
+              <h1 className="font-display text-xl md:text-2xl font-bold mb-1 leading-tight"
+                style={{ textShadow: "0 0 40px rgba(167,139,250,0.5)", color: "#ffffff" }}>
                 {title}
               </h1>
-              <p className="font-body text-[11px] text-violet-300/50 mb-4">Irawan Sutiawan, M.Pd</p>
 
-              <div className="flex gap-2 flex-wrap justify-center">
+              <div className="flex gap-2 flex-wrap justify-center mb-0">
                 <span className="text-[10px] font-body px-3 py-1 rounded-full border font-semibold"
                   style={{ background: "rgba(99,102,241,0.15)", borderColor: "rgba(99,102,241,0.35)", color: "#a5b4fc" }}>
                   📖 {materiSections.length} Materi
@@ -215,6 +214,22 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                   </span>
                 ))}
               </div>
+            </div>
+
+            {/* ── Author strip ── */}
+            <div className="px-6 py-3 flex items-center justify-center gap-2 border-t"
+              style={isWhite ? {
+                borderColor: "rgba(255,255,255,0.35)",
+                background: "rgba(0,0,0,0.12)",
+              } : {
+                borderColor: "rgba(167,139,250,0.2)",
+                background: "rgba(99,102,241,0.08)",
+              }}>
+              <PenLine className="w-3.5 h-3.5 shrink-0" style={{ color: isWhite ? "rgba(255,255,255,0.8)" : "#a5b4fc" }} />
+              <span className="font-body text-sm font-semibold tracking-wide"
+                style={{ color: isWhite ? "#ffffff" : "#c4b5fd" }}>
+                oleh Irawan Sutiawan, M.Pd
+              </span>
             </div>
           </div>
         </div>
