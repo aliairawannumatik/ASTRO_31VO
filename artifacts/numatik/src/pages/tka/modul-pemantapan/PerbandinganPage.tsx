@@ -357,11 +357,74 @@ const latihanDasar: LatihanSoal[] = [
   { no: 20, soal: "Seorang peternak memiliki 40 ekor sapi yang dapat menghabiskan 60 karung pakan dalam waktu 15 hari. Jika peternak tersebut menjual 10 ekor sapinya (tersisa 30 ekor) dan ia hanya memiliki 45 karung pakan, berapa lama persediaan pakan tersebut akan habis?", options: ["A. 15 hari", "B. 20 hari", "C. 12 hari", "D. 25 hari"], jawaban: "B", pembahasan: "Konsumsi per sapi per hari = 60 / (40 × 15) = 60/600 = 1/10 karung\n30 sapi per hari = 30 × (1/10) = 3 karung/hari\nHari habis = 45 / 3 = 15 hari\nKoreksi: 45/3 = 15 hari → A\nJawaban A (15 hari)" },
 ];
 
+import type { LatihanSoal as LS } from "@/components/tka/TKAPemantapanLayout";
+
+const contohSoal: LS[] = [
+  {
+    no: 101,
+    type: "pgkbs",
+    soal: "Sebuah botol minuman sirup berkapasitas 500 mL dibuat dari campuran 350 mL air, 100 mL sirup konsentrat, dan sisanya adalah es batu. Kakak ingin membuat minuman sirup tersebut dalam wadah besar berukuran 2 liter.\n\nBerdasarkan informasi di atas, tentukan Benar atau Salah untuk setiap pernyataan berikut!",
+    pernyataan: [
+      "Kebutuhan air untuk membuat 2 liter minuman sirup tersebut adalah $1.400\\text{ mL}$.",
+      "Kebutuhan sirup konsentrat untuk membuat 2 liter minuman sirup adalah $300\\text{ mL}$.",
+      "Kebutuhan es batu untuk membuat 2 liter minuman sirup tersebut adalah $200\\text{ mL}$.",
+    ],
+    jawabanBS: ["B", "S", "B"],
+    pembahasan: "Komposisi 1 botol (500 mL): Air = 350 mL, Sirup = 100 mL, Es batu = 500 − (350 + 100) = 50 mL\nSkala penggandaan: 2.000 mL ÷ 500 mL = 4 kali\n(1) Air = 4 × 350 = 1.400 mL → BENAR\n(2) Sirup = 4 × 100 = 400 mL (bukan 300 mL) → SALAH\n(3) Es batu = 4 × 50 = 200 mL → BENAR",
+  },
+  {
+    no: 102,
+    type: "pgkbs",
+    soal: "Sisca membeli jepit rambut sebanyak 1 lusin dengan harga total Rp36.000,00.\n\nBerdasarkan informasi tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!",
+    pernyataan: [
+      "Laju perubahan antara total harga dan jumlah jepit rambut adalah Rp36.000,00 per 12 buah.",
+      "Laju perubahan satuan harga per buah jepit rambut adalah Rp3.000,00/buah.",
+      "Laju perubahan antara total harga dan jumlah jepit rambut setara dengan Rp60.000,00 per 18 buah.",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "Data: 1 lusin = 12 buah, harga = Rp36.000,00\n(1) Laju perubahan = Rp36.000 per 12 buah → BENAR\n(2) Harga satuan = Rp36.000 ÷ 12 = Rp3.000,00/buah → BENAR\n(3) Untuk 18 buah: harga = 18 × Rp3.000 = Rp54.000,00 (bukan Rp60.000,00) → SALAH",
+  },
+  {
+    no: 103,
+    type: "pgkbs",
+    soal: "Pak Ahmad merencanakan pembangunan gedung olahraga dengan ukuran asli 40 m × 50 m. Sebelum membangun, ia menggambar cetak biru (blueprint) gedung tersebut dengan ukuran 10 cm × 12,5 cm.\n\nBerdasarkan informasi tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!",
+    pernyataan: [
+      "Skala yang digunakan oleh Pak Ahmad pada blueprint tersebut adalah $1 : 400$.",
+      "Ukuran gedung sebenarnya $500$ kali lebih besar daripada ukuran pada blueprint.",
+      "Perbandingan luas cetak biru dengan luas gedung sebenarnya adalah $1 : 160.000$.",
+      "Luas gedung sebenarnya $160.000$ kali lebih besar daripada luas cetak birunya.",
+    ],
+    jawabanBS: ["B", "S", "B", "B"],
+    pembahasan: "Ukuran sebenarnya: 40 m = 4.000 cm, 50 m = 5.000 cm\n(1) Skala = 10 cm ÷ 4.000 cm = 1 : 400 → BENAR\n(2) Skala 1:400 berarti 400 kali lebih besar (bukan 500 kali) → SALAH\n(3) Luas blueprint = 10 × 12,5 = 125 cm². Luas sebenarnya = 4.000 × 5.000 = 20.000.000 cm². Perbandingan = 125 : 20.000.000 = 1 : 160.000 → BENAR\n(4) Luas sebenarnya = 160.000 × luas blueprint → BENAR",
+  },
+  {
+    no: 104,
+    type: "pgkbs",
+    soal: "Sebuah UMKM konveksi sanggup memproduksi 200 potong baju dalam waktu satu minggu menggunakan 10 orang pekerja. Pada minggu ini, sebanyak 2 orang pekerja tidak masuk karena izin sakit.\n\nBerdasarkan informasi tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!",
+    pernyataan: [
+      "Total baju yang berhasil diproduksi pada minggu ini adalah 160 potong.",
+      "Pada minggu ini, rata-rata produksi baju oleh satu orang pekerja adalah 2,8 potong per hari.",
+      "Agar total produksi tetap 200 potong baju, setiap pekerja yang hadir harus menyelesaikan 25 potong baju pada minggu ini.",
+    ],
+    jawabanBS: ["B", "B", "B"],
+    pembahasan: "Pekerja aktif = 10 − 2 = 8 orang. Kapasitas per pekerja = 200 ÷ 10 = 20 baju/minggu.\n(1) Produksi 8 pekerja = 8 × 20 = 160 potong → BENAR\n(2) 1 minggu = 7 hari. Produksi 1 pekerja per hari = 20 ÷ 7 ≈ 2,85 ≈ 2,8 potong/hari → BENAR\n(3) Agar tetap 200 potong dengan 8 pekerja: beban per pekerja = 200 ÷ 8 = 25 potong → BENAR",
+  },
+  {
+    no: 105,
+    type: "pg",
+    soal: "Untuk merenovasi sebuah ruang kelas, dibutuhkan 10 pekerja selama 20 hari. Jika renovasi tersebut ditargetkan selesai dalam waktu 8 hari, berapa banyak pekerja yang dibutuhkan untuk menyelesaikan pekerjaan tersebut tepat waktu?",
+    options: ["A. 22 pekerja", "B. 25 pekerja", "C. 28 pekerja", "D. 30 pekerja"],
+    jawaban: "B",
+    pembahasan: "Konsep: Perbandingan Berbalik Nilai (waktu lebih singkat → pekerja lebih banyak).\nFormulasi: $\\frac{\\text{Pekerja}_1}{\\text{Pekerja}_2} = \\frac{\\text{Waktu}_2}{\\text{Waktu}_1}$\nPerhitungan: $\\frac{10}{x} = \\frac{8}{20}$\n$8x = 200$\n$x = 25$ pekerja → Jawaban B",
+  },
+];
+
 const PerbandinganPage = () => (
   <TKAPemantapanLayout
     title="PERBANDINGAN"
     materiSections={materiSections}
     latihanDasar={latihanDasar}
+    contohSoal={contohSoal}
   />
 );
 
