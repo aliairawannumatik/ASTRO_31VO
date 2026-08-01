@@ -557,6 +557,237 @@ const latihanDasar: LatihanSoal[] = [
       "$n\\in\\{-5,\\ 1,\\ 3,\\ 9\\}$\n\n" +
       "Jumlah: $(-5)+1+3+9=8$ → C",
   },
+
+  // ─── 20 · PG ──────────────────────────────────────────────────────────────
+  {
+    no: 20,
+    type: "pg",
+    soal: "Dina akan mengemas tepung beras ke dalam kantong plastik berukuran $\\dfrac{1}{2}\\text{ kg}$ dan $\\dfrac{1}{4}\\text{ kg}$. Berat tepung beras yang akan dikemas adalah $24{,}3\\text{ kg}$. Kemasan $\\dfrac{1}{2}\\text{ kg}$ akan digunakan terlebih dahulu. Berat sisa tepung beras yang tidak dapat dikemas sesuai ukuran kantong adalah ....",
+    options: [
+      "A. $\\dfrac{1}{20}\\text{ kg}$",
+      "B. $\\dfrac{1}{10}\\text{ kg}$",
+      "C. $\\dfrac{3}{20}\\text{ kg}$",
+      "D. $\\dfrac{1}{5}\\text{ kg}$",
+    ],
+    jawaban: "A",
+    pembahasan:
+      "Gunakan kantong $\\frac{1}{2}$ kg terlebih dahulu:\n" +
+      "$24{,}3 \\div \\frac{1}{2} = 48{,}6$ → 48 kantong penuh\n" +
+      "Tepung terpakai: $48 \\times \\frac{1}{2} = 24\\text{ kg}$\n" +
+      "Sisa: $24{,}3 - 24 = 0{,}3\\text{ kg}$\n\n" +
+      "Gunakan kantong $\\frac{1}{4}$ kg:\n" +
+      "$0{,}3 \\div \\frac{1}{4} = 1{,}2$ → hanya 1 kantong penuh\n" +
+      "Tepung terpakai: $1 \\times \\frac{1}{4} = 0{,}25\\text{ kg}$\n" +
+      "Sisa akhir: $0{,}3 - 0{,}25 = 0{,}05\\text{ kg} = \\dfrac{1}{20}\\text{ kg}$\n\n" +
+      "Jawaban: A",
+  },
+
+  // ─── 21 · PGKBS ───────────────────────────────────────────────────────────
+  {
+    no: 21,
+    type: "pgkbs",
+    soal: "Diketahui sekarung kedelai dengan berat $36\\text{ kg}$. Kedelai tersebut akan dijual dalam kemasan plastik kecil. Tentukan Benar atau Salah untuk setiap pernyataan berikut.",
+    pernyataan: [
+      "Jika terdapat 24 kemasan plastik, setiap kemasan berisi $1{,}5\\text{ kg}$ kedelai.",
+      "Jika setiap kemasan berisi $5\\text{ kg}$ kedelai, sisa kedelai yang tidak dikemas adalah $2\\text{ kg}$.",
+      "Jika setiap kemasan berisi $2\\dfrac{1}{4}\\text{ kg}$ kedelai, banyak kemasan plastik adalah 16 buah.",
+    ],
+    jawabanBS: ["B", "S", "B"],
+    pembahasan:
+      "(1) $36 \\div 24 = 1{,}5\\text{ kg}$ per kemasan ✓ BENAR\n\n" +
+      "(2) $36 \\div 5 = 7{,}2$ → 7 kemasan penuh → terpakai $7 \\times 5 = 35\\text{ kg}$\n" +
+      "Sisa: $36 - 35 = 1\\text{ kg} \\neq 2\\text{ kg}$ ✗ SALAH\n\n" +
+      "(3) $36 \\div 2\\frac{1}{4} = 36 \\div \\frac{9}{4} = 36 \\times \\frac{4}{9} = 16$ kemasan ✓ BENAR",
+  },
+
+  // ─── 22 · PG (estimasi) ────────────────────────────────────────────────────
+  {
+    no: 22,
+    type: "pg",
+    soal: "Diketahui operasi bilangan $4{,}2 \\times 19{,}7 + 13{,}81 - 32{,}47 = m$. Perkiraan hasil dari $(m - 20)$ adalah ....",
+    options: ["A. 20", "B. 40", "C. 80", "D. 100"],
+    jawaban: "B",
+    pembahasan:
+      "Gunakan pembulatan ke bilangan yang nyaman:\n" +
+      "$4{,}2 \\approx 4,\\quad 19{,}7 \\approx 20,\\quad 13{,}81 \\approx 14,\\quad 32{,}47 \\approx 32$\n\n" +
+      "$m \\approx 4 \\times 20 + 14 - 32 = 80 + 14 - 32 = 62$\n\n" +
+      "$m - 20 \\approx 62 - 20 = 42 \\approx 40$\n\n" +
+      "(Nilai sejati: $4{,}2 \\times 19{,}7 = 82{,}74$; $m = 82{,}74 + 13{,}81 - 32{,}47 = 64{,}08$; $m-20 = 44{,}08$)\n" +
+      "Jawaban: B",
+  },
+
+  // ─── 23 · PG (urutan → kode) ───────────────────────────────────────────────
+  {
+    no: 23,
+    type: "pg",
+    soal: "Diketahui kode warna menggunakan huruf yang nilainya disusun dari terbesar ke terkecil. Huruf beserta nilainya: $B = \\dfrac{3}{5}$; $I = 0{,}48$; $R = \\dfrac{1}{3}$; $U = 7\\%$. Kode warna tersebut adalah ....",
+    options: ["A. BIRU", "B. RUBI", "C. UBIR", "D. IURB"],
+    jawaban: "A",
+    pembahasan:
+      "Ubah semua ke desimal:\n" +
+      "$B = \\frac{3}{5} = 0{,}600$\n" +
+      "$I = 0{,}480$\n" +
+      "$R = \\frac{1}{3} \\approx 0{,}333$\n" +
+      "$U = 7\\% = 0{,}070$\n\n" +
+      "Urutan dari terbesar ke terkecil: $B > I > R > U$\n\n" +
+      "Kode warna: **BIRU** → A",
+  },
+
+  // ─── 24 · PG ──────────────────────────────────────────────────────────────
+  {
+    no: 24,
+    type: "pg",
+    soal: "Hasil dari $\\dfrac{2}{5} \\times \\dfrac{5}{6} - \\dfrac{3}{4} \\div \\dfrac{9}{2}$ adalah ....",
+    options: [
+      "A. $-\\dfrac{1}{6}$",
+      "B. $\\dfrac{1}{6}$",
+      "C. $\\dfrac{1}{3}$",
+      "D. $\\dfrac{5}{6}$",
+    ],
+    jawaban: "B",
+    pembahasan:
+      "Perkalian dan pembagian dikerjakan lebih dulu (kiri ke kanan):\n" +
+      "$\\frac{2}{5} \\times \\frac{5}{6} = \\frac{10}{30} = \\frac{1}{3}$\n\n" +
+      "$\\frac{3}{4} \\div \\frac{9}{2} = \\frac{3}{4} \\times \\frac{2}{9} = \\frac{6}{36} = \\frac{1}{6}$\n\n" +
+      "Sekarang pengurangan:\n" +
+      "$\\frac{1}{3} - \\frac{1}{6} = \\frac{2}{6} - \\frac{1}{6} = \\frac{1}{6}$\n\n" +
+      "Jawaban: B",
+  },
+
+  // ─── 25 & 26 · Konteks Kaveling ────────────────────────────────────────────
+  // ─── 25 · PGKBS ───────────────────────────────────────────────────────────
+  {
+    no: 25,
+    type: "pgkbs",
+    soal: `Perhatikan teks berikut untuk menjawab soal nomor 25 dan 26.
+
+Tanah Kaveling
+Seorang pengembang memiliki sebidang tanah berbentuk persegi panjang berukuran $80\\text{ m} \\times 40\\text{ m}$ yang dibagi menjadi kaveling rumah berukuran sama, masing-masing $8\\text{ m} \\times 4\\text{ m}$. Kaveling-kaveling tersebut diberi nomor urut 1, 2, 3, dan seterusnya hingga semuanya bernomor.
+
+Berdasarkan teks tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut.`,
+    pernyataan: [
+      "Kaveling bernomor ganjil merupakan $\\dfrac{1}{2}$ bagian dari total kaveling.",
+      "Kaveling bernomor prima merupakan $\\dfrac{1}{5}$ bagian dari total kaveling.",
+      "Kaveling bernomor lebih dari 12 merupakan $\\dfrac{22}{25}$ bagian dari total kaveling.",
+    ],
+    jawabanBS: ["B", "S", "B"],
+    pembahasan:
+      "Total kaveling: $\\dfrac{80 \\times 40}{8 \\times 4} = \\dfrac{3200}{32} = 100$ kaveling\n\n" +
+      "(1) Ganjil: nomor 1, 3, 5, …, 99 → 50 kaveling = $\\dfrac{50}{100} = \\dfrac{1}{2}$ ✓ BENAR\n\n" +
+      "(2) Bilangan prima ≤ 100: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97 → 25 bilangan prima\n" +
+      "$\\dfrac{25}{100} = \\dfrac{1}{4} \\neq \\dfrac{1}{5}$ ✗ SALAH\n\n" +
+      "(3) Bernomor > 12 → kaveling 13 s.d. 100 = 88 kaveling = $\\dfrac{88}{100} = \\dfrac{22}{25}$ ✓ BENAR",
+  },
+
+  // ─── 26 · PGK ─────────────────────────────────────────────────────────────
+  {
+    no: 26,
+    type: "pgk",
+    soal: "Berdasarkan teks Tanah Kaveling (soal 25), pilihlah semua jawaban yang benar. Jawaban benar lebih dari satu.",
+    pernyataan: [
+      "Luas setiap kaveling adalah $\\dfrac{1}{100}$ dari luas total tanah.",
+      "Luas kaveling bernomor kurang dari 4 (nomor 1, 2, 3) adalah $\\dfrac{3}{100}$ dari luas total tanah.",
+      "Luas 5 kaveling bernomor terakhir adalah $\\dfrac{1}{20}$ dari luas total tanah.",
+      "Luas 4 kaveling bernomor pertama adalah $\\dfrac{1}{20}$ dari luas total tanah.",
+    ],
+    options: [
+      "(1), (2), dan (3)",
+      "(1), (3), dan (4)",
+      "(2) dan (3)",
+      "(1), (2), (3), dan (4)",
+    ],
+    jawaban: "A",
+    pembahasan:
+      "Luas total: $80 \\times 40 = 3200\\text{ m}^2$; luas setiap kaveling: $8 \\times 4 = 32\\text{ m}^2$\n\n" +
+      "(1) $\\dfrac{32}{3200} = \\dfrac{1}{100}$ ✓ BENAR\n\n" +
+      "(2) 3 kaveling (no. 1–3): $3 \\times 32 = 96\\text{ m}^2$; $\\dfrac{96}{3200} = \\dfrac{3}{100}$ ✓ BENAR\n\n" +
+      "(3) 5 kaveling terakhir (no. 96–100): $5 \\times 32 = 160\\text{ m}^2$; $\\dfrac{160}{3200} = \\dfrac{1}{20}$ ✓ BENAR\n\n" +
+      "(4) 4 kaveling pertama (no. 1–4): $4 \\times 32 = 128\\text{ m}^2$; $\\dfrac{128}{3200} = \\dfrac{1}{25} \\neq \\dfrac{1}{20}$ ✗ SALAH\n\n" +
+      "Jawaban: (1), (2), dan (3) → A",
+  },
+
+  // ─── 27 · PGK ─────────────────────────────────────────────────────────────
+  {
+    no: 27,
+    type: "pgk",
+    soal: "Perhatikan perhitungan bilangan pecahan berikut.\n$P = \\dfrac{4}{7} \\div \\dfrac{8}{21}, \\quad Q = \\dfrac{3}{8} \\times \\dfrac{4}{15}, \\quad R = \\dfrac{7}{12} + \\dfrac{5}{6}, \\quad S = \\dfrac{11}{12} - \\dfrac{5}{6}$\nBerdasarkan informasi tersebut, pilihlah semua jawaban yang benar. Jawaban benar lebih dari satu.",
+    pernyataan: [
+      "Nilai $P = \\dfrac{2}{3}$",
+      "Nilai $Q = \\dfrac{1}{10}$",
+      "Nilai $R = \\dfrac{17}{12}$",
+      "Nilai $S = \\dfrac{1}{6}$",
+    ],
+    options: [
+      "(1) dan (2)",
+      "(2) dan (3)",
+      "(3) dan (4)",
+      "(1), (2), dan (3)",
+    ],
+    jawaban: "B",
+    pembahasan:
+      "$P = \\dfrac{4}{7} \\div \\dfrac{8}{21} = \\dfrac{4}{7} \\times \\dfrac{21}{8} = \\dfrac{84}{56} = \\dfrac{3}{2}$; pernyataan $P=\\frac{2}{3}$ ✗ SALAH\n\n" +
+      "$Q = \\dfrac{3}{8} \\times \\dfrac{4}{15} = \\dfrac{12}{120} = \\dfrac{1}{10}$ ✓ BENAR\n\n" +
+      "$R = \\dfrac{7}{12} + \\dfrac{5}{6} = \\dfrac{7}{12} + \\dfrac{10}{12} = \\dfrac{17}{12}$ ✓ BENAR\n\n" +
+      "$S = \\dfrac{11}{12} - \\dfrac{5}{6} = \\dfrac{11}{12} - \\dfrac{10}{12} = \\dfrac{1}{12}$; pernyataan $S=\\frac{1}{6}$ ✗ SALAH\n\n" +
+      "Pernyataan yang benar: (2) dan (3) → B",
+  },
+
+  // ─── 28 & 29 · Konteks Persediaan Beras ────────────────────────────────────
+  // ─── 28 · PGK ─────────────────────────────────────────────────────────────
+  {
+    no: 28,
+    type: "pgk",
+    soal: `Perhatikan teks berikut untuk menjawab soal nomor 28 dan 29.
+
+Persediaan Beras Bu Kartika
+Bu Kartika membeli sekarung beras dengan berat $\\dfrac{1}{4}$ kuintal di Toko Sinar. Toko Sinar menjual beras seharga Rp1.200.000 per kuintal. Beras tersebut merupakan persediaan harian keluarga sebagai bahan makanan pokok.
+
+Suatu hari, Bu Kartika akan mengadakan acara syukuran di rumahnya. Ia memasak nasi sebagai hidangan utama untuk 75 tamu yang diundang, dengan perkiraan setiap tamu membutuhkan $0{,}12\\text{ kg}$ beras. Bu Kartika membeli beras tambahan di Toko Sinar dengan jenis dan harga yang sama.
+
+Berdasarkan teks tersebut, pilihlah semua jawaban yang benar. Jawaban benar lebih dari satu.`,
+    pernyataan: [
+      "Jika Bu Kartika memasak $1\\dfrac{1}{4}\\text{ kg}$ beras setiap hari, persediaan beras akan habis dalam 20 hari.",
+      "Jika Bu Kartika memasak $2\\dfrac{1}{2}\\text{ kg}$ beras setiap hari, persediaan beras akan habis dalam 8 hari.",
+      "Jika Bu Kartika memasak $\\dfrac{5}{3}\\text{ kg}$ beras setiap hari, persediaan beras akan habis dalam 15 hari.",
+      "Jika Bu Kartika memasak $2\\dfrac{3}{4}\\text{ kg}$ beras setiap hari, persediaan beras akan habis dalam 10 hari.",
+    ],
+    options: [
+      "(1) dan (3)",
+      "(2) dan (4)",
+      "(1) dan (4)",
+      "(1), (2), dan (3)",
+    ],
+    jawaban: "A",
+    pembahasan:
+      "Persediaan beras: $\\frac{1}{4}$ kuintal $= \\frac{1}{4} \\times 100 = 25\\text{ kg}$\n\n" +
+      "(1) $1\\frac{1}{4} \\times 20 = \\frac{5}{4} \\times 20 = 25\\text{ kg}$ ✓ BENAR\n\n" +
+      "(2) $2\\frac{1}{2} \\times 8 = \\frac{5}{2} \\times 8 = 20\\text{ kg} \\neq 25\\text{ kg}$ ✗ SALAH\n\n" +
+      "(3) $\\frac{5}{3} \\times 15 = \\frac{75}{3} = 25\\text{ kg}$ ✓ BENAR\n\n" +
+      "(4) $2\\frac{3}{4} \\times 10 = \\frac{11}{4} \\times 10 = 27{,}5\\text{ kg} \\neq 25\\text{ kg}$ ✗ SALAH\n\n" +
+      "Jawaban: (1) dan (3) → A",
+  },
+
+  // ─── 29 · PG ──────────────────────────────────────────────────────────────
+  {
+    no: 29,
+    type: "pg",
+    soal: "Berdasarkan teks Persediaan Beras Bu Kartika (soal 28), biaya pembelian beras tambahan untuk acara syukuran adalah ....",
+    options: [
+      "A. Rp96.000",
+      "B. Rp108.000",
+      "C. Rp120.000",
+      "D. Rp216.000",
+    ],
+    jawaban: "B",
+    pembahasan:
+      "Kebutuhan beras untuk acara:\n" +
+      "$75 \\text{ tamu} \\times 0{,}12\\text{ kg} = 9\\text{ kg}$\n\n" +
+      "Harga beras per kg:\n" +
+      "$\\text{Rp}1.200.000 \\div 100\\text{ kg} = \\text{Rp}12.000\\text{/kg}$\n\n" +
+      "Total biaya:\n" +
+      "$9 \\times \\text{Rp}12.000 = \\text{Rp}108.000$\n\n" +
+      "Jawaban: B",
+  },
 ];
 
 const BilanganRasionalPage = () => (
