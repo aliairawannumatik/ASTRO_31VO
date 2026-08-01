@@ -382,7 +382,7 @@ const BilanganBulatPage = () => {
                   <BookMarked className="w-[18px] h-[18px] text-white" />
                 </div>
                 <span className="font-body text-[10px] font-bold tracking-[0.2em] uppercase"
-                  style={{ color: isDark ? "rgba(167,139,250,0.7)" : "rgba(255,255,255,0.85)" }}>
+                  style={{ color: isDark ? "rgba(167,139,250,0.7)" : "rgba(255,255,255,1)" }}>
                   Modul Pemantapan TKA
                 </span>
               </div>
@@ -391,7 +391,7 @@ const BilanganBulatPage = () => {
                 BILANGAN BULAT
               </h1>
               <p className="font-body text-[11px] mb-4"
-                style={{ color: isDark ? "rgba(167,139,250,0.5)" : "rgba(255,255,255,0.75)" }}>
+                style={{ color: isDark ? "rgba(167,139,250,0.5)" : "rgba(255,255,255,0.95)" }}>
                 Matematika Kelas 7 SMP/MTs · TA 2026–2027
               </p>
 
@@ -421,13 +421,15 @@ const BilanganBulatPage = () => {
                   style={{ background: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.35)", color: "#ffffff" }}>PG Kategori</span>
               </div>
 
-              <p className="font-body text-[15px] font-bold mt-4 tracking-wide"
-                style={{ color: isDark ? "rgba(255,255,255,0.9)" : "#ffffff" }}>
-                Irawan Sutiawan, M.Pd
-              </p>
             </div>
           </div>
         </div>
+
+        {/* ── Author byline ── */}
+        <p className="text-center font-body text-[12px] font-semibold -mt-3 mb-5"
+          style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.45)" }}>
+          Oleh : Irawan Sutiawan, M.Pd
+        </p>
 
         {/* ── Tab Switcher ── */}
         <div className={`flex gap-2 mb-6 p-1 rounded-xl ${isDark ? "bg-white/4 border border-white/8" : "bg-gray-100 border border-gray-200"}`}>
