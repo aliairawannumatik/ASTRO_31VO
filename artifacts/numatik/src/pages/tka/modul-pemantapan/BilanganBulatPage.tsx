@@ -501,6 +501,48 @@ const BilanganBulatPage = () => {
                 ),
               },
               {
+                heading: "Urutan Operasi Hitung Campuran Bilangan Bulat",
+                content: [],
+                jsxContent: (
+                  <div>
+                    <p className="text-center text-xs italic mb-3" style={{ color: isDark ? "rgba(255,255,255,0.45)" : "#6b7280" }}>
+                      Ingat singkatan:{" "}
+                      <span className="font-semibold not-italic" style={{ color: isDark ? "rgba(251,191,36,0.9)" : "#d97706" }}>
+                        Ka – Pa – Ka – Ta
+                      </span>
+                    </p>
+                    <div className="space-y-2">
+                      {[
+                        { num: 1, sym: "( )", title: "Tanda Kurung", desc: "Kerjakan yang di dalam kurung dulu", color: "#fbbf24", numBg: "rgba(251,191,36,0.22)", numBorder: "rgba(251,191,36,0.5)", symBg: "rgba(251,191,36,0.13)", cardBg: "rgba(251,191,36,0.07)", cardBorder: "rgba(251,191,36,0.22)" },
+                        { num: 2, sym: "xⁿ √", title: "Pangkat / Akar", desc: "Operasi pangkat atau akar", color: "#22d3ee", numBg: "rgba(34,211,238,0.22)", numBorder: "rgba(34,211,238,0.5)", symBg: "rgba(34,211,238,0.13)", cardBg: "rgba(34,211,238,0.07)", cardBorder: "rgba(34,211,238,0.22)" },
+                        { num: 3, sym: "× ÷", title: "Kali / Bagi", desc: "Kerjakan dari kiri ke kanan", color: "#4ade80", numBg: "rgba(74,222,128,0.22)", numBorder: "rgba(74,222,128,0.5)", symBg: "rgba(74,222,128,0.13)", cardBg: "rgba(74,222,128,0.07)", cardBorder: "rgba(74,222,128,0.22)" },
+                        { num: 4, sym: "+ −", title: "Tambah / Kurang", desc: "Kerjakan dari kiri ke kanan", color: "#f472b6", numBg: "rgba(244,114,182,0.22)", numBorder: "rgba(244,114,182,0.5)", symBg: "rgba(244,114,182,0.13)", cardBg: "rgba(244,114,182,0.07)", cardBorder: "rgba(244,114,182,0.22)" },
+                      ].map(step => (
+                        <div key={step.num} className="flex items-center gap-3 rounded-xl px-4 py-3 border"
+                          style={{ background: step.cardBg, borderColor: step.cardBorder }}>
+                          <div className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold font-display border"
+                            style={{ background: step.numBg, borderColor: step.numBorder, color: step.color }}>
+                            {step.num}
+                          </div>
+                          <div className="flex-shrink-0 w-14 h-9 rounded-lg flex items-center justify-center text-sm font-bold font-display border"
+                            style={{ background: step.symBg, borderColor: step.numBorder, color: step.color }}>
+                            {step.sym}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="font-display text-sm font-bold leading-tight" style={{ color: step.color }}>
+                              {step.title}
+                            </div>
+                            <div className="font-body text-xs mt-0.5" style={{ color: isDark ? "rgba(255,255,255,0.55)" : "#6b7280" }}>
+                              {step.desc}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ),
+              },
+              {
                 heading: "Sifat-Sifat Operasi Hitung Bilangan Bulat",
                 content: [
                   "Operasi hitung bilangan bulat meliputi penjumlahan, pengurangan, perkalian, dan pembagian.",
@@ -572,59 +614,6 @@ const BilanganBulatPage = () => {
                 ),
               },
               {
-                heading: "Urutan Operasi Hitung Campuran Bilangan Bulat",
-                content: [],
-                jsxContent: (
-                  <div>
-                    <p className="text-center text-xs italic mb-3" style={{ color: isDark ? "rgba(255,255,255,0.45)" : "#6b7280" }}>
-                      Ingat singkatan:{" "}
-                      <span className="font-semibold not-italic" style={{ color: isDark ? "rgba(251,191,36,0.9)" : "#d97706" }}>
-                        Ka – Pa – Ka – Ta
-                      </span>
-                    </p>
-                    <div className="space-y-2">
-                      {[
-                        { num: 1, sym: "( )", title: "Tanda Kurung", desc: "Kerjakan yang di dalam kurung dulu", color: "#fbbf24", numBg: "rgba(251,191,36,0.22)", numBorder: "rgba(251,191,36,0.5)", symBg: "rgba(251,191,36,0.13)", cardBg: "rgba(251,191,36,0.07)", cardBorder: "rgba(251,191,36,0.22)" },
-                        { num: 2, sym: "xⁿ √", title: "Pangkat / Akar", desc: "Operasi pangkat atau akar", color: "#22d3ee", numBg: "rgba(34,211,238,0.22)", numBorder: "rgba(34,211,238,0.5)", symBg: "rgba(34,211,238,0.13)", cardBg: "rgba(34,211,238,0.07)", cardBorder: "rgba(34,211,238,0.22)" },
-                        { num: 3, sym: "× ÷", title: "Kali / Bagi", desc: "Kerjakan dari kiri ke kanan", color: "#4ade80", numBg: "rgba(74,222,128,0.22)", numBorder: "rgba(74,222,128,0.5)", symBg: "rgba(74,222,128,0.13)", cardBg: "rgba(74,222,128,0.07)", cardBorder: "rgba(74,222,128,0.22)" },
-                        { num: 4, sym: "+ −", title: "Tambah / Kurang", desc: "Kerjakan dari kiri ke kanan", color: "#f472b6", numBg: "rgba(244,114,182,0.22)", numBorder: "rgba(244,114,182,0.5)", symBg: "rgba(244,114,182,0.13)", cardBg: "rgba(244,114,182,0.07)", cardBorder: "rgba(244,114,182,0.22)" },
-                      ].map(step => (
-                        <div key={step.num} className="flex items-center gap-3 rounded-xl px-4 py-3 border"
-                          style={{ background: step.cardBg, borderColor: step.cardBorder }}>
-                          <div className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold font-display border"
-                            style={{ background: step.numBg, borderColor: step.numBorder, color: step.color }}>
-                            {step.num}
-                          </div>
-                          <div className="flex-shrink-0 w-14 h-9 rounded-lg flex items-center justify-center text-sm font-bold font-display border"
-                            style={{ background: step.symBg, borderColor: step.numBorder, color: step.color }}>
-                            {step.sym}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="font-display text-sm font-bold leading-tight" style={{ color: step.color }}>
-                              {step.title}
-                            </div>
-                            <div className="font-body text-xs mt-0.5" style={{ color: isDark ? "rgba(255,255,255,0.55)" : "#6b7280" }}>
-                              {step.desc}
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ),
-              },
-              {
-                heading: "Menyelesaikan Masalah Bilangan Bulat",
-                content: [
-                  "Langkah-langkah menyelesaikan permasalahan yang berkaitan dengan bilangan bulat:",
-                  "",
-                  "a. Pahami isi soal dan identifikasi informasi yang diketahui.",
-                  "b. Buatlah kalimat matematika yang sesuai dengan permasalahan.",
-                  "c. Selesaikan kalimat matematika yang diperoleh.",
-                  "d. Jawablah soal sesuai pertanyaan yang diminta.",
-                ],
-              },
-              {
                 heading: "Faktorisasi Prima",
                 content: [
                   "Faktorisasi prima adalah proses memecah sebuah bilangan menjadi perkalian dari faktor-faktor bilangan prima.",
@@ -652,6 +641,48 @@ const BilanganBulatPage = () => {
                   "Contoh:",
                   "Harga sebuah baju Rp83.600. Lebih dekat dibulatkan menjadi Rp84.000 daripada Rp80.000.",
                   "Pembulatan ini dilakukan untuk mempermudah perhitungan.",
+                ],
+                jsxContent: (
+                  <div className="space-y-2 mt-2">
+                    {/* ── Aturan Pembulatan ── */}
+                    <p className={`text-[10px] font-bold uppercase tracking-wider mb-1 ${isDark ? "text-white/35" : "text-gray-400"}`}>Aturan Pembulatan</p>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className={`rounded-xl p-3 border ${isDark ? "bg-emerald-900/20 border-emerald-500/30" : "bg-emerald-50 border-emerald-200"}`}>
+                        <p className={`text-[9px] font-bold uppercase tracking-widest mb-1.5 ${isDark ? "text-emerald-300" : "text-emerald-700"}`}>
+                          Angka ≥ 5 → Bulatkan ke atas
+                        </p>
+                        <div className={`text-xs font-body space-y-0.5 ${isDark ? "text-white/70" : "text-gray-700"}`}>
+                          <div>83.6<span className={`font-bold ${isDark ? "text-emerald-300" : "text-emerald-600"}`}>7</span>00 → 83.700</div>
+                          <div>2.<span className={`font-bold ${isDark ? "text-emerald-300" : "text-emerald-600"}`}>8</span> → 3</div>
+                          <div>4<span className={`font-bold ${isDark ? "text-emerald-300" : "text-emerald-600"}`}>5</span> → 50</div>
+                        </div>
+                      </div>
+                      <div className={`rounded-xl p-3 border ${isDark ? "bg-sky-900/20 border-sky-500/30" : "bg-sky-50 border-sky-200"}`}>
+                        <p className={`text-[9px] font-bold uppercase tracking-widest mb-1.5 ${isDark ? "text-sky-300" : "text-sky-700"}`}>
+                          Angka &lt; 5 → Tetap (bulatkan ke bawah)
+                        </p>
+                        <div className={`text-xs font-body space-y-0.5 ${isDark ? "text-white/70" : "text-gray-700"}`}>
+                          <div>83.6<span className={`font-bold ${isDark ? "text-sky-300" : "text-sky-600"}`}>3</span>00 → 83.600</div>
+                          <div>2.<span className={`font-bold ${isDark ? "text-sky-300" : "text-sky-600"}`}>2</span> → 2</div>
+                          <div>4<span className={`font-bold ${isDark ? "text-sky-300" : "text-sky-600"}`}>1</span> → 40</div>
+                        </div>
+                      </div>
+                    </div>
+                    <p className={`text-[10px] font-body text-center pt-1 ${isDark ? "text-white/35" : "text-gray-400"}`}>
+                      Angka yang diperhatikan = digit <span className="font-semibold">setelah</span> posisi yang dibulatkan
+                    </p>
+                  </div>
+                ),
+              },
+              {
+                heading: "Menyelesaikan Masalah Bilangan Bulat",
+                content: [
+                  "Langkah-langkah menyelesaikan permasalahan yang berkaitan dengan bilangan bulat:",
+                  "",
+                  "a. Pahami isi soal dan identifikasi informasi yang diketahui.",
+                  "b. Buatlah kalimat matematika yang sesuai dengan permasalahan.",
+                  "c. Selesaikan kalimat matematika yang diperoleh.",
+                  "d. Jawablah soal sesuai pertanyaan yang diminta.",
                 ],
               },
             ] as { heading: string; content: string[]; jsxContent?: React.ReactNode }[]).map((sec, idx) => {
