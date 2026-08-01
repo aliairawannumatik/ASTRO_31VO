@@ -369,7 +369,7 @@ const BilanganBulatPage = () => {
                 BILANGAN BULAT
               </h1>
               <p className="font-body text-[11px] text-violet-300/50 mb-4">
-                Irawan Sutiawan, M.Pd · Matematika Kelas 7 SMP/MTs · TA 2026–2027
+                Matematika Kelas 7 SMP/MTs · TA 2026–2027
               </p>
               <div className="flex gap-2 flex-wrap justify-center mb-3">
                 <span className="text-[10px] font-body px-3 py-1 rounded-full border font-semibold"
@@ -380,10 +380,6 @@ const BilanganBulatPage = () => {
                   style={{ background: "rgba(139,92,246,0.15)", borderColor: "rgba(139,92,246,0.35)", color: "#c4b5fd" }}>
                   ✏️ 30 Soal Latihan
                 </span>
-                <span className="text-[10px] font-body px-3 py-1 rounded-full border font-semibold"
-                  style={{ background: "rgba(245,158,11,0.15)", borderColor: "rgba(245,158,11,0.35)", color: "#fcd34d" }}>
-                  ⏱️ 45 Menit
-                </span>
               </div>
               <div className="flex gap-2 flex-wrap justify-center">
                 <span className="text-[9px] font-body px-2.5 py-0.5 rounded-full border font-semibold text-sky-300"
@@ -393,19 +389,11 @@ const BilanganBulatPage = () => {
                 <span className="text-[9px] font-body px-2.5 py-0.5 rounded-full border font-semibold text-rose-300"
                   style={{ background: "rgba(244,63,94,0.15)", borderColor: "rgba(244,63,94,0.35)" }}>Benar/Salah</span>
               </div>
+              <p className="font-body text-[15px] font-bold text-white/90 mt-4 tracking-wide">
+                Irawan Sutiawan, M.Pd
+              </p>
             </div>
           </div>
-        </div>
-
-        {/* ── Petunjuk ── */}
-        <div className={`border rounded-xl p-4 mb-6 ${isDark ? "bg-blue-900/15 border-blue-500/25" : "bg-blue-50 border-blue-300"}`}>
-          <p className={`font-body text-xs font-bold mb-2 ${isDark ? "text-blue-300" : "text-blue-700"}`}>PETUNJUK PENGERJAAN</p>
-          <ul className={`space-y-1 text-xs font-body list-disc list-inside ${isDark ? "text-white/65" : "text-gray-600"}`}>
-            <li>Klik pilihan jawaban untuk menjawab. Jawaban <span className="font-semibold">tidak dapat diubah</span> setelah diklik.</li>
-            <li>Soal <span className={`font-bold ${isDark ? "text-sky-300" : "text-sky-600"}`}>Pilihan Ganda (PGS)</span>: pilih <em>satu</em> jawaban yang paling tepat.</li>
-            <li>Soal <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>PG Kompleks MCMA</span>: klik semua pernyataan yang benar — jawaban <em>lebih dari satu</em>.</li>
-            <li>Soal <span className={`font-bold ${isDark ? "text-rose-300" : "text-rose-600"}`}>PG Kompleks Benar/Salah</span>: klik kolom <em>Benar</em> atau <em>Salah</em> untuk setiap pernyataan.</li>
-          </ul>
         </div>
 
         {/* ── Tab Switcher ── */}
@@ -593,17 +581,45 @@ const BilanganBulatPage = () => {
               },
               {
                 heading: "E. Operasi Hitung Campuran Bilangan Bulat",
-                content: [
-                  "Aturan urutan pengerjaan operasi hitung campuran bilangan bulat:",
-                  "",
-                  "a. Dahulukan operasi hitung yang terdapat di dalam tanda kurung.",
-                  "b. Jika terdapat perkalian/pembagian dan penjumlahan/pengurangan, kerjakan perkalian atau pembagian terlebih dahulu.",
-                  "c. Jika hanya terdapat penjumlahan dan pengurangan, kerjakan berurutan dari kiri ke kanan.",
-                  "d. Jika hanya terdapat perkalian dan pembagian, kerjakan berurutan dari kiri ke kanan.",
-                  "",
-                  "💡 Ingat urutan Ka–Pa–Ka–Ta:",
-                  "   Kurung → Pangkat/Akar → Kali/Bagi (kiri ke kanan) → Tambah/Kurang (kiri ke kanan)",
-                ],
+                content: [],
+                jsxContent: (
+                  <div>
+                    <p className="text-center text-xs italic mb-3" style={{ color: isDark ? "rgba(255,255,255,0.45)" : "#6b7280" }}>
+                      Ingat singkatan:{" "}
+                      <span className="font-semibold not-italic" style={{ color: isDark ? "rgba(251,191,36,0.9)" : "#d97706" }}>
+                        Ka – Pa – Ka – Ta
+                      </span>
+                    </p>
+                    <div className="space-y-2">
+                      {[
+                        { num: 1, sym: "( )", title: "Tanda Kurung", desc: "Kerjakan yang di dalam kurung dulu", color: "#fbbf24", numBg: "rgba(251,191,36,0.22)", numBorder: "rgba(251,191,36,0.5)", symBg: "rgba(251,191,36,0.13)", cardBg: "rgba(251,191,36,0.07)", cardBorder: "rgba(251,191,36,0.22)" },
+                        { num: 2, sym: "xⁿ √", title: "Pangkat / Akar", desc: "Operasi pangkat atau akar", color: "#22d3ee", numBg: "rgba(34,211,238,0.22)", numBorder: "rgba(34,211,238,0.5)", symBg: "rgba(34,211,238,0.13)", cardBg: "rgba(34,211,238,0.07)", cardBorder: "rgba(34,211,238,0.22)" },
+                        { num: 3, sym: "× ÷", title: "Kali / Bagi", desc: "Kerjakan dari kiri ke kanan", color: "#4ade80", numBg: "rgba(74,222,128,0.22)", numBorder: "rgba(74,222,128,0.5)", symBg: "rgba(74,222,128,0.13)", cardBg: "rgba(74,222,128,0.07)", cardBorder: "rgba(74,222,128,0.22)" },
+                        { num: 4, sym: "+ −", title: "Tambah / Kurang", desc: "Kerjakan dari kiri ke kanan", color: "#f472b6", numBg: "rgba(244,114,182,0.22)", numBorder: "rgba(244,114,182,0.5)", symBg: "rgba(244,114,182,0.13)", cardBg: "rgba(244,114,182,0.07)", cardBorder: "rgba(244,114,182,0.22)" },
+                      ].map(step => (
+                        <div key={step.num} className="flex items-center gap-3 rounded-xl px-4 py-3 border"
+                          style={{ background: step.cardBg, borderColor: step.cardBorder }}>
+                          <div className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold font-display border"
+                            style={{ background: step.numBg, borderColor: step.numBorder, color: step.color }}>
+                            {step.num}
+                          </div>
+                          <div className="flex-shrink-0 w-14 h-9 rounded-lg flex items-center justify-center text-sm font-bold font-display border"
+                            style={{ background: step.symBg, borderColor: step.numBorder, color: step.color }}>
+                            {step.sym}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="font-display text-sm font-bold leading-tight" style={{ color: step.color }}>
+                              {step.title}
+                            </div>
+                            <div className="font-body text-xs mt-0.5" style={{ color: isDark ? "rgba(255,255,255,0.55)" : "#6b7280" }}>
+                              {step.desc}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ),
               },
               {
                 heading: "F. Menyelesaikan Masalah Bilangan Bulat",
