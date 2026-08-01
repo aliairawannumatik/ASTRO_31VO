@@ -2,11 +2,171 @@ import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
 
 const materiSections: MateriSection[] = [
-  { heading: "A. Pengertian Bilangan Rasional", content: `Bilangan rasional adalah bilangan yang dapat dinyatakan dalam bentuk $\\dfrac{p}{q}$ di mana $p$ dan $q$ bilangan bulat dan $q \\neq 0$.\n\nContoh: $\\frac{1}{2}$, $\\frac{-3}{4}$, $\\frac{5}{1} = 5$, $0,75 = \\frac{3}{4}$, $1,\\overline{3} = \\frac{4}{3}$` },
-  { heading: "B. Operasi Pecahan", content: `1. Penjumlahan/Pengurangan:\n$\\frac{a}{b} \\pm \\frac{c}{d} = \\frac{ad \\pm bc}{bd}$ (samakan penyebut terlebih dahulu)\n\n2. Perkalian:\n$\\frac{a}{b} \\times \\frac{c}{d} = \\frac{ac}{bd}$\n\n3. Pembagian:\n$\\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c} = \\frac{ad}{bc}$` },
-  { heading: "C. Bentuk Pecahan", content: `1. Pecahan biasa: $\\frac{p}{q}$\n\n2. Pecahan campuran: $a\\frac{p}{q} = a + \\frac{p}{q}$\n\n3. Desimal:\n   - Desimal berhingga: $\\frac{3}{4} = 0,75$\n   - Desimal tak berhingga berulang: $\\frac{1}{3} = 0,333...$\n\n4. Persen: $p\\% = \\frac{p}{100}$` },
-  { heading: "D. Membandingkan Bilangan Rasional", content: `Untuk membandingkan $\\frac{a}{b}$ dan $\\frac{c}{d}$, samakan penyebutnya terlebih dahulu.\n\nAlternatif: kalikan silang:\n$\\frac{a}{b} < \\frac{c}{d}$ jika $ad < bc$ (untuk $b, d > 0$)` },
-  { heading: "E. Bilangan Rasional pada Garis Bilangan", content: `Setiap bilangan rasional dapat diletakkan pada garis bilangan. Semakin ke kanan, semakin besar nilainya.\n\nUrutan bilangan rasional:\n$... < -1 < -\\frac{1}{2} < 0 < \\frac{1}{3} < \\frac{1}{2} < 1 < ...$` },
+  {
+    heading: "A. Pengertian Bilangan Rasional",
+    content: `Bilangan rasional adalah bilangan yang dapat dinyatakan dalam bentuk $\\dfrac{p}{q}$ di mana $p$ dan $q$ bilangan bulat dan $q \\neq 0$.\n\nContoh: $\\frac{1}{2}$, $\\frac{-3}{4}$, $\\frac{5}{1} = 5$, $0{,}75 = \\frac{3}{4}$, $1{,}\\overline{3} = \\frac{4}{3}$`,
+  },
+  {
+    heading: "B. Operasi Pecahan",
+    content: `1. Penjumlahan/Pengurangan:\n$\\dfrac{a}{b} \\pm \\dfrac{c}{d} = \\dfrac{ad \\pm bc}{bd}$\n(samakan penyebut terlebih dahulu)\n\n2. Perkalian:\n$\\dfrac{a}{b} \\times \\dfrac{c}{d} = \\dfrac{ac}{bd}$\n\n3. Pembagian:\n$\\dfrac{a}{b} \\div \\dfrac{c}{d} = \\dfrac{a}{b} \\times \\dfrac{d}{c} = \\dfrac{ad}{bc}$`,
+  },
+  {
+    heading: "C. Bentuk Pecahan",
+    content: `1. Pecahan biasa: $\\dfrac{p}{q}$\n\n2. Pecahan campuran: $a\\dfrac{p}{q} = a + \\dfrac{p}{q}$\n\n3. Desimal:\n   - Desimal berhingga: $\\dfrac{3}{4} = 0{,}75$\n   - Desimal tak berhingga berulang: $\\dfrac{1}{3} = 0{,}333...$\n\n4. Persen: $p\\% = \\dfrac{p}{100}$`,
+  },
+  {
+    heading: "D. Membandingkan Bilangan Rasional",
+    content: `Untuk membandingkan $\\dfrac{a}{b}$ dan $\\dfrac{c}{d}$, samakan penyebutnya terlebih dahulu.\n\nAlternatif: kalikan silang:\n$\\dfrac{a}{b} < \\dfrac{c}{d}$ jika $ad < bc$ (untuk $b, d > 0$)\n\nContoh: Urutkan $0{,}6;\\; 55\\%;\\; \\frac{2}{3}$ dari terkecil ke terbesar.\nUbah ke desimal: $0{,}600 > 0{,}550$ dan $\\frac{2}{3} \\approx 0{,}667$\nUrutan: $55\\% < 0{,}6 < \\frac{2}{3}$`,
+  },
+  {
+    heading: "E. Bilangan Rasional pada Garis Bilangan",
+    content: `Setiap bilangan rasional dapat diletakkan pada garis bilangan. Semakin ke kanan, semakin besar nilainya.\n\nUrutan bilangan rasional:\n$... < -1 < -\\dfrac{1}{2} < 0 < \\dfrac{1}{3} < \\dfrac{1}{2} < 1 < ...$`,
+  },
+  {
+    heading: "F. Menentukan Penyelesaian yang Berkaitan dengan Bilangan Rasional",
+    content: `Langkah-langkah menyelesaikan soal yang berkaitan dengan bilangan rasional:\n\n1. Baca soal dengan cermat dan identifikasi semua data bilangan rasional yang diketahui.\n2. Ubah semua bilangan ke bentuk yang seragam (pecahan biasa, desimal, atau persen) agar mudah dioprasikan.\n3. Tentukan operasi yang diperlukan (penjumlahan, pengurangan, perkalian, atau pembagian).\n4. Lakukan operasi sesuai aturan, kemudian sederhanakan hasilnya.\n5. Nyatakan jawaban dalam satuan atau bentuk yang diminta soal.\n\nContoh:\nSebuah tali panjang $3\\frac{1}{4}$ m. Dipotong $\\frac{2}{5}$ bagiannya. Sisa tali = ?\n$3\\frac{1}{4} \\times \\left(1 - \\frac{2}{5}\\right) = \\frac{13}{4} \\times \\frac{3}{5} = \\frac{39}{20} = 1\\frac{19}{20}$ m`,
+  },
+  {
+    heading: "G. Estimasi/Pembulatan Bilangan Rasional",
+    content: `Estimasi adalah menaksir nilai suatu bilangan rasional ke nilai terdekat tertentu, untuk mempermudah perhitungan.\n\nCara membulatkan:\n1. Bulatkan ke satuan terdekat: perhatikan angka persepuluhan.\n   - Jika angka persepuluhan $\\geq 5$, bulatkan ke atas.\n   - Jika angka persepuluhan $< 5$, bulatkan ke bawah.\n2. Estimasi persen: misalnya $\\frac{1}{3} \\approx 33\\%$ (bukan 33,3% — sudah cukup dekat).\n3. Estimasi pecahan: $\\frac{7}{8} \\approx 1$, $\\frac{1}{9} \\approx 0$.\n\nContoh:\n$38\\% \\times 520 \\approx 40\\% \\times 500 = \\frac{40}{100} \\times 500 = 200$\nHarga Rp29.750 → dibulatkan menjadi Rp30.000 untuk kemudahan estimasi belanja.`,
+  },
+];
+
+const contohSoal: LatihanSoal[] = [
+  // ─── CONTOH 1 · PG ─────────────────────────────────────────────────────────
+  {
+    no: 101,
+    type: "pg",
+    soal: "Diketahui empat bilangan $\\dfrac{3}{4};\\; 0{,}6;\\; 45\\%;\\; \\dfrac{4}{5}$. Urutan bilangan tersebut dari yang terkecil ke terbesar adalah ....",
+    options: [
+      "A. $\\dfrac{3}{4};\\; 0{,}6;\\; 45\\%;\\; \\dfrac{4}{5}$",
+      "B. $45\\%;\\; \\dfrac{3}{4};\\; 0{,}6;\\; \\dfrac{4}{5}$",
+      "C. $45\\%;\\; 0{,}6;\\; \\dfrac{4}{5};\\; \\dfrac{3}{4}$",
+      "D. $45\\%;\\; 0{,}6;\\; \\dfrac{3}{4};\\; \\dfrac{4}{5}$",
+    ],
+    jawaban: "D",
+    pembahasan: `Ubah semua bilangan ke pecahan dengan penyebut yang sama (penyebut 20):
+$0{,}6 = \\dfrac{6}{10} = \\dfrac{12}{20}$
+$45\\% = \\dfrac{45}{100} = \\dfrac{9}{20}$
+$\\dfrac{3}{4} = \\dfrac{15}{20}$
+$\\dfrac{4}{5} = \\dfrac{16}{20}$
+
+Urutan dari terkecil: $\\dfrac{9}{20} < \\dfrac{12}{20} < \\dfrac{15}{20} < \\dfrac{16}{20}$
+
+Jadi, urutan dari terkecil ke terbesar: $45\\% < 0{,}6 < \\dfrac{3}{4} < \\dfrac{4}{5}$.
+Jawaban: D`,
+  },
+
+  // ─── CONTOH 2 · PG (estimasi/konteks belanja) ──────────────────────────────
+  {
+    no: 102,
+    type: "pg",
+    soal: "Dodi akan membeli susu dan biskuit di minimarket. Kebetulan sedang ada promo akhir bulan dengan diskon 15% untuk semua produk. Harga sebelum diskon: 1 liter susu Rp35.000 dan 1 kotak biskuit Rp28.000. Jika Dodi membeli 2 liter susu dan 3 kotak biskuit, estimasi harga yang harus dibayar adalah ....",
+    options: [
+      "A. Rp98.000",
+      "B. Rp114.000",
+      "C. Rp132.000",
+      "D. Rp148.000",
+    ],
+    jawaban: "C",
+    pembahasan: `Harga 1 liter susu setelah diskon 15%:
+$= \\text{Rp}35.000 - (15\\% \\times \\text{Rp}35.000)$
+$= \\text{Rp}35.000 - \\text{Rp}5.250 = \\text{Rp}29.750$
+Dibulatkan → estimasi $\\text{Rp}30.000$.
+
+Harga 1 kotak biskuit setelah diskon 15%:
+$= \\text{Rp}28.000 - (15\\% \\times \\text{Rp}28.000)$
+$= \\text{Rp}28.000 - \\text{Rp}4.200 = \\text{Rp}23.800$
+Dibulatkan → estimasi $\\text{Rp}24.000$.
+
+Total 2 liter susu + 3 kotak biskuit:
+$= 2(\\text{Rp}30.000) + 3(\\text{Rp}24.000)$
+$= \\text{Rp}60.000 + \\text{Rp}72.000 = \\text{Rp}132.000$
+Jawaban: C`,
+  },
+
+  // ─── CONTOH 3 · PGK (konteks lahan kebun buah) ─────────────────────────────
+  {
+    no: 103,
+    type: "pgk",
+    soal: `Perhatikan bacaan berikut untuk menjawab soal nomor 3 dan 4.
+
+Kebun Buah Pak Eko
+Pak Eko memiliki sebidang lahan untuk berkebun. Diketahui $\\dfrac{3}{8}$ bagian lahan ditanami mangga, $\\dfrac{1}{4}$ bagian ditanami rambutan, $\\dfrac{1}{5}$ bagian ditanami durian, dan sisanya ditanami pepaya. Luas lahan yang ditanami pepaya adalah $42\\text{ m}^2$. Pak Eko menjual hasil panen berdasarkan luas lahan. Harga jual per meter persegi: mangga Rp8.000, rambutan Rp15.000, durian Rp20.000, dan pepaya Rp5.000.
+
+Berdasarkan bacaan tersebut, pilihlah semua jawaban yang benar. Jawaban benar lebih dari satu.`,
+    pernyataan: [
+      "Luas lahan yang ditanami mangga adalah $90\\text{ m}^2$.",
+      "Luas seluruh lahan Pak Eko adalah $300\\text{ m}^2$.",
+      "Luas lahan yang ditanami rambutan adalah $60\\text{ m}^2$.",
+      "Luas lahan yang ditanami durian adalah $48\\text{ m}^2$.",
+    ],
+    options: [
+      "(1) dan (2)",
+      "(1) dan (3)",
+      "(2) dan (4)",
+      "(1), (3), dan (4)",
+    ],
+    jawaban: "D",
+    pembahasan: `Tentukan bagian lahan pepaya terlebih dahulu:
+$= 1 - \\dfrac{3}{8} - \\dfrac{1}{4} - \\dfrac{1}{5}$
+$= \\dfrac{40}{40} - \\dfrac{15}{40} - \\dfrac{10}{40} - \\dfrac{8}{40} = \\dfrac{7}{40}$ bagian
+
+$\\dfrac{7}{40}$ bagian $= 42\\text{ m}^2$, sehingga luas seluruh lahan $= 42 \\times \\dfrac{40}{7} = 240\\text{ m}^2$.
+
+Pernyataan (1): Mangga $= \\dfrac{3}{8} \\times 240 = 90\\text{ m}^2$ ✓ BENAR
+Pernyataan (2): Luas seluruh lahan $240\\text{ m}^2 \\neq 300\\text{ m}^2$ ✗ SALAH
+Pernyataan (3): Rambutan $= \\dfrac{1}{4} \\times 240 = 60\\text{ m}^2$ ✓ BENAR
+Pernyataan (4): Durian $= \\dfrac{1}{5} \\times 240 = 48\\text{ m}^2$ ✓ BENAR
+
+Jawaban: D — Pernyataan (1), (3), dan (4) benar.`,
+  },
+
+  // ─── CONTOH 4 · PGKBS (masih konteks kebun Pak Eko) ───────────────────────
+  {
+    no: 104,
+    type: "pgkbs",
+    soal: `Berdasarkan bacaan Kebun Buah Pak Eko (soal nomor 3), tentukan Benar atau Salah untuk setiap pernyataan berikut.`,
+    pernyataan: [
+      "Hasil penjualan durian merupakan yang terbesar di antara keempat komoditas.",
+      "Hasil penjualan mangga lebih besar daripada hasil penjualan rambutan.",
+      "Hasil penjualan pepaya lebih kecil daripada hasil penjualan mangga.",
+    ],
+    jawabanBS: ["B", "S", "B"],
+    pembahasan: `Hitung hasil penjualan masing-masing komoditas:
+Mangga: $90 \\times \\text{Rp}8.000 = \\text{Rp}720.000$
+Rambutan: $60 \\times \\text{Rp}15.000 = \\text{Rp}900.000$
+Durian: $48 \\times \\text{Rp}20.000 = \\text{Rp}960.000$
+Pepaya: $42 \\times \\text{Rp}5.000 = \\text{Rp}210.000$
+
+Pernyataan (1): Durian = Rp960.000 (tertinggi) ✓ BENAR
+Pernyataan (2): Mangga (Rp720.000) < Rambutan (Rp900.000), jadi mangga TIDAK lebih besar ✗ SALAH
+Pernyataan (3): Pepaya (Rp210.000) < Mangga (Rp720.000) ✓ BENAR`,
+  },
+
+  // ─── CONTOH 5 · PG (operasi campuran pecahan) ──────────────────────────────
+  {
+    no: 105,
+    type: "pg",
+    soal: "Hasil dari $\\dfrac{3}{5} \\times \\dfrac{10}{9} - \\left(\\dfrac{5}{6} - \\dfrac{1}{4}\\right)$ adalah ....",
+    options: [
+      "A. $-\\dfrac{5}{12}$",
+      "B. $-\\dfrac{1}{12}$",
+      "C. $\\dfrac{1}{12}$",
+      "D. $\\dfrac{2}{3}$",
+    ],
+    jawaban: "C",
+    pembahasan: `Ikuti aturan urutan operasi: kerjakan perkalian dan operasi dalam kurung terlebih dahulu.
+
+$\\dfrac{3}{5} \\times \\dfrac{10}{9} - \\left(\\dfrac{5}{6} - \\dfrac{1}{4}\\right)$
+$= \\dfrac{3 \\times 10}{5 \\times 9} - \\left(\\dfrac{10}{12} - \\dfrac{3}{12}\\right)$
+$= \\dfrac{30}{45} - \\dfrac{7}{12}$
+$= \\dfrac{2}{3} - \\dfrac{7}{12}$
+$= \\dfrac{8}{12} - \\dfrac{7}{12}$
+$= \\dfrac{1}{12}$
+
+Jawaban: C`,
+  },
 ];
 
 const latihanDasar: LatihanSoal[] = [
@@ -403,6 +563,7 @@ const BilanganRasionalPage = () => (
   <TKAPemantapanLayout
     title="BILANGAN RASIONAL"
     materiSections={materiSections}
+    contohSoal={contohSoal}
     latihanDasar={latihanDasar}
   />
 );

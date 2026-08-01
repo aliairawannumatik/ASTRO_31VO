@@ -36,6 +36,7 @@ interface Props {
   backPath?: string;
   materiSections: MateriSection[];
   latihanDasar: LatihanSoal[];
+  contohSoal?: LatihanSoal[];
 }
 
 const renderWithLatex = (text: string) => {
@@ -82,11 +83,11 @@ const TYPE_BADGE: Record<string, { label: string; color: string; bg: string; bor
   },
 };
 
-const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materiSections, latihanDasar }: Props) => {
+const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materiSections, latihanDasar, contohSoal }: Props) => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const isWhite = theme === "white";
-  const [activeTab, setActiveTab] = useState<"materi" | "dasar">("materi");
+  const [activeTab, setActiveTab] = useState<"materi" | "contoh" | "dasar">("materi");
   const [expandedSections, setExpandedSections] = useState<number[]>(() =>
     Array.from({ length: materiSections.length }, (_, i) => i)
   );
@@ -95,6 +96,9 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
   /* PGKBS: stores ["B"|"S"|null, ...] per soal.no */
   const [pgkbsAnswers, setPgkbsAnswers] = useState<Record<number, ("B" | "S" | null)[]>>({});
   const [revealedAnswers, setRevealedAnswers] = useState<Set<number>>(new Set());
+  /* Contoh soal interactive state (separate from latihan) */
+  const [selectedContohAnswers, setSelectedContohAnswers] = useState<Record<number, string>>({});
+  const [pgkbsContohAnswers, setPgkbsContohAnswers] = useState<Record<number, ("B" | "S" | null)[]>>({});
 
   const toggleSection = (idx: number) => {
     playPopSound();
@@ -200,6 +204,12 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                   style={{ background: "rgba(99,102,241,0.15)", borderColor: "rgba(99,102,241,0.35)", color: "#a5b4fc" }}>
                   📖 {materiSections.length} Materi
                 </span>
+                {contohSoal && contohSoal.length > 0 && (
+                  <span className="text-[10px] font-body px-3 py-1 rounded-full border font-semibold"
+                    style={{ background: "rgba(16,185,129,0.15)", borderColor: "rgba(16,185,129,0.35)", color: "#6ee7b7" }}>
+                    📚 {contohSoal.length} Contoh Soal
+                  </span>
+                )}
                 <span className="text-[10px] font-body px-3 py-1 rounded-full border font-semibold"
                   style={{ background: "rgba(139,92,246,0.15)", borderColor: "rgba(139,92,246,0.35)", color: "#c4b5fd" }}>
                   ✏️ {latihanDasar.length} Soal Latihan
@@ -222,10 +232,11 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
         {/* ── Tab Switcher ── */}
         <div className="flex gap-2 mb-6 p-1 rounded-xl"
           style={isWhite ? { background: "var(--bg-secondary)", border: "1px solid var(--border)" } : { background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-          {[
-            { key: "materi" as const, label: "📘 Ringkasan Materi", icon: BookOpen },
-            { key: "dasar" as const, label: "✏️ Latihan Soal", icon: PenLine },
-          ].map(tab => (
+          {([
+            { key: "materi" as const, label: "📘 Ringkasan Materi" },
+            ...(contohSoal && contohSoal.length > 0 ? [{ key: "contoh" as const, label: "📚 Contoh Soal" }] : []),
+            { key: "dasar" as const, label: "✏️ Latihan Soal" },
+          ] as { key: "materi" | "contoh" | "dasar"; label: string }[]).map(tab => (
             <button
               key={tab.key}
               onClick={() => { playPopSound(); setActiveTab(tab.key); }}
@@ -345,6 +356,264 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
               <p className="font-body text-xs text-white/50 leading-relaxed">
                 Pelajari semua materi di atas, lalu uji pemahamanmu di tab <span className="text-violet-300 font-semibold">Latihan Soal</span>.
               </p>
+            </div>
+          </div>
+        )}
+
+        {/* ── CONTOH SOAL TAB ── */}
+        {activeTab === "contoh" && contohSoal && (
+          <div className="animate-slide-up">
+            {/* Info banner */}
+            <div className="mb-4 px-4 py-3 rounded-xl flex items-center gap-2.5"
+              style={isWhite
+                ? { background: "rgba(16,185,129,0.06)", border: "1px solid rgba(16,185,129,0.25)" }
+                : { background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.22)" }}>
+              <Lightbulb className="w-4 h-4 shrink-0 text-emerald-400" />
+              <p className="font-body text-xs leading-relaxed" style={{ color: isWhite ? "#065f46" : "rgba(255,255,255,0.6)" }}>
+                Soal-soal berikut disertai <span className="font-semibold" style={{ color: isWhite ? "#059669" : "#6ee7b7" }}>pembahasan lengkap</span>. Coba kerjakan terlebih dahulu sebelum melihat solusinya.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              {contohSoal.map((soal, qi) => {
+                const type = soal.type ?? "pg";
+                const selected = selectedContohAnswers[soal.no];
+                const bsArr = pgkbsContohAnswers[soal.no] ?? Array(soal.pernyataan?.length ?? 3).fill(null);
+                const typeBadge = TYPE_BADGE[type];
+
+                return (
+                  <div key={soal.no} className="relative rounded-2xl overflow-hidden"
+                    style={isWhite ? {
+                      background: "var(--bg-card)",
+                      border: "1px solid rgba(0,0,0,0.08)",
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                    } : {
+                      background: "linear-gradient(135deg, rgba(20,20,40,0.95) 0%, rgba(15,10,30,0.98) 100%)",
+                      border: "1px solid rgba(255,255,255,0.08)",
+                      boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+                    }}>
+
+                    {/* ── Question header: number + type badge + soal text ── */}
+                    <div className="flex items-start gap-3 px-5 pt-4 pb-2">
+                      <span className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold font-display mt-0.5"
+                        style={{
+                          background: "linear-gradient(135deg, rgba(16,185,129,0.4), rgba(5,150,105,0.2))",
+                          border: "1px solid rgba(52,211,153,0.3)",
+                          color: "#6ee7b7",
+                        }}>
+                        {qi + 1}
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <span className={`inline-block text-[9px] font-bold font-display px-2 py-0.5 rounded-full mb-1.5 ${typeBadge.color}`}
+                          style={{ background: typeBadge.bg, border: `1px solid ${typeBadge.border}` }}>
+                          {typeBadge.label}
+                        </span>
+                        <div className="font-body text-sm leading-relaxed" style={{ color: isWhite ? "var(--text-primary)" : "rgba(255,255,255,0.9)" }}>
+                          {soal.soal.split('\n').map((line, lineIdx) => (
+                            <span key={lineIdx}>
+                              {lineIdx > 0 && <br />}
+                              {renderWithLatex(line)}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* ── PGK: numbered pernyataan list ── */}
+                    {type === "pgk" && soal.pernyataan && (
+                      <div className="px-5 pb-2 space-y-1.5 ml-11">
+                        {soal.pernyataan.map((p, pi) => (
+                          <div key={pi} className="flex items-start gap-2 text-xs font-body leading-relaxed"
+                            style={{ color: isWhite ? "var(--text-secondary)" : "rgba(255,255,255,0.8)" }}>
+                            <span className="flex-shrink-0 w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-bold font-display mt-0.5"
+                              style={{ background: "rgba(245,158,11,0.15)", border: "1px solid rgba(245,158,11,0.3)", color: "#fcd34d" }}>
+                              {pi + 1}
+                            </span>
+                            <span>{renderWithLatex(p)}</span>
+                          </div>
+                        ))}
+                        <p className="text-[11px] font-body text-amber-300/60 mt-2 italic">
+                          Pernyataan yang <span className="font-bold not-italic text-amber-300/80">BENAR</span> adalah ...
+                        </p>
+                      </div>
+                    )}
+
+                    {/* ── PG & PGK: options (correct always highlighted green) ── */}
+                    {(type === "pg" || type === "pgk") && soal.options && soal.options.length > 0 && (
+                      <div className="px-5 pb-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {soal.options.map((opt, j) => {
+                          const letter = optionLetters[j];
+                          const isSelected = selected === letter;
+                          const isThisCorrect = letter === soal.jawaban;
+
+                          let optStyle: React.CSSProperties;
+                          if (isThisCorrect) {
+                            optStyle = isWhite
+                              ? { background: "#dcfce7", border: "1px solid rgba(34,197,94,0.5)", color: "#15803d" }
+                              : { background: "rgba(34,197,94,0.15)", border: "1px solid rgba(34,197,94,0.5)", color: "#86efac" };
+                          } else if (isSelected && !isThisCorrect) {
+                            optStyle = isWhite
+                              ? { background: "#fef2f2", border: "1px solid rgba(239,68,68,0.4)", color: "#dc2626" }
+                              : { background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.4)", color: "#fca5a5" };
+                          } else {
+                            optStyle = isWhite
+                              ? { background: "var(--bg-secondary)", border: "1px solid var(--border)", color: "var(--text-secondary)" }
+                              : { background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.55)" };
+                          }
+
+                          return (
+                            <button
+                              key={j}
+                              onClick={() => {
+                                if (!selected) {
+                                  playPopSound();
+                                  setSelectedContohAnswers(prev => ({ ...prev, [soal.no]: letter }));
+                                }
+                              }}
+                              className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-left transition-all duration-200 text-xs font-body"
+                              style={{ ...optStyle, cursor: selected ? "default" : "pointer" }}
+                            >
+                              <span className="flex-shrink-0 w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-bold font-display"
+                                style={{
+                                  background: isThisCorrect ? "rgba(34,197,94,0.3)" : isSelected && !isThisCorrect ? "rgba(239,68,68,0.3)" : "rgba(255,255,255,0.08)",
+                                  color: "inherit",
+                                }}>
+                                {letter}
+                              </span>
+                              <span className="leading-snug">{renderWithLatex(opt.replace(/^[A-E]\.\s*/, ''))}</span>
+                              {isThisCorrect && <CheckCircle2 className="w-3.5 h-3.5 shrink-0 ml-auto text-green-400" />}
+                              {isSelected && !isThisCorrect && <XCircle className="w-3.5 h-3.5 shrink-0 ml-auto text-red-400" />}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    {/* ── PGKBS: pernyataan B/S table (always shows key) ── */}
+                    {type === "pgkbs" && soal.pernyataan && (
+                      <div className="px-5 pb-3 ml-11">
+                        <div className="rounded-xl overflow-hidden border"
+                          style={{ borderColor: "rgba(6,182,212,0.2)", background: "rgba(6,182,212,0.04)" }}>
+                          <div className="grid grid-cols-[1fr_auto_auto] gap-0 border-b"
+                            style={{ borderColor: "rgba(6,182,212,0.15)" }}>
+                            <div className="px-3 py-1.5 text-[9px] font-bold font-display tracking-widest uppercase text-cyan-400/60">Pernyataan</div>
+                            <div className="w-14 text-center py-1.5 text-[9px] font-bold font-display tracking-widest uppercase text-emerald-400/60">Benar</div>
+                            <div className="w-14 text-center py-1.5 text-[9px] font-bold font-display tracking-widest uppercase text-rose-400/60">Salah</div>
+                          </div>
+                          {soal.pernyataan.map((p, pi) => {
+                            const correctAns = soal.jawabanBS?.[pi];
+                            const userAns = bsArr[pi];
+                            return (
+                              <div key={pi}
+                                className={`grid grid-cols-[1fr_auto_auto] gap-0 ${pi < soal.pernyataan!.length - 1 ? "border-b" : ""}`}
+                                style={{ borderColor: "rgba(6,182,212,0.1)" }}>
+                                <div className="px-3 py-2.5 flex items-center gap-2 min-w-0">
+                                  <span className="flex-shrink-0 w-4 h-4 rounded flex items-center justify-center text-[9px] font-bold font-display"
+                                    style={{ background: "rgba(6,182,212,0.15)", color: "#67e8f9" }}>
+                                    {pi + 1}
+                                  </span>
+                                  <span className="font-body text-xs leading-snug flex-1 min-w-0"
+                                    style={{ color: isWhite ? "var(--text-secondary)" : "rgba(255,255,255,0.8)" }}>
+                                    {renderWithLatex(p)}
+                                  </span>
+                                </div>
+                                {(["B", "S"] as const).map(choice => {
+                                  const isCorrectChoice = correctAns === choice;
+                                  const isUserChoice = userAns === choice;
+                                  return (
+                                    <div key={choice} className="w-14 flex items-center justify-center py-2">
+                                      <button
+                                        onClick={() => {
+                                          if (userAns === null || userAns === undefined) {
+                                            playPopSound();
+                                            setPgkbsContohAnswers(prev => {
+                                              const cur: ("B" | "S" | null)[] = prev[soal.no] ? [...prev[soal.no]] : Array(soal.pernyataan!.length).fill(null);
+                                              cur[pi] = choice;
+                                              return { ...prev, [soal.no]: cur };
+                                            });
+                                          }
+                                        }}
+                                        className="w-8 h-7 rounded-lg text-[10px] font-bold font-display transition-all duration-150"
+                                        style={
+                                          isCorrectChoice
+                                            ? { background: choice === "B" ? "rgba(34,197,94,0.3)" : "rgba(239,68,68,0.3)", border: `1px solid ${choice === "B" ? "rgba(34,197,94,0.6)" : "rgba(239,68,68,0.6)"}`, color: choice === "B" ? "#86efac" : "#fca5a5" }
+                                            : isUserChoice && !isCorrectChoice
+                                              ? { background: "rgba(239,68,68,0.2)", border: "1px solid rgba(239,68,68,0.4)", color: "#fca5a5", cursor: "default" }
+                                              : { background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.4)", cursor: userAns != null ? "default" : "pointer" }
+                                        }>
+                                        {choice}
+                                      </button>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            );
+                          })}
+                          {/* Answer key row */}
+                          <div className="px-3 py-2 border-t flex items-center gap-2"
+                            style={{ borderColor: "rgba(6,182,212,0.15)", background: "rgba(6,182,212,0.06)" }}>
+                            <span className="text-[9px] font-body text-cyan-400/60">Kunci:</span>
+                            {soal.jawabanBS?.map((ans, i) => (
+                              <span key={i} className="text-[10px] font-bold font-display px-2 py-0.5 rounded-md"
+                                style={{
+                                  background: ans === "B" ? "rgba(34,197,94,0.2)" : "rgba(239,68,68,0.2)",
+                                  color: ans === "B" ? "#86efac" : "#fca5a5",
+                                  border: `1px solid ${ans === "B" ? "rgba(34,197,94,0.35)" : "rgba(239,68,68,0.35)"}`,
+                                }}>
+                                ({i + 1}) {ans}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* ── Pembahasan — always visible ── */}
+                    {soal.pembahasan && (
+                      <div className="mx-4 mb-4 rounded-xl p-4"
+                        style={isWhite ? {
+                          background: "rgba(16,185,129,0.06)",
+                          border: "1px solid rgba(16,185,129,0.25)",
+                        } : {
+                          background: "linear-gradient(135deg, rgba(16,185,129,0.08), rgba(5,150,105,0.05))",
+                          border: "1px solid rgba(16,185,129,0.2)",
+                        }}>
+                        <div className="flex items-center gap-2 mb-2">
+                          <Lightbulb className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                          <span className="font-display text-[10px] font-bold tracking-widest uppercase text-emerald-400/80">Pembahasan</span>
+                        </div>
+                        <div className="font-body text-xs leading-relaxed whitespace-pre-wrap"
+                          style={{ color: isWhite ? "#065f46" : "rgba(255,255,255,0.75)" }}>
+                          {soal.pembahasan.split('\n').map((line, i) => (
+                            <span key={i}>{i > 0 && <br />}{renderWithLatex(line)}</span>
+                          ))}
+                        </div>
+                        {(soal.jawaban || soal.jawabanBS) && (
+                          <div className="mt-2.5 flex items-center gap-2 flex-wrap">
+                            <span className="text-[10px] font-body text-white/40">Kunci jawaban:</span>
+                            {soal.jawaban && (
+                              <span className="font-display text-xs font-bold px-2.5 py-0.5 rounded-lg text-green-300"
+                                style={{ background: "rgba(34,197,94,0.15)", border: "1px solid rgba(34,197,94,0.3)" }}>
+                                {soal.jawaban}
+                              </span>
+                            )}
+                            {soal.jawabanBS?.map((ans, i) => (
+                              <span key={i} className="font-display text-xs font-bold px-2.5 py-0.5 rounded-lg"
+                                style={{
+                                  background: ans === "B" ? "rgba(34,197,94,0.15)" : "rgba(239,68,68,0.15)",
+                                  border: `1px solid ${ans === "B" ? "rgba(34,197,94,0.3)" : "rgba(239,68,68,0.3)"}`,
+                                  color: ans === "B" ? "#86efac" : "#fca5a5",
+                                }}>
+                                ({i + 1}) {ans}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}
