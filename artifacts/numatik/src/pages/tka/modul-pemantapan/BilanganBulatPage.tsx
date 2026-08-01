@@ -57,18 +57,10 @@ const BilanganBulatPage = () => {
   const navigate = useNavigate();
   const { isDark, theme } = useTheme();
   const [activeTab, setActiveTab]                   = useState<"materi" | "telaah" | "soal">("materi");
-  const [expandedMateri, setExpandedMateri]         = useState<number[]>([0, 1, 2, 3, 4, 5, 6, 7]);
   const [expandedPembahasan, setExpandedPembahasan] = useState<Set<number>>(new Set());
   const [selectedAnswers, setSelectedAnswers]       = useState<Record<number, number>>({});
   const [selectedComplex, setSelectedComplex]       = useState<Record<number, Set<number>>>({});
   const [selectedTF, setSelectedTF]                 = useState<Record<string, string>>({});
-
-  const toggleMateri = (idx: number) => {
-    playPopSound();
-    setExpandedMateri(prev =>
-      prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]
-    );
-  };
 
   const togglePembahasan = (n: number) => {
     setExpandedPembahasan(prev => {
@@ -428,7 +420,7 @@ const BilanganBulatPage = () => {
           <div className="space-y-3">
             {([
               {
-                heading: "A. Jenis-Jenis Bilangan",
+                heading: "Jenis-Jenis Bilangan",
                 content: [
                   "Jenis-jenis bilangan, antara lain sebagai berikut.",
                   "• Bilangan asli dinyatakan dalam {1, 2, 3, 4, 5, …}",
@@ -439,7 +431,7 @@ const BilanganBulatPage = () => {
                 ],
               },
               {
-                heading: "B. Pengertian Bilangan Bulat",
+                heading: "Pengertian Bilangan Bulat",
                 content: [
                   "Bilangan bulat adalah himpunan bilangan yang terdiri atas bilangan bulat positif, nol, dan bilangan bulat negatif.",
                   "Bilangan bulat dapat digambarkan pada garis bilangan.",
@@ -454,7 +446,7 @@ const BilanganBulatPage = () => {
                 jsxContent: <NumberLineSVG />,
               },
               {
-                heading: "C. Membandingkan Bilangan Bulat",
+                heading: "Membandingkan Bilangan Bulat",
                 content: [
                   "Membandingkan dua bilangan bulat berarti menentukan hubungan nilai antara kedua bilangan tersebut dengan kata 'lebih dari', 'kurang dari', atau 'sama dengan'.",
                   "",
@@ -509,7 +501,7 @@ const BilanganBulatPage = () => {
                 ),
               },
               {
-                heading: "D. Sifat-Sifat Operasi Hitung Bilangan Bulat",
+                heading: "Sifat-Sifat Operasi Hitung Bilangan Bulat",
                 content: [
                   "Operasi hitung bilangan bulat meliputi penjumlahan, pengurangan, perkalian, dan pembagian.",
                   "Misalkan $a$, $b$, dan $c$ adalah bilangan bulat. Sifat-sifatnya:",
@@ -580,7 +572,7 @@ const BilanganBulatPage = () => {
                 ),
               },
               {
-                heading: "E. Operasi Hitung Campuran Bilangan Bulat",
+                heading: "Urutan Operasi Hitung Campuran Bilangan Bulat",
                 content: [],
                 jsxContent: (
                   <div>
@@ -622,7 +614,7 @@ const BilanganBulatPage = () => {
                 ),
               },
               {
-                heading: "F. Menyelesaikan Masalah Bilangan Bulat",
+                heading: "Menyelesaikan Masalah Bilangan Bulat",
                 content: [
                   "Langkah-langkah menyelesaikan permasalahan yang berkaitan dengan bilangan bulat:",
                   "",
@@ -633,7 +625,7 @@ const BilanganBulatPage = () => {
                 ],
               },
               {
-                heading: "G. Faktorisasi Prima",
+                heading: "Faktorisasi Prima",
                 content: [
                   "Faktorisasi prima adalah proses memecah sebuah bilangan menjadi perkalian dari faktor-faktor bilangan prima.",
                   "Cara: bagi bilangan secara berulang menggunakan bilangan prima (2, 3, 5, 7, …) hingga hasilnya 1.",
@@ -647,7 +639,7 @@ const BilanganBulatPage = () => {
                 ],
               },
               {
-                heading: "H. Estimasi/Perkiraan Hasil Perhitungan",
+                heading: "Estimasi/Perkiraan Hasil Perhitungan",
                 content: [
                   "Estimasi adalah memperkirakan hasil operasi hitung bilangan bulat secara cepat dan masuk akal, tanpa menghitung secara tepat.",
                   "",
@@ -663,7 +655,6 @@ const BilanganBulatPage = () => {
                 ],
               },
             ] as { heading: string; content: string[]; jsxContent?: React.ReactNode }[]).map((sec, idx) => {
-              const isOpen = expandedMateri.includes(idx);
               const colors = [
                 { border: "border-indigo-400/50",  badge: "bg-indigo-500/30 text-indigo-200 border-indigo-400/40"  },
                 { border: "border-violet-400/50",  badge: "bg-violet-500/30 text-violet-200 border-violet-400/40"  },
@@ -673,31 +664,26 @@ const BilanganBulatPage = () => {
               ];
               const c = colors[idx % colors.length];
               return (
-                <div key={idx} className={`relative rounded-2xl overflow-hidden border transition-all duration-300 ${c.border} ${
+                <div key={idx} className={`relative rounded-2xl overflow-hidden border ${c.border} ${
                   isDark
-                    ? isOpen ? "bg-gradient-to-br from-indigo-950/60 to-slate-900/95" : "bg-white/3"
-                    : isOpen ? "bg-indigo-50 shadow-sm" : "bg-white border-gray-200"
+                    ? "bg-gradient-to-br from-indigo-950/60 to-slate-900/95"
+                    : "bg-indigo-50 shadow-sm"
                 }`}>
-                  {isOpen && <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl bg-gradient-to-b from-indigo-500 to-violet-600" />}
-                  <button onClick={() => toggleMateri(idx)} className="w-full flex items-center gap-3 px-5 py-4 cursor-pointer text-left group pl-6">
+                  <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl bg-gradient-to-b from-indigo-500 to-violet-600" />
+                  <div className="w-full flex items-center gap-3 px-5 py-4 text-left pl-6">
                     <span className={`flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold border ${c.badge}`}>
                       {String.fromCharCode(65 + idx)}
                     </span>
-                    <span className={`font-display text-sm font-bold flex-1 leading-snug transition-colors ${isDark ? "text-white/90 group-hover:text-white" : "text-gray-800 group-hover:text-indigo-700"}`}>
+                    <span className={`font-display text-sm font-bold flex-1 leading-snug ${isDark ? "text-white/90" : "text-gray-800"}`}>
                       {sec.heading}
                     </span>
-                    <span className={`shrink-0 transition-colors ${isDark ? "text-white/30 group-hover:text-white/60" : "text-gray-400 group-hover:text-gray-600"}`}>
-                      {isOpen ? "▲" : "▼"}
-                    </span>
-                  </button>
-                  {isOpen && (
-                    <div className={`px-6 pb-5 pt-1 border-t space-y-1 font-body text-sm leading-relaxed ${isDark ? "border-white/5 text-white/80" : "border-indigo-100 text-gray-700"}`}>
-                      {sec.content.map((line, li) =>
-                        line === "" ? <div key={li} className="h-1" /> : <div key={li}>{renderWithLatex(line)}</div>
-                      )}
-                      {sec.jsxContent && <div className="mt-2">{sec.jsxContent}</div>}
-                    </div>
-                  )}
+                  </div>
+                  <div className={`px-6 pb-5 pt-1 border-t space-y-1 font-body text-sm leading-relaxed ${isDark ? "border-white/5 text-white/80" : "border-indigo-100 text-gray-700"}`}>
+                    {sec.content.map((line, li) =>
+                      line === "" ? <div key={li} className="h-1" /> : <div key={li}>{renderWithLatex(line)}</div>
+                    )}
+                    {sec.jsxContent && <div className="mt-2">{sec.jsxContent}</div>}
+                  </div>
                 </div>
               );
             })}
