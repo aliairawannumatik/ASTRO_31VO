@@ -38,91 +38,35 @@ const routes: Record<string, string> = {
 
 type Topic = { name: string; emoji: string };
 
-type Kelas = {
-  label: string;
-  grade: string;
-  accent: string;
-  glow: string;
-  headerBg: string;
-  headerBorder: string;
-  badgeBg: string;
-  badgeText: string;
-  barColor: string;
-  iconBg: string;
-  topics: Topic[];
-};
-
-const kelasList: Kelas[] = [
-  {
-    label: "Kelas 7",
-    grade: "VII",
-    accent: "#fbbf24",
-    glow: "rgba(251,191,36,0.18)",
-    headerBg: "linear-gradient(135deg, rgba(251,191,36,0.18) 0%, rgba(245,158,11,0.08) 100%)",
-    headerBorder: "rgba(251,191,36,0.35)",
-    badgeBg: "rgba(251,191,36,0.18)",
-    badgeText: "#fde68a",
-    barColor: "#fbbf24",
-    iconBg: "rgba(251,191,36,0.12)",
-    topics: [
-      { name: "Bilangan Bulat", emoji: "🔵" },
-      { name: "Bilangan Rasional", emoji: "⅔" },
-      { name: "Perbandingan", emoji: "∶" },
-      { name: "Aljabar", emoji: "𝑥" },
-      { name: "Persamaan & Pertidaksamaan LSV", emoji: "=" },
-      { name: "Aritmetika Sosial", emoji: "💰" },
-      { name: "KPK dan FPB", emoji: "÷" },
-      { name: "Himpunan", emoji: "⊂" },
-      { name: "Garis dan Sudut", emoji: "∠" },
-      { name: "Segitiga & Segiempat", emoji: "◻" },
-    ],
-  },
-  {
-    label: "Kelas 8",
-    grade: "VIII",
-    accent: "#22d3ee",
-    glow: "rgba(34,211,238,0.18)",
-    headerBg: "linear-gradient(135deg, rgba(34,211,238,0.18) 0%, rgba(6,182,212,0.08) 100%)",
-    headerBorder: "rgba(34,211,238,0.35)",
-    badgeBg: "rgba(34,211,238,0.18)",
-    badgeText: "#a5f3fc",
-    barColor: "#22d3ee",
-    iconBg: "rgba(34,211,238,0.12)",
-    topics: [
-      { name: "Pola Bilangan", emoji: "…" },
-      { name: "Koordinat Kartesius", emoji: "⊹" },
-      { name: "Relasi dan Fungsi", emoji: "↦" },
-      { name: "Persamaan Garis", emoji: "📈" },
-      { name: "Sistem Persamaan Linear Dua Variabel", emoji: "xy" },
-      { name: "Teorema Pythagoras", emoji: "△" },
-      { name: "Lingkaran", emoji: "○" },
-      { name: "Bangun Ruang Sisi Datar", emoji: "⬡" },
-    ],
-  },
-  {
-    label: "Kelas 9",
-    grade: "IX",
-    accent: "#a78bfa",
-    glow: "rgba(167,139,250,0.18)",
-    headerBg: "linear-gradient(135deg, rgba(167,139,250,0.18) 0%, rgba(139,92,246,0.08) 100%)",
-    headerBorder: "rgba(167,139,250,0.35)",
-    badgeBg: "rgba(167,139,250,0.18)",
-    badgeText: "#ddd6fe",
-    barColor: "#a78bfa",
-    iconBg: "rgba(167,139,250,0.12)",
-    topics: [
-      { name: "Bilangan Berpangkat", emoji: "²ⁿ" },
-      { name: "Bilangan Irasional", emoji: "√" },
-      { name: "Modulo & Sisa Pembagian", emoji: "%" },
-      { name: "Persamaan Kuadrat", emoji: "²" },
-      { name: "Fungsi Kuadrat", emoji: "∪" },
-      { name: "Kesebangunan & Kekongruenan", emoji: "≅" },
-      { name: "Transformasi Geometri", emoji: "↻" },
-      { name: "Bangun Ruang Sisi Lengkung", emoji: "⬤" },
-      { name: "Statistika", emoji: "📉" },
-      { name: "Peluang", emoji: "🎲" },
-    ],
-  },
+const allTopics: Topic[] = [
+  { name: "Bilangan Bulat", emoji: "🔵" },
+  { name: "Bilangan Rasional", emoji: "⅔" },
+  { name: "Perbandingan", emoji: "∶" },
+  { name: "Aljabar", emoji: "𝑥" },
+  { name: "Persamaan & Pertidaksamaan LSV", emoji: "=" },
+  { name: "Aritmetika Sosial", emoji: "💰" },
+  { name: "KPK dan FPB", emoji: "÷" },
+  { name: "Himpunan", emoji: "⊂" },
+  { name: "Garis dan Sudut", emoji: "∠" },
+  { name: "Segitiga & Segiempat", emoji: "◻" },
+  { name: "Pola Bilangan", emoji: "…" },
+  { name: "Koordinat Kartesius", emoji: "⊹" },
+  { name: "Relasi dan Fungsi", emoji: "↦" },
+  { name: "Persamaan Garis", emoji: "📈" },
+  { name: "Sistem Persamaan Linear Dua Variabel", emoji: "xy" },
+  { name: "Teorema Pythagoras", emoji: "△" },
+  { name: "Lingkaran", emoji: "○" },
+  { name: "Bangun Ruang Sisi Datar", emoji: "⬡" },
+  { name: "Bilangan Berpangkat", emoji: "²ⁿ" },
+  { name: "Bilangan Irasional", emoji: "√" },
+  { name: "Modulo & Sisa Pembagian", emoji: "%" },
+  { name: "Persamaan Kuadrat", emoji: "²" },
+  { name: "Fungsi Kuadrat", emoji: "∪" },
+  { name: "Kesebangunan & Kekongruenan", emoji: "≅" },
+  { name: "Transformasi Geometri", emoji: "↻" },
+  { name: "Bangun Ruang Sisi Lengkung", emoji: "⬤" },
+  { name: "Statistika", emoji: "📉" },
+  { name: "Peluang", emoji: "🎲" },
 ];
 
 const TKAModulPemantapanPage = () => {
@@ -176,113 +120,85 @@ const TKAModulPemantapanPage = () => {
           </div>
         </div>
 
-        {/* ── Per-Kelas Sections ── */}
-        <div className="flex flex-col gap-6">
-          {kelasList.map((kelas, ki) => (
-            <div key={kelas.label} className={`rounded-2xl overflow-hidden${isWhite ? " kelas-blue-card" : ""}`}
-              style={isWhite ? {
-                border: "1px solid rgba(33,150,243,0.4)",
-                boxShadow: "0 4px 32px rgba(33,150,243,0.2)",
-                background: "linear-gradient(to right, #2196f3, #00bcd4)",
-              } : {
-                border: `1px solid ${kelas.headerBorder}`,
-                boxShadow: `0 4px 32px ${kelas.glow}`,
-                background: "rgba(10,10,30,0.7)",
-              }}>
+        {/* ── All Topics (flat list) ── */}
+        <div className="rounded-2xl overflow-hidden"
+          style={isWhite ? {
+            border: "1px solid rgba(33,150,243,0.4)",
+            boxShadow: "0 4px 32px rgba(33,150,243,0.1)",
+            background: "rgba(255,255,255,0.05)",
+          } : {
+            border: "1px solid rgba(34,211,238,0.2)",
+            boxShadow: "0 4px 32px rgba(34,211,238,0.08)",
+            background: "rgba(10,10,30,0.7)",
+          }}>
+          <div className="px-3 py-3 flex flex-col gap-1.5">
+            {allTopics.map((topic, ti) => {
+              const hasRoute = !!routes[topic.name];
+              return (
+                <button
+                  key={topic.name}
+                  onClick={() => handleClick(topic.name)}
+                  disabled={!hasRoute}
+                  className={`group flex items-center gap-3 w-full rounded-xl px-4 py-3 text-left transition-all duration-200
+                    ${hasRoute
+                      ? "cursor-pointer hover:-translate-y-0.5 active:translate-y-0"
+                      : "cursor-not-allowed opacity-35"}`}
+                  style={hasRoute ? (isWhite ? {
+                    background: "rgba(255,255,255,0.12)",
+                    border: "1px solid rgba(255,255,255,0.22)",
+                  } : {
+                    background: "rgba(255,255,255,0.04)",
+                    border: "1px solid rgba(255,255,255,0.07)",
+                  }) : (isWhite ? {
+                    background: "rgba(255,255,255,0.06)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                  } : {
+                    background: "rgba(255,255,255,0.02)",
+                    border: "1px solid rgba(255,255,255,0.04)",
+                  })}
+                  onMouseEnter={e => {
+                    if (hasRoute) {
+                      (e.currentTarget as HTMLButtonElement).style.background = isWhite ? "rgba(255,255,255,0.25)" : "rgba(34,211,238,0.08)";
+                      (e.currentTarget as HTMLButtonElement).style.border = isWhite ? "1px solid rgba(255,255,255,0.45)" : "1px solid rgba(34,211,238,0.3)";
+                    }
+                  }}
+                  onMouseLeave={e => {
+                    if (hasRoute) {
+                      (e.currentTarget as HTMLButtonElement).style.background = isWhite ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.04)";
+                      (e.currentTarget as HTMLButtonElement).style.border = isWhite ? "1px solid rgba(255,255,255,0.22)" : "1px solid rgba(255,255,255,0.07)";
+                    }
+                  }}
+                >
+                  {/* Number */}
+                  <span className="shrink-0 w-6 h-6 rounded-md flex items-center justify-center font-display font-bold text-[10px]"
+                    style={isWhite ? { background: "rgba(255,255,255,0.22)", color: "#ffffff", border: "1px solid rgba(255,255,255,0.35)" } : { background: "rgba(34,211,238,0.1)", color: "#22d3ee", border: "1px solid rgba(34,211,238,0.2)" }}>
+                    {ti + 1}
+                  </span>
 
-              {/* Section header */}
-              <div className="flex items-center gap-4 px-5 py-4"
-                style={isWhite ? { background: "rgba(255,255,255,0.12)", borderBottom: "1px solid rgba(255,255,255,0.2)" } : { background: kelas.headerBg, borderBottom: `1px solid ${kelas.headerBorder}` }}>
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 font-display font-black text-lg"
-                  style={isWhite ? { background: "rgba(255,255,255,0.22)", border: "1.5px solid rgba(255,255,255,0.4)", color: "#ffffff" } : { background: `${kelas.iconBg}`, border: `1.5px solid ${kelas.headerBorder}`, color: kelas.accent }}>
-                  {kelas.grade}
-                </div>
-                <div className="flex-1">
-                  <p className="font-display text-base font-bold" style={isWhite ? { color: "#ffffff" } : {}}>
-                    {kelas.label}
-                  </p>
-                  <p className="font-body text-[11px]" style={isWhite ? { color: "rgba(255,255,255,0.85)" } : { color: kelas.accent, opacity: 0.7 }}>
-                    {kelas.topics.length} topik materi
-                  </p>
-                </div>
-                <span className="font-body text-[9px] font-bold px-2.5 py-1 rounded-full tracking-widest uppercase"
-                  style={isWhite ? { background: "rgba(255,255,255,0.18)", color: "#ffffff", border: "1px solid rgba(255,255,255,0.35)" } : { background: kelas.badgeBg, color: kelas.badgeText, border: `1px solid ${kelas.headerBorder}` }}>
-                  ✦ MATERI & LATIHAN
-                </span>
-              </div>
+                  {/* Emoji icon */}
+                  <span className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm"
+                    style={isWhite ? { background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)" } : { background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                    {topic.emoji}
+                  </span>
 
-              {/* Topics list */}
-              <div className="px-3 py-3 flex flex-col gap-1.5">
-                {kelas.topics.map((topic, ti) => {
-                  const hasRoute = !!routes[topic.name];
-                  const num = ti + 1;
-                  return (
-                    <button
-                      key={topic.name}
-                      onClick={() => handleClick(topic.name)}
-                      disabled={!hasRoute}
-                      className={`group flex items-center gap-3 w-full rounded-xl px-4 py-3 text-left transition-all duration-200
-                        ${hasRoute
-                          ? "cursor-pointer hover:-translate-y-0.5 active:translate-y-0"
-                          : "cursor-not-allowed opacity-35"}`}
-                      style={hasRoute ? (isWhite ? {
-                        background: "rgba(255,255,255,0.12)",
-                        border: "1px solid rgba(255,255,255,0.22)",
-                      } : {
-                        background: "rgba(255,255,255,0.04)",
-                        border: "1px solid rgba(255,255,255,0.07)",
-                      }) : (isWhite ? {
-                        background: "rgba(255,255,255,0.06)",
-                        border: "1px solid rgba(255,255,255,0.1)",
-                      } : {
-                        background: "rgba(255,255,255,0.02)",
-                        border: "1px solid rgba(255,255,255,0.04)",
-                      })}
-                      onMouseEnter={e => {
-                        if (hasRoute) {
-                          (e.currentTarget as HTMLButtonElement).style.background = isWhite ? "rgba(255,255,255,0.25)" : `${kelas.iconBg}`;
-                          (e.currentTarget as HTMLButtonElement).style.border = isWhite ? "1px solid rgba(255,255,255,0.45)" : `1px solid ${kelas.headerBorder}`;
-                        }
-                      }}
-                      onMouseLeave={e => {
-                        if (hasRoute) {
-                          (e.currentTarget as HTMLButtonElement).style.background = isWhite ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.04)";
-                          (e.currentTarget as HTMLButtonElement).style.border = isWhite ? "1px solid rgba(255,255,255,0.22)" : "1px solid rgba(255,255,255,0.07)";
-                        }
-                      }}
-                    >
-                      {/* Number */}
-                      <span className="shrink-0 w-6 h-6 rounded-md flex items-center justify-center font-display font-bold text-[10px]"
-                        style={isWhite ? { background: "rgba(255,255,255,0.22)", color: "#ffffff", border: "1px solid rgba(255,255,255,0.35)" } : { background: kelas.iconBg, color: kelas.accent, border: `1px solid ${kelas.headerBorder}` }}>
-                        {num}
-                      </span>
+                  {/* Name */}
+                  <span className="flex-1 font-body text-sm font-medium leading-snug transition-colors"
+                    style={{ color: isWhite ? "#ffffff" : undefined }}>
+                    {topic.name}
+                  </span>
 
-                      {/* Emoji icon */}
-                      <span className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm"
-                        style={isWhite ? { background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)" } : { background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                        {topic.emoji}
-                      </span>
-
-                      {/* Name */}
-                      <span className="flex-1 font-body text-sm font-medium leading-snug transition-colors"
-                        style={{ color: isWhite ? "#ffffff" : undefined }}>
-                        {topic.name}
-                      </span>
-
-                      {/* Arrow */}
-                      {hasRoute && (
-                        <svg className="w-4 h-4 shrink-0 transition-all duration-200 group-hover:translate-x-1"
-                          style={isWhite ? { color: "rgba(255,255,255,0.7)" } : { color: kelas.accent, opacity: 0.5 }}
-                          fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                        </svg>
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
+                  {/* Arrow */}
+                  {hasRoute && (
+                    <svg className="w-4 h-4 shrink-0 transition-all duration-200 group-hover:translate-x-1"
+                      style={isWhite ? { color: "rgba(255,255,255,0.7)" } : { color: "#22d3ee", opacity: 0.5 }}
+                      fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* ── Footer note ── */}
