@@ -472,34 +472,124 @@ const BilanganBulatPage = () => {
                   "",
                   "• Lambang membandingkan: lebih dari (>), kurang dari (<), sama dengan (=)",
                   "• Pada garis bilangan, nilai di sebelah kiri lebih kecil daripada nilai di sebelah kanan.",
-                  "",
-                  "Contoh:",
-                  "Bandingkan −4 dengan 2.",
-                  "Pada garis bilangan, −4 berada di sebelah kiri 2.",
-                  "Jadi, −4 kurang dari 2, ditulis −4 < 2.",
                 ],
+                jsxContent: (
+                  <div className="space-y-3 mt-2">
+                    {/* ── INGAT! ── */}
+                    <div className={`rounded-xl p-3.5 border-l-[3px] border-rose-400 ${isDark ? "bg-rose-900/20 border border-rose-500/30" : "bg-rose-50 border border-rose-200"}`}>
+                      <p className={`text-[9px] font-bold uppercase tracking-widest mb-1.5 flex items-center gap-1 ${isDark ? "text-rose-300" : "text-rose-600"}`}>
+                        ⚠️ INGAT! — Bilangan Negatif
+                      </p>
+                      <p className={`text-xs font-body leading-relaxed ${isDark ? "text-rose-100/80" : "text-rose-800"}`}>
+                        Semakin <span className="font-bold">besar</span> angka di belakang tanda minus <span className="font-bold">(−)</span>, semakin <span className="font-bold underline">kecil</span> nilainya.
+                      </p>
+                      <div className={`mt-2 flex items-center gap-2 flex-wrap text-xs font-body ${isDark ? "text-white/55" : "text-gray-600"}`}>
+                        <InlineMath math="-8 < -3" />
+                        <span>karena 8 &gt; 3, maka −8 berada lebih jauh ke kiri dari −3 pada garis bilangan.</span>
+                      </div>
+                    </div>
+
+                    {/* ── 3 Contoh ── */}
+                    <p className={`text-[10px] font-bold uppercase tracking-wider ${isDark ? "text-white/35" : "text-gray-400"}`}>3 Jenis Perbandingan</p>
+                    <div className="space-y-2">
+                      {/* ① Positif vs Positif */}
+                      <div className={`rounded-xl p-3 border ${isDark ? "bg-sky-900/20 border-sky-500/30" : "bg-sky-50 border-sky-200"}`}>
+                        <p className={`text-[9px] font-bold uppercase tracking-widest mb-1.5 ${isDark ? "text-sky-400" : "text-sky-600"}`}>① Positif dengan Positif</p>
+                        <div className={`flex items-baseline gap-2 flex-wrap text-xs font-body ${isDark ? "text-white/75" : "text-gray-700"}`}>
+                          <InlineMath math="5 > 3" />
+                          <span>→ 5 berada di sebelah kanan 3, sehingga 5 lebih besar dari 3.</span>
+                        </div>
+                      </div>
+                      {/* ② Negatif vs Positif */}
+                      <div className={`rounded-xl p-3 border ${isDark ? "bg-violet-900/20 border-violet-500/30" : "bg-violet-50 border-violet-200"}`}>
+                        <p className={`text-[9px] font-bold uppercase tracking-widest mb-1.5 ${isDark ? "text-violet-400" : "text-violet-600"}`}>② Negatif dengan Positif</p>
+                        <div className={`flex items-baseline gap-2 flex-wrap text-xs font-body ${isDark ? "text-white/75" : "text-gray-700"}`}>
+                          <InlineMath math="-4 < 2" />
+                          <span>→ −4 berada di sebelah kiri 2, sehingga −4 lebih kecil dari 2.</span>
+                        </div>
+                      </div>
+                      {/* ③ Negatif vs Negatif */}
+                      <div className={`rounded-xl p-3 border ${isDark ? "bg-rose-900/20 border-rose-500/30" : "bg-rose-50 border-rose-200"}`}>
+                        <p className={`text-[9px] font-bold uppercase tracking-widest mb-1.5 ${isDark ? "text-rose-400" : "text-rose-600"}`}>③ Negatif dengan Negatif</p>
+                        <div className={`flex items-baseline gap-2 flex-wrap text-xs font-body ${isDark ? "text-white/75" : "text-gray-700"}`}>
+                          <InlineMath math="-7 < -2" />
+                          <span>→ meski 7 &gt; 2, tanda negatif membalik urutan: −7 lebih jauh ke kiri dari −2.</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ),
               },
               {
                 heading: "D. Sifat-Sifat Operasi Hitung Bilangan Bulat",
                 content: [
                   "Operasi hitung bilangan bulat meliputi penjumlahan, pengurangan, perkalian, dan pembagian.",
-                  "Misalkan a, b, dan c adalah bilangan bulat. Sifat-sifatnya:",
-                  "",
-                  "a. Tertutup terhadap penjumlahan, pengurangan, dan perkalian.",
-                  "   Artinya, hasil dari a+b, a−b, dan a×b juga merupakan bilangan bulat.",
-                  "",
-                  "b. Komutatif terhadap penjumlahan dan perkalian:",
-                  "   a + b = b + a  dan  a × b = b × a",
-                  "",
-                  "c. Unsur identitas penjumlahan (0) dan perkalian (1):",
-                  "   a + 0 = 0 + a = a  dan  a × 1 = 1 × a = a",
-                  "",
-                  "d. Asosiatif terhadap penjumlahan dan perkalian:",
-                  "   (a+b)+c = a+(b+c)  dan  (a×b)×c = a×(b×c)",
-                  "",
-                  "e. Distributif perkalian terhadap penjumlahan dan pengurangan:",
-                  "   a×(b+c) = (a×b)+(a×c)  dan  a×(b−c) = (a×b)−(a×c)",
+                  "Misalkan $a$, $b$, dan $c$ adalah bilangan bulat. Sifat-sifatnya:",
                 ],
+                jsxContent: (
+                  <div className="space-y-2 mt-2">
+
+                    {/* ── a. Tertutup ── */}
+                    <div className="rounded-xl overflow-hidden border" style={{ borderColor: "rgba(99,102,241,0.4)", background: "rgba(99,102,241,0.08)" }}>
+                      <div className="px-3 py-2 border-b flex items-center gap-2" style={{ borderColor: "rgba(99,102,241,0.25)", background: "rgba(99,102,241,0.18)" }}>
+                        <span className="text-[10px] font-bold font-display tracking-wide" style={{ color: "#a5b4fc" }}>a. Sifat Tertutup</span>
+                      </div>
+                      <div className="px-4 py-3 flex flex-wrap justify-center gap-x-5 gap-y-1">
+                        <InlineMath math="a + b \in \mathbb{Z}" />
+                        <InlineMath math="a - b \in \mathbb{Z}" />
+                        <InlineMath math="a \times b \in \mathbb{Z}" />
+                      </div>
+                      <p className={`text-center text-[10px] font-body pb-2.5 ${isDark ? "text-white/40" : "text-gray-500"}`}>Hasil selalu bilangan bulat</p>
+                    </div>
+
+                    {/* ── b. Komutatif ── */}
+                    <div className="rounded-xl overflow-hidden border" style={{ borderColor: "rgba(139,92,246,0.4)", background: "rgba(139,92,246,0.08)" }}>
+                      <div className="px-3 py-2 border-b flex items-center gap-2" style={{ borderColor: "rgba(139,92,246,0.25)", background: "rgba(139,92,246,0.18)" }}>
+                        <span className="text-[10px] font-bold font-display tracking-wide" style={{ color: "#c4b5fd" }}>b. Sifat Komutatif</span>
+                      </div>
+                      <div className="px-4 py-3 flex flex-wrap justify-center gap-x-6 gap-y-1">
+                        <InlineMath math="a + b = b + a" />
+                        <InlineMath math="a \times b = b \times a" />
+                      </div>
+                    </div>
+
+                    {/* ── c. Identitas ── */}
+                    <div className="rounded-xl overflow-hidden border" style={{ borderColor: "rgba(20,184,166,0.4)", background: "rgba(20,184,166,0.08)" }}>
+                      <div className="px-3 py-2 border-b flex items-center gap-2" style={{ borderColor: "rgba(20,184,166,0.25)", background: "rgba(20,184,166,0.18)" }}>
+                        <span className="text-[10px] font-bold font-display tracking-wide" style={{ color: "#5eead4" }}>c. Unsur Identitas</span>
+                      </div>
+                      <div className="px-4 py-3 flex flex-wrap justify-center gap-x-6 gap-y-1">
+                        <InlineMath math="a + 0 = 0 + a = a" />
+                        <InlineMath math="a \times 1 = 1 \times a = a" />
+                      </div>
+                      <p className={`text-center text-[10px] font-body pb-2.5 ${isDark ? "text-white/40" : "text-gray-500"}`}>0 = identitas penjumlahan · 1 = identitas perkalian</p>
+                    </div>
+
+                    {/* ── d. Asosiatif ── */}
+                    <div className="rounded-xl overflow-hidden border" style={{ borderColor: "rgba(245,158,11,0.4)", background: "rgba(245,158,11,0.08)" }}>
+                      <div className="px-3 py-2 border-b flex items-center gap-2" style={{ borderColor: "rgba(245,158,11,0.25)", background: "rgba(245,158,11,0.18)" }}>
+                        <span className="text-[10px] font-bold font-display tracking-wide" style={{ color: "#fcd34d" }}>d. Sifat Asosiatif</span>
+                      </div>
+                      <div className="px-4 py-3 flex flex-col items-center gap-2">
+                        <InlineMath math="(a + b) + c = a + (b + c)" />
+                        <InlineMath math="(a \times b) \times c = a \times (b \times c)" />
+                      </div>
+                    </div>
+
+                    {/* ── e. Distributif ── */}
+                    <div className="rounded-xl overflow-hidden border" style={{ borderColor: "rgba(236,72,153,0.4)", background: "rgba(236,72,153,0.08)" }}>
+                      <div className="px-3 py-2 border-b flex items-center gap-2" style={{ borderColor: "rgba(236,72,153,0.25)", background: "rgba(236,72,153,0.18)" }}>
+                        <span className="text-[10px] font-bold font-display tracking-wide" style={{ color: "#f9a8d4" }}>e. Sifat Distributif</span>
+                      </div>
+                      <div className="px-4 py-3 flex flex-col items-center gap-2">
+                        <InlineMath math="a \times (b + c) = (a \times b) + (a \times c)" />
+                        <InlineMath math="a \times (b - c) = (a \times b) - (a \times c)" />
+                      </div>
+                      <p className={`text-center text-[10px] font-body pb-2.5 ${isDark ? "text-white/40" : "text-gray-500"}`}>Perkalian terhadap penjumlahan &amp; pengurangan</p>
+                    </div>
+
+                  </div>
+                ),
               },
               {
                 heading: "E. Operasi Hitung Campuran Bilangan Bulat",
