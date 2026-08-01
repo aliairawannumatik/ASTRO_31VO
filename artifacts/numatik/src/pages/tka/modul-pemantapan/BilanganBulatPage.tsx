@@ -5,7 +5,53 @@ import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import { InlineMath, BlockMath } from "react-katex";
 import { useTheme } from "@/contexts/ThemeContext";
+import { BookMarked } from "lucide-react";
 import "katex/dist/katex.min.css";
+
+const renderWithLatex = (text: string) => {
+  const parts = text.split(/(\$[^$]+\$)/g);
+  return parts.map((part, index) => {
+    if (part.startsWith("$") && part.endsWith("$")) {
+      return <InlineMath key={index} math={part.slice(1, -1)} />;
+    }
+    return <span key={index}>{part}</span>;
+  });
+};
+
+const NumberLineSVG = () => (
+  <svg viewBox="0 0 440 95" className="w-full my-3" style={{ maxHeight: 120 }}>
+    {/* Colored background regions */}
+    <rect x="32" y="47" width="173" height="26" rx="4" fill="rgba(248,113,113,0.15)" stroke="rgba(248,113,113,0.4)" strokeWidth="1" />
+    <rect x="212" y="45" width="26" height="30" rx="4" fill="rgba(251,191,36,0.15)" stroke="rgba(251,191,36,0.4)" strokeWidth="1" />
+    <rect x="245" y="47" width="162" height="26" rx="4" fill="rgba(96,165,250,0.15)" stroke="rgba(96,165,250,0.4)" strokeWidth="1" />
+    {/* Axis line */}
+    <line x1="24" y1="60" x2="410" y2="60" stroke="#94a3b8" strokeWidth="2" />
+    {/* Arrow heads */}
+    <polygon points="418,60 406,54 406,66" fill="#94a3b8" />
+    <polygon points="16,60 28,54 28,66" fill="#94a3b8" />
+    {/* Tick marks and number labels */}
+    {[-5,-4,-3,-2,-1,0,1,2,3,4,5].map((n, i) => {
+      const x = 55 + i * 34;
+      const clr = n < 0 ? "#f87171" : n > 0 ? "#60a5fa" : "#fbbf24";
+      return (
+        <g key={n}>
+          <line x1={x} y1="53" x2={x} y2="67" stroke="#94a3b8" strokeWidth="1.5" />
+          <text x={x} y="82" textAnchor="middle" fontSize="10" fontWeight="600" fill={clr}>{n}</text>
+        </g>
+      );
+    })}
+    {/* Region labels with dashed pointer lines */}
+    <text x="118" y="31" textAnchor="middle" fontSize="8.5" fontWeight="bold" fill="#f87171">Bilangan Bulat Negatif</text>
+    <line x1="118" y1="32" x2="118" y2="45" stroke="#f87171" strokeWidth="0.8" strokeDasharray="2,2" />
+    <text x="225" y="31" textAnchor="middle" fontSize="8.5" fontWeight="bold" fill="#fbbf24">Nol</text>
+    <line x1="225" y1="32" x2="225" y2="45" stroke="#fbbf24" strokeWidth="0.8" strokeDasharray="2,2" />
+    <text x="326" y="31" textAnchor="middle" fontSize="8.5" fontWeight="bold" fill="#60a5fa">Bilangan Bulat Positif</text>
+    <line x1="326" y1="32" x2="326" y2="45" stroke="#60a5fa" strokeWidth="0.8" strokeDasharray="2,2" />
+    {/* Ellipsis on both ends */}
+    <text x="12" y="65" textAnchor="middle" fontSize="11" fill="#64748b">…</text>
+    <text x="428" y="65" textAnchor="middle" fontSize="11" fill="#64748b">…</text>
+  </svg>
+);
 
 const BilanganBulatPage = () => {
   const navigate = useNavigate();
@@ -301,31 +347,51 @@ const BilanganBulatPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
 
         {/* ── Header ── */}
-        <div className={`relative backdrop-blur border border-blue-500/30 rounded-2xl p-5 mb-6 ${isDark ? "bg-card/80" : "bg-white shadow-sm"}`}>
-          <img src="/logo-numatik.png" alt="Numatik" className="absolute top-3 left-3 w-10 h-10 object-contain" />
-          <div className="text-center mb-4">
-            <div className="inline-flex items-center gap-2 bg-blue-500/15 border border-blue-400/40 rounded-full px-4 py-1 mb-3">
-              <span className="text-blue-400 text-[10px] font-body font-bold uppercase tracking-widest">✦ MODUL PEMANTAPAN ✦</span>
-            </div>
-            <h1 className={`font-display text-base font-bold mb-0.5 ${isDark ? "text-blue-300" : "text-blue-700"}`}>TES KEMAMPUAN AKADEMIK (TKA)</h1>
-            <p className={`font-body text-xs mb-0.5 ${isDark ? "text-white/60" : "text-gray-500"}`}>MATEMATIKA — KELAS 7 SMP/MTs</p>
-            <p className={`font-display text-xl font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>BILANGAN BULAT</p>
-            <p className={`font-body text-xs mt-1 ${isDark ? "text-white/45" : "text-gray-400"}`}>Tahun Ajaran 2026 – 2027</p>
-          </div>
-          <div className="grid grid-cols-3 gap-2 text-xs font-body">
-            <div className={`rounded-lg p-2 text-center ${isDark ? "bg-white/5" : "bg-gray-50 border border-gray-200"}`}>
-              <p className={`text-[9px] uppercase tracking-wider ${isDark ? "text-white/40" : "text-gray-400"}`}>Soal</p>
-              <p className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>15 Soal</p>
-            </div>
-            <div className={`rounded-lg p-2 text-center ${isDark ? "bg-sky-500/10 border border-sky-500/30" : "bg-sky-50 border border-sky-300"}`}>
-              <p className={`text-[9px] uppercase tracking-wider ${isDark ? "text-sky-400" : "text-sky-600"}`}>Jenjang</p>
-              <p className={`font-bold ${isDark ? "text-sky-300" : "text-sky-700"}`}>SMP Kelas 7</p>
-            </div>
-            <div className={`rounded-lg p-2 text-center flex items-center justify-center gap-1.5 ${isDark ? "bg-amber-500/10 border border-amber-500/30" : "bg-amber-50 border border-amber-300"}`}>
-              <span className="text-base">⏱️</span>
-              <div>
-                <p className={`text-[9px] uppercase tracking-wider ${isDark ? "text-amber-400" : "text-amber-600"}`}>Waktu</p>
-                <p className={`font-display font-bold text-sm ${isDark ? "text-amber-300" : "text-amber-700"}`}>45 Menit</p>
+        <div className="relative mb-6">
+          <div className="absolute inset-0 rounded-2xl blur-2xl opacity-30"
+            style={{ background: "radial-gradient(ellipse at 50% 0%, #6366f1 0%, transparent 70%)" }} />
+          <div className="relative rounded-2xl overflow-hidden border border-indigo-500/30"
+            style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.18) 0%, rgba(139,92,246,0.12) 50%, rgba(15,12,41,0.9) 100%)" }}>
+            <div className="absolute top-0 left-0 right-0 h-px"
+              style={{ background: "linear-gradient(90deg, transparent, rgba(167,139,250,0.6), transparent)" }} />
+            <div className="px-6 py-6 flex flex-col items-center text-center">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center"
+                  style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.4), rgba(139,92,246,0.2))", border: "1px solid rgba(167,139,250,0.35)" }}>
+                  <BookMarked className="w-[18px] h-[18px] text-violet-300" />
+                </div>
+                <span className="font-body text-[10px] font-bold tracking-[0.2em] uppercase text-violet-400/70">
+                  Modul Pemantapan TKA
+                </span>
+              </div>
+              <h1 className="font-display text-xl md:text-2xl font-bold text-white mb-1 leading-tight"
+                style={{ textShadow: "0 0 40px rgba(167,139,250,0.5)" }}>
+                BILANGAN BULAT
+              </h1>
+              <p className="font-body text-[11px] text-violet-300/50 mb-4">
+                Irawan Sutiawan, M.Pd · Matematika Kelas 7 SMP/MTs · TA 2026–2027
+              </p>
+              <div className="flex gap-2 flex-wrap justify-center mb-3">
+                <span className="text-[10px] font-body px-3 py-1 rounded-full border font-semibold"
+                  style={{ background: "rgba(99,102,241,0.15)", borderColor: "rgba(99,102,241,0.35)", color: "#a5b4fc" }}>
+                  📖 8 Ringkasan Materi
+                </span>
+                <span className="text-[10px] font-body px-3 py-1 rounded-full border font-semibold"
+                  style={{ background: "rgba(139,92,246,0.15)", borderColor: "rgba(139,92,246,0.35)", color: "#c4b5fd" }}>
+                  ✏️ 15 Soal Latihan
+                </span>
+                <span className="text-[10px] font-body px-3 py-1 rounded-full border font-semibold"
+                  style={{ background: "rgba(245,158,11,0.15)", borderColor: "rgba(245,158,11,0.35)", color: "#fcd34d" }}>
+                  ⏱️ 45 Menit
+                </span>
+              </div>
+              <div className="flex gap-2 flex-wrap justify-center">
+                <span className="text-[9px] font-body px-2.5 py-0.5 rounded-full border font-semibold text-sky-300"
+                  style={{ background: "rgba(14,165,233,0.15)", borderColor: "rgba(14,165,233,0.35)" }}>PGS</span>
+                <span className="text-[9px] font-body px-2.5 py-0.5 rounded-full border font-semibold text-amber-300"
+                  style={{ background: "rgba(245,158,11,0.15)", borderColor: "rgba(245,158,11,0.35)" }}>MCMA</span>
+                <span className="text-[9px] font-body px-2.5 py-0.5 rounded-full border font-semibold text-rose-300"
+                  style={{ background: "rgba(244,63,94,0.15)", borderColor: "rgba(244,63,94,0.35)" }}>Benar/Salah</span>
               </div>
             </div>
           </div>
@@ -380,8 +446,8 @@ const BilanganBulatPage = () => {
                   "• Bilangan asli dinyatakan dalam {1, 2, 3, 4, 5, …}",
                   "• Bilangan cacah dinyatakan dalam {0, 1, 2, 3, 4, 5, …}",
                   "• Bilangan bulat dinyatakan dalam {…, −4, −3, −2, −1, 0, 1, 2, 3, 4, …}",
-                  "• Bilangan rasional: dapat dinyatakan dalam bentuk a/b, dengan a dan b bilangan bulat serta b ≠ 0",
-                  "• Bilangan irasional: tidak dapat dinyatakan dalam bentuk a/b, dengan a dan b bilangan bulat serta b ≠ 0",
+                  "• Bilangan rasional: dapat dinyatakan dalam bentuk $\\dfrac{a}{b}$, dengan $a$ dan $b$ bilangan bulat serta $b \\neq 0$",
+                  "• Bilangan irasional: tidak dapat dinyatakan dalam bentuk $\\dfrac{a}{b}$, dengan $a$ dan $b$ bilangan bulat serta $b \\neq 0$",
                 ],
               },
               {
@@ -397,6 +463,7 @@ const BilanganBulatPage = () => {
                   "Di garis bilangan: makin ke kanan → makin besar.",
                   "Contoh: −6 < −2 < 0 < 3 (urutan dari kiri ke kanan)",
                 ],
+                jsxContent: <NumberLineSVG />,
               },
               {
                 heading: "C. Membandingkan Bilangan Bulat",
@@ -489,7 +556,7 @@ const BilanganBulatPage = () => {
                   "Pembulatan ini dilakukan untuk mempermudah perhitungan.",
                 ],
               },
-            ] as { heading: string; content: string[] }[]).map((sec, idx) => {
+            ] as { heading: string; content: string[]; jsxContent?: React.ReactNode }[]).map((sec, idx) => {
               const isOpen = expandedMateri.includes(idx);
               const colors = [
                 { border: "border-indigo-400/50",  badge: "bg-indigo-500/30 text-indigo-200 border-indigo-400/40"  },
@@ -520,8 +587,9 @@ const BilanganBulatPage = () => {
                   {isOpen && (
                     <div className={`px-6 pb-5 pt-1 border-t space-y-1 font-body text-sm leading-relaxed ${isDark ? "border-white/5 text-white/80" : "border-indigo-100 text-gray-700"}`}>
                       {sec.content.map((line, li) =>
-                        line === "" ? <div key={li} className="h-1" /> : <div key={li}>{line}</div>
+                        line === "" ? <div key={li} className="h-1" /> : <div key={li}>{renderWithLatex(line)}</div>
                       )}
+                      {sec.jsxContent && <div className="mt-2">{sec.jsxContent}</div>}
                     </div>
                   )}
                 </div>
