@@ -64,9 +64,9 @@ const kelasList: Kelas[] = [
     topics: [
       { name: "Bilangan Bulat", emoji: "🔵" },
       { name: "Bilangan Rasional", emoji: "⅔" },
+      { name: "Perbandingan", emoji: "∶" },
       { name: "Aljabar", emoji: "𝑥" },
       { name: "Persamaan & Pertidaksamaan LSV", emoji: "=" },
-      { name: "Perbandingan", emoji: "∶" },
       { name: "Aritmetika Sosial", emoji: "💰" },
       { name: "KPK dan FPB", emoji: "÷" },
       { name: "Himpunan", emoji: "⊂" },
