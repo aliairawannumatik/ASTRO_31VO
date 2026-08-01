@@ -226,15 +226,39 @@ const SenilaiRingkasan = (
 const BertingkatRingkasan = (
   <div className="mt-5 space-y-4">
 
-    {/* ── Langkah-Langkah Penyelesaian ── */}
+    {/* ── Rumus Proporsi yang Dicari ── */}
     <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
       <div className="flex items-center gap-3 px-5 py-4">
         <svg className="w-5 h-5 text-green-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        <span className="font-body font-semibold text-white">Rumus Proporsi yang Dicari</span>
+      </div>
+      <div className="px-5 pb-5 space-y-3">
+        <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
+          <div className="bg-slate-900/50 rounded p-3">
+            <BlockMath math="\text{Nilai}_x = \frac{\text{rasio}_x}{\text{jumlah/selisih rasio}} \times \text{jumlah/selisih yang diketahui}" />
+          </div>
+          <div className="grid grid-cols-2 gap-2 font-body text-xs text-white/70">
+            <div className="bg-slate-800/50 rounded p-2">
+              <p className="text-green-300 font-semibold mb-1">Jika diketahui JUMLAH:</p>
+              <p>Gunakan jumlah seluruh angka rasio sebagai pembagi.</p>
+            </div>
+            <div className="bg-slate-800/50 rounded p-2">
+              <p className="text-yellow-300 font-semibold mb-1">Jika diketahui SELISIH:</p>
+              <p>Gunakan selisih dua angka rasio yang bersangkutan sebagai pembagi.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* ── Langkah-Langkah Penyelesaian ── */}
+    <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+      <div className="flex items-center gap-3 px-5 py-4">
+        <svg className="w-5 h-5 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
         <span className="font-body font-semibold text-white">Langkah-Langkah Penyelesaian</span>
       </div>
       <div className="px-5 pb-5 space-y-4">
         <div className="bg-slate-800/50 rounded-lg p-4">
-          <p className="font-body text-xs font-semibold text-white/60 mb-3">LANGKAH-LANGKAH:</p>
           <div className="space-y-3 font-body text-sm text-white/80">
             {[
               { h: "Temukan variabel perantara", b: "variabel yang muncul di kedua perbandingan." },
@@ -248,22 +272,6 @@ const BertingkatRingkasan = (
                 <p><strong className="text-cyan-300">{step.h}</strong> — {step.b}</p>
               </div>
             ))}
-          </div>
-        </div>
-        <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
-          <p className="font-body text-sm font-semibold text-green-300">Rumus Cepat:</p>
-          <div className="bg-slate-900/50 rounded p-3">
-            <BlockMath math="\text{Nilai}_x = \frac{\text{rasio}_x}{\text{jumlah/selisih rasio}} \times \text{jumlah/selisih yang diketahui}" />
-          </div>
-          <div className="grid grid-cols-2 gap-2 font-body text-xs text-white/70">
-            <div className="bg-slate-800/50 rounded p-2">
-              <p className="text-green-300 font-semibold mb-1">Jika diketahui JUMLAH:</p>
-              <p>Gunakan jumlah seluruh angka rasio sebagai pembagi.</p>
-            </div>
-            <div className="bg-slate-800/50 rounded p-2">
-              <p className="text-yellow-300 font-semibold mb-1">Jika diketahui SELISIH:</p>
-              <p>Gunakan selisih dua angka rasio yang bersangkutan sebagai pembagi.</p>
-            </div>
           </div>
         </div>
       </div>
