@@ -63,6 +63,48 @@ const PerbandinganCampuranPage = () => {
               <span className="font-semibold text-accent shrink-0">6.</span>
               <p>{t('practice.perbandingan.perbandinganCampuran.q6')}</p>
             </div>
+
+            {/* Soal 7 */}
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">7.</span>
+              <div>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganCampuran.q7.stem')}</p>
+                <div className="space-y-1 ml-4">
+                  <p>{t('practice.perbandingan.perbandinganCampuran.q7.optA')}</p>
+                  <p>{t('practice.perbandingan.perbandinganCampuran.q7.optB')}</p>
+                  <p>{t('practice.perbandingan.perbandinganCampuran.q7.optC')}</p>
+                  <p>{t('practice.perbandingan.perbandinganCampuran.q7.optD')}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Soal 8 */}
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">8.</span>
+              <div>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganCampuran.q8.stem')}</p>
+                <div className="space-y-1 ml-4">
+                  <p>{t('practice.perbandingan.perbandinganCampuran.q8.optA')}</p>
+                  <p>{t('practice.perbandingan.perbandinganCampuran.q8.optB')}</p>
+                  <p>{t('practice.perbandingan.perbandinganCampuran.q8.optC')}</p>
+                  <p>{t('practice.perbandingan.perbandinganCampuran.q8.optD')}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Soal 9 */}
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">9.</span>
+              <div>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganCampuran.q9.stem')}</p>
+                <div className="space-y-1 ml-4">
+                  <p>{t('practice.perbandingan.perbandinganCampuran.q9.optA')}</p>
+                  <p>{t('practice.perbandingan.perbandinganCampuran.q9.optB')}</p>
+                  <p>{t('practice.perbandingan.perbandinganCampuran.q9.optC')}</p>
+                  <p>{t('practice.perbandingan.perbandinganCampuran.q9.optD')}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

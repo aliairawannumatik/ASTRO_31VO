@@ -101,6 +101,62 @@ const PerbandinganSenilaiPage = () => {
               <span className="font-semibold text-accent shrink-0">10.</span>
               <p>{t('practice.perbandingan.perbandinganSenilai.q10')}</p>
             </div>
+
+            {/* Soal 11 */}
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">11.</span>
+              <div>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganSenilai.q11.stem')}</p>
+                <div className="space-y-1 ml-4">
+                  <p>{t('practice.perbandingan.perbandinganSenilai.q11.optA')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSenilai.q11.optB')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSenilai.q11.optC')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSenilai.q11.optD')}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Soal 12 */}
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">12.</span>
+              <div>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganSenilai.q12.stem')}</p>
+                <div className="space-y-1 ml-4">
+                  <p>{t('practice.perbandingan.perbandinganSenilai.q12.optA')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSenilai.q12.optB')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSenilai.q12.optC')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSenilai.q12.optD')}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Soal 13 */}
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">13.</span>
+              <div>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganSenilai.q13.stem')}</p>
+                <div className="space-y-1 ml-4">
+                  <p>{t('practice.perbandingan.perbandinganSenilai.q13.optA')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSenilai.q13.optB')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSenilai.q13.optC')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSenilai.q13.optD')}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Soal 14 */}
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">14.</span>
+              <div>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganSenilai.q14.stem')}</p>
+                <div className="space-y-1 ml-4">
+                  <p>{t('practice.perbandingan.perbandinganSenilai.q14.optA')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSenilai.q14.optB')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSenilai.q14.optC')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSenilai.q14.optD')}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

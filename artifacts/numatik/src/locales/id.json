@@ -1746,6 +1746,25 @@
         "q10": {
           "pre": "Hasil panen buah mangga, jeruk, dan apel di sebuah perkebunan memiliki perbandingan ",
           "post": ". Jika diketahui selisih berat panen buah apel dan buah mangga adalah 450 kg, tentukanlah total keseluruhan berat hasil panen ketiga buah tersebut!"
+        },
+        "q11": {
+          "stem": "Diketahui perbandingan tiga buah bilangan x, y, dan z adalah 2 : 3 : 5 dan nilai z − x = 15. Berdasarkan informasi tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!",
+          "s1": "Nilai bilangan y adalah 15.",
+          "s2": "Nilai bilangan z adalah 25.",
+          "s3": "Hasil penjumlahan x + y + z adalah 50."
+        },
+        "q12": {
+          "stem": "Perbandingan uang tabungan Rian dan Deni untuk membeli perlengkapan sekolah adalah 3 : 5. Selisih uang tabungan mereka berdua adalah Rp90.000,00. Berdasarkan informasi tersebut, pilihlah semua jawaban yang benar (jawaban bisa lebih dari satu):",
+          "opt1": "Uang tabungan Rian adalah Rp135.000,00.",
+          "opt2": "Uang tabungan Deni adalah Rp225.000,00.",
+          "opt3": "Jika Deni membayar dengan 3 lembar uang seratus ribuan, uang kembaliannya sebesar Rp65.000,00.",
+          "opt4": "Jumlah uang tabungan Rian dan Deni seluruhnya adalah Rp360.000,00."
+        },
+        "q13": {
+          "stem": "Tiga jenis barang ditimbang menggunakan alat berbeda. Sepaket buku ditimbang digital menunjukkan hasil 800 gram. Kotak pensil ditimbang jarum menunjukkan angka 1 kg. Tas sekolah ditimbang seimbang terhadap beban 2 kg. Berdasarkan informasi tersebut, pilihlah semua jawaban yang benar:",
+          "opt1": "Perbandingan berat buku dan kotak pensil adalah 4 : 5.",
+          "opt2": "Perbandingan berat buku dan tas adalah 2 : 5.",
+          "opt3": "Perbandingan berat ketiga jenis barang tersebut berturut-turut adalah 4 : 5 : 10."
         }
       },
       "perbandinganBertingkat": {
@@ -1796,6 +1815,12 @@
           "intro": ". Jika kelereng Gita berjumlah 21 butir, tentukan:",
           "a": "a. Kelereng Fani dan Hana masing-masing",
           "b": "b. Jumlah kelereng ketiganya"
+        },
+        "q9": {
+          "stem": "Perbandingan banyak kelereng Andi dan Budi adalah 2 : 3. Sementara itu, perbandingan banyak kelereng Budi dan Candra adalah 4 : 5. Diketahui selisih kelereng antara anak yang memiliki kelereng terbanyak dan tersedikit adalah 14 buah. Berdasarkan informasi tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!",
+          "s1": "Banyak kelereng Budi adalah 24 buah.",
+          "s2": "Perbandingan banyak kelereng Andi dan Candra adalah 8 : 15.",
+          "s3": "Jumlah kelereng mereka bertiga seluruhnya adalah 70 buah."
         }
       },
       "perbandinganSenilai": {
@@ -1822,7 +1847,35 @@
         "q7": "Mesin P dapat mengisi tangki sampai penuh dalam 2 jam, mesin Q dalam 5 jam, dan mesin R dalam 10 jam. Jika ketiga mesin dinyalakan secara bersamaan, berapa waktu yang diperlukan hingga tangki terisi penuh?",
         "q8": "Persiapan sebuah panggung festival budaya diperkirakan selesai dalam waktu 24 hari jika dikerjakan oleh 6 orang teknisi. Setelah dikerjakan selama 4 hari, pekerjaan terpaksa dihentikan selama 8 hari karena badai. Agar persiapan panggung selesai tepat waktu sesuai rencana awal, berapa banyak tambahan teknisi yang diperlukan?",
         "q9": "Sebuah pesanan seragam sekolah dapat diselesaikan oleh 4 orang penjahit dalam waktu 20 hari. Setelah mereka bekerja selama 4 hari, pasokan listrik terputus sehingga pekerjaan terhenti total selama 12 hari. Berapa banyak tambahan penjahit yang dibutuhkan agar pesanan seragam tersebut dapat diselesaikan tepat waktu?",
-        "q10": "Sebuah pesanan katering pernikahan raksasa jika dikerjakan oleh 3 orang Chef utama akan selesai dalam waktu 10 hari, sedangkan jika dikerjakan oleh 8 orang asisten dapur akan selesai dalam waktu 9 hari. Jika pesanan tersebut dikerjakan secara bersama-sama oleh 5 Chef utama dan 6 asisten dapur, dalam waktu berapa hari pesanan katering itu akan selesai?"
+        "q10": "Sebuah pesanan katering pernikahan raksasa jika dikerjakan oleh 3 orang Chef utama akan selesai dalam waktu 10 hari, sedangkan jika dikerjakan oleh 8 orang asisten dapur akan selesai dalam waktu 9 hari. Jika pesanan tersebut dikerjakan secara bersama-sama oleh 5 Chef utama dan 6 asisten dapur, dalam waktu berapa hari pesanan katering itu akan selesai?",
+        "q11": {
+          "stem": "Sebuah kendaraan membutuhkan 20 liter bensin untuk menempuh jarak 300 km. Jika tangki kendaraan tersebut terisi 32 liter bensin, jarak maksimum yang dapat ditempuh adalah ....",
+          "optA": "A. 420 km",
+          "optB": "B. 450 km",
+          "optC": "C. 480 km",
+          "optD": "D. 520 km"
+        },
+        "q12": {
+          "stem": "Ibu membeli pupuk tanaman seberat 30 kg yang dikemas dalam 6 kantong. Laju perubahan antara berat pupuk terhadap banyaknya kantong pupuk yang tepat adalah ....",
+          "optA": "A. 10 kg / 3 kantong",
+          "optB": "B. 15 kg / 2 kantong",
+          "optC": "C. 5 kg / 1 kantong",
+          "optD": "D. 20 kg / 4 kantong"
+        },
+        "q13": {
+          "stem": "Seorang perenang dapat menempuh jarak 200 meter dalam waktu 20 detik. Laju perubahan satuan kecepatan perenang tersebut adalah ....",
+          "optA": "A. 8 m/detik",
+          "optB": "B. 10 m/detik",
+          "optC": "C. 12 m/detik",
+          "optD": "D. 15 m/detik"
+        },
+        "q14": {
+          "stem": "Untuk membuat 15 porsi makanan dibutuhkan 6 kg beras. Jika warung makan memiliki persediaan 10 kg beras dan akan digunakan seluruhnya, banyak porsi makanan yang dapat dibuat adalah ....",
+          "optA": "A. 20 porsi",
+          "optB": "B. 25 porsi",
+          "optC": "C. 30 porsi",
+          "optD": "D. 35 porsi"
+        }
       },
       "perbandinganSkala": {
         "title": "SKALA",
@@ -1901,6 +1954,33 @@
           "optB": "B. 20.000 liter",
           "optC": "C. 200 liter",
           "optD": "D. 2.000.000 liter"
+        },
+        "q11": {
+          "stem": "Sebuah monumen dipotret dengan skala pengecilan 1/50 kali. Jika tinggi monumen sebenarnya adalah 15 m, berapa cm tinggi monumen pada foto tersebut?",
+          "optA": "A. 10 cm",
+          "optB": "B. 15 cm",
+          "optC": "C. 25 cm",
+          "optD": "D. 30 cm"
+        },
+        "q12": {
+          "stem": "Sebuah peta wilayah memiliki skala 1 : 600.000. Farhan mengendarai sepeda motor dari kota P ke kota Q dengan kecepatan rata-rata 50 km/jam dan membutuhkan waktu 3 jam. Jarak antara kota P dan kota Q pada peta tersebut adalah ....",
+          "optA": "A. 15 cm",
+          "optB": "B. 20 cm",
+          "optC": "C. 25 cm",
+          "optD": "D. 30 cm"
+        },
+        "q13": {
+          "stem": "Pak Heru adalah seorang arsitek. Ia membuat denah rancangan sebuah aula gedung beserta lahan parkirnya pada kertas gambar berukuran 40 cm × 25 cm. Diketahui ukuran panjang dan lebar lahan aula sebenarnya berturut-turut adalah 16 m dan 10 m. Berdasarkan informasi tersebut, pilihlah semua skala yang mungkin digunakan Pak Heru:",
+          "opt1": "1 : 30",
+          "opt2": "1 : 40",
+          "opt3": "1 : 50",
+          "opt4": "1 : 60"
+        },
+        "q14": {
+          "stem": "Perhatikan informasi peta pulau dengan skala 1 : 500.000 berikut! Berdasarkan informasi tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!",
+          "s1": "Jika jarak Kota A ke B pada peta 12 cm, jarak sebenarnya adalah 60 km.",
+          "s2": "Jika jarak Kota B ke C pada peta 20 cm, jarak sebenarnya adalah 100 km.",
+          "s3": "Jika jarak sebenarnya dua kota adalah 150 km, jarak pada petanya adalah 25 cm."
         }
       },
       "perbandinganCampuran": {
@@ -1913,7 +1993,28 @@
         "q3": "Sebuah perusahaan konstruksi mengerahkan 12 pekerja untuk menyelesaikan 2 unit rumah dalam waktu 30 hari. Jika perusahaan tersebut ingin menyelesaikan 3 unit rumah serupa dalam waktu 24 hari, berapa banyak pekerja yang harus mereka kerahkan?",
         "q4": "Seorang peternak memiliki 40 ekor sapi yang dapat menghabiskan 60 karung pakan dalam waktu 15 hari. Jika peternak tersebut menjual 10 ekor sapinya (tersisa 30 ekor) dan ia hanya memiliki 45 karung pakan, berapa lama (dalam hari) persediaan pakan tersebut akan habis?",
         "q5": "Tiga mesin cetak tipe A dapat mencetak 3.000 buku dalam 5 jam. Empat mesin cetak tipe B dapat mencetak 4.800 buku dalam 6 jam. Jika perusahaan menggunakan 2 mesin tipe A dan 3 mesin tipe B secara bersamaan, berapa jam waktu yang dibutuhkan untuk mencetak 8.000 buku?",
-        "q6": "Sebuah pabrik kain jika memproduksi pesanannya menggunakan 2 mesin tenun modern (kapasitas besar) akan selesai dalam waktu 12 hari, sedangkan jika dikerjakan menggunakan 4 mesin tenun tradisional (kapasitas kecil) selesai dalam waktu 18 hari. Jika pabrik tersebut mengoperasikan 3 mesin tenun modern dan 3 mesin tenun tradisional secara bersamaan, dalam waktu berapa hari pesanan kain tersebut dapat diselesaikan?"
+        "q6": "Sebuah pabrik kain jika memproduksi pesanannya menggunakan 2 mesin tenun modern (kapasitas besar) akan selesai dalam waktu 12 hari, sedangkan jika dikerjakan menggunakan 4 mesin tenun tradisional (kapasitas kecil) selesai dalam waktu 18 hari. Jika pabrik tersebut mengoperasikan 3 mesin tenun modern dan 3 mesin tenun tradisional secara bersamaan, dalam waktu berapa hari pesanan kain tersebut dapat diselesaikan?",
+        "q7": {
+          "stem": "Pak Hendra merencanakan pengerjaan renovasi toko yang dikerjakan oleh 12 pekerja selesai dalam waktu 30 hari. Jika Pak Hendra menginginkan renovasi tersebut selesai lebih cepat dalam waktu 20 hari, banyak pekerja tambahan yang diperlukan adalah ....",
+          "optA": "A. 4 orang",
+          "optB": "B. 6 orang",
+          "optC": "C. 18 orang",
+          "optD": "D. 24 orang"
+        },
+        "q8": {
+          "stem": "Persediaan pakan ternak cukup untuk 40 ekor sapi selama 18 hari. Jika peternak menambah 5 ekor sapi lagi, persediaan pakan tersebut akan habis dalam ....",
+          "optA": "A. 12 hari",
+          "optB": "B. 14 hari",
+          "optC": "C. 16 hari",
+          "optD": "D. 20 hari"
+        },
+        "q9": {
+          "stem": "Kontraktor memprediksi pembuatan jembatan selesai dalam 40 hari dengan 15 pekerja. Setelah 10 hari bekerja, proyek terhenti selama 6 hari akibat kendala cuaca. Jika proyek harus selesai tepat sesuai jadwal semula, berapa tambahan pekerja yang dibutuhkan?",
+          "optA": "A. 3 orang",
+          "optB": "B. 4 orang",
+          "optC": "C. 5 orang",
+          "optD": "D. 6 orang"
+        }
       }
     },
     "aritmetikaSosial": {

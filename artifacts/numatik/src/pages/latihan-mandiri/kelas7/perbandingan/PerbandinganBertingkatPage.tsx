@@ -131,6 +131,42 @@ const PerbandinganBertingkatPage = () => {
               </p>
             </div>
 
+            {/* Soal 9 — Benar/Salah */}
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">9.</span>
+              <div className="w-full">
+                <p className="mb-3">{t('practice.perbandingan.perbandinganBertingkat.q9.stem')}</p>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr className="border-b border-white/20">
+                        <th className="text-left pb-2 pr-6 font-semibold text-white/70">Pernyataan</th>
+                        <th className="pb-2 px-4 font-semibold text-white/70">Benar</th>
+                        <th className="pb-2 px-4 font-semibold text-white/70">Salah</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-white/10">
+                        <td className="py-2 pr-6">{t('practice.perbandingan.perbandinganBertingkat.q9.s1')}</td>
+                        <td className="py-2 px-4 text-center text-lg">☐</td>
+                        <td className="py-2 px-4 text-center text-lg">☐</td>
+                      </tr>
+                      <tr className="border-b border-white/10">
+                        <td className="py-2 pr-6">{t('practice.perbandingan.perbandinganBertingkat.q9.s2')}</td>
+                        <td className="py-2 px-4 text-center text-lg">☐</td>
+                        <td className="py-2 px-4 text-center text-lg">☐</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 pr-6">{t('practice.perbandingan.perbandinganBertingkat.q9.s3')}</td>
+                        <td className="py-2 px-4 text-center text-lg">☐</td>
+                        <td className="py-2 px-4 text-center text-lg">☐</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 

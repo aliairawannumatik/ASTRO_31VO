@@ -1746,6 +1746,25 @@
         "q10": {
           "pre": "The harvest of mangoes, oranges, and apples in an orchard is in the ratio ",
           "post": ". If the difference in weight between the apple harvest and the mango harvest is 450 kg, find the total weight of all three fruit harvests!"
+        },
+        "q11": {
+          "stem": "Diketahui perbandingan tiga buah bilangan x, y, dan z adalah 2 : 3 : 5 dan nilai z − x = 15. Berdasarkan informasi tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!",
+          "s1": "Nilai bilangan y adalah 15.",
+          "s2": "Nilai bilangan z adalah 25.",
+          "s3": "Hasil penjumlahan x + y + z adalah 50."
+        },
+        "q12": {
+          "stem": "Perbandingan uang tabungan Rian dan Deni untuk membeli perlengkapan sekolah adalah 3 : 5. Selisih uang tabungan mereka berdua adalah Rp90.000,00. Berdasarkan informasi tersebut, pilihlah semua jawaban yang benar (jawaban bisa lebih dari satu):",
+          "opt1": "Uang tabungan Rian adalah Rp135.000,00.",
+          "opt2": "Uang tabungan Deni adalah Rp225.000,00.",
+          "opt3": "Jika Deni membayar dengan 3 lembar uang seratus ribuan, uang kembaliannya sebesar Rp65.000,00.",
+          "opt4": "Jumlah uang tabungan Rian dan Deni seluruhnya adalah Rp360.000,00."
+        },
+        "q13": {
+          "stem": "Tiga jenis barang ditimbang menggunakan alat berbeda. Sepaket buku ditimbang digital menunjukkan hasil 800 gram. Kotak pensil ditimbang jarum menunjukkan angka 1 kg. Tas sekolah ditimbang seimbang terhadap beban 2 kg. Berdasarkan informasi tersebut, pilihlah semua jawaban yang benar:",
+          "opt1": "Perbandingan berat buku dan kotak pensil adalah 4 : 5.",
+          "opt2": "Perbandingan berat buku dan tas adalah 2 : 5.",
+          "opt3": "Perbandingan berat ketiga jenis barang tersebut berturut-turut adalah 4 : 5 : 10."
         }
       },
       "perbandinganBertingkat": {
@@ -1796,6 +1815,12 @@
           "intro": ". If Gita has 21 marbles, find:",
           "a": "a. The number of marbles Fani and Hana each have",
           "b": "b. The total number of marbles all three have"
+        },
+        "q9": {
+          "stem": "Perbandingan banyak kelereng Andi dan Budi adalah 2 : 3. Sementara itu, perbandingan banyak kelereng Budi dan Candra adalah 4 : 5. Diketahui selisih kelereng antara anak yang memiliki kelereng terbanyak dan tersedikit adalah 14 buah. Berdasarkan informasi tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!",
+          "s1": "Banyak kelereng Budi adalah 24 buah.",
+          "s2": "Perbandingan banyak kelereng Andi dan Candra adalah 8 : 15.",
+          "s3": "Jumlah kelereng mereka bertiga seluruhnya adalah 70 buah."
         }
       },
       "perbandinganSenilai": {
@@ -1822,7 +1847,35 @@
         "q7": "Machine P can fill a tank completely in 2 hours, machine Q in 5 hours, and machine R in 10 hours. If all three machines are turned on at the same time, how long will it take to fill the tank completely?",
         "q8": "Setting up a cultural festival stage is estimated to take 24 days if done by 6 technicians. After 4 days of work, operations were halted for 8 days due to a storm. How many additional technicians are needed so the stage is ready on the original schedule?",
         "q9": "A school uniform order can be completed by 4 tailors in 20 days. After they worked for 4 days, a power outage stopped all work for 12 days. How many additional tailors are needed to complete the order on time?",
-        "q10": "A large wedding catering order would take 3 head chefs 10 days, or 8 kitchen assistants 9 days to complete. If the order is worked on together by 5 head chefs and 6 kitchen assistants, how many days will it take to complete?"
+        "q10": "A large wedding catering order would take 3 head chefs 10 days, or 8 kitchen assistants 9 days to complete. If the order is worked on together by 5 head chefs and 6 kitchen assistants, how many days will it take to complete?",
+        "q11": {
+          "stem": "Sebuah kendaraan membutuhkan 20 liter bensin untuk menempuh jarak 300 km. Jika tangki kendaraan tersebut terisi 32 liter bensin, jarak maksimum yang dapat ditempuh adalah ....",
+          "optA": "A. 420 km",
+          "optB": "B. 450 km",
+          "optC": "C. 480 km",
+          "optD": "D. 520 km"
+        },
+        "q12": {
+          "stem": "Ibu membeli pupuk tanaman seberat 30 kg yang dikemas dalam 6 kantong. Laju perubahan antara berat pupuk terhadap banyaknya kantong pupuk yang tepat adalah ....",
+          "optA": "A. 10 kg / 3 kantong",
+          "optB": "B. 15 kg / 2 kantong",
+          "optC": "C. 5 kg / 1 kantong",
+          "optD": "D. 20 kg / 4 kantong"
+        },
+        "q13": {
+          "stem": "Seorang perenang dapat menempuh jarak 200 meter dalam waktu 20 detik. Laju perubahan satuan kecepatan perenang tersebut adalah ....",
+          "optA": "A. 8 m/detik",
+          "optB": "B. 10 m/detik",
+          "optC": "C. 12 m/detik",
+          "optD": "D. 15 m/detik"
+        },
+        "q14": {
+          "stem": "Untuk membuat 15 porsi makanan dibutuhkan 6 kg beras. Jika warung makan memiliki persediaan 10 kg beras dan akan digunakan seluruhnya, banyak porsi makanan yang dapat dibuat adalah ....",
+          "optA": "A. 20 porsi",
+          "optB": "B. 25 porsi",
+          "optC": "C. 30 porsi",
+          "optD": "D. 35 porsi"
+        }
       },
       "perbandinganSkala": {
         "title": "SCALE",
@@ -1901,6 +1954,33 @@
           "optB": "B. 20,000 liters",
           "optC": "C. 200 liters",
           "optD": "D. 2,000,000 liters"
+        },
+        "q11": {
+          "stem": "Sebuah monumen dipotret dengan skala pengecilan 1/50 kali. Jika tinggi monumen sebenarnya adalah 15 m, berapa cm tinggi monumen pada foto tersebut?",
+          "optA": "A. 10 cm",
+          "optB": "B. 15 cm",
+          "optC": "C. 25 cm",
+          "optD": "D. 30 cm"
+        },
+        "q12": {
+          "stem": "Sebuah peta wilayah memiliki skala 1 : 600.000. Farhan mengendarai sepeda motor dari kota P ke kota Q dengan kecepatan rata-rata 50 km/jam dan membutuhkan waktu 3 jam. Jarak antara kota P dan kota Q pada peta tersebut adalah ....",
+          "optA": "A. 15 cm",
+          "optB": "B. 20 cm",
+          "optC": "C. 25 cm",
+          "optD": "D. 30 cm"
+        },
+        "q13": {
+          "stem": "Pak Heru adalah seorang arsitek. Ia membuat denah rancangan sebuah aula gedung beserta lahan parkirnya pada kertas gambar berukuran 40 cm × 25 cm. Diketahui ukuran panjang dan lebar lahan aula sebenarnya berturut-turut adalah 16 m dan 10 m. Berdasarkan informasi tersebut, pilihlah semua skala yang mungkin digunakan Pak Heru:",
+          "opt1": "1 : 30",
+          "opt2": "1 : 40",
+          "opt3": "1 : 50",
+          "opt4": "1 : 60"
+        },
+        "q14": {
+          "stem": "Perhatikan informasi peta pulau dengan skala 1 : 500.000 berikut! Berdasarkan informasi tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!",
+          "s1": "Jika jarak Kota A ke B pada peta 12 cm, jarak sebenarnya adalah 60 km.",
+          "s2": "Jika jarak Kota B ke C pada peta 20 cm, jarak sebenarnya adalah 100 km.",
+          "s3": "Jika jarak sebenarnya dua kota adalah 150 km, jarak pada petanya adalah 25 cm."
         }
       },
       "perbandinganCampuran": {
@@ -1913,7 +1993,28 @@
         "q3": "A construction company employs 12 workers to complete 2 housing units in 30 days. If the company wants to complete 3 similar housing units in 24 days, how many workers must they deploy?",
         "q4": "A farmer has 40 cows that consume 60 sacks of feed in 15 days. If the farmer sells 10 cows (30 remain) and has only 45 sacks of feed left, how many days will the feed supply last?",
         "q5": "Three type-A printing machines can print 3,000 books in 5 hours. Four type-B printing machines can print 4,800 books in 6 hours. If the company runs 2 type-A machines and 3 type-B machines simultaneously, how many hours are needed to print 8,000 books?",
-        "q6": "A textile factory can complete an order using 2 modern looms (large capacity) in 12 days, or using 4 traditional looms (small capacity) in 18 days. If the factory operates 3 modern looms and 3 traditional looms simultaneously, in how many days can the order be completed?"
+        "q6": "A textile factory can complete an order using 2 modern looms (large capacity) in 12 days, or using 4 traditional looms (small capacity) in 18 days. If the factory operates 3 modern looms and 3 traditional looms simultaneously, in how many days can the order be completed?",
+        "q7": {
+          "stem": "Pak Hendra merencanakan pengerjaan renovasi toko yang dikerjakan oleh 12 pekerja selesai dalam waktu 30 hari. Jika Pak Hendra menginginkan renovasi tersebut selesai lebih cepat dalam waktu 20 hari, banyak pekerja tambahan yang diperlukan adalah ....",
+          "optA": "A. 4 orang",
+          "optB": "B. 6 orang",
+          "optC": "C. 18 orang",
+          "optD": "D. 24 orang"
+        },
+        "q8": {
+          "stem": "Persediaan pakan ternak cukup untuk 40 ekor sapi selama 18 hari. Jika peternak menambah 5 ekor sapi lagi, persediaan pakan tersebut akan habis dalam ....",
+          "optA": "A. 12 hari",
+          "optB": "B. 14 hari",
+          "optC": "C. 16 hari",
+          "optD": "D. 20 hari"
+        },
+        "q9": {
+          "stem": "Kontraktor memprediksi pembuatan jembatan selesai dalam 40 hari dengan 15 pekerja. Setelah 10 hari bekerja, proyek terhenti selama 6 hari akibat kendala cuaca. Jika proyek harus selesai tepat sesuai jadwal semula, berapa tambahan pekerja yang dibutuhkan?",
+          "optA": "A. 3 orang",
+          "optB": "B. 4 orang",
+          "optC": "C. 5 orang",
+          "optD": "D. 6 orang"
+        }
       }
     },
     "aritmetikaSosial": {

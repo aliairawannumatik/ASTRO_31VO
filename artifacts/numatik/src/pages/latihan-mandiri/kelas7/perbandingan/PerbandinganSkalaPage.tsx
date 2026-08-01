@@ -178,6 +178,84 @@ const PerbandinganSkalaPage = () => {
                 </div>
               </div>
             </div>
+
+            {/* Soal 11 */}
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">11.</span>
+              <div>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganSkala.q11.stem')}</p>
+                <div className="space-y-1 ml-4">
+                  <p>{t('practice.perbandingan.perbandinganSkala.q11.optA')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q11.optB')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q11.optC')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q11.optD')}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Soal 12 */}
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">12.</span>
+              <div>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganSkala.q12.stem')}</p>
+                <div className="space-y-1 ml-4">
+                  <p>{t('practice.perbandingan.perbandinganSkala.q12.optA')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q12.optB')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q12.optC')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q12.optD')}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Soal 13 — Pilih Semua */}
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">13.</span>
+              <div>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganSkala.q13.stem')}</p>
+                <div className="space-y-2 ml-2">
+                  <p className="flex items-start gap-2"><span className="shrink-0 text-lg">☐</span><span>{t('practice.perbandingan.perbandinganSkala.q13.opt1')}</span></p>
+                  <p className="flex items-start gap-2"><span className="shrink-0 text-lg">☐</span><span>{t('practice.perbandingan.perbandinganSkala.q13.opt2')}</span></p>
+                  <p className="flex items-start gap-2"><span className="shrink-0 text-lg">☐</span><span>{t('practice.perbandingan.perbandinganSkala.q13.opt3')}</span></p>
+                  <p className="flex items-start gap-2"><span className="shrink-0 text-lg">☐</span><span>{t('practice.perbandingan.perbandinganSkala.q13.opt4')}</span></p>
+                </div>
+              </div>
+            </div>
+
+            {/* Soal 14 — Benar/Salah */}
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">14.</span>
+              <div className="w-full">
+                <p className="mb-3">{t('practice.perbandingan.perbandinganSkala.q14.stem')}</p>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr className="border-b border-white/20">
+                        <th className="text-left pb-2 pr-6 font-semibold text-white/70">Pernyataan</th>
+                        <th className="pb-2 px-4 font-semibold text-white/70">Benar</th>
+                        <th className="pb-2 px-4 font-semibold text-white/70">Salah</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-white/10">
+                        <td className="py-2 pr-6">{t('practice.perbandingan.perbandinganSkala.q14.s1')}</td>
+                        <td className="py-2 px-4 text-center text-lg">☐</td>
+                        <td className="py-2 px-4 text-center text-lg">☐</td>
+                      </tr>
+                      <tr className="border-b border-white/10">
+                        <td className="py-2 pr-6">{t('practice.perbandingan.perbandinganSkala.q14.s2')}</td>
+                        <td className="py-2 px-4 text-center text-lg">☐</td>
+                        <td className="py-2 px-4 text-center text-lg">☐</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 pr-6">{t('practice.perbandingan.perbandinganSkala.q14.s3')}</td>
+                        <td className="py-2 px-4 text-center text-lg">☐</td>
+                        <td className="py-2 px-4 text-center text-lg">☐</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

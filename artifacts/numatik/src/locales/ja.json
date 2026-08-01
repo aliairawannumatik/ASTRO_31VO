@@ -1746,6 +1746,25 @@
         "q10": {
           "pre": "ある果樹園のマンゴー・みかん・リンゴの収穫量の比は ",
           "post": " です。リンゴとマンゴーの収穫量の差が450 kgのとき、3種類の果物の合計収穫量を求めなさい。"
+        },
+        "q11": {
+          "stem": "Diketahui perbandingan tiga buah bilangan x, y, dan z adalah 2 : 3 : 5 dan nilai z − x = 15. Berdasarkan informasi tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!",
+          "s1": "Nilai bilangan y adalah 15.",
+          "s2": "Nilai bilangan z adalah 25.",
+          "s3": "Hasil penjumlahan x + y + z adalah 50."
+        },
+        "q12": {
+          "stem": "Perbandingan uang tabungan Rian dan Deni untuk membeli perlengkapan sekolah adalah 3 : 5. Selisih uang tabungan mereka berdua adalah Rp90.000,00. Berdasarkan informasi tersebut, pilihlah semua jawaban yang benar (jawaban bisa lebih dari satu):",
+          "opt1": "Uang tabungan Rian adalah Rp135.000,00.",
+          "opt2": "Uang tabungan Deni adalah Rp225.000,00.",
+          "opt3": "Jika Deni membayar dengan 3 lembar uang seratus ribuan, uang kembaliannya sebesar Rp65.000,00.",
+          "opt4": "Jumlah uang tabungan Rian dan Deni seluruhnya adalah Rp360.000,00."
+        },
+        "q13": {
+          "stem": "Tiga jenis barang ditimbang menggunakan alat berbeda. Sepaket buku ditimbang digital menunjukkan hasil 800 gram. Kotak pensil ditimbang jarum menunjukkan angka 1 kg. Tas sekolah ditimbang seimbang terhadap beban 2 kg. Berdasarkan informasi tersebut, pilihlah semua jawaban yang benar:",
+          "opt1": "Perbandingan berat buku dan kotak pensil adalah 4 : 5.",
+          "opt2": "Perbandingan berat buku dan tas adalah 2 : 5.",
+          "opt3": "Perbandingan berat ketiga jenis barang tersebut berturut-turut adalah 4 : 5 : 10."
         }
       },
       "perbandinganBertingkat": {
@@ -1796,6 +1815,12 @@
           "intro": " です。ギタのビー玉が21個のとき、次を求めなさい：",
           "a": "a. ファニとハナのビー玉の数それぞれ",
           "b": "b. 3人のビー玉の合計"
+        },
+        "q9": {
+          "stem": "Perbandingan banyak kelereng Andi dan Budi adalah 2 : 3. Sementara itu, perbandingan banyak kelereng Budi dan Candra adalah 4 : 5. Diketahui selisih kelereng antara anak yang memiliki kelereng terbanyak dan tersedikit adalah 14 buah. Berdasarkan informasi tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!",
+          "s1": "Banyak kelereng Budi adalah 24 buah.",
+          "s2": "Perbandingan banyak kelereng Andi dan Candra adalah 8 : 15.",
+          "s3": "Jumlah kelereng mereka bertiga seluruhnya adalah 70 buah."
         }
       },
       "perbandinganSenilai": {
@@ -1822,7 +1847,35 @@
         "q7": "ポンプPは2時間、ポンプQは5時間、ポンプRは10時間でタンクを満水にできます。3台同時に稼働させると、何時間で満水になりますか？",
         "q8": "ある文化祭のステージ準備は、6人の技術者が作業した場合24日で完了する見込みです。4日間作業した後、嵐のため8日間作業が中断されました。当初の予定どおりに完成させるには、何人の技術者を追加する必要がありますか？",
         "q9": "4人の仕立て職人が20日で制服の注文を完成させることができます。4日間作業した後、停電により12日間作業が全停止しました。予定通りに完成させるには、何人の仕立て職人を追加する必要がありますか？",
-        "q10": "大型の結婚式ケータリング注文は、3人のシェフが担当すれば10日、8人の厨房スタッフが担当すれば9日で完成します。5人のシェフと6人の厨房スタッフが一緒に作業した場合、何日で完成しますか？"
+        "q10": "大型の結婚式ケータリング注文は、3人のシェフが担当すれば10日、8人の厨房スタッフが担当すれば9日で完成します。5人のシェフと6人の厨房スタッフが一緒に作業した場合、何日で完成しますか？",
+        "q11": {
+          "stem": "Sebuah kendaraan membutuhkan 20 liter bensin untuk menempuh jarak 300 km. Jika tangki kendaraan tersebut terisi 32 liter bensin, jarak maksimum yang dapat ditempuh adalah ....",
+          "optA": "A. 420 km",
+          "optB": "B. 450 km",
+          "optC": "C. 480 km",
+          "optD": "D. 520 km"
+        },
+        "q12": {
+          "stem": "Ibu membeli pupuk tanaman seberat 30 kg yang dikemas dalam 6 kantong. Laju perubahan antara berat pupuk terhadap banyaknya kantong pupuk yang tepat adalah ....",
+          "optA": "A. 10 kg / 3 kantong",
+          "optB": "B. 15 kg / 2 kantong",
+          "optC": "C. 5 kg / 1 kantong",
+          "optD": "D. 20 kg / 4 kantong"
+        },
+        "q13": {
+          "stem": "Seorang perenang dapat menempuh jarak 200 meter dalam waktu 20 detik. Laju perubahan satuan kecepatan perenang tersebut adalah ....",
+          "optA": "A. 8 m/detik",
+          "optB": "B. 10 m/detik",
+          "optC": "C. 12 m/detik",
+          "optD": "D. 15 m/detik"
+        },
+        "q14": {
+          "stem": "Untuk membuat 15 porsi makanan dibutuhkan 6 kg beras. Jika warung makan memiliki persediaan 10 kg beras dan akan digunakan seluruhnya, banyak porsi makanan yang dapat dibuat adalah ....",
+          "optA": "A. 20 porsi",
+          "optB": "B. 25 porsi",
+          "optC": "C. 30 porsi",
+          "optD": "D. 35 porsi"
+        }
       },
       "perbandinganSkala": {
         "title": "縮尺",
@@ -1901,6 +1954,33 @@
           "optB": "B. 20,000リットル",
           "optC": "C. 200リットル",
           "optD": "D. 2,000,000リットル"
+        },
+        "q11": {
+          "stem": "Sebuah monumen dipotret dengan skala pengecilan 1/50 kali. Jika tinggi monumen sebenarnya adalah 15 m, berapa cm tinggi monumen pada foto tersebut?",
+          "optA": "A. 10 cm",
+          "optB": "B. 15 cm",
+          "optC": "C. 25 cm",
+          "optD": "D. 30 cm"
+        },
+        "q12": {
+          "stem": "Sebuah peta wilayah memiliki skala 1 : 600.000. Farhan mengendarai sepeda motor dari kota P ke kota Q dengan kecepatan rata-rata 50 km/jam dan membutuhkan waktu 3 jam. Jarak antara kota P dan kota Q pada peta tersebut adalah ....",
+          "optA": "A. 15 cm",
+          "optB": "B. 20 cm",
+          "optC": "C. 25 cm",
+          "optD": "D. 30 cm"
+        },
+        "q13": {
+          "stem": "Pak Heru adalah seorang arsitek. Ia membuat denah rancangan sebuah aula gedung beserta lahan parkirnya pada kertas gambar berukuran 40 cm × 25 cm. Diketahui ukuran panjang dan lebar lahan aula sebenarnya berturut-turut adalah 16 m dan 10 m. Berdasarkan informasi tersebut, pilihlah semua skala yang mungkin digunakan Pak Heru:",
+          "opt1": "1 : 30",
+          "opt2": "1 : 40",
+          "opt3": "1 : 50",
+          "opt4": "1 : 60"
+        },
+        "q14": {
+          "stem": "Perhatikan informasi peta pulau dengan skala 1 : 500.000 berikut! Berdasarkan informasi tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!",
+          "s1": "Jika jarak Kota A ke B pada peta 12 cm, jarak sebenarnya adalah 60 km.",
+          "s2": "Jika jarak Kota B ke C pada peta 20 cm, jarak sebenarnya adalah 100 km.",
+          "s3": "Jika jarak sebenarnya dua kota adalah 150 km, jarak pada petanya adalah 25 cm."
         }
       },
       "perbandinganCampuran": {
@@ -1913,7 +1993,28 @@
         "q3": "ある建設会社が12人の作業員を使って2棟の住宅を30日で完成させました。同じ会社が3棟の同様の住宅を24日で完成させたい場合、何人の作業員を投入する必要がありますか？",
         "q4": "ある農家は40頭の牛が15日間で飼料60袋を消費できます。農家が10頭の牛を売り（残り30頭）、飼料が45袋しかない場合、飼料は何日で尽きますか？",
         "q5": "Aタイプの印刷機3台は5時間で3,000冊を印刷できます。Bタイプの印刷機4台は6時間で4,800冊を印刷できます。Aタイプ2台とBタイプ3台を同時に稼働させた場合、8,000冊を印刷するのに何時間かかりますか？",
-        "q6": "ある織物工場は、大容量の現代的な織機2台を使えば12日間で注文を完成でき、小容量の伝統的な織機4台を使えば18日間で完成できます。現代的な織機3台と伝統的な織機3台を同時に稼働させた場合、何日で注文を完成できますか？"
+        "q6": "ある織物工場は、大容量の現代的な織機2台を使えば12日間で注文を完成でき、小容量の伝統的な織機4台を使えば18日間で完成できます。現代的な織機3台と伝統的な織機3台を同時に稼働させた場合、何日で注文を完成できますか？",
+        "q7": {
+          "stem": "Pak Hendra merencanakan pengerjaan renovasi toko yang dikerjakan oleh 12 pekerja selesai dalam waktu 30 hari. Jika Pak Hendra menginginkan renovasi tersebut selesai lebih cepat dalam waktu 20 hari, banyak pekerja tambahan yang diperlukan adalah ....",
+          "optA": "A. 4 orang",
+          "optB": "B. 6 orang",
+          "optC": "C. 18 orang",
+          "optD": "D. 24 orang"
+        },
+        "q8": {
+          "stem": "Persediaan pakan ternak cukup untuk 40 ekor sapi selama 18 hari. Jika peternak menambah 5 ekor sapi lagi, persediaan pakan tersebut akan habis dalam ....",
+          "optA": "A. 12 hari",
+          "optB": "B. 14 hari",
+          "optC": "C. 16 hari",
+          "optD": "D. 20 hari"
+        },
+        "q9": {
+          "stem": "Kontraktor memprediksi pembuatan jembatan selesai dalam 40 hari dengan 15 pekerja. Setelah 10 hari bekerja, proyek terhenti selama 6 hari akibat kendala cuaca. Jika proyek harus selesai tepat sesuai jadwal semula, berapa tambahan pekerja yang dibutuhkan?",
+          "optA": "A. 3 orang",
+          "optB": "B. 4 orang",
+          "optC": "C. 5 orang",
+          "optD": "D. 6 orang"
+        }
       }
     },
     "aritmetikaSosial": {
