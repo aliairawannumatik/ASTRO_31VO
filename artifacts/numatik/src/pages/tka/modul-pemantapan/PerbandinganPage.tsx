@@ -226,43 +226,11 @@ const SenilaiRingkasan = (
 const BertingkatRingkasan = (
   <div className="mt-5 space-y-4">
 
-    {/* ── Apa Itu Perbandingan Bertingkat? ── */}
-    <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-      <div className="flex items-center gap-3 px-5 py-4">
-        <svg className="w-5 h-5 text-yellow-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-        <span className="font-body font-semibold text-white">Apa Itu Perbandingan Bertingkat?</span>
-      </div>
-      <div className="px-5 pb-5 space-y-4">
-        <p className="font-body text-sm text-white/80 leading-relaxed">
-          Perbandingan bertingkat muncul ketika dua perbandingan berbeda dihubungkan melalui satu variabel perantara. Misalnya, diketahui A : B dan B : C — maka B adalah variabel perantara yang menghubungkan A dan C.
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
-            <p className="font-body text-sm font-semibold text-blue-300 mb-2">Contoh Masalah</p>
-            <p className="font-body text-sm text-white/70">
-              <InlineMath math="A : B = 2 : 3" /> dan <InlineMath math="B : C = 4 : 5" />. Berapakah <InlineMath math="A : B : C" />?
-            </p>
-          </div>
-          <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
-            <p className="font-body text-sm font-semibold text-purple-300 mb-2">Kunci Utama</p>
-            <p className="font-body text-sm text-white/70">
-              Samakan nilai B di kedua perbandingan menggunakan KPK, lalu gabungkan menjadi satu rasio A : B : C.
-            </p>
-          </div>
-        </div>
-        <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
-          <p className="font-body text-sm text-yellow-200 leading-relaxed">
-            <strong>Catatan:</strong> Jika nilai perantara sudah sama di kedua perbandingan, tidak perlu menggunakan KPK — langsung gabungkan saja!
-          </p>
-        </div>
-      </div>
-    </div>
-
-    {/* ── Ringkasan Intisari: Langkah-Langkah Penyelesaian ── */}
+    {/* ── Langkah-Langkah Penyelesaian ── */}
     <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
       <div className="flex items-center gap-3 px-5 py-4">
         <svg className="w-5 h-5 text-green-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-        <span className="font-body font-semibold text-white">Ringkasan Intisari: Langkah-Langkah Penyelesaian</span>
+        <span className="font-body font-semibold text-white">Langkah-Langkah Penyelesaian</span>
       </div>
       <div className="px-5 pb-5 space-y-4">
         <div className="bg-slate-800/50 rounded-lg p-4">
