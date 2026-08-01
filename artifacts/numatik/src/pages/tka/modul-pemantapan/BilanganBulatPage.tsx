@@ -103,6 +103,20 @@ const BilanganBulatPage = () => {
     ? "bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50"
     : "bg-gradient-to-br from-blue-50 via-white to-sky-50";
 
+  // ── header card background & border (solid on light themes) ─────────
+  const headerBg = isDark
+    ? "linear-gradient(135deg, rgba(99,102,241,0.18) 0%, rgba(139,92,246,0.12) 50%, rgba(15,12,41,0.9) 100%)"
+    : theme === "forest"  ? "#16a34a"
+    : theme === "sunset"  ? "#c2410c"
+    : theme === "white"   ? "#4f46e5"
+    : "#0369a1"; // ocean / blue
+  const headerBorder = isDark
+    ? "rgba(99,102,241,0.3)"
+    : theme === "forest"  ? "rgba(22,163,74,0.6)"
+    : theme === "sunset"  ? "rgba(194,65,12,0.6)"
+    : theme === "white"   ? "rgba(79,70,229,0.5)"
+    : "rgba(3,105,161,0.6)";
+
   // ── pembahasan cards ────────────────────────────────────────────────
   const PBJawaban = ({ children }: { children: React.ReactNode }) => (
     <div className={`rounded-xl px-4 py-3 flex items-center gap-3 border ${
@@ -163,17 +177,21 @@ const BilanganBulatPage = () => {
       tipe === "PGS"  ? (isDark ? "bg-sky-500/20 text-sky-300 border-sky-500/40"       : "bg-sky-100 text-sky-700 border-sky-300") :
       tipe === "MCMA" ? (isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/40"  : "bg-amber-100 text-amber-700 border-amber-300") :
                         (isDark ? "bg-rose-500/20 text-rose-300 border-rose-500/40"     : "bg-rose-100 text-rose-700 border-rose-300");
+    const tipeBadge =
+      tipe === "PGS"  ? "PG" :
+      tipe === "MCMA" ? "PG MCMA" :
+                        "PG Kategori";
     const tipeLabel =
       tipe === "PGS"  ? "Pilihan Ganda" :
-      tipe === "MCMA" ? "PG Kompleks – lebih dari 1 jawaban" :
-                        "PG Kompleks – Benar / Salah";
+      tipe === "MCMA" ? "Multiple Choice – lebih dari 1 jawaban" :
+                        "Pernyataan Benar / Salah";
     return (
       <div className={`rounded-xl p-5 ${
         isDark ? "bg-card/70 backdrop-blur border border-border" : "bg-white border border-gray-200 shadow-sm"
       }`}>
         <div className="flex items-center gap-2 mb-3">
           <span className="bg-emerald-500/20 text-emerald-400 font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">{num}</span>
-          <span className={`text-[10px] font-body font-bold rounded-full px-2.5 py-0.5 border ${tipeColor}`}>{tipe}</span>
+          <span className={`text-[10px] font-body font-bold rounded-full px-2.5 py-0.5 border ${tipeColor}`}>{tipeBadge}</span>
           <span className={`text-[9px] font-body ${isDark ? "text-white/35" : "text-gray-400"}`}>{tipeLabel}</span>
         </div>
         {children}
@@ -187,17 +205,21 @@ const BilanganBulatPage = () => {
       tipe === "PGS"  ? (isDark ? "bg-sky-500/20 text-sky-300 border-sky-500/40"       : "bg-sky-100 text-sky-700 border-sky-300") :
       tipe === "MCMA" ? (isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/40"  : "bg-amber-100 text-amber-700 border-amber-300") :
                         (isDark ? "bg-rose-500/20 text-rose-300 border-rose-500/40"     : "bg-rose-100 text-rose-700 border-rose-300");
+    const tipeBadge =
+      tipe === "PGS"  ? "PG" :
+      tipe === "MCMA" ? "PG MCMA" :
+                        "PG Kategori";
     const tipeLabel =
       tipe === "PGS"  ? "Pilihan Ganda" :
-      tipe === "MCMA" ? "PG Kompleks – lebih dari 1 jawaban" :
-                        "PG Kompleks – Benar / Salah";
+      tipe === "MCMA" ? "Multiple Choice – lebih dari 1 jawaban" :
+                        "Pernyataan Benar / Salah";
     return (
       <div className={`rounded-xl p-5 ${
         isDark ? "bg-card/70 backdrop-blur border border-border" : "bg-white border border-gray-200 shadow-sm"
       }`}>
         <div className="flex items-center gap-2 mb-3">
           <span className="bg-amber-500/20 text-amber-400 font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">{n}</span>
-          <span className={`text-[10px] font-body font-bold rounded-full px-2.5 py-0.5 border ${tipeColor}`}>{tipe}</span>
+          <span className={`text-[10px] font-body font-bold rounded-full px-2.5 py-0.5 border ${tipeColor}`}>{tipeBadge}</span>
           <span className={`text-[9px] font-body ${isDark ? "text-white/35" : "text-gray-400"}`}>{tipeLabel}</span>
         </div>
         {children}
@@ -340,48 +362,67 @@ const BilanganBulatPage = () => {
 
         {/* ── Header ── */}
         <div className="relative mb-6">
-          <div className="absolute inset-0 rounded-2xl blur-2xl opacity-30"
-            style={{ background: "radial-gradient(ellipse at 50% 0%, #6366f1 0%, transparent 70%)" }} />
-          <div className="relative rounded-2xl overflow-hidden border border-indigo-500/30"
-            style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.18) 0%, rgba(139,92,246,0.12) 50%, rgba(15,12,41,0.9) 100%)" }}>
-            <div className="absolute top-0 left-0 right-0 h-px"
-              style={{ background: "linear-gradient(90deg, transparent, rgba(167,139,250,0.6), transparent)" }} />
+          {isDark && (
+            <div className="absolute inset-0 rounded-2xl blur-2xl opacity-30"
+              style={{ background: "radial-gradient(ellipse at 50% 0%, #6366f1 0%, transparent 70%)" }} />
+          )}
+          <div className="relative rounded-2xl overflow-hidden border"
+            style={{ background: headerBg, borderColor: headerBorder }}>
+            {isDark && (
+              <div className="absolute top-0 left-0 right-0 h-px"
+                style={{ background: "linear-gradient(90deg, transparent, rgba(167,139,250,0.6), transparent)" }} />
+            )}
             <div className="px-6 py-6 flex flex-col items-center text-center">
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-                  style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.4), rgba(139,92,246,0.2))", border: "1px solid rgba(167,139,250,0.35)" }}>
-                  <BookMarked className="w-[18px] h-[18px] text-violet-300" />
+                  style={{
+                    background: isDark ? "linear-gradient(135deg, rgba(99,102,241,0.4), rgba(139,92,246,0.2))" : "rgba(255,255,255,0.2)",
+                    border: isDark ? "1px solid rgba(167,139,250,0.35)" : "1px solid rgba(255,255,255,0.4)",
+                  }}>
+                  <BookMarked className="w-[18px] h-[18px] text-white" />
                 </div>
-                <span className="font-body text-[10px] font-bold tracking-[0.2em] uppercase text-violet-400/70">
+                <span className="font-body text-[10px] font-bold tracking-[0.2em] uppercase"
+                  style={{ color: isDark ? "rgba(167,139,250,0.7)" : "rgba(255,255,255,0.85)" }}>
                   Modul Pemantapan TKA
                 </span>
               </div>
               <h1 className="font-display text-xl md:text-2xl font-bold text-white mb-1 leading-tight"
-                style={{ textShadow: "0 0 40px rgba(167,139,250,0.5)" }}>
+                style={{ textShadow: isDark ? "0 0 40px rgba(167,139,250,0.5)" : "0 1px 4px rgba(0,0,0,0.25)" }}>
                 BILANGAN BULAT
               </h1>
-              <p className="font-body text-[11px] text-violet-300/50 mb-4">
+              <p className="font-body text-[11px] mb-4"
+                style={{ color: isDark ? "rgba(167,139,250,0.5)" : "rgba(255,255,255,0.75)" }}>
                 Matematika Kelas 7 SMP/MTs · TA 2026–2027
               </p>
+
+              {/* ── Stats: 3 colored boxes ── */}
               <div className="flex gap-2 flex-wrap justify-center mb-3">
-                <span className="text-[10px] font-body px-3 py-1 rounded-full border font-semibold"
-                  style={{ background: "rgba(99,102,241,0.15)", borderColor: "rgba(99,102,241,0.35)", color: "#a5b4fc" }}>
-                  📖 8 Ringkasan Materi
+                <span className="text-[10px] font-body px-3 py-1.5 rounded-lg border font-bold"
+                  style={{ background: "rgba(255,255,255,0.18)", borderColor: "rgba(255,255,255,0.35)", color: "#ffffff" }}>
+                  📘 Ringkasan Materi
                 </span>
-                <span className="text-[10px] font-body px-3 py-1 rounded-full border font-semibold"
-                  style={{ background: "rgba(139,92,246,0.15)", borderColor: "rgba(139,92,246,0.35)", color: "#c4b5fd" }}>
-                  ✏️ 30 Soal Latihan
+                <span className="text-[10px] font-body px-3 py-1.5 rounded-lg border font-bold"
+                  style={{ background: "rgba(255,255,255,0.18)", borderColor: "rgba(255,255,255,0.35)", color: "#ffffff" }}>
+                  📚 Contoh Soal
+                </span>
+                <span className="text-[10px] font-body px-3 py-1.5 rounded-lg border font-bold"
+                  style={{ background: "rgba(255,255,255,0.18)", borderColor: "rgba(255,255,255,0.35)", color: "#ffffff" }}>
+                  ✏️ Latihan Soal
                 </span>
               </div>
+
+              {/* ── Type legend ── */}
               <div className="flex gap-2 flex-wrap justify-center">
-                <span className="text-[9px] font-body px-2.5 py-0.5 rounded-full border font-semibold text-sky-300"
-                  style={{ background: "rgba(14,165,233,0.15)", borderColor: "rgba(14,165,233,0.35)" }}>PGS</span>
-                <span className="text-[9px] font-body px-2.5 py-0.5 rounded-full border font-semibold text-amber-300"
-                  style={{ background: "rgba(245,158,11,0.15)", borderColor: "rgba(245,158,11,0.35)" }}>MCMA</span>
-                <span className="text-[9px] font-body px-2.5 py-0.5 rounded-full border font-semibold text-rose-300"
-                  style={{ background: "rgba(244,63,94,0.15)", borderColor: "rgba(244,63,94,0.35)" }}>Benar/Salah</span>
+                <span className="text-[9px] font-body px-2.5 py-0.5 rounded-full border font-semibold"
+                  style={{ background: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.35)", color: "#ffffff" }}>PG</span>
+                <span className="text-[9px] font-body px-2.5 py-0.5 rounded-full border font-semibold"
+                  style={{ background: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.35)", color: "#ffffff" }}>PG MCMA</span>
+                <span className="text-[9px] font-body px-2.5 py-0.5 rounded-full border font-semibold"
+                  style={{ background: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.35)", color: "#ffffff" }}>PG Kategori</span>
               </div>
-              <p className="font-body text-[15px] font-bold text-white/90 mt-4 tracking-wide">
+
+              <p className="font-body text-[15px] font-bold mt-4 tracking-wide"
+                style={{ color: isDark ? "rgba(255,255,255,0.9)" : "#ffffff" }}>
                 Irawan Sutiawan, M.Pd
               </p>
             </div>
