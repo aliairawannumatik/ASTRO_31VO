@@ -228,6 +228,87 @@ const SenilaiRingkasan = (
   </div>
 );
 
+const BertingkatRingkasan = (
+  <div className="mt-5 space-y-4">
+
+    {/* ── Apa Itu Perbandingan Bertingkat? ── */}
+    <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+      <div className="flex items-center gap-3 px-5 py-4">
+        <svg className="w-5 h-5 text-yellow-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+        <span className="font-body font-semibold text-white">Apa Itu Perbandingan Bertingkat?</span>
+      </div>
+      <div className="px-5 pb-5 space-y-4">
+        <p className="font-body text-sm text-white/80 leading-relaxed">
+          Perbandingan bertingkat muncul ketika dua perbandingan berbeda dihubungkan melalui satu variabel perantara. Misalnya, diketahui A : B dan B : C — maka B adalah variabel perantara yang menghubungkan A dan C.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+            <p className="font-body text-sm font-semibold text-blue-300 mb-2">Contoh Masalah</p>
+            <p className="font-body text-sm text-white/70">
+              <InlineMath math="A : B = 2 : 3" /> dan <InlineMath math="B : C = 4 : 5" />. Berapakah <InlineMath math="A : B : C" />?
+            </p>
+          </div>
+          <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+            <p className="font-body text-sm font-semibold text-purple-300 mb-2">Kunci Utama</p>
+            <p className="font-body text-sm text-white/70">
+              Samakan nilai B di kedua perbandingan menggunakan KPK, lalu gabungkan menjadi satu rasio A : B : C.
+            </p>
+          </div>
+        </div>
+        <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+          <p className="font-body text-sm text-yellow-200 leading-relaxed">
+            <strong>Catatan:</strong> Jika nilai perantara sudah sama di kedua perbandingan, tidak perlu menggunakan KPK — langsung gabungkan saja!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* ── Ringkasan Intisari: Langkah-Langkah Penyelesaian ── */}
+    <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+      <div className="flex items-center gap-3 px-5 py-4">
+        <svg className="w-5 h-5 text-green-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        <span className="font-body font-semibold text-white">Ringkasan Intisari: Langkah-Langkah Penyelesaian</span>
+      </div>
+      <div className="px-5 pb-5 space-y-4">
+        <div className="bg-slate-800/50 rounded-lg p-4">
+          <p className="font-body text-xs font-semibold text-white/60 mb-3">LANGKAH-LANGKAH:</p>
+          <div className="space-y-3 font-body text-sm text-white/80">
+            {[
+              { h: "Temukan variabel perantara", b: "variabel yang muncul di kedua perbandingan." },
+              { h: "Cari KPK", b: "dari angka variabel perantara di kedua perbandingan." },
+              { h: "Kalikan", b: "masing-masing perbandingan sehingga nilai perantara menjadi sama (= KPK)." },
+              { h: "Gabungkan", b: "menjadi satu rasio A : B : C." },
+              { h: "Gunakan", b: "jumlah/selisih angka rasio untuk mencari nilai yang ditanyakan." },
+            ].map((step, i) => (
+              <div key={i} className="flex gap-3">
+                <span className="text-cyan-300 font-bold shrink-0">{i + 1}.</span>
+                <p><strong className="text-cyan-300">{step.h}</strong> — {step.b}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
+          <p className="font-body text-sm font-semibold text-green-300">Rumus Cepat:</p>
+          <div className="bg-slate-900/50 rounded p-3">
+            <BlockMath math="\text{Nilai}_x = \frac{\text{rasio}_x}{\text{jumlah/selisih rasio}} \times \text{jumlah/selisih yang diketahui}" />
+          </div>
+          <div className="grid grid-cols-2 gap-2 font-body text-xs text-white/70">
+            <div className="bg-slate-800/50 rounded p-2">
+              <p className="text-green-300 font-semibold mb-1">Jika diketahui JUMLAH:</p>
+              <p>Gunakan jumlah seluruh angka rasio sebagai pembagi.</p>
+            </div>
+            <div className="bg-slate-800/50 rounded p-2">
+              <p className="text-yellow-300 font-semibold mb-1">Jika diketahui SELISIH:</p>
+              <p>Gunakan selisih dua angka rasio yang bersangkutan sebagai pembagi.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+);
+
 const materiSections: MateriSection[] = [
   {
     heading: "A. Pengertian Perbandingan",
@@ -237,6 +318,11 @@ const materiSections: MateriSection[] = [
     heading: "B. Jenis-Jenis Perbandingan",
     content: `1. Perbandingan Senilai (Seharga / Sebanding)\nPerbandingan senilai adalah perbandingan dua besaran yang jika salah satunya bertambah, maka yang lain juga bertambah secara tetap.\n\nContoh:\n- Jumlah barang bertambah → harga total bertambah\n- Waktu kerja bertambah → hasil kerja bertambah\n\nRumus:\n$\\frac{a_1}{a_2} = \\frac{b_1}{b_2}$\n\n2. Perbandingan Berbalik Nilai\nPerbandingan berbalik nilai adalah perbandingan dua besaran di mana jika satu bertambah, yang lain justru berkurang.\n\nContoh:\n- Banyak pekerja bertambah → waktu kerja berkurang\n- Kecepatan bertambah → waktu tempuh berkurang\n\nRumus:\n$\\frac{a_1}{a_2} = \\frac{b_2}{b_1}$\n\n3. Perbandingan Campuran\nPerbandingan campuran adalah metode matematika yang digunakan untuk menyelesaikan masalah yang melibatkan penggabungan dua atau lebih komponen dengan sifat yang berbeda untuk menciptakan campuran baru.\n\nRumus dasar:\n$(\\text{Kuantitas}_1 \\times \\text{Nilai}_1) + (\\text{Kuantitas}_2 \\times \\text{Nilai}_2) = (\\text{Kuantitas Total} \\times \\text{Nilai Campuran})$`,
     jsxAfter: SenilaiRingkasan,
+  },
+  {
+    heading: "B. Proporsi dan Perbandingan Bertingkat",
+    content: `Perbandingan bertingkat (compound ratio) adalah perbandingan yang menggabungkan dua perbandingan terpisah melalui satu variabel perantara yang sama.\n\nContoh: A : B = 2 : 3 dan B : C = 4 : 5\nKarena B menjadi perantara, keduanya digabung menjadi A : B : C = 8 : 12 : 15`,
+    jsxAfter: BertingkatRingkasan,
   },
   {
     heading: "C. Skala",
