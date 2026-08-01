@@ -115,12 +115,25 @@ const TKAPage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const isWhite = theme === "white";
-  const [showModul, setShowModul] = useState(false);
+  const [showModul, setShowModul] = useState(() =>
+    sessionStorage.getItem("tka_showModul") === "true"
+  );
   const [showPaket, setShowPaket] = useState(false);
 
   const handleTopicClick = (name: string) => {
     const path = routes[name];
-    if (path) { playPopSound(); navigate(path); }
+    if (path) {
+      sessionStorage.setItem("tka_showModul", "true");
+      playPopSound();
+      navigate(path);
+    }
+  };
+
+  const toggleModul = () => {
+    const next = !showModul;
+    setShowModul(next);
+    sessionStorage.setItem("tka_showModul", String(next));
+    playPopSound();
   };
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
@@ -166,7 +179,7 @@ const TKAPage = () => {
         {/* ── Modul Pemantapan (toggle) ── */}
         <div className="mb-6 animate-slide-up" style={{ animationDelay: "0s" }}>
           <button
-            onClick={() => { playPopSound(); setShowModul(v => !v); }}
+            onClick={toggleModul}
             className={`w-full flex items-center justify-between gap-3 px-5 py-3.5 rounded-xl border transition-all duration-200 cursor-pointer mb-3
               ${showModul
                 ? "bg-emerald-500/20 border-emerald-400/60 shadow-md shadow-emerald-500/10"
