@@ -88,9 +88,6 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
   const { theme } = useTheme();
   const isWhite = theme === "white";
   const [activeTab, setActiveTab] = useState<"materi" | "contoh" | "dasar">("materi");
-  const [expandedSections, setExpandedSections] = useState<number[]>(() =>
-    Array.from({ length: materiSections.length }, (_, i) => i)
-  );
   /* PG & PGK: stores selected letter (A/B/C/D) per soal.no */
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string>>({});
   /* PGKBS: stores ["B"|"S"|null, ...] per soal.no */
@@ -99,13 +96,6 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
   /* Contoh soal interactive state (separate from latihan) */
   const [selectedContohAnswers, setSelectedContohAnswers] = useState<Record<number, string>>({});
   const [pgkbsContohAnswers, setPgkbsContohAnswers] = useState<Record<number, ("B" | "S" | null)[]>>({});
-
-  const toggleSection = (idx: number) => {
-    playPopSound();
-    setExpandedSections(prev =>
-      prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]
-    );
-  };
 
   const handleSelectAnswer = (soalNo: number, letter: string) => {
     if (revealedAnswers.has(soalNo)) return;
@@ -267,85 +257,73 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
           <div className="space-y-3 animate-slide-up">
             {materiSections.map((section, idx) => {
               const color = SECTION_COLORS[idx % SECTION_COLORS.length];
-              const isOpen = expandedSections.includes(idx);
+              const headingText = section.heading.replace(/^[A-Z]\.\s*/, '');
               return (
-                <div key={idx} className={`relative rounded-2xl overflow-hidden border transition-all duration-300 ${color.border}`}
+                <div key={idx} className={`relative rounded-2xl overflow-hidden border ${color.border}`}
                   style={isWhite ? {
-                    background: isOpen ? "#f0f4ff" : "var(--bg-secondary)",
-                    border: `1px solid ${isOpen ? "rgba(33,150,243,0.25)" : "rgba(0,0,0,0.08)"}`,
-                    boxShadow: isOpen ? "0 4px 12px rgba(33,150,243,0.08)" : "none",
+                    background: "#f0f4ff",
+                    border: `1px solid rgba(33,150,243,0.25)`,
+                    boxShadow: "0 4px 12px rgba(33,150,243,0.08)",
                   } : {
-                    background: isOpen
-                      ? `linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(15,12,41,0.95) 100%)`
-                      : "rgba(255,255,255,0.03)",
-                    boxShadow: isOpen ? "0 4px 24px rgba(99,102,241,0.12)" : "none",
+                    background: `linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(15,12,41,0.95) 100%)`,
+                    boxShadow: "0 4px 24px rgba(99,102,241,0.12)",
                   }}>
 
-                  {isOpen && (
-                    <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
-                      style={{ background: `linear-gradient(to bottom, #6366f1, #8b5cf6)` }} />
-                  )}
+                  <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
+                    style={{ background: `linear-gradient(to bottom, #6366f1, #8b5cf6)` }} />
 
-                  <button onClick={() => toggleSection(idx)}
-                    className="w-full flex items-center gap-3 px-5 py-4 cursor-pointer text-left group pl-6">
+                  <div className="w-full flex items-center gap-3 px-5 py-4 text-left pl-6">
                     <span className={`flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold border ${color.badge}`}>
                       {String.fromCharCode(65 + idx)}
                     </span>
-                    <span className="font-display text-sm font-bold text-white/90 group-hover:text-white flex-1 leading-snug transition-colors">
-                      {section.heading}
+                    <span className="font-display text-sm font-bold text-white/90 flex-1 leading-snug">
+                      {headingText}
                     </span>
-                    <span className="shrink-0 text-white/30 group-hover:text-white/60 transition-colors">
-                      {isOpen
-                        ? <ChevronUp className="w-4 h-4" />
-                        : <ChevronDown className="w-4 h-4" />}
-                    </span>
-                  </button>
+                  </div>
 
-                  {isOpen && (
-                    <div className="px-6 pb-5 pt-1 border-t border-white/5 animate-slide-up">
-                      {section.jsx && <div className="mb-3">{section.jsx}</div>}
-                      <div className="font-body text-sm text-white/80 leading-relaxed space-y-0.5">
-                        {section.content.split('\n').map((line, i) => {
-                          const trimmed = line.trim();
-                          const imgMatch = trimmed.match(/^\[IMAGE:([^|]+)(?:\|(\w+))?\]$/);
-                          if (imgMatch) {
-                            const sizeClass = imgMatch[2] === 'small' ? 'max-w-[160px]' : 'max-w-sm w-full';
-                            return (
-                              <div key={i} className="my-3 flex justify-center">
-                                <img src={imgMatch[1]} alt="Gambar materi" className={`${sizeClass} rounded-xl shadow-lg`} />
-                              </div>
-                            );
-                          }
-                          if (trimmed.startsWith('$') && trimmed.endsWith('$') && trimmed.length > 2) {
-                            return (
-                              <div key={i} className="my-4 relative">
-                                <div className="absolute inset-0 rounded-xl blur-sm opacity-20"
-                                  style={{ background: "linear-gradient(135deg, #f59e0b, #d97706)" }} />
-                                <div className="relative px-5 py-4 rounded-xl text-center border"
-                                  style={{
-                                    background: "linear-gradient(135deg, rgba(245,158,11,0.12), rgba(217,119,6,0.06))",
-                                    borderColor: "rgba(245,158,11,0.35)",
-                                  }}>
-                                  <div className="flex items-center justify-center gap-1.5 mb-2">
-                                    <div className="h-px flex-1 max-w-[40px]"
-                                      style={{ background: "rgba(245,158,11,0.4)" }} />
-                                    <span className="text-[9px] font-bold tracking-widest uppercase"
-                                      style={{ color: "#fbbf24" }}>⭐ Rumus Penting</span>
-                                    <div className="h-px flex-1 max-w-[40px]"
-                                      style={{ background: "rgba(245,158,11,0.4)" }} />
-                                  </div>
-                                  <span className="text-base font-bold text-white">{renderWithLatex(trimmed)}</span>
+                  <div className="px-6 pb-5 pt-1 border-t border-white/5">
+                    {section.jsx && <div className="mb-3">{section.jsx}</div>}
+                    <div className="font-body text-sm text-white/80 leading-relaxed space-y-0.5">
+                      {section.content.split('\n').map((line, i) => {
+                        const trimmed = line.trim();
+                        const imgMatch = trimmed.match(/^\[IMAGE:([^|]+)(?:\|(\w+))?\]$/);
+                        if (imgMatch) {
+                          const sizeClass = imgMatch[2] === 'small' ? 'max-w-[160px]' : 'max-w-sm w-full';
+                          return (
+                            <div key={i} className="my-3 flex justify-center">
+                              <img src={imgMatch[1]} alt="Gambar materi" className={`${sizeClass} rounded-xl shadow-lg`} />
+                            </div>
+                          );
+                        }
+                        if (trimmed.startsWith('$') && trimmed.endsWith('$') && trimmed.length > 2) {
+                          return (
+                            <div key={i} className="my-4 relative">
+                              <div className="absolute inset-0 rounded-xl blur-sm opacity-20"
+                                style={{ background: "linear-gradient(135deg, #f59e0b, #d97706)" }} />
+                              <div className="relative px-5 py-4 rounded-xl text-center border"
+                                style={{
+                                  background: "linear-gradient(135deg, rgba(245,158,11,0.12), rgba(217,119,6,0.06))",
+                                  borderColor: "rgba(245,158,11,0.35)",
+                                }}>
+                                <div className="flex items-center justify-center gap-1.5 mb-2">
+                                  <div className="h-px flex-1 max-w-[40px]"
+                                    style={{ background: "rgba(245,158,11,0.4)" }} />
+                                  <span className="text-[9px] font-bold tracking-widest uppercase"
+                                    style={{ color: "#fbbf24" }}>⭐ Rumus Penting</span>
+                                  <div className="h-px flex-1 max-w-[40px]"
+                                    style={{ background: "rgba(245,158,11,0.4)" }} />
                                 </div>
+                                <span className="text-base font-bold text-white">{renderWithLatex(trimmed)}</span>
                               </div>
-                            );
-                          }
-                          if (trimmed === '') return <div key={i} className="h-1.5" />;
-                          return <div key={i}>{renderWithLatex(line)}</div>;
-                        })}
-                      </div>
-                      {section.jsxAfter && <div className="mt-3">{section.jsxAfter}</div>}
+                            </div>
+                          );
+                        }
+                        if (trimmed === '') return <div key={i} className="h-1.5" />;
+                        return <div key={i}>{renderWithLatex(line)}</div>;
+                      })}
                     </div>
-                  )}
+                    {section.jsxAfter && <div className="mt-3">{section.jsxAfter}</div>}
+                  </div>
                 </div>
               );
             })}
