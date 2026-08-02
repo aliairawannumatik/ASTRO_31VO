@@ -343,13 +343,6 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
               );
             })}
 
-            <div className="mt-2 px-4 py-3 rounded-xl flex items-center gap-2.5"
-              style={{ background: "rgba(99,102,241,0.06)", border: "1px solid rgba(99,102,241,0.2)" }}>
-              <Lightbulb className="w-4 h-4 shrink-0 text-amber-400" />
-              <p className="font-body text-xs text-white/50 leading-relaxed">
-                Pelajari semua materi di atas, lalu uji pemahamanmu di tab <span className="text-violet-300 font-semibold">Latihan Soal</span>.
-              </p>
-            </div>
           </div>
         )}
 

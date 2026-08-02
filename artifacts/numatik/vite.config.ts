@@ -3,15 +3,24 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import { visualizer } from "rollup-plugin-visualizer";
 
+import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+
+// PORT and BASE_PATH are injected by the artifact system during dev/serve.
+// For production builds (pnpm build) they may not be set — fall back to
+// the values declared in artifact.toml so the build does not abort.
+const port = Number(process.env.PORT || "18860");
+const basePath = process.env.BASE_PATH || "/";
+
 const IS_DEV = process.env.NODE_ENV !== "production";
 
 export default defineConfig({
-  base: "/",
+  base: basePath,
 
   envPrefix: ["VITE_"],
 
   plugins: [
     react(),
+    runtimeErrorOverlay(),
 
     // Bundle visualizer — only in dev builds, writes stats.html
     IS_DEV &&
@@ -22,11 +31,31 @@ export default defineConfig({
         brotliSize: true,
         template: "treemap",
       }) as Plugin),
+
+    ...(process.env.NODE_ENV !== "production" &&
+    process.env.REPL_ID !== undefined
+      ? [
+          await import("@replit/vite-plugin-cartographer").then((m) =>
+            m.cartographer({
+              root: path.resolve(import.meta.dirname, ".."),
+            }),
+          ),
+          await import("@replit/vite-plugin-dev-banner").then((m) =>
+            m.devBanner(),
+          ),
+        ]
+      : []),
   ].filter(Boolean) as Plugin[],
 
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "src"),
+      "@assets": path.resolve(
+        import.meta.dirname,
+        "..",
+        "..",
+        "attached_assets",
+      ),
     },
     dedupe: ["react", "react-dom"],
   },
@@ -88,26 +117,23 @@ export default defineConfig({
     assetsInlineLimit: 4096,
   },
 
-  optimizeDeps: {
-    include: [
-      "react",
-      "react-dom",
-      "react-router-dom",
-      "@tanstack/react-query",
-      "react-ga4",
-      "@vercel/analytics/react",
-      "@capacitor/core",
-    ],
-  },
-
   server: {
-    host: "0.0.0.0",
-    port: Number(process.env.PORT) || 5000,
+    port,
     strictPort: true,
+    host: "0.0.0.0",
     allowedHosts: true,
     hmr: {
       overlay: false,
-      clientPort: Number(process.env.PORT) || 5000,
+      clientPort: port,
     },
+    fs: {
+      strict: true,
+    },
+  },
+
+  preview: {
+    port,
+    host: "0.0.0.0",
+    allowedHosts: true,
   },
 });
