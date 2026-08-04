@@ -484,6 +484,216 @@ const latihanDasar: LatihanSoal[] = [
     jawaban: "D",
     pembahasan: "$\\frac{1}{2}(2x-6) = x - 3$ → Pernyataan (1) BENAR\nKalikan 3: $3(x-3) \\geq x - 4$ → Pernyataan (2) BENAR\n$3x - 9 \\geq x - 4 \\Rightarrow 2x \\geq 5 \\Rightarrow x \\geq \\frac{5}{2}$ → Pernyataan (3) BENAR\nUji $x = 2$: $2 < 2{,}5$, tidak memenuhi $x \\geq \\frac{5}{2}$ → Pernyataan (4) SALAH\nBenar: 1, 2, dan 3 → Jawaban D",
   },
+
+  // ── No. 24 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 24, type: "pg",
+    soal: "Jika $x$ adalah penyelesaian dari $\\dfrac{3}{5}x - 5 = \\dfrac{1}{5}x + 7$, maka nilai dari $x - 4$ adalah ...",
+    options: ["A. $18$", "B. $26$", "C. $30$", "D. $34$"],
+    jawaban: "B",
+    pembahasan: "Kelompokkan suku-suku sejenis:\n$\\dfrac{3}{5}x - \\dfrac{1}{5}x = 7 + 5$\n$\\dfrac{2}{5}x = 12$\n$x = 30$\n$x - 4 = 30 - 4 = 26$ → Jawaban B",
+  },
+
+  // ── No. 25 — PGK ────────────────────────────────────────────────────────────
+  {
+    no: 25, type: "pgk",
+    soal: "Diberikan persamaan $9x - 4 = 5x + 12$. Pernyataan-pernyataan berikut berkaitan dengan penyelesaian dan nilai-nilai turunannya.",
+    pernyataan: [
+      "Nilai $x$ yang memenuhi persamaan tersebut adalah $x = 4$.",
+      "Nilai $x + 7 = 11$ untuk penyelesaian yang diperoleh.",
+      "Nilai $2x - 3 = 5$ untuk penyelesaian yang diperoleh.",
+      "Nilai $x^2 - 5 = 9$ untuk penyelesaian yang diperoleh.",
+    ],
+    options: [
+      "A. 1 dan 4",
+      "B. 2 dan 4",
+      "C. 1 dan 3",
+      "D. 1, 2, dan 3",
+    ],
+    jawaban: "D",
+    pembahasan: "$9x - 4 = 5x + 12 \\Rightarrow 4x = 16 \\Rightarrow x = 4$ → Pernyataan (1) BENAR\n$x + 7 = 4 + 7 = 11$ → Pernyataan (2) BENAR\n$2x - 3 = 8 - 3 = 5$ → Pernyataan (3) BENAR\n$x^2 - 5 = 16 - 5 = 11 \\neq 9$ → Pernyataan (4) SALAH\nBenar: 1, 2, dan 3 → Jawaban D",
+  },
+
+  // ── No. 26 — PGKBS ──────────────────────────────────────────────────────────
+  {
+    no: 26, type: "pgkbs",
+    soal: "Sebuah segitiga siku-siku memiliki kaki terpendek $a$ cm. Kaki lainnya 5 cm lebih panjang dari kaki terpendek, dan sisi miringnya 10 cm lebih panjang dari kaki terpendek. Keliling segitiga tersebut 60 cm. Tentukan kebenaran setiap pernyataan berikut!",
+    pernyataan: [
+      "Panjang kaki terpendek segitiga tersebut adalah 15 cm.",
+      "Panjang sisi miring (hipotenusa) segitiga tersebut adalah 30 cm.",
+      "Luas segitiga tersebut adalah 150 cm².",
+    ],
+    jawabanBS: ["B", "S", "B"],
+    pembahasan: "Misalkan kaki terpendek $= a$, kaki lain $= a+5$, hipotenusa $= a+10$\n$a + (a+5) + (a+10) = 3a + 15 = 60 \\Rightarrow a = 15$ → Pernyataan (1) BENAR\nHipotenusa $= 15 + 10 = 25$ cm, bukan 30 cm → Pernyataan (2) SALAH\nCek Pythagoras: $15^2 + 20^2 = 225 + 400 = 625 = 25^2$ ✓\nLuas $= \\frac{1}{2} \\times 15 \\times 20 = 150$ cm² → Pernyataan (3) BENAR",
+  },
+
+  // ── No. 27 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 27, type: "pg",
+    soal: "Doni membeli 5 kg apel dan 3 kg jeruk seharga Rp87.000,00. Harga 1 kg apel Rp3.000,00 lebih mahal dari harga 1 kg jeruk. Harga 1 kg jeruk adalah ...",
+    options: ["A. Rp6.000,00", "B. Rp9.000,00", "C. Rp12.000,00", "D. Rp15.000,00"],
+    jawaban: "B",
+    pembahasan: "Misalkan harga jeruk $= x$, maka harga apel $= x + 3.000$\n$5(x + 3.000) + 3x = 87.000$\n$8x + 15.000 = 87.000$\n$8x = 72.000 \\Rightarrow x = 9.000$\nHarga 1 kg jeruk = Rp9.000,00 → Jawaban B",
+  },
+
+  // ── No. 28 — PGK ────────────────────────────────────────────────────────────
+  {
+    no: 28, type: "pgk",
+    soal: "Perhatikan pertidaksamaan $\\dfrac{1}{4}(3x - 8) \\leq \\dfrac{1}{2}(x + 2)$. Pernyataan-pernyataan berikut berkaitan dengan penyelesaiannya.",
+    pernyataan: [
+      "Mengalikan kedua ruas dengan 4 menghasilkan $3x - 8 \\leq 2(x + 2)$.",
+      "Penyelesaian pertidaksamaan adalah $x \\leq 12$.",
+      "Nilai $x = 13$ tidak memenuhi pertidaksamaan tersebut.",
+      "Himpunan penyelesaian untuk bilangan bulat adalah $\\{13, 14, 15, \\ldots\\}$.",
+    ],
+    options: [
+      "A. 1 dan 4",
+      "B. 2 dan 4",
+      "C. 1 dan 3",
+      "D. 1, 2, dan 3",
+    ],
+    jawaban: "D",
+    pembahasan: "Kalikan dengan 4: $3x - 8 \\leq 2(x + 2)$ → Pernyataan (1) BENAR\n$3x - 8 \\leq 2x + 4 \\Rightarrow x \\leq 12$ → Pernyataan (2) BENAR\nUji $x = 13$: $13 > 12$, tidak memenuhi → Pernyataan (3) BENAR\nHP bilangan bulat: $\\{\\ldots, 10, 11, 12\\}$, bukan $\\{13, 14, \\ldots\\}$ → Pernyataan (4) SALAH\nBenar: 1, 2, dan 3 → Jawaban D",
+  },
+
+  // ── No. 29 — PGKBS ──────────────────────────────────────────────────────────
+  {
+    no: 29, type: "pgkbs",
+    soal: "Diketahui persamaan $\\dfrac{1}{3}(x + 9) = \\dfrac{2}{5}x - 1$. Tentukan kebenaran setiap pernyataan berikut!",
+    pernyataan: [
+      "Mengalikan kedua ruas dengan 15 menghasilkan $5(x + 9) = 6x - 15$.",
+      "Penyelesaian persamaan tersebut adalah $x = 60$.",
+      "Nilai $x - 10 = 40$ untuk penyelesaian yang diperoleh.",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "Kalikan kedua ruas dengan 15:\n$5(x+9) = 6x - 15$ → Pernyataan (1) BENAR\n$5x + 45 = 6x - 15 \\Rightarrow x = 60$ → Pernyataan (2) BENAR\n$x - 10 = 60 - 10 = 50 \\neq 40$ → Pernyataan (3) SALAH",
+  },
+
+  // ── No. 30 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 30, type: "pg",
+    soal: "Pak Dika mempunyai sejumlah uang. Seperempat bagian dipakai membayar tagihan listrik, kemudian sepertiga dari sisa uang dibelanjakan kebutuhan dapur. Jika uang yang tersisa adalah Rp150.000,00, maka uang Pak Dika mula-mula adalah ...",
+    options: ["A. Rp200.000,00", "B. Rp240.000,00", "C. Rp300.000,00", "D. Rp360.000,00"],
+    jawaban: "C",
+    pembahasan: "Misalkan uang mula-mula $= T$\nListrik $= \\frac{T}{4}$; sisa $= \\frac{3T}{4}$\nDapur $= \\frac{1}{3} \\times \\frac{3T}{4} = \\frac{T}{4}$\nSisa akhir $= \\frac{3T}{4} - \\frac{T}{4} = \\frac{T}{2} = 150.000$\n$T = 300.000$ → Jawaban C",
+  },
+
+  // ── No. 31 — PGK ────────────────────────────────────────────────────────────
+  {
+    no: 31, type: "pgk",
+    soal: "Riko memiliki 5 bilangan ganjil berurutan dengan jumlah 65. Sari memiliki 5 bilangan genap berurutan dengan jumlah 5 lebih banyak dari jumlah bilangan Riko. Pernyataan-pernyataan berikut berkaitan dengan situasi tersebut.",
+    pernyataan: [
+      "Bilangan tengah dari kelima bilangan ganjil berurutan milik Riko adalah 13.",
+      "Jumlah seluruh bilangan milik Sari adalah 70.",
+      "Selisih bilangan terkecil milik Sari dan terkecil milik Riko adalah 1.",
+      "Bilangan terbesar milik Sari adalah 20.",
+    ],
+    options: [
+      "A. 1 dan 4",
+      "B. 2 dan 4",
+      "C. 1, 2, dan 4",
+      "D. 1, 2, dan 3",
+    ],
+    jawaban: "D",
+    pembahasan: "Misalkan tengah Riko $= n$: $5n = 65 \\Rightarrow n = 13$ → Pernyataan (1) BENAR\nBilangan Riko: 9, 11, 13, 15, 17\nJumlah Sari $= 65 + 5 = 70$ → Pernyataan (2) BENAR; tengah Sari $= m$: $5m = 70 \\Rightarrow m = 14$\nBilangan Sari: 10, 12, 14, 16, 18\nTerkecil Sari $= 10$, terkecil Riko $= 9$; selisih $= 1$ → Pernyataan (3) BENAR\nTerbesar Sari $= 18 \\neq 20$ → Pernyataan (4) SALAH\nBenar: 1, 2, dan 3 → Jawaban D",
+  },
+
+  // ── No. 32 — PGKBS ──────────────────────────────────────────────────────────
+  {
+    no: 32, type: "pgkbs",
+    soal: "Diberikan persamaan $\\dfrac{3x + 2}{x + 4} = 2$. Tentukan kebenaran setiap pernyataan berikut!",
+    pernyataan: [
+      "Perkalian silang menghasilkan $3x + 2 = 2(x + 4)$.",
+      "Penyelesaian persamaan tersebut adalah $x = 6$.",
+      "Nilai $3x + 2$ untuk nilai $x$ yang diperoleh adalah 24.",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "Perkalian silang: $3x + 2 = 2(x + 4)$ → Pernyataan (1) BENAR\n$3x + 2 = 2x + 8 \\Rightarrow x = 6$ → Pernyataan (2) BENAR\n$3(6) + 2 = 20 \\neq 24$ → Pernyataan (3) SALAH",
+  },
+
+  // ── No. 33 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 33, type: "pg",
+    soal: "Penyelesaian dari pertidaksamaan $\\dfrac{x + 3}{2} > \\dfrac{2x - 1}{3}$ adalah ...",
+    options: ["A. $x > 3$", "B. $x < 3$", "C. $x > 11$", "D. $x < 11$"],
+    jawaban: "D",
+    pembahasan: "Kalikan dengan KPK(2, 3) = 6:\n$3(x + 3) > 2(2x - 1)$\n$3x + 9 > 4x - 2$\n$-x > -11$\nBagi dengan $-1$ (tanda dibalik): $x < 11$ → Jawaban D",
+  },
+
+  // ── No. 34 — PGK ────────────────────────────────────────────────────────────
+  {
+    no: 34, type: "pgk",
+    soal: "Umur kakak $k$ tahun, sedangkan kakak 8 tahun lebih tua dari adik. Jumlah umur keduanya adalah 48 tahun. Pernyataan-pernyataan berikut berkaitan dengan situasi tersebut.",
+    pernyataan: [
+      "Model matematika dari situasi tersebut adalah $2k - 8 = 48$.",
+      "Umur kakak saat ini adalah 28 tahun.",
+      "Umur adik saat ini adalah 20 tahun.",
+      "Empat tahun yang lalu, umur kakak adalah 26 tahun.",
+    ],
+    options: [
+      "A. 1 dan 4",
+      "B. 2 dan 4",
+      "C. 2 dan 3",
+      "D. 1, 2, dan 3",
+    ],
+    jawaban: "D",
+    pembahasan: "Umur adik $= k - 8$\n$k + (k - 8) = 48 \\Rightarrow 2k - 8 = 48$ → Pernyataan (1) BENAR\n$2k = 56 \\Rightarrow k = 28$ → Pernyataan (2) BENAR\nAdik $= 28 - 8 = 20$ tahun → Pernyataan (3) BENAR\nEmpat tahun lalu: $28 - 4 = 24 \\neq 26$ → Pernyataan (4) SALAH\nBenar: 1, 2, dan 3 → Jawaban D",
+  },
+
+  // ── No. 35 — PGKBS ──────────────────────────────────────────────────────────
+  {
+    no: 35, type: "pgkbs",
+    soal: "Sebuah tali dengan panjang $(5n + 3)$ cm dipotong menjadi dua bagian. Bagian pertama sepanjang $(2n - 1)$ cm. Panjang total tali adalah 53 cm. Tentukan kebenaran setiap pernyataan berikut!",
+    pernyataan: [
+      "Nilai $n$ yang memenuhi adalah $n = 10$.",
+      "Panjang bagian pertama tali adalah 19 cm.",
+      "Panjang bagian kedua tali adalah 30 cm.",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "$5n + 3 = 53 \\Rightarrow 5n = 50 \\Rightarrow n = 10$ → Pernyataan (1) BENAR\nBagian pertama $= 2(10) - 1 = 19$ cm → Pernyataan (2) BENAR\nBagian kedua $= 53 - 19 = 34$ cm, bukan 30 cm → Pernyataan (3) SALAH",
+  },
+
+  // ── No. 36 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 36, type: "pg",
+    soal: "Diketahui $4(3x - 2) = 2(5x + 1) - 4$. Nilai dari $3x + 2$ adalah ...",
+    options: ["A. $5$", "B. $7$", "C. $11$", "D. $14$"],
+    jawaban: "C",
+    pembahasan: "$12x - 8 = 10x + 2 - 4$\n$12x - 8 = 10x - 2$\n$2x = 6 \\Rightarrow x = 3$\n$3x + 2 = 9 + 2 = 11$ → Jawaban C",
+  },
+
+  // ── No. 37 — PGK ────────────────────────────────────────────────────────────
+  {
+    no: 37, type: "pgk",
+    soal: "Diketahui $p + q = 12$ dan $pq = 20$. Pernyataan-pernyataan berikut berkaitan dengan nilai-nilai yang dapat diturunkan dari informasi tersebut.",
+    pernyataan: [
+      "Nilai $(p + q)^2 = 144$.",
+      "Nilai $2pq = 40$.",
+      "Nilai $p^2 + q^2 = 104$.",
+      "Nilai $(p - q)^2 = 144$.",
+    ],
+    options: [
+      "A. 1 dan 4",
+      "B. 2 dan 4",
+      "C. 1, 2, dan 4",
+      "D. 1, 2, dan 3",
+    ],
+    jawaban: "D",
+    pembahasan: "$(p+q)^2 = 12^2 = 144$ → Pernyataan (1) BENAR\n$2pq = 2 \\times 20 = 40$ → Pernyataan (2) BENAR\n$p^2 + q^2 = (p+q)^2 - 2pq = 144 - 40 = 104$ → Pernyataan (3) BENAR\n$(p-q)^2 = (p+q)^2 - 4pq = 144 - 80 = 64 \\neq 144$ → Pernyataan (4) SALAH\nBenar: 1, 2, dan 3 → Jawaban D",
+  },
+
+  // ── No. 38 — PGKBS ──────────────────────────────────────────────────────────
+  {
+    no: 38, type: "pgkbs",
+    soal: "Suatu persegi panjang memiliki ukuran panjang $(4x + 1)$ cm dan lebar $(x + 4)$ cm. Kelilingnya adalah 70 cm. Tentukan kebenaran setiap pernyataan berikut!",
+    pernyataan: [
+      "Nilai $x$ yang memenuhi adalah $x = 6$.",
+      "Panjang persegi panjang tersebut adalah 25 cm.",
+      "Luas persegi panjang tersebut adalah 300 cm².",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "$2[(4x+1)+(x+4)] = 70$\n$2(5x+5) = 70 \\Rightarrow 5x+5 = 35 \\Rightarrow x = 6$ → Pernyataan (1) BENAR\nPanjang $= 4(6)+1 = 25$ cm → Pernyataan (2) BENAR\nLebar $= 6+4 = 10$ cm; Luas $= 25 \\times 10 = 250$ cm², bukan 300 cm² → Pernyataan (3) SALAH",
+  },
 ];
 
 const PLSVPage = () => (
