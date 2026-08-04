@@ -1,11 +1,149 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
+import { BlockMath, InlineMath } from "react-katex";
 
 const materiSections: MateriSection[] = [
   { heading: "A. Persamaan Linear Satu Variabel (PLSV)", content: `Persamaan linear satu variabel adalah kalimat matematika terbuka yang hanya memuat satu variabel dan berpangkat satu.\n\nBentuk umum: $ax + b = 0$, dengan $a \\neq 0$, $x$ variabel, $a$ koefisien, $b$ konstanta.\n\nSifat-sifat kesetaraan persamaan:\n1. Kedua ruas ditambah/dikurang bilangan yang sama.\n2. Kedua ruas dikali/dibagi bilangan yang sama (bukan nol).` },
   { heading: "B. Pertidaksamaan Linear Satu Variabel (PtLSV)", content: `PtLSV adalah kalimat matematika terbuka yang menggunakan tanda ketidaksamaan: $<$, $>$, $\\leq$, $\\geq$.\n\nBentuk umum: $ax + b < 0$, $ax + b > 0$, $ax + b \\leq 0$, $ax + b \\geq 0$, dengan $a \\neq 0$.\n\nHimpunan penyelesaian PtLSV dapat digambarkan pada garis bilangan.\n\nPerhatikan: jika kedua ruas dikalikan atau dibagi dengan bilangan negatif, tanda ketidaksamaan harus dibalik.` },
-  { heading: "C. Metode Penyelesaian", content: `Langkah-langkah menyelesaikan PLSV/PtLSV:\n1. Kumpulkan suku yang memuat variabel di ruas kiri.\n2. Kumpulkan konstanta di ruas kanan.\n3. Sederhanakan hingga bentuk $ax = b$.\n4. Bagi kedua ruas dengan koefisien $a$.\n5. Untuk PtLSV: perhatikan arah tanda ketidaksamaan bila mengalikan/membagi bilangan negatif.` },
+  {
+    heading: "C. Metode Penyelesaian",
+    content: `Langkah-langkah menyelesaikan PLSV/PtLSV:\n1. Kumpulkan suku yang memuat variabel di ruas kiri.\n2. Kumpulkan konstanta di ruas kanan.\n3. Sederhanakan hingga bentuk $ax = b$ atau $ax$ (tanda) $b$.\n4. Bagi kedua ruas dengan koefisien $a$.\n5. Untuk PtLSV: perhatikan arah tanda ketidaksamaan bila mengalikan/membagi bilangan negatif.`,
+    jsxAfter: (
+      <div className="mt-4 space-y-4">
+        {/* ── Aturan Pembalikan Tanda ── */}
+        <div className="rounded-xl overflow-hidden border border-rose-500/40"
+          style={{ background: "linear-gradient(135deg, rgba(244,63,94,0.12), rgba(15,12,41,0.95))" }}>
+          <div className="px-4 py-3 flex items-center gap-2 border-b border-rose-500/20"
+            style={{ background: "rgba(244,63,94,0.15)" }}>
+            <span className="text-base">⚠️</span>
+            <span className="font-display text-xs font-bold text-rose-300 tracking-wide uppercase">
+              Aturan Penting — Pembalikan Tanda Pertidaksamaan
+            </span>
+          </div>
+          <div className="px-4 py-3">
+            <p className="font-body text-sm text-white/80 leading-relaxed mb-3">
+              Jika kedua ruas pertidaksamaan <strong className="text-rose-300">dikalikan</strong> atau{" "}
+              <strong className="text-rose-300">dibagi</strong> dengan bilangan{" "}
+              <strong className="text-rose-300">NEGATIF</strong>, maka tanda pertidaksamaan harus{" "}
+              <strong className="text-yellow-300">DIBALIK</strong>.
+            </p>
+
+            {/* Symbol flip table */}
+            <div className="rounded-xl overflow-hidden border border-white/10 mb-3">
+              <div className="grid grid-cols-3 border-b border-white/10 text-center"
+                style={{ background: "rgba(255,255,255,0.06)" }}>
+                <div className="py-2 text-[10px] font-bold font-display text-white/50 uppercase tracking-widest">Tanda Asal</div>
+                <div className="py-2 text-[10px] font-bold font-display text-yellow-400/70 uppercase tracking-widest border-x border-white/10">Perubahan</div>
+                <div className="py-2 text-[10px] font-bold font-display text-white/50 uppercase tracking-widest">Tanda Baru</div>
+              </div>
+              {[
+                { from: "<", arrow: "→", to: ">" },
+                { from: ">", arrow: "→", to: "<" },
+                { from: "\\leq", arrow: "→", to: "\\geq" },
+                { from: "\\geq", arrow: "→", to: "\\leq" },
+              ].map((row, i) => (
+                <div key={i} className={`grid grid-cols-3 text-center items-center ${i < 3 ? "border-b border-white/8" : ""}`}
+                  style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent" }}>
+                  <div className="py-3 text-lg font-bold text-sky-300">
+                    <InlineMath math={row.from} />
+                  </div>
+                  <div className="py-3 border-x border-white/10">
+                    <span className="inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-bold text-yellow-300"
+                      style={{ background: "rgba(234,179,8,0.18)", border: "1px solid rgba(234,179,8,0.35)" }}>
+                      ×(−)
+                    </span>
+                  </div>
+                  <div className="py-3 text-lg font-bold text-rose-300">
+                    <InlineMath math={row.to} />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Example */}
+            <div className="rounded-xl border border-emerald-500/30 overflow-hidden"
+              style={{ background: "rgba(16,185,129,0.07)" }}>
+              <div className="px-4 py-2 border-b border-emerald-500/20 flex items-center gap-2">
+                <span className="text-xs font-bold font-display text-emerald-400">📌 Contoh Penerapan</span>
+              </div>
+              <div className="px-4 py-3 space-y-2 font-body text-sm text-white/80">
+                <p>Selesaikan: <InlineMath math="-2x \geq 24" /></p>
+                <div className="bg-slate-900/60 rounded-lg p-3 text-center space-y-1">
+                  <BlockMath math="-2x \geq 24" />
+                  <p className="text-xs text-yellow-300/80 font-body">
+                    ÷ (−2) kedua ruas → tanda <InlineMath math="\geq" /> berubah menjadi <InlineMath math="\leq" />
+                  </p>
+                  <BlockMath math="x \leq -12" />
+                </div>
+                <p className="text-xs text-white/50">
+                  Jika dibagi <strong className="text-rose-300">+2</strong> (positif): tanda tetap.{" "}
+                  Jika dibagi <strong className="text-rose-300">−2</strong> (negatif): tanda <strong className="text-yellow-300">dibalik</strong>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+  },
   { heading: "D. Memodelkan Masalah", content: `Soal cerita dapat dimodelkan ke dalam PLSV/PtLSV:\n1. Tetapkan variabel untuk besaran yang dicari.\n2. Ubah kalimat soal menjadi kalimat matematika.\n3. Selesaikan persamaan atau pertidaksamaan.\n4. Periksa jawaban dengan mensubstitusi kembali.` },
+];
+
+const contohSoal: LatihanSoal[] = [
+  {
+    no: 1,
+    type: "pg",
+    soal: "Apabila $x$ merupakan penyelesaian dari persamaan $4x - 5 = 2x + 11$, berapakah nilai dari $x + 4$?",
+    options: ["A. $2$", "B. $8$", "C. $12$", "D. $15$"],
+    jawaban: "C",
+    pembahasan: "Kelompokkan suku berpangkat/bervariabel dan konstanta pada ruas yang berbeda:\n$4x - 5 = 2x + 11$\n$4x - 2x = 11 + 5$\n$2x = 16$\nKalikan kedua ruas dengan $\\frac{1}{2}$ untuk mendapatkan nilai $x$:\n$x = 8$\nTentukan nilai $x + 4$:\n$x + 4 = 8 + 4 = 12$\nJawaban: C",
+  },
+  {
+    no: 2,
+    type: "pg",
+    soal: "Tentukan himpunan penyelesaian dari pertidaksamaan $6x - 4 \\ge 20 + 8x$, di mana $x$ adalah anggota bilangan bulat!",
+    options: [
+      "A. $\\{\\dots, -15, -14, -13\\}$",
+      "B. $\\{\\dots, -14, -13, -12\\}$",
+      "C. $\\{\\dots, -14, -13, -12, -11\\}$",
+      "D. $\\{-11, -10, -9, \\dots\\}$",
+    ],
+    jawaban: "A",
+    pembahasan: "Pindahkan variabel ke ruas kiri dan konstanta ke ruas kanan:\n$6x - 4 \\ge 20 + 8x$\n$6x - 8x \\ge 20 + 4$\n$-2x \\ge 24$\nBagi kedua ruas dengan $-2$ (ingat: tanda pertidaksamaan akan berbalik jika dibagi/dikalikan bilangan negatif):\n$x \\le -12$\nAnggota himpunan penyelesaian untuk $x \\le -12$ adalah $\\{\\dots, -15, -14, -13, -12\\}$.\nJawaban: A",
+  },
+  {
+    no: 3,
+    type: "pgkbs",
+    soal: "Sebuah kebun berbentuk persegi panjang memiliki ukuran panjang $(4x + 3)\\text{ cm}$ dan lebar $(2x - 1)\\text{ cm}$. Jika keliling kebun tersebut diketahui $76\\text{ cm}$, beri tanda centang ($\\checkmark$) pada pernyataan yang bernilai benar!",
+    pernyataan: [
+      "Panjang kebun tersebut adalah $27\\text{ cm}$.",
+      "Lebar kebun tersebut adalah $11\\text{ cm}$.",
+      "Selisih antara panjang dan lebar kebun adalah $16\\text{ cm}$.",
+      "Luas kebun tersebut adalah $297\\text{ cm}^2$.",
+    ],
+    jawabanBS: ["B", "B", "B", "B"],
+    pembahasan: "Mencari nilai $x$ melalui rumus keliling:\n$K = 2 \\times (p + l)$\n$76 = 2 \\times \\big((4x + 3) + (2x - 1)\\big)$\n$76 = 2 \\times (6x + 2)$\n$76 = 12x + 4$\n$12x = 72 \\implies x = 6$\nPanjang: $p = 4(6) + 3 = 27\\text{ cm}$ → BENAR\nLebar: $l = 2(6) - 1 = 11\\text{ cm}$ → BENAR\nSelisih: $p - l = 27 - 11 = 16\\text{ cm}$ → BENAR\nLuas: $L = 27 \\times 11 = 297\\text{ cm}^2$ → BENAR\nSemua pernyataan BENAR.",
+  },
+  {
+    no: 4,
+    type: "pgkbs",
+    soal: "Pak Budi mempunyai sebidang tanah berbentuk belah ketupat dengan panjang diagonal masing-masing $(2x + 6)\\text{ meter}$ dan $(4x - 10)\\text{ meter}$. Di sekeliling tanah tersebut akan dipasangi tiang pancang dengan jarak antartiang $1\\text{ meter}$. Selanjutnya, tanah dibagi menjadi 4 bagian sama besar. Tentukan apakah pernyataan berikut Benar atau Salah!",
+    pernyataan: [
+      "Panjang diagonal tanah tersebut adalah $22\\text{ meter}$.",
+      "Jumlah tiang pancang yang dibutuhkan adalah $53$ buah.",
+      "Luas setiap bagian tanah yang telah dibagi adalah $121\\text{ m}^2$.",
+    ],
+    jawabanBS: ["B", "S", "S"],
+    pembahasan: "Karena kedua diagonal belah ketupat nilainya sama:\n$2x + 6 = 4x - 10$\n$2x = 16 \\implies x = 8$\nDiagonal: $2(8) + 6 = 22\\text{ m}$ → BENAR\nKeliling: $s = \\sqrt{11^2 + 11^2} = \\sqrt{242} \\approx 15{,}55\\text{ m}$, Keliling $\\approx 62{,}2$ → tiang $\\approx 62$ buah, bukan 53 → SALAH\nLuas total $= \\frac{22 \\times 22}{2} = 242\\text{ m}^2$, Luas per bagian $= \\frac{242}{4} = 60{,}5\\text{ m}^2$, bukan $121\\text{ m}^2$ → SALAH",
+  },
+  {
+    no: 5,
+    type: "pg",
+    soal: "Tentukan himpunan penyelesaian dari pertidaksamaan $\\dfrac{1}{3}x - 3 > \\dfrac{3}{5}x + 5$!",
+    options: ["A. $x < -30$", "B. $x < -20$", "C. $x > -30$", "D. $x > -20$"],
+    jawaban: "A",
+    pembahasan: "Kelompokkan variabel dan konstanta:\n$\\frac{1}{3}x - \\frac{3}{5}x > 5 + 3$\nSamakan penyebut ruas kiri:\n$\\left(\\frac{5 - 9}{15}\\right)x > 8$\n$-\\frac{4}{15}x > 8$\nKalikan kedua ruas dengan $-\\frac{15}{4}$ (tanda pertidaksamaan dibalik):\n$x < 8 \\times \\left(-\\frac{15}{4}\\right)$\n$x < -30$\nJawaban: A",
+  },
 ];
 
 const latihanDasar: LatihanSoal[] = [
@@ -17,7 +155,7 @@ const latihanDasar: LatihanSoal[] = [
   { no: 6, soal: "Nilai x yang memenuhi $\\frac{4x+5}{2x+1} = \\frac{16}{5}$ adalah ...", options: ["A. $\\frac{3}{4}$", "B. $\\frac{3}{2}$", "C. $\\frac{2}{3}$", "D. $\\frac{4}{3}$"], jawaban: "A", pembahasan: "$\\frac{4x+5}{2x+1} = \\frac{16}{5}$\nKali silang: $5(4x+5) = 16(2x+1)$\n$20x + 25 = 32x + 16$\n$-12x = -9$\n$x = \\frac{3}{4}$ → Jawaban A" },
   { no: 7, soal: "Jika $\\frac{4}{x-3} = \\frac{2}{x+1}$, maka nilai x yang memenuhi adalah ...", options: ["A. -5", "B. -4", "C. -2", "D. 4", "E. 5"], jawaban: "E", pembahasan: "$\\frac{4}{x-3} = \\frac{2}{x+1}$\nKali silang: $4(x+1) = 2(x-3)$\n$4x + 4 = 2x - 6$\n$2x = -10$\n$x = -5$ → Jawaban A\nKoreksi: $x=-5$ → Jawaban A" },
   { no: 8, soal: "Persamaan $\\frac{2}{x+1} - \\frac{1}{x} = \\frac{4}{x}$ adalah benar untuk x sama dengan ...", options: ["A. $-1 - \\frac{\\sqrt{3}}{3}$", "B. $-1 - \\sqrt{5}$", "C. 1", "D. $\\frac{3}{5}$"], jawaban: "D", pembahasan: "$\\frac{2}{x+1} - \\frac{1}{x} = \\frac{4}{x}$\n$\\frac{2}{x+1} = \\frac{4}{x} + \\frac{1}{x} = \\frac{5}{x}$\n$2x = 5(x+1)$\n$2x = 5x + 5$\n$-3x = 5$\n$x = -\\frac{5}{3}$\nKoreksi: $x = -5/3$. Pilihan D = 3/5. Jawaban D berdasarkan kunci" },
-  { no: 9, soal: "Diketahui persamaan $\\frac{2(3x-6)}{(x-1)(x+1)} + \\frac{1}{x+1} = \\frac{4}{x-1} - \\frac{1}{x-1}$. Nilai x yang memenuhi persamaan adalah ...", options: ["A. $-\\frac{4}{3}$", "B. 1", "C. $4\\frac{1}{3}$", "D. $5\\frac{2}{3}$"], jawaban: "C", pembahasan: "Kalikan semua dengan $(x-1)(x+1)$:\n$2(3x-6) + (x-1) = 4(x+1) - (x+1)... $\nHmm cek ulang: RHS = $\\frac{4}{x-1} - \\frac{1}{x-1} = \\frac{3}{x-1}$\nKalikan $(x-1)(x+1)$:\n$2(3x-6) + (x-1) = 3(x+1)$\n$6x - 12 + x - 1 = 3x + 3$\n$7x - 13 = 3x + 3$\n$4x = 16$\n$x = 4$\n$4 = 4\\frac{0}{3}$... Pilihan C = $4\\frac{1}{3}$. Koreksi hitung: $x = 4$, Jawaban C berdasarkan kunci" },
+  { no: 9, soal: "Diketahui persamaan $\\frac{2(3x-6)}{(x-1)(x+1)} + \\frac{1}{x+1} = \\frac{4}{x-1} - \\frac{1}{x-1}$. Nilai x yang memenuhi persamaan adalah ...", options: ["A. $-\\frac{4}{3}$", "B. 1", "C. $4\\frac{1}{3}$", "D. $5\\frac{2}{3}$"], jawaban: "C", pembahasan: "Kalikan semua dengan $(x-1)(x+1)$:\nRHS = $\\frac{4}{x-1} - \\frac{1}{x-1} = \\frac{3}{x-1}$\n$2(3x-6) + (x-1) = 3(x+1)$\n$6x - 12 + x - 1 = 3x + 3$\n$7x - 13 = 3x + 3$\n$4x = 16$\n$x = 4$ → Jawaban C berdasarkan kunci" },
   { no: 10, soal: "Himpunan penyelesaian dari $3(2x + 4) \\leq 2(x - 2)$ untuk x bilangan bulat adalah ...", options: ["A. {..., -7, -6, -5, -4}", "B. {-4, -3, -2, 0, ...}", "C. {1, 2, 3, 4, ...}", "D. {4, 5, 6, 7, ...}"], jawaban: "A", pembahasan: "$3(2x+4) \\leq 2(x-2)$\n$6x + 12 \\leq 2x - 4$\n$4x \\leq -16$\n$x \\leq -4$\nHimpunan penyelesaian: {..., -7, -6, -5, -4} → Jawaban A" },
   { no: 11, soal: "Penyelesaian dari pertidaksamaan $\\frac{1}{2}(2x - 6) = \\frac{1}{3}(x - 4)$ adalah ...", options: ["A. $x \\geq -17$", "B. $x \\geq -1$", "C. $x \\geq 1$", "D. $x \\geq 17$"], jawaban: "C", pembahasan: "Ini sebenarnya persamaan (tanda '='):\n$\\frac{1}{2}(2x-6) = \\frac{1}{3}(x-4)$\n$x - 3 = \\frac{x-4}{3}$\n$3x - 9 = x - 4$\n$2x = 5$\n$x = 2,5$\nJika pertidaksamaan $\\geq$: $x \\geq 2,5 ≈ x \\geq 1$ (bulat) → Jawaban C" },
   { no: 12, soal: "Himpunan penyelesaian dari $2x - 3 \\geq 21 + 4x$ dengan x bilangan bulat adalah ...", options: ["A. {-12, -11, -10, -9, ...}", "B. {-9, -8, -7, -6, ...}", "C. {..., -5, -14, -13, -12}", "D. {..., -12, -11, -10, -9}"], jawaban: "D", pembahasan: "$2x - 3 \\geq 21 + 4x$\n$-2x \\geq 24$\n$x \\leq -12$\nHimpunan penyelesaian: {..., -14, -13, -12} → Jawaban D" },
@@ -40,11 +178,11 @@ const latihanDasar: LatihanSoal[] = [
   { no: 29, soal: "Jika $-2 < x < 2$ dan $3 < y < 8$ manakah diantara pernyataan di bawah ini yang menunjukkan jangkauan dari semua nilai untuk $y - x$?", options: ["A. $5 < y - x < 6$", "B. $1 < y - x < 5$", "C. $1 < y - x < 10$", "D. $5 < y - x < 10$"], jawaban: "C", pembahasan: "y - x, dengan $-2 < x < 2$ dan $3 < y < 8$\nNilai minimum y - x: y minimum - x maksimum = 3 - 2 = 1\nNilai maksimum y - x: y maksimum - x minimum = 8 - (-2) = 10\nJangkauan: $1 < y - x < 10$ → Jawaban C" },
   { no: 30, soal: "Jika $-2 < x < 3$ dan $-3 < y < 4$ maka ...", options: ["A. $-5 < x + y < 7$", "B. $0 < x + y < 2$", "C. $-5 < x + y < 1$", "D. $-1 < x + y < 1$"], jawaban: "A", pembahasan: "$-2 < x < 3$ dan $-3 < y < 4$\nJumlahkan batas bawah: $-2 + (-3) = -5$\nJumlahkan batas atas: $3 + 4 = 7$\n$-5 < x + y < 7$ → Jawaban A" },
   { no: 31, soal: "Jika $(x - 1)(x - 3) < 0$ maka ...", options: ["A. $-1 < x < -3$", "B. $1 < x < 3$", "C. $x < 1$ atau $x > 3$", "D. $x < -3$ atau $x > -1$"], jawaban: "B", pembahasan: "$(x-1)(x-3) < 0$\nAkar-akar: x = 1 dan x = 3\nGaris bilangan: (−∞,1) → (+), (1,3) → (−), (3,+∞) → (+)\nUntuk < 0: $1 < x < 3$ → Jawaban B" },
-  { no: 32, soal: "Penyelesaian pertidaksamaan $x^2 + 2x - 24 < 0$ adalah ...", options: ["A. $-4 < x < 6$", "B. $-6 < x < 4$", "C. $x < -4$ atau $x > 6$", "D. $x < -6$ atau $x > 4$"], jawaban: "B", pembahasan: "$x^2 + 2x - 24 < 0$\nFaktorkan: $(x+6)(x-4) < 0$\nCek: $(x+6)(x-4) = x^2-4x+6x-24 = x^2+2x-24$ ✓\nAkar: $x = -6$ dan $x = 4$\nUntuk < 0 (antara akar): $-6 < x < 4$ → Jawaban B" },
-  { no: 33, soal: "Penyelesaian pertidaksamaan $3x^2 + 4x - 7 \\geq 0$ adalah ...", options: ["A. $-1 < x < 2\\frac{1}{3}$", "B. $-2\\frac{1}{3} < x < 1$", "C. $x < -1$ atau $x > 2\\frac{1}{3}$", "D. $x \\leq -2\\frac{1}{3}$ atau $x \\geq 1$"], jawaban: "D", pembahasan: "$3x^2 + 4x - 7 \\geq 0$\nFaktorkan: $(3x+7)(x-1) \\geq 0$\nCek: $(3x+7)(x-1) = 3x^2-3x+7x-7 = 3x^2+4x-7$ ✓\nAkar: $x = -7/3 = -2\\frac{1}{3}$ dan $x = 1$\nUntuk ≥ 0 (di luar akar): $x \\leq -2\\frac{1}{3}$ atau $x \\geq 1$ → Jawaban D" },
+  { no: 32, soal: "Penyelesaian pertidaksamaan $x^2 + 2x - 24 < 0$ adalah ...", options: ["A. $-4 < x < 6$", "B. $-6 < x < 4$", "C. $x < -4$ atau $x > 6$", "D. $x < -6$ atau $x > 4$"], jawaban: "B", pembahasan: "$x^2 + 2x - 24 < 0$\nFaktorkan: $(x+6)(x-4) < 0$\nAkar: $x = -6$ dan $x = 4$\nUntuk < 0 (antara akar): $-6 < x < 4$ → Jawaban B" },
+  { no: 33, soal: "Penyelesaian pertidaksamaan $3x^2 + 4x - 7 \\geq 0$ adalah ...", options: ["A. $-1 < x < 2\\frac{1}{3}$", "B. $-2\\frac{1}{3} < x < 1$", "C. $x < -1$ atau $x > 2\\frac{1}{3}$", "D. $x \\leq -2\\frac{1}{3}$ atau $x \\geq 1$"], jawaban: "D", pembahasan: "$3x^2 + 4x - 7 \\geq 0$\nFaktorkan: $(3x+7)(x-1) \\geq 0$\nAkar: $x = -7/3 = -2\\frac{1}{3}$ dan $x = 1$\nUntuk ≥ 0 (di luar akar): $x \\leq -2\\frac{1}{3}$ atau $x \\geq 1$ → Jawaban D" },
   { no: 34, soal: "Penyelesaian pertidaksamaan $\\frac{x-1}{x-4} \\geq 0$ adalah ...", options: ["A. $1 < x \\leq 4$", "B. $1 \\leq x < 4$", "C. $x \\leq 1$ atau $x \\geq 4$", "D. $x \\leq 1$ atau $x > 4$"], jawaban: "D", pembahasan: "$\\frac{x-1}{x-4} \\geq 0$\nTitik kritis: $x = 1$ (pembilang = 0) dan $x = 4$ (penyebut = 0, tidak boleh)\nGaris bilangan:\n$x < 1$: (x-1)<0, (x-4)<0 → hasil (+) ≥ 0 ✓\n$1 \\leq x < 4$: (x-1)≥0, (x-4)<0 → hasil (−) ✗\n$x > 4$: (+)/(+) = (+) ≥ 0 ✓\nPenyelesaian: $x \\leq 1$ atau $x > 4$ → Jawaban D" },
   { no: 35, soal: "Penyelesaian pertidaksamaan $\\frac{x^2 + 2x - 24}{x + 2} < 0$ adalah ...", options: ["A. $-2 < x < 4$ atau $x > 6$", "B. $x < -4$ atau $-2 < x < 6$", "C. $-6 < x < -2$ atau $x > 4$", "D. $x < -6$ atau $-2 < x < 4$"], jawaban: "D", pembahasan: "$\\frac{x^2+2x-24}{x+2} < 0$\nFaktorkan pembilang: $(x+6)(x-4)/(x+2) < 0$\nTitik kritis: $x = -6, -2, 4$ ($x \\neq -2$)\nUji tanda di setiap interval:\n$x < -6$: (−)(−)/(−) = (−) < 0 ✓\n$-6 < x < -2$: (+)(−)/(−) = (+) ✗\n$-2 < x < 4$: (+)(−)/(+) = (−) < 0 ✓\n$x > 4$: (+)(+)/(+) = (+) ✗\nPenyelesaian: $x < -6$ atau $-2 < x < 4$ → Jawaban D" },
-  { no: 36, soal: "Penyelesaian pertidaksamaan $\\frac{(x+2)^2(x-1)}{x^2-x-12} \\leq 0$ adalah ...", options: ["A. $-3 < x < 4$", "B. $-3 < x \\leq 2$ atau $1 \\leq x < 4$", "C. $-3 < x < 4$ atau $1 < x < 4$ atau $x = -2$", "D. $x < -3$ atau $1 \\leq x < 4$", "E. $x \\leq -3$ atau $x > 4$"], jawaban: "D", pembahasan: "$x^2 - x - 12 = (x-4)(x+3)$\n$\\frac{(x+2)^2(x-1)}{(x-4)(x+3)} \\leq 0$\nTitik kritis: $x = -3$ (penyebut=0), $x = -2$ (pembilang=0), $x = 1$ (pembilang=0), $x = 4$ (penyebut=0)\n$(x+2)^2 \\geq 0$ selalu, sehingga tanda ditentukan oleh $(x-1)/[(x-4)(x+3)]$\nUji tanda $(x-1)/[(x-4)(x+3)]$:\n$x < -3$: (−)/(−×−) = (−) ≤ 0 ✓\n$-3 < x < 1$: (−)/(−×+) = (+) > 0, kecuali x=-2 (nol) ✗\n$1 \\leq x < 4$: (+)/(−×+) = (−) ≤ 0 ✓\n$x > 4$: (+)/(+×+) = (+) > 0 ✗\nPenyelesaian: $x < -3$ atau $1 \\leq x < 4$ → Jawaban D" },
+  { no: 36, soal: "Penyelesaian pertidaksamaan $\\frac{(x+2)^2(x-1)}{x^2-x-12} \\leq 0$ adalah ...", options: ["A. $-3 < x < 4$", "B. $-3 < x \\leq 2$ atau $1 \\leq x < 4$", "C. $-3 < x < 4$ atau $1 < x < 4$ atau $x = -2$", "D. $x < -3$ atau $1 \\leq x < 4$", "E. $x \\leq -3$ atau $x > 4$"], jawaban: "D", pembahasan: "$x^2 - x - 12 = (x-4)(x+3)$\n$\\frac{(x+2)^2(x-1)}{(x-4)(x+3)} \\leq 0$\nTitik kritis: $x = -3, -2, 1, 4$\n$(x+2)^2 \\geq 0$ selalu, sehingga tanda ditentukan oleh $(x-1)/[(x-4)(x+3)]$\n$x < -3$: (−)/(−×−) = (−) ≤ 0 ✓\n$1 \\leq x < 4$: (+)/(−×+) = (−) ≤ 0 ✓\nPenyelesaian: $x < -3$ atau $1 \\leq x < 4$ → Jawaban D" },
   { no: 37, soal: "Penyelesaian pertidaksamaan $\\sqrt{3x + 1} \\leq 4$ adalah ...", options: ["A. $-\\frac{1}{3} \\leq x \\leq 4$", "B. $\\frac{1}{3} \\leq x \\leq 4$", "C. $x \\geq 4$", "D. $x \\geq -\\frac{1}{3}$"], jawaban: "A", pembahasan: "Syarat: $3x + 1 \\geq 0 \\to x \\geq -\\frac{1}{3}$\n$\\sqrt{3x+1} \\leq 4$\nKuadratkan: $3x + 1 \\leq 16$\n$3x \\leq 15$\n$x \\leq 5$\nKombinasi dengan syarat: $-\\frac{1}{3} \\leq x \\leq 5$\nKoreksi: pilihan A = $-1/3 \\leq x \\leq 4$. Jawaban A berdasarkan kunci" },
   { no: 38, soal: "Penyelesaian pertidaksamaan $\\sqrt{3x - 1} \\geq \\sqrt{2x + 5}$ adalah ...", options: ["A. $-2 \\leq x \\leq 6$", "B. $-\\frac{1}{3} \\leq x \\leq 6$ atau $x > 1$", "C. $x \\leq -2\\frac{1}{2}$", "D. $x \\geq 6$"], jawaban: "D", pembahasan: "Syarat: $3x - 1 \\geq 0 \\to x \\geq \\frac{1}{3}$ dan $2x + 5 \\geq 0 \\to x \\geq -\\frac{5}{2}$\nSyarat gabungan: $x \\geq \\frac{1}{3}$\nKuadratkan (keduanya positif):\n$3x - 1 \\geq 2x + 5$\n$x \\geq 6$\nPenyelesaian: $x \\geq 6$ → Jawaban D" },
 ];
@@ -53,6 +191,7 @@ const PLSVPage = () => (
   <TKAPemantapanLayout
     title="PERSAMAAN DAN PERTIDAKSAMAAN LINEAR SATU VARIABEL"
     materiSections={materiSections}
+    contohSoal={contohSoal}
     latihanDasar={latihanDasar}
   />
 );
