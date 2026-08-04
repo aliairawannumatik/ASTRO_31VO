@@ -456,15 +456,6 @@ const latihanDasar: LatihanSoal[] = [
     pembahasan: "Luas $= \\frac{1}{2} \\times 10 \\times (x-4) = 5(x-4)$ → Pernyataan (1) BENAR\n$5(x-4) \\geq 2x-2 \\Rightarrow 5x-20 \\geq 2x-2$ → Pernyataan (2) BENAR\n$3x \\geq 18 \\Rightarrow x \\geq 6$; juga syarat tinggi $> 0 \\Rightarrow x > 4$; gabungan: $x \\geq 6$\nNilai minimum adalah 6, bukan 4 → Pernyataan (3) SALAH",
   },
 
-  // ── No. 22 — PG ─────────────────────────────────────────────────────────────
-  {
-    no: 22, type: "pg",
-    soal: "Diketahui persamaan $\\dfrac{2(3x - 6)}{(x-1)(x+1)} + \\dfrac{1}{x+1} = \\dfrac{3}{x-1}$. Nilai $x$ yang memenuhi persamaan adalah ...",
-    options: ["A. $-\\dfrac{4}{3}$", "B. $1$", "C. $4$", "D. $5$"],
-    jawaban: "C",
-    pembahasan: "Kalikan semua dengan $(x-1)(x+1)$:\n$2(3x-6) + (x-1) = 3(x+1)$\n$6x - 12 + x - 1 = 3x + 3$\n$7x - 13 = 3x + 3$\n$4x = 16 \\Rightarrow x = 4$ → Jawaban C",
-  },
-
   // ── No. 23 — PGK ────────────────────────────────────────────────────────────
   {
     no: 23, type: "pgk",
@@ -660,26 +651,6 @@ const latihanDasar: LatihanSoal[] = [
     options: ["A. $5$", "B. $7$", "C. $11$", "D. $14$"],
     jawaban: "C",
     pembahasan: "$12x - 8 = 10x + 2 - 4$\n$12x - 8 = 10x - 2$\n$2x = 6 \\Rightarrow x = 3$\n$3x + 2 = 9 + 2 = 11$ → Jawaban C",
-  },
-
-  // ── No. 37 — PGK ────────────────────────────────────────────────────────────
-  {
-    no: 37, type: "pgk",
-    soal: "Diketahui $p + q = 12$ dan $pq = 20$. Pernyataan-pernyataan berikut berkaitan dengan nilai-nilai yang dapat diturunkan dari informasi tersebut.",
-    pernyataan: [
-      "Nilai $(p + q)^2 = 144$.",
-      "Nilai $2pq = 40$.",
-      "Nilai $p^2 + q^2 = 104$.",
-      "Nilai $(p - q)^2 = 144$.",
-    ],
-    options: [
-      "A. 1 dan 4",
-      "B. 2 dan 4",
-      "C. 1, 2, dan 4",
-      "D. 1, 2, dan 3",
-    ],
-    jawaban: "D",
-    pembahasan: "$(p+q)^2 = 12^2 = 144$ → Pernyataan (1) BENAR\n$2pq = 2 \\times 20 = 40$ → Pernyataan (2) BENAR\n$p^2 + q^2 = (p+q)^2 - 2pq = 144 - 40 = 104$ → Pernyataan (3) BENAR\n$(p-q)^2 = (p+q)^2 - 4pq = 144 - 80 = 64 \\neq 144$ → Pernyataan (4) SALAH\nBenar: 1, 2, dan 3 → Jawaban D",
   },
 
   // ── No. 38 — PGKBS ──────────────────────────────────────────────────────────
