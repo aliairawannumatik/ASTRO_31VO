@@ -785,52 +785,6 @@ const BentukAkarPage = () => {
             )}
           </div>
 
-          {/* CONTOH 2 */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="c2" icon={<Calculator className="w-5 h-5" />} iconColor="text-purple-400" title={t.sec_c2} />
-            {isOpen("c2") && (
-              <div className="px-5 pb-5 space-y-6">
-                <ExBlock level="easy" n={1}
-                  soal={<>{t.c2_easy_q} <InlineMath math="7^{\frac{1}{2}}" /> {t.dan} <InlineMath math="5^{\frac{1}{3}}" /></>}
-                  solution={<>
-                    <p>{t.c2_easy_rule} <InlineMath math="a^{\frac{1}{n}} = \sqrt[n]{a}" />:</p>
-                    <Dark>
-                      <BlockMath math="7^{\frac{1}{2}} = \sqrt[2]{7} = \sqrt{7}" />
-                      <BlockMath math="5^{\frac{1}{3}} = \sqrt[3]{5}" />
-                    </Dark>
-                  </>}
-                />
-                <ExBlock level="med" n={2}
-                  soal={<>{t.c2_med_q} <InlineMath math="32^{\frac{3}{5}}" /></>}
-                  solution={<>
-                    <p><strong>{t.step} 1:</strong> {t.c2_med_s1}</p>
-                    <Dark><BlockMath math="32^{\frac{3}{5}} = \sqrt[5]{32^3}" /></Dark>
-                    <p><strong>{t.step} 2:</strong> {t.c2_med_s2} <InlineMath math="\sqrt[5]{32}" />{t.c2_med_s2b}</p>
-                    {/* KaTeX fix: removed \text{karena } — use JSX annotation */}
-                    <Dark><BlockMath math="\sqrt[5]{32} = 2" /></Dark>
-                    <p className="text-xs text-white/60">{t.karena} <InlineMath math="2^5 = 32" /></p>
-                    <p><strong>{t.step} 3:</strong> {t.c2_med_s3}</p>
-                    <Dark><BlockMath math="32^{\frac{3}{5}} = \left(\sqrt[5]{32}\right)^3 = 2^3 = 8" /></Dark>
-                    <p><strong className="text-primary">{t.c2_med_ans}</strong></p>
-                  </>}
-                />
-                <ExBlock level="hard" n={3}
-                  soal={<>{t.c2_hard_q} <InlineMath math="\dfrac{27^{\frac{2}{3}} \times 9^{\frac{1}{2}}}{3^2}" /></>}
-                  solution={<>
-                    <p><strong>{t.step} 1:</strong> {t.c2_hard_s1}</p>
-                    <Dark>
-                      <BlockMath math="27 = 3^3 \Rightarrow 27^{\frac{2}{3}} = (3^3)^{\frac{2}{3}} = 3^2 = 9" />
-                      <BlockMath math="9 = 3^2 \Rightarrow 9^{\frac{1}{2}} = (3^2)^{\frac{1}{2}} = 3^1 = 3" />
-                    </Dark>
-                    <p><strong>{t.step} 2:</strong> {t.c2_hard_s2}</p>
-                    <Dark><BlockMath math="\frac{9 \times 3}{3^2} = \frac{27}{9} = 3" /></Dark>
-                    <p><strong className="text-primary">{t.hasil} 3</strong></p>
-                  </>}
-                />
-              </div>
-            )}
-          </div>
-
           {/* SUB-BAB 3: PENYEDERHANAAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="k3" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400" title={t.sec_k3} />
@@ -934,7 +888,7 @@ const BentukAkarPage = () => {
                     <div className="bg-slate-900/50 rounded-lg p-3">
                       <p className="font-body text-xs font-semibold text-orange-300 mb-2">{t.k4_add}</p>
                       <p className="font-body text-xs text-white/60 mb-2">{t.k4_add_note}</p>
-                      <BlockMath math="p\sqrt{a} \pm q\sqrt{a} = (p \pm q)\sqrt{a}" />
+                      <BlockMath math="a\sqrt{b} \pm c\sqrt{b} = (a \pm c)\sqrt{b}" />
                     </div>
                     <div className="bg-slate-900/50 rounded-lg p-3">
                       <p className="font-body text-xs font-semibold text-orange-300 mb-2">{t.k4_mul}</p>
@@ -1031,12 +985,21 @@ const BentukAkarPage = () => {
                   </>}
                 />
                 <ExBlock level="med" n={2}
-                  soal={<>{t.c5_med_q} <InlineMath math="\dfrac{4}{\sqrt{5} - 1}" /></>}
+                  soal={<>{t.c5_med_q} <InlineMath math="\dfrac{3\sqrt{3} - 2\sqrt{2}}{3\sqrt{3} + 2\sqrt{2}}" /></>}
                   solution={<>
-                    <p>{t.kalikan_conj}</p>
+                    <p>{t.kalikan_conj} <InlineMath math="(3\sqrt{3} - 2\sqrt{2})" />:</p>
                     <Dark>
-                      <BlockMath math="\frac{4}{\sqrt{5}-1} \times \frac{\sqrt{5}+1}{\sqrt{5}+1} = \frac{4(\sqrt{5}+1)}{5-1} = \frac{4(\sqrt{5}+1)}{4} = \sqrt{5}+1" />
+                      <BlockMath math="\frac{3\sqrt{3} - 2\sqrt{2}}{3\sqrt{3} + 2\sqrt{2}} \times \frac{3\sqrt{3} - 2\sqrt{2}}{3\sqrt{3} - 2\sqrt{2}} = \frac{(3\sqrt{3} - 2\sqrt{2})^2}{(3\sqrt{3})^2 - (2\sqrt{2})^2}" />
                     </Dark>
+                    <p><strong>{t.step} 1:</strong> {t.gunakan_selisih}</p>
+                    <Dark>
+                      <BlockMath math="(3\sqrt{3})^2 - (2\sqrt{2})^2 = 27 - 8 = 19" />
+                    </Dark>
+                    <p><strong>{t.step} 2:</strong></p>
+                    <Dark>
+                      <BlockMath math="(3\sqrt{3} - 2\sqrt{2})^2 = 27 - 2 \cdot 3\sqrt{3} \cdot 2\sqrt{2} + 8 = 35 - 12\sqrt{6}" />
+                    </Dark>
+                    <p><strong className="text-primary">{t.hasil} <InlineMath math="\dfrac{35 - 12\sqrt{6}}{19}" /></strong></p>
                   </>}
                 />
                 <ExBlock level="hard" n={3}
