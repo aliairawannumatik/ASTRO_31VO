@@ -1,6 +1,77 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
 
+const contohSoal: LatihanSoal[] = [
+  // ── Soal 1 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 1, type: "pg",
+    soal: "Diberikan sistem persamaan linear dua variabel $x + y = 7$ dan $x - y = 3$. Himpunan penyelesaian dari sistem tersebut adalah …",
+    options: [
+      "A. $\\{(2, 5)\\}$",
+      "B. $\\{(5, -2)\\}$",
+      "C. $\\{(5, 2)\\}$",
+      "D. $\\{(-5, 2)\\}$",
+    ],
+    jawaban: "C",
+    pembahasan: "Gunakan metode eliminasi untuk menghilangkan variabel $y$:\n$$\\begin{aligned} x + y &= 7 \\\\ x - y &= 3 \\\\ \\hline 2x &= 10 \\quad (+)\\\\ x &= 5 \\end{aligned}$$\nSubstitusi $x = 5$ ke persamaan pertama:\n$$5 + y = 7 \\implies y = 2$$\nHimpunan Penyelesaian $= \\{(5, 2)\\}$\nJawaban: C",
+  },
+
+  // ── Soal 2 — PGKBS ──────────────────────────────────────────────────────────
+  {
+    no: 2, type: "pgkbs",
+    soal: "Diketahui sistem persamaan linear dua variabel $4x - 2y = 10$ dan $2x + y = 9$ memiliki penyelesaian $x = m$ dan $y = n$. Tentukan kebenaran setiap pernyataan berikut!",
+    pernyataan: [
+      "Nilai $n$ sama dengan $4$.",
+      "Nilai $m$ sama dengan $3$.",
+      "Nilai dari $2m - n$ adalah $2$.",
+      "Nilai $m < n$.",
+    ],
+    jawabanBS: ["S", "S", "S", "S"],
+    pembahasan: "Eliminasi variabel $x$ untuk mencari $y$ ($n$):\n$$\\begin{aligned} 4x - 2y = 10 &\\;(\\times 1) \\implies 4x - 2y = 10 \\\\ 2x + y = 9 &\\;(\\times 2) \\implies 4x + 2y = 18 \\\\ \\hline &\\quad\\quad -4y = -8 \\quad (-) \\\\ &\\quad\\quad y = 2 \\end{aligned}$$\nMaka $n = 2$ (bukan 4) → Pernyataan (1) SALAH\nSubstitusi $y = 2$ ke persamaan (2): $2x + 2 = 9 \\Rightarrow x = 3{,}5$\nMaka $m = 3{,}5$ (bukan 3) → Pernyataan (2) SALAH\n$2m - n = 2(3{,}5) - 2 = 5$ (bukan 2) → Pernyataan (3) SALAH\n$m = 3{,}5 > n = 2$, sehingga $m > n$ (bukan $m < n$) → Pernyataan (4) SALAH",
+  },
+
+  // ── Soal 3 — PGKBS (bacaan: Toko Busana Indah) ──────────────────────────────
+  {
+    no: 3, type: "pgkbs",
+    soal: "📖 Bacaan (untuk Soal 3 dan 4)\nIbu Sarah membeli 3 potong kemeja dan 2 potong celana di toko \"Busana Indah\" seharga Rp450.000,00. Ibu Maya membeli 2 potong kemeja dan 1 potong celana di toko yang sama seharga Rp260.000,00. Ibu Rini berniat membeli 4 potong kemeja dan 3 potong celana di toko tersebut.\n\nBerdasarkan teks di atas, tentukan kategorisasi Tepat atau Tidak Tepat untuk setiap pernyataan berikut!",
+    pernyataan: [
+      "Harga satu potong kemeja di toko \"Busana Indah\" adalah Rp70.000,00.",
+      "Harga dua potong celana di toko \"Busana Indah\" adalah Rp240.000,00.",
+      "Ibu Rini harus membayar total Rp640.000,00 di toko \"Busana Indah\".",
+    ],
+    jawabanBS: ["B", "B", "B"],
+    pembahasan: "Misalkan $x$ = harga 1 kemeja, $y$ = harga 1 celana.\nSistem persamaan:\n$3x + 2y = 450.000 \\quad \\text{--- (1)}$\n$2x + y = 260.000 \\quad \\text{--- (2)} \\implies y = 260.000 - 2x$\nSubstitusi $y$ ke (1):\n$$3x + 2(260.000 - 2x) = 450.000$$\n$$3x + 520.000 - 4x = 450.000 \\implies -x = -70.000 \\implies x = 70.000$$\nHarga 1 kemeja = Rp70.000,00 → TEPAT\n$y = 260.000 - 2(70.000) = 120.000$; harga 2 celana $= 2 \\times 120.000 = 240.000$ → TEPAT\nBelanjaan Ibu Rini $= 4(70.000) + 3(120.000) = 280.000 + 360.000 = 640.000$ → TEPAT",
+  },
+
+  // ── Soal 4 — PG (lanjutan bacaan Toko Busana Indah) ─────────────────────────
+  {
+    no: 4, type: "pg",
+    soal: "Berdasarkan bacaan pada Soal 3, apabila Ibu Rini hendak melunasi belanjaannya sebesar Rp640.000,00 menggunakan pecahan uang Rp100.000,00, berapa lembar uang kertas yang minimal harus ia bayarkan?",
+    options: [
+      "A. 6 lembar",
+      "B. 7 lembar",
+      "C. 8 lembar",
+      "D. 10 lembar",
+    ],
+    jawaban: "B",
+    pembahasan: "Total belanja Ibu Rini = Rp640.000,00; pecahan uang = Rp100.000,00.\n$$\\frac{640.000}{100.000} = 6{,}4 \\text{ lembar}$$\nKarena lembaran harus utuh dan mencukupi, dibulatkan ke atas:\n$6{,}4 \\rightarrow 7$ lembar\nDengan 7 lembar uang Rp100.000,00 (total Rp700.000,00), cukup membayar dan mendapat kembalian Rp60.000,00.\nJawaban: B",
+  },
+
+  // ── Soal 5 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 5, type: "pg",
+    soal: "Diberikan sistem persamaan:\n$$\\frac{1}{x} + \\frac{3}{y} = \\frac{5}{6} \\quad \\text{dan} \\quad \\frac{3}{x} - \\frac{1}{y} = \\frac{1}{2}$$\nPenyelesaian dari sistem persamaan tersebut adalah $(x, y) = \\dots$",
+    options: [
+      "A. $(2, 4)$",
+      "B. $(3, 4)$",
+      "C. $(4, 3)$",
+      "D. $(2, 3)$",
+    ],
+    jawaban: "D",
+    pembahasan: "Misalkan $a = \\dfrac{1}{x}$ dan $b = \\dfrac{1}{y}$, sehingga:\n$a + 3b = \\dfrac{5}{6} \\implies 6a + 18b = 5 \\quad\\text{--- (1)}$\n$3a - b = \\dfrac{1}{2} \\implies 6a - 2b = 1 \\quad\\text{--- (2)}$\nEliminasi variabel $a$ dengan (1) $-$ (2):\n$$20b = 4 \\implies b = \\frac{1}{5}$$\nSubstitusi $b = \\dfrac{1}{5}$ ke (2):\n$$6a - \\frac{2}{5} = 1 \\implies 6a = \\frac{7}{5} \\implies a = \\frac{7}{30}$$\nKembalikan ke variabel asli:\n$x = \\dfrac{1}{a} = \\dfrac{30}{7}$, $\\quad y = \\dfrac{1}{b} = 5$\nHasil: $\\left(\\dfrac{30}{7},\\, 5\\right)$",
+  },
+];
+
 const materiSections: MateriSection[] = [
   { heading: "A. Persamaan Linear Dua Variabel (PLDV)", content: `Bentuk umum PLDV: $ax + by = c$ dengan $a, b \\neq 0$, variabel x dan y.` },
   { heading: "B. Sistem Persamaan Linear Dua Variabel (SPLDV)", content: `$a_1x + b_1y = c_1$\n$a_2x + b_2y = c_2$` },
@@ -35,6 +106,7 @@ const SPLDVPage = () => (
   <TKAPemantapanLayout
     title="SISTEM PERSAMAAN LINEAR DUA VARIABEL"
     materiSections={materiSections}
+    contohSoal={contohSoal}
     latihanDasar={latihanDasar}
   />
 );
