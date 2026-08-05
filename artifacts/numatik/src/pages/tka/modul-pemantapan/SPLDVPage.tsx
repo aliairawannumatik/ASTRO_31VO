@@ -83,23 +83,245 @@ const materiSections: MateriSection[] = [
 ];
 
 const latihanDasar: LatihanSoal[] = [
-  { no: 1, soal: "Diketahui sistem persamaan $x - 3y - 5 = 0$ dan $2x - 5y = 9$. Nilai dari $3x + 2y$ adalah", options: ["A. -1", "B. 1", "C. 3", "D. 4"] },
-  { no: 2, soal: "Penyelesaian sistem persamaan $3x - 2y = 12$ dan $5x + y = 7$ adalah $x = p$ dan $y = q$. Nilai dari $4p + 3q$ adalah ...", options: ["A. -2", "B. 7", "C. 14", "D. 16"] },
-  { no: 3, soal: "Jika a dan b merupakan penyelesaian dari sistem persamaan $-3x + 2y = 8$ dan $2x - y = -10$, nilai dari $a - 2b$ adalah ...", options: ["A. 16", "B. 32", "C. 40", "D. 48"] },
-  { no: 4, soal: "Penyelesaian dari $\\frac{2}{x} + \\frac{1}{y} = 6$ dan $\\frac{1}{x} + \\frac{1}{y} = 2$ adalah $x = a$ dan $y = b$. Nilai dari $a - 2b$ adalah ...", options: ["A. -2", "B. 7", "C. 14", "D. 16"] },
-  { no: 5, soal: "Diketahui $\\frac{3}{x} + \\frac{1}{y} = 4$ dan $\\frac{1}{x} - \\frac{2}{y} = -2$. Nilai $2x - y$ adalah ...", options: ["A. 0", "B. 2", "C. 4", "D. 8"] },
-  { no: 6, soal: "Diketahui sistem persamaan berikut:\n$\\frac{2}{x} + \\frac{3}{y} = 2$\n$\\frac{4}{x} - \\frac{3}{y} = 1$\nNilai x sama dengan ...", options: ["A. 2", "B. 3", "C. $\\frac{1}{2}$", "D. $\\frac{1}{3}$"] },
-  { no: 7, soal: "Perhatikan sistem persamaan 'campuran' berikut:\n$\\sqrt{y} - \\sqrt{x} = 1$\n$\\frac{4}{\\sqrt{x}} + \\frac{3}{\\sqrt{y}} = 3$\nJika diketahui x dan y adalah bilangan bulat positif, maka nilai dari xy adalah ...", options: ["A. 6", "B. 3", "C. 2", "D. 5"] },
-  { no: 8, soal: "Hanna membeli 3 buah buku dan 2 buah pensil. Hanna membayar dengan dua lembar uang Rp 10.000,00 dan mendapatkan kembalian Rp 3.000,00. Jika harga sebuah buku x rupiah dan pensil y rupiah, maka model matematikanya adalah..", options: ["A. $10.000 - 3x - 2y = 3.000$", "B. $10.000 - 3x + 2y = 3.000$", "C. $20.000 - (3x - 2y) = 3.000$", "D. $20.000 - (3x + 2y) = 3.000$"] },
-  { no: 9, soal: "Indra membeli 2 buah buku dan 3 buah pensil. Indra membayar dengan dua lembar uang Rp 20.000,00 dan mendapatkan kembalian Rp 13.000,00. Jika harga sebuah buku x rupiah dan pensil y rupiah, maka model matematikanya adalah..", options: ["A. $20.000 - 2x - 3y = 13.000$", "B. $20.000 - 2x + 3y = 13.000$", "C. $40.000 - (2x - 3y) = 13.000$", "D. $40.000 - (2x + 3y) = 13.000$"] },
-  { no: 10, soal: "Harga 4 buku tulis dan 3 pensil adalah Rp. 13.500,00. Harga 3 buku tulis dan 2 pensil adalah Rp. 9.750,00. Harga 2 buku tulis dan 3 pensil adalah ..", options: ["A. Rp 11.250,00", "B. Rp 10.000,00", "C. Rp 9.500,00", "D. Rp 9.000,00"] },
-  { no: 11, soal: "Jika harga sebuah mesin cetak adalah 5 kali harga sebuah komputer sedangkan harga 2 buah mesin cetak dan 5 buah komputer adalah Rp 60.000.000,00, maka harga sebuah mesin cetak adalah ...", options: ["A. Rp 8.000.000,00", "B. Rp 12.000.000,00", "C. Rp 20.000.000,00", "D. Rp 24.000.000,00"] },
-  { no: 12, soal: "Di kandang Pak Karto terdapat ayam dan kambing sebanyak 75 ekor. Jika banyaknya kaki ada 198 buah maka banyaknya kambing adalah ....", options: ["A. 24 ekor", "B. 23 ekor", "C. 22 ekor", "D. 21 ekor"] },
-  { no: 13, soal: "Tempat parkir pada saat itu menampung 90 kendaraan sepeda motor dan mobil, sedangkan jumlah roda seluruhnya ada 290 buah. Jika tarif parkir sepeda motor Rp2.000,00/jam dan mobil Rp5.000,00/jam, maka pendapatan tukang parkir saat itu selama 2 jam adalah ....", options: ["A. Rp345.000,00", "B. Rp325.000,00", "C. Rp285.000,00", "D. Rp690.000,00"] },
-  { no: 14, soal: "Hazky mengambil uang di bank sebesar Rp.1.850.000,00 yang terdiri dari uang seratus ribuan dan uang lima puluh ribuan. Jika banyaknya uang lima puluh ribuan 7 lembar lebih banyak dari uang seratus ribuan, maka banyaknya uang lima puluh ribuan adalah...", options: ["A. 10 lembar", "B. 12 lembar", "C. 15 lembar", "D. 17 lembar"] },
-  { no: 15, soal: "Dalam sebuah tempat pertunjukan terdapat 200 orang yang terdiri dari penonton dewasa dan anak-anak. Dari penjualan tiket diperoleh uang sebesar Rp 780.000,00. Jika harga tiket orang dewasa Rp 4.000,00 dan harga tiket anak-anak Rp 3.500,00, banyak penonton anak-anak adalah....", options: ["A. 40 orang", "B. 35 orang", "C. 30 orang", "D. 160 orang"] },
-  { no: 16, soal: "Lima tahun yang lalu, usia Ayah adalah empat kali usia Paman. Lima tahun yang akan datang, dua kali usia Ayah sama dengan tiga kali usia Paman ditambah 7 tahun. Berapakah usia Ayah sekarang?", options: ["A. 40 tahun", "B. 35 tahun", "C. 25 tahun", "D. 45 tahun"] },
-  { no: 17, soal: "Jumlah dua buah kebalikan bilangan adalah 5, sedangkan selisihnya adalah 1. (Kebalikan bilangan x adalah $\\frac{1}{x}$). Tentukan hasil kali kedua bilangan tersebut.", options: ["A. 6", "B. $\\frac{1}{6}$", "C. 5", "D. $\\frac{1}{5}$"] },
+
+  // ── No. 1 — PG ──────────────────────────────────────────────────────────────
+  {
+    no: 1, type: "pg",
+    soal: "Diketahui sistem persamaan $x + 2y = 10$ dan $3x - y = 9$. Nilai dari $x + y$ adalah ...",
+    options: ["A. $5$", "B. $7$", "C. $9$", "D. $11$"],
+    jawaban: "B",
+    pembahasan: "Dari persamaan (2): $y = 3x - 9$. Substitusi ke (1):\n$x + 2(3x - 9) = 10 \\Rightarrow 7x - 18 = 10 \\Rightarrow x = 4,\\; y = 3$\n$x + y = 4 + 3 = 7$ → Jawaban B",
+  },
+
+  // ── No. 2 — PGK ─────────────────────────────────────────────────────────────
+  {
+    no: 2, type: "pgk",
+    soal: "Sistem persamaan $2x + 3y = 19$ dan $x - y = 2$ memiliki penyelesaian $x = p$ dan $y = q$. Pernyataan-pernyataan berikut berkaitan dengan nilai $p$ dan $q$.",
+    pernyataan: [
+      "Nilai $p = 5$.",
+      "Nilai $q = 3$.",
+      "Nilai $p + q = 7$.",
+      "Nilai $2p - q = 7$.",
+    ],
+    options: [
+      "A. 1 dan 2",
+      "B. 1 dan 3",
+      "C. 2 dan 4",
+      "D. 1, 2, dan 4",
+    ],
+    jawaban: "D",
+    pembahasan: "Dari (2): $x = y + 2$. Sub ke (1): $2(y+2)+3y=19 \\Rightarrow 5y=15 \\Rightarrow y=3=q,\\; x=5=p$\nPernyataan (1): $p=5$ → BENAR\nPernyataan (2): $q=3$ → BENAR\nPernyataan (3): $p+q=8 \\neq 7$ → SALAH\nPernyataan (4): $2(5)-3=7$ → BENAR\nBenar: 1, 2, dan 4 → Jawaban D",
+  },
+
+  // ── No. 3 — PGKBS ───────────────────────────────────────────────────────────
+  {
+    no: 3, type: "pgkbs",
+    soal: "Harga 2 buku dan 1 pensil adalah Rp13.000,00. Harga 1 buku dan 2 pensil adalah Rp11.000,00. Tentukan kebenaran setiap pernyataan berikut!",
+    pernyataan: [
+      "Harga 1 buku adalah Rp5.000,00.",
+      "Harga 1 pensil adalah Rp4.000,00.",
+      "Harga 3 buku dan 2 pensil adalah Rp21.000,00.",
+    ],
+    jawabanBS: ["B", "S", "B"],
+    pembahasan: "Misalkan $b$ = harga 1 buku, $p$ = harga 1 pensil.\n$2b + p = 13.000$ dan $b + 2p = 11.000$\nKalikan persamaan (1) dengan 2: $4b + 2p = 26.000$. Kurangi (2): $3b = 15.000 \\Rightarrow b = 5.000$\n$p = 13.000 - 10.000 = 3.000$\nPernyataan (1): $b = 5.000$ → BENAR\nPernyataan (2): $p = 3.000 \\neq 4.000$ → SALAH\nPernyataan (3): $3(5.000)+2(3.000)=21.000$ → BENAR",
+  },
+
+  // ── No. 4 — PG ──────────────────────────────────────────────────────────────
+  {
+    no: 4, type: "pg",
+    soal: "Diketahui $3x + 2y = 16$ dan $x - y = 2$. Nilai dari $2x + y$ adalah ...",
+    options: ["A. $8$", "B. $9$", "C. $10$", "D. $12$"],
+    jawaban: "C",
+    pembahasan: "Dari (2): $x = y + 2$. Sub ke (1): $3(y+2)+2y=16 \\Rightarrow 5y=10 \\Rightarrow y=2,\\; x=4$\n$2x + y = 8 + 2 = 10$ → Jawaban C",
+  },
+
+  // ── No. 5 — PGK ─────────────────────────────────────────────────────────────
+  {
+    no: 5, type: "pgk",
+    soal: "Diketahui $\\dfrac{1}{x} + \\dfrac{1}{y} = 5$ dan $\\dfrac{2}{x} - \\dfrac{1}{y} = 4$. Misalkan $a = \\dfrac{1}{x}$ dan $b = \\dfrac{1}{y}$. Pernyataan-pernyataan berikut berkaitan dengan penyelesaiannya.",
+    pernyataan: [
+      "Nilai $a = \\dfrac{1}{x} = 3$.",
+      "Nilai $b = \\dfrac{1}{y} = 2$.",
+      "Nilai $x + y = \\dfrac{5}{6}$.",
+      "Nilai $x \\cdot y = \\dfrac{1}{3}$.",
+    ],
+    options: [
+      "A. 1 dan 2",
+      "B. 2 dan 4",
+      "C. 1 dan 4",
+      "D. 1, 2, dan 3",
+    ],
+    jawaban: "D",
+    pembahasan: "Sistem: $a+b=5$ dan $2a-b=4$. Jumlahkan: $3a=9 \\Rightarrow a=3,\\; b=2$\nJadi $x=\\frac{1}{3}$ dan $y=\\frac{1}{2}$\nPernyataan (1): $a=3$ → BENAR\nPernyataan (2): $b=2$ → BENAR\nPernyataan (3): $x+y=\\frac{1}{3}+\\frac{1}{2}=\\frac{5}{6}$ → BENAR\nPernyataan (4): $xy=\\frac{1}{6}\\neq\\frac{1}{3}$ → SALAH\nBenar: 1, 2, dan 3 → Jawaban D",
+  },
+
+  // ── No. 6 — PGKBS ───────────────────────────────────────────────────────────
+  {
+    no: 6, type: "pgkbs",
+    soal: "Harga 4 mangga dan 1 jeruk adalah Rp22.000,00. Harga 2 mangga dan 3 jeruk adalah Rp26.000,00. Tentukan kebenaran setiap pernyataan berikut!",
+    pernyataan: [
+      "Harga 1 mangga adalah Rp4.000,00.",
+      "Harga 1 jeruk adalah Rp5.000,00.",
+      "Harga 2 mangga dan 1 jeruk adalah Rp14.000,00.",
+    ],
+    jawabanBS: ["B", "S", "B"],
+    pembahasan: "Misalkan $m$ = mangga, $j$ = jeruk.\n$4m+j=22.000$ dan $2m+3j=26.000$\nKalikan (1) dengan 3: $12m+3j=66.000$. Kurangi (2): $10m=40.000 \\Rightarrow m=4.000$\n$j=22.000-16.000=6.000$\nPernyataan (1): $m=4.000$ → BENAR\nPernyataan (2): $j=6.000 \\neq 5.000$ → SALAH\nPernyataan (3): $2(4.000)+6.000=14.000$ → BENAR",
+  },
+
+  // ── No. 7 — PG ──────────────────────────────────────────────────────────────
+  {
+    no: 7, type: "pg",
+    soal: "Diketahui $x - y = 3$ dan $2x + y = 12$. Nilai dari $x^2 + y^2$ adalah ...",
+    options: ["A. $20$", "B. $25$", "C. $29$", "D. $35$"],
+    jawaban: "C",
+    pembahasan: "Jumlahkan kedua persamaan: $3x=15 \\Rightarrow x=5$; $y=x-3=2$\n$x^2+y^2=25+4=29$ → Jawaban C",
+  },
+
+  // ── No. 8 — PGK ─────────────────────────────────────────────────────────────
+  {
+    no: 8, type: "pgk",
+    soal: "Di sebuah tempat parkir terdapat 60 kendaraan yang terdiri dari sepeda motor dan mobil. Jumlah seluruh roda kendaraan tersebut adalah 180 buah. Pernyataan-pernyataan berikut berkaitan dengan situasi tersebut.",
+    pernyataan: [
+      "Banyak sepeda motor di tempat parkir adalah 30 unit.",
+      "Banyak mobil di tempat parkir adalah 30 unit.",
+      "Selisih banyak sepeda motor dan mobil adalah 0.",
+      "Banyak mobil lebih banyak dari sepeda motor.",
+    ],
+    options: [
+      "A. 1 dan 2",
+      "B. 2 dan 4",
+      "C. 1 dan 4",
+      "D. 1, 2, dan 3",
+    ],
+    jawaban: "D",
+    pembahasan: "Misalkan motor $= m$, mobil $= b$.\n$m+b=60$ dan $2m+4b=180 \\Rightarrow m+2b=90$\nKurangi: $b=30,\\; m=30$\nPernyataan (1): motor = 30 → BENAR\nPernyataan (2): mobil = 30 → BENAR\nPernyataan (3): selisih = 0 → BENAR\nPernyataan (4): mobil sama dengan motor, tidak lebih banyak → SALAH\nBenar: 1, 2, dan 3 → Jawaban D",
+  },
+
+  // ── No. 9 — PGKBS ───────────────────────────────────────────────────────────
+  {
+    no: 9, type: "pgkbs",
+    soal: "Umur Adi tiga kali umur Bela. Tiga tahun yang akan datang, jumlah umur keduanya adalah 42 tahun. Tentukan kebenaran setiap pernyataan berikut!",
+    pernyataan: [
+      "Umur Bela saat ini adalah 9 tahun.",
+      "Umur Adi saat ini adalah 27 tahun.",
+      "Lima tahun yang akan datang, jumlah umur keduanya adalah 47 tahun.",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "Misalkan umur Adi $= a$, Bela $= b$.\n$a=3b$ dan $(a+3)+(b+3)=42 \\Rightarrow a+b=36$\nSubstitusi: $3b+b=36 \\Rightarrow b=9,\\; a=27$\nPernyataan (1): $b=9$ → BENAR\nPernyataan (2): $a=27$ → BENAR\nPernyataan (3): $(27+5)+(9+5)=46 \\neq 47$ → SALAH",
+  },
+
+  // ── No. 10 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 10, type: "pg",
+    soal: "Harga 5 buku dan 2 penghapus adalah Rp19.000,00. Harga 3 buku dan 4 penghapus adalah Rp17.000,00. Harga 1 buku adalah ...",
+    options: ["A. Rp2.000,00", "B. Rp2.500,00", "C. Rp3.000,00", "D. Rp3.500,00"],
+    jawaban: "C",
+    pembahasan: "Misalkan $b$ = harga 1 buku, $p$ = harga 1 penghapus.\n$5b+2p=19.000$ dan $3b+4p=17.000$\nKalikan (1) dengan 2: $10b+4p=38.000$. Kurangi (2): $7b=21.000 \\Rightarrow b=3.000$\nHarga 1 buku = Rp3.000,00 → Jawaban C",
+  },
+
+  // ── No. 11 — PGK ────────────────────────────────────────────────────────────
+  {
+    no: 11, type: "pgk",
+    soal: "Sebuah persegi panjang memiliki ukuran panjang $(3x + 2)$ cm dan lebar $(x + 4)$ cm. Keliling persegi panjang tersebut adalah 52 cm. Pernyataan-pernyataan berikut berkaitan dengan situasi tersebut.",
+    pernyataan: [
+      "Nilai $x$ yang memenuhi adalah $x = 5$.",
+      "Panjang persegi panjang tersebut adalah 17 cm.",
+      "Lebar persegi panjang tersebut adalah 9 cm.",
+      "Luas persegi panjang tersebut adalah 160 cm².",
+    ],
+    options: [
+      "A. 1 dan 2",
+      "B. 2 dan 4",
+      "C. 1 dan 4",
+      "D. 1, 2, dan 3",
+    ],
+    jawaban: "D",
+    pembahasan: "$2[(3x+2)+(x+4)]=52 \\Rightarrow 2(4x+6)=52 \\Rightarrow 4x=20 \\Rightarrow x=5$ → Pernyataan (1) BENAR\nPanjang $= 3(5)+2=17$ cm → Pernyataan (2) BENAR\nLebar $= 5+4=9$ cm → Pernyataan (3) BENAR\nLuas $= 17 \\times 9=153 \\neq 160$ cm² → Pernyataan (4) SALAH\nBenar: 1, 2, dan 3 → Jawaban D",
+  },
+
+  // ── No. 12 — PGKBS ──────────────────────────────────────────────────────────
+  {
+    no: 12, type: "pgkbs",
+    soal: "Di kandang Pak Karto terdapat kambing dan ayam sebanyak 50 ekor. Jumlah seluruh kaki hewan tersebut adalah 140. Tentukan kebenaran setiap pernyataan berikut!",
+    pernyataan: [
+      "Banyak kambing di kandang adalah 20 ekor.",
+      "Banyak ayam di kandang adalah 20 ekor.",
+      "Selisih banyak ayam dan kambing adalah 10 ekor.",
+    ],
+    jawabanBS: ["B", "S", "B"],
+    pembahasan: "Misalkan $k$ = kambing, $a$ = ayam.\n$k+a=50$ dan $4k+2a=140 \\Rightarrow 2k+a=70$\nKurangi: $k=20,\\; a=30$\nPernyataan (1): kambing = 20 → BENAR\nPernyataan (2): ayam = 30, bukan 20 → SALAH\nPernyataan (3): $30-20=10$ → BENAR",
+  },
+
+  // ── No. 13 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 13, type: "pg",
+    soal: "Diketahui $3x - y = 7$ dan $x + 2y = 7$. Nilai dari $x + y$ adalah ...",
+    options: ["A. $3$", "B. $4$", "C. $5$", "D. $7$"],
+    jawaban: "C",
+    pembahasan: "Dari (1): $y = 3x - 7$. Sub ke (2): $x + 2(3x-7) = 7 \\Rightarrow 7x = 21 \\Rightarrow x = 3,\\; y = 2$\n$x + y = 3 + 2 = 5$ → Jawaban C",
+  },
+
+  // ── No. 14 — PGK ────────────────────────────────────────────────────────────
+  {
+    no: 14, type: "pgk",
+    soal: "Suatu bilangan terdiri dari dua angka. Jumlah angka puluhan dan satuannya adalah 9. Jika angka-angkanya dibalik, bilangan tersebut bertambah 27. Pernyataan-pernyataan berikut berkaitan dengan bilangan tersebut.",
+    pernyataan: [
+      "Angka satuan dari bilangan tersebut adalah 6.",
+      "Bilangan tersebut adalah 63.",
+      "Bilangan yang angkanya dibalik adalah 63.",
+      "Selisih bilangan terbalik dan bilangan asli adalah 27.",
+    ],
+    options: [
+      "A. 1 dan 2",
+      "B. 2 dan 4",
+      "C. 1 dan 3",
+      "D. 1, 3, dan 4",
+    ],
+    jawaban: "D",
+    pembahasan: "Misalkan angka puluhan $= p$, satuan $= s$.\n$p+s=9$ dan $(10s+p)-(10p+s)=27 \\Rightarrow s-p=3$\nDari kedua persamaan: $s=6,\\; p=3$ → Bilangan asli = 36\nPernyataan (1): satuan = 6 → BENAR\nPernyataan (2): bilangan = 36, bukan 63 → SALAH\nPernyataan (3): bilangan terbalik = 63 → BENAR\nPernyataan (4): $63-36=27$ → BENAR\nBenar: 1, 3, dan 4 → Jawaban D",
+  },
+
+  // ── No. 15 — PGKBS ──────────────────────────────────────────────────────────
+  {
+    no: 15, type: "pgkbs",
+    soal: "Dalam sebuah pertunjukan terdapat 80 penonton yang terdiri dari penonton dewasa dan anak-anak. Harga tiket dewasa Rp12.000,00 dan anak-anak Rp7.000,00. Total pendapatan dari penjualan tiket adalah Rp660.000,00. Tentukan kebenaran setiap pernyataan berikut!",
+    pernyataan: [
+      "Banyak penonton dewasa adalah 20 orang.",
+      "Banyak penonton anak-anak adalah 60 orang.",
+      "Pendapatan dari tiket dewasa adalah Rp300.000,00.",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "Misalkan $d$ = dewasa, $a$ = anak-anak.\n$d+a=80$ dan $12.000d+7.000a=660.000$\nKalikan (1) dengan 7.000: $7.000d+7.000a=560.000$. Kurangi: $5.000d=100.000 \\Rightarrow d=20,\\; a=60$\nPernyataan (1): dewasa = 20 → BENAR\nPernyataan (2): anak = 60 → BENAR\nPernyataan (3): $20 \\times 12.000=240.000 \\neq 300.000$ → SALAH",
+  },
+
+  // ── No. 16 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 16, type: "pg",
+    soal: "Jumlah dua bilangan adalah 30. Dua kali bilangan pertama dikurangi bilangan kedua hasilnya 6. Bilangan terbesar dari kedua bilangan tersebut adalah ...",
+    options: ["A. $12$", "B. $15$", "C. $18$", "D. $20$"],
+    jawaban: "C",
+    pembahasan: "Misalkan bilangan pertama $= x$, kedua $= y$.\n$x+y=30$ dan $2x-y=6$\nJumlahkan: $3x=36 \\Rightarrow x=12,\\; y=18$\nBilangan terbesar = 18 → Jawaban C",
+  },
+
+  // ── No. 17 — PGK ────────────────────────────────────────────────────────────
+  {
+    no: 17, type: "pgk",
+    soal: "Selisih umur Ayah dan anak adalah 26 tahun. Empat tahun yang akan datang, jumlah umur keduanya adalah 60 tahun. Pernyataan-pernyataan berikut berkaitan dengan situasi tersebut.",
+    pernyataan: [
+      "Umur anak saat ini adalah 13 tahun.",
+      "Umur Ayah saat ini adalah 39 tahun.",
+      "Lima tahun yang lalu, umur Ayah adalah 34 tahun.",
+      "Selisih umur keduanya sepuluh tahun yang akan datang adalah 20 tahun.",
+    ],
+    options: [
+      "A. 1 dan 2",
+      "B. 1 dan 4",
+      "C. 2 dan 4",
+      "D. 1, 2, dan 3",
+    ],
+    jawaban: "D",
+    pembahasan: "Misalkan umur Ayah $= a$, anak $= c$.\n$a-c=26$ dan $(a+4)+(c+4)=60 \\Rightarrow a+c=52$\nJumlahkan: $2a=78 \\Rightarrow a=39,\\; c=13$\nPernyataan (1): anak = 13 → BENAR\nPernyataan (2): Ayah = 39 → BENAR\nPernyataan (3): $39-5=34$ → BENAR\nPernyataan (4): selisih tetap 26, bukan 20 → SALAH\nBenar: 1, 2, dan 3 → Jawaban D",
+  },
 ];
 
 const SPLDVPage = () => (
