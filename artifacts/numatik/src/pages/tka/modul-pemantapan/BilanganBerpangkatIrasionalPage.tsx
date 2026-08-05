@@ -418,10 +418,90 @@ const latihanDasar: LatihanSoal[] = [
   },
 ];
 
+const contohSoal: LatihanSoal[] = [
+  {
+    no: 101,
+    type: "pgk",
+    soal: "Diketahui hasil perpangkatan dari $\\left(64^{\\frac{2}{3}}\\right)^{\\frac{1}{4}}$ setara dengan $p + 6$. Beri tanda centang ($\\checkmark$) pada setiap opsi yang bernilai benar! (Jawaban benar dapat lebih dari satu)",
+    pernyataan: [
+      "Nilai dari $3p$ bernilai $-12$.",
+      "Nilai dari $2 - p$ adalah $6$.",
+      "Hasil kalkulasi $p^2$ yaitu $8$.",
+      "Nilai dari $-2\\frac{1}{2}p$ sama dengan $10$.",
+    ],
+    options: [
+      "A. (1) dan (2)",
+      "B. (1), (2), dan (4)",
+      "C. (1) dan (3)",
+      "D. (1), (2), (3), dan (4)",
+    ],
+    jawaban: "B",
+    pembahasan: "Sederhanakan bentuk perpangkatan terlebih dahulu:\n$\\left(64^{\\frac{2}{3}}\\right)^{\\frac{1}{4}} = \\left(\\left(2^6\\right)^{\\frac{2}{3}}\\right)^{\\frac{1}{4}} = 2^{6 \\times \\frac{2}{3} \\times \\frac{1}{4}} = 2^1 = 2$\n\nKarena nilai ekspresi adalah $2$, diperoleh:\n$p + 6 = 2 \\Rightarrow p = -4$\n\nPernyataan 1: $3p = 3(-4) = -12$ → BENAR\nPernyataan 2: $2 - p = 2 - (-4) = 6$ → BENAR\nPernyataan 3: $p^2 = (-4)^2 = 16 \\neq 8$ → SALAH\nPernyataan 4: $-2\\frac{1}{2}p = -\\frac{5}{2} \\times (-4) = 10$ → BENAR\n\nJadi pernyataan yang benar: (1), (2), dan (4).",
+  },
+  {
+    no: 102,
+    type: "pg",
+    soal: "Hasil operasi dari $3\\sqrt{2} \\times \\sqrt{24} : \\sqrt{3}$ adalah ....",
+    options: [
+      "A. $3\\sqrt{2}$",
+      "B. $6\\sqrt{2}$",
+      "C. $6\\sqrt{3}$",
+      "D. $12$",
+    ],
+    jawaban: "D",
+    pembahasan: "Sederhanakan perkalian dan pembagian bentuk akar:\n$\\frac{3\\sqrt{2} \\times \\sqrt{24}}{\\sqrt{3}} = 3\\sqrt{2} \\times \\sqrt{\\frac{24}{3}} = 3\\sqrt{2} \\times \\sqrt{8}$\n$= 3\\sqrt{2} \\times 2\\sqrt{2} = 6 \\times 2 = 12$",
+  },
+  {
+    no: 103,
+    type: "pgk",
+    soal: "Perhatikan dua pengerjaan bentuk aljabar akar berikut:\n\nPengerjaan X: $\\frac{2\\sqrt{5}}{3} \\times \\frac{\\sqrt{5}}{3} = \\frac{10}{9}$\nPengerjaan Y: $\\frac{1}{4\\sqrt{2}} = \\frac{1}{4\\sqrt{2}} \\times \\frac{\\sqrt{2}}{\\sqrt{2}} = \\frac{\\sqrt{2}}{8}$\n\nPilih semua opsi yang tepat! (Jawaban benar dapat lebih dari satu)",
+    pernyataan: [
+      "Hasil perkalian dari Pengerjaan X $\\times$ Pengerjaan Y adalah $\\frac{5\\sqrt{2}}{36}$.",
+      "Nilai dari $3 \\times$ Pengerjaan X adalah $3\\frac{1}{3}$.",
+      "Hasil pada Pengerjaan X tepat bernilai $1\\frac{1}{9}$.",
+      "Langkah penyederhanaan pada Pengerjaan Y bernilai benar.",
+    ],
+    options: [
+      "A. (1) dan (2)",
+      "B. (1), (2), dan (3)",
+      "C. (2), (3), dan (4)",
+      "D. (1), (2), (3), dan (4)",
+    ],
+    jawaban: "D",
+    pembahasan: "Pernyataan 1: $\\frac{10}{9} \\times \\frac{\\sqrt{2}}{8} = \\frac{10\\sqrt{2}}{72} = \\frac{5\\sqrt{2}}{36}$ → BENAR\n\nPernyataan 2: $3 \\times \\frac{10}{9} = \\frac{10}{3} = 3\\frac{1}{3}$ → BENAR\n\nPernyataan 3: $\\frac{10}{9} = 1\\frac{1}{9}$ → BENAR\n\nPernyataan 4: $\\frac{1}{4\\sqrt{2}} \\times \\frac{\\sqrt{2}}{\\sqrt{2}} = \\frac{\\sqrt{2}}{4 \\times 2} = \\frac{\\sqrt{2}}{8}$ → BENAR\n\nSemua pernyataan benar.",
+  },
+  {
+    no: 104,
+    type: "pg",
+    soal: "Bentuk sederhana pecahan berpenyebut bentuk akar $\\frac{18}{4 + \\sqrt{7}}$ adalah ....",
+    options: [
+      "A. $8 + 2\\sqrt{7}$",
+      "B. $8 - 2\\sqrt{7}$",
+      "C. $6 + 2\\sqrt{7}$",
+      "D. $8 - \\sqrt{7}$",
+    ],
+    jawaban: "B",
+    pembahasan: "Rasionalkan penyebut dengan mengalikan sekawannya:\n$\\frac{18}{4 + \\sqrt{7}} \\times \\frac{4 - \\sqrt{7}}{4 - \\sqrt{7}} = \\frac{18(4 - \\sqrt{7})}{16 - 7} = \\frac{18(4 - \\sqrt{7})}{9}$\n$= 2(4 - \\sqrt{7}) = 8 - 2\\sqrt{7}$",
+  },
+  {
+    no: 105,
+    type: "pgkbs",
+    soal: "Cermati data perkiraan estimasi luas wilayah dari beberapa samudra di dunia berikut:\n\nPasifik: $1{,}652 \\times 10^8$ km²\nAtlantik: $1{,}065 \\times 10^8$ km²\nHindia: $7{,}056 \\times 10^7$ km²\nArktik: $1{,}406 \\times 10^7$ km²\n\nTentukan status Benar atau Salah untuk setiap pernyataan berikut!",
+    pernyataan: [
+      "Luas wilayah Samudra Pasifik setara dengan $165.200.000$ km².",
+      "Luas wilayah Samudra Hindia bernilai $705.600.000$ km².",
+      "Luas wilayah Samudra Arktik sama dengan $14.060.000$ km².",
+    ],
+    jawabanBS: ["B", "S", "B"],
+    pembahasan: "Pernyataan 1: $1{,}652 \\times 10^8 = 1{,}652 \\times 100.000.000 = 165.200.000$ km² → BENAR\n\nPernyataan 2: $7{,}056 \\times 10^7 = 7{,}056 \\times 10.000.000 = 70.560.000$ km²\nPernyataan menyebutkan $705.600.000$ km², maka → SALAH\n\nPernyataan 3: $1{,}406 \\times 10^7 = 1{,}406 \\times 10.000.000 = 14.060.000$ km² → BENAR",
+  },
+];
+
 const BilanganBerpangkatIrasionalPage = () => (
   <TKAPemantapanLayout
     title="BILANGAN BERPANGKAT DAN IRASIONAL"
     materiSections={materiSections}
+    contohSoal={contohSoal}
     latihanDasar={latihanDasar}
   />
 );
