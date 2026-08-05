@@ -1,28 +1,29 @@
 kind = "web"
-previewPath = "/"
-title = "Numatik"
-description = "A multilingual (Indonesian, English, Japanese) math education web app for middle school students covering topics like algebra, fractions, geometry, and more with interactive practice exercises."
-version = "1.0.0"
-id = "artifacts/numatik"
-router = "path"
+    previewPath = "/"
+    title = "Numatik"
+    description = "A multilingual (Indonesian, English, Japanese) math education web app for middle school students covering topics like algebra, fractions, geometry, and more with interactive practice exercises."
+    version = "1.0.0"
+    id = "artifacts/numatik"
+    router = "path"
 
-[[services]]
-name = "web"
-paths = [ "/" ]
-localPort = 18860
+    [[services]]
+    name = "web"
+    paths = [ "/" ]
+    localPort = 18860
 
-[services.development]
-run = "pnpm --filter @workspace/numatik run dev"
+    [services.development]
+    run = "pnpm --filter @workspace/numatik run dev"
 
-[services.production]
-build = [ "pnpm", "--filter", "@workspace/numatik", "run", "build" ]
-serve = "static"
-publicDir = "artifacts/numatik/dist/public"
+    [services.production]
+    build = [ "pnpm", "--filter", "@workspace/numatik", "run", "build" ]
+    serve = "static"
+    publicDir = "artifacts/numatik/dist/public"
 
-[[services.production.rewrites]]
-from = "/*"
-to = "/index.html"
+    [[services.production.rewrites]]
+    from = "/*"
+    to = "/index.html"
 
-[services.env]
-PORT = "18860"
-BASE_PATH = "/"
+    [services.env]
+    PORT = "18860"
+    BASE_PATH = "/"
+    
