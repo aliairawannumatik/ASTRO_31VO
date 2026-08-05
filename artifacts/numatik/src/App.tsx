@@ -228,6 +228,7 @@ const TKAPemantapanBilanganBulatPage = lazy(() => import("./pages/tka/modul-pema
 const TKAPemantapanBilanganRasionalPage = lazy(() => import("./pages/tka/modul-pemantapan/BilanganRasionalPage"));
 const TKAPemantapanBilanganBerpangkatPage = lazy(() => import("./pages/tka/modul-pemantapan/BilanganBerpangkatPage"));
 const TKAPemantapanBilanganIrasionalPage = lazy(() => import("./pages/tka/modul-pemantapan/BilanganIrasionalPage"));
+const TKAPemantapanBilanganBerpangkatIrasionalPage = lazy(() => import("./pages/tka/modul-pemantapan/BilanganBerpangkatIrasionalPage"));
 const TKAPemantapanKPKFPBPage = lazy(() => import("./pages/tka/modul-pemantapan/KPKFPBPage"));
 const TKAPemantapanModuloPage = lazy(() => import("./pages/tka/modul-pemantapan/ModuloPage"));
 const TKAPemantapanHimpunanPage = lazy(() => import("./pages/tka/modul-pemantapan/HimpunanPage"));
@@ -1157,6 +1158,7 @@ const AppInner = () => {
           <Route path="/tka/modul-pemantapan/bilangan-rasional" element={<TKAPemantapanBilanganRasionalPage />} />
           <Route path="/tka/modul-pemantapan/bilangan-berpangkat" element={<TKAPemantapanBilanganBerpangkatPage />} />
           <Route path="/tka/modul-pemantapan/bilangan-irasional" element={<TKAPemantapanBilanganIrasionalPage />} />
+          <Route path="/tka/modul-pemantapan/bilangan-berpangkat-irasional" element={<TKAPemantapanBilanganBerpangkatIrasionalPage />} />
           <Route path="/tka/modul-pemantapan/kpk-fpb" element={<TKAPemantapanKPKFPBPage />} />
           <Route path="/tka/modul-pemantapan/modulo" element={<TKAPemantapanModuloPage />} />
           <Route path="/tka/modul-pemantapan/himpunan" element={<TKAPemantapanHimpunanPage />} />
