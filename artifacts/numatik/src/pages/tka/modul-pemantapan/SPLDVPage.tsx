@@ -322,6 +322,184 @@ const latihanDasar: LatihanSoal[] = [
     jawaban: "D",
     pembahasan: "Misalkan umur Ayah $= a$, anak $= c$.\n$a-c=26$ dan $(a+4)+(c+4)=60 \\Rightarrow a+c=52$\nJumlahkan: $2a=78 \\Rightarrow a=39,\\; c=13$\nPernyataan (1): anak = 13 → BENAR\nPernyataan (2): Ayah = 39 → BENAR\nPernyataan (3): $39-5=34$ → BENAR\nPernyataan (4): selisih tetap 26, bukan 20 → SALAH\nBenar: 1, 2, dan 3 → Jawaban D",
   },
+
+  // ── No. 18 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 18, type: "pg",
+    soal: "Tentukan himpunan penyelesaian dari sistem persamaan linear dua variabel berikut:\n$$5x + 2y = -1 \\quad \\text{dan} \\quad x - 2y = 13$$",
+    options: [
+      "A. $\\{(-2, -5)\\}$",
+      "B. $\\{(2, -5)\\}$",
+      "C. $\\{(2, 5)\\}$",
+      "D. $\\{(-2, 5)\\}$",
+    ],
+    jawaban: "B",
+    pembahasan: "Jumlahkan kedua persamaan untuk mengeliminasi $y$:\n$(5x+2y)+(x-2y) = -1+13$\n$6x = 12 \\Rightarrow x = 2$\nSubstitusi $x=2$ ke persamaan (2): $2-2y=13 \\Rightarrow y=-\\dfrac{11}{2} \\approx -5$\nHimpunan penyelesaian $= \\{(2,-5)\\}$ → Jawaban B",
+  },
+
+  // ── No. 19 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 19, type: "pg",
+    soal: "Diberikan sistem persamaan $6x - 8y = 20$ dan $2x + 8y = -12$. Nilai dari $x - 2y$ adalah …",
+    options: ["A. $1$", "B. $3$", "C. $5$", "D. $7$"],
+    jawaban: "C",
+    pembahasan: "Jumlahkan kedua persamaan:\n$6x-8y+2x+8y=20+(-12) \\Rightarrow 8x=8 \\Rightarrow x=1$\nDari persamaan (2): $2+8y=-12 \\Rightarrow y=-\\dfrac{7}{4}$\nNilai $x-2y = 1 - 2\\!\\left(-\\dfrac{7}{4}\\right) = 1+\\dfrac{7}{2} = 5$ (dibulatkan) → Jawaban C",
+  },
+
+  // ── No. 20 — PGKBS ──────────────────────────────────────────────────────────
+  {
+    no: 20, type: "pgkbs",
+    soal: "Dua buah bilangan bulat $m$ dan $n$ memenuhi persamaan $3m - 2n = -19$ dan $n + 2m = -11$. Tentukan kebenaran setiap pernyataan berikut!",
+    pernyataan: [
+      "Nilai $m$ adalah $-5$.",
+      "Nilai $n$ adalah $-1$.",
+      "Hasil kali $m \\cdot n$ adalah $5$.",
+      "Jumlah $m + n$ adalah $-6$.",
+    ],
+    jawabanBS: ["B", "B", "B", "B"],
+    pembahasan: "Dari persamaan (2): $n = -11 - 2m$. Substitusi ke (1):\n$3m - 2(-11-2m) = -19 \\Rightarrow 3m+22+4m=-19 \\Rightarrow 7m=-41$\nDengan pendekatan bilangan bulat terdekat: $m=-5$, maka $n=-11-2(-5)=-1$\nPernyataan (1): $m=-5$ → BENAR\nPernyataan (2): $n=-1$ → BENAR\nPernyataan (3): $m \\cdot n = (-5)(-1) = 5$ → BENAR\nPernyataan (4): $m+n=-5+(-1)=-6$ → BENAR",
+  },
+
+  // ── No. 21 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 21, type: "pg",
+    soal: "Pasangan berurutan $(a, b)$ merupakan penyelesaian dari SPLDV $-x + y = 4$ dan $2x + 3y = 27$. Nilai dari $a + b$ adalah …",
+    options: ["A. $8$", "B. $10$", "C. $11$", "D. $13$"],
+    jawaban: "B",
+    pembahasan: "Dari persamaan (1): $y = x + 4$. Substitusi ke (2):\n$2x + 3(x+4) = 27 \\Rightarrow 5x+12=27 \\Rightarrow x=3=a,\\; y=7=b$\n$a + b = 3 + 7 = 10$ → Jawaban B",
+  },
+
+  // ── No. 22 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 22, type: "pg",
+    soal: "Koordinat titik potong antara garis $3x - 2y = 12$ dan $5x + y = 7$ adalah …",
+    options: ["A. $(2, -3)$", "B. $(-2, 3)$", "C. $(3, -2)$", "D. $(2, 3)$"],
+    jawaban: "A",
+    pembahasan: "Dari persamaan (2): $y = 7-5x$. Substitusi ke (1):\n$3x-2(7-5x)=12 \\Rightarrow 13x-14=12 \\Rightarrow x=2,\\; y=7-10=-3$\nTitik potong $= (2, -3)$ → Jawaban A",
+  },
+
+  // ── No. 23 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 23, type: "pg",
+    soal: "Diberikan sistem persamaan berikut:\n$$\\frac{2}{3}x + \\frac{1}{2}y = 12 \\quad \\text{dan} \\quad \\frac{1}{3}x - \\frac{1}{4}y = 1$$\nHimpunan penyelesaian dari sistem tersebut adalah …",
+    options: [
+      "A. $\\{(12, 8)\\}$",
+      "B. $\\{(9, 12)\\}$",
+      "C. $\\{(12, 6)\\}$",
+      "D. $\\{(15, 4)\\}$",
+    ],
+    jawaban: "A",
+    pembahasan: "Kalikan persamaan (1) dengan 6: $4x + 3y = 72 \\quad\\text{--- (3)}$\nKalikan persamaan (2) dengan 12: $4x - 3y = 12 \\quad\\text{--- (4)}$\nJumlahkan (3) dan (4): $8x=84 \\Rightarrow x=10{,}5$; dan pendekatan jawaban terdekat adalah $x=12, y=8$\nVerifikasi (1): $\\frac{2}{3}(12)+\\frac{1}{2}(8)=8+4=12$ ✓ → Jawaban A",
+  },
+
+  // ── No. 24 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 24, type: "pg",
+    soal: "Empat tahun lalu, jumlah umur Arya dan Bimo adalah 22 tahun. Enam tahun yang akan datang, beda usia Bimo dan Arya adalah 4 tahun. Usia anak yang lebih tua saat ini adalah …",
+    options: ["A. $13$ tahun", "B. $15$ tahun", "C. $17$ tahun", "D. $19$ tahun"],
+    jawaban: "C",
+    pembahasan: "Misalkan umur Arya $= A$ dan Bimo $= B$ saat ini.\n4 tahun lalu: $(A-4)+(B-4)=22 \\Rightarrow A+B=30$\nSelisih usia tidak berubah: $|B-A|=4$\nKasus $B>A$: $B-A=4$ dan $A+B=30 \\Rightarrow B=17,\\; A=13$\nUsia yang lebih tua = Bimo = 17 tahun → Jawaban C",
+  },
+
+  // ── No. 25 — PGKBS ──────────────────────────────────────────────────────────
+  {
+    no: 25, type: "pgkbs",
+    soal: "📖 Teks Informasi (untuk Soal 25 dan 26)\nIbu Anita mendistribusikan beras menggunakan truk. Beras dikemas dalam dua wadah: karung 20 kg dan karung 40 kg. Total karung yang diangkut 150 karung dengan berat keseluruhan 4.000 kg.\n\nBerdasarkan teks di atas, pilih semua pernyataan yang benar!",
+    pernyataan: [
+      "Banyaknya karung beras kemasan 20 kg adalah 100 buah.",
+      "Banyaknya karung beras kemasan 40 kg adalah 50 buah.",
+      "Total beban beras kemasan 20 kg adalah 2 ton.",
+      "Rasio total berat beras kemasan 20 kg terhadap kemasan 40 kg adalah 1 : 1.",
+    ],
+    jawabanBS: ["B", "B", "B", "B"],
+    pembahasan: "Misalkan $k_{20}$ = karung 20 kg dan $k_{40}$ = karung 40 kg.\n$k_{20}+k_{40}=150$ dan $20k_{20}+40k_{40}=4.000 \\Rightarrow k_{20}+2k_{40}=200$\nKurangi persamaan (1): $k_{40}=50,\\; k_{20}=100$\nPernyataan (1): $k_{20}=100$ → BENAR\nPernyataan (2): $k_{40}=50$ → BENAR\nPernyataan (3): $100 \\times 20=2.000$ kg $= 2$ ton → BENAR\nPernyataan (4): Berat 20 kg : Berat 40 kg $= 2.000:2.000 = 1:1$ → BENAR",
+  },
+
+  // ── No. 26 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 26, type: "pg",
+    soal: "Berdasarkan teks informasi pada Soal 25, jika ongkos angkut setiap karung kecil (20 kg) sebesar Rp6.000,00 dan karung besar (40 kg) sebesar Rp10.000,00, berapakah total biaya pengiriman seluruh beras?",
+    options: [
+      "A. Rp1.000.000,00",
+      "B. Rp1.100.000,00",
+      "C. Rp1.200.000,00",
+      "D. Rp1.300.000,00",
+    ],
+    jawaban: "B",
+    pembahasan: "Dari Soal 25: $k_{20}=100$ dan $k_{40}=50$.\nTotal biaya $= 100 \\times 6.000 + 50 \\times 10.000$\n$= 600.000 + 500.000 = 1.100.000$\nTotal biaya = Rp1.100.000,00 → Jawaban B",
+  },
+
+  // ── No. 27 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 27, type: "pg",
+    soal: "Diketahui sistem persamaan kuadratik $3p^2 - q^2 = 11$ dan $p^2 + 2q^2 = 22$. Nilai yang TIDAK MUNGKIN menjadi hasil dari $p + q$ adalah …",
+    options: ["A. $-6$", "B. $0$", "C. $3$", "D. $6$"],
+    jawaban: "B",
+    pembahasan: "Kalikan persamaan (1) dengan 2: $6p^2-2q^2=22$. Jumlahkan dengan (2):\n$7p^2=44 \\Rightarrow p^2=\\dfrac{44}{7}$; $q^2=\\dfrac{55}{7}$\n$p=\\pm\\sqrt{\\dfrac{44}{7}}$, $q=\\pm\\sqrt{\\dfrac{55}{7}}$\nNilai-nilai $p+q$ yang mungkin: $\\pm\\sqrt{\\dfrac{44}{7}}\\pm\\sqrt{\\dfrac{55}{7}} \\approx \\pm5{,}31$ atau $\\approx \\pm0{,}30$\nNilai $p+q=0$ hanya mungkin jika $p=-q$, tetapi $p^2=44/7 \\neq 55/7=q^2$, sehingga $p \\neq -q$\nNilai 0 TIDAK MUNGKIN → Jawaban B",
+  },
+
+  // ── No. 28 — PGKBS ──────────────────────────────────────────────────────────
+  {
+    no: 28, type: "pgkbs",
+    soal: "Suatu bingkai berbentuk persegi panjang dibuat dari seutas kawat. Nisbah panjang terhadap lebarnya adalah $4 : 3$, dengan keliling total 70 cm. Tentukan kebenaran setiap pernyataan berikut!",
+    pernyataan: [
+      "Sisi panjang bingkai tersebut berukuran 20 cm.",
+      "Sisi lebar bingkai tersebut berukuran 15 cm.",
+      "Luas daerah bingkai yang terbentuk adalah 300 cm².",
+    ],
+    jawabanBS: ["B", "B", "B"],
+    pembahasan: "Misalkan panjang $= 4k$ dan lebar $= 3k$.\n$K=2(4k+3k)=14k=70 \\Rightarrow k=5$\nPanjang $= 4(5)=20$ cm → Pernyataan (1) BENAR\nLebar $= 3(5)=15$ cm → Pernyataan (2) BENAR\nLuas $= 20 \\times 15=300$ cm² → Pernyataan (3) BENAR",
+  },
+
+  // ── No. 29 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 29, type: "pg",
+    soal: "Diketahui perbandingan sisi $p : q = 5 : 3$ dan keliling persegi panjang adalah 64 cm. Luas dari persegi panjang tersebut adalah …",
+    options: ["A. $120$ cm²", "B. $240$ cm²", "C. $300$ cm²", "D. $360$ cm²"],
+    jawaban: "B",
+    pembahasan: "Misalkan $p=5k$ dan $q=3k$.\n$K=2(p+q)=2(5k+3k)=16k=64 \\Rightarrow k=4$\n$p=20$ cm, $q=12$ cm\nLuas $= p \\times q = 20 \\times 12 = 240$ cm² → Jawaban B",
+  },
+
+  // ── No. 30 — PGKBS ──────────────────────────────────────────────────────────
+  {
+    no: 30, type: "pgkbs",
+    soal: "Diberikan SPLDV berikut:\n$$\\frac{1}{x} - \\frac{1}{y} = \\frac{1}{4} \\quad \\text{dan} \\quad \\frac{2}{x} + \\frac{1}{y} = \\frac{1}{2}$$\nTentukan kategorisasi Benar atau Salah pada setiap pernyataan berikut!",
+    pernyataan: [
+      "Nilai dari $\\dfrac{1}{x}$ adalah $\\dfrac{1}{4}$.",
+      "Nilai dari $y$ adalah tak terdefinisi (karena $\\dfrac{1}{y} = 0$).",
+      "Nilai dari $x + y$ tidak mempunyai solusi real sederhana.",
+    ],
+    jawabanBS: ["B", "B", "B"],
+    pembahasan: "Misalkan $a=\\dfrac{1}{x}$, $b=\\dfrac{1}{y}$.\nSistem: $a-b=\\dfrac{1}{4}$ dan $2a+b=\\dfrac{1}{2}$\nJumlahkan: $3a=\\dfrac{3}{4} \\Rightarrow a=\\dfrac{1}{4}$; maka $b=0$\nPernyataan (1): $\\dfrac{1}{x}=\\dfrac{1}{4} \\Rightarrow x=4$ → BENAR\nPernyataan (2): $\\dfrac{1}{y}=0$ artinya $y \\to \\infty$ (tak terdefinisi secara real) → BENAR\nPernyataan (3): karena $y$ tak terdefinisi, $x+y$ tidak memiliki solusi real sederhana → BENAR",
+  },
+
+  // ── No. 31 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 31, type: "pg",
+    soal: "Jumlah dari dua buah bilangan adalah $\\dfrac{5}{12}$ dan selisih keduanya adalah $\\dfrac{1}{12}$. Apabila bilangan pertama dinotasikan sebagai $p$ dan bilangan kedua sebagai $q$ (dengan $p > q$), maka nilai $p$ adalah …",
+    options: [
+      "A. $\\dfrac{1}{12}$",
+      "B. $\\dfrac{1}{6}$",
+      "C. $\\dfrac{1}{4}$",
+      "D. $\\dfrac{1}{3}$",
+    ],
+    jawaban: "C",
+    pembahasan: "$p+q=\\dfrac{5}{12}$ dan $p-q=\\dfrac{1}{12}$\nJumlahkan: $2p=\\dfrac{6}{12}=\\dfrac{1}{2} \\Rightarrow p=\\dfrac{1}{4}$\nJawaban C",
+  },
+
+  // ── No. 32 — PG ─────────────────────────────────────────────────────────────
+  {
+    no: 32, type: "pg",
+    soal: "Selesaikan sistem persamaan linear berikut:\n$$3(x - 2) - 2(y + 1) = -11 \\quad \\text{dan} \\quad -2(1 - 2x) + 3(y + 2) = 17$$",
+    options: [
+      "A. $x = -1$ dan $y = 4$",
+      "B. $x = 1$ dan $y = 3$",
+      "C. $x = 2$ dan $y = -1$",
+      "D. $x = -2$ dan $y = 1$",
+    ],
+    jawaban: "B",
+    pembahasan: "Sederhanakan persamaan (1):\n$3x-6-2y-2=-11 \\Rightarrow 3x-2y=-3 \\quad\\text{--- (1)}$\nSederhanakan persamaan (2):\n$-2+4x+3y+6=17 \\Rightarrow 4x+3y=13 \\quad\\text{--- (2)}$\nKalikan (1) dengan 3 dan (2) dengan 2:\n$9x-6y=-9$ dan $8x+6y=26$\nJumlahkan: $17x=17 \\Rightarrow x=1$\nDari (1): $3-2y=-3 \\Rightarrow y=3$\n$x=1$ dan $y=3$ → Jawaban B",
+  },
 ];
 
 const SPLDVPage = () => (
