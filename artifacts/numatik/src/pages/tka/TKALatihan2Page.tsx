@@ -649,32 +649,127 @@ const TKALatihan2Page = () => {
             </div>
           </div>
 
-          {/* Q16–18 Placeholder */}
-          {[16, 17, 18].map(n => (
-            <div key={n} className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
-              <div className="flex gap-3">
-                <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">{n}</span>
-                <div className="flex-1 flex items-center justify-center py-6">
-                  <p className="text-white/30 text-xs font-body italic">Soal nomor {n} segera ditambahkan.</p>
-                </div>
+          {/* Q16 — MCQ: Volume ember Regu Merah */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">16</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Ember kecil Regu Merah berbentuk tabung dengan diameter <span className="text-yellow-300 font-bold">28 cm</span> dan tinggi <span className="text-yellow-300 font-bold">35 cm</span>. Berapa volume ember tersebut?
+                </p>
+                <MCQ qn={16} correct={2} options={[
+                  <span key="a"><InlineMath math="A.\ 19.600\ \text{cm}^3" /></span>,
+                  <span key="b"><InlineMath math="B.\ 20.790\ \text{cm}^3" /></span>,
+                  <span key="c"><InlineMath math="C.\ 21.560\ \text{cm}^3" /></span>,
+                  <span key="d"><InlineMath math="D.\ 22.400\ \text{cm}^3" /></span>,
+                ]} />
               </div>
             </div>
-          ))}
-
-          {/* Q19–21 Placeholder */}
-          <div className="bg-blue-950/40 border border-blue-500/30 rounded-xl p-4">
-            <p className="font-body text-blue-300/60 text-xs italic">Konteks dan soal nomor 19 – 21 segera ditambahkan.</p>
           </div>
-          {[19, 20, 21].map(n => (
-            <div key={n} className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
-              <div className="flex gap-3">
-                <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">{n}</span>
-                <div className="flex-1 flex items-center justify-center py-6">
-                  <p className="text-white/30 text-xs font-body italic">Soal nomor {n} segera ditambahkan.</p>
-                </div>
+
+          {/* Q17 — MCQ: Minimal gelas Regu Merah */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">17</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Regu Merah menggunakan gelas ukur <span className="text-yellow-300 font-bold">200 ml</span> untuk memindahkan air ke dalam ember kecilnya. Minimal berapa kali gelas ukur harus dipindahkan agar ember terisi penuh?
+                </p>
+                <MCQ qn={17} correct={3} options={[
+                  "A. 105 kali",
+                  "B. 106 kali",
+                  "C. 107 kali",
+                  "D. 108 kali",
+                ]} />
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Q18 — MCQ: Selisih volume ember */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">18</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Ember kecil Regu Putih memiliki diameter <span className="text-yellow-300 font-bold">35 cm</span> dan tinggi <span className="text-yellow-300 font-bold">40 cm</span>. Berapa selisih volume antara ember Regu Putih dan ember Regu Merah?
+                </p>
+                <MCQ qn={18} correct={2} options={[
+                  <span key="a"><InlineMath math="A.\ 15.940\ \text{cm}^3" /></span>,
+                  <span key="b"><InlineMath math="B.\ 16.140\ \text{cm}^3" /></span>,
+                  <span key="c"><InlineMath math="C.\ 16.940\ \text{cm}^3" /></span>,
+                  <span key="d"><InlineMath math="D.\ 17.940\ \text{cm}^3" /></span>,
+                ]} />
+              </div>
+            </div>
+          </div>
+
+          {/* ── KONTEKS 19–21: DEKORASI FESTIVAL BUDAYA SEKOLAH ── */}
+          <div className="bg-blue-950/40 border border-blue-500/30 rounded-xl p-4">
+            <p className="font-body text-blue-300 text-xs font-bold mb-2 uppercase tracking-wide">Perhatikan informasi berikut untuk menjawab nomor 19 – 21!</p>
+            <p className="font-body text-white/90 text-xs font-bold mb-2">Persiapan Festival Budaya Sekolah</p>
+            <p className="font-body text-white/70 text-xs leading-relaxed mb-3">
+              SMP Nusantara sedang mempersiapkan festival budaya tahunan. Panitia memasang berbagai dekorasi di area panggung:
+            </p>
+            <div className="bg-white/5 rounded-lg px-3 py-2 text-xs font-body text-white/80 space-y-2">
+              <p>• Sebuah <span className="text-yellow-300 font-bold">tangga dekorasi sepanjang 13 m</span> disandarkan ke dinding panggung. Bagian bawah tangga diletakkan sejauh <span className="text-cyan-300 font-bold">5 m</span> dari kaki dinding.</p>
+              <p>• Sebuah <span className="text-yellow-300 font-bold">ornamen segitiga</span> dengan titik sudut <InlineMath math="P(3,\ 4)" />, <InlineMath math="Q(5,\ 4)" />, dan <InlineMath math="R(5,\ 1)" /> dicerminkan terhadap sumbu-<InlineMath math="y" /> untuk membuat desain yang simetris.</p>
+              <p>• Sebuah <span className="text-yellow-300 font-bold">hiasan juring lingkaran</span> berjari-jari <span className="text-cyan-300 font-bold">14 cm</span> dengan sudut pusat <span className="text-cyan-300 font-bold">90°</span> dipasang di setiap sudut panggung. Gunakan <InlineMath math="\pi = \tfrac{22}{7}" />.</p>
+            </div>
+          </div>
+
+          {/* Q19 — MCQ: Teorema Pythagoras (tangga dekorasi) */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">19</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Berdasarkan data tangga dekorasi di atas, berapa tinggi dinding panggung yang dapat dijangkau oleh tangga tersebut?
+                </p>
+                <MCQ qn={19} correct={2} options={[
+                  "A. 10 m",
+                  "B. 11 m",
+                  "C. 12 m",
+                  "D. 14 m",
+                ]} />
+              </div>
+            </div>
+          </div>
+
+          {/* Q20 — MCQ: Transformasi (pencerminan terhadap sumbu-y) */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">20</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Setelah ornamen segitiga dicerminkan terhadap sumbu-<InlineMath math="y" />, koordinat bayangan titik <InlineMath math="R(5,\ 1)" /> adalah ....
+                </p>
+                <MCQ qn={20} correct={2} options={[
+                  <span key="a"><InlineMath math="A.\ (-5,\ {-1})" /></span>,
+                  <span key="b"><InlineMath math="B.\ (5,\ {-1})" /></span>,
+                  <span key="c"><InlineMath math="C.\ ({-5},\ 1)" /></span>,
+                  <span key="d"><InlineMath math="D.\ (1,\ {-5})" /></span>,
+                ]} />
+              </div>
+            </div>
+          </div>
+
+          {/* Q21 — MCQ: Luas juring lingkaran */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">21</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Berapa luas satu hiasan juring lingkaran yang dipasang di sudut panggung?
+                </p>
+                <MCQ qn={21} correct={2} options={[
+                  <span key="a"><InlineMath math="A.\ 144\ \text{cm}^2" /></span>,
+                  <span key="b"><InlineMath math="B.\ 148\ \text{cm}^2" /></span>,
+                  <span key="c"><InlineMath math="C.\ 154\ \text{cm}^2" /></span>,
+                  <span key="d"><InlineMath math="D.\ 176\ \text{cm}^2" /></span>,
+                ]} />
+              </div>
+            </div>
+          </div>
 
           {/* ── KONTEKS 22–24: HARGA BARANG POKOK ── */}
           <div className="bg-blue-950/40 border border-blue-500/30 rounded-xl p-4">
