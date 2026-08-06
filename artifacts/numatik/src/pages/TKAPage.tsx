@@ -10,12 +10,12 @@ import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const packages = [
-  { id: 1, label: "Try Out 1", path: "/tka/paket-1", soal: 30 },
-  { id: 2, label: "Try Out 2", path: "/tka/paket-2", soal: 30 },
-  { id: 3, label: "Try Out 3", path: "/tka/paket-3", soal: 30 },
-  { id: 4, label: "Try Out 4", path: "/tka/paket-4", soal: 30 },
-  { id: 5, label: "Try Out 5", path: "/tka/paket-5", soal: 30 },
-  { id: 6, label: "Try Out 6", path: "/tka/paket-6", soal: 30 },
+  { id: 1, label: "Try Out dan Prediksi TKA Matematika 1", path: "/tka/paket-1", soal: 30 },
+  { id: 2, label: "Try Out dan Prediksi TKA Matematika 2", path: "/tka/paket-2", soal: 30 },
+  { id: 3, label: "Try Out dan Prediksi TKA Matematika 3", path: "/tka/paket-3", soal: 30 },
+  { id: 4, label: "Try Out dan Prediksi TKA Matematika 4", path: "/tka/paket-4", soal: 30 },
+  { id: 5, label: "Try Out dan Prediksi TKA Matematika 5", path: "/tka/paket-5", soal: 30 },
+  { id: 6, label: "Try Out dan Prediksi TKA Matematika 6", path: "/tka/paket-6", soal: 30 },
 ];
 
 const routes: Record<string, string> = {
