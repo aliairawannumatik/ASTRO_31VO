@@ -520,6 +520,7 @@ const TKALatihan2Page = () => {
                     "Keuntungan dari penjualan 30 bungkus adalah Rp80.000.",
                   ]}
                 />
+                <PembahasanCard pembahasanKey="tka2-q11" pembahasan={tkaLatihan2Pembahasan[11]} />
               </div>
             </div>
           </div>
@@ -538,6 +539,7 @@ const TKALatihan2Page = () => {
                   { text: "Pendapatan dari 50 bungkus adalah Rp350.000.", benar: true },
                   { text: "Keuntungan dari 50 bungkus adalah Rp160.000.", benar: true },
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q12" pembahasan={tkaLatihan2Pembahasan[12]} />
               </div>
             </div>
           </div>
@@ -589,6 +591,7 @@ const TKALatihan2Page = () => {
                   "C. Rp120.000",
                   "D. Rp125.000",
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q13" pembahasan={tkaLatihan2Pembahasan[13]} />
               </div>
             </div>
           </div>
@@ -609,6 +612,7 @@ const TKALatihan2Page = () => {
                   { text: "Jika Budi memilih TelkomIndo Keluarga, ia tidak perlu membeli add-on karena kuota 20 GB sudah mencukupi.", benar: false },
                   { text: "Paket paling hemat untuk Budi adalah TelkomIndo Keluarga + add-on 5 GB.", benar: false },
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q14" pembahasan={tkaLatihan2Pembahasan[14]} />
               </div>
             </div>
           </div>
@@ -629,6 +633,7 @@ const TKALatihan2Page = () => {
                     "Untuk pengguna dengan kebutuhan 12 GB internet dan 40 menit telepon, selisih biaya antara TelkomIndo Personal (+ add-on) dan IndosatOreo Personal (+ add-on) adalah Rp10.000.",
                   ]}
                 />
+                <PembahasanCard pembahasanKey="tka2-q15" pembahasan={tkaLatihan2Pembahasan[15]} />
               </div>
             </div>
           </div>
@@ -675,6 +680,7 @@ const TKALatihan2Page = () => {
                   <span key="c"><InlineMath math="C.\ 21.560\ \text{cm}^3" /></span>,
                   <span key="d"><InlineMath math="D.\ 22.400\ \text{cm}^3" /></span>,
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q16" pembahasan={tkaLatihan2Pembahasan[16]} />
               </div>
             </div>
           </div>
@@ -693,6 +699,7 @@ const TKALatihan2Page = () => {
                   "C. 107 kali",
                   "D. 108 kali",
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q17" pembahasan={tkaLatihan2Pembahasan[17]} />
               </div>
             </div>
           </div>
@@ -711,6 +718,7 @@ const TKALatihan2Page = () => {
                   <span key="c"><InlineMath math="C.\ 16.940\ \text{cm}^3" /></span>,
                   <span key="d"><InlineMath math="D.\ 17.940\ \text{cm}^3" /></span>,
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q18" pembahasan={tkaLatihan2Pembahasan[18]} />
               </div>
             </div>
           </div>
@@ -743,6 +751,7 @@ const TKALatihan2Page = () => {
                   "C. 12 m",
                   "D. 14 m",
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q19" pembahasan={tkaLatihan2Pembahasan[19]} />
               </div>
             </div>
           </div>
@@ -761,6 +770,7 @@ const TKALatihan2Page = () => {
                   <span key="c"><InlineMath math="C.\ ({-5},\ 1)" /></span>,
                   <span key="d"><InlineMath math="D.\ (1,\ {-5})" /></span>,
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q20" pembahasan={tkaLatihan2Pembahasan[20]} />
               </div>
             </div>
           </div>

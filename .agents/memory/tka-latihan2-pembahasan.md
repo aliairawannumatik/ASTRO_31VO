@@ -26,8 +26,13 @@ Each key in the Record<number, Pembahasan> must supply:
 
 **Why:** `PembahasanCard` renders `$...$` as InlineMath via its `renderWithLatex` helper — no JSX needed in the data file.
 
-## Q11–30 still pending
-Q11–30 in TKALatihan2Page have NO pembahasan yet. Topics:
+## Progress
+- Q1–Q10: DONE (August 2026)
+- Q11–Q20: DONE (August 2026)
+- Q21–Q30: still pending
+
+## Q21–30 still pending
+Q21–30 in TKALatihan2Page have NO pembahasan yet. Topics:
 - Q11–12: keripik singkong (fungsi biaya, B(x)=3000x+40000, harga jual Rp7000)
 - Q13–15: paket internet TelkomIndo vs IndosatOreo
 - Q16–18: lomba memindahkan air — volume tabung, π=22/7
