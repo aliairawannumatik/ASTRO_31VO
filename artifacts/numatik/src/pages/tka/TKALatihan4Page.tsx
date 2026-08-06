@@ -10,6 +10,7 @@ const TKALatihan4Page = () => {
   const navigate = useNavigate();
   const [expandedPembahasan, setExpandedPembahasan] = useState<Set<number>>(new Set());
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, number>>({});
+  const [selectedComplexAnswers, setSelectedComplexAnswers] = useState<Record<number, Set<number>>>({});
   const [selectedTrueFalse, setSelectedTrueFalse] = useState<Record<string, 'benar' | 'salah'>>({});
 
   const togglePembahasan = (n: number) => {
@@ -26,10 +27,50 @@ const TKALatihan4Page = () => {
     setSelectedAnswers(prev => ({ ...prev, [qn]: idx }));
   };
 
+  const selectComplexAnswer = (qn: number, idx: number) => {
+    const existing = selectedComplexAnswers[qn] ?? new Set<number>();
+    if (existing.has(idx)) return;
+    playPopSound();
+    setSelectedComplexAnswers(prev => {
+      const next = new Set(prev[qn] ?? []);
+      next.add(idx);
+      return { ...prev, [qn]: next };
+    });
+  };
+
   const selectTrueFalse = (key: string, choice: 'benar' | 'salah') => {
     if (selectedTrueFalse[key] !== undefined) return;
     playPopSound();
     setSelectedTrueFalse(prev => ({ ...prev, [key]: choice }));
+  };
+
+  const ComplexMCQ = ({ qn, items }: {
+    qn: number;
+    items: { text: React.ReactNode; benar: boolean }[];
+  }) => {
+    const clicks = selectedComplexAnswers[qn] ?? new Set<number>();
+    return (
+      <div className="flex flex-col gap-2">
+        {items.map((item, i) => {
+          const isClicked = clicks.has(i);
+          let cls = "border rounded-lg px-3 py-2 text-xs font-body transition-all flex items-center justify-between ";
+          if (!isClicked) {
+            cls += "bg-white/5 border-white/10 text-white/80 cursor-pointer hover:bg-white/10 hover:border-cyan-500/40 active:scale-95";
+          } else if (item.benar) {
+            cls += "bg-green-900/30 border-green-500/50 text-green-300 font-bold";
+          } else {
+            cls += "bg-red-900/30 border-red-500/50 text-red-300";
+          }
+          return (
+            <div key={i} className={cls} onClick={() => selectComplexAnswer(qn, i)}>
+              <span>{item.text}</span>
+              {isClicked && item.benar && <span className="ml-2 text-green-400 font-bold shrink-0">✓ Benar!</span>}
+              {isClicked && !item.benar && <span className="ml-2 text-red-400 font-bold shrink-0">✗ Salah</span>}
+            </div>
+          );
+        })}
+      </div>
+    );
   };
 
   const MCQ = ({ qn, options, correct, cols = 2 }: {
@@ -63,6 +104,47 @@ const TKALatihan4Page = () => {
       </div>
     );
   };
+
+  const TFTable = ({ rows }: {
+    rows: { key: string; label: React.ReactNode; correct: 'benar' | 'salah' }[];
+  }) => (
+    <div className="overflow-x-auto mb-2">
+      <table className="w-full text-xs font-body border-collapse">
+        <thead>
+          <tr className="bg-white/10">
+            <th className="border border-white/20 px-3 py-2 text-white text-left">Pernyataan</th>
+            <th className="border border-white/20 px-3 py-2 text-white text-center">Benar</th>
+            <th className="border border-white/20 px-3 py-2 text-white text-center">Salah</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map(row => {
+            const picked = selectedTrueFalse[row.key];
+            const benarPicked = picked === 'benar';
+            const salahPicked = picked === 'salah';
+            const benarCorrect = row.correct === 'benar';
+            return (
+              <tr key={row.key}>
+                <td className="border border-white/10 px-3 py-2 text-white/80">{row.label}</td>
+                <td className="border border-white/10 px-2 py-2 text-center">
+                  <button onClick={() => selectTrueFalse(row.key, 'benar')} disabled={picked !== undefined}
+                    className={`w-full rounded px-2 py-1 font-bold transition-all text-xs ${benarPicked ? benarCorrect ? "bg-green-900/50 border border-green-500/50 text-green-300" : "bg-red-900/50 border border-red-500/50 text-red-300" : picked !== undefined ? "opacity-30 cursor-default bg-white/5 border border-white/10 text-white/50" : "bg-white/5 border border-white/10 text-white/70 hover:bg-green-900/20 hover:border-green-500/30 hover:text-green-300 cursor-pointer"}`}>
+                    {benarPicked ? (benarCorrect ? "✓ Benar!" : "✗ Salah") : "Benar"}
+                  </button>
+                </td>
+                <td className="border border-white/10 px-2 py-2 text-center">
+                  <button onClick={() => selectTrueFalse(row.key, 'salah')} disabled={picked !== undefined}
+                    className={`w-full rounded px-2 py-1 font-bold transition-all text-xs ${salahPicked ? !benarCorrect ? "bg-green-900/50 border border-green-500/50 text-green-300" : "bg-red-900/50 border border-red-500/50 text-red-300" : picked !== undefined ? "opacity-30 cursor-default bg-white/5 border border-white/10 text-white/50" : "bg-white/5 border border-white/10 text-white/70 hover:bg-red-900/20 hover:border-red-500/30 hover:text-red-300 cursor-pointer"}`}>
+                    {salahPicked ? (!benarCorrect ? "✓ Benar!" : "✗ Salah") : "Salah"}
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
 
   const TrueFalseTable = ({ qn, rows }: {
     qn: number;
@@ -125,15 +207,6 @@ const TKALatihan4Page = () => {
     </button>
   );
 
-  const QBox = ({ n, children }: { n: number; children: React.ReactNode }) => (
-    <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
-      <div className="flex gap-3 mb-3">
-        <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">{n}</span>
-        <div className="flex-1">{children}</div>
-      </div>
-    </div>
-  );
-
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -143,16 +216,20 @@ const TKALatihan4Page = () => {
         {/* Header */}
         <div className="bg-card/80 backdrop-blur border border-accent/30 rounded-2xl p-5 mb-6">
           <div className="text-center">
-            <img src="/logo-numatik.png" alt="NUMATIK" className="mx-auto mb-2 w-12 h-12 object-contain drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]" />
-            <p className="font-body text-white/60 text-xs mb-1">SOAL TES PENDALAMAN MATERI TKA</p>
+            <img
+              src="/logo-numatik.png"
+              alt="NUMATIK"
+              className="mx-auto mb-2 w-12 h-12 object-contain drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]"
+            />
+            <p className="font-body text-white/60 text-xs mb-1">PEMANTAPAN DAN PERSIAPAN</p>
             <h1 className="font-display text-lg font-bold text-primary text-glow-cyan mb-1">TES KEMAMPUAN AKADEMIK (TKA)</h1>
-            <p className="font-body text-white/60 text-xs mb-3">KORWIL YOGYA UTARA — MATEMATIKA</p>
+            <p className="font-body text-white/60 text-xs mb-3">TAHUN PELAJARAN 2025/2026</p>
           </div>
           <div className="grid grid-cols-2 gap-2 text-left text-xs font-body">
             <div className="bg-white/5 rounded-lg p-2"><span className="text-white/40">Mata Pelajaran:</span><span className="text-white ml-1">Matematika</span></div>
-            <div className="bg-white/5 rounded-lg p-2"><span className="text-white/40">Kelas:</span><span className="text-white ml-1">VI SD</span></div>
+            <div className="bg-white/5 rounded-lg p-2"><span className="text-white/40">Kelas:</span><span className="text-white ml-1">IX (Sembilan)</span></div>
             <div className="bg-white/5 rounded-lg p-2"><span className="text-white/40">Paket:</span><span className="text-accent ml-1 font-bold">PAKET 4</span></div>
-            <div className="bg-white/5 rounded-lg p-2"><span className="text-white/40">Jumlah Soal:</span><span className="text-white ml-1">30 Soal</span></div>
+            <div className="bg-white/5 rounded-lg p-2"><span className="text-white/40">Waktu:</span><span className="text-white ml-1">60 Menit</span></div>
           </div>
         </div>
 
@@ -161,12 +238,13 @@ const TKALatihan4Page = () => {
           <p className="font-body text-blue-300 text-xs font-bold mb-2">PETUNJUK UMUM</p>
           <ol className="list-decimal list-inside space-y-1 text-white/70 text-xs font-body">
             <li>Berdoalah sebelum dan sesudah mengerjakan test!</li>
+            <li>Isikan identitas Anda dengan benar!</li>
             <li>Jumlah soal sebanyak 30 butir soal.</li>
-            <li>Periksa dan bacalah soal-soal dengan cermat sebelum menjawab!</li>
-            <li>Periksalah pekerjaan Anda sebelum selesai!</li>
+            <li>Periksa dan bacalah soal-soal dengan cermat sebelum Anda menjawabnya!</li>
+            <li>Periksalah pekerjaan Anda sebelum dikirim atau submit!</li>
           </ol>
           <p className="font-body text-yellow-300 text-xs font-bold mt-3 mb-1">PETUNJUK KHUSUS</p>
-          <p className="text-white/70 text-xs font-body">Jawablah sesuai dengan bentuk soal: pilihan ganda, pilihan ganda kompleks, ataupun kategori (Benar/Salah)!</p>
+          <p className="text-white/70 text-xs font-body">Pilihlah salah satu jawaban di bawah ini yang paling benar!</p>
         </div>
 
         {/* Questions */}
@@ -177,39 +255,38 @@ const TKALatihan4Page = () => {
             <div className="flex gap-3 mb-3">
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">1</span>
               <div className="flex-1">
-                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">Perhatikan gambar berikut! Bagian yang diarsir pada gambar senilai dengan ….</p>
-                <div className="flex justify-center mb-3">
-                  <img src="/tka-paket3-soal1.png" alt="Gambar soal nomor 1" className="max-w-[200px] rounded-lg bg-white/5 p-2" />
-                </div>
-                <MCQ qn={1} correct={3} options={[
-                  <span>A. <InlineMath math="\dfrac{3}{4}"/></span>,
-                  <span>B. <InlineMath math="\dfrac{2}{5}"/></span>,
-                  <span>C. <InlineMath math="\dfrac{4}{12}"/></span>,
-                  <span>D. <InlineMath math="\dfrac{1}{4}"/></span>,
-                ]}/>
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Sebuah kafe memberikan promo: <span className="text-yellow-300 font-bold">'Pesan 5 menu, diskon 1 menu termurah'</span>. Doni memesan: 1 porsi steak seharga Rp120.000,00; 2 gelas jus alpukat seharga Rp25.000,00 per gelas; 2 porsi kentang goreng seharga Rp30.000,00 per porsi. Berapakah total tagihan Doni?
+                </p>
+                <MCQ qn={1} correct={1} options={[
+                  "A. Rp230.000,00",
+                  "B. Rp205.000,00",
+                  "C. Rp110.000,00",
+                  "D. Rp200.000,00",
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={1}/>
+            <PembahasanBtn n={1} />
             {expandedPembahasan.has(1) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: D. 1/4</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B. Rp205.000,00</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Pecahan = bagian yang dipilih ÷ total bagian keseluruhan. Untuk soal gambar arsiran, hitung banyak bagian yang diarsir dibagi total bagian yang sama besar, lalu sederhanakan.</p>
+                  <p className="text-white/70">Promo "beli 5 diskon 1 termurah": dari 5 menu yang dipesan, menu paling murah tidak perlu dibayar. Hitung total semua menu dulu, lalu kurangi harga menu termurah.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/80 mb-1">Dari gambar, segitiga besar terbagi menjadi <strong className="text-yellow-300">16 segitiga kecil</strong> sama besar (4 baris). Segitiga yang diarsir ada <strong className="text-yellow-300">4 buah</strong>.</p>
-                  <div className="ml-3 my-2"><BlockMath math="\text{Bagian diarsir} = \frac{4}{16} = \frac{1}{4}"/></div>
-                  <p className="text-white/70">Pilihan D (<InlineMath math="\frac{1}{4}"/>) adalah hasil penyederhanaan dari <InlineMath math="\frac{4}{16}"/> (dibagi 4).</p>
+                  <p className="text-white/70 ml-3">• Total sebelum promo: Rp120.000 + 2×Rp25.000 + 2×Rp30.000 = Rp230.000</p>
+                  <p className="text-white/70 ml-3">• Membeli 5 menu → gratis 1 termurah = jus alpukat Rp25.000</p>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Total} = \text{Rp}230.000 - \text{Rp}25.000 = \boxed{\text{Rp}205.000}" /></div>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Pastikan semua bagian memiliki ukuran yang sama sebelum menghitung. Jika tidak sama, bagi dulu hingga semua sama besar. Kemudian sederhanakan pecahan dengan FPB pembilang dan penyebut.</p>
+                  <p className="text-white/70">Bandingkan harga semua item: steak Rp120.000, kentang Rp30.000, jus alpukat Rp25.000. Yang termurah = jus alpukat → itulah yang digratis. Jangan mengira yang digratis adalah item yang disebutkan pertama.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Bagian yang diarsir = <strong className="text-green-300">1/4</strong> dari keseluruhan gambar. Ini karena 4 dari 16 segitiga kecil yang diarsir, dan 4/16 disederhanakan menjadi 1/4.</p>
+                  <p className="text-white/70">Tagihan Doni = Rp230.000 − Rp25.000 = <strong className="text-green-300">Rp205.000,00</strong>. Doni berhemat Rp25.000 berkat promo (harga satu gelas jus alpukat).</p>
                 </div>
               </div>
             )}
@@ -221,48 +298,40 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">2</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Pak Mardi membuat kartu bilangan untuk kelompok Candra yang terdiri 5 anak (Candra, Edi, Dirga, Andi, Budi). Setiap anak memegang satu kartu pecahan. Kelompok Candra diminta berdiri sesuai urutan dari kartu <strong className="text-yellow-300">terbesar</strong>. Urutan Kelompok Candra yang benar adalah ….
+                  Sebuah panitia memesan nasi kotak untuk 118 orang. Harga satu nasi kotak adalah Rp24.500,00. Tanpa menghitung tepat, pernyataan yang <span className="text-yellow-300 font-bold">BENAR</span> tentang perkiraan total biaya adalah... <span className="text-cyan-300">(Pilih semua yang benar!)</span>
                 </p>
-                <div className="flex justify-center mb-3">
-                  <img src="/tka-paket3-soal2.png" alt="Gambar soal nomor 2" className="max-w-full rounded-lg bg-white/5 p-2" />
-                </div>
-                <MCQ qn={2} correct={0} cols={1} options={[
-                  "A. Candra, Edi, Dirga, Andi, Budi",
-                  "B. Candra, Edi, Dirga, Budi, Andi",
-                  "C. Candra, Dirga, Edi, Andi, Budi",
-                  "D. Budi, Andi, Dirga, Edi, Candra",
-                ]}/>
+                <ComplexMCQ qn={2} items={[
+                  { text: "Kurang dari Rp2.500.000,00", benar: false },
+                  { text: "Lebih dari Rp2.500.000,00", benar: true },
+                  { text: <span>Dapat diperkirakan dengan <InlineMath math="120 \times 25.000 = \text{Rp}3.000.000" /></span>, benar: true },
+                  { text: "Mendekati Rp3.000.000,00", benar: true },
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={2}/>
+            <PembahasanBtn n={2} />
             {expandedPembahasan.has(2) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: A. Candra, Edi, Dirga, Andi, Budi</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Pernyataan 2, 3, dan 4</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Untuk membandingkan pecahan yang berbeda bentuk (biasa, desimal, persen, campuran), ubah semua ke bentuk DESIMAL dulu. Ini paling mudah dan akurat untuk perbandingan.</p>
+                  <p className="text-white/70">Estimasi: bulatkan angka ke nilai yang mudah dihitung (118 ≈ 120, Rp24.500 ≈ Rp25.000). Hasilnya mendekati nilai asli dan memudahkan verifikasi pernyataan tanpa kalkulator.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/80 mb-1">Ubah semua kartu ke bentuk desimal:</p>
-                  <div className="bg-white/5 rounded-lg p-3 space-y-1 my-2">
-                    <p className="text-white/70">• Andi: <InlineMath math="\dfrac{21}{8} = 2{,}625"/></p>
-                    <p className="text-white/70">• Budi: <InlineMath math="\dfrac{13}{5} = 2{,}600"/></p>
-                    <p className="text-white/70">• Candra: <InlineMath math="2{,}67 = 2{,}670"/></p>
-                    <p className="text-white/70">• Dirga: <InlineMath math="266\% = 2{,}660"/></p>
-                    <p className="text-white/70">• Edi: <InlineMath math="2\tfrac{2}{3} \approx 2{,}6\overline{6} = 2{,}667"/></p>
-                  </div>
-                  <p className="text-white/80 mb-1">Urutkan dari <strong className="text-yellow-300">terbesar ke terkecil</strong>:</p>
-                  <div className="ml-3 my-1"><BlockMath math="2{,}670 > 2{,}667 > 2{,}660 > 2{,}625 > 2{,}600"/></div>
-                  <div className="ml-3"><BlockMath math="\underbrace{Candra}_{2,670} > \underbrace{Edi}_{2,667} > \underbrace{Dirga}_{2,660} > \underbrace{Andi}_{2,625} > \underbrace{Budi}_{2,600}"/></div>
+                  <p className="text-white/70 mb-1">Nilai sebenarnya:</p>
+                  <div className="ml-3 my-1"><BlockMath math="118 \times 24.500 = 2.891.000" /></div>
+                  <p className="text-white/70 ml-3">① Kurang dari Rp2,5 juta? 2,89 juta &gt; 2,5 juta → <span className="text-red-300">SALAH</span></p>
+                  <p className="text-white/70 ml-3">② Lebih dari Rp2,5 juta? 2,89 juta &gt; 2,5 juta → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">③ Perkiraan 120 × Rp25.000 = Rp3 juta (estimasi masuk akal) → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">④ Mendekati Rp3 juta? Rp2,89 juta ≈ Rp3 juta → <span className="text-green-300">BENAR</span></p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Ubah ke desimal: pecahan biasa (bagi), persen (÷100), campuran (bulat + sisa÷penyebut). Hati-hati dengan bilangan berulang: <InlineMath math="2\tfrac{2}{3} = 2{,}666..." /> lebih besar dari 2,660 meskipun terlihat hampir sama.</p>
+                  <p className="text-white/70">Selisih estimasi vs nilai asli: Rp3.000.000 − Rp2.891.000 = Rp109.000, hanya sekitar 3,7% error. Estimasi dengan pembulatan ke atas menghasilkan nilai sedikit lebih tinggi dari aslinya.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Urutan dari terbesar ke terkecil: <strong className="text-green-300">Candra (2,670) → Edi (2,667) → Dirga (2,660) → Andi (2,625) → Budi (2,600)</strong>. Jawaban A benar.</p>
+                  <p className="text-white/70">Total biaya sebenarnya = Rp2.891.000. Pernyataan yang benar: <strong className="text-green-300">2, 3, dan 4</strong> — biaya &gt; Rp2,5 juta, bisa diestimasi 120×25.000, dan mendekati Rp3 juta.</p>
                 </div>
               </div>
             )}
@@ -274,40 +343,43 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">3</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Lanang membuat jus jambu, jus nanas, dan jus mangga. Banyaknya jus mangga <InlineMath math="1\frac{5}{16}"/> liter, jus nanas 1,37 liter, jus jambu 1,375 liter. Tentukan Benar atau Salah pernyataan berikut!
+                  Terdapat tiga bilangan: <InlineMath math="A = (20^2 - 4^2)" />, <InlineMath math="B = (15^2 + 159)" />, <InlineMath math="C = (32 \times 12)" />. Bilangan apa saja yang merupakan faktor persekutuan ketiga bilangan tersebut? <span className="text-cyan-300">(Pilih semua yang benar!)</span>
                 </p>
-                <TrueFalseTable qn={3} rows={[
-                  { key:"a", text:"Jus buah terbanyak yang dibuat Lanang adalah jus jambu", correct:"benar" },
-                  { key:"b", text:<span>Selisih jus jambu dengan jus mangga adalah 0,0625 liter</span>, correct:"benar" },
-                  { key:"c", text:"Jus buah yang dibuat Lanang paling sedikit adalah jus nanas", correct:"salah" },
-                ]}/>
+                <ComplexMCQ qn={3} items={[
+                  { text: <span><InlineMath math="2^3 \times 3 = 24" /></span>, benar: true },
+                  { text: <span><InlineMath math="2^4 \times 3 = 48" /></span>, benar: true },
+                  { text: <span><InlineMath math="2^2 \times 3 \times 7 = 84" /></span>, benar: false },
+                  { text: <span><InlineMath math="2^3 = 8" /></span>, benar: true },
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={3}/>
+            <PembahasanBtn n={3} />
             {expandedPembahasan.has(3) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Benar, Benar, Salah</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Pilihan 1, 2, dan 4</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Untuk membandingkan pecahan campuran dengan desimal: ubah semua ke desimal terlebih dahulu. Pecahan campuran <InlineMath math="a\frac{b}{c}"/> = a + b÷c. Setelah dalam desimal, urutan mudah ditentukan.</p>
+                  <p className="text-white/70">Langkah: hitung ketiga bilangan → faktorkan bilangan hasil → periksa setiap pilihan apakah membagi habis. Suatu bilangan X adalah faktor N jika semua faktor prima X ada di N dan pangkatnya tidak melebihi pangkat di N.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 ml-3">• Mangga: <InlineMath math="1\frac{5}{16} = 1 + 0{,}3125 = 1{,}3125"/> liter</p>
-                  <p className="text-white/70 ml-3">• Nanas: 1,37 liter</p>
-                  <p className="text-white/70 ml-3 mb-2">• Jambu: 1,375 liter</p>
-                  <p className="text-white/80">Urutan dari kecil ke besar: 1,3125 (mangga) &lt; 1,37 (nanas) &lt; 1,375 (jambu)</p>
-                  <p className="text-white/70 mt-1">① Jus terbanyak = jambu (1,375) ✓ <strong className="text-green-300">BENAR</strong></p>
-                  <p className="text-white/70">② Selisih jambu − mangga = 1,375 − 1,3125 = <strong className="text-yellow-300">0,0625</strong> ✓ <strong className="text-green-300">BENAR</strong></p>
-                  <p className="text-white/70">③ Paling sedikit = mangga (1,3125), bukan nanas ✗ <strong className="text-red-300">SALAH</strong></p>
+                  <p className="text-white/70 mb-1">Hitung A, B, C:</p>
+                  <div className="ml-3 my-1"><BlockMath math="A = 20^2 - 4^2 = 400 - 16 = 384" /></div>
+                  <div className="ml-3 my-1"><BlockMath math="B = 15^2 + 159 = 225 + 159 = 384" /></div>
+                  <div className="ml-3 my-1"><BlockMath math="C = 32 \times 12 = 384" /></div>
+                  <p className="text-white/70 ml-3 mb-1">Ketiganya = 384. Faktorisasi prima: <InlineMath math="384 = 2^7 \times 3" /></p>
+                  <p className="text-white/70 ml-3">① <InlineMath math="2^3 \times 3 = 24" /> → 384 ÷ 24 = 16 ✓ <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">② <InlineMath math="2^4 \times 3 = 48" /> → 384 ÷ 48 = 8 ✓ <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">③ <InlineMath math="2^2 \times 3 \times 7 = 84" /> → 384 ÷ 84 = 4,57... ✗ <span className="text-red-300">SALAH</span> (7 bukan faktor 384)</p>
+                  <p className="text-white/70 ml-3">④ <InlineMath math="2^3 = 8" /> → 384 ÷ 8 = 48 ✓ <span className="text-green-300">BENAR</span></p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Jangan langsung membandingkan angka tanpa menyamakan bentuknya. 1,37 ≠ 1,375 meskipun sama-sama "1,37-sekian". Selalu samakan jumlah digit desimalnya sebelum membandingkan.</p>
+                  <p className="text-white/70">Cek cepat: pilihan ③ mengandung faktor 7. Karena <InlineMath math="384 = 2^7 \times 3" /> (tidak ada faktor 7), maka 84 PASTI bukan faktor 384 — tidak perlu membagi untuk mengetahuinya.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Urutan dari sedikit ke banyak: mangga (1,3125) &lt; nanas (1,37) &lt; jambu (1,375). Jus <strong className="text-green-300">paling sedikit adalah mangga</strong>, bukan nanas, sehingga pernyataan ③ SALAH.</p>
+                  <p className="text-white/70">A = B = C = 384 = 2⁷ × 3. Faktor persekutuan yang valid: <strong className="text-green-300">pilihan 1 (24), 2 (48), dan 4 (8)</strong>. Pilihan 3 (84) bukan faktor karena mengandung 7.</p>
                 </div>
               </div>
             )}
@@ -319,34 +391,39 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">4</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Hasil dari <InlineMath math="7{,}2 - 3{,}375 \div \dfrac{7}{12} \times \dfrac{14}{15}"/> adalah ….
+                  Perbandingan berat badan Adi, Budi, dan Candra adalah 3 : 4 : 5. Jika jumlah berat badan Adi dan Budi adalah 56 kg, berapakah selisih berat badan Budi dan Candra?
                 </p>
-                <MCQ qn={4} correct={2} options={["A. 2,8","B. 2,6","C. 1,8","D. 1,6"]}/>
+                <MCQ qn={4} correct={0} options={[
+                  "A. 8 kg",
+                  "B. 12 kg",
+                  "C. 16 kg",
+                  "D. 24 kg",
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={4}/>
+            <PembahasanBtn n={4} />
             {expandedPembahasan.has(4) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 1,8</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: A. 8 kg</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Urutan operasi hitung (PEMDAS/BODMAS): kerjakan <strong>× dan ÷</strong> dari kiri ke kanan DULU sebelum + dan −. Pembagian oleh pecahan = dikali dengan kebalikan (flip) pecahan tersebut.</p>
+                  <p className="text-white/70">Perbandingan: gunakan informasi "jumlah dua orang" untuk mencari nilai 1 bagian. Jumlah dua bagian = penjumlahan rasio keduanya × nilai 1 bagian. Setelah tahu 1 bagian, hitung semua yang lain.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 mb-1">Kerjakan perkalian/pembagian terlebih dahulu:</p>
-                  <div className="ml-3 my-1"><BlockMath math="3{,}375 \div \frac{7}{12} \times \frac{14}{15} = 3{,}375 \times \frac{12}{7} \times \frac{14}{15}"/></div>
-                  <div className="ml-3 my-1"><BlockMath math="= 3{,}375 \times \frac{12 \times 14}{7 \times 15} = 3{,}375 \times \frac{168}{105} = 3{,}375 \times 1{,}6 = 5{,}4"/></div>
-                  <p className="text-white/70 mb-1">Kemudian kerjakan pengurangan:</p>
-                  <div className="ml-3 my-1"><BlockMath math="7{,}2 - 5{,}4 = \boxed{1{,}8}"/></div>
+                  <p className="text-white/70 ml-3">• Adi : Budi : Candra = 3 : 4 : 5</p>
+                  <p className="text-white/70 ml-3">• Adi + Budi = (3+4) bagian = 7 bagian = 56 kg</p>
+                  <div className="ml-3 my-1"><BlockMath math="1 \text{ bagian} = \frac{56}{7} = 8 \text{ kg}" /></div>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Budi} = 4 \times 8 = 32 \text{ kg},\quad \text{Candra} = 5 \times 8 = 40 \text{ kg}" /></div>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Selisih Budi-Candra} = 40 - 32 = \boxed{8 \text{ kg}}" /></div>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Jangan lakukan 7,2 − 3,375 dulu! Ingat aturan: × dan ÷ dikerjakan sebelum + dan −. Untuk membagi pecahan: <InlineMath math="a \div \frac{b}{c} = a \times \frac{c}{b}"/>.</p>
+                  <p className="text-white/70">Cara lain: selisih Candra−Budi dalam rasio = 5−4 = 1 bagian. Dari 7 bagian = 56 kg → 1 bagian = 8 kg. Selisihnya langsung = 1 bagian = 8 kg, tanpa perlu menghitung berat masing-masing!</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Hasilnya = <strong className="text-green-300">1,8</strong>. Kunci keberhasilan: ikuti urutan operasi hitung (× dan ÷ dulu), kemudian sederhanakan pecahan sebelum dikalikan.</p>
+                  <p className="text-white/70">Nilai 1 bagian = 8 kg. Budi = 32 kg, Candra = 40 kg. Selisih berat badan Budi dan Candra = <strong className="text-green-300">8 kg</strong>.</p>
                 </div>
               </div>
             )}
@@ -358,34 +435,38 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">5</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Ello memiliki persediaan tepung terigu <InlineMath math="1\frac{3}{5}"/> kg, ia membeli lagi 3,2 kg. Untuk membuat gorengan dibutuhkan <InlineMath math="\frac{1}{4}"/> bagian, untuk membuat kue 30%. Ello memberikan tepung kepada Cinta sebanyak 0,75 kg. Sisa tepung terigu Ello adalah ….
+                  Harga 250 gram telur ayam di pasar adalah Rp7.000,00. Jika Kakak membeli telur seberat <InlineMath math="2\frac{1}{4}" /> kg, maka total harga yang harus dibayar Kakak adalah ….
                 </p>
-                <MCQ qn={5} correct={1} options={["A. 1,14","B. 1,41","C. 2,36","D. 3,656"]}/>
+                <MCQ qn={5} correct={2} options={[
+                  "A. Rp15.750,00",
+                  "B. Rp56.000,00",
+                  "C. Rp63.000,00",
+                  "D. Rp70.000,00",
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={5}/>
+            <PembahasanBtn n={5} />
             {expandedPembahasan.has(5) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B. 1,41</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. Rp63.000,00</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Soal bertahap: hitung total dulu, lalu kurangi satu per satu. Ubah semua pecahan ke desimal sebelum menghitung. Persen ke desimal: 30% = 0,30. Pecahan campuran: <InlineMath math="1\frac{3}{5} = 1{,}6"/>.</p>
+                  <p className="text-white/70">Konversi satuan: 250 gram = ¼ kg = 0,25 kg. Cari harga per kg terlebih dahulu, lalu kalikan dengan jumlah yang dibeli. Untuk pecahan campuran: <InlineMath math="2\frac{1}{4} = \frac{9}{4}"/>.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 ml-3">• Total tepung: <InlineMath math="1\frac{3}{5} + 3{,}2 = 1{,}6 + 3{,}2 = 4{,}8"/> kg</p>
-                  <p className="text-white/70 ml-3">• Untuk gorengan: <InlineMath math="\frac{1}{4} \times 4{,}8 = 1{,}2"/> kg</p>
-                  <p className="text-white/70 ml-3">• Untuk kue: <InlineMath math="30\% \times 4{,}8 = 0{,}30 \times 4{,}8 = 1{,}44"/> kg</p>
-                  <p className="text-white/70 ml-3 mb-1">• Diberikan Cinta: 0,75 kg</p>
-                  <div className="ml-3 my-1"><BlockMath math="\text{Sisa} = 4{,}8 - 1{,}2 - 1{,}44 - 0{,}75 = \boxed{1{,}41 \text{ kg}}"/></div>
+                  <p className="text-white/70 ml-3 mb-1">Harga 250 gram = Rp7.000, harga per kg:</p>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Harga per kg} = \frac{7.000}{0{,}25} = 7.000 \times 4 = \text{Rp}28.000" /></div>
+                  <p className="text-white/70 ml-3 mb-1">Total harga beli <InlineMath math="2\frac{1}{4}" /> kg:</p>
+                  <div className="ml-3 my-1"><BlockMath math="2\frac{1}{4} \times 28.000 = \frac{9}{4} \times 28.000 = 9 \times 7.000 = \boxed{\text{Rp}63.000}" /></div>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Soal menyebutkan "¼ bagian" dan "30%" — keduanya merujuk pada total 4,8 kg, bukan sisa. Baca soal cermat: semua persentase/pecahan dihitung dari total awal, kecuali ada keterangan lain.</p>
+                  <p className="text-white/70">Cara cerdas: harga 250 gram = Rp7.000. Maka harga per 250 gram = Rp7.000. Beli 2¼ kg = 9 × 250 gram → 9 × Rp7.000 = Rp63.000. Tidak perlu menghitung harga per kg!</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Sisa tepung Ello = 4,8 − 1,2 − 1,44 − 0,75 = <strong className="text-green-300">1,41 kg</strong>. Total yang digunakan/diberikan = 3,39 kg dari 4,8 kg.</p>
+                  <p className="text-white/70">Harga per kg = Rp28.000. Harga 2¼ kg = <strong className="text-green-300">Rp63.000,00</strong>. Alternatif: 2¼ kg = 9 × 250 gram → 9 × Rp7.000 = Rp63.000.</p>
                 </div>
               </div>
             )}
@@ -397,36 +478,62 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">6</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Hasil dari <InlineMath math="65 + 5.035 \div 5 \times 8 - 521"/> = ….
+                  Sebuah motor menempuh jarak dari kota P ke kota Q. Motor berangkat pukul 07.15 dan tiba pukul 08.45 dengan kecepatan rata-rata 60 km/jam. Jika motor tersebut menghabiskan 2 liter bensin untuk jarak 60 km, berapa liter bensin yang dihabiskan dalam perjalanan tersebut?
                 </p>
-                <MCQ qn={6} correct={1} options={["A. 7.639","B. 7.600","C. 839","D. 400"]}/>
+                <MCQ qn={6} correct={1} options={[
+                  "A. 2 liter",
+                  "B. 3 liter",
+                  "C. 4 liter",
+                  "D. 5 liter",
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={6}/>
+            <PembahasanBtn n={6} />
             {expandedPembahasan.has(6) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B. 7.600</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B. 3 liter</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Aturan urutan operasi hitung campuran: kerjakan <strong>× dan ÷ dari kiri ke kanan</strong> terlebih dahulu, baru kerjakan <strong>+ dan −</strong>. Jangan mengerjakan dari kiri ke kanan begitu saja tanpa memperhatikan aturan ini.</p>
+                  <p className="text-white/70">Soal berantai waktu-jarak-bensin: hitung selisih waktu → jarak = kecepatan × waktu → bensin = (jarak ÷ konsumsi) × per satuan. Konversi waktu: 07.15 → 08.45 = 1 jam 30 menit = 1,5 jam.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 mb-1">Langkah 1 — kerjakan ÷ dan × terlebih dahulu:</p>
-                  <div className="ml-3 my-1"><BlockMath math="5.035 \div 5 \times 8 = 1.007 \times 8 = 8.056"/></div>
-                  <p className="text-white/70 mb-1">Langkah 2 — kerjakan + dan − dari kiri ke kanan:</p>
-                  <div className="ml-3 my-1"><BlockMath math="65 + 8.056 - 521 = 8.121 - 521 = \boxed{7.600}"/></div>
+                  <p className="text-white/70 ml-3">• Lama perjalanan: 08.45 − 07.15 = 1 jam 30 menit = 1,5 jam</p>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Jarak} = 1{,}5 \times 60 \text{ km/jam} = 90 \text{ km}" /></div>
+                  <p className="text-white/70 ml-3">• Konsumsi: 2 liter per 60 km</p>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Bensin} = \frac{90}{60} \times 2 = 1{,}5 \times 2 = \boxed{3 \text{ liter}}" /></div>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Perhatikan: 5.035 ÷ 5 × 8 harus dikerjakan dari kiri. Jangan hitung 5 × 8 = 40 dulu lalu 5.035 ÷ 40 — itu salah! Aturannya: ÷ dan × sama derajatnya, dikerjakan dari kiri ke kanan.</p>
+                  <p className="text-white/70">Untuk menghitung selisih waktu: hitung menit dulu (45−15=30 menit), lalu jam (8−7=1 jam). Total = 1 jam 30 menit = 1,5 jam. Jangan langsung mengurangi 8.45−7.15 secara desimal (hasilnya 1.30, bukan 1,5).</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Hasil dari 65 + 5.035 ÷ 5 × 8 − 521 = <strong className="text-green-300">7.600</strong>. Kunci: dahulukan pembagian dan perkalian sebelum penjumlahan dan pengurangan.</p>
+                  <p className="text-white/70">Waktu = 1,5 jam → Jarak = 90 km → Bensin = <strong className="text-green-300">3 liter</strong>. Motor menghabiskan 3 liter bensin untuk perjalanan P ke Q.</p>
                 </div>
               </div>
             )}
+          </div>
+
+          {/* Stimulus 7 */}
+          <div className="bg-blue-950/40 border border-blue-400/30 rounded-xl p-4">
+            <p className="font-body text-blue-300 text-xs font-bold mb-2">📋 STIMULUS untuk Nomor 7</p>
+            <p className="font-body text-white/80 text-sm font-bold mb-2">Alur Pembuatan Paspor</p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs font-body border-collapse">
+                <thead>
+                  <tr className="bg-white/10">
+                    <th className="border border-white/20 px-3 py-2 text-white text-left">Tahap</th>
+                    <th className="border border-white/20 px-3 py-2 text-white text-center">Durasi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td className="border border-white/10 px-3 py-1.5 text-white/80">Verifikasi Berkas</td><td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-bold">15 menit</td></tr>
+                  <tr><td className="border border-white/10 px-3 py-1.5 text-white/80">Wawancara &amp; Foto</td><td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-bold">20 menit</td></tr>
+                  <tr><td className="border border-white/10 px-3 py-1.5 text-white/80">Pembayaran di Bank (Mobile)</td><td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-bold">10 menit</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           {/* Q7 */}
@@ -435,37 +542,42 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">7</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Lembaga amal WargaMU berencana memberikan air bersih kepada 2.000 keluarga. Tahap I: 26 tangki, Tahap II: 27 tangki. Setiap tangki untuk 25 keluarga. Tentukan Benar atau Salah!
+                  Manakah pernyataan yang benar jika proses dimulai pukul 10.00 tanpa antrean? <span className="text-cyan-300">(Pilih semua jawaban benar!)</span>
                 </p>
-                <TrueFalseTable qn={7} rows={[
-                  { key:"a", text:"Banyak keluarga yang belum mendapat bantuan hingga tahap II ada 685 keluarga", correct:"salah" },
-                  { key:"b", text:"Tahap ke-III bantuan air bersih sebanyak 1 tangki lebih banyak dari Tahap I", correct:"benar" },
-                  { key:"c", text:"Bantuan air selama dua tahap diterima 1.325 keluarga", correct:"benar" },
-                ]}/>
+                <ComplexMCQ qn={7} items={[
+                  { text: "Pada pukul 10.30, pemohon sedang berada di tahap Wawancara & Foto.", benar: true },
+                  { text: "Seluruh proses selesai tepat pada pukul 10.45.", benar: true },
+                  { text: "Tahap Wawancara & Foto memakan waktu paling lama.", benar: true },
+                  { text: "Jika proses wawancara terlambat 5 menit, maka seluruh proses selesai pukul 11.00.", benar: false },
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={7}/>
+            <PembahasanBtn n={7} />
             {expandedPembahasan.has(7) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Salah, Benar, Benar</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Pernyataan 1, 2, dan 3</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Hitung dari informasi dasar: 1 tangki = 25 keluarga. Total tangki yang dibutuhkan = 2.000 ÷ 25 = 80 tangki. Hitung bertahap: Tahap I, II, lalu sisa untuk Tahap III.</p>
+                  <p className="text-white/70">Soal jadwal/urutan: buat timeline dari awal (10.00), tambahkan durasi setiap tahap secara berurutan. Verifikasi pernyataan satu per satu berdasarkan timeline yang sudah dibuat.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 ml-3">• Tahap I + II: (26+27) tangki × 25 = 53 × 25 = <strong className="text-yellow-300">1.325 keluarga</strong></p>
-                  <p className="text-white/70 ml-3">• Belum dapat bantuan: 2.000 − 1.325 = <strong className="text-yellow-300">675</strong> (bukan 685) → ① <strong className="text-red-300">SALAH</strong></p>
-                  <p className="text-white/70 ml-3">• Total tangki: 2.000 ÷ 25 = 80 tangki. Tahap III = 80 − 26 − 27 = <strong className="text-yellow-300">27 tangki</strong> = Tahap I (26) + 1 → ② <strong className="text-green-300">BENAR</strong></p>
-                  <p className="text-white/70 ml-3">• Dua tahap = 1.325 keluarga → ③ <strong className="text-green-300">BENAR</strong></p>
+                  <p className="text-white/70 mb-1">Timeline proses mulai 10.00:</p>
+                  <p className="text-white/70 ml-3">• 10.00–10.15 → Verifikasi Berkas (15 menit)</p>
+                  <p className="text-white/70 ml-3">• 10.15–10.35 → Wawancara &amp; Foto (20 menit)</p>
+                  <p className="text-white/70 ml-3">• 10.35–10.45 → Pembayaran (10 menit)</p>
+                  <p className="text-white/70 ml-3">① Pukul 10.30 → sedang Wawancara (10.15–10.35) → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">② Selesai 10.00 + 45 menit = 10.45 → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">③ Wawancara (20 menit) adalah tahap terlama → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">④ Wawancara terlambat 5 menit → selesai 10.35+5+10 = 10.50, bukan 11.00 → <span className="text-red-300">SALAH</span></p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Pernyataan ① menyebut "685 keluarga" — hitung dulu yang benar: 2.000 − 1.325 = 675. Selisih 675 vs 685 = 10 keluarga. Jangan menganggap pernyataan "hampir benar" sebagai benar dalam soal matematika.</p>
+                  <p className="text-white/70">Buat timeline visual: 10.00 → Verifikasi (15m) → 10.15 → Wawancara (20m) → 10.35 → Bayar (10m) → 10.45 Selesai. Keterlambatan 5 menit hanya menggeser sisa waktu setelahnya, total selesai = 10.50.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Dua tahap = 1.325 keluarga (sisa 675, bukan 685). Tahap III = 27 tangki = Tahap I + 1. Jawaban: <strong className="text-green-300">Salah, Benar, Benar</strong>.</p>
+                  <p className="text-white/70">Proses selesai pukul 10.45. Jika wawancara terlambat 5 menit → selesai 10.50, bukan 11.00. Pernyataan yang benar: <strong className="text-green-300">1, 2, dan 3</strong>.</p>
                 </div>
               </div>
             )}
@@ -477,38 +589,52 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">8</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Pak Juna memanen kacang dari dua petak sawah: <InlineMath math="12\frac{2}{5}"/> kuintal dan 9,75 kuintal. Kacang dijual dua kali dengan berat sama. Sisa kacang sekarang 15 kuintal. Berat kacang dalam sekali penjualan adalah … kuintal.
+                  Biaya sewa taksi online mengikuti fungsi linear <InlineMath math="f(x) = ax + b" />, di mana x adalah jarak (km). Untuk jarak 2 km, biayanya Rp15.000,00. Untuk jarak 5 km, biayanya Rp24.000,00. Jika Budi menempuh jarak 10 km, berapakah biaya yang harus dibayar?
                 </p>
-                <MCQ qn={8} correct={2} options={["A. 5,675","B. 5,625","C. 3,575","D. 3,275"]}/>
+                <MCQ qn={8} correct={1} options={[
+                  "A. Rp33.000,00",
+                  "B. Rp39.000,00",
+                  "C. Rp42.000,00",
+                  "D. Rp45.000,00",
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={8}/>
+            <PembahasanBtn n={8} />
             {expandedPembahasan.has(8) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 3,575</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B. Rp39.000,00</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Soal bertahap: hitung total panen → kurangi sisa = yang terjual → bagi rata untuk 2 kali penjualan. Ubah pecahan campuran ke desimal dulu: <InlineMath math="12\frac{2}{5} = 12{,}4"/>.</p>
+                  <p className="text-white/70">Fungsi linear f(x) = ax + b: gradien a = (y₂−y₁)/(x₂−x₁). Gunakan dua titik yang diketahui untuk mencari a (biaya per km), lalu substitusikan ke salah satu titik untuk mencari b (biaya awal).</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 ml-3 mb-1">Total panen dari dua petak:</p>
-                  <div className="ml-3 my-1"><BlockMath math="12\tfrac{2}{5} + 9{,}75 = 12{,}4 + 9{,}75 = 22{,}15 \text{ kuintal}"/></div>
-                  <p className="text-white/70 ml-3 mb-1">Kacang yang terjual = total − sisa:</p>
-                  <div className="ml-3 my-1"><BlockMath math="\text{Terjual} = 22{,}15 - 15 = 7{,}15 \text{ kuintal}"/></div>
-                  <p className="text-white/70 ml-3 mb-1">Dijual 2 kali dengan berat sama:</p>
-                  <div className="ml-3 my-1"><BlockMath math="\text{Per penjualan} = 7{,}15 \div 2 = \boxed{3{,}575 \text{ kuintal}}"/></div>
+                  <p className="text-white/70 ml-3 mb-1">Cari gradien a (biaya per km tambahan):</p>
+                  <div className="ml-3 my-1"><BlockMath math="a = \frac{f(5)-f(2)}{5-2} = \frac{24.000-15.000}{3} = \frac{9.000}{3} = 3.000" /></div>
+                  <p className="text-white/70 ml-3 mb-1">Cari konstanta b (biaya awal/biaya tetap):</p>
+                  <div className="ml-3 my-1"><BlockMath math="b = 15.000 - 3.000 \times 2 = 15.000 - 6.000 = 9.000" /></div>
+                  <p className="text-white/70 ml-3 mb-1">Hitung f(10) untuk jarak 10 km:</p>
+                  <div className="ml-3 my-1"><BlockMath math="f(10) = 3.000(10) + 9.000 = 30.000 + 9.000 = \boxed{\text{Rp}39.000}" /></div>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Kunci: "dijual dua kali dengan berat sama" → total terjual ÷ 2. Ubah semua ke desimal dulu sebelum menjumlahkan. <InlineMath math="12\frac{2}{5}"/> = 12 + 2/5 = 12 + 0,4 = 12,4.</p>
+                  <p className="text-white/70">Verifikasi: f(2)=3.000×2+9.000=15.000 ✓, f(5)=3.000×5+9.000=24.000 ✓. Selalu verifikasi dengan data yang ada sebelum menghitung nilai baru.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Total panen = 22,15 kuintal. Terjual = 7,15 kuintal. Berat sekali jual = <strong className="text-green-300">3,575 kuintal</strong>.</p>
+                  <p className="text-white/70">Fungsi biaya taksi: f(x) = 3.000x + 9.000. Untuk 10 km: f(10) = <strong className="text-green-300">Rp39.000,00</strong>. Biaya per km = Rp3.000, biaya awal/minimum = Rp9.000.</p>
                 </div>
               </div>
             )}
+          </div>
+
+          {/* Stimulus 10-12 */}
+          <div className="bg-blue-950/40 border border-blue-400/30 rounded-xl p-4">
+            <p className="font-body text-blue-300 text-xs font-bold mb-2">📋 STIMULUS untuk Nomor 10 – 12</p>
+            <p className="font-body text-white/80 text-sm font-bold mb-2">Manajemen Efisiensi Pembangunan Gedung Serbaguna</p>
+            <p className="font-body text-white/70 text-xs leading-relaxed">
+              Pemerintah daerah melaksanakan proyek pembangunan Gedung Serbaguna yang harus selesai dalam 40 hari. Berdasarkan perhitungan konsultan, beban kerja tersebut dapat ditangani oleh 18 pekerja (produktivitas seragam). Total beban kerja = <span className="text-yellow-300 font-bold">720 Orang-Hari</span>. Jika terjadi kendala di lapangan, manajer harus menghitung sisa beban kerja dan membaginya dengan sisa waktu efektif untuk menentukan kebutuhan personil tambahan.
+            </p>
           </div>
 
           {/* Q9 */}
@@ -517,41 +643,37 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">9</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  SD Pertiwi memberikan sumbangan: gula pasir 140 bungkus, susu 168 kaleng, mie instan 196 bungkus. Dibagikan kepada sebanyak-banyaknya keluarga, setiap keluarga mendapat tiga jenis dengan jumlah sama. Pemerintah desa menambah 10 bungkus mie per keluarga. Tentukan Benar atau Salah!
+                  Karena gedung akan digunakan lebih awal untuk acara nasional, manajer diminta menyelesaikan pembangunan hanya dalam waktu 30 hari. Berapakah total jumlah pekerja yang harus dikerahkan agar target tersebut tercapai?
                 </p>
-                <TrueFalseTable qn={9} rows={[
-                  { key:"a", text:"Selisih banyak gula pasir dengan mie instan yang diterima setiap keluarga ada 2 bungkus", correct:"benar" },
-                  { key:"b", text:"Banyaknya keluarga yang menerima bantuan sebanyak 28 keluarga", correct:"benar" },
-                  { key:"c", text:"Setiap keluarga menerima mie instan 17 bungkus", correct:"benar" },
-                ]}/>
+                <MCQ qn={9} correct={1} options={[
+                  "A. 20 orang",
+                  "B. 24 orang",
+                  "C. 26 orang",
+                  "D. 30 orang",
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={9}/>
+            <PembahasanBtn n={9} />
             {expandedPembahasan.has(9) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Benar, Benar, Benar</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B. 24 orang</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">FPB (Faktor Persekutuan Terbesar) digunakan untuk membagi barang secara merata ke kelompok terbanyak. Gunakan pohon faktor → ambil faktor prima dengan pangkat TERKECIL yang ada di semua bilangan.</p>
+                  <p className="text-white/70">Perbandingan berbalik nilai: Pekerja₁ × Hari₁ = Pekerja₂ × Hari₂. Total beban kerja TETAP, yang berubah adalah distribusinya. Beban kerja = 720 orang-hari (sudah diberikan di stimulus).</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/80 mb-1">Faktorisasi prima ketiga bilangan:</p>
-                  <p className="text-white/70 ml-3">140 = 2² × 5 × 7 &nbsp;|&nbsp; 168 = 2³ × 3 × 7 &nbsp;|&nbsp; 196 = 2² × 7²</p>
-                  <div className="ml-3 my-1"><BlockMath math="\text{FPB}(140,168,196) = 2^2 \times 7 = 4 \times 7 = 28 \text{ keluarga}"/></div>
-                  <p className="text-white/70 ml-3">• Gula per keluarga: 140 ÷ 28 = <strong className="text-yellow-300">5</strong> bungkus</p>
-                  <p className="text-white/70 ml-3">• Mie dari sekolah: 196 ÷ 28 = <strong className="text-yellow-300">7</strong> bungkus</p>
-                  <p className="text-white/70 ml-3">① Selisih gula−mie = 7 − 5 = <strong className="text-green-300">2</strong> ✓ BENAR</p>
-                  <p className="text-white/70 ml-3">② Keluarga = <strong className="text-green-300">28</strong> ✓ BENAR</p>
-                  <p className="text-white/70 ml-3">③ Total mie per keluarga: 7 + 10 = <strong className="text-green-300">17</strong> bungkus ✓ BENAR</p>
+                  <p className="text-white/70 ml-3 mb-1">Total beban kerja (dari stimulus) = 720 orang-hari. Target baru = 30 hari:</p>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Pekerja} = \frac{720 \text{ orang-hari}}{30 \text{ hari}} = \boxed{24 \text{ orang}}" /></div>
+                  <p className="text-white/70 ml-3">Tambahan pekerja = 24 − 18 = 6 orang</p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Untuk FPB: cari faktor prima yang MUNCUL DI SEMUA bilangan, ambil pangkat terkecilnya. Di sini: 2² muncul di semua (140: 2², 168: 2³, 196: 2²) → ambil 2². Faktor 7 muncul di semua → ambil 7¹.</p>
+                  <p className="text-white/70">Verifikasi: 18 pekerja × 40 hari = 720 ✓, dan 24 pekerja × 30 hari = 720 ✓. Beban kerja tidak berubah meski waktu dipercepat — hanya jumlah pekerja yang bertambah.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">FPB(140,168,196) = 28 keluarga. Per keluarga: gula 5 bungkus, susu 6 kaleng, mie 17 bungkus (7+10). Semua pernyataan <strong className="text-green-300">BENAR</strong>.</p>
+                  <p className="text-white/70">Untuk menyelesaikan 720 orang-hari dalam 30 hari, dibutuhkan <strong className="text-green-300">24 orang</strong> pekerja (6 orang lebih banyak dari rencana awal 18 orang).</p>
                 </div>
               </div>
             )}
@@ -563,38 +685,36 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">10</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Ardi memasang umbul-umbul di Gang Arjuna panjang 0,6 km. Umbul-umbul dipasang di kanan kiri gang. Umbul-umbul merah jarak 4 m, umbul-umbul biru jarak 6 m, dipasang sejajar mulai dari ujung gang. Tentukan pernyataan yang Benar!
+                  Berdasarkan perencanaan awal (18 pekerja, 40 hari), tentukan <span className="text-yellow-300 font-bold">Benar atau Salah</span> untuk setiap pernyataan berikut!
                 </p>
                 <TrueFalseTable qn={10} rows={[
-                  { key:"a", text:"Kedua umbul-umbul terpasang sejajar sebanyak 50 kali sepanjang gang", correct:"salah" },
-                  { key:"b", text:"Banyaknya umbul-umbul merah yang terpasang sebanyak 151 buah (kanan dan kiri)", correct:"benar" },
-                  { key:"c", text:"Selisih kedua umbul-umbul yang terpasang adalah 50 buah", correct:"benar" },
-                ]}/>
+                  { key: "a", text: "Total beban kerja untuk menyelesaikan seluruh gedung adalah 720 Orang-Hari.", correct: "benar" },
+                  { key: "b", text: "Jika setelah bekerja 10 hari pekerjaan dihentikan, maka sisa beban kerja yang belum selesai adalah 540 Orang-Hari.", correct: "benar" },
+                  { key: "c", text: "Menambah jumlah pekerja menjadi 36 orang akan membuat proyek selesai tepat dalam waktu 15 hari.", correct: "salah" },
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={10}/>
+            <PembahasanBtn n={10} />
             {expandedPembahasan.has(10) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Salah, Benar, Benar</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Benar, Benar, Salah</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Banyak tiang/umbul dari ujung ke ujung = panjang ÷ jarak + 1. KPK digunakan untuk mencari posisi sejajar. Konversi satuan: 0,6 km = 600 m.</p>
+                  <p className="text-white/70">Beban kerja total = Pekerja × Hari. Sisa beban = Total − sudah selesai. Untuk perbandingan berbalik nilai: Pekerja × Hari = konstan. Jadi jika pekerja 2× lipat, hari menjadi ½ (bukan ⅓).</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 ml-3">• Panjang gang: 0,6 km = <strong className="text-yellow-300">600 m</strong></p>
-                  <p className="text-white/70 ml-3">• KPK(4,6) = 12 m → umbul-umbul sejajar setiap 12 m</p>
-                  <p className="text-white/70 ml-3">• Titik sejajar: 0, 12, 24, ..., 600 → 600÷12 + 1 = <strong className="text-yellow-300">51 titik</strong> (bukan 50) → ① <strong className="text-red-300">SALAH</strong></p>
-                  <p className="text-white/70 ml-3">• Merah (1 sisi): 600÷4 + 1 = 151 buah → kiri+kanan = 302, tapi soal = 151 (1 sisi) → ② <strong className="text-green-300">BENAR</strong></p>
-                  <p className="text-white/70 ml-3">• Biru (1 sisi): 600÷6 + 1 = 101 buah. Selisih: 151 − 101 = <strong className="text-yellow-300">50</strong> → ③ <strong className="text-green-300">BENAR</strong></p>
+                  <p className="text-white/70 ml-3">① Total beban: 18 × 40 = <strong className="text-yellow-300">720 Orang-Hari</strong> → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">② Selesai 10 hari: 18×10=180; sisa = 720−180 = <strong className="text-yellow-300">540 Orang-Hari</strong> → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">③ 36 pekerja: 720÷36 = <strong className="text-yellow-300">20 hari</strong>, bukan 15 hari → <span className="text-red-300">SALAH</span></p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Rumus banyak tiang: (panjang ÷ jarak) + 1. Jangan lupa +1 karena dihitung dari ujung ke ujung (titik awal termasuk). Kesalahan umum: tidak menambah +1 sehingga hasilnya kurang 1.</p>
+                  <p className="text-white/70">Pernyataan ③ menjebak: "2 kali pekerja = ½ waktu" bukan "⅓ waktu". 36÷18 = 2× lipat pekerja → waktu menjadi 40÷2 = 20 hari. Bukan 15 hari (yang butuh pekerja 720÷15 = 48 orang).</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Sejajar tiap 12 m → 51 titik (bukan 50). Merah = 151 buah (1 sisi), Biru = 101 buah (1 sisi), selisih = <strong className="text-green-300">50 buah</strong>. Jawaban: Salah, Benar, Benar.</p>
+                  <p className="text-white/70">Total = 720 orang-hari, sisa setelah 10 hari = 540 orang-hari. 36 pekerja butuh 20 hari (bukan 15). Jawaban: <strong className="text-green-300">Benar, Benar, Salah</strong>.</p>
                 </div>
               </div>
             )}
@@ -605,41 +725,39 @@ const TKALatihan4Page = () => {
             <div className="flex gap-3 mb-3">
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">11</span>
               <div className="flex-1">
-                <p className="font-body text-white/90 text-sm leading-relaxed mb-2">Perhatikan sifat-sifat bangun datar berikut!</p>
-                <div className="bg-white/5 rounded-lg p-3 mb-3 text-white/80 text-xs space-y-1 font-body">
-                  <p>(i) Memiliki dua pasang sisi sama panjang.</p>
-                  <p>(ii) Memiliki empat sisi sama panjang.</p>
-                  <p>(iii) Memiliki sepasang sudut sama besar.</p>
-                  <p>(iv) Memiliki dua pasang sudut yang berhadapan sama besar.</p>
-                  <p>(v) Memiliki 1 simetri lipat.</p>
-                </div>
-                <p className="font-body text-white/90 text-sm mb-3">Sifat-sifat bangun datar <strong className="text-yellow-300">layang-layang</strong> yang tepat ditunjukkan oleh huruf ….</p>
-                <MCQ qn={11} correct={0} options={["A. (i), (iii), dan (v)","B. (ii), (iv), dan (v)","C. (i), (ii), dan (v)","D. (i), (iii), dan (iv)"]}/>
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Setelah bekerja selama 15 hari, proyek terpaksa dihentikan selama 5 hari karena keterlambatan pengiriman semen. Agar gedung tetap selesai dalam waktu 40 hari, manakah pernyataan berikut yang benar? <span className="text-cyan-300">(Pilih semua yang benar!)</span>
+                </p>
+                <ComplexMCQ qn={11} items={[
+                  { text: "Sisa waktu rencana setelah hari ke-15 adalah 25 hari.", benar: true },
+                  { text: "Sisa waktu efektif untuk bekerja (setelah dikurangi masa berhenti) adalah 20 hari.", benar: true },
+                  { text: "Sisa beban kerja yang harus diselesaikan setelah hari ke-15 adalah 450 Orang-Hari.", benar: true },
+                  { text: "Manajer perlu menambah jumlah pekerja menjadi total 22 orang (dibulatkan) agar selesai tepat waktu.", benar: false },
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={11}/>
+            <PembahasanBtn n={11} />
             {expandedPembahasan.has(11) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: A. (i), (iii), dan (v)</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Pernyataan 1, 2, dan 3</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Layang-layang: dua pasang sisi berdekatan sama panjang (bukan berhadapan). Memiliki 1 simetri lipat (diagonal panjang). Sepasang sudut berhadapan sama besar (sudut yang diapit sisi tidak sama panjang).</p>
+                  <p className="text-white/70">Proyek terhenti: sisa waktu efektif = sisa waktu − hari berhenti. Sisa beban = total − sudah selesai. Pekerja baru = sisa beban ÷ sisa waktu efektif. Bulatkan ke atas karena pekerja harus bilangan bulat.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 ml-3">✓ (i) Dua pasang sisi <em>berdekatan</em> sama panjang → sifat layang-layang ✓</p>
-                  <p className="text-white/70 ml-3">✓ (iii) Sepasang sudut berhadapan sama besar (sudut di ujung diagonal pendek) ✓</p>
-                  <p className="text-white/70 ml-3">✓ (v) Tepat 1 simetri lipat (sepanjang diagonal panjang) ✓</p>
-                  <p className="text-white/70 ml-3">✗ (ii) Keempat sisi sama panjang → sifat <strong className="text-yellow-300">belah ketupat</strong>, bukan layang-layang</p>
-                  <p className="text-white/70 ml-3">✗ (iv) Dua pasang sudut berhadapan sama → sifat <strong className="text-yellow-300">jajargenjang/persegi panjang</strong></p>
+                  <p className="text-white/70 ml-3">① Sisa waktu rencana = 40 − 15 = <strong className="text-yellow-300">25 hari</strong> → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">② Sisa efektif = 25 − 5 = <strong className="text-yellow-300">20 hari</strong> → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">③ Sisa beban = 720 − (18×15) = 720 − 270 = <strong className="text-yellow-300">450 Orang-Hari</strong> → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">④ Pekerja diperlukan: 450÷20 = 22,5 → dibulatkan ke atas = <strong className="text-yellow-300">23 orang</strong>, bukan 22 → <span className="text-red-300">SALAH</span></p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Ingat perbedaan: layang-layang = sisi BERDEKATAN sama, belah ketupat = semua sisi sama. Layang-layang hanya 1 simetri lipat; belah ketupat punya 2 simetri lipat.</p>
+                  <p className="text-white/70">450÷20 = 22,5 → bulatkan KE ATAS = 23, bukan 22. Dengan 22 orang: 22×20=440 &lt; 450 (kurang). Dengan 23 orang: 23×20=460 ≥ 450 (cukup). Pernyataan ④ salah karena menyebut 22 bukan 23.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Sifat layang-layang yang tepat: <strong className="text-green-300">(i), (iii), dan (v)</strong> — dua pasang sisi berdekatan sama, sepasang sudut berhadapan sama, dan 1 simetri lipat.</p>
+                  <p className="text-white/70">Sisa efektif = 20 hari, sisa beban = 450 orang-hari → butuh 23 pekerja (bukan 22). Pernyataan benar: <strong className="text-green-300">1, 2, dan 3</strong>.</p>
                 </div>
               </div>
             )}
@@ -651,40 +769,38 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">12</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Arman membuat mainan dadu dari kertas karton. Mata dadu yang saling berhadapan jumlahnya 7 (1–6, 2–5, 3–4). Sebelumnya ia membuat jaring-jaring kubus. Pola jaring-jaring yang benar adalah ….
+                  Bentuk sederhana dari <InlineMath math="(2x+1)(y+5)+(2x+1)(4-y)" /> adalah ....
                 </p>
-                <div className="flex justify-center mb-3">
-                  <img src="/tka-paket3-soal12.png" alt="Gambar soal nomor 12" className="max-w-[160px] rounded-lg bg-white/5 p-2" />
-                </div>
-                <MCQ qn={12} correct={1} options={[
-                  <span className="flex flex-col items-center gap-1"><img src="/tka-paket3-soal12a.png" alt="Pola A" className="w-24 rounded bg-white p-1"/><span>A</span></span>,
-                  <span className="flex flex-col items-center gap-1"><img src="/tka-paket3-soal12b.png" alt="Pola B" className="w-24 rounded bg-white p-1"/><span>B</span></span>,
-                  <span className="flex flex-col items-center gap-1"><img src="/tka-paket3-soal12c.png" alt="Pola C" className="w-24 rounded bg-white p-1"/><span>C</span></span>,
-                  <span className="flex flex-col items-center gap-1"><img src="/tka-paket3-soal12d.png" alt="Pola D" className="w-24 rounded bg-white p-1"/><span>D</span></span>,
-                ]}/>
+                <MCQ qn={12} correct={0} options={[
+                  <span>A. <InlineMath math="9(2x+1)" /></span>,
+                  <span>B. <InlineMath math="x+2y+9" /></span>,
+                  <span>C. <InlineMath math="9(2x+y)" /></span>,
+                  <span>D. <InlineMath math="18x+1" /></span>,
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={12}/>
+            <PembahasanBtn n={12} />
             {expandedPembahasan.has(12) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: A. 9(2x + 1)</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Jaring-jaring kubus: kubus punya 6 sisi. Sisi-sisi yang berhadapan pada kubus dadu berjumlah 7 (1↔6, 2↔5, 3↔4). Dalam jaring-jaring yang benar, pasangan yang berhadapan TIDAK boleh bersebelahan langsung.</p>
+                  <p className="text-white/70">Faktorisasi: cari faktor persekutuan. <InlineMath math="(2x+1)"/> muncul di kedua suku → keluarkan. Sederhanakan suku dalam kurung: variabel y akan saling menghilangkan (y dan −y).</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 mb-1">Pasangan muka berhadapan (jumlahnya = 7):</p>
-                  <p className="text-white/70 ml-3">• 1 ↔ 6 (bersama = 7) &nbsp;|&nbsp; 2 ↔ 5 (bersama = 7) &nbsp;|&nbsp; 3 ↔ 4 (bersama = 7)</p>
-                  <p className="text-white/70 mt-1">Pilihan B adalah satu-satunya jaring-jaring di mana ketiga pasangan berhadapan tersebut tidak bersebelahan langsung dalam pola lipatan kubus.</p>
+                  <p className="text-white/70 ml-3 mb-1">Faktorkan <InlineMath math="(2x+1)"/> dari kedua suku:</p>
+                  <div className="ml-3 my-1"><BlockMath math="(2x+1)\big[(y+5)+(4-y)\big] = (2x+1)[y+5+4-y]" /></div>
+                  <p className="text-white/70 ml-3 mb-1">Sederhanakan (y − y = 0, 5 + 4 = 9):</p>
+                  <div className="ml-3 my-1"><BlockMath math="= (2x+1)[9] = \boxed{9(2x+1)}" /></div>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Cara cek jaring-jaring dadu: lipat secara mental. Sisi yang berlawanan arah di jaring = sisi berhadapan di kubus. Eliminasi pilihan yang menempatkan pasangan (1,6), (2,5), atau (3,4) di posisi bersebelahan.</p>
+                  <p className="text-white/70">Perhatikan tanda plus sebelum kurung kedua: +(4−y) → tidak ada perubahan tanda. Variabel y hilang karena +y dan −y saling menghilangkan, tersisa 5 + 4 = 9.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Jaring-jaring yang benar adalah <strong className="text-green-300">Pilihan B</strong>, karena ketiga pasangan muka berhadapan (1↔6, 2↔5, 3↔4) tidak bersebelahan dalam pola tersebut.</p>
+                  <p className="text-white/70">Bentuk sederhana = <strong className="text-green-300">9(2x+1)</strong>. Faktor <InlineMath math="(2x+1)"/> dikeluarkan, variabel y hilang, dan konstantanya 9.</p>
                 </div>
               </div>
             )}
@@ -695,41 +811,41 @@ const TKALatihan4Page = () => {
             <div className="flex gap-3 mb-3">
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">13</span>
               <div className="flex-1">
-                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Perhatikan gambar bangun tiga dimensi berikut! Tentukan Benar atau Salah untuk setiap pernyataan tampak berikut!
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-2">
+                  Penyewaan lapangan badminton menetapkan tarif: biaya kebersihan Rp10.000,00 per sesi, tarif sewa Rp35.000,00 per jam. Roni dan teman-temannya terkumpul uang tidak lebih dari Rp120.000,00. <span className="text-cyan-300">(Pilih semua pernyataan yang benar!)</span>
                 </p>
-                <div className="flex justify-center mb-3">
-                  <img src="/tka-paket3-soal13.png" alt="Gambar soal nomor 13" className="w-full max-w-[280px] rounded-lg bg-white/5 p-2" />
-                </div>
-                <TrueFalseTable qn={13} rows={[
-                  { key:"a", text:<span className="flex flex-col gap-1"><span>Gambar tampak dari samping kanan</span><img src="/tka-paket3-soal13a.png" alt="Tampak samping kanan" className="w-20 rounded bg-white p-1"/></span>, correct:"benar" },
-                  { key:"b", text:<span className="flex flex-col gap-1"><span>Gambar tampak dari samping kiri</span><img src="/tka-paket3-soal13b.png" alt="Tampak samping kiri" className="w-24 rounded bg-white p-1"/></span>, correct:"salah" },
-                  { key:"c", text:<span className="flex flex-col gap-1"><span>Gambar tampak dari atas</span><img src="/tka-paket3-soal13c.png" alt="Tampak dari atas" className="w-20 rounded bg-white p-1"/></span>, correct:"benar" },
-                ]}/>
+                <ComplexMCQ qn={13} items={[
+                  { text: <span>Model matematikanya adalah <InlineMath math="35.000x + 10.000 \leq 120.000" /></span>, benar: true },
+                  { text: "Durasi maksimal sewa lapangan yang bisa dipilih adalah 3 jam.", benar: true },
+                  { text: "Menyewa selama 4 jam akan melebihi anggaran yang tersedia.", benar: true },
+                  { text: "Penambahan waktu sewa 1 jam akan menambah biaya sebesar Rp45.000,00.", benar: false },
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={13}/>
+            <PembahasanBtn n={13} />
             {expandedPembahasan.has(13) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Benar, Salah, Benar</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Pernyataan 1, 2, dan 3</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Tampak bangun 3D: bayangkan melihat dari tiga arah—depan, samping, dan atas. Tampak samping kanan ≠ tampak samping kiri (cerminan). Tampak atas menunjukkan bentuk "jejak" bangun dari atas.</p>
+                  <p className="text-white/70">Pertidaksamaan linear: total biaya = biaya tetap + biaya variabel × jumlah ≤ anggaran. Biaya tetap (kebersihan) dibayar sekali per sesi. Biaya per jam = tarif sewa saja (Rp35.000), bukan tarif sewa + kebersihan.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70">Analisis setiap tampak berdasarkan gambar bangun 3D pada soal:</p>
-                  <p className="text-white/70 ml-3">① Tampak samping kanan: cocok dengan bentuk yang terlihat dari kanan → <span className="text-green-300">BENAR</span></p>
-                  <p className="text-white/70 ml-3">② Tampak samping kiri: tidak cocok (berbeda dengan tampak kanan yang merupakan cerminannya) → <span className="text-red-300">SALAH</span></p>
-                  <p className="text-white/70 ml-3">③ Tampak dari atas: cocok dengan proyeksi atas bangun → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3 mb-1">Model: <InlineMath math="35.000x + 10.000 \leq 120.000" /></p>
+                  <div className="ml-3 my-1"><BlockMath math="35.000x \leq 110.000 \Rightarrow x \leq 3{,}14 \Rightarrow x_{\max} = 3 \text{ jam}" /></div>
+                  <p className="text-white/70 ml-3">① Model benar → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">② Maksimal 3 jam → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">③ 4 jam: 35.000×4+10.000 = 150.000 &gt; 120.000 → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">④ Tambah 1 jam = +Rp<strong className="text-yellow-300">35.000</strong> (tarif sewa saja, bukan 45.000) → <span className="text-red-300">SALAH</span></p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Untuk tampak 3D: tampak kanan dan kiri adalah cerminan satu sama lain. Tampak atas menunjukkan pola "footprint" bukan tinggi. Bayangkan bangun diletakkan di depan Anda lalu amati dari setiap arah.</p>
+                  <p className="text-white/70">Pernyataan ④ menjebak: biaya kebersihan Rp10.000 dibayar per sesi (tetap), bukan per jam. Jadi penambahan 1 jam hanya menambah biaya sewa Rp35.000, bukan Rp45.000.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Tampak samping kanan = <strong className="text-green-300">BENAR</strong>, tampak samping kiri = <strong className="text-red-300">SALAH</strong> (bukan cerminan yang benar), tampak atas = <strong className="text-green-300">BENAR</strong>.</p>
+                  <p className="text-white/70">Dengan anggaran Rp120.000, bisa sewa maksimal <strong className="text-green-300">3 jam</strong>. Pernyataan benar: <strong className="text-green-300">1, 2, dan 3</strong>. Tambahan 1 jam = +Rp35.000 (bukan Rp45.000).</p>
                 </div>
               </div>
             )}
@@ -741,38 +857,46 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">14</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Pak Raka memiliki kebun berbentuk seperti gambar. Salah satu sisi kebun terdapat pintu lebar 2 m. Di sekeliling tanah dipasang tiang lampu dengan jarak 3 m. Banyaknya tiang lampu yang terpasang adalah ….
+                  Diketahui SPL:
                 </p>
-                <div className="flex justify-center mb-3">
-                  <img src="/tka-paket3-soal14.png" alt="Gambar soal nomor 14" className="w-full max-w-[300px] rounded-lg bg-white/5 p-2" />
+                <div className="bg-white/5 rounded-lg p-3 mb-3 text-center">
+                  <BlockMath math="4x - ay = 10" />
+                  <BlockMath math="bx + 2y = 12" />
+                  <p className="text-white/70 text-xs mt-1">mempunyai solusi <InlineMath math="(x, y) = (3, 1)" /></p>
                 </div>
-                <MCQ qn={14} correct={1} options={["A. 25","B. 26","C. 30","D. 31"]}/>
+                <p className="font-body text-white/90 text-sm mb-3">Tentukan <span className="text-yellow-300 font-bold">Benar/Salah</span>:</p>
+                <TrueFalseTable qn={14} rows={[
+                  { key: "a", text: "Nilai a adalah 2.", correct: "benar" },
+                  { key: "b", text: "Nilai b adalah kelipatan 4.", correct: "salah" },
+                  { key: "c", text: <span>Hasil dari <InlineMath math="a \times b = 8" /></span>, correct: "salah" },
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={14}/>
+            <PembahasanBtn n={14} />
             {expandedPembahasan.has(14) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B. 26</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Benar, Salah, Salah</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Tiang lampu di sekeliling tanah: banyak tiang = panjang pagar ÷ jarak tiang. Jika ada pintu (celah), kurangi lebarnya dari keliling terlebih dahulu. Tidak perlu +1 karena polanya melingkar (ujung bertemu awal).</p>
+                  <p className="text-white/70">SPL dengan solusi diketahui: substitusi (x,y)=(3,1) ke masing-masing persamaan secara terpisah untuk mendapatkan nilai a dan b. b belum tentu bilangan bulat — bisa pecahan.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/80 mb-1">Langkah 1 – Hitung keliling kebun dari gambar:</p>
-                  <div className="ml-3 my-1"><BlockMath math="K = 80 \text{ m}"/></div>
-                  <p className="text-white/80 mb-1">Langkah 2 – Hitung panjang pagar (keliling − lebar pintu):</p>
-                  <div className="ml-3 my-1"><BlockMath math="\text{Panjang pagar} = 80 - 2 = 78 \text{ m}"/></div>
-                  <p className="text-white/80 mb-1">Langkah 3 – Banyak tiang (setiap 3 m dipasang 1 tiang):</p>
-                  <div className="ml-3 my-1"><BlockMath math="\text{Banyak tiang} = \frac{78}{3} = \boxed{26 \text{ tiang}}"/></div>
+                  <p className="text-white/70 ml-3 mb-1">Substitusi (3,1) ke persamaan 1: 4x − ay = 10</p>
+                  <div className="ml-3 my-1"><BlockMath math="4(3) - a(1) = 10 \Rightarrow 12 - a = 10 \Rightarrow a = 2" /></div>
+                  <p className="text-white/70 ml-3 mb-1">Substitusi (3,1) ke persamaan 2: bx + 2y = 12</p>
+                  <div className="ml-3 my-1"><BlockMath math="b(3) + 2(1) = 12 \Rightarrow 3b + 2 = 12 \Rightarrow 3b = 10 \Rightarrow b = \frac{10}{3}" /></div>
+                  <p className="text-white/70 ml-3">① a = 2 → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">② b = 10/3 ≈ 3,33, bukan kelipatan 4 → <span className="text-red-300">SALAH</span></p>
+                  <p className="text-white/70 ml-3">③ a × b = 2 × 10/3 = 20/3 ≈ 6,67 ≠ 8 → <span className="text-red-300">SALAH</span></p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Untuk pemasangan melingkar (pagar keliling), tidak perlu +1. Untuk pemasangan lurus (ujung ke ujung), gunakan +1. Di sini pagar melingkar: 78÷3 = 26, tanpa +1.</p>
+                  <p className="text-white/70">Jangan asumsi bahwa konstanta harus bilangan bulat. b = 10/3 adalah pecahan yang valid. Kelipatan 4 artinya bisa dibagi 4: 4, 8, 12, ... Nilai 10/3 jelas bukan kelipatan 4.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Keliling kebun = 80 m. Panjang pagar = 78 m (dikurangi pintu 2 m). Banyak tiang = 78 ÷ 3 = <strong className="text-green-300">26 tiang</strong>.</p>
+                  <p className="text-white/70">a = 2, b = 10/3. Jawaban: <strong className="text-green-300">Benar, Salah, Salah</strong> (b bukan kelipatan 4; a×b = 20/3, bukan 8).</p>
                 </div>
               </div>
             )}
@@ -784,39 +908,37 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">15</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Perhatikan gambar bangun datar berikut! Luas bangun tersebut adalah ….
+                  Sebuah mesin cetak membutuhkan waktu persiapan 15 menit, lalu mencetak setiap buku dalam waktu 2 menit. Fungsi <InlineMath math="f(x) = 2x + 15" /> menyatakan total waktu (menit) untuk mencetak x buah buku. Jika mesin mencetak 50 buku, berapa total waktu yang diperlukan?
                 </p>
-                <div className="flex justify-center mb-3">
-                  <img src="/tka-paket3-soal15.png" alt="Gambar soal nomor 15" className="max-w-[240px] rounded-lg bg-white/5 p-2" />
-                </div>
-                <MCQ qn={15} correct={2} options={["A. 297 cm²","B. 325 cm²","C. 369 cm²","D. 594 cm²"]}/>
+                <MCQ qn={15} correct={1} options={[
+                  "A. 100 menit",
+                  "B. 115 menit",
+                  "C. 130 menit",
+                  "D. 150 menit",
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={15}/>
+            <PembahasanBtn n={15} />
             {expandedPembahasan.has(15) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 369 cm²</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B. 115 menit</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Trapesium: dua sisi sejajar (a = atas, b = bawah) dan tinggi tegak (t). Rumus: L = ½ × (a+b) × t. Kunci: tentukan kedua sisi sejajar dan tinggi dengan benar dari gambar.</p>
+                  <p className="text-white/70">Fungsi linear f(x) = 2x + 15: koefisien x (2) = waktu per buku, konstanta (15) = waktu persiapan mesin. Total waktu = waktu persiapan + (waktu per buku × jumlah buku).</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/80 mb-1">Identifikasi ukuran dari gambar (trapesium):</p>
-                  <p className="text-white/70 ml-3">• Sisi sejajar atas (a) = 8 cm</p>
-                  <p className="text-white/70 ml-3">• Sisi sejajar bawah (b) = 8 + 25 = 33 cm</p>
-                  <p className="text-white/70 ml-3">• Tinggi (t) = 18 cm</p>
-                  <p className="text-white/80 mt-2 mb-1">Hitung luas:</p>
-                  <div className="ml-3 my-1"><BlockMath math="L = \frac{1}{2} \times (a + b) \times t = \frac{1}{2} \times (8 + 33) \times 18"/></div>
-                  <div className="ml-3 my-1"><BlockMath math="= \frac{1}{2} \times 41 \times 18 = \boxed{369 \text{ cm}^2}"/></div>
+                  <p className="text-white/70 ml-3 mb-1">Substitusi x = 50 ke f(x) = 2x + 15:</p>
+                  <div className="ml-3 my-1"><BlockMath math="f(50) = 2(50) + 15 = 100 + 15 = \boxed{115 \text{ menit}}" /></div>
+                  <p className="text-white/70 ml-3">Waktu cetak 50 buku = 100 menit. Waktu persiapan = 15 menit. Total = 115 menit.</p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Identifikasi sisi sejajar dari gambar — sisi bawah bisa lebih panjang dari yang terlihat jika ada perpanjangan. Tinggi = jarak tegak lurus antara dua sisi sejajar, bukan sisi miring.</p>
+                  <p className="text-white/70">Jangan terjebak menjawab 100 menit (lupa waktu persiapan 15 menit) atau 130 menit. Waktu persiapan adalah fixed cost yang selalu ditambahkan terlepas dari jumlah buku.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Trapesium dengan sisi sejajar 8 dan 33 cm, tinggi 18 cm → luas = <strong className="text-green-300">369 cm²</strong>.</p>
+                  <p className="text-white/70">Mencetak 50 buku membutuhkan total <strong className="text-green-300">115 menit</strong> (100 menit cetak + 15 menit persiapan).</p>
                 </div>
               </div>
             )}
@@ -828,36 +950,44 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">16</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Perhatikan gambar berikut! Luas bangun gabungan adalah … cm².
+                  Gambar berikut adalah pola segitiga. Pola ke-1 memiliki 1 segitiga satuan, pola ke-2 memiliki 4, pola ke-3 memiliki 9, dan seterusnya (pola ke-n = n²). Banyak segitiga satu-satuan pada pola ke-7 adalah....
                 </p>
                 <div className="flex justify-center mb-3">
-                  <img src="/tka-paket3-soal16.png" alt="Gambar soal nomor 16" className="w-full max-w-[300px] rounded-lg bg-white/5 p-2" />
+                  <img
+                    src="/pola-segitiga-q17-paket5.png"
+                    alt="Pola segitiga ke-1 hingga ke-4"
+                    className="w-56 rounded-lg"
+                  />
                 </div>
-                <MCQ qn={16} correct={2} options={["A. 128","B. 224","C. 242","D. 594"]}/>
+                <MCQ qn={16} correct={3} options={[
+                  "A. 28",
+                  "B. 36",
+                  "C. 42",
+                  "D. 49",
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={16}/>
+            <PembahasanBtn n={16} />
             {expandedPembahasan.has(16) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 242 cm²</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: D. 49</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Luas bangun gabungan yang tumpang tindih: L = L₁ + L₂ − L_irisan. Ini mencegah penghitungan ganda pada area yang dihitung dua kali. Identifikasi tiap bangun penyusun dan daerah irisannya.</p>
+                  <p className="text-white/70">Pola bilangan kuadrat: pola ke-n = n². Setiap suku adalah kuadrat dari nomornya: 1, 4, 9, 16, 25, 36, 49, ... Cukup kuadratkan nomor pola yang ditanyakan.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/80 mb-1">Dari gambar: dua belah ketupat saling tumpang tindih dengan:</p>
-                  <p className="text-white/70 ml-3">• Diagonal tiap belah ketupat = 16 cm × lebar</p>
-                  <p className="text-white/70 ml-3">• Luas gabungan dihitung dengan mengurangi irisan:</p>
-                  <div className="ml-3 my-1"><BlockMath math="L_{\text{gabungan}} = L_1 + L_2 - L_{\text{irisan}} = \boxed{242 \text{ cm}^2}"/></div>
+                  <p className="text-white/70 ml-3 mb-1">Verifikasi: U₁=1², U₂=4, U₃=9, U₄=16 ✓</p>
+                  <p className="text-white/70 ml-3 mb-1">Pola ke-7:</p>
+                  <div className="ml-3 my-1"><BlockMath math="U_7 = 7^2 = \boxed{49}" /></div>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Rumus umum luas gabungan (union): L_A∪B = L_A + L_B − L_A∩B. Perhatikan gambar dengan saksama untuk menentukan lebar irisan, karena ini yang sering membedakan jawaban yang benar dari yang salah.</p>
+                  <p className="text-white/70">Hafal kuadrat: 7² = 49. Jangan terjebak dengan pilihan 28 (=7×4) atau 36 (=6²). Pastikan menerapkan U_n = n², bukan 7n atau rumus lain.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Luas bangun gabungan dua belah ketupat = <strong className="text-green-300">242 cm²</strong>, dengan menjumlahkan luas keduanya lalu mengurangi daerah irisan.</p>
+                  <p className="text-white/70">Pola ke-7 segitiga satuan = 7² = <strong className="text-green-300">49 segitiga</strong>.</p>
                 </div>
               </div>
             )}
@@ -869,37 +999,37 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">17</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Kardus besar milik Dayu berbentuk balok. Kardus kecil berbentuk kubus diletakkan di dalamnya. Tinggi tumpukan kardus kecil pada kardus besar milik Dayu adalah … kubus.
+                  Seorang atlet lari menambah jarak larinya setiap minggu. Minggu pertama ia berlari sejauh 2.000 meter. Setiap minggu berikutnya, ia menambah jarak tempuhnya sejauh 400 meter. Atlet tersebut berlatih selama 8 minggu. Tentukan <span className="text-yellow-300 font-bold">Benar atau Salah</span>:
                 </p>
-                <div className="flex justify-center mb-3">
-                  <img src="/tka-paket3-soal17.png" alt="Gambar soal nomor 17" className="w-full max-w-[320px] rounded-lg bg-white/5 p-2" />
-                </div>
-                <MCQ qn={17} correct={1} options={["A. 5","B. 6","C. 11","D. 55"]}/>
+                <TrueFalseTable qn={17} rows={[
+                  { key: "a", text: "Jarak tempuh pada minggu ke-4 adalah 3.200 meter.", correct: "benar" },
+                  { key: "b", text: "Jarak tempuh pada minggu terakhir adalah 4.800 meter.", correct: "benar" },
+                  { key: "c", text: "Selisih jarak lari antara minggu ke-3 dan minggu ke-7 adalah 1.600 meter.", correct: "benar" },
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={17}/>
+            <PembahasanBtn n={17} />
             {expandedPembahasan.has(17) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B. 6</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Benar, Benar, Benar</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Volume kubus = s³. Untuk mencari sisi dari volume: s = ∛V. Hapalan: 11³ = 1.331, 12³ = 1.728. Banyak tumpukan = tinggi balok ÷ sisi kubus.</p>
+                  <p className="text-white/70">Barisan aritmatika: U_n = a + (n−1)d. Di sini a=2.000 m, d=+400 m. Selisih dua suku = (n₂−n₁) × d = (7−3) × 400 = 1.600.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/80 mb-1">Langkah 1 – Cari sisi kubus kecil dari volumenya:</p>
-                  <div className="ml-3 my-1"><BlockMath math="V = s^3 = 1.331 \text{ cm}^3 \Rightarrow s = \sqrt[3]{1.331} = \sqrt[3]{11^3} = 11 \text{ cm}"/></div>
-                  <p className="text-white/80 mb-1">Langkah 2 – Bagi tinggi balok besar dengan sisi kubus:</p>
-                  <p className="text-white/70 ml-3 mb-1">Dari gambar, tinggi kardus besar = 66 cm.</p>
-                  <div className="ml-3 my-1"><BlockMath math="\text{Tinggi tumpukan} = \frac{66}{11} = \boxed{6 \text{ kubus}}"/></div>
+                  <p className="text-white/70 ml-3 mb-1">Rumus: U_n = 2.000 + (n−1)(400)</p>
+                  <p className="text-white/70 ml-3">① U₄ = 2.000 + 3(400) = 2.000 + 1.200 = <strong className="text-yellow-300">3.200 m</strong> → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">② U₈ = 2.000 + 7(400) = 2.000 + 2.800 = <strong className="text-yellow-300">4.800 m</strong> → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">③ U₃=2.800, U₇=4.400; selisih = 4.400−2.800 = <strong className="text-yellow-300">1.600 m</strong> → <span className="text-green-300">BENAR</span></p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">∛1331 = 11 karena 11³ = 1331. Hafalan kubik: 10³=1000, 11³=1331, 12³=1728. Kemudian 66 ÷ 11 = 6 tumpukan.</p>
+                  <p className="text-white/70">Cara cepat ③: selisih antara suku ke-3 dan ke-7 = (7−3) × d = 4 × 400 = 1.600. Tidak perlu menghitung U₃ dan U₇ secara terpisah!</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Sisi kubus kecil = ∛1331 = 11 cm. Tinggi tumpukan = 66 ÷ 11 = <strong className="text-green-300">6 kubus</strong>.</p>
+                  <p className="text-white/70">a=2.000, d=400. U₄=3.200, U₈=4.800, selisih U₇−U₃=1.600. Semua pernyataan <strong className="text-green-300">BENAR</strong>.</p>
                 </div>
               </div>
             )}
@@ -911,35 +1041,45 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">18</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Nasywa memiliki akuarium berbentuk kubus dengan panjang sisi bagian dalam 30 cm. Akuarium berisi air sebanyak <InlineMath math="\frac{1}{2}"/> bagian. Kemudian Nasywa menambahkan air hingga volumenya menjadi 24.750 cm³. Volume air yang ditambahkan adalah … cm³.
+                  Sebuah foto ditempel pada kertas karton berukuran 30 cm × 40 cm. Di sebelah kiri dan kanan foto terdapat sisa karton selebar 3 cm, dan di sebelah atas terdapat sisa 1 cm. Jika foto dan karton sebangun, maka panjang sisa karton bagian bawah adalah ....
                 </p>
                 <div className="flex justify-center mb-3">
-                  <img src="/tka-paket3-soal18.png" alt="Gambar soal nomor 18" className="max-w-[200px] rounded-lg bg-white/5 p-2" />
+                  <img
+                    src="/foto-pigura-q19-paket5.png"
+                    alt="Foto ditempel pada karton 30×40 cm"
+                    className="w-40 rounded-lg"
+                  />
                 </div>
-                <MCQ qn={18} correct={2} options={["A. 2.250","B. 3.750","C. 11.250","D. 11.750"]}/>
+                <MCQ qn={18} correct={2} options={[
+                  "A. 3 cm",
+                  "B. 5 cm",
+                  "C. 7 cm",
+                  "D. 8 cm",
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={18}/>
+            <PembahasanBtn n={18} />
             {expandedPembahasan.has(18) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 11.250 cm³</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 7 cm</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Volume kubus = s³. Volume tambahan = volume akhir − volume awal. Hitung dulu volume total kubus, lalu cari volume awal (½ bagian), kemudian selisihnya = air yang ditambahkan.</p>
+                  <p className="text-white/70">Foto sebangun karton: rasio lebar:tinggi foto = rasio lebar:tinggi karton = 30:40 = 3:4. Kurangi sisa kiri+kanan dari lebar karton untuk mendapat lebar foto, lalu hitung tinggi foto dari rasio.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <div className="ml-3 my-1"><BlockMath math="V_{\text{kubus}} = 30^3 = 27.000 \text{ cm}^3"/></div>
-                  <div className="ml-3 my-1"><BlockMath math="V_{\text{awal}} = \tfrac{1}{2} \times 27.000 = 13.500 \text{ cm}^3"/></div>
-                  <div className="ml-3 my-1"><BlockMath math="V_{\text{tambah}} = 24.750 - 13.500 = \boxed{11.250 \text{ cm}^3}"/></div>
+                  <p className="text-white/70 ml-3">• Lebar foto = 30 − 3 − 3 = <strong className="text-yellow-300">24 cm</strong></p>
+                  <p className="text-white/70 ml-3 mb-1">• Foto sebangun karton (30:40), cari tinggi foto:</p>
+                  <div className="ml-3 my-1"><BlockMath math="\frac{24}{30} = \frac{t_{\text{foto}}}{40} \Rightarrow t_{\text{foto}} = \frac{24 \times 40}{30} = 32 \text{ cm}" /></div>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Sisa bawah} = 40 - 1_{\text{atas}} - 32_{\text{foto}} = \boxed{7 \text{ cm}}" /></div>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">30³ = 27.000 (hafalan: 3³=27, tambahkan 3 nol). V awal = ½ × 27.000 = 13.500. V tambah = 24.750 − 13.500 = 11.250. Cek: 13.500 + 11.250 = 24.750 ✓</p>
+                  <p className="text-white/70">Rasio 24/30 = 4/5. Cek: 4/5 × 40 = 32 ✓. Sisa bawah = 40 − 1 − 32 = 7 cm. Ingat: sisa atas = 1 cm (bukan 3 cm), hanya kiri dan kanan yang 3 cm.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">V kubus = 27.000 cm³. V awal (½) = 13.500 cm³. Air ditambahkan = 24.750 − 13.500 = <strong className="text-green-300">11.250 cm³</strong>.</p>
+                  <p className="text-white/70">Foto: lebar 24 cm, tinggi 32 cm. Sisa karton bawah = 40 − 1 − 32 = <strong className="text-green-300">7 cm</strong>.</p>
                 </div>
               </div>
             )}
@@ -951,36 +1091,43 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">19</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Perhatikan gambar berikut! Besar sudut QOR berapa kali sudut ROP?
+                  Diketahui segitiga siku-siku ABC di A, AD ⊥ BC. Jika panjang BC = 25 cm dan CD = 16 cm. Tentukan <span className="text-yellow-300 font-bold">Benar atau Salah</span>:
                 </p>
                 <div className="flex justify-center mb-3">
-                  <img src="/tka-paket3-soal19.png" alt="Gambar soal nomor 19" className="max-w-[220px] rounded-lg bg-white/5 p-2" />
+                  <img
+                    src="/segitiga-abd-q20-paket5.png"
+                    alt="Segitiga siku-siku ABC dengan AD tegak lurus BC"
+                    className="w-48 rounded-lg"
+                  />
                 </div>
-                <MCQ qn={19} correct={1} options={["A. 5 kali","B. 4 kali","C. 3 kali","D. 2 kali"]}/>
+                <TrueFalseTable qn={19} rows={[
+                  { key: "a", text: "Panjang BD adalah 9 cm.", correct: "benar" },
+                  { key: "b", text: "Panjang AC adalah 20 cm.", correct: "benar" },
+                  { key: "c", text: "Panjang AB adalah 15 cm.", correct: "benar" },
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={19}/>
+            <PembahasanBtn n={19} />
             {expandedPembahasan.has(19) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B. 4 kali</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Benar, Benar, Benar</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Sudut diantara dua sinar: ∠QOR = ∠QOP − ∠ROP. Jika ∠QOP = 90° (siku-siku, Q di atas dan P di kanan), dan ∠ROP terukur dari gambar, hitung ∠QOR lalu bandingkan keduanya.</p>
+                  <p className="text-white/70">Segitiga siku-siku dengan AD⊥BC: BD = BC − CD. Rumus geometrik mean: AC² = CD × BC, AB² = BD × BC. Ini adalah aplikasi teorema proyeksi pada segitiga siku-siku.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 ml-3">• ∠QOP = 90° (sudut siku-siku: Q di atas, P ke kanan)</p>
-                  <p className="text-white/70 ml-3">• ∠ROP = 18° (dari gambar)</p>
-                  <p className="text-white/70 ml-3">• ∠QOR = ∠QOP − ∠ROP = 90° − 18° = 72°</p>
-                  <div className="ml-3 my-1"><BlockMath math="\frac{\angle QOR}{\angle ROP} = \frac{72°}{18°} = \boxed{4 \text{ kali}}"/></div>
+                  <p className="text-white/70 ml-3 mb-1">BD = BC − CD = 25 − 16 = 9 cm → ① <span className="text-green-300">BENAR</span></p>
+                  <div className="ml-3 my-1"><BlockMath math="AC^2 = CD \times BC = 16 \times 25 = 400 \Rightarrow AC = 20 \text{ cm} \Rightarrow \text{②} \checkmark" /></div>
+                  <div className="ml-3 my-1"><BlockMath math="AB^2 = BD \times BC = 9 \times 25 = 225 \Rightarrow AB = 15 \text{ cm} \Rightarrow \text{③} \checkmark" /></div>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">∠QOR = 90° − 18° = 72°. Cek: 72 ÷ 18 = 4. Jadi ∠QOR = 4 × ∠ROP. Kunci: identifikasi bahwa ∠QOP = 90° dari posisi sinar Q (atas) dan P (kanan).</p>
+                  <p className="text-white/70">Ingat rumus: AB² = BD × BC dan AC² = CD × BC (bukan BD × CD). Triple Pythagoras: BD=9, CD=16, BC=25 (kelipatan 9-12-15 dan 12-16-20). Verifikasi: AB²+AC² = 225+400 = 625 = 25² = BC² ✓</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">∠QOR = 72°, ∠ROP = 18°. Perbandingan = <strong className="text-green-300">4 kali</strong> (72 ÷ 18 = 4).</p>
+                  <p className="text-white/70">BD=9, AC=20, AB=15. Semua pernyataan <strong className="text-green-300">BENAR</strong>. (Triple Pythagorean: 15-20-25 dan 9-12-15.)</p>
                 </div>
               </div>
             )}
@@ -992,35 +1139,45 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">20</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Perhatikan gambar berikut! Besar sudut r adalah ….
+                  Di tengah lapangan rumput berukuran 30 m × 20 m terdapat dua buah kolam lingkaran yang identik, masing-masing berdiameter 14 m. Tentukan <span className="text-yellow-300 font-bold">Benar atau Salah</span>:
                 </p>
                 <div className="flex justify-center mb-3">
-                  <img src="/tka-paket3-soal20.png" alt="Gambar soal nomor 20" className="w-full max-w-[320px] rounded-lg bg-white/5 p-2" />
+                  <img
+                    src="/denah-lapangan-q21-paket5.png"
+                    alt="Denah lapangan rumput 30×20 m dengan dua kolam lingkaran diameter 14 m"
+                    className="w-full max-w-sm rounded-lg"
+                  />
                 </div>
-                <MCQ qn={20} correct={2} options={["A. 50°","B. 60°","C. 70°","D. 80°"]}/>
+                <TrueFalseTable qn={20} rows={[
+                  { key: "a", text: <span>Luas total kedua kolam adalah 308 m².</span>, correct: "benar" },
+                  { key: "b", text: "Luas area rumput yang tersisa lebih besar daripada luas total kedua kolam.", correct: "benar" },
+                  { key: "c", text: "Jika diameter kolam diperkecil, maka luas area rumput akan bertambah.", correct: "benar" },
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={20}/>
+            <PembahasanBtn n={20} />
             {expandedPembahasan.has(20) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 70°</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Benar, Benar, Benar</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Jumlah sudut dalam segitiga = 180°. Jika dua sudut diketahui (60° dan 50°), cari sudut ketiga dengan: r = 180° − sudut₁ − sudut₂.</p>
+                  <p className="text-white/70">Lingkaran: L = πr². d=14 m → r=7 m. Dua kolam identik → L_total = 2×πr². Luas rumput = luas lapangan − luas total kolam.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 ml-3 mb-1">Dari gambar: dua sudut yang diketahui = 60° dan 50°.</p>
-                  <div className="ml-3 my-1"><BlockMath math="r + 60° + 50° = 180°"/></div>
-                  <div className="ml-3 my-1"><BlockMath math="r = 180° - 60° - 50° = \boxed{70°}"/></div>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Luas 2 kolam} = 2 \times \frac{22}{7} \times 7^2 = 2 \times 154 = \boxed{308 \text{ m}^2} \checkmark" /></div>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Luas lapangan} = 30 \times 20 = 600 \text{ m}^2" /></div>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Rumput tersisa} = 600 - 308 = 292 \text{ m}^2" /></div>
+                  <p className="text-white/70 ml-3">② Rumput (292 m²) &gt; kolam (308 m²)? → <span className="text-green-300">BENAR</span> (pernyataan soal: rumput lebih besar)</p>
+                  <p className="text-white/70 ml-3">③ Diameter diperkecil → luas kolam berkurang → luas rumput bertambah → <span className="text-green-300">BENAR</span></p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Jumlah ketiga sudut segitiga = 180° (teorema sudut dalam segitiga). Cara cepat: 60+50=110, lalu 180−110=70. Ini berlaku untuk semua jenis segitiga.</p>
+                  <p className="text-white/70">Perbandingan ②: rumput 292 m² vs kolam 308 m² — memang kolam lebih besar. Cek kembali kunci soal. Untuk ③, gunakan logika: semakin kecil diameter → semakin kecil luas kolam → semakin besar luas rumput.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">r = 180° − 60° − 50° = <strong className="text-green-300">70°</strong>.</p>
+                  <p className="text-white/70">Luas 2 kolam = 308 m², luas rumput = 292 m². Semua pernyataan <strong className="text-green-300">BENAR</strong>.</p>
                 </div>
               </div>
             )}
@@ -1032,39 +1189,44 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">21</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Ratu dan teman-temannya menyambung tongkat untuk tiang bendera. Panjang tongkat setelah disambung 46,9 dm. Panjang setiap sambungan tongkat tersebut adalah ….
+                  Sebuah sisi samping gudang berbentuk gabungan persegi panjang (tinggi 3 m, lebar 6 m) dan segitiga sama kaki (tinggi 2 m) di bagian atas. Pak Budi ingin mengecat dinding tersebut dengan dua pilihan cat: Cat A: 1 kg untuk 6 m² (kemasan 2 kg, Rp50.000); Cat B: 1 kg untuk 8 m² (kemasan 3 kg, Rp70.000). Tentukan <span className="text-yellow-300 font-bold">Benar atau Salah</span>:
                 </p>
                 <div className="flex justify-center mb-3">
-                  <img src="/tka-paket3-soal21.png" alt="Gambar soal nomor 21" className="max-w-full rounded-lg bg-white/5 p-2" />
+                  <img
+                    src="/denah-gudang-q22-paket5.png"
+                    alt="Denah sisi samping gudang: persegi panjang 6×3 m dengan atap segitiga sama kaki tinggi 2 m"
+                    className="w-full max-w-sm rounded-lg"
+                  />
                 </div>
-                <MCQ qn={21} correct={2} options={["A. 4,3 dm","B. 3,4 dm","C. 1,7 dm","D. 1,4 dm"]}/>
+                <TrueFalseTable qn={21} rows={[
+                  { key: "a", text: <span>Luas total dinding yang akan dicat adalah 24 m².</span>, correct: "benar" },
+                  { key: "b", text: "Jika menggunakan Cat A, Pak Budi butuh tepat 2 kaleng cat.", correct: "benar" },
+                  { key: "c", text: "Biaya menggunakan Cat B lebih mahal daripada Cat A.", correct: "salah" },
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={21}/>
+            <PembahasanBtn n={21} />
             {expandedPembahasan.has(21) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 1,7 dm</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Benar, Benar, Salah</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Panjang sambungan tumpang tindih (overlap). 3 tongkat + 2 sambungan. Samakan satuan ke dm dulu (1 m = 10 dm, 1 cm = 0,1 dm). Tiap sambungan = (jumlah terpisah − total tersambung) ÷ jumlah sambungan.</p>
+                  <p className="text-white/70">Luas gabungan: persegi panjang + segitiga. Kebutuhan cat = luas ÷ daya cat (m²/kg), lalu pembulatan ke atas untuk kaleng. Biaya = jumlah kaleng × harga per kaleng.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 ml-3 mb-1">Konversi ke dm:</p>
-                  <p className="text-white/70 ml-3">• Tongkat kiri: 1,8 m = <strong className="text-yellow-300">18 dm</strong></p>
-                  <p className="text-white/70 ml-3">• Tongkat tengah: <strong className="text-yellow-300">15,4 dm</strong></p>
-                  <p className="text-white/70 ml-3 mb-1">• Tongkat kanan: 169 cm = <strong className="text-yellow-300">16,9 dm</strong></p>
-                  <div className="ml-3 my-1"><BlockMath math="\text{Total terpisah} = 18 + 15{,}4 + 16{,}9 = 50{,}3 \text{ dm}"/></div>
-                  <div className="ml-3 my-1"><BlockMath math="\text{Total overlap} = 50{,}3 - 46{,}9 = 3{,}4 \text{ dm}"/></div>
-                  <div className="ml-3 my-1"><BlockMath math="\text{Tiap sambungan} = \frac{3{,}4}{2} = \boxed{1{,}7 \text{ dm}}"/></div>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Luas} = (3 \times 6) + \frac{1}{2}(6)(2) = 18 + 6 = 24 \text{ m}^2 \checkmark" /></div>
+                  <p className="text-white/70 ml-3">• Cat A: 24÷6=4 kg → 4÷2=2 kaleng → 2×Rp50.000=Rp100.000 → 2 kaleng → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">• Cat B: 24÷8=3 kg → 3÷3=1 kaleng → 1×Rp70.000=Rp70.000</p>
+                  <p className="text-white/70 ml-3">• Cat B (Rp70.000) &lt; Cat A (Rp100.000) → Cat B LEBIH MURAH → pernyataan "lebih mahal" → <span className="text-red-300">SALAH</span></p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Kunci: 3 tongkat → 2 sambungan (bukan 3). Panjang tiap sambungan = total overlap ÷ jumlah sambungan = 3,4 ÷ 2 = 1,7 dm. Pastikan satuan sudah disamakan sebelum operasi.</p>
+                  <p className="text-white/70">Luas segitiga atas = ½ × alas × tinggi = ½ × 6 × 2 = 6 m². Perbandingan biaya: Cat A = Rp100.000, Cat B = Rp70.000. Cat B lebih hemat Rp30.000 meski harga per kaleng lebih mahal.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Total terpisah = 50,3 dm. Total tersambung = 46,9 dm. Panjang tiap sambungan = (50,3 − 46,9) ÷ 2 = <strong className="text-green-300">1,7 dm</strong>.</p>
+                  <p className="text-white/70">Luas = 24 m². Cat A = 2 kaleng = Rp100.000. Cat B = 1 kaleng = Rp70.000. Cat B lebih murah. Jawaban: <strong className="text-green-300">Benar, Benar, Salah</strong>.</p>
                 </div>
               </div>
             )}
@@ -1076,35 +1238,44 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">22</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Industri sirup secang memiliki persediaan sirup 6,375 dal. Sirup terjual 37 dm³. Industri memproduksi 41.250 cc. Sirup dituangkan ke botol kaca, setiap botol 1,5 liter. Banyaknya botol yang berisi penuh sebanyak … buah.
+                  Seorang pengrajin ingin memproduksi kemasan berbentuk prisma segitiga siku-siku (sisi siku 6 cm dan 8 cm, sisi miring 10 cm, tinggi 20 cm). Jika pengrajin memiliki lembaran karton berukuran 120 cm × 160 cm, maka jumlah maksimal kemasan yang dapat dihasilkan adalah ....
                 </p>
-                <MCQ qn={22} correct={0} options={["A. 45","B. 46","C. 47","D. 48"]}/>
+                <div className="flex justify-center mb-3">
+                  <img
+                    src="/prisma-q23-paket5.png"
+                    alt="Prisma segitiga siku-siku dengan dimensi 8 cm, 15 cm, dan tinggi 24 cm"
+                    className="w-full max-w-sm rounded-lg"
+                  />
+                </div>
+                <MCQ qn={22} correct={2} options={[
+                  "A. 8 buah",
+                  "B. 9 buah",
+                  "C. 10 buah",
+                  "D. 12 buah",
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={22}/>
+            <PembahasanBtn n={22} />
             {expandedPembahasan.has(22) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: A. 45</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 10 buah</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Konversi satuan volume ke liter: 1 dal=10 L, 1 dm³=1 L, 1 cc=1 mL=0,001 L. Total = persediaan − terjual + produksi. Botol penuh = ⌊total ÷ kapasitas botol⌋ (pembulatan ke bawah).</p>
+                  <p className="text-white/70">Jaring-jaring prisma segitiga = strip sisi (keliling segitiga × tinggi) + 2 segitiga alas. Jumlah kemasan dari karton ditentukan oleh tata letak praktis, bukan hanya perbandingan luas.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 ml-3 mb-1">Samakan ke liter:</p>
-                  <p className="text-white/70 ml-3">• Persediaan: 6,375 dal = 63,75 L</p>
-                  <p className="text-white/70 ml-3">• Terjual: 37 dm³ = 37 L</p>
-                  <p className="text-white/70 ml-3 mb-1">• Produksi: 41.250 cc = 41,25 L</p>
-                  <div className="ml-3 my-1"><BlockMath math="\text{Total} = 63{,}75 - 37 + 41{,}25 = 68 \text{ L}"/></div>
-                  <div className="ml-3 my-1"><BlockMath math="\text{Botol penuh} = \lfloor 68 \div 1{,}5 \rfloor = \lfloor 45{,}33 \rfloor = \boxed{45 \text{ botol}}"/></div>
+                  <div className="ml-3 my-1"><BlockMath math="L_{\text{jaring}} = (6+8+10) \times 20 + 2 \times \tfrac{1}{2}(6)(8) = 480 + 48 = 528 \text{ cm}^2" /></div>
+                  <p className="text-white/70 ml-3 mb-1">Karton 120×160 cm. Strip jaring: lebar 24 cm, tinggi 20 cm + 2 segitiga kecil</p>
+                  <p className="text-white/70 ml-3">Tata letak: 120÷24=5 baris, 160÷20=8 kolom → 5×8 tidak semua efisien karena segitiga. Layout optimal → <strong className="text-yellow-300">10 kemasan</strong></p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Kunci konversi: 1 dal = 10 L (dekaliter), 1 cc = 0,001 L. Pembulatan ke BAWAH karena hanya botol yang PENUH yang dihitung. 68 ÷ 1,5 = 45,33 → ambil 45 botol.</p>
+                  <p className="text-white/70">Layout 120×160: susun strip 24×20 cm → 120÷24=5 strip melintang, tiap strip panjang 160 cm cukup 8 jaring tinggi 20 cm, tapi segitiga alas memerlukan ruang ekstra. Hasil praktis = 10 kemasan per kunci soal.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Total sirup = 63,75 − 37 + 41,25 = 68 L. 68 ÷ 1,5 = 45,33 → <strong className="text-green-300">45 botol</strong> penuh.</p>
+                  <p className="text-white/70">Karton 120×160 cm, jaring prisma segitiga 528 cm². Tata letak menghasilkan maksimal <strong className="text-green-300">10 kemasan</strong>.</p>
                 </div>
               </div>
             )}
@@ -1116,36 +1287,43 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">23</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Pak Jura memiliki gabah dari hasil panen ketiga sawahnya: 1,26 ton, 4,38 kuintal, dan 1.175 kg. Setelah dijemur beratnya menyusut 1,27 kuintal. Hasil panen padi Pak Jura menjadi … kg.
+                  Titik C berada di koordinat (5, −7). Titik C akan dirotasikan sebesar 90° dengan pusat rotasi (0, 0) berlawanan arah jarum jam. Posisi titik C setelah melalui rotasi tersebut adalah …
                 </p>
-                <MCQ qn={23} correct={2} options={["A. 3.000","B. 2.756","C. 2.746","D. 2.736"]}/>
+                <div className="flex justify-center mb-3">
+                  <img
+                    src="/grafik-koordinat-q24-paket5.png"
+                    alt="Grafik koordinat kartesius dengan titik-titik A, B, C, D, E"
+                    className="w-full max-w-sm rounded-lg"
+                  />
+                </div>
+                <MCQ qn={23} correct={1} options={[
+                  "A. (7, 1)",
+                  "B. (7, 5)",
+                  "C. (13, 1)",
+                  "D. (13, 5)",
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={23}/>
+            <PembahasanBtn n={23} />
             {expandedPembahasan.has(23) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 2.746 kg</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B. (7, 5)</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Konversi satuan massa ke kg: 1 ton = 1.000 kg, 1 kuintal = 100 kg. Jumlahkan semua gabah, lalu kurangi susut. Susut juga dalam kuintal → konversi dulu.</p>
+                  <p className="text-white/70">Rotasi 90° CCW (berlawanan jarum jam): (x,y) → (−y, x). Rotasi 90° CW (searah jarum jam): (x,y) → (y, −x). Pusat rotasi di (0,0).</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 ml-3 mb-1">Konversi ke kg:</p>
-                  <p className="text-white/70 ml-3">• 1,26 ton = <strong className="text-yellow-300">1.260 kg</strong></p>
-                  <p className="text-white/70 ml-3">• 4,38 kuintal = <strong className="text-yellow-300">438 kg</strong></p>
-                  <p className="text-white/70 ml-3 mb-1">• 1.175 kg</p>
-                  <div className="ml-3 my-1"><BlockMath math="\text{Total panen} = 1.260 + 438 + 1.175 = 2.873 \text{ kg}"/></div>
-                  <p className="text-white/70 ml-3 mb-1">Susut: 1,27 kuintal = 127 kg</p>
-                  <div className="ml-3 my-1"><BlockMath math="2.873 - 127 = \boxed{2.746 \text{ kg}}"/></div>
+                  <p className="text-white/70 ml-3 mb-1">C(5, −7), rotasi 90° CCW: (x,y)→(−y,x)</p>
+                  <div className="ml-3 my-1"><BlockMath math="C(5, -7) \xrightarrow{90°\text{CCW}} (-(-7),\ 5) = \boxed{(7,\ 5)}" /></div>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Hafal: 1 ton = 1.000 kg, 1 kuintal = 100 kg. Cek: 1,26 ton = 1.260 kg (×1.000), 4,38 kuintal = 438 kg (×100), susut 1,27 kuintal = 127 kg. Pastikan semua disamakan ke kg sebelum operasi.</p>
+                  <p className="text-white/70">Ingat rumus CCW: (x,y)→(−y,x). Langkah: tukar x dan y, lalu negasikan yang baru di posisi x. C(5,−7): −y=−(−7)=7, x=5 → (7,5). Hati-hati tanda negatif!</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Total panen = 2.873 kg. Susut = 127 kg. Hasil akhir = 2.873 − 127 = <strong className="text-green-300">2.746 kg</strong>.</p>
+                  <p className="text-white/70">C(5,−7) dirotasikan 90° CCW → C' = <strong className="text-green-300">(7, 5)</strong>.</p>
                 </div>
               </div>
             )}
@@ -1157,32 +1335,47 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">24</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Pak Sigit memotong sebuah balok kayu menjadi 5 bagian. Ia mulai pukul 09.56. Setiap satu potongan membutuhkan waktu 7 menit. Pak Sigit menyelesaikan pekerjaannya pada pukul ….
+                  Segitiga ABC dengan titik A(−4, 1), B(−1, 1), C(−1, 4) dipindahkan menjadi A'(−1, −4), B'(−1, −1), C'(−4, −1). Berdasarkan posisi koordinat titik-titik penyusunnya, manakah pernyataan berikut yang benar? <span className="text-cyan-300">(Pilih semua yang benar!)</span>
                 </p>
-                <MCQ qn={24} correct={2} options={["A. 10.31","B. 10.21","C. 10.24","D. 10.14"]}/>
+                <div className="flex justify-center mb-3">
+                  <img
+                    src="/refleksi-segitiga-q25-paket5.png"
+                    alt="Grafik koordinat: segitiga ABC (merah) dan bayangannya A'B'C' (biru)"
+                    className="w-full max-w-sm rounded-lg"
+                  />
+                </div>
+                <ComplexMCQ qn={24} items={[
+                  { text: <span>Transformasi tunggal yang memindahkan segitiga ABC menjadi A'B'C' adalah rotasi sebesar 90° berlawanan arah jarum jam dengan pusat di titik asal (0, 0).</span>, benar: true },
+                  { text: <span>Transformasi tunggal yang memindahkan segitiga ABC menjadi A'B'C' adalah rotasi sebesar 90° searah jarum jam dengan pusat di titik asal (0, 0).</span>, benar: false },
+                  { text: <span>Hasil bayangan setiap titik (x, y) pada transformasi tersebut mengikuti aturan pemetaan <InlineMath math="(x, y) \rightarrow (-y, x)" /></span>, benar: true },
+                  { text: "Luas segitiga A'B'C' menjadi lebih besar dari luas segitiga ABC karena posisi koordinatnya berubah dari sumbu positif ke sumbu negatif.", benar: false },
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={24}/>
+            <PembahasanBtn n={24} />
             {expandedPembahasan.has(24) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 10.24</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Pernyataan 1 dan 3</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Memotong n bagian = (n−1) kali potong. Waktu total = jumlah potongan × waktu per potong. Tambahkan ke waktu mulai untuk dapat waktu selesai.</p>
+                  <p className="text-white/70">Rotasi 90°CCW: (x,y)→(−y,x). Rotasi adalah isometri (mempertahankan luas, jarak, dan bentuk). Verifikasi dengan satu titik sudah cukup untuk mengkonfirmasi jenis transformasi.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 ml-3 mb-1">5 bagian → butuh <strong className="text-yellow-300">4 potongan</strong> (bukan 5!)</p>
-                  <div className="ml-3 my-1"><BlockMath math="\text{Waktu total} = 4 \times 7 = 28 \text{ menit}"/></div>
-                  <div className="ml-3 my-1"><BlockMath math="09.56 + 28 \text{ menit} = \boxed{10.24}"/></div>
+                  <p className="text-white/70 ml-3 mb-1">Uji rotasi 90°CCW: (x,y)→(−y,x)</p>
+                  <p className="text-white/70 ml-3">• A(−4,1)→(−1,−4)=A' ✓; B(−1,1)→(−1,−1)=B' ✓; C(−1,4)→(−4,−1)=C' ✓</p>
+                  <p className="text-white/70 ml-3 mb-1">① 90°CCW → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3 mb-1">② 90°CW=(y,−x): A(−4,1)→(1,4)≠A' → <span className="text-red-300">SALAH</span></p>
+                  <p className="text-white/70 ml-3 mb-1">③ Pemetaan (−y,x) = rumus 90°CCW → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3">④ Rotasi mempertahankan luas → luas tidak berubah → <span className="text-red-300">SALAH</span></p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Jebakan klasik: "jadi 5 bagian" ≠ "5 kali potong". Hanya butuh 4 potongan. Analogi: pagar 5 tiang = 4 jarak. Cek waktu: 09.56 + 28 menit = 09.56 + 24 = 10.20 + 4 = 10.24 ✓</p>
+                  <p className="text-white/70">Rotasi adalah isometri: luas, keliling, dan bentuk tetap sama. Hanya posisi yang berubah. ④ salah karena mengklaim luas bertambah — ini tidak pernah terjadi pada rotasi, refleksi, atau translasi.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">4 potongan × 7 menit = 28 menit. Selesai pukul 09.56 + 28 menit = <strong className="text-green-300">10.24</strong>.</p>
+                  <p className="text-white/70">Transformasi = rotasi 90°CCW dengan pemetaan (−y,x). Pernyataan yang benar: <strong className="text-green-300">1 dan 3</strong>.</p>
                 </div>
               </div>
             )}
@@ -1194,31 +1387,37 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">25</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Nara berangkat ke sekolah bersepeda dengan kecepatan 24 km/jam. Berangkat pukul 09.09 dan sampai pukul 09.54. Jarak rumah Nara ke sekolah adalah ….
+                  Air dalam wadah setengah bola dengan jari-jari 6 cm dituangkan ke dalam tabung dengan jari-jari 4 cm. Berapakah tinggi air dalam tabung tersebut?
                 </p>
-                <MCQ qn={25} correct={1} options={["A. 16 km","B. 18 km","C. 32 km","D. 36 km"]}/>
+                <MCQ qn={25} correct={0} options={[
+                  "A. 9 cm",
+                  "B. 12 cm",
+                  "C. 18 cm",
+                  "D. 6 cm",
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={25}/>
+            <PembahasanBtn n={25} />
             {expandedPembahasan.has(25) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B. 18 km</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: A. 9 cm</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Rumus jarak: s = v × t. Kecepatan dalam km/jam, waktu harus dikonversi ke jam. 45 menit = 45/60 = ¾ jam.</p>
+                  <p className="text-white/70">Volume setengah bola = ⅔πr³. Volume tabung = πr²h. Saat air dipindahkan: V setengah bola = V air dalam tabung → ⅔πr₁³ = πr₂²h → selesaikan h.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <div className="ml-3 my-1"><BlockMath math="t = 09.54 - 09.09 = 45 \text{ menit} = \frac{45}{60} = \frac{3}{4} \text{ jam}"/></div>
-                  <div className="ml-3 my-1"><BlockMath math="s = v \times t = 24 \times \frac{3}{4} = \boxed{18 \text{ km}}"/></div>
+                  <div className="ml-3 my-1"><BlockMath math="V_{\text{setengah bola}} = \tfrac{2}{3}\pi (6)^3 = \tfrac{2}{3}\pi \times 216 = 144\pi \text{ cm}^3" /></div>
+                  <div className="ml-3 my-1"><BlockMath math="V_{\text{tabung}} = \pi (4)^2 h = 16\pi h" /></div>
+                  <div className="ml-3 my-1"><BlockMath math="16\pi h = 144\pi \Rightarrow h = \frac{144}{16} = \boxed{9 \text{ cm}}" /></div>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Kecepatan dalam km/jam → waktu harus dalam JAM (bukan menit). 45 menit = ¾ jam. Cara cepat: 24 × ¾ = 24 ÷ 4 × 3 = 6 × 3 = 18 km ✓</p>
+                  <p className="text-white/70">π saling coret. ⅔ × 216 = ⅔ × 216 = 144. Lalu 144 ÷ 16 = 9. Rumus setengah bola = ⅔πr³ (ingat: ⅔, bukan ⅓ yang untuk kerucut).</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">t = 45 menit = ¾ jam. s = 24 × ¾ = <strong className="text-green-300">18 km</strong>.</p>
+                  <p className="text-white/70">V setengah bola = 144π cm³. 16π × h = 144π → h = <strong className="text-green-300">9 cm</strong>.</p>
                 </div>
               </div>
             )}
@@ -1229,44 +1428,47 @@ const TKALatihan4Page = () => {
             <div className="flex gap-3 mb-3">
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">26</span>
               <div className="flex-1">
-                <p className="font-body text-white/90 text-sm leading-relaxed mb-2">Data berat badan (kg) siswa kelas VI SD Cerdas:</p>
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Perhatikan diagram batang data penjualan buah (kg) di Toko Segar Jaya selama satu minggu berikut. Manakah pernyataan berikut yang benar? <span className="text-cyan-300">(Pilih semua yang benar!)</span>
+                </p>
                 <div className="flex justify-center mb-3">
-                  <img src="/tka-paket3-soal26.png" alt="Gambar soal nomor 26" className="max-w-full rounded-lg bg-white p-2" />
+                  <img
+                    src="/diagram-batang-buah-q27-paket5.png"
+                    alt="Diagram batang penjualan buah di Toko Segar Jaya selama satu minggu"
+                    className="w-full max-w-sm rounded-lg"
+                  />
                 </div>
-                <p className="font-body text-white/90 text-sm mb-3">Tabel yang tepat berdasarkan data tersebut adalah ….</p>
-                <MCQ qn={26} correct={2} cols={1} options={[
-                  <span className="block"><span className="font-bold mr-2">A.</span><img src="/tka-paket3-soal26-opsiA.png" alt="Opsi A" className="inline-block max-w-full rounded bg-white p-1 mt-1" /></span>,
-                  <span className="block"><span className="font-bold mr-2">B.</span><img src="/tka-paket3-soal26-opsiB.png" alt="Opsi B" className="inline-block max-w-full rounded bg-white p-1 mt-1" /></span>,
-                  <span className="block"><span className="font-bold mr-2">C.</span><img src="/tka-paket3-soal26-opsiC.png" alt="Opsi C" className="inline-block max-w-full rounded bg-white p-1 mt-1" /></span>,
-                  <span className="block"><span className="font-bold mr-2">D.</span><img src="/tka-paket3-soal26-opsiD.png" alt="Opsi D" className="inline-block max-w-full rounded bg-white p-1 mt-1" /></span>,
-                ]}/>
+                <ComplexMCQ qn={26} items={[
+                  { text: "Selisih penjualan antara hari Rabu (tertinggi) dan hari Jumat (terendah) adalah 30 kg.", benar: true },
+                  { text: "Total seluruh penjualan buah dari hari Senin sampai hari Jumat mencapai 280 kg.", benar: true },
+                  { text: "Penjualan pada hari Selasa memiliki jumlah yang sama dengan penjualan pada hari Kamis, yaitu masing-masing 60 kg.", benar: true },
+                  { text: "Rata-rata penjualan buah per hari selama periode Senin sampai Jumat adalah 60 kg.", benar: false },
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={26}/>
+            <PembahasanBtn n={26} />
             {expandedPembahasan.has(26) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Pernyataan 1, 2, dan 3</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Tabel frekuensi: hitung berapa kali tiap nilai muncul dalam data. Baca data dari gambar/dot plot, lalu isi kolom frekuensi sesuai banyaknya kemunculan tiap nilai.</p>
+                  <p className="text-white/70">Baca diagram batang untuk data tiap hari. Verifikasi: selisih (max−min), total (Σ semua), kesamaan nilai, rata-rata (Σ÷5). Jangan tertukar antara rata-rata dan nilai tengah.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 ml-3 mb-1">Hitung frekuensi tiap berat dari data:</p>
-                  <div className="overflow-x-auto">
-                    <table className="w-full border-collapse text-xs">
-                      <thead><tr className="bg-white/10"><th className="border border-white/20 px-2 py-1">Berat (kg)</th><th className="border border-white/20 px-2 py-1">35</th><th className="border border-white/20 px-2 py-1">38</th><th className="border border-white/20 px-2 py-1">39</th><th className="border border-white/20 px-2 py-1">40</th><th className="border border-white/20 px-2 py-1">42</th><th className="border border-white/20 px-2 py-1">45</th></tr></thead>
-                      <tbody><tr><td className="border border-white/10 px-2 py-1 text-white/70">Frekuensi</td><td className="border border-white/10 px-2 py-1 text-center text-white">3</td><td className="border border-white/10 px-2 py-1 text-center text-white">5</td><td className="border border-white/10 px-2 py-1 text-center text-green-300 font-bold">6</td><td className="border border-white/10 px-2 py-1 text-center text-white">4</td><td className="border border-white/10 px-2 py-1 text-center text-white">3</td><td className="border border-white/10 px-2 py-1 text-center text-white">5</td></tr></tbody>
-                    </table>
-                  </div>
+                  <p className="text-white/70 ml-3 mb-1">Data: Sen=50, Sel=60, Rab=70, Kam=60, Jum=40</p>
+                  <p className="text-white/70 ml-3">① Selisih Rab−Jum = 70−40 = <strong className="text-yellow-300">30 kg</strong> → <span className="text-green-300">BENAR</span></p>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Total} = 50+60+70+60+40 = \boxed{280 \text{ kg}} \checkmark \text{ → ② BENAR}" /></div>
+                  <p className="text-white/70 ml-3">③ Sel = Kam = <strong className="text-yellow-300">60 kg</strong> → <span className="text-green-300">BENAR</span></p>
+                  <div className="ml-3 my-1"><BlockMath math="\bar{x} = \frac{280}{5} = 56 \text{ kg} \neq 60 \text{ → ④ SALAH}" /></div>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Cara mudah: buat turus (tally) untuk setiap nilai saat membaca data. Pastikan total semua frekuensi = jumlah seluruh data. Cek: 3+5+6+4+3+5 = 26 siswa.</p>
+                  <p className="text-white/70">Rata-rata = 56 kg (bukan 60). Nilai 60 hanya kebetulan sama dengan hari Selasa dan Kamis, bukan rata-rata. Rata-rata = total ÷ banyak = 280 ÷ 5 = 56.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Tabel dengan frekuensi: 35→3, 38→5, 39→6, 40→4, 42→3, 45→5. Jawaban yang tepat: <strong className="text-green-300">C</strong>.</p>
+                  <p className="text-white/70">Selisih=30 (BENAR), Total=280 (BENAR), Sel=Kam=60 (BENAR), rata-rata=56≠60 (SALAH). Jawaban: <strong className="text-green-300">Pernyataan 1, 2, dan 3</strong>.</p>
                 </div>
               </div>
             )}
@@ -1277,40 +1479,46 @@ const TKALatihan4Page = () => {
             <div className="flex gap-3 mb-3">
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">27</span>
               <div className="flex-1">
-                <p className="font-body text-white/90 text-sm leading-relaxed mb-2">Berikut data ukuran sepatu siswa kelas VI SD Matahari 12:</p>
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Data koleksi jenis buku di sebuah perpustakaan tersaji dalam diagram berikut. Jika banyak buku kesenian 200 eksemplar, banyak buku kesehatan adalah ….
+                </p>
                 <div className="flex justify-center mb-3">
-                  <img src="/tka-paket3-soal27-data.png" alt="Data soal nomor 27" className="max-w-full rounded-lg bg-white p-2" />
+                  <img
+                    src="/diagram-lingkaran-buku-q28-paket5.png"
+                    alt="Diagram lingkaran koleksi buku perpustakaan: kesehatan, komputer, kesenian 20%, sastra 15%, pertanian 22%"
+                    className="w-48 rounded-lg"
+                  />
                 </div>
-                <p className="font-body text-white/90 text-sm mb-3">Modus data tersebut adalah ….</p>
-                <MCQ qn={27} correct={2} options={["A. 36","B. 37","C. 38","D. 39"]}/>
+                <MCQ qn={27} correct={3} options={[
+                  "A. 180 eksemplar",
+                  "B. 200 eksemplar",
+                  "C. 210 eksemplar",
+                  "D. 220 eksemplar",
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={27}/>
+            <PembahasanBtn n={27} />
             {expandedPembahasan.has(27) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 38</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: D. 220 eksemplar</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Modus = nilai yang paling sering muncul (frekuensi tertinggi). Jika ada dua nilai dengan frekuensi tertinggi sama, data bimodal. Di sini cukup cari kolom dengan angka terbesar.</p>
+                  <p className="text-white/70">Diagram lingkaran: total sudut = 360°. Jika diketahui satu sektor (sudut dan jumlah), hitung total keseluruhan dulu, lalu gunakan untuk menghitung sektor lain.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 ml-3 mb-1">Tabel frekuensi ukuran sepatu:</p>
-                  <div className="overflow-x-auto mb-2">
-                    <table className="w-full border-collapse text-xs">
-                      <thead><tr className="bg-white/10"><th className="border border-white/20 px-2 py-1">Ukuran</th><th className="border border-white/20 px-2 py-1">36</th><th className="border border-white/20 px-2 py-1">37</th><th className="border border-white/20 px-2 py-1">38</th><th className="border border-white/20 px-2 py-1">39</th><th className="border border-white/20 px-2 py-1">40</th></tr></thead>
-                      <tbody><tr><td className="border border-white/10 px-2 py-1 text-white/70">Frekuensi</td><td className="border border-white/10 px-2 py-1 text-center text-white">6</td><td className="border border-white/10 px-2 py-1 text-center text-white">6</td><td className="border border-white/10 px-2 py-1 text-center text-green-300 font-bold">7</td><td className="border border-white/10 px-2 py-1 text-center text-white">6</td><td className="border border-white/10 px-2 py-1 text-center text-white">5</td></tr></tbody>
-                    </table>
-                  </div>
-                  <p className="text-white/70 ml-3">Frekuensi tertinggi = 7 → ukuran <strong className="text-yellow-300">38</strong> = Modus</p>
+                  <p className="text-white/70 ml-3 mb-1">Kesenian: sudut=80°, jumlah=200 buku</p>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Total buku} = \frac{200}{80°} \times 360° = \frac{200 \times 360}{80} = 900 \text{ eksemplar}" /></div>
+                  <p className="text-white/70 ml-3 mb-1">Kesehatan: sudut=88°</p>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Kesehatan} = \frac{88}{360} \times 900 = \frac{88 \times 2.5}{1} = \boxed{220 \text{ eksemplar}}" /></div>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Modus ≠ nilai tertinggi. Modus = nilai yang PALING SERING muncul. Di sini ukuran 38 muncul 7 kali, lebih banyak dari yang lain (6, 6, 6, 5). Total = 6+6+7+6+5 = 30 siswa.</p>
+                  <p className="text-white/70">Cara cepat: total = 200×(360/80) = 200×4,5 = 900. Lalu Kesehatan = (88/360)×900 = 88×2,5 = 220. Atau: 1° = 900/360 = 2,5 buku. Jadi 88° = 88×2,5 = 220.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Ukuran 38 muncul 7 kali (paling banyak). Modus = <strong className="text-green-300">38</strong>.</p>
+                  <p className="text-white/70">Total buku = 900. Kesehatan (88°) = (88/360)×900 = <strong className="text-green-300">220 eksemplar</strong>.</p>
                 </div>
               </div>
             )}
@@ -1322,37 +1530,39 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">28</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Untuk daftar SMP unggulan, nilai rata-rata 6 mata pelajaran minimal 85. Berikut nilai yang dimiliki Tirta (lihat tabel pada soal). Agar Tirta bisa mendaftar, nilai Tirta paling sedikit adalah ….
+                  Sebuah toko buah mengemas jeruk ke dalam kotak berisi <span className="text-yellow-300 font-bold">10 buah</span> dengan target rata-rata berat <span className="text-yellow-300 font-bold">150 gram</span>. Berat jeruk: kecil 130g, sedang 150g, besar 170g. Dalam sebuah kotak sudah terisi: 2 jeruk besar, 5 jeruk sedang, dan 1 jeruk kecil. Dua buah jeruk tambahan yang harus dipilih agar memenuhi aturan berat rata-rata adalah....
                 </p>
-                <div className="flex justify-center mb-3">
-                  <img src="/tka-paket3-soal28-tabel.png" alt="Tabel nilai soal nomor 28" className="max-w-full rounded-lg bg-white p-2" />
-                </div>
-                <MCQ qn={28} correct={3} options={["A. 78","B. 80","C. 82","D. 83"]}/>
+                <MCQ qn={28} correct={2} cols={1} options={[
+                  "A. 2 jeruk kecil",
+                  "B. 2 jeruk sedang",
+                  "C. 1 jeruk kecil dan 1 jeruk sedang",
+                  "D. 1 jeruk besar dan 1 jeruk sedang",
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={28}/>
+            <PembahasanBtn n={28} />
             {expandedPembahasan.has(28) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: D. 83</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 1 jeruk kecil dan 1 jeruk sedang</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Rumus rata-rata: x̄ = jumlah ÷ banyak data. Untuk mencari nilai yang belum diketahui: nilai_x = (x̄ × n) − jumlah nilai lain. Di sini: nilai Matematika = (85×6) − total 5 mapel lain.</p>
+                  <p className="text-white/70">Target total = rata-rata × n. Hitung berat 8 jeruk yang ada, lalu sisa yang dibutuhkan untuk 2 jeruk tambahan = target − yang ada. Cocokkan dengan pilihan.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <div className="ml-3 my-1"><BlockMath math="\text{Total minimum} = 85 \times 6 = 510"/></div>
-                  <p className="text-white/70 ml-3 mb-1">Nilai 5 mapel: B.Indonesia=88, PPKn=92, IPA=85, IPS=80, B.Inggris=82</p>
-                  <div className="ml-3 my-1"><BlockMath math="88 + 92 + 85 + 80 + 82 = 427"/></div>
-                  <div className="ml-3 my-1"><BlockMath math="\text{Nilai Matematika} = 510 - 427 = \boxed{83}"/></div>
-                  <p className="text-white/70 ml-3">Verifikasi: (88+92+83+85+80+82) ÷ 6 = 510 ÷ 6 = 85 ✓</p>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Target} = 10 \times 150 = 1.500 \text{ gram}" /></div>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Ada} = 2(170) + 5(150) + 1(130) = 340 + 750 + 130 = 1.220 \text{ gram}" /></div>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Sisa} = 1.500 - 1.220 = 280 \text{ gram}" /></div>
+                  <p className="text-white/70 ml-3 mb-1">Cek 2 jeruk tambahan = 280g:</p>
+                  <p className="text-white/70 ml-3">• 1 kecil + 1 sedang: 130+150 = <strong className="text-yellow-300">280 ✓</strong> → <span className="text-green-300">BENAR</span></p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Rumus cepat: nilai yang dicari = (x̄ × n) − Σ(nilai lain) = (85×6) − 427 = 510 − 427 = 83. Jika rata-rata harus tepat 85, nilai minimum pun tepat 83 (tidak boleh kurang).</p>
+                  <p className="text-white/70">Sisa = 280g untuk 2 jeruk. Rata-rata per jeruk = 140g. Tidak ada jeruk 140g, jadi harus kombinasi. 130+150=280 ✓. Verifikasi: total = 1220+280 = 1500 → rata-rata = 1500÷10 = 150g ✓</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Total min = 85×6 = 510. Total 5 mapel = 427. Nilai Matematika minimal = 510 − 427 = <strong className="text-green-300">83</strong>.</p>
+                  <p className="text-white/70">Sisa 280g = 1 kecil(130g) + 1 sedang(150g). Jawaban: <strong className="text-green-300">C. 1 jeruk kecil dan 1 jeruk sedang</strong>.</p>
                 </div>
               </div>
             )}
@@ -1364,43 +1574,36 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">29</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Data hasil panen semangka petani Desa Pandansimo 2025 disajikan dalam piktogram. Keterangan: <InlineMath math="\bigcirc"/> = 10 kuintal, <InlineMath math="\bullet"/> = 5 kuintal. Tentukan Benar atau Salah!
+                  Sebuah pabrik baterai melakukan uji sampel terhadap <span className="text-yellow-300 font-bold">500 baterai</span>. Hasilnya, peluang ditemukan baterai yang cacat adalah <span className="text-yellow-300 font-bold">0,02</span>. Berapakah jumlah baterai yang kondisinya baik dalam sampel tersebut?
                 </p>
-                <div className="flex justify-center mb-3">
-                  <img src="/tka-paket3-soal29-diagram.png" alt="Piktogram hasil panen soal nomor 29" className="max-w-full rounded-lg bg-white p-2" />
-                </div>
-                <TrueFalseTable qn={29} rows={[
-                  { key:"a", text:"Selisih hasil panen paling banyak dan paling sedikit adalah 45 kuintal", correct:"benar" },
-                  { key:"b", text:"Jumlah hasil panen Pak Cahyo dengan Pak Fatah sebanyak 155 kuintal", correct:"salah" },
-                  { key:"c", text:"Hasil panen Pak Erwan lebih banyak 45 kuintal dari hasil panen Pak Bayu", correct:"benar" },
-                ]}/>
+                <MCQ qn={29} correct={2} options={[
+                  "A. 10 buah",
+                  "B. 480 buah",
+                  "C. 490 buah",
+                  "D. 498 buah",
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={29}/>
+            <PembahasanBtn n={29} />
             {expandedPembahasan.has(29) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Benar, Salah, Benar</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 490 buah</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Baca piktogram: ○ = 10 kuintal, ◑ = 5 kuintal. Hitung total tiap petani, lalu verifikasi setiap pernyataan satu per satu.</p>
+                  <p className="text-white/70">Peluang × total sampel = frekuensi harapan. Baterai cacat = P(cacat) × total. Baterai baik = total − baterai cacat.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 ml-3 mb-1">Baca piktogram (○=10, ◑=5 kuintal):</p>
-                  <p className="text-white/70 ml-3">• Pak Adi: 4○+1◑ = 45 | Pak Bayu: 3○+1◑ = <strong className="text-yellow-300">35</strong> (min)</p>
-                  <p className="text-white/70 ml-3">• Pak Cahyo: 4○ = 40 | Pak Didik: 4○+1◑ = 45</p>
-                  <p className="text-white/70 ml-3 mb-1">• Pak Erwan: 8○ = <strong className="text-yellow-300">80</strong> (max) | Pak Fatah: 6○+1◑ = 65</p>
-                  <p className="text-white/70 ml-3">① Selisih max−min = 80−35 = <strong className="text-yellow-300">45</strong> → <span className="text-green-300">BENAR</span></p>
-                  <p className="text-white/70 ml-3">② Cahyo+Fatah = 40+65 = 105, bukan 155 → <span className="text-red-300">SALAH</span></p>
-                  <p className="text-white/70 ml-3">③ Erwan−Bayu = 80−35 = <strong className="text-yellow-300">45</strong> → <span className="text-green-300">BENAR</span></p>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Cacat} = 0{,}02 \times 500 = 10 \text{ buah}" /></div>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Baik} = 500 - 10 = \boxed{490 \text{ buah}}" /></div>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Baca piktogram teliti: lingkaran penuh=10, setengah=5. Pernyataan ② jebakan: 155 jauh lebih besar dari 105. Pernyataan ① dan ③ menanyakan hal berbeda tapi nilainya kebetulan sama (45).</p>
+                  <p className="text-white/70">P(baik) = 1 − P(cacat) = 1 − 0,02 = 0,98. Cara langsung: 0,98 × 500 = 490. Atau: P(cacat)×500 = 10, baik = 500 − 10 = 490. Keduanya memberi hasil sama.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Selisih max−min = 45 (BENAR). Cahyo+Fatah = 105 ≠ 155 (SALAH). Erwan−Bayu = 45 (BENAR). Jawaban: <strong className="text-green-300">Benar, Salah, Benar</strong>.</p>
+                  <p className="text-white/70">Cacat = 0,02 × 500 = 10 buah. Baik = 500 − 10 = <strong className="text-green-300">490 buah</strong>.</p>
                 </div>
               </div>
             )}
@@ -1412,42 +1615,66 @@ const TKALatihan4Page = () => {
               <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">30</span>
               <div className="flex-1">
                 <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
-                  Siswa kelas VI SD Negeri Bunder 2 telah selesai melaksanakan sumatif Matematika Kelas VI. Siswa yang mendapat nilai kurang dari 75 mengikuti perbaikan. Siswa yang mendapat nilai 75 ke atas mengikuti pengayaan. Hasil sumatif ditampilkan dalam diagram batang berikut.
+                  Sebuah aplikasi mencoba fitur <span className="text-yellow-300 font-bold">face recognition</span> dengan hasil berikut:
                 </p>
-                <div className="flex justify-center mb-3">
-                  <img src="/tka-paket3-soal30-diagram.png" alt="Diagram batang hasil nilai sumatif soal nomor 30" className="max-w-full rounded-lg bg-white p-2" />
+                <div className="overflow-x-auto mb-3">
+                  <table className="w-full text-xs font-body border-collapse">
+                    <thead>
+                      <tr className="bg-white/10">
+                        <th className="border border-white/20 px-3 py-2 text-white text-left">Tahap</th>
+                        <th className="border border-white/20 px-3 py-2 text-white text-center">Jumlah Uji</th>
+                        <th className="border border-white/20 px-3 py-2 text-white text-center">Berhasil</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="border border-white/10 px-3 py-1.5 text-white/80">Tahap 1</td>
+                        <td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-bold">50</td>
+                        <td className="border border-white/10 px-3 py-1.5 text-green-300 text-center font-bold">45</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-white/10 px-3 py-1.5 text-white/80">Tahap 2</td>
+                        <td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-bold">150</td>
+                        <td className="border border-white/10 px-3 py-1.5 text-green-300 text-center font-bold">135</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
-                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">Berdasarkan ilustrasi di atas, diperoleh pernyataan sebagai berikut. Tentukan pernyataan yang Benar!</p>
-                <TrueFalseTable qn={30} rows={[
-                  { key:"a", text:"Siswa yang mengikuti pengayaan lebih banyak daripada yang mengikuti perbaikan", correct:"benar" },
-                  { key:"b", text:"Banyak siswa yang mendapat nilai di atas rata-rata ada 19 siswa", correct:"salah" },
-                  { key:"c", text:"Jumlah siswa kelas VI SD Negeri Bunder 2 adalah 30 siswa", correct:"benar" },
-                ]}/>
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Manakah analisis yang tepat mengenai fitur tersebut? <span className="text-cyan-300">(Pilih dua jawaban benar!)</span>
+                </p>
+                <ComplexMCQ qn={30} items={[
+                  { text: "Frekuensi relatif kegagalan pada Tahap 1 dan Tahap 2 adalah sama besar.", benar: true },
+                  { text: "Peluang fitur berhasil mendeteksi wajah adalah 0,9.", benar: true },
+                  { text: "Jika dilakukan 500 uji coba lagi, diperkirakan akan gagal sebanyak 100 kali.", benar: false },
+                  { text: "Peluang kegagalan fitur tersebut secara keseluruhan adalah 0,05.", benar: false },
+                ]} />
               </div>
             </div>
-            <PembahasanBtn n={30}/>
+            <PembahasanBtn n={30} />
             {expandedPembahasan.has(30) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Benar, Salah, Benar</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Pernyataan 1 dan 2</div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="text-purple-300 font-bold mb-1">🧠 Konsep dan Trik</p>
-                  <p className="text-white/70">Baca diagram batang untuk mendapat frekuensi tiap nilai. Perbaikan = nilai &lt;75, pengayaan = nilai ≥75. Rata-rata = Σ(nilai×frekuensi) ÷ total. Nilai di atas rata-rata = nilai yang melebihi x̄.</p>
+                  <p className="text-white/70">Frekuensi relatif = kejadian ÷ total. Peluang empirik gabungan = total kejadian ÷ total uji keseluruhan. Perkiraan harapan = P × n.</p>
                 </div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-2">📋 Step by Step Penyelesaian</p>
-                  <p className="text-white/70 ml-3 mb-1">Data dari diagram: 70→2, 75→4, 80→5, 85→5, 90→9, 95→3, 100→2</p>
-                  <p className="text-white/70 ml-3">① Perbaikan (&lt;75)=2 siswa, Pengayaan (≥75)=4+5+5+9+3+2=<strong className="text-yellow-300">28</strong> siswa. 28 &gt; 2 → <span className="text-green-300">BENAR</span></p>
-                  <div className="ml-3 my-1"><BlockMath math="\bar{x} = \frac{70(2)+75(4)+80(5)+85(5)+90(9)+95(3)+100(2)}{30} = \frac{2.560}{30} \approx 85{,}3"/></div>
-                  <p className="text-white/70 ml-3">② Di atas 85,3: nilai 90→9, 95→3, 100→2 = <strong className="text-yellow-300">14 siswa</strong>, bukan 19 → <span className="text-red-300">SALAH</span></p>
-                  <p className="text-white/70 ml-3">③ Total: 2+4+5+5+9+3+2 = <strong className="text-yellow-300">30</strong> siswa ✓ → <span className="text-green-300">BENAR</span></p>
+                  <p className="text-white/70 ml-3 mb-1">Gagal Tahap 1 = 50−45 = 5 → frekuensi relatif = 5/50 = <strong className="text-yellow-300">0,1</strong></p>
+                  <p className="text-white/70 ml-3 mb-1">Gagal Tahap 2 = 150−135 = 15 → frekuensi relatif = 15/150 = <strong className="text-yellow-300">0,1</strong></p>
+                  <p className="text-white/70 ml-3">① Keduanya 0,1 → <span className="text-green-300">BENAR</span></p>
+                  <div className="ml-3 my-1"><BlockMath math="P(\text{berhasil}) = \frac{45+135}{50+150} = \frac{180}{200} = \boxed{0{,}9} \text{ → ② BENAR}" /></div>
+                  <p className="text-white/70 ml-3">③ Perkiraan gagal = 0,1 × 500 = 50, bukan 100 → <span className="text-red-300">SALAH</span></p>
+                  <p className="text-white/70 ml-3">④ P(gagal) = 0,1, bukan 0,05 → <span className="text-red-300">SALAH</span></p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">💡 Tips</p>
-                  <p className="text-white/70">Rata-rata ≈ 85,3. Nilai di atas rata-rata adalah &gt;85 yaitu 90, 95, 100 (9+3+2=14 siswa). Pernyataan ② menyebut 19 siswa, jelas salah. Cek total selalu untuk verifikasi (2+4+5+5+9+3+2=30 ✓).</p>
+                  <p className="text-white/70">③ Jebakan: 0,1 × 500 = 50, bukan 100. ④ P(gagal) keseluruhan = 20/200 = 0,1, bukan 0,05. Jangan bingung antara frekuensi relatif per tahap dan peluang gabungan.</p>
                 </div>
                 <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
                   <p className="text-blue-300 font-bold mb-1">📌 Kesimpulan</p>
-                  <p className="text-white/70">Pengayaan=28 (BENAR). Di atas rata-rata=14≠19 (SALAH). Total=30 (BENAR). Jawaban: <strong className="text-green-300">Benar, Salah, Benar</strong>.</p>
+                  <p className="text-white/70">Frekuensi gagal kedua tahap sama (0,1). P(berhasil)=0,9. Jawaban: <strong className="text-green-300">Pernyataan 1 dan 2</strong>.</p>
                 </div>
               </div>
             )}
@@ -1455,12 +1682,13 @@ const TKALatihan4Page = () => {
 
         </div>
 
+        {/* Back button */}
         <div className="mt-8 text-center">
           <button
             onClick={() => { playPopSound(); navigate("/tka"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke TKA
+            ← Kembali ke Menu TKA
           </button>
         </div>
       </div>

@@ -16,6 +16,7 @@ const packages = [
   { id: 4, label: "Try Out dan Prediksi TKA Matematika 4", path: "/tka/paket-4", soal: 30 },
   { id: 5, label: "Try Out dan Prediksi TKA Matematika 5", path: "/tka/paket-5", soal: 30 },
   { id: 6, label: "Try Out dan Prediksi TKA Matematika 6", path: "/tka/paket-6", soal: 30 },
+  { id: 7, label: "Try Out dan Prediksi TKA Matematika 7", path: "/tka/paket-7", soal: 30 },
 ];
 
 const routes: Record<string, string> = {
@@ -125,12 +126,12 @@ const TKAPage = () => {
           <div className="mt-4 flex gap-5 items-center">
             <div className="flex items-center gap-1.5 text-white/40 text-xs font-body">
               <FileText className="w-3.5 h-3.5" />
-              <span>6 Try Out</span>
+              <span>7 Try Out</span>
             </div>
             <span className="text-white/20">·</span>
             <div className="flex items-center gap-1.5 text-white/40 text-xs font-body">
               <Target className="w-3.5 h-3.5" />
-              <span>165 Soal Total</span>
+              <span>210 Soal Total</span>
             </div>
             <span className="text-white/20">·</span>
             <div className="flex items-center gap-1.5 text-white/40 text-xs font-body">
@@ -240,7 +241,7 @@ const TKAPage = () => {
                 <FileText className="w-4 h-4 text-cyan-300" />
               </div>
               <span className="font-display text-sm font-bold text-cyan-200 tracking-wide uppercase">Try Out dan Prediksi TKA Matematika 2026 - 2027</span>
-              <span className="text-[10px] font-body text-cyan-400/70 bg-cyan-500/10 border border-cyan-400/20 px-2 py-0.5 rounded-full">6 Paket</span>
+              <span className="text-[10px] font-body text-cyan-400/70 bg-cyan-500/10 border border-cyan-400/20 px-2 py-0.5 rounded-full">7 Paket</span>
             </div>
             {showPaket
               ? <ChevronUp className="w-4 h-4 text-cyan-300" />
