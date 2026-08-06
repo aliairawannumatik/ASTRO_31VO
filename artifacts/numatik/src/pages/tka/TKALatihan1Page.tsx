@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
-import { InlineMath } from "react-katex";
+import { InlineMath, BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
 
 const TKALatihan1Page = () => {
@@ -11,6 +11,16 @@ const TKALatihan1Page = () => {
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, number>>({});
   const [selectedComplexAnswers, setSelectedComplexAnswers] = useState<Record<number, Set<number>>>({});
   const [selectedTrueFalse, setSelectedTrueFalse] = useState<Record<string, string>>({});
+  const [expandedPembahasan, setExpandedPembahasan] = useState<Set<number>>(new Set());
+
+  const togglePembahasan = (n: number) => {
+    playPopSound();
+    setExpandedPembahasan(prev => {
+      const next = new Set(prev);
+      next.has(n) ? next.delete(n) : next.add(n);
+      return next;
+    });
+  };
 
   const selectAnswer = (qn: number, idx: number) => {
     if (selectedAnswers[qn] !== undefined) return;
@@ -176,6 +186,51 @@ const TKALatihan1Page = () => {
     <TF2Table qn={qn} col1="Bisa ditanami cabai" col2="Tidak bisa ditanami cabai" correct1={correct} rows={rows} />
   );
 
+  /* ── Pembahasan sub-components ── */
+  const PBJawaban = ({ children }: { children: React.ReactNode }) => (
+    <div className="rounded-xl px-4 py-3 flex items-center gap-3 border bg-gradient-to-r from-green-900/60 to-emerald-900/30 border-green-500/60">
+      <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-base border bg-green-500/20 border-green-400/40">✅</div>
+      <div>
+        <p className="text-[9px] font-bold uppercase tracking-widest mb-0.5 text-green-400">① Jawaban</p>
+        <p className="font-bold text-xs leading-snug text-green-200">{children}</p>
+      </div>
+    </div>
+  );
+
+  const PBKonsep = ({ children }: { children: React.ReactNode }) => (
+    <div className="rounded-xl px-4 py-3 border bg-gradient-to-r from-violet-900/50 to-purple-900/25 border-violet-500/50">
+      <p className="text-[9px] font-bold uppercase tracking-widest mb-2 flex items-center gap-1.5 text-violet-300">
+        🧠 ② Konsep &amp; Trik
+      </p>
+      <div className="text-xs space-y-1.5 text-white/80">{children}</div>
+    </div>
+  );
+
+  const PBSteps = ({ children }: { children: React.ReactNode }) => (
+    <div className="rounded-xl px-4 py-3 border bg-gradient-to-r from-cyan-900/40 to-sky-900/20 border-cyan-500/40">
+      <p className="text-[9px] font-bold uppercase tracking-widest mb-2 flex items-center gap-1.5 text-cyan-300">
+        📐 ③ Step by Step
+      </p>
+      <div className="text-xs space-y-2 text-white/80">{children}</div>
+    </div>
+  );
+
+  const PembahasanBtn = ({ n }: { n: number }) => (
+    <button
+      onClick={() => togglePembahasan(n)}
+      className="mt-3 w-full py-2 rounded-lg text-xs font-body font-semibold transition-all border border-amber-500/40 text-amber-300 hover:bg-amber-500/10"
+    >
+      {expandedPembahasan.has(n) ? "▲ Tutup Pembahasan" : "▼ Lihat Pembahasan"}
+    </button>
+  );
+
+  const S = ({ n, children }: { n: number; children: React.ReactNode }) => (
+    <div className="flex gap-2 items-start">
+      <span className="w-5 h-5 rounded-full font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5 bg-cyan-500/30 text-cyan-300 border border-cyan-500/30">{n}</span>
+      <div className="flex-1">{children}</div>
+    </div>
+  );
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -238,6 +293,32 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={1} />
+            {expandedPembahasan.has(1) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>A. <InlineMath math="5^{-3}" /></PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Sifat Perkalian Bilangan Berpangkat:</strong></p>
+                  <div className="my-1 text-center"><InlineMath math="a^m \times a^n = a^{m+n}" /></div>
+                  <p><strong className="text-violet-300">Sifat Pembagian Bilangan Berpangkat:</strong></p>
+                  <div className="my-1 text-center"><InlineMath math="a^m \div a^n = a^{m-n}" /></div>
+                  <p className="text-yellow-300/80">🔑 Trik: Kerjakan dari kiri ke kanan — kali dulu, baru bagi.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Hitung bagian perkalian terlebih dahulu:</p>
+                    <div className="my-1"><InlineMath math="5^3 \times 5^{-2} = 5^{3+(-2)} = 5^1" /></div>
+                  </S>
+                  <S n={2}>
+                    <p>Lanjutkan dengan pembagian:</p>
+                    <div className="my-1"><InlineMath math="5^1 \div 5^4 = 5^{1-4} = 5^{-3}" /></div>
+                  </S>
+                  <S n={3}>
+                    <p>Jadi, hasil operasinya adalah <InlineMath math="5^{-3}" /> → Jawaban <strong className="text-green-300">A</strong>.</p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q2 — Complex MCQ: Diskon */}
@@ -267,6 +348,40 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={2} />
+            {expandedPembahasan.has(2) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>Diskon A dan Diskon D (keduanya memberikan potongan lebih dari Rp15.000,00)</PBJawaban>
+                <PBKonsep>
+                  <p>Potongan diskon = persentase × total belanja, <strong className="text-violet-300">tetapi tidak boleh melebihi batas maksimal.</strong></p>
+                  <p className="text-yellow-300/80">🔑 Trik: Hitung potongan riil (persentase × belanja), lalu bandingkan dengan batas maks — ambil yang lebih kecil. Kemudian cek apakah hasilnya &gt; Rp15.000.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Transaksi = Rp100.000,00. Hitung potongan riil setiap diskon:</p>
+                  </S>
+                  <S n={2}>
+                    <p><strong className="text-cyan-300">Diskon A</strong> (20%, maks Rp80.000):</p>
+                    <p>20% × 100.000 = Rp20.000 &lt; Rp80.000 → potongan = <strong className="text-green-300">Rp20.000 &gt; Rp15.000 ✓</strong></p>
+                  </S>
+                  <S n={3}>
+                    <p><strong className="text-cyan-300">Diskon B</strong> (10%, maks Rp150.000):</p>
+                    <p>10% × 100.000 = Rp10.000 → potongan = <strong className="text-red-300">Rp10.000 &lt; Rp15.000 ✗</strong></p>
+                  </S>
+                  <S n={4}>
+                    <p><strong className="text-cyan-300">Diskon C</strong> (15%, maks Rp50.000):</p>
+                    <p>15% × 100.000 = Rp15.000 → potongan = <strong className="text-red-300">Rp15.000, tidak LEBIH DARI Rp15.000 ✗</strong></p>
+                  </S>
+                  <S n={5}>
+                    <p><strong className="text-cyan-300">Diskon D</strong> (30%, maks Rp30.000):</p>
+                    <p>30% × 100.000 = Rp30.000 = batas maks → potongan = <strong className="text-green-300">Rp30.000 &gt; Rp15.000 ✓</strong></p>
+                  </S>
+                  <S n={6}>
+                    <p>Jawaban benar: <strong className="text-green-300">Diskon A dan Diskon D</strong>.</p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q3 — True/False: Diskon Rani */}
@@ -287,6 +402,38 @@ const TKALatihan1Page = () => {
                 />
               </div>
             </div>
+            <PembahasanBtn n={3} />
+            {expandedPembahasan.has(3) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>Pernyataan 1 = Benar, Pernyataan 2 = Salah, Pernyataan 3 = Benar</PBJawaban>
+                <PBKonsep>
+                  <p>Rani memiliki <strong className="text-violet-300">Diskon A</strong> (20%, maks Rp80.000), <strong className="text-violet-300">Diskon C</strong> (15%, maks Rp50.000), dan <strong className="text-violet-300">Diskon D</strong> (30%, maks Rp30.000).</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Hitung potongan riil = min(persen × belanja, batas maks). Lalu bandingkan ketiganya.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p><strong className="text-cyan-300">Pernyataan 1</strong> — Transaksi Rp200.000:</p>
+                    <p>A: min(20%×200rb, 80rb) = min(40rb, 80rb) = <strong className="text-green-300">Rp40.000</strong></p>
+                    <p>C: min(15%×200rb, 50rb) = min(30rb, 50rb) = Rp30.000</p>
+                    <p>D: min(30%×200rb, 30rb) = min(60rb, 30rb) = Rp30.000</p>
+                    <p>A terbesar → <strong className="text-green-300">BENAR ✓</strong></p>
+                  </S>
+                  <S n={2}>
+                    <p><strong className="text-cyan-300">Pernyataan 2</strong> — Transaksi Rp600.000:</p>
+                    <p>A: min(20%×600rb, 80rb) = min(120rb, 80rb) = <strong className="text-green-300">Rp80.000</strong></p>
+                    <p>C: min(15%×600rb, 50rb) = min(90rb, 50rb) = Rp50.000</p>
+                    <p>D: min(30%×600rb, 30rb) = min(180rb, 30rb) = Rp30.000</p>
+                    <p>A terbesar, bukan C → <strong className="text-red-300">SALAH ✗</strong></p>
+                  </S>
+                  <S n={3}>
+                    <p><strong className="text-cyan-300">Pernyataan 3</strong> — Transaksi Rp150.000:</p>
+                    <p>A: min(20%×150rb, 80rb) = min(30rb, 80rb) = <strong className="text-green-300">Rp30.000</strong></p>
+                    <p>D: min(30%×150rb, 30rb) = min(45rb, 30rb) = <strong className="text-green-300">Rp30.000</strong></p>
+                    <p>Sama besar → <strong className="text-green-300">BENAR ✓</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q4 — MCQ: Data buah */}
@@ -322,6 +469,31 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={4} />
+            {expandedPembahasan.has(4) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>C. Buah R (berat 155,50 gr dan kandungan gula 65,80 gr — keduanya terbesar)</PBJawaban>
+                <PBKonsep>
+                  <p>Soal meminta buah dengan <strong className="text-violet-300">berat terbesar DAN kandungan gula paling banyak</strong> secara bersamaan.</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Urutkan tabel untuk setiap kolom lalu cari buah yang menang di kedua kolom sekaligus.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Bandingkan berat semua buah:</p>
+                    <p>P=145,25 · Q=138,70 · <strong className="text-green-300">R=155,50</strong> · S=150,30</p>
+                    <p>→ Berat terbesar: <strong className="text-green-300">Buah R</strong></p>
+                  </S>
+                  <S n={2}>
+                    <p>Bandingkan kandungan gula semua buah:</p>
+                    <p>P=60,40 · Q=55,15 · <strong className="text-green-300">R=65,80</strong> · S=62,10</p>
+                    <p>→ Gula terbanyak: <strong className="text-green-300">Buah R</strong></p>
+                  </S>
+                  <S n={3}>
+                    <p>Buah R unggul di kedua kriteria → <strong className="text-green-300">Buah R yang diteliti pertama</strong>.</p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q5 — MCQ: Vaksin */}
@@ -359,6 +531,28 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={5} />
+            {expandedPembahasan.has(5) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>A. 20 derajat di bawah 0 °C</PBJawaban>
+                <PBKonsep>
+                  <p>Suhu negatif berarti di <strong className="text-violet-300">bawah titik beku (0 °C)</strong>. Notasi <InlineMath math="= -20\,°C" /> berarti suhu tersebut tepat −20 °C, yaitu 20 derajat di bawah nol.</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Tanda "−" pada suhu = jumlah derajat DI BAWAH 0 °C. Jangan terkecoh dengan angka 15 (itu syarat Vaksin A, bukan B).</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Baca tabel: suhu penyimpanan Vaksin B = <InlineMath math="= -20\,°C" /></p>
+                  </S>
+                  <S n={2}>
+                    <p>Interpretasi: −20 °C artinya 20 derajat di bawah 0 °C.</p>
+                  </S>
+                  <S n={3}>
+                    <p>Jawaban: <strong className="text-green-300">A. 20 derajat di bawah 0 °C</strong>.</p>
+                    <p className="text-white/50 text-[10px]">Opsi B salah (di atas 0 = positif). Opsi C dan D menggunakan angka 15 milik Vaksin A, bukan Vaksin B.</p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q6 — True/False: Aljabar */}
@@ -385,6 +579,33 @@ const TKALatihan1Page = () => {
                 />
               </div>
             </div>
+            <PembahasanBtn n={6} />
+            {expandedPembahasan.has(6) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>Pernyataan 1 = Benar, Pernyataan 2 = Benar, Pernyataan 3 = Salah</PBJawaban>
+                <PBKonsep>
+                  <p>Pada bentuk aljabar <InlineMath math="4x^2y - 2xy^2 + 5x^2y - y^2 + 7" />:</p>
+                  <p>• <strong className="text-violet-300">Variabel</strong>: huruf-huruf yang mewakili nilai berubah (x, y)</p>
+                  <p>• <strong className="text-violet-300">Konstanta</strong>: suku tanpa variabel (bilangan tetap)</p>
+                  <p>• <strong className="text-violet-300">Koefisien</strong>: bilangan yang mengalikan variabel pada setiap suku</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Koefisien suku <InlineMath math="-y^2" /> adalah <InlineMath math="-1" />, bukan 1!</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p><strong className="text-cyan-300">Pernyataan 1:</strong> Variabel yang muncul adalah x dan y → <strong className="text-green-300">BENAR ✓</strong></p>
+                  </S>
+                  <S n={2}>
+                    <p><strong className="text-cyan-300">Pernyataan 2:</strong> Suku tanpa variabel adalah +7 → konstanta = 7 → <strong className="text-green-300">BENAR ✓</strong></p>
+                  </S>
+                  <S n={3}>
+                    <p><strong className="text-cyan-300">Pernyataan 3:</strong> Koefisien dari masing-masing suku:</p>
+                    <p><InlineMath math="4x^2y" /> → koef. 4 &nbsp;|&nbsp; <InlineMath math="-2xy^2" /> → koef. −2</p>
+                    <p><InlineMath math="5x^2y" /> → koef. 5 &nbsp;|&nbsp; <InlineMath math="-y^2" /> → koef. <strong className="text-red-300">−1</strong> (bukan 1!)</p>
+                    <p>Pernyataan menyebut "1" padahal seharusnya "−1" → <strong className="text-red-300">SALAH ✗</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q7 — Fungsi/Bukan Fungsi */}
@@ -409,6 +630,31 @@ const TKALatihan1Page = () => {
                 />
               </div>
             </div>
+            <PembahasanBtn n={7} />
+            {expandedPembahasan.has(7) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>Relasi 1 = Fungsi, Relasi 2 = Bukan Fungsi, Relasi 3 = Fungsi</PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Definisi Fungsi:</strong> Setiap anggota domain (himpunan asal) dipasangkan ke <em>tepat satu</em> anggota kodomain (himpunan kawan).</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Cek domain — jika ada satu anggota domain yang dipetakan ke DUA anggota berbeda, bukan fungsi. Boleh banyak domain ke satu kodomain.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p><strong className="text-cyan-300">Relasi 1:</strong> 2→p, 4→q, 6→r, 8→s</p>
+                    <p>Setiap anggota A (2,4,6,8) dipetakan ke tepat 1 anggota B → <strong className="text-green-300">FUNGSI ✓</strong></p>
+                  </S>
+                  <S n={2}>
+                    <p><strong className="text-cyan-300">Relasi 2:</strong> 2→p, 2→q, 4→r, 6→s</p>
+                    <p>Anggota 2 dipetakan ke DUA anggota (p dan q) → <strong className="text-red-300">BUKAN FUNGSI ✗</strong></p>
+                  </S>
+                  <S n={3}>
+                    <p><strong className="text-cyan-300">Relasi 3:</strong> 2→p, 4→p, 6→q, 8→r</p>
+                    <p>Beberapa domain → p, tapi setiap domain dipetakan ke tepat 1 kodomain → <strong className="text-green-300">FUNGSI ✓</strong></p>
+                    <p className="text-white/50 text-[10px]">Banyak-ke-satu diperbolehkan dalam fungsi; yang dilarang hanya satu-ke-banyak.</p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q8 — True/False: Persamaan Garis / Listrik */}
@@ -435,6 +681,38 @@ const TKALatihan1Page = () => {
                 />
               </div>
             </div>
+            <PembahasanBtn n={8} />
+            {expandedPembahasan.has(8) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>Pernyataan 1 = Benar, Pernyataan 2 = Salah, Pernyataan 3 = Benar</PBJawaban>
+                <PBKonsep>
+                  <p>Soal ini menggunakan <strong className="text-violet-300">Persamaan Garis Lurus</strong> <InlineMath math="y = mx + c" />, di mana:</p>
+                  <p>• <InlineMath math="x" /> = pemakaian listrik (kWh), <InlineMath math="y" /> = total biaya (Rp)</p>
+                  <p>• <InlineMath math="m" /> = tarif per kWh, <InlineMath math="c" /> = biaya admin awal (konstan)</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Cari gradien dari dua titik, lalu substitusi untuk cari konstanta (biaya admin).</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Dua titik: <InlineMath math="(10,\ 35.000)" /> dan <InlineMath math="(30,\ 75.000)" /></p>
+                    <p>Gradien: <InlineMath math="m = \dfrac{75.000 - 35.000}{30 - 10} = \dfrac{40.000}{20} = 2.000" /></p>
+                  </S>
+                  <S n={2}>
+                    <p>Cari biaya admin (konstanta <InlineMath math="c" />):</p>
+                    <p><InlineMath math="35.000 = 2.000 \times 10 + c \Rightarrow c = 35.000 - 20.000 = 15.000" /></p>
+                    <p>Persamaan: <InlineMath math="y = 2.000x + 15.000" /></p>
+                  </S>
+                  <S n={3}>
+                    <p><strong className="text-cyan-300">P1</strong> — Total biaya Rp95.000: <InlineMath math="95.000 = 2.000x + 15.000 \Rightarrow x = 40" /> kWh → <strong className="text-green-300">BENAR ✓</strong></p>
+                  </S>
+                  <S n={4}>
+                    <p><strong className="text-cyan-300">P2</strong> — Biaya admin = Rp15.000, bukan Rp20.000 → <strong className="text-red-300">SALAH ✗</strong></p>
+                  </S>
+                  <S n={5}>
+                    <p><strong className="text-cyan-300">P3</strong> — Pemakaian 50 kWh: <InlineMath math="y = 2.000(50) + 15.000 = 115.000" /> → <strong className="text-green-300">BENAR ✓</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q9 — Bisa/Tidak: Koordinat Kartesius */}
@@ -458,6 +736,31 @@ const TKALatihan1Page = () => {
                 />
               </div>
             </div>
+            <PembahasanBtn n={9} />
+            {expandedPembahasan.has(9) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>(-5, 4) = Bisa · (6, -3) = Tidak Bisa · (-7, -8) = Bisa</PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Pembagian Kuadran Koordinat Kartesius:</strong></p>
+                  <p>• Kuadran I: <InlineMath math="x > 0,\ y > 0" /></p>
+                  <p>• Kuadran II: <InlineMath math="x < 0,\ y > 0" /> ← <strong className="text-green-300">boleh ditanami</strong></p>
+                  <p>• Kuadran III: <InlineMath math="x < 0,\ y < 0" /> ← <strong className="text-green-300">boleh ditanami</strong></p>
+                  <p>• Kuadran IV: <InlineMath math="x > 0,\ y < 0" /></p>
+                  <p className="text-yellow-300/80">🔑 Trik: Lihat tanda x dan y. Negatif-positif = Kuadran II. Negatif-negatif = Kuadran III.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p><strong className="text-cyan-300"><InlineMath math="(-5,\ 4)" /></strong>: x = −5 &lt; 0, y = 4 &gt; 0 → <strong className="text-green-300">Kuadran II → Bisa ditanami ✓</strong></p>
+                  </S>
+                  <S n={2}>
+                    <p><strong className="text-cyan-300"><InlineMath math="(6,\ -3)" /></strong>: x = 6 &gt; 0, y = −3 &lt; 0 → <strong className="text-red-300">Kuadran IV → Tidak bisa ditanami ✗</strong></p>
+                  </S>
+                  <S n={3}>
+                    <p><strong className="text-cyan-300"><InlineMath math="(-7,\ -8)" /></strong>: x = −7 &lt; 0, y = −8 &lt; 0 → <strong className="text-green-300">Kuadran III → Bisa ditanami ✓</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q10 — MCQ: Pertidaksamaan */}
@@ -482,6 +785,39 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={10} />
+            {expandedPembahasan.has(10) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>A. Titik tertutup di 5, diarsir ke arah bilangan lebih besar (kanan) — karena x ≥ 5</PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Pertidaksamaan Linear Satu Variabel (PtLSV):</strong></p>
+                  <p>• Operasi hitung kedua ruas (tambah, kurang, kali/bagi bilangan <em>positif</em>) tidak mengubah tanda ketidaksamaan.</p>
+                  <p>• Tanda <InlineMath math="\geq" /> → titik <strong className="text-violet-300">tertutup</strong> (nilai tersebut termasuk solusi)</p>
+                  <p>• Tanda <InlineMath math=">" /> → titik <strong className="text-violet-300">terbuka</strong> (nilai tersebut tidak termasuk)</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Pindahkan suku x ke kiri, konstanta ke kanan, lalu baca arah arsiran dari tanda ketidaksamaan.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Mulai dari pertidaksamaan: <InlineMath math="5x - 12 \geq 2x + 3" /></p>
+                  </S>
+                  <S n={2}>
+                    <p>Pindahkan suku x ke kiri (kurangi 2x kedua ruas):</p>
+                    <p><InlineMath math="5x - 2x - 12 \geq 3 \Rightarrow 3x - 12 \geq 3" /></p>
+                  </S>
+                  <S n={3}>
+                    <p>Pindahkan konstanta ke kanan (tambah 12 kedua ruas):</p>
+                    <p><InlineMath math="3x \geq 3 + 12 \Rightarrow 3x \geq 15" /></p>
+                  </S>
+                  <S n={4}>
+                    <p>Bagi kedua ruas dengan 3 (positif, tanda tidak berubah):</p>
+                    <p><InlineMath math="x \geq 5" /></p>
+                  </S>
+                  <S n={5}>
+                    <p>HP: <InlineMath math="\{x \mid x \geq 5\}" /> → <strong className="text-green-300">titik tertutup di 5, arsir ke kanan</strong> → Jawaban A.</p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q11 — MCQ: SPLDV */}
