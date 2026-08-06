@@ -1002,25 +1002,7 @@ const BentukAkarPage = () => {
                     <p><strong className="text-primary">{t.hasil} <InlineMath math="2\sqrt{6}+2\sqrt{2}" /></strong></p>
                   </>}
                 />
-                <ExBlock level="hard" n={3}
-                  soal={<>{t.c5_hard_q} <InlineMath math="\dfrac{3\sqrt{3} - 2\sqrt{2}}{3\sqrt{3} + 2\sqrt{2}}" /></>}
-                  solution={<>
-                    <p>{t.kalikan_conj} <InlineMath math="(3\sqrt{3} - 2\sqrt{2})" />:</p>
-                    <Dark>
-                      <BlockMath math="\frac{3\sqrt{3} - 2\sqrt{2}}{3\sqrt{3} + 2\sqrt{2}} \times \frac{3\sqrt{3} - 2\sqrt{2}}{3\sqrt{3} - 2\sqrt{2}} = \frac{(3\sqrt{3} - 2\sqrt{2})^2}{(3\sqrt{3})^2 - (2\sqrt{2})^2}" />
-                    </Dark>
-                    <p><strong>{t.step} 1:</strong> {t.gunakan_selisih}</p>
-                    <Dark>
-                      <BlockMath math="(3\sqrt{3})^2 - (2\sqrt{2})^2 = 27 - 8 = 19" />
-                    </Dark>
-                    <p><strong>{t.step} 2:</strong></p>
-                    <Dark>
-                      <BlockMath math="(3\sqrt{3} - 2\sqrt{2})^2 = 27 - 2 \cdot 3\sqrt{3} \cdot 2\sqrt{2} + 8 = 35 - 12\sqrt{6}" />
-                    </Dark>
-                    <p><strong className="text-primary">{t.hasil} <InlineMath math="\dfrac{35 - 12\sqrt{6}}{19}" /></strong></p>
-                  </>}
-                />
-                <ExBlock level="med" n={4}
+                <ExBlock level="med" n={3}
                   soal={<>{t.rasionalkan} <InlineMath math="\dfrac{4}{\sqrt{5}+1}" /></>}
                   solution={<>
                     <p>{t.kalikan_conj} <InlineMath math="(\sqrt{5}-1)" />:</p>
@@ -1036,6 +1018,24 @@ const BentukAkarPage = () => {
                       <BlockMath math="\frac{4(\sqrt{5}-1)}{4} = \sqrt{5}-1" />
                     </Dark>
                     <p><strong className="text-primary">{t.hasil} <InlineMath math="\sqrt{5}-1" /></strong></p>
+                  </>}
+                />
+                <ExBlock level="hard" n={4}
+                  soal={<>{t.c5_hard_q} <InlineMath math="\dfrac{3\sqrt{3} - 2\sqrt{2}}{3\sqrt{3} + 2\sqrt{2}}" /></>}
+                  solution={<>
+                    <p>{t.kalikan_conj} <InlineMath math="(3\sqrt{3} - 2\sqrt{2})" />:</p>
+                    <Dark>
+                      <BlockMath math="\frac{3\sqrt{3} - 2\sqrt{2}}{3\sqrt{3} + 2\sqrt{2}} \times \frac{3\sqrt{3} - 2\sqrt{2}}{3\sqrt{3} - 2\sqrt{2}} = \frac{(3\sqrt{3} - 2\sqrt{2})^2}{(3\sqrt{3})^2 - (2\sqrt{2})^2}" />
+                    </Dark>
+                    <p><strong>{t.step} 1:</strong> {t.gunakan_selisih}</p>
+                    <Dark>
+                      <BlockMath math="(3\sqrt{3})^2 - (2\sqrt{2})^2 = 27 - 8 = 19" />
+                    </Dark>
+                    <p><strong>{t.step} 2:</strong></p>
+                    <Dark>
+                      <BlockMath math="(3\sqrt{3} - 2\sqrt{2})^2 = 27 - 2 \cdot 3\sqrt{3} \cdot 2\sqrt{2} + 8 = 35 - 12\sqrt{6}" />
+                    </Dark>
+                    <p><strong className="text-primary">{t.hasil} <InlineMath math="\dfrac{35 - 12\sqrt{6}}{19}" /></strong></p>
                   </>}
                 />
               </div>
