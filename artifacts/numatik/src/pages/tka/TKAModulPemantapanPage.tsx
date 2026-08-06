@@ -25,7 +25,6 @@ const routes: Record<string, string> = {
   "Lingkaran": "/tka/modul-pemantapan/lingkaran",
   "Bangun Ruang Sisi Datar": "/tka/modul-pemantapan/bangun-ruang-sisi-datar",
   "Bilangan Berpangkat dan Irasional": "/tka/modul-pemantapan/bilangan-berpangkat-irasional",
-  "Modulo & Sisa Pembagian": "/tka/modul-pemantapan/modulo",
   "Persamaan Kuadrat": "/tka/modul-pemantapan/persamaan-kuadrat",
   "Fungsi Kuadrat": "/tka/modul-pemantapan/fungsi-kuadrat",
   "Kesebangunan & Kekongruenan": "/tka/modul-pemantapan/kesebangunan",
@@ -57,7 +56,6 @@ const allTopics: Topic[] = [
   { name: "Teorema Pythagoras", emoji: "△" },
   { name: "Lingkaran", emoji: "○" },
   { name: "Bangun Ruang Sisi Datar", emoji: "⬡" },
-  { name: "Modulo & Sisa Pembagian", emoji: "%" },
   { name: "Persamaan Kuadrat", emoji: "²" },
   { name: "Fungsi Kuadrat", emoji: "∪" },
   { name: "Kesebangunan & Kekongruenan", emoji: "≅" },
@@ -105,7 +103,7 @@ const TKAModulPemantapanPage = () => {
 
           <div className="flex flex-wrap items-center justify-center gap-2">
             {[
-              { v: "28", l: "Topik", c: "rgba(34,211,238,0.12)", bc: "rgba(34,211,238,0.3)", tc: "#67e8f9" },
+              { v: "27", l: "Topik", c: "rgba(34,211,238,0.12)", bc: "rgba(34,211,238,0.3)", tc: "#67e8f9" },
               { v: "3", l: "Jenjang Kelas", c: "rgba(167,139,250,0.12)", bc: "rgba(167,139,250,0.3)", tc: "#c4b5fd" },
               { v: "TKA", l: "Siap Ujian", c: "rgba(34,197,94,0.1)", bc: "rgba(34,197,94,0.3)", tc: "#86efac" },
             ].map(({ v, l, c, bc, tc }) => (
