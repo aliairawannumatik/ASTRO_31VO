@@ -1,286 +1,6 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
 
-// ─── SVG Components (duplicated from Olimpiade Matematika - Teorema Pythagoras) ───
-
-const SegitigaPQRSVG = () => {
-  const W = 260, H = 170;
-  const Ax = 30, Ay = H - 30;
-  const Bx = W - 30, By = H - 30;
-  const Cx = 30, Cy = 25;
-  return (
-    <div className="my-3 flex justify-center">
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
-        <polygon points={`${Ax},${Ay} ${Bx},${By} ${Cx},${Cy}`} fill="none" stroke="#22d3ee" strokeWidth="2" />
-        <rect x={Ax} y={Ay - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1" />
-        <text x={Ax - 10} y={(Ay + Cy) / 2 + 4} fill="#fbbf24" fontSize="14" fontStyle="italic" fontWeight="bold" textAnchor="end">p</text>
-        <text x={(Ax + Bx) / 2} y={By + 18} fill="#fbbf24" fontSize="14" fontStyle="italic" fontWeight="bold" textAnchor="middle">q</text>
-        <text x={(Bx + Cx) / 2 + 4} y={(By + Cy) / 2 - 4} fill="#fbbf24" fontSize="14" fontStyle="italic" fontWeight="bold">r</text>
-      </svg>
-    </div>
-  );
-};
-
-const SegitigaABC182430SVG = () => {
-  const W = 280, H = 200;
-  const Ax = 30, Ay = H - 30;
-  const Bx = W - 30, By = H - 30;
-  const Cx = W - 30, Cy = 25;
-  return (
-    <div className="my-3 flex justify-center">
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
-        <polygon points={`${Ax},${Ay} ${Bx},${By} ${Cx},${Cy}`} fill="rgba(34,211,238,0.08)" stroke="#22d3ee" strokeWidth="2" />
-        <rect x={Bx - 12} y={By - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1.2" />
-        <circle cx={Ax} cy={Ay} r="3" fill="#22d3ee" />
-        <circle cx={Bx} cy={By} r="3" fill="#22d3ee" />
-        <circle cx={Cx} cy={Cy} r="3" fill="#22d3ee" />
-        <text x={Ax - 10} y={Ay + 4} fill="#e5e7eb" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
-        <text x={Bx + 8} y={By + 12} fill="#e5e7eb" fontSize="14" fontWeight="bold">B</text>
-        <text x={Cx + 8} y={Cy + 4} fill="#e5e7eb" fontSize="14" fontWeight="bold">C</text>
-        <text x={(Ax + Bx) / 2} y={By + 18} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="middle">24 cm</text>
-        <text x={Bx - 8} y={(By + Cy) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">18 cm</text>
-        <text x={(Ax + Cx) / 2 - 8} y={(Ay + Cy) / 2 - 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end" transform={`rotate(-36 ${(Ax + Cx) / 2 - 8} ${(Ay + Cy) / 2 - 4})`}>?</text>
-      </svg>
-    </div>
-  );
-};
-
-const SegitigaABD72425SVG = () => {
-  const W = 280, H = 200;
-  const Ax = 30, Ay = H - 30;
-  const Bx = W - 30, By = H - 30;
-  const Dx = W - 30, Dy = 50;
-  return (
-    <div className="my-3 flex justify-center">
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
-        <polygon points={`${Ax},${Ay} ${Bx},${By} ${Dx},${Dy}`} fill="rgba(34,211,238,0.08)" stroke="#22d3ee" strokeWidth="2" />
-        <rect x={Bx - 12} y={By - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1.2" />
-        <circle cx={Ax} cy={Ay} r="3" fill="#22d3ee" />
-        <circle cx={Bx} cy={By} r="3" fill="#22d3ee" />
-        <circle cx={Dx} cy={Dy} r="3" fill="#22d3ee" />
-        <text x={Ax - 10} y={Ay + 4} fill="#e5e7eb" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
-        <text x={Bx + 8} y={By + 12} fill="#e5e7eb" fontSize="14" fontWeight="bold">B</text>
-        <text x={Dx + 8} y={Dy + 4} fill="#e5e7eb" fontSize="14" fontWeight="bold">D</text>
-        <text x={(Ax + Bx) / 2} y={By + 18} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="middle">24 cm</text>
-        <text x={Bx - 8} y={(By + Dy) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">7 cm</text>
-        <text x={(Ax + Dx) / 2 - 6} y={(Ay + Dy) / 2 - 6} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end" transform={`rotate(-22 ${(Ax + Dx) / 2 - 6} ${(Ay + Dy) / 2 - 6})`}>?</text>
-      </svg>
-    </div>
-  );
-};
-
-const SegitigaCABD9_15_41_SVG = () => {
-  const W = 320, H = 200;
-  const Ax = 30, Ay = H - 30;
-  const Cx = 30, Cy = 30;
-  const Bx = W - 20, By = H - 30;
-  const Dx = Ax + (12 / 40) * (Bx - Ax);
-  const Dy = Ay;
-  return (
-    <div className="my-3 flex justify-center">
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
-        <polygon points={`${Cx},${Cy} ${Ax},${Ay} ${Bx},${By}`} fill="rgba(34,211,238,0.08)" stroke="#22d3ee" strokeWidth="2" />
-        <line x1={Cx} y1={Cy} x2={Dx} y2={Dy} stroke="#22d3ee" strokeWidth="1.6" />
-        <rect x={Ax} y={Ay - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1.2" />
-        <circle cx={Cx} cy={Cy} r="3" fill="#22d3ee" />
-        <circle cx={Ax} cy={Ay} r="3" fill="#22d3ee" />
-        <circle cx={Bx} cy={By} r="3" fill="#22d3ee" />
-        <circle cx={Dx} cy={Dy} r="3" fill="#22d3ee" />
-        <text x={Cx - 8} y={Cy + 4} fill="#e5e7eb" fontSize="14" fontWeight="bold" textAnchor="end">C</text>
-        <text x={Ax - 6} y={Ay + 16} fill="#e5e7eb" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
-        <text x={Bx + 6} y={By + 16} fill="#e5e7eb" fontSize="14" fontWeight="bold">B</text>
-        <text x={Dx} y={Dy + 18} fill="#e5e7eb" fontSize="14" fontWeight="bold" textAnchor="middle">D</text>
-        <text x={Cx - 6} y={(Cy + Ay) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">9</text>
-        <text x={(Cx + Bx) / 2 + 8} y={(Cy + By) / 2 - 4} fill="#fbbf24" fontSize="13" fontWeight="bold">41</text>
-        <text x={(Cx + Dx) / 2 + 10} y={(Cy + Dy) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold">15</text>
-      </svg>
-    </div>
-  );
-};
-
-// Soal 7 — Bangun ABCDE (persegi panjang + segitiga siku-siku)
-const Soal7ABCDESVG = () => (
-  <svg viewBox="0 0 300 290" className="w-full max-w-xs mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    <line x1="40" y1="250" x2="220" y2="250" stroke="#22d3ee" strokeWidth="2.2" />
-    <line x1="220" y1="250" x2="220" y2="130" stroke="#22d3ee" strokeWidth="2.2" />
-    <line x1="220" y1="130" x2="155" y2="44" stroke="#22d3ee" strokeWidth="2.2" />
-    <line x1="155" y1="44" x2="40" y2="130" stroke="#22d3ee" strokeWidth="2.2" />
-    <line x1="40" y1="130" x2="40" y2="250" stroke="#22d3ee" strokeWidth="2.2" />
-    <line x1="40" y1="130" x2="220" y2="130" stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="8,4" opacity="0.7" />
-    <polyline points="159.8,50.4 153.4,55.2 148.6,48.8" fill="none" stroke="#22d3ee" strokeWidth="1.5" />
-    <line x1="33" y1="190" x2="47" y2="190" stroke="#22d3ee" strokeWidth="2" />
-    <line x1="213" y1="190" x2="227" y2="190" stroke="#22d3ee" strokeWidth="2" />
-    <circle cx="40"  cy="250" r="2.5" fill="#f87171" />
-    <circle cx="220" cy="250" r="2.5" fill="#f87171" />
-    <circle cx="220" cy="130" r="2.5" fill="#f87171" />
-    <circle cx="155" cy="44"  r="2.5" fill="#f87171" />
-    <circle cx="40"  cy="130" r="2.5" fill="#f87171" />
-    <text x="26"  y="268" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
-    <text x="222" y="268" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
-    <text x="224" y="128" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">C</text>
-    <text x="149" y="34"  fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">D</text>
-    <text x="20"  y="128" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">E</text>
-    <text x="130" y="272" fill="#fbbf24" fontSize="12" fontFamily="sans-serif" textAnchor="middle">15 cm</text>
-    <text x="236" y="196" fill="#fbbf24" fontSize="12" fontFamily="sans-serif">10 cm</text>
-    <text x="198" y="82"  fill="#fbbf24" fontSize="12" fontFamily="sans-serif">9 cm</text>
-  </svg>
-);
-
-const TabelSegitiga11 = () => {
-  const rows = [
-    { tri: "△ABC", sisi: ["3", "10", "12"] },
-    { tri: "△DEF", sisi: ["3", "4", "6"] },
-    { tri: "△KLM", sisi: ["10", "24", "26"] },
-    { tri: "△PQR", sisi: ["6", "8", "9"] },
-  ];
-  return (
-    <div className="my-3 flex justify-center">
-      <div className="w-full max-w-xs sm:max-w-sm overflow-hidden rounded-lg border border-cyan-400/40 bg-white/5">
-        <table className="w-full text-sm text-white">
-          <thead className="bg-cyan-500/20">
-            <tr>
-              <th className="px-3 py-2 text-left font-semibold border-b border-cyan-400/30">Segitiga</th>
-              <th className="px-3 py-2 text-center font-semibold border-b border-cyan-400/30">Sisi 1</th>
-              <th className="px-3 py-2 text-center font-semibold border-b border-cyan-400/30">Sisi 2</th>
-              <th className="px-3 py-2 text-center font-semibold border-b border-cyan-400/30">Sisi 3</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((r, i) => (
-              <tr key={r.tri} className={i % 2 === 0 ? "bg-white/0" : "bg-white/5"}>
-                <td className="px-3 py-2 font-semibold text-cyan-300 border-t border-cyan-400/20">{r.tri}</td>
-                {r.sisi.map((s, j) => (
-                  <td key={j} className="px-3 py-2 text-center text-yellow-300 border-t border-cyan-400/20">{s}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-};
-
-const SegitigaXSVG = () => {
-  const W = 280, H = 200;
-  const Ax = 90, Ay = H - 30;
-  const Bx = W - 30, By = H - 30;
-  const Cx = 90, Cy = 25;
-  return (
-    <div className="my-3 flex justify-center">
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-[180px] sm:max-w-[220px] rounded-lg border border-border/40 bg-white/5">
-        <polygon points={`${Ax},${Ay} ${Bx},${By} ${Cx},${Cy}`} fill="rgba(34,211,238,0.08)" stroke="#22d3ee" strokeWidth="2" />
-        <rect x={Ax} y={Ay - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1.2" />
-        <circle cx={Ax} cy={Ay} r="3" fill="#22d3ee" />
-        <circle cx={Bx} cy={By} r="3" fill="#22d3ee" />
-        <circle cx={Cx} cy={Cy} r="3" fill="#22d3ee" />
-        <text x={Ax - 8} y={(Ay + Cy) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">(x − 1) cm</text>
-        <text x={(Ax + Bx) / 2} y={By + 18} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="middle">(x + 1) cm</text>
-        <text x={(Bx + Cx) / 2 + 6} y={(By + Cy) / 2 - 6} fill="#fbbf24" fontSize="13" fontWeight="bold">(x + 3) cm</text>
-      </svg>
-    </div>
-  );
-};
-
-const LayangLayangABCDSVG = () => {
-  const W = 240, H = 300;
-  const cx = W / 2;
-  const cy = H / 2 - 10;
-  const B = { x: cx, y: 30 };
-  const D = { x: cx, y: H - 20 };
-  const A = { x: 30, y: cy };
-  const C = { x: W - 30, y: cy };
-  return (
-    <div className="my-3 flex justify-center">
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-[200px] sm:max-w-[240px] rounded-lg border border-border/40 bg-white/5">
-        <line x1={B.x} y1={B.y} x2={D.x} y2={D.y} stroke="#94a3b8" strokeWidth="1.4" strokeDasharray="5,4" />
-        <line x1={A.x} y1={A.y} x2={C.x} y2={C.y} stroke="#94a3b8" strokeWidth="1.4" strokeDasharray="5,4" />
-        <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y} ${D.x},${D.y}`} fill="rgba(34,211,238,0.06)" stroke="#22d3ee" strokeWidth="2" />
-        <line x1={cx - 5} y1={cy} x2={cx + 5} y2={cy} stroke="#94a3b8" strokeWidth="1" />
-        <line x1={cx} y1={cy - 5} x2={cx} y2={cy + 5} stroke="#94a3b8" strokeWidth="1" />
-        {[A, B, C, D].map((p, i) => <circle key={i} cx={p.x} cy={p.y} r="3" fill="#22d3ee" />)}
-        <text x={B.x} y={B.y - 8} fill="#e5e7eb" fontSize="14" fontWeight="bold" textAnchor="middle">B</text>
-        <text x={D.x} y={D.y + 16} fill="#e5e7eb" fontSize="14" fontWeight="bold" textAnchor="middle">D</text>
-        <text x={A.x - 8} y={A.y + 5} fill="#e5e7eb" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
-        <text x={C.x + 8} y={C.y + 5} fill="#e5e7eb" fontSize="14" fontWeight="bold">C</text>
-      </svg>
-    </div>
-  );
-};
-
-const JajargenjangABCDSVG = () => {
-  const W = 320, H = 250;
-  const A = { x: 30, y: 210 };
-  const E = { x: 80, y: 210 };
-  const B = { x: 230, y: 210 };
-  const D = { x: 80, y: 90 };
-  const C = { x: 280, y: 90 };
-  return (
-    <div className="my-3 flex justify-center">
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
-        <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y} ${D.x},${D.y}`} fill="rgba(34,211,238,0.06)" stroke="#22d3ee" strokeWidth="2" />
-        <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke="#94a3b8" strokeWidth="1.4" strokeDasharray="5,4" />
-        <rect x={E.x} y={E.y - 10} width="10" height="10" fill="none" stroke="#22d3ee" strokeWidth="1.2" />
-        {[A, B, C, D, E].map((p, i) => <circle key={i} cx={p.x} cy={p.y} r="3" fill="#22d3ee" />)}
-        <text x={A.x - 6} y={A.y + 16} fill="#e5e7eb" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
-        <text x={B.x + 6} y={B.y + 16} fill="#e5e7eb" fontSize="14" fontWeight="bold">B</text>
-        <text x={C.x + 6} y={C.y - 4} fill="#e5e7eb" fontSize="14" fontWeight="bold">C</text>
-        <text x={D.x - 6} y={D.y - 4} fill="#e5e7eb" fontSize="14" fontWeight="bold" textAnchor="end">D</text>
-        <text x={E.x} y={E.y + 16} fill="#e5e7eb" fontSize="13" fontWeight="bold" textAnchor="middle">E</text>
-        <text x={(D.x + C.x) / 2} y={D.y - 8} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="middle">20 cm</text>
-        <text x={(A.x + D.x) / 2 - 8} y={(A.y + D.y) / 2} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">13 cm</text>
-        <text x={(E.x + B.x) / 2} y={B.y + 22} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="middle">15 cm</text>
-      </svg>
-    </div>
-  );
-};
-
-const SegitigaPQR30SVG = () => {
-  const W = 300, H = 200;
-  const P = { x: 40, y: 170 };
-  const Q = { x: 260, y: 170 };
-  const R = { x: 40, y: 40 };
-  return (
-    <div className="my-3 flex justify-center">
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
-        <polygon points={`${P.x},${P.y} ${Q.x},${Q.y} ${R.x},${R.y}`} fill="rgba(34,211,238,0.08)" stroke="#22d3ee" strokeWidth="2" />
-        <rect x={P.x} y={P.y - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1.2" />
-        <path d={`M ${Q.x - 28} ${Q.y} A 28 28 0 0 1 ${Q.x - 24.2} ${Q.y - 14}`} fill="none" stroke="#fbbf24" strokeWidth="1.4" />
-        <text x={Q.x - 30} y={Q.y - 6} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">30°</text>
-        {[P, Q, R].map((p, i) => <circle key={i} cx={p.x} cy={p.y} r="3" fill="#22d3ee" />)}
-        <text x={P.x - 6} y={P.y + 16} fill="#e5e7eb" fontSize="14" fontWeight="bold" textAnchor="end">P</text>
-        <text x={Q.x + 6} y={Q.y + 16} fill="#e5e7eb" fontSize="14" fontWeight="bold">Q</text>
-        <text x={R.x - 6} y={R.y - 4} fill="#e5e7eb" fontSize="14" fontWeight="bold" textAnchor="end">R</text>
-      </svg>
-    </div>
-  );
-};
-
-// Soal 29 — Segitiga ABC siku-siku di B, titik D pada AB, ∠A=30°, ∠CDB=45°, BC=5cm
-const Soal29ABCDSVG = () => (
-  <svg viewBox="65 115 245 160" className="w-full max-w-xs mx-auto rounded-lg border border-border/40 bg-white/5" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="87,240 260,240 260,140" fill="rgba(251,191,36,0.08)" stroke="none" />
-    <line x1="87" y1="240" x2="260" y2="240" stroke="#22d3ee" strokeWidth="2" />
-    <line x1="260" y1="240" x2="260" y2="140" stroke="#22d3ee" strokeWidth="2" />
-    <line x1="87" y1="240" x2="260" y2="140" stroke="#22d3ee" strokeWidth="2" />
-    <line x1="160" y1="240" x2="260" y2="140" stroke="#22d3ee" strokeWidth="1.8" />
-    <polyline points="248,240 248,228 260,228" fill="none" stroke="#22d3ee" strokeWidth="1.5" />
-    <path d="M 111,240 A 24 24 0 0 0 107.78,228" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
-    <path d="M 180,240 A 20 20 0 0 0 174.14,225.86" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
-    <circle cx="87"  cy="240" r="2.5" fill="#f87171" />
-    <circle cx="260" cy="240" r="2.5" fill="#f87171" />
-    <circle cx="260" cy="140" r="2.5" fill="#f87171" />
-    <circle cx="160" cy="240" r="2.5" fill="#f87171" />
-    <text x="74"  y="258" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
-    <text x="264" y="258" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
-    <text x="264" y="140" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">C</text>
-    <text x="154" y="258" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">D</text>
-    <text x="115" y="234" fill="#fbbf24" fontSize="11" fontFamily="sans-serif">30°</text>
-    <text x="182" y="232" fill="#fbbf24" fontSize="11" fontFamily="sans-serif">45°</text>
-    <text x="268" y="196" fill="#fbbf24" fontSize="12" fontFamily="sans-serif">5 cm</text>
-  </svg>
-);
-
 // ─── Materi ───────────────────────────────────────────────────────────────────
 
 const materiSections: MateriSection[] = [
@@ -334,63 +54,479 @@ Pada segitiga siku-siku sama kaki dengan sudut $45°$, $45°$, dan $90°$:
   },
 ];
 
-// ─── Latihan Soal (sama dengan Olimpiade Matematika - Teorema Pythagoras - Latihan Dasar) ─────
+// ─── Latihan Soal — 30 soal merata: 10 PG · 10 PGK · 10 PGKBS ──────────────
+// Pola susunan: PG (ganjil/1,4,7,...) · PGK (2,5,8,...) · PGKBS (3,6,9,...)
 
 const latihanDasar: LatihanSoal[] = [
-  { no: 1, soal: "Diketahui ukuran segitiga:\ni. 1 cm, 1 cm, 1 cm\nii. 8 cm, 10 cm, 18 cm\niii. 12 cm, 21 cm, 8 cm\niv. 5 cm, 12 cm, 15 cm\nYang dapat membentuk suatu segitiga adalah ....", options: ["A. i dan iii", "B. iii dan iv", "C. i, iii dan iv", "D. i dan iv"] },
-  { no: 2, soal: "Diketahui ukuran berikut:\ni. 2 cm, 2 cm, 2 cm\nii. 6 cm, 8 cm, 14 cm\niii. 7 cm, 15 cm, 25 cm\niv. 5 cm, 12 cm, 15 cm\nYang merupakan sisi pada segitiga adalah ..", options: ["A. i dan ii", "B. i dan iv", "C. ii dan iv", "D. iv saja"] },
-  { no: 3, soal: "Perhatikan gambar! Dari pernyataan berikut yang benar adalah ....", options: ["A. $p = \\sqrt{r^2 + q^2}$", "B. $q = \\sqrt{r^2 - p^2}$", "C. $p = \\sqrt{q^2 - r^2}$", "D. $q = \\sqrt{r^2 + p^2}$"], gambar: <SegitigaPQRSVG /> },
-  { no: 4, soal: "Panjang AC adalah..", options: ["A. 24 cm", "B. 28 cm", "C. 30 cm", "D. 32 cm"], gambar: <SegitigaABC182430SVG /> },
-  { no: 5, soal: "Perhatikan gambar! Panjang AD adalah....", options: ["A. 15 cm", "B. 17 cm", "C. 24 cm", "D. 25 cm"], gambar: <SegitigaABD72425SVG /> },
-  { no: 6, soal: "Perhatikan gambar berikut! Panjang BD adalah....", options: ["A. 12 cm", "B. 18 cm", "C. 18 cm", "D. 40 cm"], gambar: <SegitigaCABD9_15_41_SVG /> },
-  { no: 7, soal: "Perhatikan gambar berikut! Keliling bangun ABCDE adalah....", options: ["A. 56 cm", "B. 74 cm", "C. 59 cm", "D. 86 cm"], gambar: <Soal7ABCDESVG /> },
-  { no: 8, soal: "Perhatikan sisi-sisi segitiga di bawah\ni. 8, 15, dan 18\nii. 7, 24, dan 25\niii. 12, 15, dan 20\niv. 9, 12, dan 15\nYang merupakan tripel Pythagoras pada sisi-sisi segitiga diatas adalah...", options: ["A. i dan ii", "B. ii dan iii", "C. ii dan iv", "D. i dan iv"] },
-  { no: 9, soal: "Besar kedua sudut segitiga $40°$ dan $70°$. Ditinjau dari panjang sisi dan besar sudutnya, jenis segitiga tersebut adalah....", options: ["A. segitiga lancip sama kaki", "B. segitiga siku-siku sama kaki", "C. segitiga tumpul sama kaki", "D. segitiga tumpul sembarang"] },
-  { no: 10, soal: "Diketahui panjang sisi-sisi pada segitiga sebagai berikut:\n(1). 3 cm, 4 cm, 5 cm\n(2). 6 cm, 7 cm, 10 cm\n(3). 4 cm, 5 cm, 6 cm\n(4). 6 cm, 8 cm, 12 cm\nPanjang sisi-sisi diatas yang dapat membentuk segitiga tumpul adalah ...", options: ["A. (1) dan (2)", "B. (2) dan (3)", "C. (3) dan (4)", "D. (2) dan (4)"] },
-  { no: 11, soal: "Perhatikan tabel berikut.\nPada tabel tersebut, segitiga yang merupakan segitiga siku-siku adalah .......", options: ["A. $\\triangle ABC$", "B. $\\triangle DEF$", "C. $\\triangle KLM$", "D. $\\triangle PQR$"], gambar: <TabelSegitiga11 /> },
-  { no: 12, soal: "Suatu segitiga mempunyai ukuran sisi-sisinya 8 cm, 15 cm, dan 20 cm. Segitiga tersebut merupakan jenis segitiga ....", options: ["A. lancip", "B. tumpul", "C. siku-siku", "D. sama kaki"] },
-  { no: 13, soal: "Diketahui ukuran segitiga:\ni. 2 cm, 2 cm, 2 cm\nii. 6 cm, 8 cm, 14 cm\niii. 7 cm, 24 cm, 25 cm\niv. 5 cm, 12 cm, 15 cm\nYang merupakan segitiga tumpul adalah ..", options: ["A. i dan ii", "B. i dan iv", "C. ii dan iv", "D. iv saja"] },
-  { no: 14, soal: "Diketahui sebuah segitiga memiliki sudut $45°$ dan $100°$, maka jika ditinjau dari sisinya dan sudut segitiga tersebut adalah......", options: ["A. Segitiga tumpul sama kaki", "B. Segitiga tumpul sebarang", "C. Segitiga lancip sama sisi", "D. Segitiga siku-siku sama kaki"] },
-  { no: 15, soal: "Pernyataan yang benar untuk gambar di bawah adalah ...", options: ["A. $x = 6$ cm", "B. $x = 7$ cm", "C. luas segitiga $= 48$ cm$^2$", "D. keliling segitiga $= 21$ cm"], gambar: <SegitigaXSVG /> },
-  { no: 16, soal: "Diketahui keliling belah ketupat 52 cm dan salah satu diagonalnya 24 cm. Luas belah ketupat ABCD adalah....", options: ["A. 312 cm$^2$", "B. 274 cm$^2$", "C. 240 cm$^2$", "D. 120 cm$^2$"] },
-  { no: 17, soal: "Panjang diagonal dan lebar sebuah persegi panjang berturut-turut adalah 15 cm dan 9 cm. Panjang persegi panjang tersebut adalah ......", options: ["A. 8 cm", "B. 10 cm", "C. 12 cm", "D. 14 cm"] },
+  // ── SOAL 1 — PG ────────────────────────────────────────────────────────────
+  {
+    no: 1,
+    type: "pg",
+    soal: "Diketahui sebuah segitiga siku-siku dengan panjang dua sisi tegaknya 6 cm dan 8 cm. Panjang sisi miringnya adalah ...",
+    options: ["A. 10 cm", "B. 12 cm", "C. 14 cm", "D. 15 cm"],
+    jawaban: "A",
+    pembahasan: "Gunakan Teorema Pythagoras:\n$c^2 = a^2 + b^2 = 6^2 + 8^2 = 36 + 64 = 100$\n$c = \\sqrt{100} = 10$ cm → Jawaban A",
+  },
+
+  // ── SOAL 2 — PGK ───────────────────────────────────────────────────────────
+  {
+    no: 2,
+    type: "pgk",
+    soal: "Suatu segitiga mempunyai sisi-sisi 5 cm, 12 cm, dan 13 cm. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "$5^2 + 12^2 = 13^2$",
+      "Segitiga tersebut adalah segitiga siku-siku",
+      "Luas segitiga tersebut adalah 30 cm²",
+      "Keliling segitiga tersebut adalah 25 cm",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (2) dan (3) saja",
+      "C. (1), (2), dan (3)",
+      "D. Semua benar",
+    ],
+    jawaban: "C",
+    pembahasan: "(1) $5^2 + 12^2 = 25 + 144 = 169 = 13^2$ ✓ BENAR\n(2) Karena $5^2+12^2=13^2$, segitiga siku-siku di sudut berhadapan 13 cm ✓ BENAR\n(3) Luas = $\\frac{1}{2} \\times 5 \\times 12 = 30$ cm² ✓ BENAR\n(4) Keliling = $5+12+13 = 30$ cm ≠ 25 cm ✗ SALAH\nPernyataan benar: (1), (2), dan (3) → Jawaban C",
+  },
+
+  // ── SOAL 3 — PGKBS ─────────────────────────────────────────────────────────
+  {
+    no: 3,
+    type: "pgkbs",
+    soal: "Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut tentang Teorema Pythagoras!",
+    pernyataan: [
+      "Pada segitiga siku-siku, kuadrat sisi miring sama dengan jumlah kuadrat kedua sisi tegaknya",
+      "Tripel (6, 8, 10) memenuhi Teorema Pythagoras karena $6^2 + 8^2 = 10^2$",
+      "Sisi miring suatu segitiga siku-siku adalah sisi yang paling pendek",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "(1) Teorema Pythagoras: $c^2 = a^2 + b^2$ → BENAR\n(2) $6^2+8^2 = 36+64 = 100 = 10^2$ → BENAR\n(3) Sisi miring (hipotenusa) adalah sisi yang TERPANJANG, bukan terpendek → SALAH",
+  },
+
+  // ── SOAL 4 — PG ────────────────────────────────────────────────────────────
+  {
+    no: 4,
+    type: "pg",
+    soal: "Panjang hipotenusa segitiga siku-siku adalah 13 cm dan salah satu sisi tegaknya 5 cm. Panjang sisi tegak yang lain adalah ...",
+    options: ["A. 8 cm", "B. 10 cm", "C. 12 cm", "D. 14 cm"],
+    jawaban: "C",
+    pembahasan: "$b^2 = c^2 - a^2 = 13^2 - 5^2 = 169 - 25 = 144$\n$b = \\sqrt{144} = 12$ cm → Jawaban C",
+  },
+
+  // ── SOAL 5 — PGK ───────────────────────────────────────────────────────────
+  {
+    no: 5,
+    type: "pgk",
+    soal: "Perhatikan pernyataan berikut tentang tripel Pythagoras!",
+    pernyataan: [
+      "(3, 4, 5) adalah tripel Pythagoras",
+      "(5, 12, 13) adalah tripel Pythagoras",
+      "(6, 8, 12) adalah tripel Pythagoras",
+      "(8, 15, 17) adalah tripel Pythagoras",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (1), (2), dan (3)",
+      "C. (1), (2), dan (4)",
+      "D. Semua benar",
+    ],
+    jawaban: "C",
+    pembahasan: "(1) $3^2+4^2 = 9+16 = 25 = 5^2$ ✓ BENAR\n(2) $5^2+12^2 = 25+144 = 169 = 13^2$ ✓ BENAR\n(3) $6^2+8^2 = 36+64 = 100 \\neq 144 = 12^2$ ✗ SALAH\n(4) $8^2+15^2 = 64+225 = 289 = 17^2$ ✓ BENAR\nPernyataan benar: (1), (2), dan (4) → Jawaban C",
+  },
+
+  // ── SOAL 6 — PGKBS ─────────────────────────────────────────────────────────
+  {
+    no: 6,
+    type: "pgkbs",
+    soal: "Titik $A(1, 2)$ dan $B(4, 6)$ berada pada bidang koordinat Kartesius. Tentukan benar (B) atau salah (S)!",
+    pernyataan: [
+      "Jarak AB = 5 satuan",
+      "Jarak AB = 25 satuan",
+      "Selisih koordinat $x$ titik A dan B adalah 3",
+    ],
+    jawabanBS: ["B", "S", "B"],
+    pembahasan: "(1) $|AB| = \\sqrt{(4-1)^2+(6-2)^2} = \\sqrt{9+16} = \\sqrt{25} = 5$ satuan → BENAR\n(2) Jarak AB = 5 satuan, bukan 25 → SALAH\n(3) Selisih koordinat $x$: $4-1 = 3$ → BENAR",
+  },
+
+  // ── SOAL 7 — PG ────────────────────────────────────────────────────────────
+  {
+    no: 7,
+    type: "pg",
+    soal: "Sebuah tangga yang panjangnya 10 m bersandar pada tembok. Kaki tangga berjarak 6 m dari tembok. Tinggi yang dicapai tangga pada tembok adalah ...",
+    options: ["A. 4 m", "B. 6 m", "C. 8 m", "D. 10 m"],
+    jawaban: "C",
+    pembahasan: "Tinggi$^2 = $ tangga$^2 - $ jarak$^2 = 10^2 - 6^2 = 100 - 36 = 64$\nTinggi $= \\sqrt{64} = 8$ m → Jawaban C",
+  },
+
+  // ── SOAL 8 — PGK ───────────────────────────────────────────────────────────
+  {
+    no: 8,
+    type: "pgk",
+    soal: "Pada segitiga siku-siku dengan sudut $30°$, $60°$, dan $90°$ serta panjang sisi miring 24 cm. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Panjang sisi di depan sudut $30°$ adalah 12 cm",
+      "Panjang sisi di depan sudut $60°$ adalah $12\\sqrt{3}$ cm",
+      "Keliling segitiga adalah $(36 + 12\\sqrt{3})$ cm",
+      "Luas segitiga adalah 144 cm²",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (1), (2), dan (3)",
+      "C. (2), (3), dan (4)",
+      "D. Semua benar",
+    ],
+    jawaban: "B",
+    pembahasan: "Sisi miring = 24 cm\n(1) Sisi depan 30° = $\\frac{1}{2} \\times 24 = 12$ cm ✓ BENAR\n(2) Sisi depan 60° = $\\frac{\\sqrt{3}}{2} \\times 24 = 12\\sqrt{3}$ cm ✓ BENAR\n(3) Keliling = $24 + 12 + 12\\sqrt{3} = 36 + 12\\sqrt{3}$ cm ✓ BENAR\n(4) Luas = $\\frac{1}{2} \\times 12 \\times 12\\sqrt{3} = 72\\sqrt{3}$ cm² $\\neq 144$ cm² ✗ SALAH\n→ Jawaban B",
+  },
+
+  // ── SOAL 9 — PGKBS ─────────────────────────────────────────────────────────
+  {
+    no: 9,
+    type: "pgkbs",
+    soal: "Sebuah segitiga mempunyai sisi-sisi $a$, $b$, dan $c$ dengan $c$ adalah sisi terpanjang. Tentukan benar (B) atau salah (S)!",
+    pernyataan: [
+      "Jika $c^2 = a^2 + b^2$, segitiga tersebut adalah segitiga siku-siku",
+      "Jika $c^2 > a^2 + b^2$, segitiga tersebut adalah segitiga lancip",
+      "Jika $c^2 < a^2 + b^2$, segitiga tersebut adalah segitiga lancip",
+    ],
+    jawabanBS: ["B", "S", "B"],
+    pembahasan: "(1) Ini adalah bunyi Teorema Pythagoras → BENAR\n(2) Jika $c^2 > a^2+b^2$ maka segitiga TUMPUL, bukan lancip → SALAH\n(3) Jika $c^2 < a^2+b^2$ maka segitiga LANCIP → BENAR",
+  },
+
+  // ── SOAL 10 — PG ───────────────────────────────────────────────────────────
+  {
+    no: 10,
+    type: "pg",
+    soal: "Jarak antara titik $P(1, 2)$ dan titik $Q(4, 6)$ pada bidang koordinat Kartesius adalah ...",
+    options: ["A. 3 satuan", "B. 4 satuan", "C. 5 satuan", "D. 7 satuan"],
+    jawaban: "C",
+    pembahasan: "$|PQ| = \\sqrt{(4-1)^2+(6-2)^2} = \\sqrt{3^2+4^2} = \\sqrt{9+16} = \\sqrt{25} = 5$ satuan → Jawaban C",
+  },
+
+  // ── SOAL 11 — PGK ──────────────────────────────────────────────────────────
+  {
+    no: 11,
+    type: "pgk",
+    soal: "Suatu belah ketupat ABCD mempunyai diagonal $AC = 10$ cm dan $BD = 24$ cm. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Panjang sisi belah ketupat = 13 cm",
+      "Keliling belah ketupat = 52 cm",
+      "Luas belah ketupat = 120 cm²",
+      "Panjang sisi belah ketupat = 15 cm",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (2) dan (3) saja",
+      "C. (1), (2), dan (3)",
+      "D. Semua benar",
+    ],
+    jawaban: "C",
+    pembahasan: "Setengah diagonal: $AO = 5$ cm, $BO = 12$ cm\n(1) Sisi = $\\sqrt{5^2+12^2} = \\sqrt{25+144} = \\sqrt{169} = 13$ cm ✓ BENAR\n(2) Keliling = $4 \\times 13 = 52$ cm ✓ BENAR\n(3) Luas = $\\frac{1}{2} \\times 10 \\times 24 = 120$ cm² ✓ BENAR\n(4) Sisi = 13 cm, bukan 15 cm ✗ SALAH\n→ Jawaban C",
+  },
+
+  // ── SOAL 12 — PGKBS ────────────────────────────────────────────────────────
+  {
+    no: 12,
+    type: "pgkbs",
+    soal: "Segitiga siku-siku sama kaki mempunyai kedua sisi tegak masing-masing sepanjang $a$ cm. Tentukan benar (B) atau salah (S)!",
+    pernyataan: [
+      "Sudut-sudut segitiga adalah 45°, 45°, dan 90°",
+      "Panjang sisi miring = $a\\sqrt{2}$ cm",
+      "Jika $a = 5$ cm, luas segitiga = 25 cm²",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "(1) Segitiga siku-siku sama kaki selalu memiliki sudut 45°-45°-90° → BENAR\n(2) $c^2 = a^2+a^2 = 2a^2$, jadi $c = a\\sqrt{2}$ → BENAR\n(3) Luas = $\\frac{1}{2} \\times 5 \\times 5 = 12{,}5$ cm², bukan 25 cm² → SALAH",
+  },
+
+  // ── SOAL 13 — PG ───────────────────────────────────────────────────────────
+  {
+    no: 13,
+    type: "pg",
+    soal: "Suatu segitiga mempunyai sisi-sisi 8 cm, 15 cm, dan 20 cm. Jenis segitiga tersebut ditinjau dari sudutnya adalah ...",
+    options: [
+      "A. Segitiga lancip",
+      "B. Segitiga siku-siku",
+      "C. Segitiga tumpul",
+      "D. Segitiga sama kaki",
+    ],
+    jawaban: "C",
+    pembahasan: "Sisi terpanjang: $c = 20$ cm\n$c^2 = 400$\n$a^2+b^2 = 8^2+15^2 = 64+225 = 289$\nKarena $c^2 = 400 > 289 = a^2+b^2$ → Segitiga TUMPUL → Jawaban C",
+  },
+
+  // ── SOAL 14 — PGK ──────────────────────────────────────────────────────────
+  {
+    no: 14,
+    type: "pgk",
+    soal: "Empat titik koordinat: $A(0,0)$, $B(3,0)$, $C(3,4)$, dan $D(0,4)$. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Jarak $AC = 5$ satuan",
+      "Jarak $BD = 5$ satuan",
+      "Bangun ABCD adalah persegi panjang",
+      "Panjang diagonal ABCD = 7 satuan",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (1), (2), dan (3)",
+      "C. (2) dan (4) saja",
+      "D. Semua benar",
+    ],
+    jawaban: "B",
+    pembahasan: "(1) $|AC| = \\sqrt{(3-0)^2+(4-0)^2} = \\sqrt{9+16} = 5$ satuan ✓ BENAR\n(2) $|BD| = \\sqrt{(0-3)^2+(4-0)^2} = \\sqrt{9+16} = 5$ satuan ✓ BENAR\n(3) AB=3, BC=4, CD=3, DA=4, semua sudut 90° → persegi panjang ✓ BENAR\n(4) Diagonal = 5 satuan ≠ 7 satuan ✗ SALAH\n→ Jawaban B",
+  },
+
+  // ── SOAL 15 — PGKBS ────────────────────────────────────────────────────────
+  {
+    no: 15,
+    type: "pgkbs",
+    soal: "Suatu belah ketupat mempunyai diagonal 16 cm dan 12 cm. Tentukan benar (B) atau salah (S)!",
+    pernyataan: [
+      "Panjang sisi belah ketupat = 10 cm",
+      "Keliling belah ketupat = 40 cm",
+      "Luas belah ketupat = 48 cm²",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "Setengah diagonal: 8 cm dan 6 cm\n(1) Sisi = $\\sqrt{8^2+6^2} = \\sqrt{64+36} = \\sqrt{100} = 10$ cm → BENAR\n(2) Keliling = $4 \\times 10 = 40$ cm → BENAR\n(3) Luas = $\\frac{1}{2} \\times 16 \\times 12 = 96$ cm², bukan 48 cm² → SALAH",
+  },
+
+  // ── SOAL 16 — PG ───────────────────────────────────────────────────────────
+  {
+    no: 16,
+    type: "pg",
+    soal: "Keliling belah ketupat ABCD dengan panjang diagonal $p = 16$ cm dan $q = 12$ cm adalah ...",
+    options: ["A. 20 cm", "B. 28 cm", "C. 40 cm", "D. 48 cm"],
+    jawaban: "C",
+    pembahasan: "Setengah diagonal: 8 cm dan 6 cm\nSisi = $\\sqrt{8^2+6^2} = \\sqrt{64+36} = \\sqrt{100} = 10$ cm\nKeliling = $4 \\times 10 = 40$ cm → Jawaban C",
+  },
+
+  // ── SOAL 17 — PGK ──────────────────────────────────────────────────────────
+  {
+    no: 17,
+    type: "pgk",
+    soal: "Segitiga ABC siku-siku di B dengan $AB = 15$ cm dan $BC = 20$ cm. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Panjang $AC = 25$ cm",
+      "Luas $\\triangle ABC = 150$ cm²",
+      "Keliling $\\triangle ABC = 60$ cm",
+      "Sudut terbesar di $\\triangle ABC$ adalah sudut A",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (2) dan (3) saja",
+      "C. (1), (2), dan (3)",
+      "D. Semua benar",
+    ],
+    jawaban: "C",
+    pembahasan: "(1) $AC = \\sqrt{15^2+20^2} = \\sqrt{225+400} = \\sqrt{625} = 25$ cm ✓ BENAR\n(2) Luas = $\\frac{1}{2} \\times 15 \\times 20 = 150$ cm² ✓ BENAR\n(3) Keliling = $15+20+25 = 60$ cm ✓ BENAR\n(4) Sudut terbesar adalah sudut B (siku-siku = 90°), bukan sudut A ✗ SALAH\n→ Jawaban C",
+  },
+
+  // ── SOAL 18 — PGKBS ────────────────────────────────────────────────────────
   {
     no: 18,
-    soal: "Perhatikan gambar berikut.\n[IMAGE:https://drive.google.com/thumbnail?id=1esQMfsShmsagj6xBd93KcfnNJuZeJkZo&sz=w400]\nDari gambar diatas, berapa kira-kira panjang tali layar dari layang-layang agar layar tersebut menarik kapal pada sudut $45°$ dan berada pada ketinggian vertikal 150 m, seperti diperlihatkan pada gambar?",
-    options: ["A. 175 m", "B. 212 m", "C. 285 m", "D. 300 m"],
+    type: "pgkbs",
+    soal: "Sebuah kapal berlayar ke arah timur sejauh 12 km, lalu ke arah utara sejauh 5 km. Tentukan benar (B) atau salah (S)!",
+    pernyataan: [
+      "Lintasan kapal membentuk segitiga siku-siku",
+      "Jarak langsung dari titik awal ke posisi akhir adalah 13 km",
+      "Kapal harus berlayar sejauh 20 km untuk kembali ke titik awal melalui jalur langsung",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "(1) Arah timur dan utara saling tegak lurus → membentuk segitiga siku-siku → BENAR\n(2) Jarak = $\\sqrt{12^2+5^2} = \\sqrt{144+25} = \\sqrt{169} = 13$ km → BENAR\n(3) Jarak langsung = 13 km, bukan 20 km → SALAH",
   },
-  { no: 19, soal: "Sebuah kapal berlayar dari pelabuhan Ambu menuju arah barat sejauh 100 mil ke pelabuhan Beta. Dari Beta ke arah selatan sejauh 50 mil menuju pelabuhan Cinta. Dari Cinta ke arah timur sejauh 170 mil ke pelabuhan Delta. Dari Delta ke arah utara sejauh 290 mil menuju pelabuhan Eco. Jarak terdekat dari pelabuhan Ambu ke pelabuhan Eco adalah...", options: ["A. 130 mil", "B. 170 mil", "C. 250 mil", "D. 260 mil"] },
+
+  // ── SOAL 19 — PG ───────────────────────────────────────────────────────────
+  {
+    no: 19,
+    type: "pg",
+    soal: "Sebuah persegi panjang mempunyai panjang 15 cm dan lebar 8 cm. Panjang diagonalnya adalah ...",
+    options: ["A. 14 cm", "B. 15 cm", "C. 17 cm", "D. 23 cm"],
+    jawaban: "C",
+    pembahasan: "Diagonal = $\\sqrt{15^2+8^2} = \\sqrt{225+64} = \\sqrt{289} = 17$ cm → Jawaban C",
+  },
+
+  // ── SOAL 20 — PGK ──────────────────────────────────────────────────────────
   {
     no: 20,
-    soal: "Perhatikan gambar.\n[IMAGE:https://drive.google.com/thumbnail?id=1rm7EQCDS9GF7Fz4UtGreZ2GGgLvk9E3h&sz=w400]\nDiketahui AB = 15 cm, AF = 10 cm, BD = 12 cm. Luas bangun tersebut adalah ...",
-    options: ["A. 140 cm$^2$", "B. 216 cm$^2$", "C. 250 cm$^2$", "D. 302 cm$^2$"],
+    type: "pgk",
+    soal: "Diketahui tiga titik: $P(0,0)$, $Q(6,0)$, dan $R(6,8)$ pada bidang koordinat. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "$PQ = 6$ satuan",
+      "$QR = 8$ satuan",
+      "$PR = 10$ satuan",
+      "$\\triangle PQR$ adalah segitiga tumpul",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (1), (2), dan (3)",
+      "C. (2) dan (4) saja",
+      "D. Semua benar",
+    ],
+    jawaban: "B",
+    pembahasan: "(1) $PQ = |6-0| = 6$ satuan ✓ BENAR\n(2) $QR = |8-0| = 8$ satuan ✓ BENAR\n(3) $PR = \\sqrt{6^2+8^2} = \\sqrt{36+64} = \\sqrt{100} = 10$ satuan ✓ BENAR\n(4) $6^2+8^2 = 10^2$ → $\\triangle PQR$ adalah segitiga SIKU-SIKU, bukan tumpul ✗ SALAH\n→ Jawaban B",
   },
+
+  // ── SOAL 21 — PGKBS ────────────────────────────────────────────────────────
   {
     no: 21,
-    soal: "Perhatikan gambar berikut.\n[IMAGE:https://drive.google.com/thumbnail?id=1Pm7o-z88MQ6qpVRrrCE0JE5GFgghrI21&sz=w400]\nLuas daerah di atas adalah",
-    options: ["A. 48 cm$^2$", "B. 98 cm$^2$", "C. 120 cm$^2$", "D. 144 cm$^2$"],
+    type: "pgkbs",
+    soal: "Seorang anak berdiri 9 m dari pangkal tiang bendera yang tingginya 12 m. Tentukan benar (B) atau salah (S)!",
+    pernyataan: [
+      "Jarak dari anak ke puncak tiang adalah 15 m",
+      "(9, 12, 15) merupakan tripel Pythagoras",
+      "Jarak anak ke puncak tiang = jarak ke pangkal + tinggi tiang",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "(1) Jarak = $\\sqrt{9^2+12^2} = \\sqrt{81+144} = \\sqrt{225} = 15$ m → BENAR\n(2) $(9,12,15) = 3 \\times (3,4,5)$ → tripel Pythagoras → BENAR\n(3) Jarak ke puncak ≠ $9+12 = 21$ m; harus dihitung dengan Teorema Pythagoras → SALAH",
   },
-  { no: 22, soal: "Kebun berbentuk belah ketupat dengan panjang masing-masing diagonalnya 12 m dan 16 m. Di sekeliling kebun akan ditanami pohon dengan jarak antar pohon 2 m.\nBanyaknya seluruh pohon adalah", options: ["A. 14 pohon", "B. 20 pohon", "C. 28 pohon", "D. 56 pohon"] },
-  { no: 23, soal: "Perhatikan gambar layang-layang ABCD di bawah ini.\nJika panjang AC = 24 cm, panjang AB = 13 cm dan panjang AD = 20 cm. Hitunglah luas bangun layang-layang di atas!", options: [], gambar: <LayangLayangABCDSVG /> },
-  { no: 24, soal: "Perhatikan bangun datar jajargenjang ABCD di bawah ini.\nJika diketahui panjang AD = 13 cm, CD = 20 cm, dan BE = 15 cm. Hitunglah luas jajargenjang ABCD tersebut.", options: [], gambar: <JajargenjangABCDSVG /> },
-  { no: 25, soal: "Sebidang tanah berbentuk trapesium sama kaki, panjang sisi sejajarnya 24 m dan 14 m, dan jarak sisi sejajar 12 m. Jika sekeliling tanah tersebut dibuat pagar, panjang pagar seluruhnya adalah...", options: ["A. 50 m", "B. 51 m", "C. 62 m", "D. 64 m"] },
-  { no: 26, soal: "Seseorang berada di atas gedung yang tingginya 12 m. Dia melihat dua buah benda A dan benda B di tanah dengan arah yang sama. Jika jarak pandang orang tersebut dengan benda A adalah 15 m dan dengan benda B adalah 20 m, maka jarak benda A dan benda B di tanah adalah...", options: ["A. 7 m", "B. 9 m", "C. 12 m", "D. 16 m"] },
-  { no: 27, soal: "Pada gambar di bawah, jika panjang PR = 12 cm maka panjang QR dan PQ adalah ...", options: [], gambar: <SegitigaPQR30SVG /> },
+
+  // ── SOAL 22 — PG ───────────────────────────────────────────────────────────
+  {
+    no: 22,
+    type: "pg",
+    soal: "Segitiga siku-siku sama kaki dengan panjang masing-masing sisi tegak 7 cm. Panjang sisi miringnya adalah ...",
+    options: [
+      "A. $7$ cm",
+      "B. $7\\sqrt{2}$ cm",
+      "C. $7\\sqrt{3}$ cm",
+      "D. $14$ cm",
+    ],
+    jawaban: "B",
+    pembahasan: "Sisi miring = $\\sqrt{7^2+7^2} = \\sqrt{49+49} = \\sqrt{98} = 7\\sqrt{2}$ cm → Jawaban B",
+  },
+
+  // ── SOAL 23 — PGK ──────────────────────────────────────────────────────────
+  {
+    no: 23,
+    type: "pgk",
+    soal: "Suatu segitiga siku-siku sama kaki mempunyai panjang sisi miring $10\\sqrt{2}$ cm. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Panjang sisi tegak = 10 cm",
+      "Sudut-sudut segitiga adalah 45°, 45°, dan 90°",
+      "Luas segitiga = 50 cm²",
+      "Keliling segitiga = 30 cm",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (1), (2), dan (3)",
+      "C. (2) dan (4) saja",
+      "D. Semua benar",
+    ],
+    jawaban: "B",
+    pembahasan: "Sisi tegak = $\\frac{10\\sqrt{2}}{\\sqrt{2}} = 10$ cm\n(1) Sisi tegak = 10 cm ✓ BENAR\n(2) Segitiga siku-siku sama kaki → 45°-45°-90° ✓ BENAR\n(3) Luas = $\\frac{1}{2} \\times 10 \\times 10 = 50$ cm² ✓ BENAR\n(4) Keliling = $10+10+10\\sqrt{2} = 20+10\\sqrt{2}$ cm $\\neq 30$ cm ✗ SALAH\n→ Jawaban B",
+  },
+
+  // ── SOAL 24 — PGKBS ────────────────────────────────────────────────────────
+  {
+    no: 24,
+    type: "pgkbs",
+    soal: "Diketahui segitiga dengan sisi 5 cm, 12 cm, dan 13 cm. Tentukan benar (B) atau salah (S)!",
+    pernyataan: [
+      "Segitiga tersebut adalah segitiga siku-siku",
+      "Luas segitiga = 60 cm²",
+      "Keliling segitiga = 30 cm",
+    ],
+    jawabanBS: ["B", "S", "B"],
+    pembahasan: "(1) $5^2+12^2 = 25+144 = 169 = 13^2$ → siku-siku → BENAR\n(2) Luas = $\\frac{1}{2} \\times 5 \\times 12 = 30$ cm², bukan 60 cm² → SALAH\n(3) Keliling = $5+12+13 = 30$ cm → BENAR",
+  },
+
+  // ── SOAL 25 — PG ───────────────────────────────────────────────────────────
+  {
+    no: 25,
+    type: "pg",
+    soal: "Titik $R(x, 0)$ terletak pada sumbu-$x$ dan berjarak 5 satuan dari titik $S(1, 4)$. Nilai $x$ yang memenuhi adalah ...",
+    options: [
+      "A. $x = 3$ atau $x = -1$",
+      "B. $x = 4$ atau $x = -2$",
+      "C. $x = 5$ atau $x = -3$",
+      "D. $x = 6$ atau $x = -4$",
+    ],
+    jawaban: "B",
+    pembahasan: "$|RS|^2 = (x-1)^2+(0-4)^2 = 25$\n$(x-1)^2+16 = 25$\n$(x-1)^2 = 9$\n$x-1 = \\pm 3$\n$x = 4$ atau $x = -2$ → Jawaban B",
+  },
+
+  // ── SOAL 26 — PGK ──────────────────────────────────────────────────────────
+  {
+    no: 26,
+    type: "pgk",
+    soal: "Sebuah tangga sepanjang 17 m bersandar pada tembok dengan kaki tangga berjarak 8 m dari tembok. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Tinggi yang dicapai tangga pada tembok = 15 m",
+      "(8, 15, 17) merupakan tripel Pythagoras",
+      "Jika kaki tangga digeser hingga berjarak 15 m dari tembok, tinggi yang dicapai = 8 m",
+      "Luas segitiga yang dibentuk tangga, tembok, dan tanah = 30 m²",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (1), (2), dan (3)",
+      "C. (2) dan (4) saja",
+      "D. Semua benar",
+    ],
+    jawaban: "B",
+    pembahasan: "(1) Tinggi = $\\sqrt{17^2-8^2} = \\sqrt{289-64} = \\sqrt{225} = 15$ m ✓ BENAR\n(2) $8^2+15^2 = 64+225 = 289 = 17^2$ ✓ BENAR\n(3) Tinggi = $\\sqrt{17^2-15^2} = \\sqrt{289-225} = \\sqrt{64} = 8$ m ✓ BENAR\n(4) Luas = $\\frac{1}{2} \\times 8 \\times 15 = 60$ m², bukan 30 m² ✗ SALAH\n→ Jawaban B",
+  },
+
+  // ── SOAL 27 — PGKBS ────────────────────────────────────────────────────────
+  {
+    no: 27,
+    type: "pgkbs",
+    soal: "Dua titik $A(2, 1)$ dan $B(8, 9)$ berada di bidang koordinat Kartesius. Tentukan benar (B) atau salah (S)!",
+    pernyataan: [
+      "Jarak AB = 10 satuan",
+      "Titik tengah AB adalah $(5, 5)$",
+      "Jarak dari titik asal $O(0,0)$ ke $A(2,1)$ adalah $\\sqrt{3}$ satuan",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "(1) $|AB| = \\sqrt{(8-2)^2+(9-1)^2} = \\sqrt{36+64} = \\sqrt{100} = 10$ satuan → BENAR\n(2) Titik tengah = $\\left(\\frac{2+8}{2}, \\frac{1+9}{2}\\right) = (5, 5)$ → BENAR\n(3) $|OA| = \\sqrt{2^2+1^2} = \\sqrt{5}$ satuan, bukan $\\sqrt{3}$ → SALAH",
+  },
+
+  // ── SOAL 28 — PG ───────────────────────────────────────────────────────────
   {
     no: 28,
-    soal: "Sebuah Helikopter terbang pada ketinggian 500 m di atas permukaan tanah. Helikopter tersebut melihat tiga titik di atas permukaan tanah, yaitu titik A, titik B, dan titik C.\nTentukanlah:\n1. jarak OA\n2. jarak AB\n3. jarak BC",
+    type: "pg",
+    soal: "Pada segitiga siku-siku dengan sudut $30°$, $60°$, dan $90°$ serta panjang sisi miring 20 cm, panjang sisi di depan sudut $60°$ adalah ...",
     options: [
-      "A. $OA = 500$ m, $AB = 300$ m, $BC = 400$ m",
-      "B. $OA = 400$ m, $AB = 300$ m, $BC = 500$ m",
-      "C. $OA = 300$ m, $AB = 400$ m, $BC = 500$ m",
-      "D. $OA = 500$ m, $AB = 400$ m, $BC = 300$ m",
+      "A. $10$ cm",
+      "B. $10\\sqrt{2}$ cm",
+      "C. $10\\sqrt{3}$ cm",
+      "D. $20\\sqrt{3}$ cm",
     ],
+    jawaban: "C",
+    pembahasan: "Sisi di depan sudut $60°$ = $\\frac{\\sqrt{3}}{2} \\times$ sisi miring = $\\frac{\\sqrt{3}}{2} \\times 20 = 10\\sqrt{3}$ cm → Jawaban C",
   },
-  { no: 29, soal: "Perhatikan gambar berikut.\nTentukanlah panjang sisi AB, AC, dan CD", options: [], gambar: <Soal29ABCDSVG /> },
-  { no: 30, soal: "Hitunglah jarak antara titik $A(3, -2)$ dan titik $B(-5, 4)$ pada bidang koordinat Kartesius.", options: ["A. 8", "B. 10", "C. $10\\sqrt{2}$", "D. $\\sqrt{52}$"] },
-  { no: 31, soal: "Jarak antara titik $P(k, 5)$ dan titik $Q(1, 1)$ adalah 5 satuan. Berapakah nilai k yang mungkin?", options: ["A. $k = 5$", "B. $k = 3$", "C. $k = -2$", "D. $k = 6$"] },
-  { no: 32, soal: "Tiga titik di bidang koordinat adalah $K(2, 5)$, $L(6, 1)$, dan $M(10, 5)$. Tentukan jenis segitiga $\\triangle KLM$ dilihat dari panjang sisi-sisinya.", options: ["A. Segitiga Sembarang", "B. Segitiga Sama Kaki", "C. Segitiga Siku-siku", "D. Segitiga Sama Sisi"] },
-  { no: 33, soal: "Titik $R(x, 0)$ terletak pada sumbu-x dan berjarak sama dari titik $A(2, 3)$ dan titik $B(5, -2)$. Berapakah koordinat titik R?", options: ["A. $R(4, 0)$", "B. $R(2, 0)$", "C. $R(3, 0)$", "D. $R\\left(\\frac{8}{3}, 0\\right)$"] },
+
+  // ── SOAL 29 — PGK ──────────────────────────────────────────────────────────
+  {
+    no: 29,
+    type: "pgk",
+    soal: "Perhatikan pernyataan berikut tentang jenis segitiga berdasarkan panjang sisinya!",
+    pernyataan: [
+      "Segitiga dengan sisi 9 cm, 40 cm, dan 41 cm adalah segitiga siku-siku",
+      "Segitiga dengan sisi 6 cm, 7 cm, dan 10 cm adalah segitiga tumpul",
+      "Segitiga dengan sisi 4 cm, 5 cm, dan 6 cm adalah segitiga lancip",
+      "Segitiga dengan sisi 5 cm, 6 cm, dan 8 cm adalah segitiga siku-siku",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (1), (2), dan (3)",
+      "C. (2) dan (4) saja",
+      "D. Semua benar",
+    ],
+    jawaban: "B",
+    pembahasan: "(1) $9^2+40^2 = 81+1600 = 1681 = 41^2$ → siku-siku ✓ BENAR\n(2) $6^2+7^2 = 85 < 100 = 10^2$ → $c^2 > a^2+b^2$ → tumpul ✓ BENAR\n(3) $4^2+5^2 = 41 > 36 = 6^2$ → $c^2 < a^2+b^2$ → lancip ✓ BENAR\n(4) $5^2+6^2 = 61 \\neq 64 = 8^2$ → bukan siku-siku ✗ SALAH\n→ Jawaban B",
+  },
+
+  // ── SOAL 30 — PGKBS ────────────────────────────────────────────────────────
+  {
+    no: 30,
+    type: "pgkbs",
+    soal: "Sebuah persegi panjang mempunyai panjang 24 cm dan lebar 7 cm. Tentukan benar (B) atau salah (S)!",
+    pernyataan: [
+      "Panjang diagonal persegi panjang = 25 cm",
+      "Keliling persegi panjang = 62 cm",
+      "Luas persegi panjang = 196 cm²",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "(1) Diagonal = $\\sqrt{24^2+7^2} = \\sqrt{576+49} = \\sqrt{625} = 25$ cm → BENAR\n(2) Keliling = $2 \\times (24+7) = 2 \\times 31 = 62$ cm → BENAR\n(3) Luas = $24 \\times 7 = 168$ cm², bukan 196 cm² → SALAH",
+  },
 ];
 
 const TeoremaPage = () => (
