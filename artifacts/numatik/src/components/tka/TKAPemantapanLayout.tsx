@@ -29,6 +29,8 @@ export interface LatihanSoal {
   /** PGKBS: array ["B"|"S"] untuk tiap pernyataan */
   jawabanBS?: ("B" | "S")[];
   pembahasan?: string;
+  /** Optional diagram/image to show below the soal text */
+  gambar?: React.ReactNode;
 }
 
 interface Props {
@@ -702,6 +704,11 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                         </div>
                       </div>
                     </div>
+
+                    {/* ── Optional diagram/image ── */}
+                    {soal.gambar && (
+                      <div className="px-5 pb-2">{soal.gambar}</div>
+                    )}
 
                     {/* ── PGK: numbered pernyataan list ── */}
                     {(type === "pgk") && soal.pernyataan && (
