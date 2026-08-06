@@ -233,6 +233,127 @@ export const tkaLatihan2Pembahasan: Record<number, Pembahasan> = {
       "Bayangan $R(5, 1)$ setelah dicerminkan terhadap sumbu-y adalah $R'(-5, 1)$ → Jawaban C.",
   },
 
+  /* ── SOAL 21–30 ── */
+  21: {
+    jawaban: "C. 154 cm²",
+    konsepTrik:
+      "Luas juring lingkaran = (sudut pusat / 360°) × π × r². Sudut pusat 90° = ¼ lingkaran penuh, jadi luas juring = ¼ × luas lingkaran penuh.",
+    stepByStep:
+      "Diketahui: r = 14 cm, sudut pusat = 90°, π = 22/7\n\nLuas lingkaran penuh:\n$L = \\pi r^2 = \\frac{22}{7} \\times 14^2 = \\frac{22}{7} \\times 196 = 22 \\times 28 = 616$ cm²\n\nLuas juring (90° = ¼ lingkaran):\n$L_{\\text{juring}} = \\frac{90°}{360°} \\times 616 = \\frac{1}{4} \\times 616 = 154$ cm²",
+    tips:
+      "Trik cepat: sudut 90° langsung = ¼ lingkaran. Jadi cukup hitung ¼ × π × r². Hafalkan: 90°=¼, 120°=⅓, 180°=½, 60°=⅙ lingkaran.",
+    kesimpulan:
+      "Luas satu hiasan juring lingkaran di sudut panggung adalah 154 cm² → Jawaban C.",
+  },
+
+  22: {
+    jawaban: "A. 14.000x + 16.000y + 18.000z + 24.000w",
+    konsepTrik:
+      "Bentuk aljabar total harga = harga satuan × kuantitas untuk setiap jenis barang, dijumlahkan. Semua variabel (x, y, z, w) harus muncul karena soal menyebut keempat jenis barang.",
+    stepByStep:
+      "Beras   : Rp14.000/kg × x kg   = $14.000x$\nGula pasir : Rp16.000/kg × y kg   = $16.000y$\nMinyak goreng : Rp18.000/liter × z liter = $18.000z$\nTelur   : Rp24.000/kg × w kg   = $24.000w$\n\nTotal = $14.000x + 16.000y + 18.000z + 24.000w$",
+    tips:
+      "Pilihan B, C, D masing-masing menghilangkan satu variabel. Soal menyebutkan empat jenis barang, sehingga keempat variabel wajib ada. Pilihan yang paling lengkap adalah jawaban yang benar.",
+    kesimpulan:
+      "Bentuk aljabar total harga belanja adalah $14.000x + 16.000y + 18.000z + 24.000w$ → Jawaban A.",
+  },
+
+  23: {
+    jawaban: "BENAR: D  |  SALAH: A, B, C, E",
+    konsepTrik:
+      "Hitung total belanja terlebih dahulu, lalu tentukan kelas diskon sesuai fungsi potongan harga: T > Rp100.000 dan membeli minimal 3 jenis barang → diskon 15%.",
+    stepByStep:
+      "Pembelian: 2 kg beras, 3 kg gula, 1 L minyak, 2 kg telur (4 jenis)\n\nTotal belanja:\n$T = 14.000(2) + 16.000(3) + 18.000(1) + 24.000(2)$\n$= 28.000 + 48.000 + 18.000 + 48.000$\n$= 142.000$\n\nA. Total Rp154.000? → 142.000 ≠ 154.000 ✗ SALAH\n\nB. Diskon 10%? → T > 100.000 ✓, tetapi membeli 4 jenis ≥ 3 jenis → diskon 15%, bukan 10% ✗ SALAH\n\nC. 'Diskon tambahan 5%'? → Fungsi tidak memisahkan 10%+5%; langsung 15% jika syarat terpenuhi ✗ SALAH\n\nD. Diskon 15% karena T > 100.000 dan membeli ≥ 3 jenis? ✓ BENAR\n\nE. Total setelah diskon Rp130.900? → 0,85 × 142.000 = 120.700 ≠ 130.900 ✗ SALAH",
+    tips:
+      "Jebakan utama: pilihan B mengatakan diskon hanya 10%. Selalu cek dua syarat sekaligus: (1) T > Rp100.000 dan (2) membeli minimal 3 jenis. Jika keduanya terpenuhi, diskon langsung 15%, bukan 10%.",
+    kesimpulan:
+      "Hanya pernyataan D yang BENAR: diskon 15% karena total belanja Rp142.000 (> Rp100.000) dan membeli 4 jenis barang (≥ 3 jenis).",
+  },
+
+  24: {
+    jawaban: "Pernyataan 1: BENAR  |  Pernyataan 2: SALAH  |  Pernyataan 3: BENAR",
+    konsepTrik:
+      "Hitung total belanja setiap kasus, lalu cocokkan dengan fungsi piecewise: T ≤ 100.000 = tidak ada diskon; T > 100.000 dan < 3 jenis = diskon 10%; T > 100.000 dan ≥ 3 jenis = diskon 15%.",
+    stepByStep:
+      "Pernyataan 1: 2 kg beras + 3 kg gula\n$T = 14.000(2) + 16.000(3) = 28.000 + 48.000 = 76.000$ ✓ BENAR\n\nPernyataan 2: Apakah Rp76.000 mendapat diskon 10%?\n$T = 76.000 \\leq 100.000$ → tidak ada diskon sama sekali!\nFungsi: $f(T) = T = 76.000$ → tidak ada diskon ✗ SALAH\n\nPernyataan 3: 4 kg beras + 2 kg gula + 1 L minyak (3 jenis)\n$T = 14.000(4) + 16.000(2) + 18.000(1)$\n$= 56.000 + 32.000 + 18.000 = 106.000$\n$T > 100.000$ dan membeli 3 jenis → diskon 15%\n$f(T) = 0{,}85 \\times 106.000 = 90.100$ ✓ BENAR",
+    tips:
+      "Pernyataan 2 adalah jebakan klasik: Rp76.000 < Rp100.000, sehingga tidak memenuhi syarat diskon apapun. Jangan asumsikan diskon 10% hanya karena total di atas Rp50.000 atau angka tertentu — syaratnya jelas: T > Rp100.000.",
+    kesimpulan:
+      "Pernyataan 1 BENAR (76.000). Pernyataan 2 SALAH (76.000 ≤ 100.000, tidak ada diskon). Pernyataan 3 BENAR (0,85 × 106.000 = 90.100).",
+  },
+
+  25: {
+    jawaban: "C. 90 kali",
+    konsepTrik:
+      "Peluang = frekuensi relatif yang diharapkan. Jika peluang suatu kejadian adalah p, maka dalam n percobaan, frekuensi harapan = p × n.",
+    stepByStep:
+      "Peluang Timnas Indonesia menjadi juara = 90% = 0,9\nJumlah turnamen = 100 kali\n\nFrekuensi harapan juara:\n$= 0{,}9 \\times 100 = 90$ kali",
+    tips:
+      "Peluang 90% TIDAK berarti pasti juara — melainkan jika kondisi yang sama berulang 100 kali, diperkirakan 90 kali menjadi juara. Ini adalah konsep frekuensi harapan (expected frequency).",
+    kesimpulan:
+      "Dari 100 turnamen dengan kondisi yang sama, Timnas Indonesia diperkirakan menjadi juara sebanyak 90 kali → Jawaban C.",
+  },
+
+  26: {
+    jawaban: "BENAR: A, B, D  |  SALAH: C, E",
+    konsepTrik:
+      "Frekuensi relatif = (jumlah kejadian) ÷ (total percobaan). Peluang historis dihitung dari data masa lalu. Peluang menjadi juara = 0 karena tidak pernah terjadi.",
+    stepByStep:
+      "Data: runner-up = 6 kali dari 15 edisi, juara = 0 kali.\n\nA. Frekuensi relatif runner-up:\n$\\frac{6}{15} = 0{,}4 = 40\\%$ ✓ BENAR\n\nB. Peluang juara (historis):\n$\\frac{0}{15} = 0\\%$ — belum pernah juara ✓ BENAR\n\nC. 'Tidak pernah juara = 9/15 = 60%'?\nSeluruh 15 edisi Indonesia tidak pernah juara → $\\frac{15}{15} = 100\\%$, bukan 60% ✗ SALAH\n(9/15 adalah frekuensi relatif 'tidak menjadi runner-up', bukan 'tidak menjadi juara')\n\nD. Prediksi 30 edisi ke depan:\n$\\frac{6}{15} \\times 30 = 0{,}4 \\times 30 = 12$ kali ✓ BENAR\n\nE. Peluang juara (0%) > peluang runner-up (40%)?\n$0\\% < 40\\%$ → pernyataan salah ✗ SALAH",
+    tips:
+      "Pernyataan C adalah jebakan: angka 9/15 = 60% adalah frekuensi 'tidak menjadi runner-up', bukan 'tidak pernah menjadi juara'. Indonesia tidak pernah juara di semua 15 edisi → frekuensi tidak pernah juara = 15/15 = 100%.",
+    kesimpulan:
+      "Pernyataan A (40%), B (0% juara), dan D (12 kali) BENAR. Pernyataan C (9/15 ≠ tidak pernah juara) dan E (0% < 40%) SALAH.",
+  },
+
+  27: {
+    jawaban: "Pernyataan 1: SALAH  |  Pernyataan 2: BENAR  |  Pernyataan 3: SALAH",
+    konsepTrik:
+      "Pernyataan 2 menggunakan konsep peluang komplemen: P(tidak juara) = 1 − P(juara). Pernyataan 3 adalah jebakan: peluang yang ditetapkan pengamat bersifat prediktif, sebuah kekalahan tidak langsung membuat peluang menjadi 0%.",
+    stepByStep:
+      "Pernyataan 1: Indonesia pernah juara AFF?\nNarasi jelas: '...belum pernah sekalipun meraih gelar juara dalam 15 edisi sebelumnya.' ✗ SALAH\n\nPernyataan 2: Peluang tidak juara jika peluang juara = 90%?\n$P(\\text{tidak juara}) = 1 - P(\\text{juara}) = 1 - 0{,}9 = 0{,}1 = 10\\%$ ✓ BENAR\n\nPernyataan 3: Kekalahan 0-3 membuat peluang juara = 0%?\nPeluang 90% adalah prediksi analitis sebelum turnamen. Satu kekalahan mengubah situasi, tetapi tidak secara matematis menghasilkan peluang 0% — masih ada pertandingan lain. ✗ SALAH",
+    tips:
+      "Jangan rancu antara 'peluang' (nilai prediktif/teoritis) dengan 'fakta historis'. Peluang 90% adalah opini pengamat berdasarkan analisis; kekalahan satu laga tidak langsung = 0% secara matematis.",
+    kesimpulan:
+      "Pernyataan 1 SALAH (Indonesia belum pernah juara). Pernyataan 2 BENAR (10% = 1 − 90%). Pernyataan 3 SALAH (satu kekalahan tidak menjadikan peluang = 0%).",
+  },
+
+  28: {
+    jawaban: "B. +1,33 gol/laga",
+    konsepTrik:
+      "Selisih gol per laga = gol dicetak − gol kebobolan. Hitung selisih tiap laga, jumlahkan, lalu bagi dengan jumlah laga.",
+    stepByStep:
+      "Laga 1 vs Kamboja   : 5 − 1 = +4\nLaga 2 vs Timor Leste : 3 − 0 = +3\nLaga 3 vs Vietnam     : 0 − 3 = −3\n─────────────────────────────────\nTotal selisih gol      = +4 + 3 − 3 = +4\n\nRata-rata per laga:\n$\\frac{+4}{3} \\approx +1{,}33$ gol/laga",
+    tips:
+      "Perhatikan tanda (+) dan (−). Kekalahan memberikan selisih negatif. Pilihan A (+1,00) adalah jebakan jika lupa bahwa 4/3 ≠ 1. Hitung dengan pembagian yang tepat: 4 ÷ 3 = 1,3333…",
+    kesimpulan:
+      "Rata-rata selisih gol Timnas Indonesia setelah tiga laga adalah +1,33 gol/laga (total +4 dari 3 pertandingan) → Jawaban B.",
+  },
+
+  29: {
+    jawaban: "BENAR: A, B, C, D  |  SALAH: E",
+    konsepTrik:
+      "Kumpulkan semua statistik dari tiga laga: total gol, gol kebobolan, selisih gol, dan jumlah kemenangan. Lalu verifikasi setiap pernyataan secara terpisah.",
+    stepByStep:
+      "Data tiga laga: vs Kamboja (5-1), vs Timor Leste (3-0), vs Vietnam (0-3)\n\nGol cetak = 5+3+0 = 8\nGol kebobolan = 1+0+3 = 4\nTotal selisih = 8−4 = +4\nMenang = 2 laga, Kalah = 1 laga\n\nA. Selisih gol +4? → Benar di atas ✓ BENAR\n\nB. Rata-rata gol dicetak per laga:\n$\\frac{8}{3} = 2{,}67$ ✓ BENAR\n\nC. Kebobolan terbanyak satu laga = vs Vietnam (3 gol) ✓ BENAR\n\nD. Persentase kemenangan:\n$\\frac{2}{3} \\times 100\\% = 66{,}7\\%$ ✓ BENAR\n\nE. Kebobolan (4) > gol dicetak (8)?\n$4 < 8$ — kebalikannya! ✗ SALAH",
+    tips:
+      "Pernyataan E adalah jebakan: total kebobolan = 4, total gol dicetak = 8. Indonesia justru jauh lebih produktif menyerang daripada kebobolan secara keseluruhan.",
+    kesimpulan:
+      "Pernyataan A, B, C, dan D semuanya BENAR. Hanya pernyataan E yang SALAH karena total gol Indonesia (8) lebih banyak dari gol kebobolan (4), bukan lebih sedikit.",
+  },
+
+  30: {
+    jawaban: "Pernyataan 1: BENAR  |  Pernyataan 2: BENAR  |  Pernyataan 3: BENAR",
+    konsepTrik:
+      "Tiga konsep sekaligus: (1) peluang komplemen, (2) sistem poin turnamen (menang=3, seri=1, kalah=0), (3) frekuensi relatif 'gagal' = 1 − frekuensi relatif 'berhasil'.",
+    stepByStep:
+      "Pernyataan 1: Komplemen peluang juara 90%\n$P(\\text{tidak juara}) = 1 - 0{,}9 = 0{,}1$ ✓ BENAR\n\nPernyataan 2: Poin maksimal di fase grup\nSudah: menang vs Kamboja (3 poin) + menang vs Timor Leste (3 poin) + kalah vs Vietnam (0 poin) = 6 poin\nJika menang vs Singapura: +3 poin\nTotal = 6 + 3 = 9 poin ✓ BENAR\n\nPernyataan 3: Frekuensi relatif gagal menjadi runner-up\nRunnerup = 6 dari 15 edisi\nGagal menjadi runner-up = 15 − 6 = 9 edisi\n$\\text{Frekuensi relatif} = \\frac{9}{15} = 60\\%$ ✓ BENAR",
+    tips:
+      "Pernyataan 3 sering membingungkan: 'gagal menjadi runner-up' ≠ 'tidak pernah juara'. Gagal runner-up artinya tidak finish di posisi ke-2, yang terjadi pada 15−6 = 9 edisi. Ini berbeda dari soal 26 pernyataan C.",
+    kesimpulan:
+      "Ketiga pernyataan BENAR: komplemen 0,1 ✓, poin maksimal 9 ✓, frekuensi gagal runner-up 9/15 = 60% ✓.",
+  },
+
   10: {
     jawaban: "C. 23 bungkus",
     konsepTrik:

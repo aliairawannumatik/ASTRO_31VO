@@ -789,6 +789,7 @@ const TKALatihan2Page = () => {
                   <span key="c"><InlineMath math="C.\ 154\ \text{cm}^2" /></span>,
                   <span key="d"><InlineMath math="D.\ 176\ \text{cm}^2" /></span>,
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q21" pembahasan={tkaLatihan2Pembahasan[21]} />
               </div>
             </div>
           </div>
@@ -822,6 +823,7 @@ const TKALatihan2Page = () => {
                   <span key="c"><InlineMath math="C.\ 14.000x + 16.000y + 24.000w" /></span>,
                   <span key="d"><InlineMath math="D.\ 16.000y + 18.000z + 24.000w" /></span>,
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q22" pembahasan={tkaLatihan2Pembahasan[22]} />
               </div>
             </div>
           </div>
@@ -842,6 +844,7 @@ const TKALatihan2Page = () => {
                   { text: "Total diskon yang didapat adalah 15% karena total belanja di atas Rp100.000 dan membeli minimal 3 jenis.", benar: true },
                   { text: "Total belanja setelah diskon adalah Rp130.900.", benar: false },
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q23" pembahasan={tkaLatihan2Pembahasan[23]} />
               </div>
             </div>
           </div>
@@ -868,6 +871,7 @@ const TKALatihan2Page = () => {
                     <span key="r3">Jika seseorang membeli <InlineMath math="4\text{ kg}" /> beras, <InlineMath math="2\text{ kg}" /> gula pasir, dan <InlineMath math="1\text{ liter}" /> minyak goreng, total belanja setelah diskon adalah Rp90.100.</span>,
                   ]}
                 />
+                <PembahasanCard pembahasanKey="tka2-q24" pembahasan={tkaLatihan2Pembahasan[24]} />
               </div>
             </div>
           </div>
@@ -901,6 +905,7 @@ const TKALatihan2Page = () => {
                   "C. 90 kali",
                   "D. 100 kali",
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q25" pembahasan={tkaLatihan2Pembahasan[25]} />
               </div>
             </div>
           </div>
@@ -921,6 +926,7 @@ const TKALatihan2Page = () => {
                   { text: "Jika pola yang sama berlanjut, dalam 30 edisi berikutnya Indonesia akan menjadi runner-up sebanyak 12 kali.", benar: true },
                   { text: "Peluang Indonesia menjadi juara lebih besar daripada menjadi runner-up.", benar: false },
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q26" pembahasan={tkaLatihan2Pembahasan[26]} />
               </div>
             </div>
           </div>
@@ -941,6 +947,7 @@ const TKALatihan2Page = () => {
                     "Kekalahan 0-3 dari Vietnam membuat peluang Indonesia menjadi juara menjadi 0%.",
                   ]}
                 />
+                <PembahasanCard pembahasanKey="tka2-q27" pembahasan={tkaLatihan2Pembahasan[27]} />
               </div>
             </div>
           </div>
@@ -959,6 +966,7 @@ const TKALatihan2Page = () => {
                   "C. +1,67 gol/laga",
                   "D. +2,00 gol/laga",
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q28" pembahasan={tkaLatihan2Pembahasan[28]} />
               </div>
             </div>
           </div>
@@ -979,6 +987,7 @@ const TKALatihan2Page = () => {
                   { text: "Persentase kemenangan Indonesia dalam tiga laga awal Grup A adalah 66,7%.", benar: true },
                   { text: "Jumlah kebobolan Indonesia lebih banyak daripada total gol yang dicetak.", benar: false },
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q29" pembahasan={tkaLatihan2Pembahasan[29]} />
               </div>
             </div>
           </div>
@@ -999,6 +1008,7 @@ const TKALatihan2Page = () => {
                     <span key="r3">Berdasarkan data historis 15 edisi sebelumnya, frekuensi relatif Indonesia gagal menjadi runner-up adalah <InlineMath math="\tfrac{9}{15}" /> atau 60%.</span>,
                   ]}
                 />
+                <PembahasanCard pembahasanKey="tka2-q30" pembahasan={tkaLatihan2Pembahasan[30]} />
               </div>
             </div>
           </div>
