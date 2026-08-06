@@ -10,7 +10,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const packages = [
-  { id: 1, label: "Try Out 1", path: "/tka/paket-1", soal: 15 },
+  { id: 1, label: "Try Out 1", path: "/tka/paket-1", soal: 30 },
   { id: 2, label: "Try Out 2", path: "/tka/paket-2", soal: 30 },
   { id: 3, label: "Try Out 3", path: "/tka/paket-3", soal: 30 },
   { id: 4, label: "Try Out 4", path: "/tka/paket-4", soal: 30 },
@@ -239,7 +239,7 @@ const TKAPage = () => {
               <div className="w-8 h-8 rounded-lg bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center shrink-0">
                 <FileText className="w-4 h-4 text-cyan-300" />
               </div>
-              <span className="font-display text-sm font-bold text-cyan-200 tracking-wide uppercase">Try Out TKA 2026 - 2027</span>
+              <span className="font-display text-sm font-bold text-cyan-200 tracking-wide uppercase">Try Out dan Prediksi TKA Matematika 2026 - 2027</span>
               <span className="text-[10px] font-body text-cyan-400/70 bg-cyan-500/10 border border-cyan-400/20 px-2 py-0.5 rounded-full">6 Paket</span>
             </div>
             {showPaket
