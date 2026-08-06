@@ -1298,6 +1298,34 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={21} />
+            {expandedPembahasan.has(21) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>A. Luas juring E tiga kali dari luas juring D (E = 90°, D = 30°, perbandingan 3 : 1)</PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Luas juring</strong> berbanding lurus dengan sudut pusatnya:</p>
+                  <p className="ml-3"><InlineMath math="\text{Luas juring} = \frac{\alpha}{360°} \times \pi r^2" /></p>
+                  <p>Sehingga perbandingan luas dua juring = perbandingan sudut pusatnya.</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Untuk membandingkan luas, cukup bandingkan sudut pusatnya tanpa perlu menghitung luas sebenarnya.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Sudut pusat: D = 30°, E = 90°, F = 60°</p>
+                  </S>
+                  <S n={2}>
+                    <p>Periksa pilihan A: Luas E = 3 × Luas D?</p>
+                    <p className="ml-3"><InlineMath math="\frac{\text{Luas E}}{\text{Luas D}} = \frac{90°}{30°} = 3" /> ✓ → <strong className="text-green-300">Benar</strong></p>
+                  </S>
+                  <S n={3}>
+                    <p>Verifikasi opsi lain:</p>
+                    <p className="ml-3">B: F/E = 60/90 = 2/3 (bukan ½) ✗</p>
+                    <p className="ml-3">C: D/F = 30/60 = 1/2 (bukan 2) ✗</p>
+                    <p className="ml-3">D: E/F = 90/60 = 3/2 (bukan 2) ✗</p>
+                    <p>Jawaban: <strong className="text-green-300">A</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q22 — MCQ: Kesebangunan persegi panjang */}
@@ -1316,6 +1344,37 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={22} />
+            {expandedPembahasan.has(22) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>C. 22 cm — keliling persegi panjang kecil = 2 × (5 + 6) = 22 cm</PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Dua bangun sebangun</strong> memiliki sisi-sisi yang sebanding dengan rasio yang sama (faktor skala).</p>
+                  <p>Faktor skala k = tinggi kecil / tinggi besar. Semua sisi dikalikan k yang sama.</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Cari panjang besar dulu dari luas, lalu kalikan dengan faktor skala untuk mendapat sisi kecil.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Persegi panjang besar: tinggi = 24 cm, luas = 480 cm²</p>
+                    <p className="ml-3"><InlineMath math="\text{panjang besar} = \frac{480}{24} = 20 \text{ cm}" /></p>
+                  </S>
+                  <S n={2}>
+                    <p>Faktor skala (rasio tinggi):</p>
+                    <p className="ml-3"><InlineMath math="k = \frac{6}{24} = \frac{1}{4}" /></p>
+                  </S>
+                  <S n={3}>
+                    <p>Sisi-sisi persegi panjang kecil:</p>
+                    <p className="ml-3">tinggi kecil = 6 cm (sudah diketahui)</p>
+                    <p className="ml-3"><InlineMath math="\text{panjang kecil} = 20 \times \frac{1}{4} = 5 \text{ cm}" /></p>
+                  </S>
+                  <S n={4}>
+                    <p>Keliling persegi panjang kecil:</p>
+                    <p className="ml-3"><InlineMath math="K = 2 \times (5 + 6) = 2 \times 11 = 22 \text{ cm}" /></p>
+                    <p>Jawaban: <strong className="text-green-300">C. 22 cm</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q23 — ComplexMCQ: Madu Bu Rina */}
@@ -1338,6 +1397,40 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={23} />
+            {expandedPembahasan.has(23) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>A dan B — botol lebih banyak dari jerigen (600 &gt; 75), dan total kemasan = 675</PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Konversi satuan volume:</strong> 1 dm = 0,1 m → 1 dm³ = 0,001 m³ = 1 liter</p>
+                  <p>Tangki: 5 dm × 1,5 m × 0,6 m → ubah semua ke dm: 5 dm × 15 dm × 6 dm = 450 dm³ = <strong>450 liter</strong></p>
+                  <p className="text-yellow-300/80">🔑 Trik: Isi botol dulu sebanyak yang diminta, sisa dimasukkan ke jerigen — tidak boleh ada sisa akhir.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Volume tangki madu A:</p>
+                    <p className="ml-3"><InlineMath math="5\,\text{dm} \times 1{,}5\,\text{m} \times 0{,}6\,\text{m} = 0{,}5\,\text{m} \times 1{,}5\,\text{m} \times 0{,}6\,\text{m} = 0{,}45\,\text{m}^3 = 450\,\text{liter}" /></p>
+                  </S>
+                  <S n={2}>
+                    <p>Madu dikemas ke 600 botol @ 0,5 liter:</p>
+                    <p className="ml-3"><InlineMath math="600 \times 0{,}5 = 300\,\text{liter}" /></p>
+                    <p className="ml-3">Sisa: 450 − 300 = <strong>150 liter</strong></p>
+                  </S>
+                  <S n={3}>
+                    <p>Sisa 150 liter dikemas ke jerigen @ 2 liter:</p>
+                    <p className="ml-3"><InlineMath math="\frac{150}{2} = 75\,\text{jerigen}" /></p>
+                    <p className="ml-3">Sisa akhir = 0 (habis tepat, tidak ada sisa untuk botol tambahan)</p>
+                  </S>
+                  <S n={4}>
+                    <p>Periksa setiap pernyataan:</p>
+                    <p className="ml-3">A: 600 &gt; 75 → <strong className="text-green-300">Benar ✓</strong></p>
+                    <p className="ml-3">B: 600 + 75 = 675 → <strong className="text-green-300">Benar ✓</strong></p>
+                    <p className="ml-3">C: Sisa = 0, tidak ada untuk botol tambahan → <strong className="text-red-300">Salah ✗</strong></p>
+                    <p className="ml-3">D: jerigen = 75, bukan 80 → <strong className="text-red-300">Salah ✗</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q24 — Mungkin/Tidak Mungkin: Madu Pak Budi & Bu Ani */}
@@ -1361,6 +1454,39 @@ const TKALatihan1Page = () => {
                 />
               </div>
             </div>
+            <PembahasanBtn n={24} />
+            {expandedPembahasan.has(24) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>Pernyataan 1: Mungkin · Pernyataan 2: Tidak Mungkin · Pernyataan 3: Mungkin</PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Syarat "mungkin":</strong> jumlah madu yang dibagi oleh masing-masing pelanggan harus habis terbagi oleh ukuran jerigen mereka (bilangan bulat), dan total A + total B = 450 + 960 = 1.410 liter harus tepat habis tanpa sisa.</p>
+                  <p>Pak Budi: jerigen 15 liter | Bu Ani: jerigen 20 liter</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Cek apakah pembagian liter masing-masing menghasilkan bilangan bulat. Jika pecahan → Tidak Mungkin.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p><strong>Data:</strong> Madu A = 450 L, Madu B = 960 L. Pak Budi (15 L/jerigen), Bu Ani (20 L/jerigen).</p>
+                  </S>
+                  <S n={2}>
+                    <p><strong>Pernyataan 1:</strong> Pak Budi 10 jerigen A (= 150 L) + 24 jerigen B (= 360 L)</p>
+                    <p className="ml-3">Bu Ani A: (450 − 150) / 20 = 300/20 = <strong>15 jerigen</strong> ✓ (bulat)</p>
+                    <p className="ml-3">Bu Ani B: (960 − 360) / 20 = 600/20 = <strong>30 jerigen</strong> ✓ (bulat)</p>
+                    <p className="ml-3">Semua madu habis → <strong className="text-green-300">Mungkin ✓</strong></p>
+                  </S>
+                  <S n={3}>
+                    <p><strong>Pernyataan 2:</strong> Pak Budi 8 jerigen A (= 120 L)</p>
+                    <p className="ml-3">Bu Ani A: (450 − 120) / 20 = 330/20 = <strong>16,5 jerigen</strong> ✗ (bukan bilangan bulat)</p>
+                    <p className="ml-3">→ <strong className="text-red-300">Tidak Mungkin ✗</strong></p>
+                  </S>
+                  <S n={4}>
+                    <p><strong>Pernyataan 3:</strong> Bu Ani 12 jerigen A (= 240 L), Pak Budi 60 jerigen B (= 900 L)</p>
+                    <p className="ml-3">Pak Budi A: (450 − 240) / 15 = 210/15 = <strong>14 jerigen</strong> ✓</p>
+                    <p className="ml-3">Bu Ani B: (960 − 900) / 20 = 60/20 = <strong>3 jerigen</strong> ✓</p>
+                    <p className="ml-3">Semua madu habis → <strong className="text-green-300">Mungkin ✓</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q25 — MCQ: Tren produksi kopi dan teh */}
@@ -1402,6 +1528,33 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={25} />
+            {expandedPembahasan.has(25) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>B. Produksi kopi terus menurun sedangkan produksi teh terus meningkat setiap tahun 2019–2025</PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Membaca tren data:</strong> amati apakah nilai naik atau turun secara konsisten dari baris pertama ke baris terakhir pada tabel.</p>
+                  <p>Tren "terus menurun" berarti setiap tahun lebih kecil dari tahun sebelumnya (monoton turun). Tren "terus meningkat" berarti setiap tahun lebih besar (monoton naik).</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Cukup lihat nilai awal dan akhir, lalu konfirmasi tidak ada yang "berbalik arah" di tengah-tengah.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Tren produksi <strong>kopi</strong> (juta ton):</p>
+                    <p className="ml-3">1,20 → 1,15 → 1,05 → 0,98 → 0,90 → 0,85 → 0,80</p>
+                    <p className="ml-3">Setiap tahun <strong className="text-red-300">menurun</strong> tanpa kecuali → tren monoton turun ✓</p>
+                  </S>
+                  <S n={2}>
+                    <p>Tren produksi <strong>teh</strong> (juta ton):</p>
+                    <p className="ml-3">1,05 → 1,06 → 1,08 → 1,10 → 1,12 → 1,14 → 1,16</p>
+                    <p className="ml-3">Setiap tahun <strong className="text-green-300">meningkat</strong> tanpa kecuali → tren monoton naik ✓</p>
+                  </S>
+                  <S n={3}>
+                    <p>Kesimpulan: kopi menurun, teh meningkat → <strong className="text-green-300">B</strong></p>
+                    <p className="ml-3">A salah (kopi bukan meningkat), C & D salah (keduanya tidak bergerak searah)</p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q26 — MCQ: Modus durasi belajar */}
