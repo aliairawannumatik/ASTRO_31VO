@@ -1576,6 +1576,30 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={26} />
+            {expandedPembahasan.has(26) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>C. 9 jam — nilai 9 muncul paling sering (5 kali) dalam data durasi belajar Sinta</PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Modus</strong> adalah nilai yang paling sering muncul dalam sekumpulan data.</p>
+                  <p>Cara tercepat: urutkan data atau hitung frekuensi tiap nilai, lalu pilih yang frekuensinya terbesar.</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Tidak perlu mengurutkan semua data — cukup "tally" (tanda turus) setiap nilai sambil membaca dari kiri ke kanan.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Data: 8, 10, 9, 10, 12, 9, 11, 9, 8, 9, 7, 9</p>
+                  </S>
+                  <S n={2}>
+                    <p>Hitung frekuensi tiap nilai:</p>
+                    <p className="ml-3">7 → 1 kali | 8 → 2 kali | <strong className="text-green-300">9 → 5 kali</strong> | 10 → 2 kali | 11 → 1 kali | 12 → 1 kali</p>
+                  </S>
+                  <S n={3}>
+                    <p>Nilai 9 muncul paling banyak (5 kali) → <strong className="text-green-300">Modus = 9 jam</strong></p>
+                    <p>Jawaban: <strong className="text-green-300">C. 9 jam</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q27 — MCQ: Rata-rata durasi belajar (lanjutan Q26) */}
@@ -1591,6 +1615,35 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={27} />
+            {expandedPembahasan.has(27) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>B. 9,25 jam — rata-rata = total jam ÷ jumlah minggu = 111 ÷ 12 = 9,25</PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Rata-rata (mean)</strong> = jumlah semua nilai ÷ banyak data.</p>
+                  <p>Gunakan data yang sama dengan Soal No. 26: 8, 10, 9, 10, 12, 9, 11, 9, 8, 9, 7, 9 (12 data)</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Kelompokkan angka yang mudah dijumlahkan (misalkan nilai 9 ada 5 buah = 45), lalu tambahkan sisanya.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Data: 8, 10, 9, 10, 12, 9, 11, 9, 8, 9, 7, 9 → n = 12</p>
+                  </S>
+                  <S n={2}>
+                    <p>Jumlahkan berdasarkan kelompok:</p>
+                    <p className="ml-3">Nilai 9 (× 5) = 45</p>
+                    <p className="ml-3">Nilai 8 (× 2) = 16</p>
+                    <p className="ml-3">Nilai 10 (× 2) = 20</p>
+                    <p className="ml-3">Nilai 7, 11, 12 = 7 + 11 + 12 = 30</p>
+                    <p className="ml-3">Total = 45 + 16 + 20 + 30 = <strong>111</strong></p>
+                  </S>
+                  <S n={3}>
+                    <p>Rata-rata:</p>
+                    <p className="ml-3"><InlineMath math="\bar{x} = \frac{111}{12} = 9{,}25 \text{ jam}" /></p>
+                    <p>Jawaban: <strong className="text-green-300">B. 9,25 jam</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q28 — MCQ: Peluang boneka Luna */}
@@ -1612,6 +1665,33 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={28} />
+            {expandedPembahasan.has(28) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban><InlineMath math="C.\ \tfrac{9}{21}" /> — setelah Rian ambil 4 kotak, tersisa 21 kotak dengan 9 Luna</PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Peluang bersyarat / tanpa pengembalian:</strong> setiap pengambilan mengubah komposisi sisa populasi.</p>
+                  <p>Setelah Rian mengambil kotak, hitung ulang jumlah sisa Luna dan total sisa, lalu hitung peluang baru untuk Wati.</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Jangan pakai total awal (25) — Wati mengambil dari sisa yang sudah berkurang.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Kondisi awal: 25 kotak → 10 Luna + 15 Nino</p>
+                  </S>
+                  <S n={2}>
+                    <p>Rian mengambil 4 kotak: 1 Luna + 3 Nino</p>
+                    <p className="ml-3">Sisa Luna = 10 − 1 = <strong>9</strong></p>
+                    <p className="ml-3">Sisa Nino = 15 − 3 = <strong>12</strong></p>
+                    <p className="ml-3">Total sisa = 25 − 4 = <strong>21 kotak</strong></p>
+                  </S>
+                  <S n={3}>
+                    <p>Peluang Wati mendapat Luna:</p>
+                    <p className="ml-3"><InlineMath math="P(\text{Luna}) = \frac{9}{21}" /></p>
+                    <p>Jawaban: <strong className="text-green-300">C. 9/21</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q29 — MCQ: Peluang telur menetas */}
@@ -1649,6 +1729,32 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={29} />
+            {expandedPembahasan.has(29) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban><InlineMath math="B.\ \tfrac{2}{5}" /> — 28 dari 70 telur akan menetas dalam 12 hari ke depan</PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Kunci soal:</strong> telur menetas pada hari ke-21 sejak masuk mesin. "Menetas dalam 12 hari ke depan" artinya waktu tersisa ≤ 12 hari, yaitu telur yang sudah berada di mesin selama <strong>≥ 9 hari</strong> (21 − 12 = 9).</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Waktu tersisa = 21 − usia saat ini. Pilih semua usia di mana 21 − usia ≤ 12, yaitu usia ≥ 9 hari.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Total telur: 18 + 24 + 20 + 8 = <strong>70 telur</strong></p>
+                  </S>
+                  <S n={2}>
+                    <p>Telur yang menetas dalam ≤ 12 hari ke depan: usia ≥ 9 hari</p>
+                    <p className="ml-3">Usia 9 hari: sisa waktu = 21 − 9 = 12 hari → tepat di batas ✓ → <strong>20 telur</strong></p>
+                    <p className="ml-3">Usia 12 hari: sisa waktu = 21 − 12 = 9 hari ✓ → <strong>8 telur</strong></p>
+                    <p className="ml-3">Usia 3 hari: sisa 18 hari ✗ | Usia 6 hari: sisa 15 hari ✗</p>
+                  </S>
+                  <S n={3}>
+                    <p>Telur yang akan menetas: 20 + 8 = <strong>28 telur</strong></p>
+                    <p className="ml-3"><InlineMath math="P = \frac{28}{70} = \frac{2}{5}" /></p>
+                    <p>Jawaban: <strong className="text-green-300">B. 2/5</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q30 — ComplexMCQ: Kertas kuis kode Y */}
@@ -1671,6 +1777,46 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={30} />
+            {expandedPembahasan.has(30) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>10 lembar dan 12 lembar — dua nilai Y mula-mula yang memenuhi semua syarat</PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Strategi:</strong> dari kondisi akhir, tentukan Z akhir dari peluang, lalu cari kondisi awal dengan mencoba kode yang diambil (X, Y, atau Z).</p>
+                  <p>Syarat awal: X₀ &gt; Y₀ | Syarat akhir: Y &gt; Z = 9 | Total akhir = 30 | Total awal = 34</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Uji satu per satu kode yang mungkin diambil (X, Y, Z), lalu cek semua syarat ketidaksamaan dan bilangan bulat.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Dari kondisi akhir: peluang Z = 3/10, total sisa = 30 → <strong>Z akhir = 9</strong></p>
+                    <p className="ml-3">Total awal = 30 + 4 = 34, sehingga X₀ + Y₀ + Z₀ = 34</p>
+                  </S>
+                  <S n={2}>
+                    <p><strong>Kasus 1 — 4 kertas kode X diambil:</strong></p>
+                    <p className="ml-3">Z₀ = Z akhir = 9, Y₀ = Y akhir</p>
+                    <p className="ml-3">Syarat akhir: Y₀ &gt; 9 → Y₀ ≥ 10</p>
+                    <p className="ml-3">X₀ = 34 − Y₀ − 9 = 25 − Y₀</p>
+                    <p className="ml-3">Syarat awal X₀ &gt; Y₀: 25 − Y₀ &gt; Y₀ → Y₀ &lt; 12,5 → Y₀ ≤ 12</p>
+                    <p className="ml-3">Y₀ ∈ {"{10, 11, 12}"} → <strong className="text-green-300">Y mula-mula bisa 10, 11, atau 12</strong></p>
+                  </S>
+                  <S n={3}>
+                    <p><strong>Kasus 2 — 4 kertas kode Z diambil:</strong></p>
+                    <p className="ml-3">Z₀ = 9 + 4 = 13, X₀ + Y₀ = 21</p>
+                    <p className="ml-3">Syarat akhir Y₀ &gt; 9 → Y₀ ≥ 10</p>
+                    <p className="ml-3">Syarat awal X₀ &gt; Y₀: (21 − Y₀) &gt; Y₀ → Y₀ &lt; 10,5 → Y₀ ≤ 10</p>
+                    <p className="ml-3">Y₀ = 10 → <strong className="text-green-300">Y mula-mula bisa 10</strong></p>
+                  </S>
+                  <S n={4}>
+                    <p><strong>Kasus 3 — 4 kertas kode Y diambil:</strong> Y akhir = Y₀ − 4 &gt; 9 → Y₀ &gt; 13, namun X₀ &gt; Y₀ dan X₀ = 25 − Y₀ &gt; Y₀ → Y₀ &lt; 12,5. Kontradiksi → tidak ada solusi.</p>
+                  </S>
+                  <S n={5}>
+                    <p>Himpunan Y mula-mula yang mungkin: {"{10, 11, 12}"}. Dari pilihan yang tersedia (9, 10, 12, 13):</p>
+                    <p className="ml-3"><strong className="text-green-300">10 lembar ✓</strong> dan <strong className="text-green-300">12 lembar ✓</strong></p>
+                    <p className="ml-3">(11 tidak ada di pilihan; 9 dan 13 tidak memenuhi syarat)</p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
         </div>{/* end questions */}
