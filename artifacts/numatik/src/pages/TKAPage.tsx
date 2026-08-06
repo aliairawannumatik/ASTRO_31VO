@@ -10,11 +10,12 @@ import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const packages = [
-  { id: 1, label: "Try Out 1", path: "/tka/paket-1", soal: 30 },
+  { id: 1, label: "Try Out 1", path: "/tka/paket-1", soal: 15 },
   { id: 2, label: "Try Out 2", path: "/tka/paket-2", soal: 30 },
   { id: 3, label: "Try Out 3", path: "/tka/paket-3", soal: 30 },
   { id: 4, label: "Try Out 4", path: "/tka/paket-4", soal: 30 },
   { id: 5, label: "Try Out 5", path: "/tka/paket-5", soal: 30 },
+  { id: 6, label: "Try Out 6", path: "/tka/paket-6", soal: 30 },
 ];
 
 const routes: Record<string, string> = {
@@ -124,12 +125,12 @@ const TKAPage = () => {
           <div className="mt-4 flex gap-5 items-center">
             <div className="flex items-center gap-1.5 text-white/40 text-xs font-body">
               <FileText className="w-3.5 h-3.5" />
-              <span>5 Try Out</span>
+              <span>6 Try Out</span>
             </div>
             <span className="text-white/20">·</span>
             <div className="flex items-center gap-1.5 text-white/40 text-xs font-body">
               <Target className="w-3.5 h-3.5" />
-              <span>150 Soal Total</span>
+              <span>165 Soal Total</span>
             </div>
             <span className="text-white/20">·</span>
             <div className="flex items-center gap-1.5 text-white/40 text-xs font-body">
@@ -239,7 +240,7 @@ const TKAPage = () => {
                 <FileText className="w-4 h-4 text-cyan-300" />
               </div>
               <span className="font-display text-sm font-bold text-cyan-200 tracking-wide uppercase">Try Out TKA 2026 - 2027</span>
-              <span className="text-[10px] font-body text-cyan-400/70 bg-cyan-500/10 border border-cyan-400/20 px-2 py-0.5 rounded-full">5 Paket</span>
+              <span className="text-[10px] font-body text-cyan-400/70 bg-cyan-500/10 border border-cyan-400/20 px-2 py-0.5 rounded-full">6 Paket</span>
             </div>
             {showPaket
               ? <ChevronUp className="w-4 h-4 text-cyan-300" />
