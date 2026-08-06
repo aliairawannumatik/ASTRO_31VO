@@ -1,0 +1,121 @@
+Soal No 16
+Garis CD dan garis MN berpotongan di titik N. Kedua garis tersebut membentuk dua sudut yang saling bertolak belakang (vertikal), yaitu sudut sebesar 65° dan sudut sebesar (5x + 5)°.
+Nilai x yang tepat adalah ....
+A. 10°
+B. 12°
+C. 13°
+D. 15°
+Soal No 17
+Sebuah prisma segi enam memiliki alas berbentuk segi enam beraturan. Banyak rusuk pada prisma segi enam tersebut adalah ....
+A. 12 rusuk
+B. 16 rusuk
+C. 18 rusuk
+D. 24 rusuk
+Soal No 18
+Garis p dan garis q sejajar. Dua garis transversal memotong garis p dan garis q sehingga membentuk sebuah segitiga di antara keduanya, dengan titik puncak segitiga berada di luar garis p dan garis q. Sudut yang terbentuk antara transversal pertama dengan garis p adalah 75°, dan sudut yang terbentuk antara transversal kedua dengan garis q adalah 55° (sudut-sudut tersebut sehadap/sepihak terhadap segitiga). Sudut pada titik puncak segitiga (di antara kedua transversal) adalah b°.
+Berdasarkan gambar tersebut, berapa nilai b?
+A. 55°
+B. 75°
+C. 110°
+D. 130°
+Soal No 19
+Seorang teknisi akan memasang kabel penyangga sebuah tiang listrik. Tiang tersebut memiliki tinggi 8 meter, dan kabel penyangga akan dipasang dari ujung atas tiang ke sebuah titik di tanah yang berjarak 6 meter dari kaki tiang.
+Tersedia 4 pilihan bahan kabel, yaitu kabel sepanjang 8 meter, 9,5 meter, 10,5 meter, dan 12 meter. Jenis kabel apa yang harus dipilih agar cukup untuk memasang penyangga tiang tersebut dan memiliki sisa paling sedikit?
+A. Kabel 8 meter
+B. Kabel 9,5 meter
+C. Kabel 10,5 meter
+D. Kabel 12 meter
+Soal No 20
+Diketahui dua segitiga kongruen, yaitu segitiga DEF dan segitiga GHI, pada bidang koordinat kartesius, dengan titik E = titik H (kedua segitiga saling berimpit di satu titik, dan segitiga GHI merupakan bayangan segitiga DEF hasil rotasi 180° terhadap titik E). Segitiga DEF kemudian akan ditranslasikan oleh T = (3, 5).
+Bayangan segitiga DEF (setelah translasi) dan segitiga GHI akan saling ....
+A. tegak lurus
+B. berpotongan
+C. sejajar
+D. berhimpit
+Soal No 21
+Sebuah lingkaran terbagi menjadi tiga juring, yaitu juring D, juring E, dan juring F, dengan sudut pusat berturut-turut 30°, 90°, dan 60°.
+Manakah pernyataan yang benar di bawah ini terkait luas juring D, E, dan F?
+A. Luas juring E tiga kali dari luas juring D.
+B. Luas juring F setengah dari luas juring E.
+C. Luas juring D dua kali dari luas juring F.
+D. Luas juring E dua kali dari luas juring F.
+Soal No 22
+Terdapat dua persegi panjang yang sebangun. Persegi panjang yang lebih besar memiliki tinggi 24 cm dan luas 480 cm². Persegi panjang yang lebih kecil memiliki tinggi 6 cm.
+Berapakah keliling persegi panjang yang lebih kecil?
+A. 11 cm
+B. 16 cm
+C. 22 cm
+D. 44 cm
+Soal No 23
+Bu Rina adalah pemasok madu curah. Madu jenis A disimpan dalam tangki berukuran 5 dm × 1,5 m × 0,6 m dan dalam keadaan penuh. Madu tersebut akan dikemas ke dalam botol berukuran 0,5 liter sebanyak 600 botol, dan sisanya dikemas ke dalam jerigen berukuran 2 liter.
+Bagaimana perbandingan banyak kemasan botol dan jerigen? Pilihlah semua jawaban benar! Jawaban benar lebih dari satu.
+☐ Jumlah kemasan botol lebih banyak daripada jerigen.
+☐ Total kemasan botol dan jerigen yang terisi adalah 675.
+☐ Sisa minyak di tangki masih cukup untuk mengisi 1 kemasan botol tambahan.
+☐ Banyak kemasan jerigen yang terisi minyak adalah 80.
+Soal No 24
+Madu jenis A pada tangki Bu Rina (lihat Soal No 23) berjumlah 450 liter, sedangkan madu jenis B dalam tangki berukuran 6 dm × 2 m × 0,8 m dalam keadaan penuh berjumlah 960 liter. Dua pelanggan, Pak Budi (membawa jerigen 15 liter) dan Bu Ani (membawa jerigen 20 liter), membeli seluruh madu tersebut sehingga tidak ada sisa. Seluruh jerigen yang dibawa berisi penuh, dan masing-masing pelanggan mendapatkan kedua jenis madu.
+Tentukan Mungkin atau Tidak Mungkin pada setiap pernyataan berikut!
+Pernyataan	Mungkin	Tidak Mungkin
+Pak Budi membawa pulang 10 jerigen madu jenis A dan 24 jerigen madu jenis B.	☐	☐
+Pak Budi membawa pulang 8 jerigen madu jenis A dan 40 jerigen madu jenis B.	☐	☐
+Bu Ani membawa pulang 12 jerigen madu jenis A dan Pak Budi membawa pulang 60 jerigen madu jenis B.	☐	☐
+Soal No 25
+Berikut adalah data produksi kopi dan teh di suatu daerah dari tahun 2019 hingga 2025 (dalam juta ton).
+Tahun	Kopi	Teh
+2019	1,20	1,05
+2020	1,15	1,06
+2021	1,05	1,08
+2022	0,98	1,10
+2023	0,90	1,12
+2024	0,85	1,14
+2025	0,80	1,16
+
+Berdasarkan data di atas, pernyataan manakah yang benar mengenai tren produksi kopi dan teh?
+A. Produksi kopi terus meningkat sedangkan produksi teh terus menurun.
+B. Produksi kopi terus menurun sedangkan produksi teh terus meningkat.
+C. Produksi kopi dan teh sama-sama meningkat setiap tahun.
+D. Produksi kopi dan teh sama-sama menurun setiap tahun.
+Soal No 26
+Sinta mencatat durasi belajarnya (dalam jam) setiap minggu selama 12 minggu berturut-turut sebagai berikut.
+8, 10, 9, 10, 12, 9, 11, 9, 8, 9, 7, 9
+Modus dari data durasi belajar Sinta tersebut adalah ....
+A. 7 jam
+B. 8 jam
+C. 9 jam
+D. 10 jam
+Soal No 27
+Menggunakan data durasi belajar Sinta pada Soal No 26, berapakah rata-rata durasi belajar Sinta selama 12 minggu tersebut?
+A. 8,5 jam
+B. 9,25 jam
+C. 9,5 jam
+D. 10 jam
+Soal No 28
+Suatu paket berisi 25 kotak misteri yang berisi boneka bernama Luna dan Nino. Dalam satu paket, terdapat 10 boneka Luna dan 15 boneka Nino.
+Rian mengambil 4 kotak misteri secara acak dari paket tersebut dan ternyata mendapatkan 1 boneka Luna dan 3 boneka Nino. Kemudian, Wati akan mengambil 1 kotak misteri dari sisa kotak yang ada. Berapakah peluang Wati mendapatkan boneka Luna?
+A. 9/25
+B. 10/21
+C. 9/21
+D. 12/21
+Soal No 29
+Sebuah inkubator digunakan untuk menetaskan telur bebek. Masa penetasan berlangsung selama 21 hari terhitung dari awal telur dimasukkan ke dalam mesin. Berikut rincian usia telur di dalam mesin saat ini.
+Usia Telur di Dalam Mesin	Banyak Telur
+3 hari	18
+6 hari	24
+9 hari	20
+12 hari	8
+
+Telur-telur tersebut diletakkan secara acak di dalam mesin. Jika dilakukan pengamatan khusus pada satu telur yang dipilih secara acak, berapakah peluang telur tersebut akan menetas dalam 12 hari ke depan?
+A. 1/5
+B. 2/5
+C. 3/7
+D. 4/7
+Soal No 30
+Seorang guru menyiapkan kertas kuis bertuliskan kode X, Y, atau Z di dalam sebuah kotak. Diketahui jumlah kertas berkode X lebih banyak daripada kertas berkode Y. Guru kemudian mengambil 4 kertas dengan kode yang sama dari dalam kotak (tidak diketahui kode apa yang diambil). Setelah pengambilan, jumlah seluruh kertas yang tersisa menjadi 30 lembar, dan jumlah kertas berkode Y lebih banyak daripada kertas berkode Z. Jika kemudian diambil satu kertas secara acak dari kotak tersebut, diketahui bahwa peluang terambilnya kertas berkode Z adalah 3/10.
+Berdasarkan informasi tersebut, berapakah kemungkinan jumlah kertas kuis kode Y mula-mula? Pilihlah semua jawaban benar! Jawaban benar lebih dari satu.
+☐ 9 lembar
+☐ 10 lembar
+☐ 12 lembar
+☐ 13 lembar
+
+

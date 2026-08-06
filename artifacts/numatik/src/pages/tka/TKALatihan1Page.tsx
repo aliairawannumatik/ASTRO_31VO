@@ -208,7 +208,7 @@ const TKALatihan1Page = () => {
           <ol className="list-decimal list-inside space-y-1 text-white/70 text-xs font-body">
             <li>Berdoalah sebelum dan sesudah mengerjakan test!</li>
             <li>Isikan identitas Anda dengan benar!</li>
-            <li>Jumlah soal sebanyak 15 butir soal.</li>
+            <li>Jumlah soal sebanyak 30 butir soal.</li>
             <li>Periksa dan bacalah soal-soal dengan cermat sebelum Anda menjawabnya!</li>
             <li>Periksalah pekerjaan Anda sebelum dikirim atau submit!</li>
           </ol>
@@ -589,6 +589,338 @@ const TKALatihan1Page = () => {
                     "Diperlukan tambahan total sebanyak 32 batu bata baik segitiga maupun persegi.",
                   ]}
                 />
+              </div>
+            </div>
+          </div>
+
+
+          {/* Q16 — MCQ: Sudut bertolak belakang */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">16</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Garis CD dan garis MN berpotongan di titik N. Kedua garis tersebut membentuk dua sudut yang saling bertolak belakang (vertikal), yaitu sudut sebesar <span className="text-yellow-300 font-bold">65°</span> dan sudut sebesar <span className="text-yellow-300 font-bold">(5x + 5)°</span>.
+                </p>
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Nilai x yang tepat adalah ....
+                </p>
+                <MCQ qn={16} correct={1} options={[
+                  "A. 10°", "B. 12°", "C. 13°", "D. 15°",
+                ]} />
+              </div>
+            </div>
+          </div>
+
+          {/* Q17 — MCQ: Rusuk prisma segi enam */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">17</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Sebuah prisma segi enam memiliki alas berbentuk segi enam beraturan. Banyak rusuk pada prisma segi enam tersebut adalah ....
+                </p>
+                <MCQ qn={17} correct={2} options={[
+                  "A. 12 rusuk", "B. 16 rusuk", "C. 18 rusuk", "D. 24 rusuk",
+                ]} />
+              </div>
+            </div>
+          </div>
+
+          {/* Q18 — MCQ: Sudut puncak segitiga (garis sejajar) */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">18</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Garis p dan garis q sejajar. Dua garis transversal memotong garis p dan garis q sehingga membentuk sebuah segitiga di antara keduanya, dengan titik puncak segitiga berada di luar garis p dan garis q. Sudut yang terbentuk antara transversal pertama dengan garis p adalah <span className="text-yellow-300 font-bold">75°</span>, dan sudut yang terbentuk antara transversal kedua dengan garis q adalah <span className="text-yellow-300 font-bold">55°</span> (sudut-sudut tersebut sehadap/sepihak terhadap segitiga). Sudut pada titik puncak segitiga (di antara kedua transversal) adalah b°.
+                </p>
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Berdasarkan gambar tersebut, berapa nilai b?
+                </p>
+                <MCQ qn={18} correct={3} options={[
+                  "A. 55°", "B. 75°", "C. 110°", "D. 130°",
+                ]} />
+              </div>
+            </div>
+          </div>
+
+          {/* Q19 — MCQ: Teorema Pythagoras (kabel penyangga) */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">19</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Seorang teknisi akan memasang kabel penyangga sebuah tiang listrik. Tiang tersebut memiliki tinggi <span className="text-cyan-300 font-bold">8 meter</span>, dan kabel penyangga akan dipasang dari ujung atas tiang ke sebuah titik di tanah yang berjarak <span className="text-cyan-300 font-bold">6 meter</span> dari kaki tiang.
+                </p>
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Tersedia 4 pilihan bahan kabel, yaitu kabel sepanjang 8 meter, 9,5 meter, 10,5 meter, dan 12 meter. Jenis kabel apa yang harus dipilih agar cukup untuk memasang penyangga tiang tersebut dan memiliki sisa paling sedikit?
+                </p>
+                <MCQ qn={19} correct={2} cols={1} options={[
+                  "A. Kabel 8 meter",
+                  "B. Kabel 9,5 meter",
+                  "C. Kabel 10,5 meter",
+                  "D. Kabel 12 meter",
+                ]} />
+              </div>
+            </div>
+          </div>
+
+          {/* Q20 — MCQ: Transformasi (translasi + rotasi) */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">20</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Diketahui dua segitiga kongruen, yaitu segitiga DEF dan segitiga GHI, pada bidang koordinat kartesius, dengan titik E = titik H (kedua segitiga saling berimpit di satu titik, dan segitiga GHI merupakan bayangan segitiga DEF hasil <span className="text-cyan-300 font-bold">rotasi 180°</span> terhadap titik E). Segitiga DEF kemudian akan ditranslasikan oleh <InlineMath math="T = (3,\ 5)" />.
+                </p>
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Bayangan segitiga DEF (setelah translasi) dan segitiga GHI akan saling ....
+                </p>
+                <MCQ qn={20} correct={2} options={[
+                  "A. tegak lurus", "B. berpotongan", "C. sejajar", "D. berhimpit",
+                ]} />
+              </div>
+            </div>
+          </div>
+
+          {/* Q21 — MCQ: Juring lingkaran */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">21</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Sebuah lingkaran terbagi menjadi tiga juring, yaitu juring D, juring E, dan juring F, dengan sudut pusat berturut-turut <span className="text-yellow-300 font-bold">30°</span>, <span className="text-yellow-300 font-bold">90°</span>, dan <span className="text-yellow-300 font-bold">60°</span>.
+                </p>
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Manakah pernyataan yang benar di bawah ini terkait luas juring D, E, dan F?
+                </p>
+                <MCQ qn={21} correct={0} cols={1} options={[
+                  "A. Luas juring E tiga kali dari luas juring D.",
+                  "B. Luas juring F setengah dari luas juring E.",
+                  "C. Luas juring D dua kali dari luas juring F.",
+                  "D. Luas juring E dua kali dari luas juring F.",
+                ]} />
+              </div>
+            </div>
+          </div>
+
+          {/* Q22 — MCQ: Kesebangunan persegi panjang */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">22</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Terdapat dua persegi panjang yang sebangun. Persegi panjang yang lebih besar memiliki tinggi <span className="text-cyan-300 font-bold">24 cm</span> dan luas <span className="text-cyan-300 font-bold">480 cm²</span>. Persegi panjang yang lebih kecil memiliki tinggi <span className="text-cyan-300 font-bold">6 cm</span>.
+                </p>
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Berapakah keliling persegi panjang yang lebih kecil?
+                </p>
+                <MCQ qn={22} correct={2} options={[
+                  "A. 11 cm", "B. 16 cm", "C. 22 cm", "D. 44 cm",
+                ]} />
+              </div>
+            </div>
+          </div>
+
+          {/* Q23 — ComplexMCQ: Madu Bu Rina */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">23</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Bu Rina adalah pemasok madu curah. Madu jenis A disimpan dalam tangki berukuran <span className="text-cyan-300 font-bold">5 dm × 1,5 m × 0,6 m</span> dan dalam keadaan penuh. Madu tersebut akan dikemas ke dalam botol berukuran <span className="text-yellow-300 font-bold">0,5 liter</span> sebanyak <span className="text-yellow-300 font-bold">600 botol</span>, dan sisanya dikemas ke dalam jerigen berukuran <span className="text-yellow-300 font-bold">2 liter</span>.
+                </p>
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Bagaimana perbandingan banyak kemasan botol dan jerigen? Pilihlah semua jawaban benar! Jawaban benar lebih dari satu.
+                </p>
+                <p className="text-cyan-300 text-xs font-body mb-2">Klik pada setiap pilihan jawaban yang benar! Jawaban benar lebih dari satu.</p>
+                <ComplexMCQ qn={23} items={[
+                  { text: "Jumlah kemasan botol lebih banyak daripada jerigen.", benar: true },
+                  { text: "Total kemasan botol dan jerigen yang terisi adalah 675.", benar: true },
+                  { text: "Sisa minyak di tangki masih cukup untuk mengisi 1 kemasan botol tambahan.", benar: false },
+                  { text: "Banyak kemasan jerigen yang terisi minyak adalah 80.", benar: false },
+                ]} />
+              </div>
+            </div>
+          </div>
+
+          {/* Q24 — Mungkin/Tidak Mungkin: Madu Pak Budi & Bu Ani */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">24</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Madu jenis A pada tangki Bu Rina (lihat Soal No 23) berjumlah <span className="text-cyan-300 font-bold">450 liter</span>, sedangkan madu jenis B dalam tangki berukuran <span className="text-cyan-300 font-bold">6 dm × 2 m × 0,8 m</span> dalam keadaan penuh berjumlah <span className="text-cyan-300 font-bold">960 liter</span>. Dua pelanggan, <span className="text-yellow-300 font-bold">Pak Budi</span> (membawa jerigen 15 liter) dan <span className="text-yellow-300 font-bold">Bu Ani</span> (membawa jerigen 20 liter), membeli seluruh madu tersebut sehingga tidak ada sisa. Seluruh jerigen yang dibawa berisi penuh, dan masing-masing pelanggan mendapatkan kedua jenis madu.
+                </p>
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Tentukan <span className="text-green-300 font-bold">Mungkin</span> atau <span className="text-red-300 font-bold">Tidak Mungkin</span> pada setiap pernyataan berikut!
+                </p>
+                <TF2Table qn={24} col1="Mungkin" col2="Tidak Mungkin"
+                  correct1={[true, false, true]}
+                  rows={[
+                    "Pak Budi membawa pulang 10 jerigen madu jenis A dan 24 jerigen madu jenis B.",
+                    "Pak Budi membawa pulang 8 jerigen madu jenis A dan 40 jerigen madu jenis B.",
+                    "Bu Ani membawa pulang 12 jerigen madu jenis A dan Pak Budi membawa pulang 60 jerigen madu jenis B.",
+                  ]}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Q25 — MCQ: Tren produksi kopi dan teh */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">25</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Berikut adalah data produksi kopi dan teh di suatu daerah dari tahun 2019 hingga 2025 (dalam juta ton).
+                </p>
+                <div className="overflow-x-auto mb-3">
+                  <table className="w-full text-xs font-body border-collapse">
+                    <thead>
+                      <tr className="bg-white/10">
+                        <th className="border border-white/20 px-3 py-2 text-white text-center">Tahun</th>
+                        <th className="border border-white/20 px-3 py-2 text-white text-center">Kopi</th>
+                        <th className="border border-white/20 px-3 py-2 text-white text-center">Teh</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-white/80 text-center">
+                      <tr><td className="border border-white/10 px-3 py-2">2019</td><td className="border border-white/10 px-3 py-2">1,20</td><td className="border border-white/10 px-3 py-2">1,05</td></tr>
+                      <tr className="bg-white/3"><td className="border border-white/10 px-3 py-2">2020</td><td className="border border-white/10 px-3 py-2">1,15</td><td className="border border-white/10 px-3 py-2">1,06</td></tr>
+                      <tr><td className="border border-white/10 px-3 py-2">2021</td><td className="border border-white/10 px-3 py-2">1,05</td><td className="border border-white/10 px-3 py-2">1,08</td></tr>
+                      <tr className="bg-white/3"><td className="border border-white/10 px-3 py-2">2022</td><td className="border border-white/10 px-3 py-2">0,98</td><td className="border border-white/10 px-3 py-2">1,10</td></tr>
+                      <tr><td className="border border-white/10 px-3 py-2">2023</td><td className="border border-white/10 px-3 py-2">0,90</td><td className="border border-white/10 px-3 py-2">1,12</td></tr>
+                      <tr className="bg-white/3"><td className="border border-white/10 px-3 py-2">2024</td><td className="border border-white/10 px-3 py-2">0,85</td><td className="border border-white/10 px-3 py-2">1,14</td></tr>
+                      <tr><td className="border border-white/10 px-3 py-2">2025</td><td className="border border-white/10 px-3 py-2">0,80</td><td className="border border-white/10 px-3 py-2">1,16</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Berdasarkan data di atas, pernyataan manakah yang benar mengenai tren produksi kopi dan teh?
+                </p>
+                <MCQ qn={25} correct={1} cols={1} options={[
+                  "A. Produksi kopi terus meningkat sedangkan produksi teh terus menurun.",
+                  "B. Produksi kopi terus menurun sedangkan produksi teh terus meningkat.",
+                  "C. Produksi kopi dan teh sama-sama meningkat setiap tahun.",
+                  "D. Produksi kopi dan teh sama-sama menurun setiap tahun.",
+                ]} />
+              </div>
+            </div>
+          </div>
+
+          {/* Q26 — MCQ: Modus durasi belajar */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">26</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Sinta mencatat durasi belajarnya (dalam jam) setiap minggu selama 12 minggu berturut-turut sebagai berikut.
+                </p>
+                <div className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 mb-3 text-center font-body text-white/90 text-sm tracking-wide">
+                  8, 10, 9, 10, 12, 9, 11, 9, 8, 9, 7, 9
+                </div>
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Modus dari data durasi belajar Sinta tersebut adalah ....
+                </p>
+                <MCQ qn={26} correct={2} options={[
+                  "A. 7 jam", "B. 8 jam", "C. 9 jam", "D. 10 jam",
+                ]} />
+              </div>
+            </div>
+          </div>
+
+          {/* Q27 — MCQ: Rata-rata durasi belajar (lanjutan Q26) */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">27</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Menggunakan data durasi belajar Sinta pada Soal No 26, berapakah <span className="text-yellow-300 font-bold">rata-rata</span> durasi belajar Sinta selama 12 minggu tersebut?
+                </p>
+                <MCQ qn={27} correct={1} options={[
+                  "A. 8,5 jam", "B. 9,25 jam", "C. 9,5 jam", "D. 10 jam",
+                ]} />
+              </div>
+            </div>
+          </div>
+
+          {/* Q28 — MCQ: Peluang boneka Luna */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">28</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Suatu paket berisi <span className="text-cyan-300 font-bold">25 kotak misteri</span> yang berisi boneka bernama Luna dan Nino. Dalam satu paket, terdapat <span className="text-yellow-300 font-bold">10 boneka Luna</span> dan <span className="text-yellow-300 font-bold">15 boneka Nino</span>.
+                </p>
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Rian mengambil <span className="text-cyan-300 font-bold">4 kotak misteri</span> secara acak dari paket tersebut dan ternyata mendapatkan 1 boneka Luna dan 3 boneka Nino. Kemudian, Wati akan mengambil 1 kotak misteri dari sisa kotak yang ada. Berapakah peluang Wati mendapatkan boneka Luna?
+                </p>
+                <MCQ qn={28} correct={2} options={[
+                  <span key="a"><InlineMath math="A.\ \tfrac{9}{25}" /></span>,
+                  <span key="b"><InlineMath math="B.\ \tfrac{10}{21}" /></span>,
+                  <span key="c"><InlineMath math="C.\ \tfrac{9}{21}" /></span>,
+                  <span key="d"><InlineMath math="D.\ \tfrac{12}{21}" /></span>,
+                ]} />
+              </div>
+            </div>
+          </div>
+
+          {/* Q29 — MCQ: Peluang telur menetas */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">29</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Sebuah inkubator digunakan untuk menetaskan telur bebek. Masa penetasan berlangsung selama <span className="text-cyan-300 font-bold">21 hari</span> terhitung dari awal telur dimasukkan ke dalam mesin. Berikut rincian usia telur di dalam mesin saat ini.
+                </p>
+                <div className="overflow-x-auto mb-3">
+                  <table className="w-full text-xs font-body border-collapse">
+                    <thead>
+                      <tr className="bg-white/10">
+                        <th className="border border-white/20 px-3 py-2 text-white text-left">Usia Telur di Dalam Mesin</th>
+                        <th className="border border-white/20 px-3 py-2 text-white text-center">Banyak Telur</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-white/80">
+                      <tr><td className="border border-white/10 px-3 py-2">3 hari</td><td className="border border-white/10 px-3 py-2 text-center">18</td></tr>
+                      <tr className="bg-white/3"><td className="border border-white/10 px-3 py-2">6 hari</td><td className="border border-white/10 px-3 py-2 text-center">24</td></tr>
+                      <tr><td className="border border-white/10 px-3 py-2">9 hari</td><td className="border border-white/10 px-3 py-2 text-center">20</td></tr>
+                      <tr className="bg-white/3"><td className="border border-white/10 px-3 py-2">12 hari</td><td className="border border-white/10 px-3 py-2 text-center">8</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Telur-telur tersebut diletakkan secara acak di dalam mesin. Jika dilakukan pengamatan khusus pada satu telur yang dipilih secara acak, berapakah peluang telur tersebut akan menetas dalam <span className="text-yellow-300 font-bold">12 hari ke depan</span>?
+                </p>
+                <MCQ qn={29} correct={1} options={[
+                  <span key="a"><InlineMath math="A.\ \tfrac{1}{5}" /></span>,
+                  <span key="b"><InlineMath math="B.\ \tfrac{2}{5}" /></span>,
+                  <span key="c"><InlineMath math="C.\ \tfrac{3}{7}" /></span>,
+                  <span key="d"><InlineMath math="D.\ \tfrac{4}{7}" /></span>,
+                ]} />
+              </div>
+            </div>
+          </div>
+
+          {/* Q30 — ComplexMCQ: Kertas kuis kode Y */}
+          <div className="bg-card/70 backdrop-blur border border-border rounded-xl p-5">
+            <div className="flex gap-3 mb-3">
+              <span className="bg-accent/20 text-accent font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">30</span>
+              <div className="flex-1">
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Seorang guru menyiapkan kertas kuis bertuliskan kode <span className="text-cyan-300 font-bold">X</span>, <span className="text-cyan-300 font-bold">Y</span>, atau <span className="text-cyan-300 font-bold">Z</span> di dalam sebuah kotak. Diketahui jumlah kertas berkode X lebih banyak daripada kertas berkode Y. Guru kemudian mengambil 4 kertas dengan kode yang sama dari dalam kotak (tidak diketahui kode apa yang diambil). Setelah pengambilan, jumlah seluruh kertas yang tersisa menjadi <span className="text-yellow-300 font-bold">30 lembar</span>, dan jumlah kertas berkode Y lebih banyak daripada kertas berkode Z. Jika kemudian diambil satu kertas secara acak dari kotak tersebut, diketahui bahwa peluang terambilnya kertas berkode Z adalah <InlineMath math="\tfrac{3}{10}" />.
+                </p>
+                <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
+                  Berdasarkan informasi tersebut, berapakah kemungkinan jumlah kertas kuis kode Y mula-mula? Pilihlah semua jawaban benar! Jawaban benar lebih dari satu.
+                </p>
+                <p className="text-cyan-300 text-xs font-body mb-2">Klik pada setiap pilihan jawaban yang benar! Jawaban benar lebih dari satu.</p>
+                <ComplexMCQ qn={30} items={[
+                  { text: "9 lembar", benar: false },
+                  { text: "10 lembar", benar: true },
+                  { text: "12 lembar", benar: true },
+                  { text: "13 lembar", benar: false },
+                ]} />
               </div>
             </div>
           </div>
