@@ -1,1 +1,2 @@
 - [Numatik artifact setup](numatik-artifact-setup.md) — .migration-backup wiring, port gotchas, trilingual page pattern, BolaPage translation progress
+- [TKA Latihan 2 pembahasan](tka-latihan2-pembahasan.md) — PembahasanCard integrated Q1–10; data file pattern for TKA pages

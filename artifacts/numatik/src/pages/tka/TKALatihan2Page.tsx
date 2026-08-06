@@ -5,6 +5,8 @@ import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import { InlineMath, BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
+import PembahasanCard from "@/components/PembahasanCard";
+import { tkaLatihan2Pembahasan } from "@/data/pembahasan/tkaLatihan2";
 
 const TKALatihan2Page = () => {
   const navigate = useNavigate();
@@ -246,6 +248,7 @@ const TKALatihan2Page = () => {
                   "C. 66.197 kali",
                   "D. 67.197 kali",
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q1" pembahasan={tkaLatihan2Pembahasan[1]} />
               </div>
             </div>
           </div>
@@ -266,6 +269,7 @@ const TKALatihan2Page = () => {
                   { text: "Gunung Dempo dan Lewotobi memiliki jumlah erupsi yang sama.", benar: true },
                   { text: "Gunung Anak Krakatau mengalami erupsi lebih dari 700 kali.", benar: false },
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q2" pembahasan={tkaLatihan2Pembahasan[2]} />
               </div>
             </div>
           </div>
@@ -286,6 +290,7 @@ const TKALatihan2Page = () => {
                     "Gunung Marapi memiliki erupsi lebih sedikit daripada Gunung Anak Krakatau.",
                   ]}
                 />
+                <PembahasanCard pembahasanKey="tka2-q3" pembahasan={tkaLatihan2Pembahasan[3]} />
               </div>
             </div>
           </div>
@@ -331,6 +336,7 @@ const TKALatihan2Page = () => {
                   "C. 9,6 juta ton",
                   "D. 12,8 juta ton",
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q4" pembahasan={tkaLatihan2Pembahasan[4]} />
               </div>
             </div>
           </div>
@@ -351,6 +357,7 @@ const TKALatihan2Page = () => {
                   { text: "Jenis plastik lainnya memiliki persentase 15%.", benar: false },
                   { text: "Botol minuman menyumbang lebih dari 15 juta ton sampah per tahun.", benar: true },
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q5" pembahasan={tkaLatihan2Pembahasan[5]} />
               </div>
             </div>
           </div>
@@ -371,6 +378,7 @@ const TKALatihan2Page = () => {
                     "Sampah botol minuman lebih banyak daripada sampah kemasan makanan.",
                   ]}
                 />
+                <PembahasanCard pembahasanKey="tka2-q6" pembahasan={tkaLatihan2Pembahasan[6]} />
               </div>
             </div>
           </div>
@@ -418,6 +426,7 @@ const TKALatihan2Page = () => {
                   "C. Rp50.000",
                   "D. Rp60.000",
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q7" pembahasan={tkaLatihan2Pembahasan[7]} />
               </div>
             </div>
           </div>
@@ -438,6 +447,7 @@ const TKALatihan2Page = () => {
                   { text: "Kecamatan A dan C memiliki selisih KK sebanyak 100.", benar: true },
                   { text: "Kecamatan B menerima KK lebih banyak daripada kecamatan E.", benar: true },
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q8" pembahasan={tkaLatihan2Pembahasan[8]} />
               </div>
             </div>
           </div>
@@ -458,6 +468,7 @@ const TKALatihan2Page = () => {
                     "Kecamatan B menerima 100 KK lebih banyak daripada kecamatan E.",
                   ]}
                 />
+                <PembahasanCard pembahasanKey="tka2-q9" pembahasan={tkaLatihan2Pembahasan[9]} />
               </div>
             </div>
           </div>
@@ -488,6 +499,7 @@ const TKALatihan2Page = () => {
                   "C. 23 bungkus",
                   "D. 25 bungkus",
                 ]} />
+                <PembahasanCard pembahasanKey="tka2-q10" pembahasan={tkaLatihan2Pembahasan[10]} />
               </div>
             </div>
           </div>
