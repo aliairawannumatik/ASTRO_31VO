@@ -985,12 +985,21 @@ const BentukAkarPage = () => {
                   </>}
                 />
                 <ExBlock level="med" n={2}
-                  soal={<>{t.c5_med_q} <InlineMath math="\dfrac{\sqrt{6} + \sqrt{2}}{\sqrt{6} - \sqrt{2}}" /></>}
+                  soal={<>{t.c5_med_q} <InlineMath math="\dfrac{8}{\sqrt{6} - \sqrt{2}}" /></>}
                   solution={<>
                     <p>{t.kalikan_conj} <InlineMath math="(\sqrt{6}+\sqrt{2})" />:</p>
                     <Dark>
-                      <BlockMath math="\frac{(\sqrt{6}+\sqrt{2})^2}{(\sqrt{6})^2 - (\sqrt{2})^2} = \frac{6 + 2\sqrt{12} + 2}{6 - 2} = \frac{8 + 4\sqrt{3}}{4} = 2 + \sqrt{3}" />
+                      <BlockMath math="\frac{8}{\sqrt{6}-\sqrt{2}} \times \frac{\sqrt{6}+\sqrt{2}}{\sqrt{6}+\sqrt{2}} = \frac{8(\sqrt{6}+\sqrt{2})}{(\sqrt{6})^2 - (\sqrt{2})^2}" />
                     </Dark>
+                    <p><strong>{t.step} 1:</strong> {t.gunakan_selisih}</p>
+                    <Dark>
+                      <BlockMath math="(\sqrt{6})^2 - (\sqrt{2})^2 = 6 - 2 = 4" />
+                    </Dark>
+                    <p><strong>{t.step} 2:</strong></p>
+                    <Dark>
+                      <BlockMath math="\frac{8(\sqrt{6}+\sqrt{2})}{4} = 2(\sqrt{6}+\sqrt{2}) = 2\sqrt{6}+2\sqrt{2}" />
+                    </Dark>
+                    <p><strong className="text-primary">{t.hasil} <InlineMath math="2\sqrt{6}+2\sqrt{2}" /></strong></p>
                   </>}
                 />
                 <ExBlock level="hard" n={3}
@@ -1009,6 +1018,24 @@ const BentukAkarPage = () => {
                       <BlockMath math="(3\sqrt{3} - 2\sqrt{2})^2 = 27 - 2 \cdot 3\sqrt{3} \cdot 2\sqrt{2} + 8 = 35 - 12\sqrt{6}" />
                     </Dark>
                     <p><strong className="text-primary">{t.hasil} <InlineMath math="\dfrac{35 - 12\sqrt{6}}{19}" /></strong></p>
+                  </>}
+                />
+                <ExBlock level="med" n={4}
+                  soal={<>{t.rasionalkan} <InlineMath math="\dfrac{4}{\sqrt{5}+1}" /></>}
+                  solution={<>
+                    <p>{t.kalikan_conj} <InlineMath math="(\sqrt{5}-1)" />:</p>
+                    <Dark>
+                      <BlockMath math="\frac{4}{\sqrt{5}+1} \times \frac{\sqrt{5}-1}{\sqrt{5}-1} = \frac{4(\sqrt{5}-1)}{(\sqrt{5})^2 - 1^2}" />
+                    </Dark>
+                    <p><strong>{t.step} 1:</strong> {t.gunakan_selisih}</p>
+                    <Dark>
+                      <BlockMath math="(\sqrt{5})^2 - 1^2 = 5 - 1 = 4" />
+                    </Dark>
+                    <p><strong>{t.step} 2:</strong></p>
+                    <Dark>
+                      <BlockMath math="\frac{4(\sqrt{5}-1)}{4} = \sqrt{5}-1" />
+                    </Dark>
+                    <p><strong className="text-primary">{t.hasil} <InlineMath math="\sqrt{5}-1" /></strong></p>
                   </>}
                 />
               </div>
