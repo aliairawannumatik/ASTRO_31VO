@@ -836,6 +836,36 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={11} />
+            {expandedPembahasan.has(11) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>C. Rp34.000,00 (kue lapis Rp9.000 dan kue lumpur Rp8.000)</PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Sistem Persamaan Linear Dua Variabel (SPLDV)</strong> — selesaikan dengan eliminasi.</p>
+                  <p>Misalkan <InlineMath math="L" /> = harga kue lapis, <InlineMath math="M" /> = harga kue lumpur.</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Eliminasi M dengan mengalikan persamaan (ii) agar koefisien M sama dengan (i), lalu kurangi.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Buat persamaan dari soal:</p>
+                    <div className="my-1"><InlineMath math="2L + 3M = 42.000 \quad \text{...(i)}" /></div>
+                    <div className="my-1"><InlineMath math="4L + 1M = 44.000 \quad \text{...(ii)}" /></div>
+                  </S>
+                  <S n={2}>
+                    <p>Kalikan (ii) dengan 3: <InlineMath math="12L + 3M = 132.000 \quad \text{...(iii)}" /></p>
+                    <p>Kurangi (i) dari (iii): <InlineMath math="10L = 90.000 \Rightarrow L = 9.000" /></p>
+                  </S>
+                  <S n={3}>
+                    <p>Substitusi ke (ii): <InlineMath math="4(9.000) + M = 44.000 \Rightarrow M = 8.000" /></p>
+                  </S>
+                  <S n={4}>
+                    <p>Hitung yang ditanya:</p>
+                    <div className="my-1"><InlineMath math="2L + 2M = 2(9.000) + 2(8.000) = 18.000 + 16.000 = \mathbf{34.000}" /></div>
+                    <p>Jawaban: <strong className="text-green-300">C. Rp34.000,00</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q12 — MCQ: Aljabar (buku gambar & crayon) */}
@@ -862,6 +892,32 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={12} />
+            {expandedPembahasan.has(12) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban><span>A. <InlineMath math="18x + 12y" /></span></PBJawaban>
+                <PBKonsep>
+                  <p>Total belanja = Reni + Sari + Dinda. Karena Sari beli 2× Reni dan Dinda beli 3× Reni, totalnya = (1 + 2 + 3)× belanja Reni.</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Jumlahkan multiplier (1+2+3=6), lalu kalikan langsung dengan belanja dasar Reni.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Belanja Reni: <InlineMath math="3x + 2y" /></p>
+                  </S>
+                  <S n={2}>
+                    <p>Belanja Sari (2× Reni): <InlineMath math="2(3x + 2y) = 6x + 4y" /></p>
+                  </S>
+                  <S n={3}>
+                    <p>Belanja Dinda (3× Reni): <InlineMath math="3(3x + 2y) = 9x + 6y" /></p>
+                  </S>
+                  <S n={4}>
+                    <p>Total ketiga anak:</p>
+                    <div className="my-1"><InlineMath math="(3x+2y)+(6x+4y)+(9x+6y) = 18x+12y" /></div>
+                    <p>Jawaban: <strong className="text-green-300">A. 18x + 12y</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q13 — MCQ: Fungsi (paket internet) */}
@@ -886,6 +942,32 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={13} />
+            {expandedPembahasan.has(13) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban><span>A. <InlineMath math="f(x) = 3.000x + 3.000" /></span></PBJawaban>
+                <PBKonsep>
+                  <p>Pasangan berurutan membentuk <strong className="text-violet-300">fungsi linear</strong> <InlineMath math="f(x) = mx + c" />, di mana:</p>
+                  <p>• <InlineMath math="m" /> = gradien (kenaikan harga per GB)</p>
+                  <p>• <InlineMath math="c" /> = konstanta (biaya tetap saat x = 0)</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Hitung gradien dari selisih dua pasangan, lalu substitusi untuk c. Verifikasi dengan pasangan lain.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Hitung gradien dari (2, 9.000) dan (4, 15.000):</p>
+                    <div className="my-1"><InlineMath math="m = \frac{15.000 - 9.000}{4 - 2} = \frac{6.000}{2} = 3.000" /></div>
+                  </S>
+                  <S n={2}>
+                    <p>Cari konstanta c dengan substitusi (2, 9.000):</p>
+                    <div className="my-1"><InlineMath math="9.000 = 3.000(2) + c \Rightarrow c = 3.000" /></div>
+                  </S>
+                  <S n={3}>
+                    <p>Verifikasi: <InlineMath math="f(8) = 24.000 + 3.000 = 27.000\ ✓" /> dan <InlineMath math="f(10) = 30.000 + 3.000 = 33.000\ ✓" /></p>
+                    <p>Jawaban: <strong className="text-green-300">A. f(x) = 3.000x + 3.000</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q14 — MCQ: Pola Bilangan (pagar bambu) */}
@@ -904,6 +986,31 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={14} />
+            {expandedPembahasan.has(14) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>D. 23 batu bata (12 persegi + 11 segitiga)</PBJawaban>
+                <PBKonsep>
+                  <p>Pada tingkat ke-<InlineMath math="n" />:</p>
+                  <p>• Bata persegi = <InlineMath math="n + 2" /></p>
+                  <p>• Bata segitiga = <InlineMath math="n + 1" /></p>
+                  <p>• <strong className="text-violet-300">Total = </strong><InlineMath math="(n+2)+(n+1) = 2n+3" /></p>
+                  <p className="text-yellow-300/80">🔑 Trik: Substitusi langsung n = 10 ke rumus total tanpa menghitung satu per satu.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Tingkat ke-10: bata persegi = <InlineMath math="10 + 2 = 12" /></p>
+                  </S>
+                  <S n={2}>
+                    <p>Tingkat ke-10: bata segitiga = <InlineMath math="10 + 1 = 11" /></p>
+                  </S>
+                  <S n={3}>
+                    <p>Total = <InlineMath math="12 + 11 = 23" /> batu bata</p>
+                    <p>Jawaban: <strong className="text-green-300">D. 23 batu bata</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q15 — True/False: Pola Bilangan (dua pagar) */}
@@ -927,6 +1034,32 @@ const TKALatihan1Page = () => {
                 />
               </div>
             </div>
+            <PembahasanBtn n={15} />
+            {expandedPembahasan.has(15) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>Pernyataan 1 = Benar, Pernyataan 2 = Salah, Pernyataan 3 = Benar</PBJawaban>
+                <PBKonsep>
+                  <p>Hitung total bata tiap jenis untuk 1 pagar (tingkat 1–8), lalu kalikan 2 untuk kedua pagar.</p>
+                  <p>• Persegi 1 pagar: <InlineMath math="\sum_{n=1}^{8}(n+2) = 3+4+5+6+7+8+9+10 = 52" /></p>
+                  <p>• Segitiga 1 pagar: <InlineMath math="\sum_{n=1}^{8}(n+1) = 2+3+4+5+6+7+8+9 = 44" /></p>
+                  <p className="text-yellow-300/80">🔑 Trik: Gunakan rumus deret aritmetika S = n/2×(a+l) atau jumlahkan langsung.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Kebutuhan 2 pagar: persegi = <InlineMath math="2 \times 52 = 104" />, segitiga = <InlineMath math="2 \times 44 = 88" /></p>
+                  </S>
+                  <S n={2}>
+                    <p><strong className="text-cyan-300">P1</strong> — Kekurangan persegi: <InlineMath math="104 - 90 = 14" /> → <strong className="text-green-300">BENAR ✓</strong></p>
+                  </S>
+                  <S n={3}>
+                    <p><strong className="text-cyan-300">P2</strong> — Kekurangan segitiga: <InlineMath math="88 - 70 = 18" /> (bukan 20!) → <strong className="text-red-300">SALAH ✗</strong></p>
+                  </S>
+                  <S n={4}>
+                    <p><strong className="text-cyan-300">P3</strong> — Total kekurangan: <InlineMath math="14 + 18 = 32" /> → <strong className="text-green-300">BENAR ✓</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
 
@@ -946,6 +1079,29 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={16} />
+            {expandedPembahasan.has(16) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>B. x = 12 (sehingga sudut = 65°)</PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Sudut Bertolak Belakang (Vertikal):</strong> Dua sudut yang terbentuk saat dua garis berpotongan dan saling berhadapan selalu <strong className="text-violet-300">sama besar</strong>.</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Samakan langsung kedua sudut bertolak belakang, lalu selesaikan persamaan linear satu langkah.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Karena sudut bertolak belakang sama besar:</p>
+                    <div className="my-1"><InlineMath math="5x + 5 = 65" /></div>
+                  </S>
+                  <S n={2}>
+                    <div className="my-1"><InlineMath math="5x = 60 \Rightarrow x = 12" /></div>
+                  </S>
+                  <S n={3}>
+                    <p>Verifikasi: <InlineMath math="5(12) + 5 = 65°\ ✓" /></p>
+                    <p>Jawaban: <strong className="text-green-300">B. 12°</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q17 — MCQ: Rusuk prisma segi enam */}
@@ -961,6 +1117,30 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={17} />
+            {expandedPembahasan.has(17) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>C. 18 rusuk</PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Rumus rusuk prisma segi-n:</strong></p>
+                  <div className="my-1 text-center"><InlineMath math="\text{Banyak rusuk} = 3n" /></div>
+                  <p className="text-yellow-300/80">🔑 Trik: Prisma segi-n punya n rusuk alas + n rusuk tutup + n rusuk tegak = 3n total. Untuk n = 6: 3 × 6 = 18.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Prisma segi enam memiliki alas dan tutup berbentuk segi enam (n = 6).</p>
+                  </S>
+                  <S n={2}>
+                    <p>Rincian rusuk:</p>
+                    <p>• 6 rusuk alas &nbsp;|&nbsp; 6 rusuk tutup &nbsp;|&nbsp; 6 rusuk tegak</p>
+                  </S>
+                  <S n={3}>
+                    <p>Total = <InlineMath math="6 + 6 + 6 = 18" /> rusuk</p>
+                    <p>Jawaban: <strong className="text-green-300">C. 18 rusuk</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q18 — MCQ: Sudut puncak segitiga (garis sejajar) */}
@@ -979,6 +1159,32 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={18} />
+            {expandedPembahasan.has(18) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>D. b = 130°</PBJawaban>
+                <PBKonsep>
+                  <p>Jika titik puncak segitiga berada di luar dua garis sejajar, dan dua transversal membentuk sudut α dengan garis p dan sudut β dengan garis q (masing-masing menghadap ke segitiga), maka:</p>
+                  <div className="my-1 text-center"><InlineMath math="b = \alpha + \beta" /></div>
+                  <p className="text-yellow-300/80">🔑 Trik: Tarik garis bantu melalui puncak sejajar dengan p dan q. Sudut puncak = α + β (sudut sehadap kiri + sudut sehadap kanan).</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Tarik garis <InlineMath math="r" /> melalui titik puncak, sejajar dengan p dan q.</p>
+                  </S>
+                  <S n={2}>
+                    <p>Transversal 1 membentuk 75° dengan p. Karena <InlineMath math="r \parallel p" />, sudut transversal 1 dengan r = <strong className="text-cyan-300">75°</strong> (sudut sehadap).</p>
+                  </S>
+                  <S n={3}>
+                    <p>Transversal 2 membentuk 55° dengan q. Karena <InlineMath math="r \parallel q" />, sudut transversal 2 dengan r = <strong className="text-cyan-300">55°</strong> (sudut sehadap).</p>
+                  </S>
+                  <S n={4}>
+                    <p>Sudut puncak b = <InlineMath math="75° + 55° = 130°" /></p>
+                    <p>Jawaban: <strong className="text-green-300">D. 130°</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q19 — MCQ: Teorema Pythagoras (kabel penyangga) */}
@@ -1000,6 +1206,36 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={19} />
+            {expandedPembahasan.has(19) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>C. Kabel 10,5 meter (panjang minimum kabel = 10 m, sisa paling sedikit dari opsi ≥ 10 m)</PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Teorema Pythagoras:</strong> <InlineMath math="c = \sqrt{a^2 + b^2}" /></p>
+                  <p>Di mana a = tinggi tiang, b = jarak ke tanah, c = panjang kabel.</p>
+                  <p className="text-yellow-300/80">🔑 Trik: Kenali tripel Pythagoras! 6-8-10 adalah tripel umum (kelipatan 3-4-5). Kabel harus ≥ 10 m — pilih yang paling mendekati dari atas.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>Tiang 8 m (tegak) dan jarak ke tanah 6 m (mendatar) membentuk segitiga siku-siku.</p>
+                  </S>
+                  <S n={2}>
+                    <p>Panjang kabel minimum:</p>
+                    <div className="my-1"><InlineMath math="c = \sqrt{8^2 + 6^2} = \sqrt{64 + 36} = \sqrt{100} = 10 \text{ m}" /></div>
+                  </S>
+                  <S n={3}>
+                    <p>Cek setiap pilihan:</p>
+                    <p>• 8 m → tidak cukup (8 &lt; 10) ✗</p>
+                    <p>• 9,5 m → tidak cukup (9,5 &lt; 10) ✗</p>
+                    <p>• <strong className="text-green-300">10,5 m → cukup, sisa = 0,5 m ✓</strong></p>
+                    <p>• 12 m → cukup, sisa = 2 m (sisa lebih banyak dari 10,5 m)</p>
+                  </S>
+                  <S n={4}>
+                    <p>Kabel yang cukup dan sisa paling sedikit: <strong className="text-green-300">C. Kabel 10,5 meter</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q20 — MCQ: Transformasi (translasi + rotasi) */}
@@ -1018,6 +1254,29 @@ const TKALatihan1Page = () => {
                 ]} />
               </div>
             </div>
+            <PembahasanBtn n={20} />
+            {expandedPembahasan.has(20) && (
+              <div className="mt-3 flex flex-col gap-3">
+                <PBJawaban>C. Sejajar (DEF' dan GHI kongruen, sisi-sisinya sejajar, tidak saling berhimpit maupun berpotongan)</PBJawaban>
+                <PBKonsep>
+                  <p><strong className="text-violet-300">Rotasi 180°</strong> menghasilkan bangun kongruen dengan orientasi terbalik — setiap sisi pada bayangan sejajar dengan sisi aslinya.</p>
+                  <p><strong className="text-violet-300">Translasi</strong> hanya menggeser posisi tanpa mengubah orientasi atau ukuran.</p>
+                  <p className="text-yellow-300/80">🔑 Trik: GHI ∥ DEF (dari rotasi 180°). Translasi menggeser DEF ke DEF' tanpa mengubah sifat kesejajaran → DEF' tetap sejajar GHI tetapi tidak lagi berhimpit.</p>
+                </PBKonsep>
+                <PBSteps>
+                  <S n={1}>
+                    <p>GHI = bayangan DEF hasil rotasi 180° terhadap E=H → GHI kongruen dengan DEF, dan sisi-sisi GHI sejajar sisi-sisi DEF.</p>
+                  </S>
+                  <S n={2}>
+                    <p>DEF ditranslasikan oleh <InlineMath math="T = (3,\ 5)" /> → DEF' bergeser 3 ke kanan dan 5 ke atas.</p>
+                  </S>
+                  <S n={3}>
+                    <p>Translasi tidak mengubah orientasi DEF, sehingga sisi-sisi DEF' tetap sejajar dengan GHI. Namun posisi DEF' sudah tidak berhimpit dengan GHI → keduanya <strong className="text-green-300">sejajar</strong>.</p>
+                    <p>Jawaban: <strong className="text-green-300">C. Sejajar</strong></p>
+                  </S>
+                </PBSteps>
+              </div>
+            )}
           </div>
 
           {/* Q21 — MCQ: Juring lingkaran */}
