@@ -24,6 +24,8 @@ export interface LatihanSoal {
   options?: string[];
   /** PG & PGK: huruf jawaban benar (A/B/C/D) */
   jawaban?: string;
+  /** PGK: indeks pernyataan benar (0-based); mendukung lebih dari satu jawaban */
+  jawabanPGK?: number[];
   /** PGK: 4 pernyataan | PGKBS: 3 pernyataan */
   pernyataan?: string[];
   /** PGKBS: array ["B"|"S"] untuk tiap pernyataan */
@@ -92,11 +94,14 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
   const [activeTab, setActiveTab] = useState<"materi" | "contoh" | "dasar">("materi");
   /* PG & PGK: stores selected letter (A/B/C/D) per soal.no */
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string>>({});
+  /* PGK modern: stores selected statement indices per soal.no */
+  const [pgkAnswers, setPgkAnswers] = useState<Record<number, number[]>>({});
   /* PGKBS: stores ["B"|"S"|null, ...] per soal.no */
   const [pgkbsAnswers, setPgkbsAnswers] = useState<Record<number, ("B" | "S" | null)[]>>({});
   const [revealedAnswers, setRevealedAnswers] = useState<Set<number>>(new Set());
   /* Contoh soal interactive state (separate from latihan) */
   const [selectedContohAnswers, setSelectedContohAnswers] = useState<Record<number, string>>({});
+  const [pgkContohAnswers, setPgkContohAnswers] = useState<Record<number, number[]>>({});
   const [pgkbsContohAnswers, setPgkbsContohAnswers] = useState<Record<number, ("B" | "S" | null)[]>>({});
 
   const handleSelectAnswer = (soalNo: number, letter: string) => {
@@ -112,6 +117,18 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
       const current: ("B" | "S" | null)[] = prev[soalNo] ? [...prev[soalNo]] : Array(count).fill(null);
       current[idx] = val;
       return { ...prev, [soalNo]: current };
+    });
+  };
+
+  const handleSelectPGK = (soalNo: number, idx: number) => {
+    if (revealedAnswers.has(soalNo)) return;
+    playPopSound();
+    setPgkAnswers(prev => {
+      const current = prev[soalNo] ?? [];
+      const next = current.includes(idx)
+        ? current.filter(item => item !== idx)
+        : [...current, idx].sort((a, b) => a - b);
+      return { ...prev, [soalNo]: next };
     });
   };
 
@@ -141,12 +158,22 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
       delete next[soalNo];
       return next;
     });
+    setPgkAnswers(prev => {
+      const next = { ...prev };
+      delete next[soalNo];
+      return next;
+    });
   };
 
   const isCorrectForSoal = (s: LatihanSoal): boolean => {
     if (!revealedAnswers.has(s.no)) return false;
     if (s.type === "pgkbs") {
       return (s.jawabanBS?.every((ans, i) => pgkbsAnswers[s.no]?.[i] === ans) ?? false);
+    }
+    if (s.type === "pgk" && s.jawabanPGK) {
+      const selected = pgkAnswers[s.no] ?? [];
+      return selected.length === s.jawabanPGK.length
+        && selected.every(index => s.jawabanPGK?.includes(index));
     }
     return selectedAnswers[s.no] === s.jawaban;
   };
@@ -638,14 +665,22 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
               {latihanDasar.map((soal, qi) => {
                 const type = soal.type ?? "pg";
                 const selected = selectedAnswers[soal.no];
+                const selectedPGK = pgkAnswers[soal.no] ?? [];
                 const isRevealed = revealedAnswers.has(soal.no);
                 const bsArr = pgkbsAnswers[soal.no] ?? Array(soal.pernyataan?.length ?? 3).fill(null);
                 const bsAllAnswered = type === "pgkbs"
                   ? bsArr.length === (soal.pernyataan?.length ?? 3) && bsArr.every(a => a !== null)
                   : false;
-                const hasAnswered = type === "pgkbs" ? bsAllAnswered : !!selected;
+                const hasAnswered = type === "pgkbs"
+                  ? bsAllAnswered
+                  : type === "pgk" && soal.jawabanPGK
+                    ? selectedPGK.length > 0
+                    : !!selected;
                 const isCorrect = type === "pgkbs"
                   ? (soal.jawabanBS?.every((ans, i) => bsArr[i] === ans) ?? false)
+                  : type === "pgk" && soal.jawabanPGK
+                    ? selectedPGK.length === soal.jawabanPGK.length
+                      && selectedPGK.every(index => soal.jawabanPGK?.includes(index))
                   : selected === soal.jawaban;
                 const typeBadge = TYPE_BADGE[type];
 
@@ -713,23 +748,50 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                     {/* ── PGK: numbered pernyataan list ── */}
                     {(type === "pgk") && soal.pernyataan && (
                       <div className="px-5 pb-2 space-y-1.5 ml-11">
-                        {soal.pernyataan.map((p, pi) => (
-                          <div key={pi} className="flex items-start gap-2 text-xs font-body text-white/80 leading-relaxed">
+                        {soal.pernyataan.map((p, pi) => {
+                          const isSelectedPGK = selectedPGK.includes(pi);
+                          const isCorrectPGK = soal.jawabanPGK?.includes(pi) ?? false;
+                          return (
+                          <button
+                            key={pi}
+                            type="button"
+                            disabled={isRevealed}
+                            onClick={() => soal.jawabanPGK && handleSelectPGK(soal.no, pi)}
+                            className="w-full flex items-start gap-2 text-left text-xs font-body text-white/80 leading-relaxed rounded-lg px-2 py-1 transition-colors"
+                            style={{
+                              background: isRevealed
+                                ? isCorrectPGK ? "rgba(34,197,94,0.12)" : isSelectedPGK ? "rgba(239,68,68,0.12)" : "transparent"
+                                : isSelectedPGK ? "rgba(245,158,11,0.14)" : "transparent",
+                              cursor: soal.jawabanPGK && !isRevealed ? "pointer" : "default",
+                            }}
+                          >
                             <span className="flex-shrink-0 w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-bold font-display mt-0.5"
-                              style={{ background: "rgba(245,158,11,0.15)", border: "1px solid rgba(245,158,11,0.3)", color: "#fcd34d" }}>
+                              style={{
+                                background: isSelectedPGK ? "rgba(245,158,11,0.35)" : "rgba(245,158,11,0.15)",
+                                border: "1px solid rgba(245,158,11,0.3)",
+                                color: "#fcd34d",
+                              }}>
                               {pi + 1}
                             </span>
                             <span>{renderWithLatex(p)}</span>
-                          </div>
-                        ))}
+                            {isRevealed && (isCorrectPGK
+                              ? <CheckCircle2 className="w-3.5 h-3.5 ml-auto shrink-0 text-green-400" />
+                              : isSelectedPGK
+                                ? <XCircle className="w-3.5 h-3.5 ml-auto shrink-0 text-red-400" />
+                                : null)}
+                          </button>
+                          );
+                        })}
                         <p className="text-[11px] font-body text-amber-300/60 mt-2 italic">
-                          Pernyataan yang <span className="font-bold not-italic text-amber-300/80">BENAR</span> adalah ...
+                          {soal.jawabanPGK
+                            ? <>Pilih <span className="font-bold not-italic text-amber-300/80">semua pernyataan yang benar</span> (jawaban lebih dari satu).</>
+                            : <>Pernyataan yang <span className="font-bold not-italic text-amber-300/80">BENAR</span> adalah ...</>}
                         </p>
                       </div>
                     )}
 
                     {/* ── PG & PGK: A-D combo options grid ── */}
-                    {(type === "pg" || type === "pgk") && soal.options && soal.options.length > 0 && (
+                    {(type === "pg" || (type === "pgk" && !soal.jawabanPGK)) && soal.options && soal.options.length > 0 && (
                       <div className="px-5 pb-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {soal.options.map((opt, j) => {
                           const letter = optionLetters[j];
