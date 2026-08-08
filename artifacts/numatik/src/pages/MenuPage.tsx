@@ -31,19 +31,22 @@ import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 
 const appSource = import.meta.glob("../App.tsx", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
+const pageSources = import.meta.glob("./**/*.{tsx,ts}", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
 const routeSource = Object.values(appSource)[0] ?? "";
-const deepSearchItems = Array.from(routeSource.matchAll(/<Route\\s+path=["']([^"']+)["']/g))
-  .map((match) => match[1])
-  .filter((path) => !path.includes(":") && !path.includes("*") && path !== "/")
-  .map((path) => ({
-    path,
-    title: path
-      .split("/")
-      .filter(Boolean)
-      .join(" ")
-      .replace(/-/g, " ")
-      .replace(/\\b\\w/g, (letter) => letter.toUpperCase()),
-  }));
+const routeEntries = Array.from(routeSource.matchAll(/<Route\\s+path=["']([^"']+)["'][^>]*element=\\{<([A-Za-z0-9_]+)/g))
+  .filter(([, path]) => !path.includes(":") && !path.includes("*") && path !== "/")
+  .map(([, path, component]) => ({ path, component }));
+const routeForComponent = (component: string) => routeEntries.find((entry) => entry.component === component)?.path;
+const titleFromPath = (path: string) => path.split("/").filter(Boolean).join(" ").replace(/-/g, " ").replace(/\\b\\w/g, (letter) => letter.toUpperCase());
+const deepSearchItems = Object.entries(pageSources)
+  .map(([file, source]) => {
+    const component = file.split("/").pop()?.replace(/\\.(tsx|ts)$/, "") ?? "";
+    const path = routeForComponent(component);
+    if (!path) return null;
+    const searchableText = source.replace(/\\s+/g, " ").replace(/[{}`]/g, " ").trim();
+    return { path, title: titleFromPath(path), content: searchableText };
+  })
+  .filter((item): item is { path: string; title: string; content: string } => Boolean(item));
 
 const MenuPage = () => {
   const navigate = useNavigate();
@@ -92,7 +95,12 @@ const MenuPage = () => {
   const filteredDeepResults = normalizedQuery
     ? deepSearchItems
         .filter((item, index, items) => items.findIndex((candidate) => candidate.path === item.path) === index)
-        .filter((item) => item.title.toLowerCase().includes(normalizedQuery) || item.path.toLowerCase().includes(normalizedQuery))
+        .filter((item) => item.title.toLowerCase().includes(normalizedQuery) || item.path.toLowerCase().includes(normalizedQuery) || item.content.toLowerCase().includes(normalizedQuery))
+        .map((item) => {
+          const contentIndex = item.content.toLowerCase().indexOf(normalizedQuery);
+          const snippet = contentIndex >= 0 ? item.content.slice(Math.max(0, contentIndex - 70), contentIndex + normalizedQuery.length + 110) : item.title;
+          return { ...item, snippet };
+        })
         .slice(0, 24)
     : [];
 
@@ -143,8 +151,11 @@ const MenuPage = () => {
                   onClick={() => handleClick(result.path)}
                   className="flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-left transition hover:bg-primary/10"
                 >
-                  <span className="truncate text-sm font-medium text-foreground">{result.title}</span>
-                  <span className="shrink-0 text-xs text-muted-foreground">{result.path}</span>
+                  <span className="min-w-0 text-left">
+                    <span className="block truncate text-sm font-medium text-foreground">{result.title}</span>
+                    <span className="block truncate text-xs text-muted-foreground">{result.snippet}</span>
+                  </span>
+                  <span className="shrink-0 text-xs text-muted-foreground">Buka</span>
                 </button>
               ))}
             </div>
