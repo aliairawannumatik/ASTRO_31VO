@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
@@ -26,35 +26,62 @@ import {
   GraduationCap,
   Search,
   X,
+  Loader2,
 } from "lucide-react";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 
-const appSource = import.meta.glob("../App.tsx", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
-const pageSources = import.meta.glob("./**/*.{tsx,ts}", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
-const routeSource = Object.values(appSource)[0] ?? "";
-const routeEntries = Array.from(routeSource.matchAll(/<Route\\s+path=["']([^"']+)["'][^>]*element=\\{<([A-Za-z0-9_]+)/g))
-  .filter(([, path]) => !path.includes(":") && !path.includes("*") && path !== "/")
-  .map(([, path, component]) => ({ path, component }));
-const routeForComponent = (component: string) => routeEntries.find((entry) => entry.component === component)?.path;
-const titleFromPath = (path: string) => path.split("/").filter(Boolean).join(" ").replace(/-/g, " ").replace(/\\b\\w/g, (letter) => letter.toUpperCase());
-const deepSearchItems = Object.entries(pageSources)
-  .map(([file, source]) => {
-    const component = file.split("/").pop()?.replace(/\\.(tsx|ts)$/, "") ?? "";
-    const path = routeForComponent(component);
-    if (!path) return null;
-    const searchableText = source.replace(/\\s+/g, " ").replace(/[{}`]/g, " ").trim();
-    return { path, title: titleFromPath(path), content: searchableText };
-  })
-  .filter((item): item is { path: string; title: string; content: string } => Boolean(item));
+// Deep-search index of every routed page's title + readable text content.
+// Generated at build time by scripts/build-search-index.mjs (see "predev"/
+// "prebuild" in package.json) — NOT bundled into JS, fetched lazily on
+// demand so the menu screen stays light for users who never search.
+type DeepSearchItem = { path: string; title: string; content: string };
+
+let deepIndexCache: DeepSearchItem[] | null = null;
+let deepIndexPromise: Promise<DeepSearchItem[]> | null = null;
+function loadDeepSearchIndex(): Promise<DeepSearchItem[]> {
+  if (deepIndexCache) return Promise.resolve(deepIndexCache);
+  if (!deepIndexPromise) {
+    deepIndexPromise = fetch("/search-index.json")
+      .then((res) => (res.ok ? res.json() : []))
+      .then((data: DeepSearchItem[]) => {
+        deepIndexCache = data;
+        return data;
+      })
+      .catch(() => {
+        deepIndexCache = [];
+        return [];
+      });
+  }
+  return deepIndexPromise;
+}
 
 const MenuPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
+  const [deepIndex, setDeepIndex] = useState<DeepSearchItem[] | null>(deepIndexCache);
+  const [deepIndexLoading, setDeepIndexLoading] = useState(false);
   const { theme } = useTheme();
   const isWhite = theme === "white";
   const isSpace = theme === "dark";
+
+  // Only fetch the (fairly small, ~700KB) deep-search index once the user
+  // actually starts typing — no cost at all for people who just browse the menu.
+  useEffect(() => {
+    if (!searchQuery.trim() || deepIndex) return;
+    let cancelled = false;
+    setDeepIndexLoading(true);
+    loadDeepSearchIndex().then((data) => {
+      if (!cancelled) {
+        setDeepIndex(data);
+        setDeepIndexLoading(false);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [searchQuery, deepIndex]);
 
   const menuItems = [
     { key: "guide",       icon: Info,           path: "/petunjuk" },
@@ -92,17 +119,28 @@ const MenuPage = () => {
     return `${label} ${description}`.includes(normalizedQuery);
   });
 
-  const filteredDeepResults = normalizedQuery
-    ? deepSearchItems
-        .filter((item, index, items) => items.findIndex((candidate) => candidate.path === item.path) === index)
-        .filter((item) => item.title.toLowerCase().includes(normalizedQuery) || item.path.toLowerCase().includes(normalizedQuery) || item.content.toLowerCase().includes(normalizedQuery))
-        .map((item) => {
-          const contentIndex = item.content.toLowerCase().indexOf(normalizedQuery);
-          const snippet = contentIndex >= 0 ? item.content.slice(Math.max(0, contentIndex - 70), contentIndex + normalizedQuery.length + 110) : item.title;
-          return { ...item, snippet };
-        })
-        .slice(0, 24)
-    : [];
+  const filteredDeepResults = useMemo(() => {
+    if (!normalizedQuery || !deepIndex) return [];
+    return deepIndex
+      .map((item) => {
+        const titleLower = item.title.toLowerCase();
+        const contentLower = item.content.toLowerCase();
+        const titleHit = titleLower.includes(normalizedQuery);
+        const pathHit = item.path.toLowerCase().includes(normalizedQuery);
+        const contentIndex = contentLower.indexOf(normalizedQuery);
+        if (!titleHit && !pathHit && contentIndex < 0) return null;
+        const snippet =
+          contentIndex >= 0
+            ? item.content.slice(Math.max(0, contentIndex - 60), contentIndex + normalizedQuery.length + 100)
+            : item.content.slice(0, 140);
+        // Rank exact/near title matches above content-only matches.
+        const rank = titleHit ? 0 : pathHit ? 1 : 2;
+        return { ...item, snippet, rank };
+      })
+      .filter((item): item is DeepSearchItem & { snippet: string; rank: number } => Boolean(item))
+      .sort((a, b) => a.rank - b.rank || a.title.localeCompare(b.title))
+      .slice(0, 24);
+  }, [normalizedQuery, deepIndex]);
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-x-hidden overflow-y-auto">
@@ -140,9 +178,18 @@ const MenuPage = () => {
           )}
         </div>
 
+        {normalizedQuery && deepIndexLoading && filteredDeepResults.length === 0 && (
+          <div className="mb-6 flex items-center justify-center gap-2 max-w-2xl mx-auto rounded-xl border border-border bg-card/70 p-3 text-xs text-muted-foreground">
+            <Loader2 className="w-3.5 h-3.5 animate-spin" aria-hidden="true" />
+            Mencari ke seluruh aplikasi...
+          </div>
+        )}
+
         {filteredDeepResults.length > 0 && (
           <div className="mb-6 max-w-2xl mx-auto rounded-xl border border-border bg-card/70 p-3 text-left shadow-sm">
-            <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Hasil dari seluruh aplikasi</p>
+            <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              Hasil dari seluruh aplikasi ({filteredDeepResults.length}{filteredDeepResults.length === 24 ? "+" : ""})
+            </p>
             <div className="flex flex-col gap-1">
               {filteredDeepResults.map((result) => (
                 <button
@@ -162,7 +209,7 @@ const MenuPage = () => {
           </div>
         )}
 
-        {filteredMenuItems.length > 0 || filteredDeepResults.length > 0 ? (
+        {filteredMenuItems.length > 0 || filteredDeepResults.length > 0 || (normalizedQuery && deepIndexLoading) ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
           {filteredMenuItems.map((item, i) => (
             <button
