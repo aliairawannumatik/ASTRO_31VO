@@ -11,26 +11,42 @@ const materiSections: MateriSection[] = [
 // Sumber: soal dan pembahasan yang diunggah pengguna.
 const contohSoal: LatihanSoal[] = [
   {
-    no: 1,
-    type: "pg",
-    soal: "Rian mencatat deretan nomor seri paket barang. Penomoran ini memiliki selisih yang konstan antar suku yang berurutan. Paket pertama diberi nomor seri $5$, dan setiap paket berikutnya nomor serinya bertambah $4$. Berapakah nomor seri pada paket yang berada di urutan ke-7?",
-    options: ["A. $21$", "B. $29$", "C. $33$", "D. $37$"],
-    jawaban: "B",
-    pembahasan: "Trik dan Tips:\nGunakan rumus suku ke-$n$ barisan aritmetika: $U_n = a + (n - 1)b$.\nNilai $a$ adalah suku pertama, dan $b$ adalah beda atau penambahan tiap suku.\n\nStep by Step Penyelesaian:\nIdentifikasi komponen dari soal:\nSuku awal ($a$) = $5$\nBeda ($b$) = $4$\nPosisi suku yang dicari ($n$) = $7$\n\nHitung suku ke-7 ($U_7$):\n$$U_7 = a + (7 - 1)b$$\n$$U_7 = 5 + 6 \\times 4$$\n$$U_7 = 5 + 24 = 29$$\n\nJawaban: B",
+    no: 1, type: "pg",
+    soal: "Bentuk paling sederhana dari aljabar $8x + 5y - 3z - 2x - 8y + 7z$ adalah …",
+    options: ["A. $6x - 3y + 4z$", "B. $6x + 3y + 4z$", "C. $10x - 3y + 4z$", "D. $6x - 3y - 4z$"],
+    jawaban: "A",
+    pembahasan: "Trik dan Tips:\nGunakan prinsip \"Suku Sejenis\": kerjakan variabel yang sama secara terpisah.\n\nStep by Step Penyelesaian:\nKelompokkan suku-suku sejenis:\n$$(8x - 2x) + (5y - 8y) + (-3z + 7z)$$\n\nVariabel $x$: $8 - 2 = 6 \\longrightarrow 6x$\nVariabel $y$: $5 - 8 = -3 \\longrightarrow -3y$\nVariabel $z$: $-3 + 7 = 4 \\longrightarrow 4z$\n\nHasil akhir: $$6x - 3y + 4z$$\n\nJawaban: A",
   },
   {
-    no: 2,
-    type: "pgk",
-    soal: "Aris mencatat sepuluh angka acak berikut: $8, 18, 3, 23, 13, 28, 33$. Ia kemudian mengurutkan deretan angka tersebut mulai dari yang nilainya terkecil hingga terbesar.\n\nBerdasarkan data yang sudah diurutkan, pilihlah semua pernyataan berikut yang benar! (Jawaban benar dapat lebih dari satu)",
+    no: 2, type: "pgk",
+    soal: "Cermati beberapa bentuk pemfaktoran aljabar berikut!\nManakah dari pemfaktoran di atas yang bernilai benar?",
     pernyataan: [
-      "Urutan angka tersebut membentuk barisan aritmetika.",
-      "Beda dari barisan tersebut adalah $8$.",
-      "Angka berikutnya setelah suku terakhir ($33$) adalah $38$.",
-      "Selisih antara suku ke-6 dan suku pertama adalah $20$.",
+      "(i) $9x^2 - 16 = (3x - 4)(3x + 4)$",
+      "(ii) $3x^2 + 5x - 2 = (3x - 1)(x - 2)$",
+      "(iii) $x^2 + 2x - 15 = (x + 5)(x - 3)$",
+      "(iv) $x^2 + 5x - 6 = (x - 6)(x + 1)$",
     ],
-    jawaban: "Pernyataan 1 dan Pernyataan 3 BENAR",
-    jawabanPGK: [0, 2],
-    pembahasan: "Urutkan data dari yang terkecil:\n$$3, 8, 13, 18, 23, 28, 33$$\n\nUji Pernyataan 1:\nSelisih antar dua suku berurutan selalu konstan, yaitu $8 - 3 = 5$. Karena bedanya tetap ($b = 5$), maka terbentuk barisan aritmetika (BENAR).\n\nUji Pernyataan 2:\nBeda dari barisan ini adalah $5$, bukan $8$ (SALAH).\n\nUji Pernyataan 3:\nSuku terakhir adalah $33$. Suku berikutnya adalah $33 + 5 = 38$ (BENAR).\n\nUji Pernyataan 4:\nSelisih suku ke-6 dan suku pertama adalah $28 - 3 = 25$, bukan $20$ (SALAH).\n\nJawaban: Pernyataan 1 dan Pernyataan 3 BENAR",
+    jawaban: "Pernyataan (i) dan (iii) BENAR", jawabanPGK: [0, 2],
+    pembahasan: "(i) BENAR karena $9x^2-16=(3x)^2-4^2=(3x-4)(3x+4)$.\n\n(ii) SALAH: $(3x-1)(x-2)=3x^2-7x+2$, tidak cocok.\n\n(iii) BENAR karena $+5\\times(-3)=-15$ dan $+5+(-3)=+2$.\n\n(iv) SALAH: $(x-6)(x+1)=x^2-5x-6$, bukan $x^2+5x-6$.\n\nJawaban: Pernyataan (i) dan (iii) BENAR",
+  },
+  {
+    no: 3, type: "pgkbs",
+    soal: "Teks Informasi (Untuk Soal 3 & 4)\nTaman Kota\nSebuah taman berbentuk persegi panjang memiliki ukuran lebar $(2x - 1)$ meter. Panjang taman tersebut $4$ m lebihnya dari ukuran lebarnya.\n\nBerdasarkan informasi teks di atas, tentukan kebenaran untuk setiap pernyataan berikut!",
+    pernyataan: ["a. Ukuran panjang taman adalah $(2x + 3)$ meter.", "b. Keliling taman tersebut dapat dinyatakan sebagai $(8x + 4)$ meter.", "c. Luas taman kota tersebut adalah $(4x^2 + 4x - 3)$ $m^2$."],
+    jawabanBS: ["B", "B", "B"],
+    pembahasan: "Panjang: $p=l+4=(2x-1)+4=2x+3$ (BENAR).\n\nKeliling: $K=2(p+l)=2[(2x+3)+(2x-1)]=8x+4$ (BENAR).\n\nLuas: $L=(2x+3)(2x-1)=4x^2+4x-3$ (BENAR).",
+  },
+  {
+    no: 4, type: "pg",
+    soal: "Di sekeliling taman kota tersebut akan dipasang pagar kawat pembatas setinggi $2$ m. Jika panjang taman diketahui $15$ m dan harga kawat pembatas adalah Rp15.000/m², hitung total biaya pembelian kawat yang dibutuhkan!",
+    options: ["A. Rp1.200.000", "B. Rp1.320.000", "C. Rp1.440.000", "D. Rp1.560.000"], jawaban: "D",
+    pembahasan: "Dari $p=2x+3=15$, diperoleh $x=6$. Lebar $l=2(6)-1=11$ m.\n\nKeliling $=2(15+11)=52$ m. Luas kawat $=52\\times2=104$ m².\n\nTotal biaya $=104\\times$ Rp15.000 = Rp1.560.000.\n\nJawaban: D",
+  },
+  {
+    no: 5, type: "pg",
+    soal: "Bentuk sederhana dari pecahan aljabar $\\dfrac{3x^2 - 7x - 6}{9x^2 - 4}$ adalah …",
+    options: ["A. $\\dfrac{x - 3}{3x - 2}$", "B. $\\dfrac{x - 3}{3x + 2}$", "C. $\\dfrac{x + 3}{3x - 2}$", "D. $\\dfrac{x + 3}{3x + 2}$"], jawaban: "A",
+    pembahasan: "Pembilang: $3x^2-7x-6=(3x+2)(x-3)$. Penyebut: $9x^2-4=(3x-2)(3x+2)$.\n\nMaka $$\\frac{(3x+2)(x-3)}{(3x-2)(3x+2)}=\\frac{x-3}{3x-2}$$\n\nJawaban: A",
   },
 ];
 
