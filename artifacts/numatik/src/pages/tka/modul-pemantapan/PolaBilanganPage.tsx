@@ -11,6 +11,72 @@ const materiSections: MateriSection[] = [
   { heading: "G. Deret Teleskopik", content: `Prinsip dasar:\n$\\dfrac{1}{k(k+1)} = \\dfrac{1}{k} - \\dfrac{1}{k+1}$\n$\\dfrac{1}{k(k+m)} = \\dfrac{1}{m}\\left(\\dfrac{1}{k} - \\dfrac{1}{k+m}\\right)$\n\nSehingga sebagian besar suku saling meniadakan.` },
 ];
 
+// ─── Contoh Soal — TES KEMAMPUAN AKADEMIK · MODUL PEMANTAPAN 2026–2027 ───
+// Sumber: soal dan pembahasan yang diunggah pengguna.
+const contohSoal: LatihanSoal[] = [
+  {
+    no: 1, type: "pg",
+    soal: "Rian mencatat deretan nomor seri paket barang. Penomoran ini memiliki selisih yang konstan antar suku yang berurutan. Paket pertama diberi nomor seri $5$, dan setiap paket berikutnya nomor serinya bertambah $4$. Berapakah nomor seri pada paket yang berada di urutan ke-7?",
+    options: [
+      "A. $21$",
+      "B. $29$",
+      "C. $33$",
+      "D. $37$",
+    ],
+    jawaban: "B",
+    pembahasan: "Trik dan Tips:\nGunakan rumus suku ke-$n$ barisan aritmetika: $U_n = a + (n - 1)b$.\nNilai $a$ adalah suku pertama, dan $b$ adalah beda atau penambahan tiap suku.\n\nStep by Step Penyelesaian:\nIdentifikasi komponen dari soal:\nSuku awal ($a$) = $5$\nBeda ($b$) = $4$\nPosisi suku yang dicari ($n$) = $7$\n\nHitung suku ke-7 ($U_7$):\n$U_7 = a + (7 - 1)b$\n$U_7 = 5 + 6 \\times 4$\n$U_7 = 5 + 24 = 29$\n\nJawaban: B",
+  },
+  {
+    no: 2, type: "pgk",
+    soal: "Aris mencatat sepuluh angka acak berikut: $8, 18, 3, 23, 13, 28, 33$. Ia kemudian mengurutkan deretan angka tersebut mulai dari yang nilainya terkecil hingga terbesar.\n\nBerdasarkan data yang sudah diurutkan, pilihlah semua pernyataan berikut yang benar! (Jawaban benar dapat lebih dari satu)",
+    pernyataan: [
+      "Pernyataan 1: Urutan angka tersebut membentuk barisan aritmetika.",
+      "Pernyataan 2: Beda dari barisan tersebut adalah $8$.",
+      "Pernyataan 3: Angka berikutnya setelah suku terakhir ($33$) adalah $38$.",
+      "Pernyataan 4: Selisih antara suku ke-6 dan suku pertama adalah $20$.",
+    ],
+    jawaban: "Pernyataan 1 dan Pernyataan 3 BENAR",
+    jawabanPGK: [0, 2],
+    pembahasan: "Trik dan Tips:\nUrutkan angka terlebih dahulu untuk melihat pola penambahan tetapnya ($b = U_2 - U_1$).\nUntuk menguji selisih suku ke-$n$ dan suku pertama, gunakan $U_n - U_1 = (n - 1)b$.\n\nStep by Step Penyelesaian:\nUrutkan data dari yang terkecil:\n$3, 8, 13, 18, 23, 28, 33$\n\nUji Pernyataan 1:\nSelisih antar dua suku berurutan selalu konstan, yaitu $8 - 3 = 5$. Karena bedanya tetap ($b = 5$), maka terbentuk barisan aritmetika → (BENAR).\n\nUji Pernyataan 2:\nBeda dari barisan ini adalah $5$, bukan $8$ → (SALAH).\n\nUji Pernyataan 3:\nSuku terakhir adalah $33$. Suku berikutnya adalah $33 + 5 = 38$ → (BENAR).\n\nUji Pernyataan 4:\nSuku pertama ($U_1$) = $3$, suku ke-6 ($U_6$) = $28$.\nSelisihnya: $28 - 3 = 25$ (bukan $20$) → (SALAH).\n\nJawaban: Pernyataan 1 dan Pernyataan 3 BENAR",
+  },
+  {
+    no: 3, type: "pg",
+    soal: "Diberikan sebuah barisan geometri: $2, 6, 18, 54, \\dots$\nNilai suku ke-6 dari barisan tersebut adalah …",
+    options: [
+      "A. $162$",
+      "B. $486$",
+      "C. $1.458$",
+      "D. $4.374$",
+    ],
+    jawaban: "B",
+    pembahasan: "Trik dan Tips:\nBarisan geometri menggunakan perkalian dengan rasio tetap ($r = \\frac{U_2}{U_1}$).\nRumus suku ke-$n$ geometri: $U_n = a \\cdot r^{n-1}$.\n\nStep by Step Penyelesaian:\nTentukan suku awal ($a$) dan rasio ($r$):\n$a = 2$\n$r = \\frac{6}{2} = 3$\n\nHitung suku ke-6 ($U_6$):\n$U_6 = a \\cdot r^{6-1}$\n$U_6 = 2 \\cdot 3^5$\n$U_6 = 2 \\times 243 = 486$\n\nJawaban: B",
+  },
+  {
+    no: 4, type: "pg",
+    soal: "Suatu deret aritmetika memiliki suku pertama sama dengan $8$ dan selisih antarsuku berurutan adalah $6$. Jumlah dari $12$ suku pertama deret tersebut adalah …",
+    options: [
+      "A. $492$",
+      "B. $418$",
+      "C. $216$",
+      "D. $96$",
+    ],
+    jawaban: "A",
+    pembahasan: "Trik dan Tips:\nRumus jumlah $n$ suku pertama ($S_n$) deret aritmetika:\n$S_n = \\frac{n}{2} \\cdot [2a + (n - 1)b]$\n\nStep by Step Penyelesaian:\nIdentifikasi besaran yang diketahui:\n$a = 8$\n$b = 6$\n$n = 12$\n\nHitung $S_{12}$:\n$S_{12} = \\frac{12}{2} \\cdot [2(8) + (12 - 1)6]$\n$S_{12} = 6 \\cdot [16 + (11 \\times 6)]$\n$S_{12} = 6 \\cdot [16 + 66]$\n$S_{12} = 6 \\times 82 = 492$\n\nJawaban: A",
+  },
+  {
+    no: 5, type: "pg",
+    soal: "Sebuah konfigurasi objek dibuat dari susunan stik kayu dengan pola berikut:\nPola ke-1 membutuhkan $5$ stik kayu.\nPola ke-2 membutuhkan $9$ stik kayu.\nPola ke-3 membutuhkan $13$ stik kayu.\nPola ke-4 membutuhkan $17$ stik kayu.\n\nBerdasarkan susunan tersebut, jumlah stik kayu yang diperlukan untuk merangkai pola ke-10 adalah …",
+    options: [
+      "A. $37$",
+      "B. $41$",
+      "C. $45$",
+      "D. $49$",
+    ],
+    jawaban: "B",
+    pembahasan: "Trik dan Tips:\nBarisan dari banyaknya stik kayu: $5, 9, 13, 17, \\dots$\nKarena selisihnya selalu $+4$, gunakan formula suku ke-$n$ barisan aritmetika ($U_n = a + (n - 1)b$).\n\nStep by Step Penyelesaian:\nAnalisis pola bilangan:\nSuku pertama ($a$) = $5$\nBeda ($b$) = $9 - 5 = 4$\n\nHitung jumlah stik pada pola ke-10 ($U_{10}$):\n$U_{10} = a + (10 - 1)b$\n$U_{10} = 5 + (9 \\times 4)$\n$U_{10} = 5 + 36 = 41$\n\nJawaban: B",
+  },
+];
+
 const latihanDasar: LatihanSoal[] = [
   { no: 1, soal: "Diketahui barisan bilangan aritmetika sebagai berikut.\n$-8, -4, 0, 4, 8, 12, n, 20, 24$\nNilai n yang memenuhi adalah ....", options: ["A. 10", "B. 14", "C. 16", "D. 18"] },
   { no: 2, soal: "Tiga suku berikutnya dari 1, 3, 5, 8, 9, 13, …, …., … adalah ....", options: ["A. 13, 18, 17", "B. 13, 17, 18", "C. 14, 17, 18", "D. 14, 18, 18"] },
@@ -60,6 +126,7 @@ const PolaBilanganPage = () => (
   <TKAPemantapanLayout
     title="POLA BILANGAN (BARISAN DAN DERET)"
     materiSections={materiSections}
+    contohSoal={contohSoal}
     latihanDasar={latihanDasar}
   />
 );
