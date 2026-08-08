@@ -7,6 +7,71 @@ const materiSections: MateriSection[] = [
   { heading: "D. Faktorisasi", content: `1. Faktor Persekutuan\n   $ab \\pm ac = a(b \\pm c)$\n\n2. Selisih dua kuadrat\n   $a^2 - b^2 = (a+b)(a-b)$\n\n3. Bentuk $ax^2 + bx + c$\n   - Jika $a = 1$: $x^2 + bx + c = (x + p)(x + q)$ dengan $p + q = b$ dan $p \\times q = c$\n   - Jika $a \\neq 1$: $ax^2 + bx + c = (ax + p)(ax + q) / a$ dengan $p + q = b$ dan $p \\times q = a \\times c$` },
 ];
 
+// ─── Contoh Soal — TES KEMAMPUAN AKADEMIK · MODUL PEMANTAPAN 2026–2027 ───
+// Sumber: soal dan pembahasan yang diunggah pengguna.
+const contohSoal: LatihanSoal[] = [
+  {
+    no: 1, type: "pg",
+    soal: "Bentuk paling sederhana dari aljabar $8x + 5y - 3z - 2x - 8y + 7z$ adalah …",
+    options: [
+      "A. $6x - 3y + 4z$",
+      "B. $6x + 3y + 4z$",
+      "C. $10x - 3y + 4z$",
+      "D. $6x - 3y - 4z$",
+    ],
+    jawaban: "A",
+    pembahasan: "Trik dan Tips:\nGunakan prinsip \"Suku Sejenis\": Kerjakan variabel yang sama secara terpisah ($x$ dengan $x$, $y$ dengan $y$, $z$ dengan $z$).\nPerhatikan koefisien negatif. Tanda negatif di depan koefisien dianggap melekat pada angka tersebut.\n\nStep by Step Penyelesaian:\nKelompokkan suku-suku yang memiliki variabel sama:\n$(8x - 2x) + (5y - 8y) + (-3z + 7z)$\n\nOperasikan masing-masing koefisien:\nVariabel $x$: $8 - 2 = 6 \\longrightarrow 6x$\nVariabel $y$: $5 - 8 = -3 \\longrightarrow -3y$\nVariabel $z$: $-3 + 7 = 4 \\longrightarrow 4z$\n\nGabungkan hasil akhirnya:\n$6x - 3y + 4z$\n\nJawaban: A",
+  },
+  {
+    no: 2, type: "pgk",
+    soal: "Cermati beberapa bentuk pemfaktoran aljabar berikut!\nManakah dari pemfaktoran di atas yang bernilai benar?",
+    pernyataan: [
+      "(i) $9x^2 - 16 = (3x - 4)(3x + 4)$",
+      "(ii) $3x^2 + 5x - 2 = (3x - 1)(x - 2)$",
+      "(iii) $x^2 + 2x - 15 = (x + 5)(x - 3)$",
+      "(iv) $x^2 + 5x - 6 = (x - 6)(x + 1)$",
+    ],
+    jawaban: "Pernyataan (i) dan (iii) BENAR",
+    jawabanPGK: [0, 2],
+    pembahasan: "Trik dan Tips:\nSelisih Dua Kuadrat: Bentuk $a^2 - b^2$ selalu bisa dipecah menjadi $(a - b)(a + b)$.\nPerkalian Cepat: Untuk mengecek kebenaran faktor bentuk $x^2 + bx + c$, periksa apakah $p \\times q = c$ dan $p + q = b$.\n\nStep by Step Penyelesaian:\nUji Pernyataan (i):\n$9x^2 - 16 = (3x)^2 - 4^2 = (3x - 4)(3x + 4)$ (BENAR)\n\nUji Pernyataan (ii):\nKembangkan ruas kanan: $(3x - 1)(x - 2) = 3x^2 - 6x - x + 2 = 3x^2 - 7x + 2$.\nTidak cocok dengan $3x^2 + 5x - 2$ → (SALAH)\n\nUji Pernyataan (iii):\nPeriksa konstanta dan koefisien: $+5 \\times (-3) = -15$ dan $+5 + (-3) = +2$.\nMaka $x^2 + 2x - 15 = (x + 5)(x - 3)$ → (BENAR)\n\nUji Pernyataan (iv):\nKembangkan ruas kanan: $(x - 6)(x + 1) = x^2 - 5x - 6$.\nTanda koefisien tengah $-5x$ tidak cocok dengan $+5x$ → (SALAH)\n\nJawaban: Pernyataan (i) dan (iii) BENAR",
+  },
+  {
+    no: 3, type: "pgkbs",
+    soal: "Teks Informasi (Untuk Soal 3 & 4)\nTaman Kota\nSebuah taman berbentuk persegi panjang memiliki ukuran lebar $(2x - 1)$ meter. Panjang taman tersebut $4\\text{ m}$ lebihnya dari ukuran lebarnya.\n\nBerdasarkan informasi teks di atas, tentukan kebenaran untuk setiap pernyataan berikut!",
+    pernyataan: [
+      "a. Ukuran panjang taman adalah $(2x + 3)$ meter.",
+      "b. Keliling taman tersebut dapat dinyatakan sebagai $(8x + 4)$ meter.",
+      "c. Luas taman kota tersebut adalah $(4x^2 + 4x - 3)$ $\\text{m}^2$.",
+    ],
+    jawabanBS: ["B", "B", "B"],
+    pembahasan: "Jawaban: Pernyataan a (BENAR), b (BENAR), c (BENAR)\n\nTrik dan Tips:\nUbah kalimat verbal \"4 m lebihnya dari lebar\" menjadi persamaan aljabar: $p = l + 4$.\nRumus dasar: $\\text{Keliling} = 2(p + l)$ dan $\\text{Luas} = p \\times l$.\n\nStep by Step Penyelesaian:\nMenentukan Model Aljabar Panjang ($p$):\n$p = l + 4$\n$p = (2x - 1) + 4 = 2x + 3$ (Pernyataan a BENAR)\n\nMenghitung Keliling ($K$):\n$K = 2(p + l)$\n$K = 2[(2x + 3) + (2x - 1)]$\n$K = 2(4x + 2) = 8x + 4$ (Pernyataan b BENAR)\n\nMenghitung Luas ($L$):\n$L = p \\times l$\n$L = (2x + 3)(2x - 1)$\n$L = 4x^2 - 2x + 6x - 3$\n$L = 4x^2 + 4x - 3$ (Pernyataan c BENAR)",
+  },
+  {
+    no: 4, type: "pg",
+    soal: "Di sekeliling taman kota tersebut akan dipasang pagar kawat pembatas setinggi $2\\text{ m}$. Jika panjang taman diketahui $15\\text{ m}$ dan harga kawat pembatas adalah $\\text{Rp}15.000\\text{/m}^2$, hitung total biaya pembelian kawat yang dibutuhkan!",
+    options: [
+      "A. $\\text{Rp}1.200.000$",
+      "B. $\\text{Rp}1.320.000$",
+      "C. $\\text{Rp}1.440.000$",
+      "D. $\\text{Rp}1.560.000$",
+    ],
+    jawaban: "D",
+    pembahasan: "Trik dan Tips:\nPagar dipasang melingkar, maka Luas Kawat = Keliling Pagar × Tinggi.\nTemukan nilai $x$ terlebih dahulu dari panjang yang diketahui untuk mendapatkan lebar sebenarnya.\n\nStep by Step Penyelesaian:\nCari Nilai $x$ dari Panjang:\n$p = 2x + 3$\n$15 = 2x + 3 \\longrightarrow 2x = 12 \\longrightarrow x = 6$\n\nHitung Lebar Sebenarnya ($l$):\n$l = 2x - 1 = 2(6) - 1 = 11\\text{ m}$\n\nHitung Keliling Taman:\n$K = 2 \\times (p + l) = 2 \\times (15 + 11) = 2 \\times 26 = 52\\text{ m}$\n\nHitung Luas Kawat Pembatas:\n$\\text{Luas Kawat} = \\text{Keliling} \\times \\text{Tinggi}$\n$\\text{Luas Kawat} = 52\\text{ m} \\times 2\\text{ m} = 104\\text{ m}^2$\n\nHitung Total Biaya:\n$\\text{Total Biaya} = 104\\text{ m}^2 \\times \\text{Rp}15.000/\\text{m}^2 = \\text{Rp}1.560.000$\n\nJawaban: D",
+  },
+  {
+    no: 5, type: "pg",
+    soal: "Bentuk sederhana dari pecahan aljabar $\\dfrac{3x^2 - 7x - 6}{9x^2 - 4}$ adalah …",
+    options: [
+      "A. $\\dfrac{x - 3}{3x - 2}$",
+      "B. $\\dfrac{x - 3}{3x + 2}$",
+      "C. $\\dfrac{x + 3}{3x - 2}$",
+      "D. $\\dfrac{x + 3}{3x + 2}$",
+    ],
+    jawaban: "A",
+    pembahasan: "Trik dan Tips:\nFaktorkan penyebut dulu ($9x^2 - 4$) karena berbentuk selisih kuadrat yang sangat mudah diprediksi: $(3x - 2)(3x + 2)$.\nSalah satu faktor penyebut dipastikan akan membagi habis faktor dari pembilang.\n\nStep by Step Penyelesaian:\nFaktorkan Pembilang ($3x^2 - 7x - 6$):\nCari kombinasi angka yang menghasilkan perkalian $3 \\times (-6) = -18$ dan jumlah $-7$, yaitu $-9$ dan $+2$.\n$3x^2 - 7x - 6 = (3x + 2)(x - 3)$\n\nFaktorkan Penyebut ($9x^2 - 4$):\nBentuk $a^2 - b^2$:\n$9x^2 - 4 = (3x - 2)(3x + 2)$\n\nSederhanakan Pecahan (Coret suku sejenis):\n$\\frac{3x^2 - 7x - 6}{9x^2 - 4} = \\frac{(3x + 2)(x - 3)}{(3x - 2)(3x + 2)} = \\frac{x - 3}{3x - 2}$\n\nJawaban: A",
+  },
+];
+
 // ─── Latihan Soal — 20 soal: PG, PG Kompleks (4 pernyataan), dan PG Benar-Salah (3 pernyataan) ───
 // Pola: PG (1,4,7,...) · PGK (2,5,8,...) · PGKBS (3,6,9,...).
 const latihanDasar: LatihanSoal[] = [
@@ -215,6 +280,7 @@ const AljabarPage = () => (
   <TKAPemantapanLayout
     title="ALJABAR"
     materiSections={materiSections}
+    contohSoal={contohSoal}
     latihanDasar={latihanDasar}
   />
 );
