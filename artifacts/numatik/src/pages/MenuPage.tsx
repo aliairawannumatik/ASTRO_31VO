@@ -30,6 +30,21 @@ import {
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 
+const appSource = import.meta.glob("../App.tsx", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
+const routeSource = Object.values(appSource)[0] ?? "";
+const deepSearchItems = Array.from(routeSource.matchAll(/<Route\\s+path=["']([^"']+)["']/g))
+  .map((match) => match[1])
+  .filter((path) => !path.includes(":") && !path.includes("*") && path !== "/")
+  .map((path) => ({
+    path,
+    title: path
+      .split("/")
+      .filter(Boolean)
+      .join(" ")
+      .replace(/-/g, " ")
+      .replace(/\\b\\w/g, (letter) => letter.toUpperCase()),
+  }));
+
 const MenuPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -74,6 +89,13 @@ const MenuPage = () => {
     return `${label} ${description}`.includes(normalizedQuery);
   });
 
+  const filteredDeepResults = normalizedQuery
+    ? deepSearchItems
+        .filter((item, index, items) => items.findIndex((candidate) => candidate.path === item.path) === index)
+        .filter((item) => item.title.toLowerCase().includes(normalizedQuery) || item.path.toLowerCase().includes(normalizedQuery))
+        .slice(0, 24)
+    : [];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-x-hidden overflow-y-auto">
       <Starfield />
@@ -110,7 +132,26 @@ const MenuPage = () => {
           )}
         </div>
 
-        {filteredMenuItems.length > 0 ? (
+        {filteredDeepResults.length > 0 && (
+          <div className="mb-6 max-w-2xl mx-auto rounded-xl border border-border bg-card/70 p-3 text-left shadow-sm">
+            <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Hasil dari seluruh aplikasi</p>
+            <div className="flex flex-col gap-1">
+              {filteredDeepResults.map((result) => (
+                <button
+                  key={result.path}
+                  type="button"
+                  onClick={() => handleClick(result.path)}
+                  className="flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-left transition hover:bg-primary/10"
+                >
+                  <span className="truncate text-sm font-medium text-foreground">{result.title}</span>
+                  <span className="shrink-0 text-xs text-muted-foreground">{result.path}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {filteredMenuItems.length > 0 || filteredDeepResults.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
           {filteredMenuItems.map((item, i) => (
             <button
