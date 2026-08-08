@@ -124,7 +124,7 @@ const latihanDasar: LatihanSoal[] = [
 
 const PolaBilanganPage = () => (
   <TKAPemantapanLayout
-    title="POLA BILANGAN (BARISAN DAN DERET)"
+    title="POLA BILANGAN"
     materiSections={materiSections}
     contohSoal={contohSoal}
     latihanDasar={latihanDasar}
