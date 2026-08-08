@@ -8,7 +8,7 @@ import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 // PORT and BASE_PATH are injected by the artifact system during dev/serve.
 // For production builds (pnpm build) they may not be set — fall back to
 // the values declared in artifact.toml so the build does not abort.
-const port = Number(process.env.PORT || "18860");
+const port = Number(process.env.PORT || "3000");
 const basePath = process.env.BASE_PATH || "/";
 
 const IS_DEV = process.env.NODE_ENV !== "production";
