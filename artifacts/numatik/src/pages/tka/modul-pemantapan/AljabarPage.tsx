@@ -11,64 +11,26 @@ const materiSections: MateriSection[] = [
 // Sumber: soal dan pembahasan yang diunggah pengguna.
 const contohSoal: LatihanSoal[] = [
   {
-    no: 1, type: "pg",
-    soal: "Bentuk paling sederhana dari aljabar $8x + 5y - 3z - 2x - 8y + 7z$ adalah …",
-    options: [
-      "A. $6x - 3y + 4z$",
-      "B. $6x + 3y + 4z$",
-      "C. $10x - 3y + 4z$",
-      "D. $6x - 3y - 4z$",
-    ],
-    jawaban: "A",
-    pembahasan: "Trik dan Tips:\nGunakan prinsip \"Suku Sejenis\": Kerjakan variabel yang sama secara terpisah ($x$ dengan $x$, $y$ dengan $y$, $z$ dengan $z$).\nPerhatikan koefisien negatif. Tanda negatif di depan koefisien dianggap melekat pada angka tersebut.\n\nStep by Step Penyelesaian:\nKelompokkan suku-suku yang memiliki variabel sama:\n$(8x - 2x) + (5y - 8y) + (-3z + 7z)$\n\nOperasikan masing-masing koefisien:\nVariabel $x$: $8 - 2 = 6 \\longrightarrow 6x$\nVariabel $y$: $5 - 8 = -3 \\longrightarrow -3y$\nVariabel $z$: $-3 + 7 = 4 \\longrightarrow 4z$\n\nGabungkan hasil akhirnya:\n$6x - 3y + 4z$\n\nJawaban: A",
+    no: 1,
+    type: "pg",
+    soal: "Rian mencatat deretan nomor seri paket barang. Penomoran ini memiliki selisih yang konstan antar suku yang berurutan. Paket pertama diberi nomor seri $5$, dan setiap paket berikutnya nomor serinya bertambah $4$. Berapakah nomor seri pada paket yang berada di urutan ke-7?",
+    options: ["A. $21$", "B. $29$", "C. $33$", "D. $37$"],
+    jawaban: "B",
+    pembahasan: "Trik dan Tips:\nGunakan rumus suku ke-$n$ barisan aritmetika: $U_n = a + (n - 1)b$.\nNilai $a$ adalah suku pertama, dan $b$ adalah beda atau penambahan tiap suku.\n\nStep by Step Penyelesaian:\nIdentifikasi komponen dari soal:\nSuku awal ($a$) = $5$\nBeda ($b$) = $4$\nPosisi suku yang dicari ($n$) = $7$\n\nHitung suku ke-7 ($U_7$):\n$$U_7 = a + (7 - 1)b$$\n$$U_7 = 5 + 6 \\times 4$$\n$$U_7 = 5 + 24 = 29$$\n\nJawaban: B",
   },
   {
-    no: 2, type: "pgk",
-    soal: "Cermati beberapa bentuk pemfaktoran aljabar berikut!\nManakah dari pemfaktoran di atas yang bernilai benar?",
+    no: 2,
+    type: "pgk",
+    soal: "Aris mencatat sepuluh angka acak berikut: $8, 18, 3, 23, 13, 28, 33$. Ia kemudian mengurutkan deretan angka tersebut mulai dari yang nilainya terkecil hingga terbesar.\n\nBerdasarkan data yang sudah diurutkan, pilihlah semua pernyataan berikut yang benar! (Jawaban benar dapat lebih dari satu)",
     pernyataan: [
-      "(i) $9x^2 - 16 = (3x - 4)(3x + 4)$",
-      "(ii) $3x^2 + 5x - 2 = (3x - 1)(x - 2)$",
-      "(iii) $x^2 + 2x - 15 = (x + 5)(x - 3)$",
-      "(iv) $x^2 + 5x - 6 = (x - 6)(x + 1)$",
+      "Urutan angka tersebut membentuk barisan aritmetika.",
+      "Beda dari barisan tersebut adalah $8$.",
+      "Angka berikutnya setelah suku terakhir ($33$) adalah $38$.",
+      "Selisih antara suku ke-6 dan suku pertama adalah $20$.",
     ],
-    jawaban: "Pernyataan (i) dan (iii) BENAR",
+    jawaban: "Pernyataan 1 dan Pernyataan 3 BENAR",
     jawabanPGK: [0, 2],
-    pembahasan: "Trik dan Tips:\nSelisih Dua Kuadrat: Bentuk $a^2 - b^2$ selalu bisa dipecah menjadi $(a - b)(a + b)$.\nPerkalian Cepat: Untuk mengecek kebenaran faktor bentuk $x^2 + bx + c$, periksa apakah $p \\times q = c$ dan $p + q = b$.\n\nStep by Step Penyelesaian:\nUji Pernyataan (i):\n$9x^2 - 16 = (3x)^2 - 4^2 = (3x - 4)(3x + 4)$ (BENAR)\n\nUji Pernyataan (ii):\nKembangkan ruas kanan: $(3x - 1)(x - 2) = 3x^2 - 6x - x + 2 = 3x^2 - 7x + 2$.\nTidak cocok dengan $3x^2 + 5x - 2$ → (SALAH)\n\nUji Pernyataan (iii):\nPeriksa konstanta dan koefisien: $+5 \\times (-3) = -15$ dan $+5 + (-3) = +2$.\nMaka $x^2 + 2x - 15 = (x + 5)(x - 3)$ → (BENAR)\n\nUji Pernyataan (iv):\nKembangkan ruas kanan: $(x - 6)(x + 1) = x^2 - 5x - 6$.\nTanda koefisien tengah $-5x$ tidak cocok dengan $+5x$ → (SALAH)\n\nJawaban: Pernyataan (i) dan (iii) BENAR",
-  },
-  {
-    no: 3, type: "pgkbs",
-    soal: "Teks Informasi (Untuk Soal 3 & 4)\nTaman Kota\nSebuah taman berbentuk persegi panjang memiliki ukuran lebar $(2x - 1)$ meter. Panjang taman tersebut $4\\text{ m}$ lebihnya dari ukuran lebarnya.\n\nBerdasarkan informasi teks di atas, tentukan kebenaran untuk setiap pernyataan berikut!",
-    pernyataan: [
-      "a. Ukuran panjang taman adalah $(2x + 3)$ meter.",
-      "b. Keliling taman tersebut dapat dinyatakan sebagai $(8x + 4)$ meter.",
-      "c. Luas taman kota tersebut adalah $(4x^2 + 4x - 3)$ $\\text{m}^2$.",
-    ],
-    jawabanBS: ["B", "B", "B"],
-    pembahasan: "Jawaban: Pernyataan a (BENAR), b (BENAR), c (BENAR)\n\nTrik dan Tips:\nUbah kalimat verbal \"4 m lebihnya dari lebar\" menjadi persamaan aljabar: $p = l + 4$.\nRumus dasar: $\\text{Keliling} = 2(p + l)$ dan $\\text{Luas} = p \\times l$.\n\nStep by Step Penyelesaian:\nMenentukan Model Aljabar Panjang ($p$):\n$p = l + 4$\n$p = (2x - 1) + 4 = 2x + 3$ (Pernyataan a BENAR)\n\nMenghitung Keliling ($K$):\n$K = 2(p + l)$\n$K = 2[(2x + 3) + (2x - 1)]$\n$K = 2(4x + 2) = 8x + 4$ (Pernyataan b BENAR)\n\nMenghitung Luas ($L$):\n$L = p \\times l$\n$L = (2x + 3)(2x - 1)$\n$L = 4x^2 - 2x + 6x - 3$\n$L = 4x^2 + 4x - 3$ (Pernyataan c BENAR)",
-  },
-  {
-    no: 4, type: "pg",
-    soal: "Di sekeliling taman kota tersebut akan dipasang pagar kawat pembatas setinggi $2\\text{ m}$. Jika panjang taman diketahui $15\\text{ m}$ dan harga kawat pembatas adalah $\\text{Rp}15.000\\text{/m}^2$, hitung total biaya pembelian kawat yang dibutuhkan!",
-    options: [
-      "A. $\\text{Rp}1.200.000$",
-      "B. $\\text{Rp}1.320.000$",
-      "C. $\\text{Rp}1.440.000$",
-      "D. $\\text{Rp}1.560.000$",
-    ],
-    jawaban: "D",
-    pembahasan: "Trik dan Tips:\nPagar dipasang melingkar, maka Luas Kawat = Keliling Pagar × Tinggi.\nTemukan nilai $x$ terlebih dahulu dari panjang yang diketahui untuk mendapatkan lebar sebenarnya.\n\nStep by Step Penyelesaian:\nCari Nilai $x$ dari Panjang:\n$p = 2x + 3$\n$15 = 2x + 3 \\longrightarrow 2x = 12 \\longrightarrow x = 6$\n\nHitung Lebar Sebenarnya ($l$):\n$l = 2x - 1 = 2(6) - 1 = 11\\text{ m}$\n\nHitung Keliling Taman:\n$K = 2 \\times (p + l) = 2 \\times (15 + 11) = 2 \\times 26 = 52\\text{ m}$\n\nHitung Luas Kawat Pembatas:\n$\\text{Luas Kawat} = \\text{Keliling} \\times \\text{Tinggi}$\n$\\text{Luas Kawat} = 52\\text{ m} \\times 2\\text{ m} = 104\\text{ m}^2$\n\nHitung Total Biaya:\n$\\text{Total Biaya} = 104\\text{ m}^2 \\times \\text{Rp}15.000/\\text{m}^2 = \\text{Rp}1.560.000$\n\nJawaban: D",
-  },
-  {
-    no: 5, type: "pg",
-    soal: "Bentuk sederhana dari pecahan aljabar $\\dfrac{3x^2 - 7x - 6}{9x^2 - 4}$ adalah …",
-    options: [
-      "A. $\\dfrac{x - 3}{3x - 2}$",
-      "B. $\\dfrac{x - 3}{3x + 2}$",
-      "C. $\\dfrac{x + 3}{3x - 2}$",
-      "D. $\\dfrac{x + 3}{3x + 2}$",
-    ],
-    jawaban: "A",
-    pembahasan: "Trik dan Tips:\nFaktorkan penyebut dulu ($9x^2 - 4$) karena berbentuk selisih kuadrat yang sangat mudah diprediksi: $(3x - 2)(3x + 2)$.\nSalah satu faktor penyebut dipastikan akan membagi habis faktor dari pembilang.\n\nStep by Step Penyelesaian:\nFaktorkan Pembilang ($3x^2 - 7x - 6$):\nCari kombinasi angka yang menghasilkan perkalian $3 \\times (-6) = -18$ dan jumlah $-7$, yaitu $-9$ dan $+2$.\n$3x^2 - 7x - 6 = (3x + 2)(x - 3)$\n\nFaktorkan Penyebut ($9x^2 - 4$):\nBentuk $a^2 - b^2$:\n$9x^2 - 4 = (3x - 2)(3x + 2)$\n\nSederhanakan Pecahan (Coret suku sejenis):\n$\\frac{3x^2 - 7x - 6}{9x^2 - 4} = \\frac{(3x + 2)(x - 3)}{(3x - 2)(3x + 2)} = \\frac{x - 3}{3x - 2}$\n\nJawaban: A",
+    pembahasan: "Urutkan data dari yang terkecil:\n$$3, 8, 13, 18, 23, 28, 33$$\n\nUji Pernyataan 1:\nSelisih antar dua suku berurutan selalu konstan, yaitu $8 - 3 = 5$. Karena bedanya tetap ($b = 5$), maka terbentuk barisan aritmetika (BENAR).\n\nUji Pernyataan 2:\nBeda dari barisan ini adalah $5$, bukan $8$ (SALAH).\n\nUji Pernyataan 3:\nSuku terakhir adalah $33$. Suku berikutnya adalah $33 + 5 = 38$ (BENAR).\n\nUji Pernyataan 4:\nSelisih suku ke-6 dan suku pertama adalah $28 - 3 = 25$, bukan $20$ (SALAH).\n\nJawaban: Pernyataan 1 dan Pernyataan 3 BENAR",
   },
 ];
 
@@ -278,7 +240,7 @@ const latihanDasar: LatihanSoal[] = [
 
 const AljabarPage = () => (
   <TKAPemantapanLayout
-    title="ALJABAR"
+    title="BENTUK ALJABAR"
     materiSections={materiSections}
     contohSoal={contohSoal}
     latihanDasar={latihanDasar}
