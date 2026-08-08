@@ -2,105 +2,159 @@ import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
 
 const materiSections: MateriSection[] = [
-  { heading: "A. Harga Beli (Modal)", content: `Harga beli atau modal adalah harga barang saat dibeli dari produsen, distributor, atau toko lain.\n\nContoh: Seorang pedagang membeli 1 lusin buku dengan harga Rp 50.000. Maka, harga beli 1 lusin buku tersebut adalah Rp 50.000.` },
+  { heading: "A. Harga Beli (Modal)", content: `Harga beli atau modal adalah harga barang saat dibeli dari produsen, distributor, atau toko lain.\n\nContoh: Seorang pedagang membeli 1 lusin buku dengan harga Rp50.000. Harga beli 1 lusin buku tersebut adalah Rp50.000.` },
   { heading: "B. Untung dan Rugi", content: `Untung: $\\text{Untung} = \\text{Harga Jual} - \\text{Harga Beli}$ (HJ > HB)\nRugi: $\\text{Rugi} = \\text{Harga Beli} - \\text{Harga Jual}$ (HJ < HB)\nImpas: Harga Jual = Harga Beli` },
   { heading: "C. Persentase Untung/Rugi", content: `$\\%U = \\dfrac{\\text{Untung}}{\\text{Harga Beli}} \\times 100\\%$\n\n$\\%R = \\dfrac{\\text{Rugi}}{\\text{Harga Beli}} \\times 100\\%$` },
-  { heading: "D. Mencari Harga Jual", content: `Jika untung:\n$\\text{HJ} = \\dfrac{(100 + \\%U)}{100} \\times \\text{HB}$\n\nJika rugi:\n$\\text{HJ} = \\dfrac{(100 - \\%R)}{100} \\times \\text{HB}$\n\nMencari HB dari HJ dan persentase:\nJika untung: $\\text{HB} = \\dfrac{100}{100 + \\%U} \\times \\text{HJ}$\nJika rugi: $\\text{HB} = \\dfrac{100}{100 - \\%R} \\times \\text{HJ}$` },
-  { heading: "E. Bunga Tunggal", content: `$B = M \\times W \\times P$\n\n- B = Besar bunga\n- M = Modal/pokok pinjaman\n- W = Waktu (dalam satuan yang sama dengan P)\n- P = Tingkat suku bunga per periode\n\nModal akhir: $M_1 = M(1 + WP)$` },
-  { heading: "F. Diskon (Potongan Harga)", content: `- Besar Diskon = Persentase Diskon × Harga Awal\n- Harga Bayar = Harga Awal × (100% - Persentase Diskon)\n\nDiskon Ganda: Diskon 20% + 10% ≠ diskon 30%.\nHitung diskon pertama dulu, kemudian diskon kedua dari harga hasil diskon pertama.` },
-  { heading: "G. Pajak (PPN & PPh)", content: `PPN:\n- Total Bayar = Harga × (100% + %PPN)\n\nPPh:\n- PKP = Penghasilan Bruto − PTKP\n- PPh = %PPh × PKP\n- Penghasilan Bersih = Penghasilan Bruto − PPh` },
-  { heading: "H. Bruto, Netto, Tara", content: `- Bruto = Berat kotor (barang + kemasan)\n- Netto = Berat bersih (tanpa kemasan)\n- Tara = Berat kemasan\n- Bruto = Netto + Tara\n- Tara% = $\\dfrac{\\text{Tara}}{\\text{Bruto}} \\times 100\\%$` },
+  { heading: "D. Mencari Harga Jual", content: `Jika untung: $\\text{HJ} = \\dfrac{(100 + \\%U)}{100} \\times \\text{HB}$\n\nJika rugi: $\\text{HJ} = \\dfrac{(100 - \\%R)}{100} \\times \\text{HB}$\n\nJika untung: $\\text{HB} = \\dfrac{100}{100 + \\%U} \\times \\text{HJ}$` },
+  { heading: "E. Bunga Tunggal", content: `$B = M \\times W \\times P$\n\nB = besar bunga, M = modal, W = waktu, dan P = suku bunga per periode.\n\nModal akhir: $M_1 = M(1 + WP)$` },
+  { heading: "F. Diskon (Potongan Harga)", content: `Besar diskon = Persentase diskon × Harga awal\n\nHarga bayar = Harga awal × (100% − Persentase diskon)\n\nDiskon ganda 20% + 10% tidak sama dengan diskon 30%.` },
+  { heading: "G. Pajak (PPN & PPh)", content: `PPN: Total bayar = Harga × (100% + %PPN)\n\nPPh: PKP = Penghasilan bruto − PTKP\nPPh = %PPh × PKP\nPenghasilan bersih = Penghasilan bruto − PPh` },
+  { heading: "H. Bruto, Netto, Tara", content: `Bruto = berat kotor (barang + kemasan)\nNetto = berat bersih (tanpa kemasan)\nTara = berat kemasan\n\nBruto = Netto + Tara` },
 ];
 
+// 21 soal dibagi merata: 7 PG biasa, 7 PG kompleks (4 pernyataan), dan 7 PG benar-salah (3 pernyataan).
+// Pola nomor: PG (1,4,7,10,13,16,19) · PGK (2,5,8,11,14,17,20) · PGKBS (3,6,9,12,15,18,21).
 const latihanDasar: LatihanSoal[] = [
-  { no: 1, soal: "Seorang pedagang membeli 60 kg mangga, kemudian dijual seharga Rp. 15.000,00 per kg. Jika pedagang tersebut mendapat keuntungan 20%, maka harga beli mangga tersebut adalah ...", options: ["A. Rp600.000,00", "B. Rp720.000,00", "C. Rp750.000,00", "D. Rp800.000,00"] , jawaban: "C", pembahasan: "Penjualan total = $60 \\times 15.000 = 900.000$. Untung 20\\% ⇒ HJ = 1.2 × HB.\n$\\text{HB} = \\dfrac{900.000}{1.2} = 750.000$. Jawaban C." },
-  { no: 2, soal: "Seorang pedagang membeli sepeda bekas. Setelah diperbaiki kembali dengan biaya Rp200.000,00, sepeda tersebut dijual dengan harga Rp1.040.000,00 sehingga mendapat untung 30%. Harga beli sepeda semula adalah ...", options: ["A. Rp500.000,00", "B. Rp600.000,00", "C. Rp700.000,00", "D. Rp800.000,00"] , jawaban: "B", pembahasan: "HB total (sepeda + perbaikan) = $\\dfrac{1.040.000}{1.3} = 800.000$.\nHB sepeda awal = $800.000 - 200.000 = 600.000$. Jawaban B." },
-  { no: 3, soal: "Pak Setya membeli sekarung beras seharga Rp.475.000,00. Beras itu akan dijual lagi dengan mengharapkan keuntungan sebesar 20%. Jika isi beras dalam karung adalah 50 kg, maka harga jual per kg dari beras adalah ...", options: ["A. Rp12.400,00", "B. Rp12.000,00", "C. Rp11.400,00", "D. Rp11.000,00"] , jawaban: "C", pembahasan: "HJ total = $475.000 \\times 1.2 = 570.000$. Per kg = $\\dfrac{570.000}{50} = 11.400$. Jawaban C." },
-  { no: 4, soal: "Bima menyimpan uang sebesar Rp. 1.200.000,00 di sebuah bank dengan bunga tunggal 15% setahun. Setelah beberapa bulan ia mengambil seluruh tabungan beserta bunganya menjadi Rp.1.260.000,00. Lama Bima menabung adalah ...", options: ["A. 3 bulan", "B. 4 bulan", "C. 5 bulan", "D. 6 bulan"] , jawaban: "B", pembahasan: "Bunga = $1.260.000 - 1.200.000 = 60.000$.\n$B = M \\cdot W \\cdot P$: $60.000 = 1.200.000 \\cdot W \\cdot 0.15 \\Rightarrow W = \\dfrac{1}{3}$ tahun = 4 bulan. Jawaban B." },
-  { no: 5, soal: "Doni menyimpan uang di bank sebesar Rp. 800.000,00 dengan bunga tunggal 12% pertahun. Agar jumlah tabungannya menjadi Rp. 872.000,00, Doni harus menabung selama ...", options: ["A. 9 bulan", "B. 7 bulan", "C. 6 bulan", "D. 4 bulan"] , jawaban: "A", pembahasan: "Bunga = $872.000 - 800.000 = 72.000$.\n$72.000 = 800.000 \\cdot W \\cdot 0.12 \\Rightarrow W = 0.75$ tahun = 9 bulan. Jawaban A." },
-  { no: 6, soal: "Egi menabung Rp. 600.000,00 pada sebuah bank. Setelah 10 bulan tabungan Egi menjadi Rp. 640.000,00. Persentase bunga per tahun pada bank tersebut adalah ...", options: ["A. 6%", "B. 6,7%", "C. 8%", "D. 8,5%"] , jawaban: "C", pembahasan: "Bunga = $640.000 - 600.000 = 40.000$.\n$40.000 = 600.000 \\cdot \\dfrac{10}{12} \\cdot P \\Rightarrow P = 0.08 = 8\\%$. Jawaban C." },
-  { no: 7, soal: "Nina menabung pada sebuah bank dengan bunga tunggal 16% setahun. Setelah 9 bulan uangnya menjadi Rp. 2.240.000,00. Tabungan awal Nina adalah ...", options: ["A. Rp. 1.800.000,00", "B. Rp. 1.900.000,00", "C. Rp. 2.000.000,00", "D. Rp. 2.100.000,00"] , jawaban: "C", pembahasan: "$M_1 = M(1 + W \\cdot P) = M\\left(1 + \\dfrac{9}{12} \\cdot 0.16\\right) = 1.12 M = 2.240.000$.\n$M = 2.000.000$. Jawaban C." },
-  { no: 8, soal: "Pak Budi meminjam uang di koperasi sebesar Rp. 4.800.000,00. Ia dikenakan bunga 24% setahun. Ia berencana mengembalikan dalam 2 tahun. Besar cicilan yang harus dibayar tiap bulan adalah ...", options: ["A. Rp296.000,00", "B. Rp269.000,00", "C. Rp260.000,00", "D. Rp209.000,00"] , jawaban: "A", pembahasan: "Total bunga 2 tahun = $4.800.000 \\times 0.24 \\times 2 = 2.304.000$.\nTotal pengembalian = $7.104.000$. Cicilan/bulan = $\\dfrac{7.104.000}{24} = 296.000$. Jawaban A." },
-  { no: 9, soal: "Data harga dan diskon sepatu dan kaos dari ke-empat toko sebagai berikut. Jika Febian akan membeli sepatu dan kaos, maka toko yang dipilihnya adalah ...", options: ["A. Toko Damai", "B. Toko Tentram", "C. Toko Rukun", "D. Toko Sentosa"], svgQuestion: (
-    <svg viewBox="0 0 400 86" width="100%" style={{maxWidth:"400px"}} className="my-2 block mx-auto">
-      {/* Border colors */}
-      {/* Outer rect */}
-      <rect x="0.5" y="0.5" width="399" height="85" fill="none" stroke="#67e8f9" strokeWidth="1"/>
-      {/* Row dividers */}
-      <line x1="0" y1="20" x2="400" y2="20" stroke="#67e8f9" strokeWidth="1"/>
-      <line x1="0" y1="42" x2="400" y2="42" stroke="#67e8f9" strokeWidth="1"/>
-      <line x1="0" y1="64" x2="400" y2="64" stroke="#67e8f9" strokeWidth="1"/>
-      {/* Col dividers */}
-      <line x1="65" y1="0" x2="65" y2="86" stroke="#67e8f9" strokeWidth="1"/>
-      <line x1="145" y1="0" x2="145" y2="86" stroke="#67e8f9" strokeWidth="1"/>
-      <line x1="210" y1="20" x2="210" y2="86" stroke="#67e8f9" strokeWidth="1"/>
-      <line x1="275" y1="20" x2="275" y2="86" stroke="#67e8f9" strokeWidth="1"/>
-      <line x1="335" y1="20" x2="335" y2="86" stroke="#67e8f9" strokeWidth="1"/>
-      {/* Header backgrounds */}
-      <rect x="1" y="1" width="64" height="41" fill="rgba(103,232,249,0.12)"/>
-      <rect x="66" y="1" width="79" height="41" fill="rgba(103,232,249,0.12)"/>
-      <rect x="146" y="1" width="253" height="19" fill="rgba(103,232,249,0.18)"/>
-      <rect x="146" y="21" width="253" height="21" fill="rgba(103,232,249,0.10)"/>
-      {/* "Diskon Toko" spanning header */}
-      <text x="272" y="14" fill="#67e8f9" fontSize="10" fontWeight="bold" textAnchor="middle">Diskon Toko</text>
-      {/* Column headers row 2 */}
-      <text x="32" y="34" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Barang</text>
-      <text x="105" y="28" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Harga</text>
-      <text x="105" y="39" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">(Rp)</text>
-      <text x="177" y="34" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Damai</text>
-      <text x="242" y="34" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Tentram</text>
-      <text x="305" y="34" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Rukun</text>
-      <text x="367" y="34" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Sentosa</text>
-      {/* Row: Sepatu */}
-      <text x="32" y="57" fill="#facc15" fontSize="9" textAnchor="middle">Sepatu</text>
-      <text x="105" y="57" fill="#ffffff" fontSize="9" textAnchor="middle">140.000</text>
-      <text x="177" y="57" fill="#ffffff" fontSize="9" textAnchor="middle">20%</text>
-      <text x="242" y="57" fill="#ffffff" fontSize="9" textAnchor="middle">25%</text>
-      <text x="305" y="57" fill="#ffffff" fontSize="9" textAnchor="middle">15%</text>
-      <text x="367" y="57" fill="#ffffff" fontSize="9" textAnchor="middle">30%</text>
-      {/* Row: Kaos */}
-      <text x="32" y="79" fill="#facc15" fontSize="9" textAnchor="middle">Kaos</text>
-      <text x="105" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">100.000</text>
-      <text x="177" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">25%</text>
-      <text x="242" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">20%</text>
-      <text x="305" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">30%</text>
-      <text x="367" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">15%</text>
-    </svg>
-  ) , jawaban: "D", pembahasan: "Total bayar per toko (sepatu 140.000, kaos 100.000):\nDamai (20\\%, 25\\%): $112.000 + 75.000 = 187.000$\nTentram (25\\%, 20\\%): $105.000 + 80.000 = 185.000$\nRukun (15\\%, 30\\%): $119.000 + 70.000 = 189.000$\nSentosa (30\\%, 15\\%): $98.000 + 85.000 = 183.000$\nTermurah: Sentosa. Jawaban D." },
-  { no: 10, soal: "Perhatikan tabel berikut! Jika Rani akan membeli 3 tas, 2 sendal dan 1 sepatu, maka uang yang harus dibayarkan adalah ...", options: ["A. Rp.360.000,00", "B. Rp.365.000,00", "C. Rp.370.000,00", "D. Rp.375.000,00"], svgQuestion: (
-    <svg viewBox="0 0 300 86" width="100%" style={{maxWidth:"300px"}} className="my-2 block mx-auto">
-      <rect x="0.5" y="0.5" width="299" height="85" fill="none" stroke="#67e8f9" strokeWidth="1"/>
-      <line x1="0" y1="22" x2="300" y2="22" stroke="#67e8f9" strokeWidth="1"/>
-      <line x1="0" y1="44" x2="300" y2="44" stroke="#67e8f9" strokeWidth="1"/>
-      <line x1="0" y1="65" x2="300" y2="65" stroke="#67e8f9" strokeWidth="1"/>
-      <line x1="75" y1="0" x2="75" y2="86" stroke="#67e8f9" strokeWidth="1"/>
-      <line x1="210" y1="0" x2="210" y2="86" stroke="#67e8f9" strokeWidth="1"/>
-      <rect x="1" y="1" width="299" height="21" fill="rgba(103,232,249,0.18)"/>
-      <text x="37" y="15" fill="#67e8f9" fontSize="10" fontWeight="bold" textAnchor="middle">Jenis</text>
-      <text x="142" y="15" fill="#67e8f9" fontSize="10" fontWeight="bold" textAnchor="middle">Harga</text>
-      <text x="254" y="15" fill="#67e8f9" fontSize="10" fontWeight="bold" textAnchor="middle">Disc</text>
-      <text x="37" y="37" fill="#facc15" fontSize="9" textAnchor="middle">Tas</text>
-      <text x="142" y="37" fill="#ffffff" fontSize="9" textAnchor="middle">Rp. 80.000,00</text>
-      <text x="254" y="37" fill="#ffffff" fontSize="9" textAnchor="middle">15%</text>
-      <text x="37" y="58" fill="#facc15" fontSize="9" textAnchor="middle">Sendal</text>
-      <text x="142" y="58" fill="#ffffff" fontSize="9" textAnchor="middle">Rp 50.000,00</text>
-      <text x="254" y="58" fill="#ffffff" fontSize="9" textAnchor="middle">25%</text>
-      <text x="37" y="79" fill="#facc15" fontSize="9" textAnchor="middle">Sepatu</text>
-      <text x="142" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">Rp 120.000,00</text>
-      <text x="254" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">20%</text>
-    </svg>
-  ) , jawaban: "D", pembahasan: "Tas: $80.000 \\times 0.85 = 68.000$, 3 tas = $204.000$.\nSendal: $50.000 \\times 0.75 = 37.500$, 2 sendal = $75.000$.\nSepatu: $120.000 \\times 0.8 = 96.000$.\nTotal = $204.000 + 75.000 + 96.000 = 375.000$. Jawaban D." },
-  { no: 11, soal: "Seorang pedagang membeli satu karung beras dengan Bruto 50 kg dan Tara 2%. Harga pembelian karung beras tersebut adalah Rp5.000,00. Pedagang itu kemudian menjual beras tersebut secara eceran dengan harga Rp12.000,00 per kg (netto).\nBerapakah total uang yang diperoleh pedagang tersebut dari penjualan satu karung beras?", options: ["A. Rp600.000,00", "B. Rp588.000,00", "C. Rp583.000,00", "D. Rp88.000,00"] , jawaban: "B", pembahasan: "Tara = $2\\% \\times 50 = 1$ kg. Netto = $50 - 1 = 49$ kg.\nPenjualan = $49 \\times 12.000 = 588.000$. Jawaban B." },
-  { no: 12, soal: "Seorang pembeli ingin mendapatkan harga beras (netto) yang paling murah. Ia membandingkan dua penawaran:\n• Toko A: Menjual 1 karung dengan Bruto 100 kg, Tara 2%, seharga Rp1.000.000,00.\n• Toko B: Menjual 1 karung dengan Bruto 100 kg, Tara 3%, seharga Rp990.000,00.\nDi toko manakah pembeli tersebut seharusnya berbelanja untuk mendapatkan harga per kg netto termurah?", options: ["A. Toko A, karena harga per kg netto sekitar Rp10.204", "B. Toko B, karena harga per kg netto sekitar Rp10.206", "C. Toko B, karena harga karungnya lebih murah (Rp990.000)", "D. Sama saja, karena brutonya sama-sama 100 kg"] , jawaban: "A", pembahasan: "Toko A: Netto = 98 kg, harga/kg = $\\dfrac{1.000.000}{98} \\approx 10.204$.\nToko B: Netto = 97 kg, harga/kg = $\\dfrac{990.000}{97} \\approx 10.206$.\nToko A lebih murah per kg netto. Jawaban A." },
-  { no: 13, soal: "Seorang penjual mendapat keuntungan total Rp100.000,00 setelah berhasil menjual habis satu peti buah. Ia menjual buah tersebut dengan harga Rp15.000,00 per kg (netto). Peti buah yang ia beli memiliki Bruto 60 kg dan Tara (berat peti) 2 kg.\nBerapakah harga beli (modal) peti buah tersebut pada awalnya?", options: ["A. Rp900.000,00", "B. Rp870.000,00", "C. Rp800.000,00", "D. Rp770.000,00"] , jawaban: "D", pembahasan: "Netto = $60 - 2 = 58$ kg. HJ total = $58 \\times 15.000 = 870.000$.\nHB = HJ - Untung = $870.000 - 100.000 = 770.000$. Jawaban D." },
-  { no: 14, soal: "Sebuah kargo berisi 20 kaleng biskuit identik ditimbang dan berat kotor (Bruto) totalnya adalah 25 kg. Diketahui berat kardus kargo (Tara kargo) adalah 1 kg. Jika berat netto (biskuit) di setiap kaleng adalah 900 gram, berapakah berat tara (kemasan kaleng) dari satu kaleng biskuit?", options: ["A. 300 gram", "B. 500 gram", "C. 1.200 gram", "D. 1.150 gram"] , jawaban: "A", pembahasan: "Berat 20 kaleng = $25 - 1 = 24$ kg = $24.000$ g. Per kaleng (kotor) = $1.200$ g.\nTara per kaleng = $1.200 - 900 = 300$ g. Jawaban A." },
-  { no: 15, soal: "Sebuah toko membeli satu drum minyak goreng dengan diskon tara (potongan berat) 3%. Setelah ditimbang, berat bersih (Netto) minyak yang diterima toko adalah 97 kg. Berapakah Bruto drum minyak tersebut sebelum dihitung diskon taranya?", options: ["A. 99,91 kg", "B. 94,09 kg", "C. 100 kg", "D. 103 kg"] , jawaban: "C", pembahasan: "Netto = $97\\% \\times \\text{Bruto} \\Rightarrow \\text{Bruto} = \\dfrac{97}{0.97} = 100$ kg. Jawaban C." },
-  { no: 16, soal: "Aris membeli sebuah lemari dengan harga Rp5.000.000,00. Jika Pajak Pertambahan Nilai (PPN) yang dikenakan adalah 11%, berapa total uang yang harus dibayar Budi?", options: ["A. Rp6.100.000,00", "B. Rp5.500.000,00", "C. Rp5.055.000,00", "D. Rp5.550.000,00"] , jawaban: "D", pembahasan: "Total = $5.000.000 \\times 1.11 = 5.550.000$. Jawaban D." },
-  { no: 17, soal: "Sebuah restoran mencantumkan harga makanan di menu sebesar Rp50.000,00. Di bagian bawah menu tertulis \"Harga belum termasuk PPN 11%\". Berapa yang harus dibayar pelanggan?", options: ["A. Rp50.000,00", "B. Rp55.500,00", "C. Rp44.500,00", "D. Rp55.000,00"] , jawaban: "B", pembahasan: "Total bayar = $50.000 \\times 1.11 = 55.500$. Jawaban B." },
-  { no: 18, soal: "Seseorang membayar Rp2.220.000,00 untuk sebuah barang yang harganya sudah termasuk PPN 11%. Berapa harga barang tersebut sebelum dikenakan PPN?", options: ["A. Rp2.000.000,00", "B. Rp2.464.200,00", "C. Rp1.980.000,00", "D. Rp2.100.000,00"] , jawaban: "A", pembahasan: "Harga sebelum PPN = $\\dfrac{2.220.000}{1.11} = 2.000.000$. Jawaban A." },
-  { no: 19, soal: "Seorang karyawan memiliki penghasilan (gaji) sebesar Rp6.000.000,00 per bulan. Batas Penghasilan Tidak Kena Pajak (PTKP) ditetapkan sebesar Rp4.500.000,00 per bulan. Berapakah besar Penghasilan Kena Pajak (PKP) karyawan tersebut?", options: ["A. Rp10.500.000,00", "B. Rp1.500.000,00", "C. Rp6.000.000,00", "D. Rp4.500.000,00"] , jawaban: "B", pembahasan: "PKP = Penghasilan - PTKP = $6.000.000 - 4.500.000 = 1.500.000$. Jawaban B." },
-  { no: 20, soal: "Pak Doni mendapat gaji Rp8.000.000,00 sebulan dengan Penghasilan Tidak Kena Pajak (PTKP) Rp5.000.000,00. Jika tarif Pajak Penghasilan (PPh) adalah 5% dari PKP, berapakah besar PPh yang harus dibayar Pak Doni?", options: ["A. Rp250.000,00", "B. Rp400.000,00", "C. Rp650.000,00", "D. Rp150.000,00"] , jawaban: "D", pembahasan: "PKP = $8.000.000 - 5.000.000 = 3.000.000$. PPh = $5\\% \\times 3.000.000 = 150.000$. Jawaban D." },
-  { no: 21, soal: "Seorang pekerja lepas mendapat upah Rp10.000.000,00. PTKP untuknya adalah Rp6.000.000,00. Tarif PPh ditetapkan 10% dari PKP. Berapa penghasilan bersih (take-home pay) yang ia terima?", options: ["A. Rp9.600.000,00", "B. Rp9.400.000,00", "C. Rp9.000.000,00", "D. Rp5.400.000,00"] , jawaban: "A", pembahasan: "PKP = Upah - PTKP = $10.000.000 - 6.000.000 = 4.000.000$.\nPPh = $10\\% \\times 4.000.000 = 400.000$.\nTake-home = $10.000.000 - 400.000 = 9.600.000$. Jawaban A." },
+  {
+    no: 1, type: "pg",
+    soal: "Seorang pedagang membeli 60 kg mangga dan menjualnya Rp15.000,00 per kg. Jika untung 20%, harga beli seluruh mangga adalah ...",
+    options: ["A. Rp600.000,00", "B. Rp720.000,00", "C. Rp750.000,00", "D. Rp800.000,00"], jawaban: "C",
+    pembahasan: "Harga jual total $=60\\times15.000=900.000$. Karena HJ $=120\\%$ HB, maka HB $=900.000/1,2=750.000$. Jawaban C.",
+  },
+  {
+    no: 2, type: "pgk",
+    soal: "Sepeda bekas dijual Rp1.040.000,00 setelah diperbaiki dengan biaya Rp200.000,00 dan menghasilkan untung 30%. Pernyataan yang benar adalah ...",
+    pernyataan: ["Modal total sepeda dan perbaikan adalah Rp800.000,00.", "Harga beli sepeda sebelum diperbaiki adalah Rp600.000,00.", "Keuntungan pedagang adalah Rp240.000,00.", "Harga beli sepeda semula adalah Rp800.000,00."],
+    options: ["A. (1) dan (2) saja", "B. (1), (2), dan (3)", "C. (2) dan (4) saja", "D. Semua benar"], jawaban: "B", jawabanPGK: [0, 1, 2],
+    pembahasan: "Modal total $=1.040.000/1,3=800.000$. Harga beli sepeda $=800.000-200.000=600.000$. Keuntungan $=1.040.000-800.000=240.000$. Jadi (1), (2), dan (3) benar.",
+  },
+  {
+    no: 3, type: "pgkbs",
+    soal: "Beras seharga Rp475.000,00 dijual dengan untung 20% dalam karung berisi 50 kg. Tentukan Benar atau Salah!",
+    pernyataan: ["Harga jual seluruh beras adalah Rp570.000,00.", "Harga jual beras per kg adalah Rp11.400,00.", "Harga beli beras per kg adalah Rp9.500,00."],
+    jawabanBS: ["B", "B", "B"],
+    pembahasan: "Harga jual total $=475.000\\times1,2=570.000$. Harga jual per kg $=570.000/50=11.400$ dan harga beli per kg $=475.000/50=9.500$.",
+  },
+  {
+    no: 4, type: "pg",
+    soal: "Bima menabung Rp1.200.000,00 dengan bunga tunggal 15% setahun. Tabungannya menjadi Rp1.260.000,00. Lama Bima menabung adalah ...",
+    options: ["A. 3 bulan", "B. 4 bulan", "C. 5 bulan", "D. 6 bulan"], jawaban: "B",
+    pembahasan: "Bunga $=60.000$. Dari $60.000=1.200.000\\times W\\times0,15$, diperoleh $W=1/3$ tahun = 4 bulan. Jawaban B.",
+  },
+  {
+    no: 5, type: "pgk",
+    soal: "Doni menabung Rp800.000,00 dengan bunga tunggal 12% per tahun hingga menjadi Rp872.000,00. Pernyataan yang benar adalah ...",
+    pernyataan: ["Bunga yang diperoleh Doni Rp72.000,00.", "Lama menabung adalah 0,75 tahun.", "Lama menabung sama dengan 9 bulan.", "Doni menabung selama 6 bulan."],
+    options: ["A. (1) dan (2) saja", "B. (1), (2), dan (3)", "C. (2) dan (4) saja", "D. Semua benar"], jawaban: "B", jawabanPGK: [0, 1, 2],
+    pembahasan: "Bunga $=72.000$. Dari $72.000=800.000\\times W\\times12\\%$, diperoleh $W=0,75$ tahun atau 9 bulan. Jadi (1), (2), dan (3) benar.",
+  },
+  {
+    no: 6, type: "pgkbs",
+    soal: "Egi menabung Rp600.000,00. Setelah 10 bulan tabungannya menjadi Rp640.000,00. Tentukan Benar atau Salah!",
+    pernyataan: ["Bunga yang diperoleh Egi Rp40.000,00.", "Waktu menabung adalah $\\frac{10}{12}$ tahun.", "Persentase bunga tunggal per tahun adalah 8%."],
+    jawabanBS: ["B", "B", "B"],
+    pembahasan: "Bunga $=40.000$. Dengan $40.000=600.000\\times\\frac{10}{12}\\times P$, diperoleh $P=8\\%$.",
+  },
+  {
+    no: 7, type: "pg",
+    soal: "Nina menabung dengan bunga tunggal 16% setahun. Setelah 9 bulan uangnya menjadi Rp2.240.000,00. Tabungan awal Nina adalah ...",
+    options: ["A. Rp1.800.000,00", "B. Rp1.900.000,00", "C. Rp2.000.000,00", "D. Rp2.100.000,00"], jawaban: "C",
+    pembahasan: "$M_1=M(1+\\frac{9}{12}\\times0,16)=1,12M=2.240.000$, sehingga $M=2.000.000$. Jawaban C.",
+  },
+  {
+    no: 8, type: "pgk",
+    soal: "Pak Budi meminjam Rp4.800.000,00 dengan bunga 24% per tahun selama 2 tahun. Pernyataan yang benar adalah ...",
+    pernyataan: ["Total bunga adalah Rp2.304.000,00.", "Total pengembalian adalah Rp7.104.000,00.", "Cicilan setiap bulan adalah Rp296.000,00.", "Cicilan setiap bulan adalah Rp260.000,00."],
+    options: ["A. (1) dan (2) saja", "B. (1), (2), dan (3)", "C. (2) dan (4) saja", "D. Semua benar"], jawaban: "B", jawabanPGK: [0, 1, 2],
+    pembahasan: "Bunga $=4.800.000\\times24\\%\\times2=2.304.000$. Total $=7.104.000$ dan cicilan $=7.104.000/24=296.000$. Jadi (1), (2), dan (3) benar.",
+  },
+  {
+    no: 9, type: "pgkbs",
+    soal: "Harga sepatu Rp140.000,00 dan kaos Rp100.000,00. Diskon di Toko Damai 20% dan 25%, Tentram 25% dan 20%, Rukun 15% dan 30%, Sentosa 30% dan 15%. Tentukan Benar atau Salah!",
+    pernyataan: ["Total pembayaran di Toko Damai Rp187.000,00.", "Total pembayaran di Toko Tentram Rp185.000,00.", "Toko Sentosa memberikan total termurah, yaitu Rp183.000,00."],
+    jawabanBS: ["B", "B", "B"],
+    pembahasan: "Damai $=112.000+75.000=187.000$, Tentram $=105.000+80.000=185.000$, dan Sentosa $=98.000+85.000=183.000$.",
+  },
+  {
+    no: 10, type: "pg",
+    soal: "Harga tas Rp80.000,00 diskon 15%, sandal Rp50.000,00 diskon 25%, dan sepatu Rp120.000,00 diskon 20%. Uang untuk membeli 3 tas, 2 sandal, dan 1 sepatu adalah ...",
+    options: ["A. Rp360.000,00", "B. Rp365.000,00", "C. Rp370.000,00", "D. Rp375.000,00"], jawaban: "D",
+    pembahasan: "Tas $=3(80.000\\times0,85)=204.000$, sandal $=2(50.000\\times0,75)=75.000$, sepatu $=96.000$. Total $=375.000$. Jawaban D.",
+  },
+  {
+    no: 11, type: "pgk",
+    soal: "Karung beras memiliki bruto 50 kg, tara 2%, dan harga jual Rp12.000,00 per kg netto. Pernyataan yang benar adalah ...",
+    pernyataan: ["Tara karung adalah 1 kg.", "Netto beras adalah 49 kg.", "Total uang hasil penjualan Rp588.000,00.", "Total uang hasil penjualan Rp600.000,00."],
+    options: ["A. (1) dan (2) saja", "B. (1), (2), dan (3)", "C. (2) dan (4) saja", "D. Semua benar"], jawaban: "B", jawabanPGK: [0, 1, 2],
+    pembahasan: "Tara $=2\\%\\times50=1$ kg, netto $=49$ kg, dan penjualan $=49\\times12.000=588.000$. Jadi (1), (2), dan (3) benar.",
+  },
+  {
+    no: 12, type: "pgkbs",
+    soal: "Toko A menjual bruto 100 kg dengan tara 2% seharga Rp1.000.000,00. Toko B menjual bruto 100 kg dengan tara 3% seharga Rp990.000,00. Tentukan Benar atau Salah!",
+    pernyataan: ["Netto Toko A adalah 98 kg.", "Harga per kg netto Toko B sekitar Rp10.206.", "Toko A lebih murah per kg netto daripada Toko B."],
+    jawabanBS: ["B", "B", "B"],
+    pembahasan: "Harga/kg A $=1.000.000/98\\approx10.204$, sedangkan B $=990.000/97\\approx10.206$. Jadi A lebih murah.",
+  },
+  {
+    no: 13, type: "pg",
+    soal: "Seorang penjual mendapat untung Rp100.000,00. Ia menjual buah Rp15.000,00 per kg netto dari peti bruto 60 kg dengan tara 2 kg. Harga beli peti buah adalah ...",
+    options: ["A. Rp900.000,00", "B. Rp870.000,00", "C. Rp800.000,00", "D. Rp770.000,00"], jawaban: "D",
+    pembahasan: "Netto $=60-2=58$ kg. HJ $=58\\times15.000=870.000$. HB $=870.000-100.000=770.000$. Jawaban D.",
+  },
+  {
+    no: 14, type: "pgk",
+    soal: "Kargo berisi 20 kaleng memiliki bruto total 25 kg, tara kardus 1 kg, dan netto tiap kaleng 900 gram. Pernyataan yang benar adalah ...",
+    pernyataan: ["Berat 20 kaleng tanpa kardus adalah 24 kg.", "Bruto satu kaleng adalah 1.200 gram.", "Tara satu kaleng adalah 300 gram.", "Netto satu kaleng adalah 1.200 gram."],
+    options: ["A. (1) dan (2) saja", "B. (1), (2), dan (3)", "C. (2) dan (4) saja", "D. Semua benar"], jawaban: "B", jawabanPGK: [0, 1, 2],
+    pembahasan: "Berat kaleng $=25-1=24$ kg. Per kaleng $=24.000/20=1.200$ gram. Tara $=1.200-900=300$ gram. Jadi (1), (2), dan (3) benar.",
+  },
+  {
+    no: 15, type: "pgkbs",
+    soal: "Sebuah drum memiliki diskon tara 3% dan netto 97 kg. Tentukan Benar atau Salah!",
+    pernyataan: ["Netto merupakan 97% dari bruto.", "Bruto drum adalah 100 kg.", "Tara drum adalah 3 kg."],
+    jawabanBS: ["B", "B", "B"],
+    pembahasan: "Bruto $=97/0,97=100$ kg dan tara $=3\\%\\times100=3$ kg.",
+  },
+  {
+    no: 16, type: "pg",
+    soal: "Aris membeli lemari Rp5.000.000,00 dan dikenai PPN 11%. Total uang yang harus dibayar adalah ...",
+    options: ["A. Rp6.100.000,00", "B. Rp5.500.000,00", "C. Rp5.055.000,00", "D. Rp5.550.000,00"], jawaban: "D",
+    pembahasan: "PPN $=11\\%\\times5.000.000=550.000$. Total $=5.550.000$. Jawaban D.",
+  },
+  {
+    no: 17, type: "pgk",
+    soal: "Harga makanan Rp50.000,00 belum termasuk PPN 11%. Pernyataan yang benar adalah ...",
+    pernyataan: ["PPN yang ditambahkan Rp5.500,00.", "Total bayar Rp55.500,00.", "Total bayar dapat dihitung dengan $50.000\\times1,11$.", "Total bayar Rp55.000,00."],
+    options: ["A. (1) dan (2) saja", "B. (1), (2), dan (3)", "C. (2) dan (4) saja", "D. Semua benar"], jawaban: "B", jawabanPGK: [0, 1, 2],
+    pembahasan: "PPN $=5.500$ dan total $=55.500$. Jadi (1), (2), dan (3) benar.",
+  },
+  {
+    no: 18, type: "pgkbs",
+    soal: "Seseorang membayar Rp2.220.000,00 untuk barang yang sudah termasuk PPN 11%. Tentukan Benar atau Salah!",
+    pernyataan: ["Harga sebelum PPN adalah Rp2.000.000,00.", "PPN yang termasuk di dalam harga adalah Rp220.000,00.", "Harga sebelum PPN dapat dihitung dengan $2.220.000/1,11$."],
+    jawabanBS: ["B", "B", "B"],
+    pembahasan: "Harga awal $=2.220.000/1,11=2.000.000$, sehingga PPN $=220.000$.",
+  },
+  {
+    no: 19, type: "pg",
+    soal: "Gaji karyawan Rp6.000.000,00 per bulan dan PTKP Rp4.500.000,00 per bulan. PKP karyawan tersebut adalah ...",
+    options: ["A. Rp10.500.000,00", "B. Rp1.500.000,00", "C. Rp6.000.000,00", "D. Rp4.500.000,00"], jawaban: "B",
+    pembahasan: "PKP $=6.000.000-4.500.000=1.500.000$. Jawaban B.",
+  },
+  {
+    no: 20, type: "pgk",
+    soal: "Pak Doni mendapat gaji Rp8.000.000,00 dengan PTKP Rp5.000.000,00. Tarif PPh 5% dari PKP. Pernyataan yang benar adalah ...",
+    pernyataan: ["PKP Pak Doni Rp3.000.000,00.", "PPh yang harus dibayar Rp150.000,00.", "Penghasilan bersihnya Rp7.850.000,00.", "PPh yang harus dibayar Rp400.000,00."],
+    options: ["A. (1) dan (2) saja", "B. (1), (2), dan (3)", "C. (2) dan (4) saja", "D. Semua benar"], jawaban: "B", jawabanPGK: [0, 1, 2],
+    pembahasan: "PKP $=3.000.000$, PPh $=5\\%\\times3.000.000=150.000$, dan penghasilan bersih $=7.850.000$. Jadi (1), (2), dan (3) benar.",
+  },
+  {
+    no: 21, type: "pgkbs",
+    soal: "Pekerja lepas mendapat upah Rp10.000.000,00, PTKP Rp6.000.000,00, dan tarif PPh 10% dari PKP. Tentukan Benar atau Salah!",
+    pernyataan: ["PKP pekerja tersebut Rp4.000.000,00.", "PPh yang harus dibayar Rp400.000,00.", "Penghasilan bersihnya Rp9.600.000,00."],
+    jawabanBS: ["B", "B", "B"],
+    pembahasan: "PKP $=10.000.000-6.000.000=4.000.000$. PPh $=400.000$. Penghasilan bersih $=10.000.000-400.000=9.600.000$.",
+  },
 ];
 
 const AritmetikaSosialPage = () => (
