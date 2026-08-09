@@ -8,6 +8,66 @@ const materiSections: MateriSection[] = [
   { heading: "D. Dilatasi", content: `Dilatasi dengan pusat $O(0,0)$ dan faktor skala $k$:\n$(x, y) \\to (kx, ky)$\n\nDilatasi dengan pusat $P(a, b)$ dan faktor skala $k$:\n$(x, y) \\to (a + k(x-a),\\ b + k(y-b))$\n\nSifat dilatasi:\n- Jika $|k| > 1$: diperbesar\n- Jika $0 < |k| < 1$: diperkecil\n- Jika $k < 0$: terjadi pembesaran/perkecilan dan pembalikan arah` },
 ];
 
+// ─── Contoh Soal — TES KEMAMPUAN AKADEMIK · MODUL PEMANTAPAN 2026–2027 ───
+const contohSoal: LatihanSoal[] = [
+  {
+    no: 1, type: "pg",
+    soal: "Bayangan titik $A(3, -2)$ oleh translasi $T=\\begin{pmatrix}2\\\\5\\end{pmatrix}$ adalah ...",
+    options: ["A. $(5, 3)$", "B. $(1, 3)$", "C. $(5, -7)$", "D. $(1, -7)$"],
+    jawaban: "A",
+    pembahasan: "Trik dan Tips:\nTranslasi $\\begin{pmatrix}a\\\\b\\end{pmatrix}$ menggeser titik $(x,y)$ menjadi $(x+a, y+b)$.\n\nStep by Step Penyelesaian:\n$$A'=(3+2, -2+5)=(5, 3)$$\n\nJawaban: A",
+  },
+  {
+    no: 2, type: "pgk",
+    soal: "Titik $B(4, 6)$ dicerminkan. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Terhadap sumbu X menghasilkan $(4, -6)$.",
+      "Terhadap sumbu Y menghasilkan $(-4, 6)$.",
+      "Terhadap garis $y=x$ menghasilkan $(6, 4)$.",
+      "Terhadap titik asal $O$ menghasilkan $(-4, -6)$.",
+    ],
+    jawabanPGK: [0, 1, 2, 3],
+    pembahasan: "Trik dan Tips:\nSumbu X: $(x,y)\\to(x,-y)$. Sumbu Y: $(x,y)\\to(-x,y)$. Garis $y=x$: $(x,y)\\to(y,x)$. Titik asal: $(x,y)\\to(-x,-y)$.\n\nStep by Step Penyelesaian:\n(1) BENAR: $(4,-6)$.\n\n(2) BENAR: $(-4,6)$.\n\n(3) BENAR: $(6,4)$.\n\n(4) BENAR: $(-4,-6)$.\n\nJawaban: Semua pernyataan BENAR",
+  },
+  {
+    no: 3, type: "pgkbs",
+    soal: "Titik $C(2, 3)$ dirotasi $90°$ berlawanan arah jarum jam terhadap pusat $O$. Tentukan kebenaran pernyataan berikut!",
+    pernyataan: [
+      "Bayangannya adalah $(-3, 2)$.",
+      "Jika dirotasi $180°$, bayangannya adalah $(-2, -3)$.",
+      "Jika dirotasi $270°$ berlawanan arah jarum jam, bayangannya adalah $(-3, 2)$.",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "Trik dan Tips:\nRotasi $90°$ CCW: $(x,y)\\to(-y,x)$. Rotasi $180°$: $(x,y)\\to(-x,-y)$. Rotasi $270°$ CCW: $(x,y)\\to(y,-x)$.\n\nStep by Step Penyelesaian:\nRotasi $90°$: $(-3,2)$ (BENAR).\n\nRotasi $180°$: $(-2,-3)$ (BENAR).\n\nRotasi $270°$: $(3,-2)$, bukan $(-3,2)$ (SALAH).",
+  },
+  {
+    no: 4, type: "pg",
+    soal: "Bayangan titik $D(-3, 5)$ oleh dilatasi $[O, k=2]$ adalah ...",
+    options: ["A. $(-6, 10)$", "B. $(-1, 3)$", "C. $(-6, 7)$", "D. $(6, 10)$"],
+    jawaban: "A",
+    pembahasan: "Trik dan Tips:\nDilatasi berpusat di $O$ dengan faktor $k$: $(x,y)\\to(kx, ky)$.\n\nStep by Step Penyelesaian:\n$$D'=(2\\times(-3), 2\\times5)=(-6, 10)$$\n\nJawaban: A",
+  },
+  {
+    no: 5, type: "pg",
+    soal: "Sebuah segitiga memiliki luas $20$ $cm^2$. Jika segitiga tersebut didilatasi dengan faktor skala $3$, luas bayangan segitiga tersebut adalah ...",
+    options: ["A. $60$ $cm^2$", "B. $120$ $cm^2$", "C. $160$ $cm^2$", "D. $180$ $cm^2$"],
+    jawaban: "D",
+    pembahasan: "Trik dan Tips:\nPada dilatasi dengan faktor skala $k$, luas bayangan $=k^2\\times$ luas asli.\n\nStep by Step Penyelesaian:\n$$L'=3^2\\times20=9\\times20=180\\text{ }cm^2$$\n\nJawaban: D",
+  },
+  {
+    no: 6, type: "pgk",
+    soal: "Titik $E(5, -2)$ mengalami translasi $\\begin{pmatrix}-1\\\\3\\end{pmatrix}$ dilanjutkan pencerminan terhadap sumbu Y. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Setelah translasi, bayangan sementaranya adalah $(4, 1)$.",
+      "Bayangan akhirnya adalah $(-4, 1)$.",
+      "Jika urutan dibalik (cermin dulu, baru translasi), hasil akhirnya akan sama.",
+      "Jarak titik $E$ ke bayangan akhirnya adalah $\\sqrt{85}$.",
+    ],
+    jawabanPGK: [0, 1],
+    pembahasan: "Trik dan Tips:\nUrutan transformasi ganda umumnya TIDAK bisa dibalik (tidak komutatif). Jarak dua titik: $\\sqrt{(\\Delta x)^2+(\\Delta y)^2}$.\n\nStep by Step Penyelesaian:\nTranslasi: $(5-1, -2+3)=(4,1)$ (BENAR).\n\nCermin sumbu Y: $(-4,1)$ (BENAR).\n\nJika dibalik: cermin dulu $(-5,-2)$, lalu translasi $(-6,1)$ — berbeda dari $(-4,1)$, jadi SALAH.\n\nJarak $E(5,-2)$ ke $(-4,1)$: $\\sqrt{(-9)^2+3^2}=\\sqrt{81+9}=\\sqrt{90}$, bukan $\\sqrt{85}$, jadi SALAH.\n\nJawaban: (1) dan (2) BENAR",
+  },
+];
+
 const latihanDasar: LatihanSoal[] = [
   { no: 1, soal: "Titik A(5, -2) ditranslasi oleh $T\\binom{-3}{1}$. Tentukan koordinat bayangan titik A tersebut!", options: ["A. A'(2, 1)", "B. A'(1, 1)", "C. A'(2, 2)", "D. A'(2, -1)", "E. A'(-2, 1)"] },
   { no: 2, soal: "Tentukan bayangan titik A(3, -4) jika digeser oleh $T\\binom{-3}{9}$ ...", options: ["A. A'(0, 13)", "B. A'(0, 5)", "C. A'(6, 13)", "D. A'(6, 5)"] },
@@ -39,6 +99,7 @@ const TransformasiPage = () => (
     title="TRANSFORMASI GEOMETRI"
     materiSections={materiSections}
     latihanDasar={latihanDasar}
+    contohSoal={contohSoal}
   />
 );
 
