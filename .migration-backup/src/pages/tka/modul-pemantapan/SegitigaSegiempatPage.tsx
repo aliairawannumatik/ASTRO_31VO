@@ -11,16 +11,81 @@ const materiSections: MateriSection[] = [
   { heading: "G. Layang-layang", content: `Dua pasang sisi berdekatan sama panjang.\n\n- Keliling = $2(a + b)$\n- Luas = $\\frac{1}{2} d_1 \\times d_2$\n- Salah satu diagonal merupakan sumbu simetri` },
 ];
 
-const latihanDasar: LatihanSoal[] = [
-  { no: 1, soal: "Perhatikan gambar berikut.\nKeliling bangun di atas adalah ...", options: ["A. 44 cm", "B. 48 cm", "C. 49 cm", "D. 52 cm"] },
-  { no: 2, soal: "Perhatikan gambar berikut ini.\nKeliling bangun di atas adalah ...", options: ["A. 61 cm", "B. 84 cm", "C. 90 cm", "D. 94 cm"] },
-  { no: 3, soal: "Perhatikan gambar.\nLuas gambar di samping adalah ...", options: ["A. 294 $cm^2$", "B. 290 $cm^2$", "C. 258 $cm^2$", "D. 250 $cm^2$"] },
-  { no: 4, soal: "Perhatikan gambar berikut. Luas huruf capital di samping adalah ..", options: ["A. 425 $cm^2$", "B. 450 $cm^2$", "C. 500 $cm^2$", "D. 525 $cm^2$"] },
-  { no: 5, soal: "Perhatikan gambar.\nDiketahui AB = 20 cm, AF = 13 cm dan BD = 10 cm. luas bangun di samping adalah ...", options: ["A. 280 $cm^2$", "B. 320 $cm^2$", "C. 360 $cm^2$", "D. 480 $cm^2$"] },
-  { no: 6, soal: "Perhatikan gambar berikut.\nPanjang AD = BE = 17 cm dan DE = 15 cm. luas bangun AGBCHD adalah...", options: ["A. 375 $cm^2$", "B. 525 $cm^2$", "C. 600 $cm^2$", "D. 750 $cm^2$"] },
-  { no: 7, soal: "Perhatikan gambar berikut.\nLuas daerah yang diarsir adalah ...", options: ["A. 60 $cm^2$", "B. 66 $cm^2$", "C. 72 $cm^2$", "D. 90 $cm^2$"] },
-  { no: 8, soal: "Perhatikan gambar di bawah!\nLuas daerah yang diarsir adalah ....", options: ["A. 42 $cm^2$", "B. 56 $cm^2$", "C. 70 $cm^2$", "D. 84 $cm^2$"] },
-  { no: 9, soal: "Perhatikan gambar persegi ABCD dan persegi panjang EFGH berikut!\nJika luas daerah yang tidak diarsir 68 $cm^2$ luas daerah yang diarsir adalah ....", options: ["A. 24 $cm^2$", "B. 28 $cm^2$", "C. 30 $cm^2$", "D. 56 $cm^2$"] },
+/**
+ * NOTE:
+ * Field `image` di bawah ini ditambahkan supaya data soal identik dengan
+ * versi Olimpiade (OlimpiadeSegitigaSegiempatPage.tsx), lengkap dengan
+ * link gambar (Google Drive thumbnail) untuk soal No. 1–9.
+ *
+ * PENTING: field `image` hanya akan tampil di layar jika komponen
+ * `TKAPemantapanLayout` sudah mendukung/merender field ini. Jika belum,
+ * data ini sudah siap tapi belum terhubung secara visual — perlu update
+ * di TKAPemantapanLayout.tsx supaya benar-benar menampilkan gambarnya.
+ */
+const latihanDasar: (LatihanSoal & { image?: string; imageAlt?: string })[] = [
+  {
+    no: 1,
+    soal: "Perhatikan gambar berikut.\nKeliling bangun di atas adalah ...",
+    options: ["A. 44 cm", "B. 48 cm", "C. 49 cm", "D. 52 cm"],
+    image: "https://drive.google.com/thumbnail?id=1FZ2AoGQ3eaOk2m_1sRzibrtwOC2_TFEU&sz=w400",
+    imageAlt: "Soal No. 1 - Keliling bangun",
+  },
+  {
+    no: 2,
+    soal: "Perhatikan gambar berikut ini.\nKeliling bangun di atas adalah ...",
+    options: ["A. 61 cm", "B. 84 cm", "C. 90 cm", "D. 94 cm"],
+    image: "https://drive.google.com/thumbnail?id=1tiDMGjhTHnJ14nthVibriCOjqyBKjftS&sz=w400",
+    imageAlt: "Soal No. 2 - Keliling bangun",
+  },
+  {
+    no: 3,
+    soal: "Perhatikan gambar.\nLuas gambar di samping adalah ...",
+    options: ["A. 294 $cm^2$", "B. 290 $cm^2$", "C. 258 $cm^2$", "D. 250 $cm^2$"],
+    image: "https://drive.google.com/thumbnail?id=1ibLO_IUNkOe4yYggPYRkZqP8-sHE_KbP&sz=w400",
+    imageAlt: "Soal No. 3 - Luas gambar",
+  },
+  {
+    no: 4,
+    soal: "Perhatikan gambar berikut. Luas huruf capital di samping adalah ..",
+    options: ["A. 425 $cm^2$", "B. 450 $cm^2$", "C. 500 $cm^2$", "D. 525 $cm^2$"],
+    image: "https://drive.google.com/thumbnail?id=1IfrX0BksGxqHmAG0CIoFrGUPmyvsZOqh&sz=w400",
+    imageAlt: "Soal No. 4 - Luas huruf kapital",
+  },
+  {
+    no: 5,
+    soal: "Perhatikan gambar.\nDiketahui AB = 20 cm, AF = 13 cm dan BD = 10 cm. luas bangun di samping adalah ...",
+    options: ["A. 280 $cm^2$", "B. 320 $cm^2$", "C. 360 $cm^2$", "D. 480 $cm^2$"],
+    image: "https://drive.google.com/thumbnail?id=13eTUR0UwxWFDKDERb3eqBdP1X4Rdc1A7&sz=w400",
+    imageAlt: "Soal No. 5 - Luas bangun",
+  },
+  {
+    no: 6,
+    soal: "Perhatikan gambar berikut.\nPanjang AD = BE = 17 cm dan DE = 15 cm. luas bangun AGBCHD adalah...",
+    options: ["A. 375 $cm^2$", "B. 525 $cm^2$", "C. 600 $cm^2$", "D. 750 $cm^2$"],
+    image: "https://drive.google.com/thumbnail?id=1omKMtkcPQyuXaxph_7C3BNYK0g39b1m1&sz=w400",
+    imageAlt: "Soal No. 6 - Luas bangun AGBCHD",
+  },
+  {
+    no: 7,
+    soal: "Perhatikan gambar berikut.\nLuas daerah yang diarsir adalah ...",
+    options: ["A. 60 $cm^2$", "B. 66 $cm^2$", "C. 72 $cm^2$", "D. 90 $cm^2$"],
+    image: "https://drive.google.com/thumbnail?id=1JwpzVgl6O7qCbzohZXtEchgzXuT62xPz&sz=w400",
+    imageAlt: "Soal No. 7 - Luas bangun",
+  },
+  {
+    no: 8,
+    soal: "Perhatikan gambar di bawah!\nLuas daerah yang diarsir adalah ....",
+    options: ["A. 42 $cm^2$", "B. 56 $cm^2$", "C. 70 $cm^2$", "D. 84 $cm^2$"],
+    image: "https://drive.google.com/thumbnail?id=1smlxX8PWDjFQnQtQDD6v_EPoot0HRWFu&sz=w400",
+    imageAlt: "Soal No. 8 - Luas daerah yang diarsir",
+  },
+  {
+    no: 9,
+    soal: "Perhatikan gambar persegi ABCD dan persegi panjang EFGH berikut!\nJika luas daerah yang tidak diarsir 68 $cm^2$ luas daerah yang diarsir adalah ....",
+    options: ["A. 24 $cm^2$", "B. 28 $cm^2$", "C. 30 $cm^2$", "D. 56 $cm^2$"],
+    image: "https://drive.google.com/thumbnail?id=1rGPa94rPURdekLuXmtlflgRwkL3mohzP&sz=w400",
+    imageAlt: "Soal No. 9 - Persegi ABCD dan persegi panjang BEFG",
+  },
   { no: 10, soal: "Sebuah taman bebentuk trapesium sama kaki dengan Panjang sisi yang sejajar adalah 40 m dan 16 m, tinggi trapesium 16 m. taman itu akan diterangi dengan lampu di pinggir taman dengan jarak tiang lampu adalah 4 m, maka banyaknya tiang yang dibutuhkan seluruhnya adalah ..", options: ["A. 18 tiang", "B. 20 tiang", "C. 24 tiang", "D. 28 tiang"] },
   { no: 11, soal: "Taman berbentuk lingkaran dengan Panjang diameter 14 m akan dipasangkan tiang lampu dengan jarak antar tiang 4 m. jika biaya 1 tiang lampu Rp 200.000,00, maka biaya seluruhnya untuk memasang tiang lampu tersebut adalah ..", options: ["A. Rp 2.200.000,00", "B. Rp 2.800.000,00", "C. Rp 3.300.000,00", "D. Rp 4.400.000,00"] },
   { no: 12, soal: "Lantai ruang tamu berukuran 4,2 m x 3,6 m. Jika akan ditutup dengan keramik persegi berukuran 30 cm. maka banyaknya keramik yang diperlukan adalah.....", options: ["A. 150", "B. 168", "C. 180", "D. 200"] },
