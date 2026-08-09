@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
 
@@ -10,6 +11,130 @@ const materiSections: MateriSection[] = [
   { heading: "F. Deret Geometri Tak Hingga", content: `Untuk $|r| < 1$:\n$S_\\infty = \\dfrac{a}{1 - r}$\n\nContoh:\n$16 + 8 + 4 + 2 + ...$\n$S_\\infty = \\dfrac{16}{1 - \\frac{1}{2}} = 32$` },
   { heading: "G. Deret Teleskopik", content: `Prinsip dasar:\n$\\dfrac{1}{k(k+1)} = \\dfrac{1}{k} - \\dfrac{1}{k+1}$\n$\\dfrac{1}{k(k+m)} = \\dfrac{1}{m}\\left(\\dfrac{1}{k} - \\dfrac{1}{k+m}\\right)$\n\nSehingga sebagian besar suku saling meniadakan.` },
 ];
+
+/* ============================================================
+   Ilustrasi soal No. 27, 28, 30, 31 (SVG) — disalin persis dari
+   OlimpiadePolaBilanganPage.tsx supaya tampilan identik.
+   Ditempel langsung ke field `gambar` pada LatihanSoal (ReactNode).
+   ============================================================ */
+const dotColor = "#5b9ec9";
+const dotR = 5;
+const sp = 14;
+
+// Soal 27: Persegi satuan in 2-row rectangular grids (2×2, 2×3, 2×4)
+const Soal27SVG = () => {
+  const sq = 18;
+  const gap = 22;
+  const patterns = [{ cols: 2 }, { cols: 3 }, { cols: 4 }];
+  let curX = 8;
+  const positions: number[] = [];
+  for (const p of patterns) { positions.push(curX); curX += p.cols * sq + gap; }
+  const totalW = curX - gap + 8;
+  return (
+    <svg width={totalW} height={2 * sq + 12}>
+      {patterns.map((p, i) => {
+        const x = positions[i];
+        const rects: ReactNode[] = [];
+        for (let r = 0; r < 2; r++)
+          for (let c = 0; c < p.cols; c++)
+            rects.push(<rect key={`${r}-${c}`} x={x + c * sq} y={6 + r * sq} width={sq} height={sq} fill="#5b9ec9" stroke="var(--icon-stroke)" strokeWidth="1.5" rx="1" />);
+        return <g key={i}>{rects}</g>;
+      })}
+    </svg>
+  );
+};
+
+// Soal 28: Circles in bowling-pin triangle (n=1,2,3,4) — triangular numbers
+const Soal28SVG = () => {
+  const r = 7;
+  const sp28 = 17;
+  const patterns = [1, 2, 3, 4];
+  const gap = 22;
+  let curX = 8;
+  const positions: number[] = [];
+  for (const n of patterns) { positions.push(curX); curX += n * sp28 + gap; }
+  const maxH = 4 * sp28;
+  const totalW = curX - gap + 8;
+  return (
+    <svg width={totalW} height={maxH + 30}>
+      {patterns.map((n, i) => {
+        const x = positions[i];
+        const patW = n * sp28;
+        const circles: ReactNode[] = [];
+        for (let row = 0; row < n; row++) {
+          const num = n - row;
+          const rowOffsetX = (patW - num * sp28) / 2;
+          const cy = 8 + maxH - (row + 1) * sp28 + sp28 / 2;
+          for (let c = 0; c < num; c++)
+            circles.push(<circle key={`${row}-${c}`} cx={x + rowOffsetX + c * sp28 + sp28 / 2} cy={cy} r={r} fill="none" stroke="#5b9ec9" strokeWidth="1.5" />);
+        }
+        return (
+          <g key={i}>
+            {circles}
+            <text x={x + patW / 2} y={8 + maxH + 20} textAnchor="middle" fill="#ffffffcc" fontSize="12" fontFamily="sans-serif">{n}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
+// Soal 30: Dots in n×(n+2) rectangles (n=1..4), U_n = n(n+2), U_10 = 120
+const Soal30SVG = () => {
+  const patterns = [
+    { rows: 1, cols: 3 },
+    { rows: 2, cols: 4 },
+    { rows: 3, cols: 5 },
+    { rows: 4, cols: 6 },
+  ];
+  const gap = 18;
+  let curX = 8;
+  const positions: number[] = [];
+  for (const p of patterns) { positions.push(curX); curX += p.cols * sp + gap; }
+  const maxH = 4 * sp;
+  const totalW = curX - gap + 8;
+  return (
+    <svg width={totalW} height={maxH + 12}>
+      {patterns.map((p, i) => {
+        const x = positions[i];
+        const h = p.rows * sp;
+        const offsetY = 6 + maxH - h;
+        const dots: ReactNode[] = [];
+        for (let r = 0; r < p.rows; r++)
+          for (let c = 0; c < p.cols; c++)
+            dots.push(<circle key={`${r}-${c}`} cx={x + c * sp + dotR} cy={offsetY + r * sp + dotR} r={dotR} fill={dotColor} />);
+        return <g key={i}>{dots}</g>;
+      })}
+    </svg>
+  );
+};
+
+// Soal 31: L-shaped dot patterns (n=1..4), U_n = 2n−1, U_30 = 59
+const Soal31SVG = () => {
+  const patterns = [1, 2, 3, 4];
+  const gap = 22;
+  let curX = 8;
+  const positions: number[] = [];
+  for (const n of patterns) { positions.push(curX); curX += n * sp + gap; }
+  const maxH = 4 * sp;
+  const totalW = curX - gap + 8;
+  return (
+    <svg width={totalW} height={maxH + 12}>
+      {patterns.map((n, i) => {
+        const x = positions[i];
+        const baseY = 6 + maxH;
+        const dots: ReactNode[] = [];
+        // Bottom row: n dots
+        for (let c = 0; c < n; c++)
+          dots.push(<circle key={`b${c}`} cx={x + c * sp + dotR} cy={baseY - dotR} r={dotR} fill={dotColor} />);
+        // Right column: n-1 dots going up (excluding corner already in bottom row)
+        for (let r = 1; r < n; r++)
+          dots.push(<circle key={`rc${r}`} cx={x + (n - 1) * sp + dotR} cy={baseY - r * sp - dotR} r={dotR} fill={dotColor} />);
+        return <g key={i}>{dots}</g>;
+      })}
+    </svg>
+  );
+};
 
 const latihanDasar: LatihanSoal[] = [
   { no: 1, soal: "Diketahui barisan bilangan aritmetika sebagai berikut.\n$-8, -4, 0, 4, 8, 12, n, 20, 24$\nNilai n yang memenuhi adalah ....", options: ["A. 10", "B. 14", "C. 16", "D. 18"] },
@@ -38,11 +163,42 @@ const latihanDasar: LatihanSoal[] = [
   { no: 24, soal: "Tiga suku berikutnya dari 1, 3, 6, 7, 11, 11, … adalah ....", options: ["A. 13, 18, 17", "B. 13, 17, 18", "C. 16, 15, 21", "D. 16, 15, 20"] },
   { no: 25, soal: "Rumus suku ke-n barisan adalah $U_n = 2n(n-1)$. Hasil dari $U_9 - U_7$ adalah ....", options: ["A. 80", "B. 70", "C. 60", "D. 50"] },
   { no: 26, soal: "Rumus suku ke-n dari barisan bilangan 0, 4, 10, 18, … adalah ....", options: ["A. $\\frac{1}{2}n(n+1)$", "B. $2n(n+1)$", "C. $(n-1)(n+2)$", "D. $(n+1)(n+2)$"] },
-  { no: 27, soal: "Perhatikan gambar berikut!\nBanyak persegi satuan pada pola ke-19 adalah ....", options: ["A. 36", "B. 38", "C. 40", "D. 42"] },
-  { no: 28, soal: "Perhatikan gambar pola berikut.\nBanyak lingkaran pada pola ke-15 adalah ....", options: ["A. 105", "B. 120", "C. 210", "D. 240"] },
-  { no: 29, soal: "Gambar berikut adalah pola segitiga.\nBanyak segitiga satu-satuan pada pola ke-7 adalah ....", options: ["A. 28", "B. 36", "C. 42", "D. 49"] },
-  { no: 30, soal: "Perhatikan gambar pola berikut!\nBanyak lingkaran pada pola ke-10 adalah ....", options: ["A. 99 buah", "B. 104 buah", "C. 115 buah", "D. 120 buah"] },
-  { no: 31, soal: "Perhatikanlah pola berikut.\nBanyak lingkaran pada pola ke-30 adalah ....", options: ["A. 39", "B. 41", "C. 57", "D. 59"] },
+  {
+    no: 27,
+    soal: "Perhatikan gambar berikut!\nBanyak persegi satuan pada pola ke-19 adalah ....",
+    options: ["A. 36", "B. 38", "C. 40", "D. 42"],
+    gambar: <Soal27SVG />,
+  },
+  {
+    no: 28,
+    soal: "Perhatikan gambar pola berikut.\nBanyak lingkaran pada pola ke-15 adalah ....",
+    options: ["A. 105", "B. 120", "C. 210", "D. 240"],
+    gambar: <Soal28SVG />,
+  },
+  {
+    no: 29,
+    soal: "Gambar berikut adalah pola segitiga.\nBanyak segitiga satu-satuan pada pola ke-7 adalah ....",
+    options: ["A. 28", "B. 36", "C. 42", "D. 49"],
+    gambar: (
+      <img
+        src="https://drive.google.com/thumbnail?id=1f-EBr1I4CaOwcZbixjEMgb5NxepLfmoM&sz=w800"
+        alt="Pola segitiga"
+        className="my-2 max-w-xs w-full rounded"
+      />
+    ),
+  },
+  {
+    no: 30,
+    soal: "Perhatikan gambar pola berikut!\nBanyak lingkaran pada pola ke-10 adalah ....",
+    options: ["A. 99 buah", "B. 104 buah", "C. 115 buah", "D. 120 buah"],
+    gambar: <Soal30SVG />,
+  },
+  {
+    no: 31,
+    soal: "Perhatikanlah pola berikut.\nBanyak lingkaran pada pola ke-30 adalah ....",
+    options: ["A. 39", "B. 41", "C. 57", "D. 59"],
+    gambar: <Soal31SVG />,
+  },
   { no: 32, soal: "Hitunglah jumlah tak hingga dari deret geometri berikut:\n$18 + 6 + 2 + \\frac{2}{3} + ...$", options: ["A. 24", "B. 27", "C. 36", "D. Tak hingga"] },
   { no: 33, soal: "Jumlah tak hingga dari deret:\n$\\frac{1}{2} + \\frac{1}{4} + \\frac{1}{8} + \\frac{1}{16} + ...$", options: ["A. 4", "B. 5", "C. 1", "D. Deret divergen (tidak memiliki jumlah)"] },
   { no: 34, soal: "Sebuah bola tenis dijatuhkan dari ketinggian 12 meter. Setelah menyentuh lantai, bola memantul kembali dengan ketinggian $\\frac{2}{3}$ dari ketinggian sebelumnya. Pantulan ini terjadi terus-menerus hingga bola berhenti. Total panjang lintasan yang ditempuh bola tersebut adalah ....", options: ["A. 24 m", "B. 36 m", "C. 48 m", "D. 60 m"] },
