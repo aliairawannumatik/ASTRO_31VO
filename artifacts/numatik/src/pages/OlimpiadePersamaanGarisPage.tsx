@@ -989,7 +989,7 @@ const PrismaSegiEnamSVG = () => {
   );
 };
 
-const soalSvgMap: Record<string, JSX.Element> = {
+export const soalSvgMap: Record<string, JSX.Element> = {
   SOAL3: <GrafikSoal3 />,
   SOAL4: <GrafikSoal4 />,
   SOAL16: <GrafikSoal16 />,

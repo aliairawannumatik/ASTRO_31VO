@@ -18,7 +18,7 @@ const brslOlimpiadeImages: Record<number, string> = {
   15: "https://drive.google.com/thumbnail?id=1e8C1_ewBTe2mfVRhu1LWhENVS1-OwEXK&sz=w400",
 };
 
-const brslDasarImages: Record<number, string> = {
+export const brslDasarImages: Record<number, string> = {
   3: "https://drive.google.com/thumbnail?id=1JKSolP4umjS4zkIFcPjTjXyX11q0fETc&sz=w400",
   5: "https://drive.google.com/thumbnail?id=1v67ykpMcxuQHQF-z3Y61HmAARB_GWH3L&sz=w400",
   6: "https://drive.google.com/thumbnail?id=1TW3y2DX8tNKNxKVDFM0SZsgWSQKerrOu&sz=w400",
@@ -316,7 +316,7 @@ const ShapeSection = ({ shape }: { shape: typeof shapes[0] }) => {
   );
 };
 
-/* ══════════════════════════════════════════════
+/* ══════════════════════��═══════════════════════
    DATA
 ══════════════════════════════════════════════ */
 const shapes = [

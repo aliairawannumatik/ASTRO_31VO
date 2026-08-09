@@ -758,7 +758,7 @@ const DiagramKotakKartu = () => {
   );
 };
 
-const latihanDasarSVG: Record<number, JSX.Element> = {
+export const latihanDasarSVG: Record<number, JSX.Element> = {
   21: <DiagramBarChartPermen />,
   34: <DiagramBracketJuara />,
   38: <DiagramKotakKartu />,
@@ -1057,7 +1057,7 @@ const latihanDasar = [
 
 // ─────────────────────────────────────────────────────────────────────────────
 // LATIHAN OLIMPIADE (94 soal)
-// ─────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────���────────────────────────────────────────
 const latihanOlimpiade = [
   { no: 1, soal: "OSN Matematika 2004 Tingkat Kota\nDengan menggunakan uang koin Rp50,00 ; Rp100,00 dan Rp200,00 ; ada berapa carakah kita menyatakan uang sebesar Rp2000,00.", options: ["A. 20", "B. 65", "C. 95", "D. 106", "E. 121"] },
   { no: 2, soal: "OSN Matematika 2004 Tingkat Kota\nAlex selalu berbohong pada hari kamis, jumat dan sabtu. Pada hari lain Alex selalu jujur. Di lain pihak Frans selalu berbohong pada hari-hari minggu, senin dan selasa dan selalu jujur pada hari-hari lain. Pada suatu hari keduanya berkata: 'kemarin saya berbohong'. Hari mereka mengucapkan perkataan tersebut adalah hari ...", options: [] },

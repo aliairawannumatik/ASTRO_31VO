@@ -33,6 +33,8 @@ export interface LatihanSoal {
   pembahasan?: string;
   /** Optional diagram/image to show below the soal text */
   gambar?: React.ReactNode;
+  /** Key for a reusable question diagram supplied by the module page. */
+  soalSvg?: string;
 }
 
 interface Props {
@@ -41,6 +43,9 @@ interface Props {
   materiSections: MateriSection[];
   latihanDasar: LatihanSoal[];
   contohSoal?: LatihanSoal[];
+  soalSvgMap?: Record<string, React.ReactNode>;
+  optionSvgMap?: Record<string, React.ReactNode>;
+  gambarMap?: Record<number, React.ReactNode>;
 }
 
 const renderWithLatex = (text: string) => {
@@ -87,7 +92,7 @@ const TYPE_BADGE: Record<string, { label: string; color: string; bg: string; bor
   },
 };
 
-const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materiSections, latihanDasar, contohSoal }: Props) => {
+const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materiSections, latihanDasar, contohSoal, soalSvgMap, optionSvgMap, gambarMap }: Props) => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const isWhite = theme === "white";
@@ -495,7 +500,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                                 }}>
                                 {letter}
                               </span>
-                              <span className="leading-snug">{renderWithLatex(opt.replace(/^[A-E]\.\s*/, ''))}</span>
+                              <span className="leading-snug">{optionSvgMap?.[opt] ?? renderWithLatex(opt.replace(/^[A-E]\.\s*/, ''))}</span>
                               {isThisCorrect && <CheckCircle2 className="w-3.5 h-3.5 shrink-0 ml-auto text-green-400" />}
                               {isSelected && !isThisCorrect && <XCircle className="w-3.5 h-3.5 shrink-0 ml-auto text-red-400" />}
                             </button>
@@ -741,8 +746,10 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                     </div>
 
                     {/* ── Optional diagram/image ── */}
-                    {soal.gambar && (
-                      <div className="px-5 pb-2">{soal.gambar}</div>
+                    {(soal.gambar || (soal.soalSvg && soalSvgMap?.[soal.soalSvg]) || gambarMap?.[soal.no]) && (
+                      <div className="px-5 pb-2">
+                        {soal.gambar ?? (soal.soalSvg && soalSvgMap?.[soal.soalSvg]) ?? gambarMap?.[soal.no]}
+                      </div>
                     )}
 
                     {/* ── PGK: numbered pernyataan list ── */}
@@ -854,7 +861,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                                 if (isImg) {
                                   return <img src={opt.slice(pipeIdx + 1)} alt={`Pilihan ${letter}`} className="max-w-[140px] w-full bg-white rounded p-1" />;
                                 }
-                                return <span className="leading-snug">{renderWithLatex(opt.replace(/^[A-E]\.\s*/, ''))}</span>;
+                                return <span className="leading-snug">{optionSvgMap?.[opt] ?? renderWithLatex(opt.replace(/^[A-E]\.\s*/, ''))}</span>;
                               })()}
                               {isRevealed && isThisCorrect && <CheckCircle2 className="w-3.5 h-3.5 shrink-0 ml-auto text-green-400" />}
                               {isRevealed && isSelected && !isThisCorrect && <XCircle className="w-3.5 h-3.5 shrink-0 ml-auto text-red-400" />}

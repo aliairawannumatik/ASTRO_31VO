@@ -1,5 +1,6 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
+import { soalSvgMap } from "@/pages/OlimpiadePersamaanGarisPage";
 
 const materiSections: MateriSection[] = [
   { heading: "A. Gradien (Kemiringan) Garis", content: `Gradien (m) menyatakan kemiringan garis lurus.\n\n1. Dari dua titik $(x_1, y_1)$ dan $(x_2, y_2)$:\n$m = \\dfrac{y_2 - y_1}{x_2 - x_1}$\n\n2. Dari persamaan $y = mx + c$: gradien = m\n\n3. Dari persamaan $ax + by + c = 0$:\n$m = -\\dfrac{a}{b}$\n\nCatatan:\n- Garis naik (kiri ke kanan): m > 0\n- Garis turun (kiri ke kanan): m < 0\n- Garis mendatar: m = 0\n- Garis tegak: m tidak terdefinisi` },
@@ -39,6 +40,7 @@ const PersamaanGarisPage = () => (
     title="PERSAMAAN GARIS LURUS"
     materiSections={materiSections}
     latihanDasar={latihanDasar}
+    soalSvgMap={soalSvgMap}
   />
 );
 

@@ -1,5 +1,6 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
+import { latihanDasarSVG } from "@/pages/OlimpiadePeluangPage";
 
 const materiSections: MateriSection[] = [
   { heading: "A. Pengertian Peluang", content: `Peluang (probabilitas) adalah ukuran kemungkinan suatu kejadian terjadi.\n\nNotasi: $P(A) = \\dfrac{n(A)}{n(S)}$\n\n- $n(A)$ = banyak kejadian yang diharapkan\n- $n(S)$ = banyak semua kemungkinan (ruang sampel)\n- $0 \\leq P(A) \\leq 1$\n- $P(\\text{pasti terjadi}) = 1$\n- $P(\\text{mustahil}) = 0$` },
@@ -57,6 +58,7 @@ const PeluangPage = () => (
     title="PELUANG"
     materiSections={materiSections}
     latihanDasar={latihanDasar}
+    gambarMap={latihanDasarSVG}
   />
 );
 

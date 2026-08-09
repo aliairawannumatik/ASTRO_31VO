@@ -10,7 +10,7 @@ import PembahasanCard from "@/components/PembahasanCard";
 import { statistikaDasarPembahasan } from "@/data/pembahasan/statistikaDasar";
 import { statistikaOlimpiadePembahasan } from "@/data/pembahasan/statistikaOlimpiade";
 
-const dasarImages: Record<number, string> = {
+export const dasarImages: Record<number, string> = {
   13: "https://drive.google.com/thumbnail?id=1lvt_8S3sZ1GRMIPjjbLxTmaG86AyvZDY&sz=w400",
 };
 
