@@ -22,6 +22,8 @@ export interface LatihanSoal {
   soal: string;
   /** PG & PGK: opsi A-D (combo untuk PGK) */
   options?: string[];
+  /** PG & PGK: override JSX untuk opsi berupa grafik/diagram (index sejajar dengan `options`) */
+  optionsJsx?: React.ReactNode[];
   /** PG & PGK: huruf jawaban benar (A/B/C/D) */
   jawaban?: string;
   /** PGK: indeks pernyataan benar (0-based); mendukung lebih dari satu jawaban */
@@ -792,7 +794,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
 
                     {/* ── PG & PGK: A-D combo options grid ── */}
                     {(type === "pg" || (type === "pgk" && !soal.jawabanPGK)) && soal.options && soal.options.length > 0 && (
-                      <div className="px-5 pb-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      <div className={`px-5 pb-3 grid gap-2 ${soal.optionsJsx ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2"}`}>
                         {soal.options.map((opt, j) => {
                           const letter = optionLetters[j];
                           const isSelected = selected === letter;
@@ -848,7 +850,9 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                                 }}>
                                 {letter}
                               </span>
-                              {(() => {
+                             {soal.optionsJsx?.[j] ? (
+                                <div className="flex-1 flex flex-col items-center">{soal.optionsJsx[j]}</div>
+                              ) : (() => {
                                 const pipeIdx = opt.indexOf('|');
                                 const isImg = pipeIdx !== -1 && (opt[pipeIdx + 1] === '/' || opt.slice(pipeIdx + 1, pipeIdx + 5) === 'http');
                                 if (isImg) {
