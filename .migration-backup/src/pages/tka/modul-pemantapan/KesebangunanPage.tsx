@@ -35,60 +35,86 @@ Syarat dua segitiga kongruen:
 // ─── Contoh Soal — TES KEMAMPUAN AKADEMIK · MODUL PEMANTAPAN 2026–2027 ───
 const contohSoal: LatihanSoal[] = [
   {
-    no: 1, type: "pg",
-    soal: "Dua segitiga sebangun memiliki perbandingan sisi $3:5$. Jika sisi terpanjang segitiga kecil adalah $12$ cm, maka sisi terpanjang segitiga besar adalah ...",
-    options: ["A. $15$ cm", "B. $18$ cm", "C. $20$ cm", "D. $24$ cm"],
+    no: 1,
+    type: "pg",
+    soal:
+      "Segitiga $PQR$ sebangun dengan segitiga $STU$ (korespondensi $P \\leftrightarrow S$, $Q \\leftrightarrow T$, $R \\leftrightarrow U$). Jika $PQ = 8$ cm, $QR = 12$ cm, dan $ST = 6$ cm, maka panjang $TU$ adalah ...",
+    options: ["A. $6$ cm", "B. $8$ cm", "C. $9$ cm", "D. $10$ cm"],
     jawaban: "C",
-    pembahasan: "Trik dan Tips:\nPada bangun sebangun, semua sisi bersesuaian memiliki rasio yang sama.\n\nStep by Step Penyelesaian:\n$$\\frac{3}{5}=\\frac{12}{x} \\Rightarrow x=\\frac{12\\times5}{3}=20$$\n\nJawaban: C",
+    pembahasan:
+      "1. JAWABAN\nC. $9$ cm\n\n2. TRIK & TIPS\nPastikan urutan korespondensi titik sudut dulu sebelum memasangkan sisi. Sisi $PQ$ bersesuaian dengan $ST$, dan sisi $QR$ bersesuaian dengan $TU$ — bukan asal dipasangkan berdasarkan urutan penulisan huruf saja.\n\n3. STEP BY STEP PENYELESAIAN\nKarena $\\triangle PQR \\sim \\triangle STU$, berlaku $\\dfrac{PQ}{ST} = \\dfrac{QR}{TU}$.\n$\\dfrac{8}{6} = \\dfrac{12}{TU}$\n$TU = \\dfrac{12 \\times 6}{8} = 9$\nJadi panjang $TU = 9$ cm.",
   },
   {
-    no: 2, type: "pgk",
-    soal: "Segitiga $ABC$ sebangun dengan segitiga $DEF$, dengan $\\frac{AB}{DE}=\\frac{BC}{EF}=\\frac{AC}{DF}=\\frac{2}{3}$. Jika $AB=8$ cm, $BC=10$ cm, dan $AC=12$ cm, perhatikan pernyataan berikut!",
-    pernyataan: [
-      "$DE = 12$ cm.",
-      "$EF = 15$ cm.",
-      "$DF = 18$ cm.",
-      "Perbandingan luas kedua segitiga adalah $4:9$.",
+    no: 2,
+    type: "pg",
+    soal:
+      "Diketahui dua segitiga $ABC$ dan $DEF$ dengan $AB = DE$, $BC = EF$, dan $\\angle B = \\angle E$. Syarat kekongruenan yang dipenuhi oleh kedua segitiga tersebut adalah ...",
+    options: [
+      "A. Sisi-Sisi-Sisi (S.S.S)",
+      "B. Sisi-Sudut-Sisi (S.Sd.S)",
+      "C. Sisi-Sisi-Sudut (S.S.Sd)",
+      "D. Sudut-Sisi-Sudut (Sd.S.Sd)",
     ],
-    jawabanPGK: [0, 1, 2, 3],
-    pembahasan: "Trik dan Tips:\nSisi bersesuaian mengikuti rasio kesebangunan; perbandingan luas $=$ kuadrat perbandingan sisi.\n\nStep by Step Penyelesaian:\n(1) BENAR: $DE=AB\\times\\frac{3}{2}=8\\times1{,}5=12$.\n\n(2) BENAR: $EF=10\\times1{,}5=15$.\n\n(3) BENAR: $DF=12\\times1{,}5=18$.\n\n(4) BENAR: $\\left(\\frac{2}{3}\\right)^2=\\frac{4}{9}$.\n\nJawaban: Semua pernyataan BENAR",
+    jawaban: "B",
+    pembahasan:
+      "1. JAWABAN\nB. Sisi-Sudut-Sisi (S.Sd.S)\n\n2. TRIK & TIPS\nSyarat S.Sd.S hanya berlaku jika sudut yang diketahui berada TEPAT DI ANTARA (diapit oleh) dua sisi yang diketahui. Perhatikan letak sudutnya, jangan hanya menghitung jumlah sisi dan sudut yang diketahui.\n\n3. STEP BY STEP PENYELESAIAN\nSisi $AB$ dan $BC$ diketahui sama dengan $DE$ dan $EF$.\nSudut $\\angle B$ terletak tepat di antara sisi $AB$ dan $BC$ (begitu juga $\\angle E$ di antara $DE$ dan $EF$).\nKarena dua sisi dan sudut apitnya sama besar, syarat yang terpenuhi adalah Sisi-Sudut-Sisi (S.Sd.S).",
   },
   {
-    no: 3, type: "pgkbs",
-    soal: "Sebuah pohon menghasilkan bayangan sepanjang $6$ m, sementara sebuah tongkat sepanjang $2$ m yang berdiri tegak di dekatnya menghasilkan bayangan $1{,}5$ m pada saat yang sama. Tentukan kebenaran pernyataan berikut!",
+    no: 3,
+    type: "pgk",
+    soal:
+      "Segitiga $ABC$ siku-siku di $A$, dengan garis tinggi $AD$ tegak lurus $BC$ ($D$ pada $BC$). Diketahui $BD = 4$ cm dan $DC = 9$ cm.",
     pernyataan: [
-      "Tinggi pohon tersebut adalah $8$ meter.",
-      "Perbandingan tinggi pohon dan tongkat sama dengan perbandingan panjang bayangannya.",
-      "Jika bayangan tongkat menjadi $3$ m, maka bayangan pohon menjadi $10$ m.",
-    ],
-    jawabanBS: ["B", "B", "S"],
-    pembahasan: "Trik dan Tips:\nGunakan kesebangunan segitiga bayangan: $\\frac{tinggi\\ pohon}{bayangan\\ pohon}=\\frac{tinggi\\ tongkat}{bayangan\\ tongkat}$.\n\nStep by Step Penyelesaian:\n$\\frac{t}{6}=\\frac{2}{1{,}5} \\Rightarrow t=6\\times\\frac{2}{1{,}5}=8$ (BENAR).\n\nPrinsip kesebangunan menyatakan hal tersebut (BENAR).\n\nBila bayangan tongkat menjadi $3$ m, bayangan pohon $=3\\times\\frac{8}{2}=12$ m, bukan $10$ m (SALAH).",
-  },
-  {
-    no: 4, type: "pg",
-    soal: "Dua segitiga dikatakan kongruen jika memenuhi salah satu syarat berikut, KECUALI ...",
-    options: ["A. Sisi-Sisi-Sisi (S-S-S)", "B. Sisi-Sudut-Sisi (S-Sd-S)", "C. Sisi-Sisi-Sudut (S-S-Sd)", "D. Sudut-Sisi-Sudut (Sd-S-Sd)"],
-    jawaban: "C",
-    pembahasan: "Trik dan Tips:\nSyarat kekongruenan segitiga yang valid: SSS, SAS (Sisi-Sudut-Sisi), dan ASA (Sudut-Sisi-Sudut). SSA (Sisi-Sisi-Sudut) BUKAN syarat yang valid karena bisa menghasilkan dua segitiga berbeda (kasus ambigu).\n\nStep by Step Penyelesaian:\nDari keempat pilihan, hanya Sisi-Sisi-Sudut yang tidak menjamin kekongruenan.\n\nJawaban: C",
-  },
-  {
-    no: 5, type: "pg",
-    soal: "Trapesium $ABCD$ dengan $AB \\parallel CD$, $AB = 16$ cm dan $CD = 8$ cm. Titik $E$ dan $F$ berturut-turut adalah titik tengah $AD$ dan $BC$. Panjang $EF$ adalah ...",
-    options: ["A. $10$ cm", "B. $11$ cm", "C. $12$ cm", "D. $13$ cm"],
-    jawaban: "C",
-    pembahasan: "Trik dan Tips:\nGaris yang menghubungkan titik tengah kedua kaki trapesium (garis tengah) sama dengan setengah jumlah sisi sejajarnya.\n\nStep by Step Penyelesaian:\n$$EF=\\frac{1}{2}(AB+CD)=\\frac{1}{2}(16+8)=12$$\n\nJawaban: C",
-  },
-  {
-    no: 6, type: "pgk",
-    soal: "Segitiga $PQR$ kongruen dengan segitiga $STU$ ($PQR \\cong STU$) dengan korespondensi $P \\leftrightarrow S$, $Q \\leftrightarrow T$, $R \\leftrightarrow U$. Perhatikan pernyataan berikut!",
-    pernyataan: [
-      "$PQ = ST$.",
-      "$\\angle Q = \\angle T$.",
-      "Luas kedua segitiga tersebut sama.",
-      "Keliling kedua segitiga tersebut bisa berbeda.",
+      "Panjang $BC = 13$ cm.",
+      "Panjang $AD = 6$ cm.",
+      "Panjang $AB = 2\\sqrt{13}$ cm.",
+      "Luas segitiga $ABC = 42 \\text{ cm}^2$.",
     ],
     jawabanPGK: [0, 1, 2],
-    pembahasan: "Trik dan Tips:\nDua bangun kongruen memiliki bentuk dan ukuran identik: semua sisi dan sudut bersesuaian sama besar, sehingga luas dan keliling juga sama.\n\nStep by Step Penyelesaian:\n(1) BENAR: sisi bersesuaian pada bangun kongruen sama panjang.\n\n(2) BENAR: sudut bersesuaian sama besar.\n\n(3) BENAR: konsekuensi langsung dari kekongruenan.\n\n(4) SALAH: keliling kedua segitiga kongruen HARUS sama, tidak boleh berbeda.\n\nJawaban: (1), (2), dan (3) BENAR",
+    pembahasan:
+      "1. JAWABAN\nPernyataan (1), (2), dan (3) BENAR; pernyataan (4) SALAH.\n\n2. TRIK & TIPS\nPada segitiga siku-siku dengan garis tinggi ke sisi miring, pakai dalil proyeksi: $AD^2 = BD \\times DC$, $AB^2 = BD \\times BC$, $AC^2 = DC \\times BC$. Hitung $BC$ terlebih dahulu karena dipakai di semua rumus berikutnya.\n\n3. STEP BY STEP PENYELESAIAN\n$BC = BD + DC = 4 + 9 = 13$ cm.\n(1) Sesuai perhitungan. BENAR\n$AD^2 = BD \\times DC = 4 \\times 9 = 36 \\Rightarrow AD = 6$ cm.\n(2) Sesuai perhitungan. BENAR\n$AB^2 = BD \\times BC = 4 \\times 13 = 52 \\Rightarrow AB = \\sqrt{52} = 2\\sqrt{13}$ cm.\n(3) Sesuai perhitungan. BENAR\nLuas $ABC = \\dfrac{1}{2} \\times BC \\times AD = \\dfrac{1}{2} \\times 13 \\times 6 = 39 \\text{ cm}^2$, bukan $42 \\text{ cm}^2$.\n(4) SALAH",
+  },
+  {
+    no: 4,
+    type: "pgk",
+    soal: "Diketahui segitiga $ABC$ kongruen dengan segitiga $DEF$ ($\\triangle ABC \\cong \\triangle DEF$).",
+    pernyataan: [
+      "Panjang $AB = DE$.",
+      "Luas kedua segitiga tersebut sama.",
+      "Kedua segitiga tersebut pasti sebangun.",
+      "Kedua segitiga tersebut pasti memiliki arah putaran (orientasi) yang sama.",
+    ],
+    jawabanPGK: [0, 1, 2],
+    pembahasan:
+      "1. JAWABAN\nPernyataan (1), (2), dan (3) BENAR; pernyataan (4) SALAH.\n\n2. TRIK & TIPS\nKongruen adalah kasus khusus dari sebangun dengan rasio $1:1$, sehingga semua sifat sebangun (termasuk kesamaan bentuk & rasio luas) otomatis berlaku. Tapi kongruen TIDAK menjamin orientasi sama — bisa jadi salah satu bangun adalah hasil pencerminan (refleksi) dari yang lain.\n\n3. STEP BY STEP PENYELESAIAN\n(1) Definisi kongruen: semua sisi bersesuaian sama panjang, termasuk $AB = DE$. BENAR\n(2) Karena ukuran dan bentuk identik, luas kedua segitiga pasti sama. BENAR\n(3) Kongruen adalah sebangun dengan rasio sisi $1:1$, jadi pasti juga sebangun. BENAR\n(4) Dua segitiga bisa kongruen meski salah satunya adalah bayangan cermin (refleksi) dari yang lain, sehingga orientasinya bisa berlawanan (searah jarum jam vs berlawanan arah jarum jam). SALAH",
+  },
+  {
+    no: 5,
+    type: "pgkbs",
+    soal:
+      "Trapesium $ABCD$ dengan $AB \\parallel CD$, $AB = 18$ cm dan $CD = 10$ cm. Titik $E$ dan $F$ berturut-turut adalah titik tengah $AD$ dan $BC$.",
+    pernyataan: [
+      "Panjang $EF = 14$ cm.",
+      "Garis $EF$ sejajar dengan $AB$ dan $CD$.",
+      "Panjang $EF$ sama dengan $CD$ ditambah setengah $AB$.",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan:
+      "1. JAWABAN\n(1) Benar, (2) Benar, (3) Salah\n\n2. TRIK & TIPS\nGaris yang menghubungkan titik tengah kedua kaki trapesium disebut garis tengah (garis sejajar), panjangnya adalah RATA-RATA (bukan jumlah) dari kedua sisi sejajarnya, dan arahnya selalu sejajar dengan kedua sisi tersebut.\n\n3. STEP BY STEP PENYELESAIAN\n$EF = \\dfrac{1}{2}(AB + CD) = \\dfrac{1}{2}(18 + 10) = 14$ cm.\n(1) Sesuai perhitungan. BENAR\n(2) Sifat garis tengah trapesium: selalu sejajar dengan kedua sisi sejajarnya. BENAR\n(3) $CD + \\dfrac{1}{2}AB = 10 + 9 = 19$ cm, tidak sama dengan $EF = 14$ cm.\n(3) SALAH",
+  },
+  {
+    no: 6,
+    type: "pgkbs",
+    soal:
+      "Persegi panjang $PQRS$ sebangun dengan persegi panjang $WXYZ$ (korespondensi $P \\leftrightarrow W$, $Q \\leftrightarrow X$, $R \\leftrightarrow Y$, $S \\leftrightarrow Z$). Diketahui $PQ = 12$ cm, $QR = 8$ cm, dan $WX = 18$ cm.",
+    pernyataan: [
+      "Rasio kesebangunan $PQRS$ terhadap $WXYZ$ adalah $2:3$.",
+      "Panjang $XY = 12$ cm.",
+      "Perbandingan luas $PQRS$ terhadap $WXYZ$ adalah $4:6$.",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan:
+      "1. JAWABAN\n(1) Benar, (2) Benar, (3) Salah\n\n2. TRIK & TIPS\nPerbandingan LUAS dua bangun sebangun adalah KUADRAT dari perbandingan sisi-sisinya, bukan perbandingan sisi itu sendiri — ini jebakan paling umum di soal kesebangunan.\n\n3. STEP BY STEP PENYELESAIAN\nRasio sisi: $\\dfrac{PQ}{WX} = \\dfrac{12}{18} = \\dfrac{2}{3}$.\n(1) Sesuai perhitungan. BENAR\n$QR$ bersesuaian dengan $XY$: $\\dfrac{QR}{XY} = \\dfrac{2}{3} \\Rightarrow XY = \\dfrac{3}{2} \\times 8 = 12$ cm.\n(2) Sesuai perhitungan. BENAR\nPerbandingan luas $= \\left(\\dfrac{2}{3}\\right)^2 = \\dfrac{4}{9}$, bukan $4:6$ (yang sama saja dengan $2:3$, perbandingan sisi bukan luas).\n(3) SALAH",
   },
 ];
 
