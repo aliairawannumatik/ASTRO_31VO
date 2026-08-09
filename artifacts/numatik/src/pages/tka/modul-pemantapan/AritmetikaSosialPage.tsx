@@ -1,5 +1,6 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
+import { getTkaContohSoal } from "@/data/tkaContohSoal";
 
 const materiSections: MateriSection[] = [
   { heading: "A. Harga Beli (Modal)", content: `Harga beli atau modal adalah harga barang saat dibeli dari produsen, distributor, atau toko lain.\n\nContoh: Seorang pedagang membeli 1 lusin buku dengan harga Rp50.000. Harga beli 1 lusin buku tersebut adalah Rp50.000.` },
@@ -161,7 +162,8 @@ const AritmetikaSosialPage = () => (
   <TKAPemantapanLayout
     title="ARITMETIKA SOSIAL"
     materiSections={materiSections}
-    latihanDasar={latihanDasar}
+    contohSoal={getTkaContohSoal("aritmetika-sosial")}
+  latihanDasar={latihanDasar}
   />
 );
 

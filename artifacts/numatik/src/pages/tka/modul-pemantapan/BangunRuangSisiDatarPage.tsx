@@ -1,5 +1,6 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
+import { getTkaContohSoal } from "@/data/tkaContohSoal";
 import { dasarImages } from "@/pages/OlimpiadeBangunRuangSisiDatarPage";
 
 const materiSections: MateriSection[] = [
@@ -62,6 +63,7 @@ const BangunRuangSisiDatarPage = () => (
   <TKAPemantapanLayout
     title="BANGUN RUANG SISI DATAR"
     materiSections={materiSections}
+    contohSoal={getTkaContohSoal("bangun-ruang-sisi-datar")}
     latihanDasar={latihanDasar}
     gambarMap={dasarImages}
   />

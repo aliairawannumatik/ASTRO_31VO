@@ -1,5 +1,6 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
+import { getTkaContohSoal } from "@/data/tkaContohSoal";
 
 const materiSections: MateriSection[] = [
   { heading: "A. Relasi", content: `Relasi dari himpunan A ke himpunan B adalah aturan yang memasangkan anggota-anggota himpunan A dengan anggota-anggota himpunan B.\n\nCara menyatakan relasi:\n1. Diagram panah\n2. Himpunan pasangan berurutan\n3. Tabel\n4. Diagram Cartesius` },
@@ -41,7 +42,8 @@ const RelasiFungsiPage = () => (
   <TKAPemantapanLayout
     title="RELASI DAN FUNGSI"
     materiSections={materiSections}
-    latihanDasar={latihanDasar}
+    contohSoal={getTkaContohSoal("relasi-dan-fungsi")}
+  latihanDasar={latihanDasar}
   />
 );
 
