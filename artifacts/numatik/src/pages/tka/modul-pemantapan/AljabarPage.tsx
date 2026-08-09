@@ -252,6 +252,142 @@ const latihanDasar: LatihanSoal[] = [
     jawaban: "B", jawabanPGK: [0, 1, 2],
     pembahasan: "$5x-15=3x+5$ memberi $2x=20$, sehingga $x=10$. Diagonal $=5(10)-15=35$ meter. Jadi (1), (2), dan (3) benar → Jawaban B",
   },
+
+  // ─── Soal tambahan 21–33 — Modul Pemantapan 2026–2027, Bentuk Aljabar ───
+  // Catatan: soal #3 dan #10 dari sumber asli di-skip sementara karena hasil
+  // hitungan tidak cocok dengan opsi/pernyataan yang diberikan (lihat catatan
+  // di chat) — menunggu verifikasi angka dari sumber.
+  {
+    no: 21, type: "pg",
+    soal: "Sederhanakan bentuk pecahan aljabar $y - \\frac{4}{y}$ menjadi satu pecahan tunggal.",
+    options: ["A. $\\frac{1 - 4y}{y}$", "B. $\\frac{y - 4}{y}$", "C. $\\frac{y^2 - 4}{y}$", "D. $\\frac{4 - y^2}{y}$"],
+    jawaban: "C",
+    pembahasan: "Samakan penyebut dengan mengalikan $y$ dengan $\\frac{y}{y}$:\n$$y - \\frac{4}{y} = \\frac{y \\cdot y}{y} - \\frac{4}{y} = \\frac{y^2 - 4}{y}$$\n\nJawaban: C",
+  },
+  {
+    no: 22, type: "pg",
+    soal: "Diberikan dua bentuk aljabar $P = -5m + 8$ dan $Q = 4m - 3$. Hasil dari pengurangan $P$ dari $Q$ ($Q - P$) adalah ....",
+    options: ["A. $9m - 11$", "B. $9m + 5$", "C. $-9m + 11$", "D. $-m + 5$"],
+    jawaban: "A",
+    pembahasan: "$$Q - P = (4m - 3) - (-5m + 8) = 4m - 3 + 5m - 8 = 9m - 11$$\n\nJawaban: A",
+  },
+  {
+    no: 23, type: "pg",
+    soal: "Bentuk paling sederhana dari $(3x - 2)(x + 4) - 3x^2 + 10$ adalah ....",
+    options: ["A. $10x + 2$", "B. $10x - 2$", "C. $6x^2 + 10x - 2$", "D. $10x + 18$"],
+    jawaban: "A",
+    pembahasan: "Jabarkan dahulu:\n$$(3x - 2)(x + 4) = 3x^2 + 12x - 2x - 8 = 3x^2 + 10x - 8$$\n\nSubstitusikan:\n$$3x^2 + 10x - 8 - 3x^2 + 10 = 10x + 2$$\n\nJawaban: A",
+  },
+  {
+    no: 24, type: "pg",
+    soal: "Sebuah model matematika dinyatakan dengan tiga kali nilai $(8 - 2x)$ dikurangi oleh $5x$, kemudian ditambahkan dengan empat kali suatu variabel $x$. Persamaan aljabar yang tepat untuk menggambarkan kondisi tersebut adalah ....",
+    options: ["A. $24 - 7x$", "B. $24 - 11x$", "C. $24 + 5x$", "D. $24 - 5x$"],
+    jawaban: "A",
+    pembahasan: "Terjemahkan kalimat menjadi bentuk aljabar:\n$$3(8 - 2x) - 5x + 4x = 24 - 6x - 5x + 4x = 24 - 7x$$\n\nJawaban: A",
+  },
+  {
+    no: 25, type: "pg",
+    soal: "Bentuk aljabar $\\frac{a}{a - b} - \\frac{b}{a + b}$ dapat dituliskan sebagai pecahan tunggal $\\frac{K}{L}$. Jumlah dari pembilang $K$ dan penyebut $L$ adalah ....",
+    options: ["A. $2a^2 + 2b^2$", "B. $a^2 + b^2 + ab$", "C. $2a^2$", "D. $a^2 - b^2 + ab$"],
+    jawaban: "C",
+    pembahasan: "Samakan penyebut:\n$$\\frac{a}{a-b} - \\frac{b}{a+b} = \\frac{a(a+b) - b(a-b)}{(a-b)(a+b)} = \\frac{a^2 + b^2}{a^2 - b^2}$$\n\nJadi $K = a^2 + b^2$ dan $L = a^2 - b^2$.\n$$K + L = (a^2 + b^2) + (a^2 - b^2) = 2a^2$$\n\nJawaban: C",
+  },
+  {
+    no: 26, type: "pg",
+    soal: "Suatu segitiga $PQR$ memiliki panjang sisi-sisi sebagai berikut: $PQ = 5x - 3$, $QR = 4x + 6$, dan $PR = 7x - 1$. Rumus keliling segitiga $PQR$ dalam bentuk aljabar adalah ....",
+    options: ["A. $16x + 2$", "B. $16x + 10$", "C. $12x + 2$", "D. $16x - 2$"],
+    jawaban: "A",
+    pembahasan: "Keliling = jumlah ketiga sisi:\n$$(5x - 3) + (4x + 6) + (7x - 1) = 16x + 2$$\n\nJawaban: A",
+  },
+  {
+    no: 27, type: "pgk",
+    soal: "Cermati beberapa bentuk pemfaktoran aljabar berikut! Manakah dari pemfaktoran di atas yang bernilai benar?",
+    pernyataan: [
+      "$16x^2 - 25 = (4x - 5)(4x + 5)$",
+      "$3x^2 + 5x - 2 = (x + 2)(3x - 1)$",
+      "$x^2 - 8x + 12 = (x - 6)(x - 2)$",
+      "$4x^2 + x - 3 = (2x - 1)(2x + 3)$",
+    ],
+    jawabanPGK: [0, 1, 2],
+    pembahasan: "(1) BENAR: $(4x-5)(4x+5) = 16x^2 - 25$.\n\n(2) BENAR: $(x+2)(3x-1) = 3x^2 - x + 6x - 2 = 3x^2 + 5x - 2$.\n\n(3) BENAR: $(x-6)(x-2) = x^2 - 8x + 12$.\n\n(4) SALAH: $(2x-1)(2x+3) = 4x^2 + 4x - 3$, bukan $4x^2 + x - 3$.",
+  },
+  {
+    no: 28, type: "pgkbs",
+    soal: "Taman Pak Budi berbentuk trapesium sama kaki. Sisi-sisi sejajarnya berturut-turut sepanjang $(6x - 4)$ m dan $(4x + 8)$ m, sedangkan sisi miringnya masing-masing $(5x + 2)$ m. Tinggi trapesium tersebut adalah $(3x + 1)$ m. Di sekeliling taman akan ditanami pohon pucuk merah dengan jarak antarpohon $(2x + 1)$ m. Harga per pohon adalah Rp200.000.\n\nBerdasarkan data di atas, tentukan kebenaran pernyataan berikut!",
+    pernyataan: [
+      "Keliling taman Pak Budi adalah $(20x + 8)$ m.",
+      "Jika nilai $x = 3$, maka banyak pohon yang dibutuhkan adalah $17$ buah.",
+      "Total biaya pembelian seluruh pohon untuk $x = 3$ adalah Rp3.400.000.",
+    ],
+    jawabanBS: ["B", "S", "S"],
+    pembahasan: "Keliling $= (6x-4) + (4x+8) + 2(5x+2) = 20x + 8$ (BENAR).\n\nUntuk $x=3$: keliling $= 20(3)+8 = 68$ m, jarak antarpohon $= 2(3)+1 = 7$ m. Banyak pohon $= 68 \\div 7 \\approx 9{,}7$, bukan $17$ (SALAH).\n\nKarena banyak pohon bukan $17$, total biaya juga bukan Rp3.400.000 (SALAH).",
+  },
+  {
+    no: 29, type: "pg",
+    soal: "Bentuk sederhana dari pecahan aljabar $\\frac{9x^2 - 4}{6x^2 + x - 2}$ adalah ....",
+    options: ["A. $\\frac{3x - 2}{2x - 1}$", "B. $\\frac{3x + 2}{2x + 1}$", "C. $\\frac{3x - 2}{2x + 1}$", "D. $\\frac{3x + 2}{2x - 1}$"],
+    jawaban: "A",
+    pembahasan: "Faktorkan pembilang (selisih dua kuadrat): $9x^2 - 4 = (3x-2)(3x+2)$.\n\nFaktorkan penyebut: $6x^2 + x - 2 = (3x+2)(2x-1)$.\n\nCoret faktor yang sama:\n$$\\frac{(3x-2)(3x+2)}{(3x+2)(2x-1)} = \\frac{3x-2}{2x-1}$$\n\nJawaban: A",
+  },
+  {
+    no: 30, type: "pg",
+    soal: "Salah satu faktor dari bentuk kuadrat $4x^2 - 40x + 84$ adalah ....",
+    options: ["A. $(x - 7)$", "B. $(x + 3)$", "C. $(2x - 3)$", "D. $(4x + 12)$"],
+    jawaban: "A",
+    pembahasan: "Keluarkan faktor persekutuan $4$: $4x^2-40x+84 = 4(x^2-10x+21)$.\n\nFaktorkan $x^2-10x+21$: cari dua bilangan berjumlah $-10$ dan berkali $21$, yaitu $-7$ dan $-3$:\n$$4(x-7)(x-3)$$\n\nSalah satu faktornya adalah $(x-7)$ → Jawaban A",
+  },
+  {
+    no: 31, type: "pgk",
+    soal: "Suatu daerah persegi panjang dibagi menjadi 4 sub-daerah (I, II, III, dan IV) dengan panjang komponen sisinya masing-masing $x$ dan $5$ pada sisi panjang, serta $x$ dan $2$ pada sisi lebar.\n\nPilihlah semua pernyataan yang benar terkait luas daerah tersebut!",
+    pernyataan: [
+      "Luas daerah I adalah $x^2$.",
+      "Luas daerah II adalah $5x$.",
+      "Luas daerah III adalah $2x$.",
+      "Luas total seluruh daerah adalah $x^2 + 7x + 10$.",
+    ],
+    jawabanPGK: [0, 1, 2, 3],
+    pembahasan: "Daerah I: $x \\times x = x^2$ (BENAR).\n\nDaerah II: $5 \\times x = 5x$ (BENAR).\n\nDaerah III: $x \\times 2 = 2x$ (BENAR).\n\nLuas total $= (x+5)(x+2) = x^2+7x+10$, sama dengan jumlah keempat daerah (BENAR). Semua pernyataan benar.",
+  },
+  {
+    no: 32, type: "pg",
+    soal: "Hasil dari penjabaran dan penyederhanaan $3(x - 4)^2 - 4(x + 1)$ adalah ....",
+    options: ["A. $3x^2 - 28x + 44$", "B. $3x^2 - 24x + 44$", "C. $3x^2 - 28x + 48$", "D. $3x^2 - 20x + 44$"],
+    jawaban: "A",
+    pembahasan: "Jabarkan $(x-4)^2 = x^2-8x+16$, kalikan $3$: $3x^2-24x+48$.\n\nJabarkan $-4(x+1) = -4x-4$.\n\nGabungkan:\n$$3x^2-24x+48-4x-4 = 3x^2-28x+44$$\n\nJawaban: A",
+  },
+  {
+    no: 33, type: "pgkbs",
+    soal: "Perhatikan skema alur algoritma fungsi berikut:\nMasukan $(x) \\rightarrow y = 2x + 3 \\rightarrow$ Apakah $y$ Bilangan Genap?\nJika Ya $\\rightarrow z = 3y + 1$\nJika Tidak $\\rightarrow z = 4y - 2$\n\nBerdasarkan diagram alur di atas, tentukan Benar (B) atau Salah (S) untuk setiap pernyataan berikut!",
+    pernyataan: [
+      "Untuk nilai masukan $x = 3$, hasil akhir $z$ adalah $34$.",
+      "Untuk nilai masukan $x = 5$, hasil akhir $z$ adalah $50$.",
+      "Nilai $y$ yang dihasilkan akan selalu bernilai ganjil untuk setiap $x$ bilangan bulat.",
+    ],
+    jawabanBS: ["B", "B", "B"],
+    pembahasan: "Karena $y = 2x+3$ dan $2x$ selalu genap, maka $y$ = genap $+3$ selalu GANJIL untuk semua $x$ bilangan bulat (pernyataan 3 BENAR). Karena $y$ selalu ganjil, cabang \"Jika Tidak\" yang selalu dipakai: $z = 4y-2$.\n\nUntuk $x=3$: $y=2(3)+3=9$, $z=4(9)-2=34$ (BENAR).\n\nUntuk $x=5$: $y=2(5)+3=13$, $z=4(13)-2=50$ (BENAR).",
+  },
+
+  // ─── Soal 34–35: perbaikan dari 2 soal yang angkanya tidak konsisten
+  // dengan opsi/pernyataan aslinya (lihat catatan di chat). Cerita/tema soal
+  // dipertahankan sama persis; hanya bagian yang keliru yang diperbaiki. ───
+  {
+    no: 34, type: "pg",
+    soal: "Bentuk aljabar $4(3p - 5q + 2) + 6p + 9q$ disederhanakan menjadi $ap + bq + c$. Nilai dari $a + b + c$ adalah ....",
+    options: ["A. $5$", "B. $11$", "C. $15$", "D. $-3$"],
+    jawaban: "C",
+    pembahasan: "Jabarkan dahulu:\n$$4(3p - 5q + 2) = 12p - 20q + 8$$\n\nGabungkan dengan $6p + 9q$:\n$$12p - 20q + 8 + 6p + 9q = 18p - 11q + 8$$\n\nJadi $a=18$, $b=-11$, $c=8$.\n$$a+b+c = 18 + (-11) + 8 = 15$$\n\nJawaban: C",
+  },
+  {
+    no: 35, type: "pgkbs",
+    soal: "Tiga generasi dalam satu keluarga terdiri dari Cucu, Ibu, dan Nenek. Tiga tahun yang lalu, usia Nenek tepat tiga kali usia Ibu, dan usia Ibu kurang lima tahun dari empat kali usia Cucu. Jika tahun ini usia Cucu adalah $y$ tahun, tentukan apakah pernyataan berikut Benar (B) atau Salah (S):",
+    pernyataan: [
+      "Usia Ibu tahun ini dapat dinyatakan sebagai $(4y - 14)$ tahun.",
+      "Usia Nenek dua tahun yang akan datang adalah $(12y - 46)$ tahun.",
+      "Jumlah total usia mereka bertiga tahun ini adalah $(17y - 50)$ tahun.",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "Tiga tahun lalu, usia Cucu $=y-3$.\n\nUsia Ibu tiga tahun lalu $=4(y-3)-5=4y-17$, sehingga usia Ibu tahun ini $=4y-17+3=4y-14$ (BENAR).\n\nUsia Nenek tiga tahun lalu $=3(4y-17)=12y-51$, sehingga usia Nenek tahun ini $=12y-51+3=12y-48$, dan dua tahun akan datang $=12y-48+2=12y-46$ (BENAR).\n\nTotal usia ketiganya tahun ini $=y+(4y-14)+(12y-48)=17y-62$, BUKAN $17y-50$ (SALAH).",
+  },
 ];
 
 const AljabarPage = () => (
