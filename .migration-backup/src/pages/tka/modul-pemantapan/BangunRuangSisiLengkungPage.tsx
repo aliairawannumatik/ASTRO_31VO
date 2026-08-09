@@ -8,6 +8,66 @@ const materiSections: MateriSection[] = [
   { heading: "D. Perbandingan Volume", content: `Tabung : Kerucut : Bola\nDengan r dan t yang sama:\n$V_{tabung} : V_{kerucut} : V_{bola} = 3 : 1 : 2$\n\n(Catatan: r dan t/d harus sesuai)` },
 ];
 
+// ─── Contoh Soal — TES KEMAMPUAN AKADEMIK · MODUL PEMANTAPAN 2026–2027 ───
+const contohSoal: LatihanSoal[] = [
+  {
+    no: 1, type: "pg",
+    soal: "Volume tabung dengan jari-jari $7$ cm dan tinggi $10$ cm ($\\pi = \\frac{22}{7}$) adalah ...",
+    options: ["A. $1.450$ $cm^3$", "B. $1.540$ $cm^3$", "C. $1.560$ $cm^3$", "D. $1.640$ $cm^3$"],
+    jawaban: "B",
+    pembahasan: "Trik dan Tips:\nVolume tabung $=\\pi r^2 t$.\n\nStep by Step Penyelesaian:\n$$V=\\frac{22}{7}\\times7^2\\times10=\\frac{22}{7}\\times49\\times10=1.540\\text{ }cm^3$$\n\nJawaban: B",
+  },
+  {
+    no: 2, type: "pgk",
+    soal: "Sebuah kerucut memiliki jari-jari $7$ cm dan tinggi $24$ cm ($\\pi = \\frac{22}{7}$). Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Garis pelukis kerucut tersebut adalah $25$ cm.",
+      "Volume kerucut tersebut adalah $1.232$ $cm^3$.",
+      "Luas selimut kerucut tersebut adalah $550$ $cm^2$.",
+      "Luas alas kerucut tersebut adalah $154$ $cm^2$.",
+    ],
+    jawabanPGK: [0, 1, 2, 3],
+    pembahasan: "Trik dan Tips:\nGaris pelukis $s=\\sqrt{r^2+t^2}$ (kenali tripel $7,24,25$). $V=\\frac{1}{3}\\pi r^2t$; luas selimut $=\\pi rs$; luas alas $=\\pi r^2$.\n\nStep by Step Penyelesaian:\n(1) BENAR: $s=\\sqrt{7^2+24^2}=\\sqrt{625}=25$.\n\n(2) BENAR: $V=\\frac{1}{3}\\times\\frac{22}{7}\\times49\\times24=1.232$.\n\n(3) BENAR: $\\frac{22}{7}\\times7\\times25=550$.\n\n(4) BENAR: $\\frac{22}{7}\\times49=154$.\n\nJawaban: Semua pernyataan BENAR",
+  },
+  {
+    no: 3, type: "pgkbs",
+    soal: "Sebuah bola memiliki jari-jari $21$ cm ($\\pi = \\frac{22}{7}$). Tentukan kebenaran pernyataan berikut!",
+    pernyataan: [
+      "Volume bola tersebut adalah $38.808$ $cm^3$.",
+      "Luas permukaan bola tersebut adalah $5.544$ $cm^2$.",
+      "Jika jari-jari bola diperbesar $2$ kali, volumenya menjadi $4$ kali volume semula.",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "Trik dan Tips:\n$V=\\frac{4}{3}\\pi r^3$; $L=4\\pi r^2$. Karena volume sebanding $r^3$, memperbesar $r$ sebanyak $2$ kali membuat volume menjadi $2^3=8$ kali, BUKAN $4$ kali.\n\nStep by Step Penyelesaian:\n$V=\\frac{4}{3}\\times\\frac{22}{7}\\times21^3=\\frac{4}{3}\\times\\frac{22}{7}\\times9.261=38.808$ (BENAR).\n\n$L=4\\times\\frac{22}{7}\\times21^2=4\\times\\frac{22}{7}\\times441=5.544$ (BENAR).\n\nMemperbesar $r$ dua kali membuat volume $8$ kali, bukan $4$ kali (SALAH).",
+  },
+  {
+    no: 4, type: "pg",
+    soal: "Luas permukaan tabung tanpa tutup (terbuka pada salah satu sisi) dengan jari-jari $7$ cm dan tinggi $15$ cm ($\\pi = \\frac{22}{7}$) adalah ...",
+    options: ["A. $744$ $cm^2$", "B. $814$ $cm^2$", "C. $884$ $cm^2$", "D. $968$ $cm^2$"],
+    jawaban: "B",
+    pembahasan: "Trik dan Tips:\nTabung tanpa tutup: $L=\\pi r^2+2\\pi rt$ (hanya satu alas $+$ selimut).\n\nStep by Step Penyelesaian:\n$$L=\\frac{22}{7}\\times49+2\\times\\frac{22}{7}\\times7\\times15=154+660=814\\text{ }cm^2$$\n\nJawaban: B",
+  },
+  {
+    no: 5, type: "pg",
+    soal: "Volume bola dengan diameter $12$ cm ($\\pi = 3{,}14$) adalah ...",
+    options: ["A. $804{,}32$ $cm^3$", "B. $904{,}32$ $cm^3$", "C. $1.004{,}32$ $cm^3$", "D. $1.104{,}32$ $cm^3$"],
+    jawaban: "B",
+    pembahasan: "Trik dan Tips:\nJari-jari $=$ setengah diameter, lalu gunakan $V=\\frac{4}{3}\\pi r^3$.\n\nStep by Step Penyelesaian:\n$r=6$ cm.\n$$V=\\frac{4}{3}\\times3{,}14\\times6^3=\\frac{4}{3}\\times3{,}14\\times216=904{,}32\\text{ }cm^3$$\n\nJawaban: B",
+  },
+  {
+    no: 6, type: "pgk",
+    soal: "Sebuah tabung memiliki jari-jari $10$ cm dan tinggi $20$ cm ($\\pi = 3{,}14$). Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Volume tabung tersebut adalah $6.280$ $cm^3$.",
+      "Luas selimut tabung tersebut adalah $1.256$ $cm^2$.",
+      "Luas permukaan total tabung tersebut adalah $1.884$ $cm^2$.",
+      "Jika tinggi tabung dijadikan setengahnya, volumenya menjadi setengah volume semula.",
+    ],
+    jawabanPGK: [0, 1, 2, 3],
+    pembahasan: "Trik dan Tips:\n$V=\\pi r^2t$; selimut $=2\\pi rt$; luas total $=2\\pi r^2+2\\pi rt$. Karena $V$ sebanding linear dengan $t$, mengubah $t$ menjadi setengahnya membuat $V$ juga setengahnya.\n\nStep by Step Penyelesaian:\n(1) BENAR: $3{,}14\\times100\\times20=6.280$.\n\n(2) BENAR: $2\\times3{,}14\\times10\\times20=1.256$.\n\n(3) BENAR: $2\\times3{,}14\\times100+1.256=628+1.256=1.884$.\n\n(4) BENAR: konsekuensi hubungan linear $V\\propto t$.\n\nJawaban: Semua pernyataan BENAR",
+  },
+];
+
 const latihanDasar: LatihanSoal[] = [
   { no: 1, soal: "Banyak rusuk pada tabung adalah ...", options: ["A. Tidak ada", "B. 1 buah", "C. 2 buah", "D. 4 buah"] },
   { no: 2, soal: "Banyak sisi pada bola adalah ...", options: ["A. 4 buah", "B. 3 buah", "C. 2 buah", "D. 1 buah"] },
@@ -61,6 +121,7 @@ const BangunRuangSisiLengkungPage = () => (
     title="BANGUN RUANG SISI LENGKUNG"
     materiSections={materiSections}
     latihanDasar={latihanDasar}
+    contohSoal={contohSoal}
   />
 );
 
