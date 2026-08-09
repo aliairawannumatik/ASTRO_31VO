@@ -1,6 +1,8 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
 
+// ─── Materi ───────────────────────────────────────────────────────────────────
+
 const materiSections: MateriSection[] = [
   {
     heading: "A. Konsep Dasar Pythagoras",
@@ -52,49 +54,534 @@ Pada segitiga siku-siku sama kaki dengan sudut $45°$, $45°$, dan $90°$:
   },
 ];
 
+// ─── Latihan Soal — 30 soal merata: 10 PG · 10 PGK · 10 PGKBS ──────────────
+// Pola susunan: PG (ganjil/1,4,7,...) · PGK (2,5,8,...) · PGKBS (3,6,9,...)
+
+// ─── Contoh Soal — TES KEMAMPUAN AKADEMIK · MODUL PEMANTAPAN 2026–2027 ───
+const contohSoal: LatihanSoal[] = [
+  {
+    no: 1, type: "pg",
+    soal: "Panjang sisi miring segitiga siku-siku dengan panjang kaki $9$ cm dan $12$ cm adalah ...",
+    options: ["A. $13$ cm", "B. $14$ cm", "C. $15$ cm", "D. $16$ cm"],
+    jawaban: "C",
+    pembahasan: "Trik dan Tips:\nGunakan Teorema Pythagoras: $c=\\sqrt{a^2+b^2}$. Kenali tripel $9,12,15$ sebagai kelipatan tripel $3,4,5$.\n\nStep by Step Penyelesaian:\n$$c=\\sqrt{9^2+12^2}=\\sqrt{81+144}=\\sqrt{225}=15$$\n\nJawaban: C",
+  },
+  {
+    no: 2, type: "pgk",
+    soal: "Perhatikan kelompok tiga bilangan berikut. Manakah yang merupakan tripel Pythagoras (memenuhi $a^2+b^2=c^2$)?",
+    pernyataan: ["$3, 4, 5$", "$6, 8, 10$", "$5, 12, 13$", "$7, 10, 12$"],
+    jawabanPGK: [0, 1, 2],
+    pembahasan: "Trik dan Tips:\nCek apakah kuadrat dua bilangan terkecil berjumlah sama dengan kuadrat bilangan terbesar.\n\nStep by Step Penyelesaian:\n(1) BENAR: $3^2+4^2=9+16=25=5^2$.\n\n(2) BENAR: $6^2+8^2=36+64=100=10^2$ (kelipatan dari 3,4,5).\n\n(3) BENAR: $5^2+12^2=25+144=169=13^2$.\n\n(4) SALAH: $7^2+10^2=49+100=149 \\neq 12^2=144$.\n\nJawaban: (1), (2), dan (3) BENAR",
+  },
+  {
+    no: 3, type: "pgkbs",
+    soal: "Sebuah segitiga memiliki sisi $7$ cm, $24$ cm, dan $25$ cm. Tentukan kebenaran pernyataan berikut!",
+    pernyataan: [
+      "Segitiga tersebut merupakan segitiga siku-siku.",
+      "Luas segitiga tersebut adalah $84$ $cm^2$.",
+      "Keliling segitiga tersebut adalah $55$ cm.",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "Trik dan Tips:\nUji Pythagoras: bila $a^2+b^2=c^2$ maka segitiga siku-siku, dengan luas $=\\frac{1}{2}\\times$ kaki$_1\\times$kaki$_2$.\n\nStep by Step Penyelesaian:\n$7^2+24^2=49+576=625=25^2$, jadi siku-siku (BENAR).\n\nLuas $=\\frac{1}{2}\\times7\\times24=84$ $cm^2$ (BENAR).\n\nKeliling $=7+24+25=56$ cm, bukan $55$ cm (SALAH).",
+  },
+  {
+    no: 4, type: "pg",
+    soal: "Sebuah tangga sepanjang $10$ m disandarkan pada tembok. Jika jarak kaki tangga ke tembok adalah $6$ m, tinggi tangga menyentuh tembok adalah ...",
+    options: ["A. $6$ m", "B. $7$ m", "C. $8$ m", "D. $9$ m"],
+    jawaban: "C",
+    pembahasan: "Trik dan Tips:\nTangga, tembok, dan tanah membentuk segitiga siku-siku dengan tangga sebagai sisi miring.\n\nStep by Step Penyelesaian:\n$$t=\\sqrt{10^2-6^2}=\\sqrt{100-36}=\\sqrt{64}=8$$\n\nJawaban: C",
+  },
+  {
+    no: 5, type: "pg",
+    soal: "Panjang diagonal persegi dengan panjang sisi $8$ cm adalah ...",
+    options: ["A. $8$ cm", "B. $8\\sqrt{2}$ cm", "C. $16$ cm", "D. $4\\sqrt{2}$ cm"],
+    jawaban: "B",
+    pembahasan: "Trik dan Tips:\nDiagonal persegi $=s\\sqrt{2}$, hasil langsung dari Teorema Pythagoras pada segitiga siku-siku sama kaki.\n\nStep by Step Penyelesaian:\n$$d=\\sqrt{8^2+8^2}=\\sqrt{128}=8\\sqrt{2}$$\n\nJawaban: B",
+  },
+  {
+    no: 6, type: "pgk",
+    soal: "Segitiga $PQR$ siku-siku di $Q$ dengan $PQ = 9$ cm dan $QR = 12$ cm. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Panjang $PR$ (sisi miring) adalah $15$ cm.",
+      "Luas segitiga $PQR$ adalah $54$ $cm^2$.",
+      "Keliling segitiga $PQR$ adalah $36$ cm.",
+      "Tinggi dari $Q$ ke $PR$ adalah $7{,}2$ cm.",
+    ],
+    jawabanPGK: [0, 1, 2, 3],
+    pembahasan: "Trik dan Tips:\nUntuk tinggi ke sisi miring, gunakan kesetaraan luas: $\\frac{1}{2}\\times PQ\\times QR=\\frac{1}{2}\\times PR\\times h$.\n\nStep by Step Penyelesaian:\n(1) BENAR: $PR=\\sqrt{9^2+12^2}=\\sqrt{225}=15$.\n\n(2) BENAR: $L=\\frac{1}{2}\\times9\\times12=54$.\n\n(3) BENAR: $K=9+12+15=36$.\n\n(4) BENAR: dari $54=\\frac{1}{2}\\times15\\times h$, diperoleh $h=\\frac{108}{15}=7{,}2$.\n\nJawaban: Semua pernyataan BENAR",
+  },
+];
+
 const latihanDasar: LatihanSoal[] = [
-  { no: 1, soal: "Diketahui ukuran segitiga:\ni. 1 cm, 1 cm, 1 cm\nii. 8 cm, 10 cm, 18 cm\niii. 12 cm, 21 cm, 8 cm\niv. 5 cm, 12 cm, 15 cm\nYang dapat membentuk suatu segitiga adalah ....", options: ["A. i dan iii", "B. iii dan iv", "C. i, iii dan iv", "D. i dan iv"] },
-  { no: 2, soal: "Diketahui ukuran berikut:\ni. 2 cm, 2 cm, 2 cm\nii. 6 cm, 8 cm, 14 cm\niii. 7 cm, 15 cm, 25 cm\niv. 5 cm, 12 cm, 15 cm\nYang merupakan sisi pada segitiga adalah ..", options: ["A. i dan ii", "B. i dan iv", "C. ii dan iv", "D. iv saja"] },
-  { no: 3, soal: "Perhatikan gambar! Dari pernyataan berikut yang benar adalah ....", options: ["A. $p = \\sqrt{r^2 + q^2}$", "B. $q = \\sqrt{r^2 - p^2}$", "C. $p = \\sqrt{q^2 - r^2}$", "D. $q = \\sqrt{r^2 + p^2}$"] },
-  { no: 4, soal: "Panjang AC adalah..", options: ["A. 24 cm", "B. 28 cm", "C. 30 cm", "D. 32 cm"] },
-  { no: 5, soal: "Perhatikan gambar! Panjang AD adalah....", options: ["A. 15 cm", "B. 17 cm", "C. 24 cm", "D. 25 cm"] },
-  { no: 6, soal: "Perhatikan gambar berikut! Panjang BD adalah....", options: ["A. 12 cm", "B. 18 cm", "C. 18 cm", "D. 40 cm"] },
-  { no: 7, soal: "Perhatikan gambar berikut! Keliling bangun ABCDE adalah....", options: ["A. 56 cm", "B. 74 cm", "C. 59 cm", "D. 86 cm"] },
-  { no: 8, soal: "Perhatikan sisi-sisi segitiga di bawah\ni. 8, 15, dan 18\nii. 7, 24, dan 25\niii. 12, 15, dan 20\niv. 9, 12, dan 15\nYang merupakan tripel Pythagoras pada sisi-sisi segitiga diatas adalah...", options: ["A. i dan ii", "B. ii dan iii", "C. ii dan iv", "D. i dan iv"] },
-  { no: 9, soal: "Besar kedua sudut segitiga $40°$ dan $70°$. Ditinjau dari panjang sisi dan besar sudutnya, jenis segitiga tersebut adalah....", options: ["A. segitiga lancip sama kaki", "B. segitiga siku-siku sama kaki", "C. segitiga tumpul sama kaki", "D. segitiga tumpul sembarang"] },
-  { no: 10, soal: "Diketahui panjang sisi-sisi pada segitiga sebagai berikut:\n(1). 3 cm, 4 cm, 5 cm\n(2). 6 cm, 7 cm, 10 cm\n(3). 4 cm, 5 cm, 6 cm\n(4). 6 cm, 8 cm, 12 cm\nPanjang sisi-sisi diatas yang dapat membentuk segitiga tumpul adalah ...", options: ["A. (1) dan (2)", "B. (2) dan (3)", "C. (3) dan (4)", "D. (2) dan (4)"] },
-  { no: 11, soal: "Perhatikan tabel berikut.\nPada tabel tersebut, segitiga yang merupakan segitiga siku-siku adalah .......", options: ["A. $\\triangle ABC$", "B. $\\triangle DEF$", "C. $\\triangle KLM$", "D. $\\triangle PQR$"] },
-  { no: 12, soal: "Suatu segitiga mempunyai ukuran sisi-sisinya 8 cm, 15 cm, dan 20 cm. Segitiga tersebut merupakan jenis segitiga ....", options: ["A. lancip", "B. tumpul", "C. siku-siku", "D. sama kaki"] },
-  { no: 13, soal: "Diketahui ukuran segitiga:\ni. 2 cm, 2 cm, 2 cm\nii. 6 cm, 8 cm, 14 cm\niii. 7 cm, 24 cm, 25 cm\niv. 5 cm, 12 cm, 15 cm\nYang merupakan segitiga tumpul adalah ..", options: ["A. i dan ii", "B. i dan iv", "C. ii dan iv", "D. iv saja"] },
-  { no: 14, soal: "Diketahui sebuah segitiga memiliki sudut $45°$ dan $100°$, maka jika ditinjau dari sisinya dan sudut segitiga tersebut adalah......", options: ["A. Segitiga tumpul sama kaki", "B. Segitiga tumpul sebarang", "C. Segitiga lancip sama sisi", "D. Segitiga siku-siku sama kaki"] },
-  { no: 15, soal: "Pernyataan yang benar untuk gambar di bawah adalah ...", options: ["A. $x = 6$ cm", "B. $x = 7$ cm", "C. luas segitiga $= 48$ cm$^2$", "D. keliling segitiga $= 21$ cm"] },
-  { no: 16, soal: "Diketahui keliling belah ketupat 52 cm dan salah satu diagonalnya 24 cm. Luas belah ketupat ABCD adalah....", options: ["A. 312 cm$^2$", "B. 274 cm$^2$", "C. 240 cm$^2$", "D. 120 cm$^2$"] },
-  { no: 17, soal: "Panjang diagonal dan lebar sebuah persegi panjang berturut-turut adalah 15 cm dan 9 cm. Panjang persegi panjang tersebut adalah ......", options: ["A. 8 cm", "B. 10 cm", "C. 12 cm", "D. 14 cm"] },
-  { no: 18, soal: "Perhatikan gambar berikut.\nDari gambar diatas, berapa kira-kira panjang tali layar dari layang-layang agar layar tersebut menarik kapal pada sudut $45°$ dan berada pada ketinggian vertikal 150 m, seperti diperlihatkan pada gambar?", options: ["A. 175 m", "B. 212 m", "C. 285 m", "D. 300 m"] },
-  { no: 19, soal: "Sebuah kapal berlayar dari pelabuhan Ambu menuju arah barat sejauh 100 mil ke pelabuhan Beta. Dari Beta ke arah selatan sejauh 50 mil menuju pelabuhan Cinta. Dari Cinta ke arah timur sejauh 170 mil ke pelabuhan Delta. Dari Delta ke arah utara sejauh 290 mil menuju pelabuhan Eco. Jarak terdekat dari pelabuhan Ambu ke pelabuhan Eco adalah...", options: ["A. 130 mil", "B. 170 mil", "C. 250 mil", "D. 260 mil"] },
-  { no: 20, soal: "Perhatikan gambar.\nDiketahui AB = 15 cm, AF = 10 cm, BD = 12 cm. Luas bangun tersebut adalah ...", options: ["A. 140 cm$^2$", "B. 216 cm$^2$", "C. 250 cm$^2$", "D. 302 cm$^2$"] },
-  { no: 21, soal: "Perhatikan gambar berikut.\nLuas daerah di atas adalah", options: ["A. 48 cm$^2$", "B. 98 cm$^2$", "C. 120 cm$^2$", "D. 144 cm$^2$"] },
-  { no: 22, soal: "Kebun berbentuk belah ketupat dengan panjang masing-masing diagonalnya 12 m dan 16 m. Di sekeliling kebun akan ditanami pohon dengan jarak antar pohon 2 m.\nBanyaknya seluruh pohon adalah", options: ["A. 14 pohon", "B. 20 pohon", "C. 28 pohon", "D. 56 pohon"] },
-  { no: 23, soal: "Perhatikan gambar layang-layang ABCD di bawah ini.\nJika panjang AC = 24 cm, panjang AB = 13 cm dan panjang AD = 20 cm. Hitunglah luas bangun layang-layang di atas!", options: [] },
-  { no: 24, soal: "Perhatikan bangun datar jajargenjang ABCD di bawah ini.\nJika diketahui panjang AD = 13 cm, CD = 20 cm, dan BE = 15 cm. Hitunglah luas jajargenjang ABCD tersebut.", options: [] },
-  { no: 25, soal: "Sebidang tanah berbentuk trapesium sama kaki, panjang sisi sejajarnya 24 m dan 14 m, dan jarak sisi sejajar 12 m. Jika sekeliling tanah tersebut dibuat pagar, panjang pagar seluruhnya adalah...", options: ["A. 50 m", "B. 51 m", "C. 62 m", "D. 64 m"] },
-  { no: 26, soal: "Seseorang berada di atas gedung yang tingginya 12 m. Dia melihat dua buah benda A dan benda B di tanah dengan arah yang sama. Jika jarak pandang orang tersebut dengan benda A adalah 15 m dan dengan benda B adalah 20 m, maka jarak benda A dan benda B di tanah adalah...", options: ["A. 7 m", "B. 9 m", "C. 12 m", "D. 16 m"] },
-  { no: 27, soal: "Pada gambar di bawah, jika panjang PR = 12 cm maka panjang QR dan PQ adalah ...", options: [] },
+  // ── SOAL 1 — PG ────────────────────────────────────────────────────────────
+  {
+    no: 1,
+    type: "pg",
+    soal: "Diketahui sebuah segitiga siku-siku dengan panjang dua sisi tegaknya 6 cm dan 8 cm. Panjang sisi miringnya adalah ...",
+    options: ["A. 10 cm", "B. 12 cm", "C. 14 cm", "D. 15 cm"],
+    jawaban: "A",
+    pembahasan: "Gunakan Teorema Pythagoras:\n$c^2 = a^2 + b^2 = 6^2 + 8^2 = 36 + 64 = 100$\n$c = \\sqrt{100} = 10$ cm → Jawaban A",
+  },
+
+  // ── SOAL 2 — PGK ───────────────────────────────────────────────────────────
+  {
+    no: 2,
+    type: "pgk",
+    soal: "Suatu segitiga mempunyai sisi-sisi 5 cm, 12 cm, dan 13 cm. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "$5^2 + 12^2 = 13^2$",
+      "Segitiga tersebut adalah segitiga siku-siku",
+      "Luas segitiga tersebut adalah 30 cm²",
+      "Keliling segitiga tersebut adalah 25 cm",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (2) dan (3) saja",
+      "C. (1), (2), dan (3)",
+      "D. Semua benar",
+    ],
+    jawaban: "C",
+    pembahasan: "(1) $5^2 + 12^2 = 25 + 144 = 169 = 13^2$ ✓ BENAR\n(2) Karena $5^2+12^2=13^2$, segitiga siku-siku di sudut berhadapan 13 cm ✓ BENAR\n(3) Luas = $\\frac{1}{2} \\times 5 \\times 12 = 30$ cm² ✓ BENAR\n(4) Keliling = $5+12+13 = 30$ cm ≠ 25 cm ✗ SALAH\nPernyataan benar: (1), (2), dan (3) → Jawaban C",
+  },
+
+  // ── SOAL 3 — PGKBS ─────────────────────────────────────────────────────────
+  {
+    no: 3,
+    type: "pgkbs",
+    soal: "Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut tentang Teorema Pythagoras!",
+    pernyataan: [
+      "Pada segitiga siku-siku, kuadrat sisi miring sama dengan jumlah kuadrat kedua sisi tegaknya",
+      "Tripel (6, 8, 10) memenuhi Teorema Pythagoras karena $6^2 + 8^2 = 10^2$",
+      "Sisi miring suatu segitiga siku-siku adalah sisi yang paling pendek",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "(1) Teorema Pythagoras: $c^2 = a^2 + b^2$ → BENAR\n(2) $6^2+8^2 = 36+64 = 100 = 10^2$ → BENAR\n(3) Sisi miring (hipotenusa) adalah sisi yang TERPANJANG, bukan terpendek → SALAH",
+  },
+
+  // ── SOAL 4 — PG ────────────────────────────────────────────────────────────
+  {
+    no: 4,
+    type: "pg",
+    soal: "Panjang hipotenusa segitiga siku-siku adalah 13 cm dan salah satu sisi tegaknya 5 cm. Panjang sisi tegak yang lain adalah ...",
+    options: ["A. 8 cm", "B. 10 cm", "C. 12 cm", "D. 14 cm"],
+    jawaban: "C",
+    pembahasan: "$b^2 = c^2 - a^2 = 13^2 - 5^2 = 169 - 25 = 144$\n$b = \\sqrt{144} = 12$ cm → Jawaban C",
+  },
+
+  // ── SOAL 5 — PGK ───────────────────────────────────────────────────────────
+  {
+    no: 5,
+    type: "pgk",
+    soal: "Perhatikan pernyataan berikut tentang tripel Pythagoras!",
+    pernyataan: [
+      "(3, 4, 5) adalah tripel Pythagoras",
+      "(5, 12, 13) adalah tripel Pythagoras",
+      "(6, 8, 12) adalah tripel Pythagoras",
+      "(8, 15, 17) adalah tripel Pythagoras",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (1), (2), dan (3)",
+      "C. (1), (2), dan (4)",
+      "D. Semua benar",
+    ],
+    jawaban: "C",
+    pembahasan: "(1) $3^2+4^2 = 9+16 = 25 = 5^2$ ✓ BENAR\n(2) $5^2+12^2 = 25+144 = 169 = 13^2$ ✓ BENAR\n(3) $6^2+8^2 = 36+64 = 100 \\neq 144 = 12^2$ ✗ SALAH\n(4) $8^2+15^2 = 64+225 = 289 = 17^2$ ✓ BENAR\nPernyataan benar: (1), (2), dan (4) → Jawaban C",
+  },
+
+  // ── SOAL 6 — PGKBS ─────────────────────────────────────────────────────────
+  {
+    no: 6,
+    type: "pgkbs",
+    soal: "Titik $A(1, 2)$ dan $B(4, 6)$ berada pada bidang koordinat Kartesius. Tentukan benar (B) atau salah (S)!",
+    pernyataan: [
+      "Jarak AB = 5 satuan",
+      "Jarak AB = 25 satuan",
+      "Selisih koordinat $x$ titik A dan B adalah 3",
+    ],
+    jawabanBS: ["B", "S", "B"],
+    pembahasan: "(1) $|AB| = \\sqrt{(4-1)^2+(6-2)^2} = \\sqrt{9+16} = \\sqrt{25} = 5$ satuan → BENAR\n(2) Jarak AB = 5 satuan, bukan 25 → SALAH\n(3) Selisih koordinat $x$: $4-1 = 3$ → BENAR",
+  },
+
+  // ── SOAL 7 — PG ────────────────────────────────────────────────────────────
+  {
+    no: 7,
+    type: "pg",
+    soal: "Sebuah tangga yang panjangnya 10 m bersandar pada tembok. Kaki tangga berjarak 6 m dari tembok. Tinggi yang dicapai tangga pada tembok adalah ...",
+    options: ["A. 4 m", "B. 6 m", "C. 8 m", "D. 10 m"],
+    jawaban: "C",
+    pembahasan: "Tinggi$^2 = $ tangga$^2 - $ jarak$^2 = 10^2 - 6^2 = 100 - 36 = 64$\nTinggi $= \\sqrt{64} = 8$ m → Jawaban C",
+  },
+
+  // ── SOAL 8 — PGK ───────────────────────────────────────────────────────────
+  {
+    no: 8,
+    type: "pgk",
+    soal: "Pada segitiga siku-siku dengan sudut $30°$, $60°$, dan $90°$ serta panjang sisi miring 24 cm. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Panjang sisi di depan sudut $30°$ adalah 12 cm",
+      "Panjang sisi di depan sudut $60°$ adalah $12\\sqrt{3}$ cm",
+      "Keliling segitiga adalah $(36 + 12\\sqrt{3})$ cm",
+      "Luas segitiga adalah 144 cm²",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (1), (2), dan (3)",
+      "C. (2), (3), dan (4)",
+      "D. Semua benar",
+    ],
+    jawaban: "B",
+    pembahasan: "Sisi miring = 24 cm\n(1) Sisi depan 30° = $\\frac{1}{2} \\times 24 = 12$ cm ✓ BENAR\n(2) Sisi depan 60° = $\\frac{\\sqrt{3}}{2} \\times 24 = 12\\sqrt{3}$ cm ✓ BENAR\n(3) Keliling = $24 + 12 + 12\\sqrt{3} = 36 + 12\\sqrt{3}$ cm ✓ BENAR\n(4) Luas = $\\frac{1}{2} \\times 12 \\times 12\\sqrt{3} = 72\\sqrt{3}$ cm² $\\neq 144$ cm² ✗ SALAH\n→ Jawaban B",
+  },
+
+  // ── SOAL 9 — PGKBS ─────────────────────────────────────────────────────────
+  {
+    no: 9,
+    type: "pgkbs",
+    soal: "Sebuah segitiga mempunyai sisi-sisi $a$, $b$, dan $c$ dengan $c$ adalah sisi terpanjang. Tentukan benar (B) atau salah (S)!",
+    pernyataan: [
+      "Jika $c^2 = a^2 + b^2$, segitiga tersebut adalah segitiga siku-siku",
+      "Jika $c^2 > a^2 + b^2$, segitiga tersebut adalah segitiga lancip",
+      "Jika $c^2 < a^2 + b^2$, segitiga tersebut adalah segitiga lancip",
+    ],
+    jawabanBS: ["B", "S", "B"],
+    pembahasan: "(1) Ini adalah bunyi Teorema Pythagoras → BENAR\n(2) Jika $c^2 > a^2+b^2$ maka segitiga TUMPUL, bukan lancip → SALAH\n(3) Jika $c^2 < a^2+b^2$ maka segitiga LANCIP → BENAR",
+  },
+
+  // ── SOAL 10 — PG ───────────────────────────────────────────────────────────
+  {
+    no: 10,
+    type: "pg",
+    soal: "Jarak antara titik $P(1, 2)$ dan titik $Q(4, 6)$ pada bidang koordinat Kartesius adalah ...",
+    options: ["A. 3 satuan", "B. 4 satuan", "C. 5 satuan", "D. 7 satuan"],
+    jawaban: "C",
+    pembahasan: "$|PQ| = \\sqrt{(4-1)^2+(6-2)^2} = \\sqrt{3^2+4^2} = \\sqrt{9+16} = \\sqrt{25} = 5$ satuan → Jawaban C",
+  },
+
+  // ── SOAL 11 — PGK ──────────────────────────────────────────────────────────
+  {
+    no: 11,
+    type: "pgk",
+    soal: "Suatu belah ketupat ABCD mempunyai diagonal $AC = 10$ cm dan $BD = 24$ cm. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Panjang sisi belah ketupat = 13 cm",
+      "Keliling belah ketupat = 52 cm",
+      "Luas belah ketupat = 120 cm²",
+      "Panjang sisi belah ketupat = 15 cm",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (2) dan (3) saja",
+      "C. (1), (2), dan (3)",
+      "D. Semua benar",
+    ],
+    jawaban: "C",
+    pembahasan: "Setengah diagonal: $AO = 5$ cm, $BO = 12$ cm\n(1) Sisi = $\\sqrt{5^2+12^2} = \\sqrt{25+144} = \\sqrt{169} = 13$ cm ✓ BENAR\n(2) Keliling = $4 \\times 13 = 52$ cm ✓ BENAR\n(3) Luas = $\\frac{1}{2} \\times 10 \\times 24 = 120$ cm² ✓ BENAR\n(4) Sisi = 13 cm, bukan 15 cm ✗ SALAH\n→ Jawaban C",
+  },
+
+  // ── SOAL 12 — PGKBS ────────────────────────────────────────────────────────
+  {
+    no: 12,
+    type: "pgkbs",
+    soal: "Segitiga siku-siku sama kaki mempunyai kedua sisi tegak masing-masing sepanjang $a$ cm. Tentukan benar (B) atau salah (S)!",
+    pernyataan: [
+      "Sudut-sudut segitiga adalah 45°, 45°, dan 90°",
+      "Panjang sisi miring = $a\\sqrt{2}$ cm",
+      "Jika $a = 5$ cm, luas segitiga = 25 cm²",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "(1) Segitiga siku-siku sama kaki selalu memiliki sudut 45°-45°-90° → BENAR\n(2) $c^2 = a^2+a^2 = 2a^2$, jadi $c = a\\sqrt{2}$ → BENAR\n(3) Luas = $\\frac{1}{2} \\times 5 \\times 5 = 12{,}5$ cm², bukan 25 cm² → SALAH",
+  },
+
+  // ── SOAL 13 — PG ───────────────────────────────────────────────────────────
+  {
+    no: 13,
+    type: "pg",
+    soal: "Suatu segitiga mempunyai sisi-sisi 8 cm, 15 cm, dan 20 cm. Jenis segitiga tersebut ditinjau dari sudutnya adalah ...",
+    options: [
+      "A. Segitiga lancip",
+      "B. Segitiga siku-siku",
+      "C. Segitiga tumpul",
+      "D. Segitiga sama kaki",
+    ],
+    jawaban: "C",
+    pembahasan: "Sisi terpanjang: $c = 20$ cm\n$c^2 = 400$\n$a^2+b^2 = 8^2+15^2 = 64+225 = 289$\nKarena $c^2 = 400 > 289 = a^2+b^2$ → Segitiga TUMPUL → Jawaban C",
+  },
+
+  // ── SOAL 14 — PGK ──────────────────────────────────────────────────────────
+  {
+    no: 14,
+    type: "pgk",
+    soal: "Empat titik koordinat: $A(0,0)$, $B(3,0)$, $C(3,4)$, dan $D(0,4)$. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Jarak $AC = 5$ satuan",
+      "Jarak $BD = 5$ satuan",
+      "Bangun ABCD adalah persegi panjang",
+      "Panjang diagonal ABCD = 7 satuan",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (1), (2), dan (3)",
+      "C. (2) dan (4) saja",
+      "D. Semua benar",
+    ],
+    jawaban: "B",
+    pembahasan: "(1) $|AC| = \\sqrt{(3-0)^2+(4-0)^2} = \\sqrt{9+16} = 5$ satuan ✓ BENAR\n(2) $|BD| = \\sqrt{(0-3)^2+(4-0)^2} = \\sqrt{9+16} = 5$ satuan ✓ BENAR\n(3) AB=3, BC=4, CD=3, DA=4, semua sudut 90° → persegi panjang ✓ BENAR\n(4) Diagonal = 5 satuan ≠ 7 satuan ✗ SALAH\n→ Jawaban B",
+  },
+
+  // ── SOAL 15 — PGKBS ────────────────────────────────────────────────────────
+  {
+    no: 15,
+    type: "pgkbs",
+    soal: "Suatu belah ketupat mempunyai diagonal 16 cm dan 12 cm. Tentukan benar (B) atau salah (S)!",
+    pernyataan: [
+      "Panjang sisi belah ketupat = 10 cm",
+      "Keliling belah ketupat = 40 cm",
+      "Luas belah ketupat = 48 cm²",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "Setengah diagonal: 8 cm dan 6 cm\n(1) Sisi = $\\sqrt{8^2+6^2} = \\sqrt{64+36} = \\sqrt{100} = 10$ cm → BENAR\n(2) Keliling = $4 \\times 10 = 40$ cm → BENAR\n(3) Luas = $\\frac{1}{2} \\times 16 \\times 12 = 96$ cm², bukan 48 cm² → SALAH",
+  },
+
+  // ── SOAL 16 — PG ───────────────────────────────────────────────────────────
+  {
+    no: 16,
+    type: "pg",
+    soal: "Keliling belah ketupat ABCD dengan panjang diagonal $p = 16$ cm dan $q = 12$ cm adalah ...",
+    options: ["A. 20 cm", "B. 28 cm", "C. 40 cm", "D. 48 cm"],
+    jawaban: "C",
+    pembahasan: "Setengah diagonal: 8 cm dan 6 cm\nSisi = $\\sqrt{8^2+6^2} = \\sqrt{64+36} = \\sqrt{100} = 10$ cm\nKeliling = $4 \\times 10 = 40$ cm → Jawaban C",
+  },
+
+  // ── SOAL 17 — PGK ──────────────────────────────────────────────────────────
+  {
+    no: 17,
+    type: "pgk",
+    soal: "Segitiga ABC siku-siku di B dengan $AB = 15$ cm dan $BC = 20$ cm. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Panjang $AC = 25$ cm",
+      "Luas $\\triangle ABC = 150$ cm²",
+      "Keliling $\\triangle ABC = 60$ cm",
+      "Sudut terbesar di $\\triangle ABC$ adalah sudut A",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (2) dan (3) saja",
+      "C. (1), (2), dan (3)",
+      "D. Semua benar",
+    ],
+    jawaban: "C",
+    pembahasan: "(1) $AC = \\sqrt{15^2+20^2} = \\sqrt{225+400} = \\sqrt{625} = 25$ cm ✓ BENAR\n(2) Luas = $\\frac{1}{2} \\times 15 \\times 20 = 150$ cm² ✓ BENAR\n(3) Keliling = $15+20+25 = 60$ cm ✓ BENAR\n(4) Sudut terbesar adalah sudut B (siku-siku = 90°), bukan sudut A ✗ SALAH\n→ Jawaban C",
+  },
+
+  // ── SOAL 18 — PGKBS ────────────────────────────────────────────────────────
+  {
+    no: 18,
+    type: "pgkbs",
+    soal: "Sebuah kapal berlayar ke arah timur sejauh 12 km, lalu ke arah utara sejauh 5 km. Tentukan benar (B) atau salah (S)!",
+    pernyataan: [
+      "Lintasan kapal membentuk segitiga siku-siku",
+      "Jarak langsung dari titik awal ke posisi akhir adalah 13 km",
+      "Kapal harus berlayar sejauh 20 km untuk kembali ke titik awal melalui jalur langsung",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "(1) Arah timur dan utara saling tegak lurus → membentuk segitiga siku-siku → BENAR\n(2) Jarak = $\\sqrt{12^2+5^2} = \\sqrt{144+25} = \\sqrt{169} = 13$ km → BENAR\n(3) Jarak langsung = 13 km, bukan 20 km → SALAH",
+  },
+
+  // ── SOAL 19 — PG ───────────────────────────────────────────────────────────
+  {
+    no: 19,
+    type: "pg",
+    soal: "Sebuah persegi panjang mempunyai panjang 15 cm dan lebar 8 cm. Panjang diagonalnya adalah ...",
+    options: ["A. 14 cm", "B. 15 cm", "C. 17 cm", "D. 23 cm"],
+    jawaban: "C",
+    pembahasan: "Diagonal = $\\sqrt{15^2+8^2} = \\sqrt{225+64} = \\sqrt{289} = 17$ cm → Jawaban C",
+  },
+
+  // ── SOAL 20 — PGK ──────────────────────────────────────────────────────────
+  {
+    no: 20,
+    type: "pgk",
+    soal: "Diketahui tiga titik: $P(0,0)$, $Q(6,0)$, dan $R(6,8)$ pada bidang koordinat. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "$PQ = 6$ satuan",
+      "$QR = 8$ satuan",
+      "$PR = 10$ satuan",
+      "$\\triangle PQR$ adalah segitiga tumpul",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (1), (2), dan (3)",
+      "C. (2) dan (4) saja",
+      "D. Semua benar",
+    ],
+    jawaban: "B",
+    pembahasan: "(1) $PQ = |6-0| = 6$ satuan ✓ BENAR\n(2) $QR = |8-0| = 8$ satuan ✓ BENAR\n(3) $PR = \\sqrt{6^2+8^2} = \\sqrt{36+64} = \\sqrt{100} = 10$ satuan ✓ BENAR\n(4) $6^2+8^2 = 10^2$ → $\\triangle PQR$ adalah segitiga SIKU-SIKU, bukan tumpul ✗ SALAH\n→ Jawaban B",
+  },
+
+  // ── SOAL 21 — PGKBS ────────────────────────────────────────────────────────
+  {
+    no: 21,
+    type: "pgkbs",
+    soal: "Seorang anak berdiri 9 m dari pangkal tiang bendera yang tingginya 12 m. Tentukan benar (B) atau salah (S)!",
+    pernyataan: [
+      "Jarak dari anak ke puncak tiang adalah 15 m",
+      "(9, 12, 15) merupakan tripel Pythagoras",
+      "Jarak anak ke puncak tiang = jarak ke pangkal + tinggi tiang",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "(1) Jarak = $\\sqrt{9^2+12^2} = \\sqrt{81+144} = \\sqrt{225} = 15$ m → BENAR\n(2) $(9,12,15) = 3 \\times (3,4,5)$ → tripel Pythagoras → BENAR\n(3) Jarak ke puncak ≠ $9+12 = 21$ m; harus dihitung dengan Teorema Pythagoras → SALAH",
+  },
+
+  // ── SOAL 22 — PG ───────────────────────────────────────────────────────────
+  {
+    no: 22,
+    type: "pg",
+    soal: "Segitiga siku-siku sama kaki dengan panjang masing-masing sisi tegak 7 cm. Panjang sisi miringnya adalah ...",
+    options: [
+      "A. $7$ cm",
+      "B. $7\\sqrt{2}$ cm",
+      "C. $7\\sqrt{3}$ cm",
+      "D. $14$ cm",
+    ],
+    jawaban: "B",
+    pembahasan: "Sisi miring = $\\sqrt{7^2+7^2} = \\sqrt{49+49} = \\sqrt{98} = 7\\sqrt{2}$ cm → Jawaban B",
+  },
+
+  // ── SOAL 23 — PGK ──────────────────────────────────────────────────────────
+  {
+    no: 23,
+    type: "pgk",
+    soal: "Suatu segitiga siku-siku sama kaki mempunyai panjang sisi miring $10\\sqrt{2}$ cm. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Panjang sisi tegak = 10 cm",
+      "Sudut-sudut segitiga adalah 45°, 45°, dan 90°",
+      "Luas segitiga = 50 cm²",
+      "Keliling segitiga = 30 cm",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (1), (2), dan (3)",
+      "C. (2) dan (4) saja",
+      "D. Semua benar",
+    ],
+    jawaban: "B",
+    pembahasan: "Sisi tegak = $\\frac{10\\sqrt{2}}{\\sqrt{2}} = 10$ cm\n(1) Sisi tegak = 10 cm ✓ BENAR\n(2) Segitiga siku-siku sama kaki → 45°-45°-90° ✓ BENAR\n(3) Luas = $\\frac{1}{2} \\times 10 \\times 10 = 50$ cm² ✓ BENAR\n(4) Keliling = $10+10+10\\sqrt{2} = 20+10\\sqrt{2}$ cm $\\neq 30$ cm ✗ SALAH\n→ Jawaban B",
+  },
+
+  // ── SOAL 24 — PGKBS ────────────────────────────────────────────────────────
+  {
+    no: 24,
+    type: "pgkbs",
+    soal: "Diketahui segitiga dengan sisi 5 cm, 12 cm, dan 13 cm. Tentukan benar (B) atau salah (S)!",
+    pernyataan: [
+      "Segitiga tersebut adalah segitiga siku-siku",
+      "Luas segitiga = 60 cm²",
+      "Keliling segitiga = 30 cm",
+    ],
+    jawabanBS: ["B", "S", "B"],
+    pembahasan: "(1) $5^2+12^2 = 25+144 = 169 = 13^2$ → siku-siku → BENAR\n(2) Luas = $\\frac{1}{2} \\times 5 \\times 12 = 30$ cm², bukan 60 cm² → SALAH\n(3) Keliling = $5+12+13 = 30$ cm → BENAR",
+  },
+
+  // ── SOAL 25 — PG ───────────────────────────────────────────────────────────
+  {
+    no: 25,
+    type: "pg",
+    soal: "Titik $R(x, 0)$ terletak pada sumbu-$x$ dan berjarak 5 satuan dari titik $S(1, 4)$. Nilai $x$ yang memenuhi adalah ...",
+    options: [
+      "A. $x = 3$ atau $x = -1$",
+      "B. $x = 4$ atau $x = -2$",
+      "C. $x = 5$ atau $x = -3$",
+      "D. $x = 6$ atau $x = -4$",
+    ],
+    jawaban: "B",
+    pembahasan: "$|RS|^2 = (x-1)^2+(0-4)^2 = 25$\n$(x-1)^2+16 = 25$\n$(x-1)^2 = 9$\n$x-1 = \\pm 3$\n$x = 4$ atau $x = -2$ → Jawaban B",
+  },
+
+  // ── SOAL 26 — PGK ──────────────────────────────────────────────────────────
+  {
+    no: 26,
+    type: "pgk",
+    soal: "Sebuah tangga sepanjang 17 m bersandar pada tembok dengan kaki tangga berjarak 8 m dari tembok. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Tinggi yang dicapai tangga pada tembok = 15 m",
+      "(8, 15, 17) merupakan tripel Pythagoras",
+      "Jika kaki tangga digeser hingga berjarak 15 m dari tembok, tinggi yang dicapai = 8 m",
+      "Luas segitiga yang dibentuk tangga, tembok, dan tanah = 30 m²",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (1), (2), dan (3)",
+      "C. (2) dan (4) saja",
+      "D. Semua benar",
+    ],
+    jawaban: "B",
+    pembahasan: "(1) Tinggi = $\\sqrt{17^2-8^2} = \\sqrt{289-64} = \\sqrt{225} = 15$ m ✓ BENAR\n(2) $8^2+15^2 = 64+225 = 289 = 17^2$ ✓ BENAR\n(3) Tinggi = $\\sqrt{17^2-15^2} = \\sqrt{289-225} = \\sqrt{64} = 8$ m ✓ BENAR\n(4) Luas = $\\frac{1}{2} \\times 8 \\times 15 = 60$ m², bukan 30 m² ✗ SALAH\n→ Jawaban B",
+  },
+
+  // ── SOAL 27 — PGKBS ────────────────────────────────────────────────────────
+  {
+    no: 27,
+    type: "pgkbs",
+    soal: "Dua titik $A(2, 1)$ dan $B(8, 9)$ berada di bidang koordinat Kartesius. Tentukan benar (B) atau salah (S)!",
+    pernyataan: [
+      "Jarak AB = 10 satuan",
+      "Titik tengah AB adalah $(5, 5)$",
+      "Jarak dari titik asal $O(0,0)$ ke $A(2,1)$ adalah $\\sqrt{3}$ satuan",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "(1) $|AB| = \\sqrt{(8-2)^2+(9-1)^2} = \\sqrt{36+64} = \\sqrt{100} = 10$ satuan → BENAR\n(2) Titik tengah = $\\left(\\frac{2+8}{2}, \\frac{1+9}{2}\\right) = (5, 5)$ → BENAR\n(3) $|OA| = \\sqrt{2^2+1^2} = \\sqrt{5}$ satuan, bukan $\\sqrt{3}$ → SALAH",
+  },
+
+  // ── SOAL 28 — PG ───────────────────────────────────────────────────────────
   {
     no: 28,
-    soal: "Sebuah Helikopter terbang pada ketinggian 500 m di atas permukaan tanah. Helikopter tersebut melihat tiga titik di atas permukaan tanah, yaitu titik A, titik B, dan titik C.\nTentukanlah:\n1. jarak OA\n2. jarak AB\n3. jarak BC",
+    type: "pg",
+    soal: "Pada segitiga siku-siku dengan sudut $30°$, $60°$, dan $90°$ serta panjang sisi miring 20 cm, panjang sisi di depan sudut $60°$ adalah ...",
     options: [
-      "A. $OA = 500$ m, $AB = 300$ m, $BC = 400$ m",
-      "B. $OA = 400$ m, $AB = 300$ m, $BC = 500$ m",
-      "C. $OA = 300$ m, $AB = 400$ m, $BC = 500$ m",
-      "D. $OA = 500$ m, $AB = 400$ m, $BC = 300$ m",
+      "A. $10$ cm",
+      "B. $10\\sqrt{2}$ cm",
+      "C. $10\\sqrt{3}$ cm",
+      "D. $20\\sqrt{3}$ cm",
     ],
+    jawaban: "C",
+    pembahasan: "Sisi di depan sudut $60°$ = $\\frac{\\sqrt{3}}{2} \\times$ sisi miring = $\\frac{\\sqrt{3}}{2} \\times 20 = 10\\sqrt{3}$ cm → Jawaban C",
   },
-  { no: 29, soal: "Perhatikan gambar berikut.\nTentukanlah panjang sisi AB, AC, dan CD", options: [] },
-  { no: 30, soal: "Hitunglah jarak antara titik $A(3, -2)$ dan titik $B(-5, 4)$ pada bidang koordinat Kartesius.", options: ["A. 8", "B. 10", "C. $10\\sqrt{2}$", "D. $\\sqrt{52}$"] },
-  { no: 31, soal: "Jarak antara titik $P(k, 5)$ dan titik $Q(1, 1)$ adalah 5 satuan. Berapakah nilai k yang mungkin?", options: ["A. $k = 5$", "B. $k = 3$", "C. $k = -2$", "D. $k = 6$"] },
-  { no: 32, soal: "Tiga titik di bidang koordinat adalah $K(2, 5)$, $L(6, 1)$, dan $M(10, 5)$. Tentukan jenis segitiga $\\triangle KLM$ dilihat dari panjang sisi-sisinya.", options: ["A. Segitiga Sembarang", "B. Segitiga Sama Kaki", "C. Segitiga Siku-siku", "D. Segitiga Sama Sisi"] },
-  { no: 33, soal: "Titik $R(x, 0)$ terletak pada sumbu-x dan berjarak sama dari titik $A(2, 3)$ dan titik $B(5, -2)$. Berapakah koordinat titik R?", options: ["A. $R(4, 0)$", "B. $R(2, 0)$", "C. $R(3, 0)$", "D. $R\\left(\\frac{8}{3}, 0\\right)$"] },
+
+  // ── SOAL 29 — PGK ──────────────────────────────────────────────────────────
+  {
+    no: 29,
+    type: "pgk",
+    soal: "Perhatikan pernyataan berikut tentang jenis segitiga berdasarkan panjang sisinya!",
+    pernyataan: [
+      "Segitiga dengan sisi 9 cm, 40 cm, dan 41 cm adalah segitiga siku-siku",
+      "Segitiga dengan sisi 6 cm, 7 cm, dan 10 cm adalah segitiga tumpul",
+      "Segitiga dengan sisi 4 cm, 5 cm, dan 6 cm adalah segitiga lancip",
+      "Segitiga dengan sisi 5 cm, 6 cm, dan 8 cm adalah segitiga siku-siku",
+    ],
+    options: [
+      "A. (1) dan (2) saja",
+      "B. (1), (2), dan (3)",
+      "C. (2) dan (4) saja",
+      "D. Semua benar",
+    ],
+    jawaban: "B",
+    pembahasan: "(1) $9^2+40^2 = 81+1600 = 1681 = 41^2$ → siku-siku ✓ BENAR\n(2) $6^2+7^2 = 85 < 100 = 10^2$ → $c^2 > a^2+b^2$ → tumpul ✓ BENAR\n(3) $4^2+5^2 = 41 > 36 = 6^2$ → $c^2 < a^2+b^2$ → lancip ✓ BENAR\n(4) $5^2+6^2 = 61 \\neq 64 = 8^2$ → bukan siku-siku ✗ SALAH\n→ Jawaban B",
+  },
+
+  // ── SOAL 30 — PGKBS ────────────────────────────────────────────────────────
+  {
+    no: 30,
+    type: "pgkbs",
+    soal: "Sebuah persegi panjang mempunyai panjang 24 cm dan lebar 7 cm. Tentukan benar (B) atau salah (S)!",
+    pernyataan: [
+      "Panjang diagonal persegi panjang = 25 cm",
+      "Keliling persegi panjang = 62 cm",
+      "Luas persegi panjang = 196 cm²",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "(1) Diagonal = $\\sqrt{24^2+7^2} = \\sqrt{576+49} = \\sqrt{625} = 25$ cm → BENAR\n(2) Keliling = $2 \\times (24+7) = 2 \\times 31 = 62$ cm → BENAR\n(3) Luas = $24 \\times 7 = 168$ cm², bukan 196 cm² → SALAH",
+  },
 ];
 
 const TeoremaPage = () => (
@@ -102,6 +589,7 @@ const TeoremaPage = () => (
     title="TEOREMA PYTHAGORAS"
     materiSections={materiSections}
     latihanDasar={latihanDasar}
+    contohSoal={contohSoal}
   />
 );
 
