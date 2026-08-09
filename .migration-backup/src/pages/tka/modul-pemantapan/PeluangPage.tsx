@@ -9,6 +9,66 @@ const materiSections: MateriSection[] = [
   { heading: "E. Aturan Pencacahan", content: `1. Aturan perkalian: pilihan A cara ada m, pilihan B ada n → total = m × n\n\n2. Permutasi (urutan penting):\n$P(n, r) = \\dfrac{n!}{(n-r)!}$\n\n3. Kombinasi (urutan tidak penting):\n$C(n, r) = \\dfrac{n!}{r!(n-r)!}$\n\n$n! = n \\times (n-1) \\times ... \\times 2 \\times 1$` },
 ];
 
+// ─── Contoh Soal — TES KEMAMPUAN AKADEMIK · MODUL PEMANTAPAN 2026–2027 ───
+const contohSoal: LatihanSoal[] = [
+  {
+    no: 1, type: "pg",
+    soal: "Peluang muncul mata dadu genap pada pelemparan sebuah dadu adalah ...",
+    options: ["A. $\\frac{1}{6}$", "B. $\\frac{1}{3}$", "C. $\\frac{1}{2}$", "D. $\\frac{2}{3}$"],
+    jawaban: "C",
+    pembahasan: "Trik dan Tips:\n$P(A)=\\dfrac{\\text{banyak kejadian}}{\\text{banyak ruang sampel}}$.\n\nStep by Step Penyelesaian:\nMata dadu genap: $\\{2,4,6\\}$, ada $3$ dari $6$ kemungkinan.\n\n$$P=\\frac{3}{6}=\\frac{1}{2}$$\n\nJawaban: C",
+  },
+  {
+    no: 2, type: "pgk",
+    soal: "Pada pelemparan dua buah dadu secara bersamaan. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Banyak ruang sampel adalah $36$.",
+      "Peluang muncul jumlah mata dadu $=7$ adalah $\\frac{1}{6}$.",
+      "Peluang muncul kedua mata dadu sama adalah $\\frac{1}{6}$.",
+      "Peluang muncul jumlah mata dadu $=13$ adalah $\\frac{1}{36}$.",
+    ],
+    jawabanPGK: [0, 1, 2],
+    pembahasan: "Trik dan Tips:\nDua dadu: ruang sampel $=6\\times6=36$. Jumlah maksimum dua dadu adalah $12$, sehingga jumlah $13$ mustahil terjadi.\n\nStep by Step Penyelesaian:\n(1) BENAR: $6\\times6=36$.\n\n(2) BENAR: pasangan berjumlah $7$ ada $6$: $(1,6)(2,5)(3,4)(4,3)(5,2)(6,1)$, $6/36=1/6$.\n\n(3) BENAR: pasangan kembar ada $6$: $(1,1)\\dots(6,6)$, $6/36=1/6$.\n\n(4) SALAH: jumlah maksimum dua dadu adalah $12$, sehingga peluang jumlah $13$ adalah $0$, bukan $\\frac{1}{36}$.\n\nJawaban: (1), (2), dan (3) BENAR",
+  },
+  {
+    no: 3, type: "pgkbs",
+    soal: "Sebuah kotak berisi $4$ bola merah, $3$ bola putih, dan $5$ bola biru. Diambil $1$ bola secara acak. Tentukan kebenaran pernyataan berikut!",
+    pernyataan: [
+      "Peluang terambil bola merah adalah $\\frac{1}{3}$.",
+      "Peluang terambil bola putih atau biru adalah $\\frac{2}{3}$.",
+      "Peluang tidak terambil bola merah adalah $\\frac{1}{3}$.",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "Trik dan Tips:\nTotal bola $=4+3+5=12$. Peluang komplemen $=1-$ peluang kejadian.\n\nStep by Step Penyelesaian:\n$P(\\text{merah})=\\frac{4}{12}=\\frac{1}{3}$ (BENAR).\n\n$P(\\text{putih atau biru})=\\frac{3+5}{12}=\\frac{8}{12}=\\frac{2}{3}$ (BENAR).\n\n$P(\\text{tidak merah})=1-\\frac{1}{3}=\\frac{2}{3}$, bukan $\\frac{1}{3}$ (SALAH).",
+  },
+  {
+    no: 4, type: "pg",
+    soal: "Dalam sebuah kantong terdapat $5$ kelereng merah dan $7$ kelereng biru. Peluang terambil kelereng biru adalah ...",
+    options: ["A. $\\frac{5}{12}$", "B. $\\frac{7}{12}$", "C. $\\frac{1}{2}$", "D. $\\frac{7}{5}$"],
+    jawaban: "B",
+    pembahasan: "Trik dan Tips:\n$P(\\text{biru})=\\dfrac{\\text{banyak biru}}{\\text{total kelereng}}$.\n\nStep by Step Penyelesaian:\nTotal $=5+7=12$.\n\n$$P(\\text{biru})=\\frac{7}{12}$$\n\nJawaban: B",
+  },
+  {
+    no: 5, type: "pg",
+    soal: "Sebuah koin dilempar $3$ kali. Peluang muncul tepat $2$ kali sisi gambar (G) adalah ...",
+    options: ["A. $\\frac{1}{8}$", "B. $\\frac{3}{8}$", "C. $\\frac{1}{2}$", "D. $\\frac{5}{8}$"],
+    jawaban: "B",
+    pembahasan: "Trik dan Tips:\nRuang sampel pelemparan $3$ koin $=2^3=8$. Banyak cara memilih posisi $2$G dari $3$ pelemparan $=C(3,2)=3$.\n\nStep by Step Penyelesaian:\nKejadian tepat $2$G: GGA, GAG, AGG $=3$ kejadian.\n\n$$P=\\frac{3}{8}$$\n\nJawaban: B",
+  },
+  {
+    no: 6, type: "pgk",
+    soal: "Dua buah dadu dilempar bersamaan. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Peluang jumlah mata dadu kurang dari $5$ adalah $\\frac{1}{6}$.",
+      "Peluang muncul minimal satu mata dadu bernilai $6$ adalah $\\frac{11}{36}$.",
+      "Peluang jumlah mata dadu merupakan bilangan prima adalah $\\frac{15}{36}$.",
+      "Peluang jumlah mata dadu merupakan kelipatan $3$ adalah $\\frac{1}{3}$.",
+    ],
+    jawabanPGK: [0, 1, 2, 3],
+    pembahasan: "Trik dan Tips:\nUntuk \"minimal satu\", gunakan komplemen: $1-P(\\text{tidak ada sama sekali})$.\n\nStep by Step Penyelesaian:\n(1) BENAR: jumlah $<5$ (yaitu $2,3,4$) ada $1+2+3=6$ kejadian, $6/36=1/6$.\n\n(2) BENAR: $P(\\text{tanpa }6)=\\frac{5\\times5}{36}=\\frac{25}{36}$, jadi $P(\\text{minimal satu }6)=1-\\frac{25}{36}=\\frac{11}{36}$.\n\n(3) BENAR: jumlah prima $\\{2,3,5,7,11\\}$ memberi $1+2+4+6+2=15$ kejadian, $15/36$.\n\n(4) BENAR: jumlah kelipatan $3$ ($3,6,9,12$) memberi $2+5+4+1=12$, $12/36=1/3$.\n\nJawaban: Semua pernyataan BENAR",
+  },
+];
+
 const latihanDasar: LatihanSoal[] = [
   { no: 1, soal: "Dari angka 0, 1, 2, 3, 4, 5, 6, akan dibentuk bilangan 3 angka berbeda yang habis dibagi 5. Berapa banyak bilangan yang dapat terbentuk?", options: ["A. 49", "B. 30", "C. 55", "D. 60"] },
   { no: 2, soal: "Berapa banyak susunan huruf dari kata 'MATEMATIKA' jika kedua huruf 'M' tidak boleh bersebelahan?", options: ["A. 120960", "B. 30240", "C. 60480", "D. 151200"] },
@@ -57,6 +117,7 @@ const PeluangPage = () => (
     title="PELUANG"
     materiSections={materiSections}
     latihanDasar={latihanDasar}
+    contohSoal={contohSoal}
   />
 );
 
