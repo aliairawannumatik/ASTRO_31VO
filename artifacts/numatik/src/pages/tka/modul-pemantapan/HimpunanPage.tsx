@@ -1,5 +1,6 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
+import { getTkaContohSoal } from "@/data/tkaContohSoal";
 
 const materiSections: MateriSection[] = [
   { heading: "A. Pengertian Himpunan", content: `Himpunan adalah kumpulan objek yang terdefinisi dengan jelas.\n\nCara menyatakan himpunan:\n1. Dengan kata-kata: "Himpunan bilangan genap"\n2. Dengan notasi pembentuk himpunan: $A = \\{x | x$ bilangan genap$\\}$\n3. Dengan mendaftar anggotanya: $A = \\{2, 4, 6, 8, ...\\}$` },
@@ -35,7 +36,8 @@ const HimpunanPage = () => (
   <TKAPemantapanLayout
     title="HIMPUNAN"
     materiSections={materiSections}
-    latihanDasar={latihanDasar}
+    contohSoal={getTkaContohSoal("himpunan")}
+  latihanDasar={latihanDasar}
   />
 );
 

@@ -1,5 +1,6 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
+import { getTkaContohSoal } from "@/data/tkaContohSoal";
 
 const materiSections: MateriSection[] = [
   { heading: "A. Segitiga", content: `Jenis segitiga berdasarkan sisi:\n- Sama sisi: ketiga sisi sama panjang\n- Sama kaki: dua sisi sama panjang\n- Sembarang: ketiga sisi berbeda\n\nJenis berdasarkan sudut:\n- Siku-siku: ada sudut 90°\n- Lancip: semua sudut < 90°\n- Tumpul: ada sudut > 90°\n\nRumus:\n- Keliling = $a + b + c$\n- Luas = $\\frac{1}{2} \\times alas \\times tinggi$\n- Luas dengan rumus Heron: $L = \\sqrt{s(s-a)(s-b)(s-c)}$ dengan $s = \\frac{a+b+c}{2}$` },
@@ -128,7 +129,8 @@ const SegitigaSegiempatPage = () => (
   <TKAPemantapanLayout
     title="SEGITIGA DAN SEGIEMPAT"
     materiSections={materiSections}
-    latihanDasar={latihanDasar}
+    contohSoal={getTkaContohSoal("segitiga-dan-segiempat")}
+  latihanDasar={latihanDasar}
   />
 );
 

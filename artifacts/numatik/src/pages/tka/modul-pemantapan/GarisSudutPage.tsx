@@ -1,5 +1,6 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
+import { getTkaContohSoal } from "@/data/tkaContohSoal";
 import { useTheme } from "@/contexts/ThemeContext";
 
 // ─── Diagram SVG untuk tiap soal — diduplikasi dari OlimpiadeGarisSudutPage.tsx
@@ -1074,7 +1075,8 @@ const GarisSudutPage = () => (
   <TKAPemantapanLayout
     title="GARIS DAN SUDUT"
     materiSections={materiSections}
-    latihanDasar={latihanDasar}
+    contohSoal={getTkaContohSoal("garis-dan-sudut")}
+  latihanDasar={latihanDasar}
   />
 );
 

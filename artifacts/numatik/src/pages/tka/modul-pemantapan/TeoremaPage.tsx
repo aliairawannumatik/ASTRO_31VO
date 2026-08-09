@@ -1,5 +1,6 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
+import { getTkaContohSoal } from "@/data/tkaContohSoal";
 
 // ─── Materi ───────────────────────────────────────────────────────────────────
 
@@ -533,7 +534,8 @@ const TeoremaPage = () => (
   <TKAPemantapanLayout
     title="TEOREMA PYTHAGORAS"
     materiSections={materiSections}
-    latihanDasar={latihanDasar}
+    contohSoal={getTkaContohSoal("teorema-pythagoras")}
+  latihanDasar={latihanDasar}
   />
 );
 
