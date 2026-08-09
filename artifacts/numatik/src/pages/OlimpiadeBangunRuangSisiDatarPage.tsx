@@ -535,7 +535,7 @@ const materiSections: MateriSection[] = [
    LATIHAN DASAR IMAGES
 ───────────────────────────────────────────────────────── */
 
-const dasarImages: Record<number, string> = {
+export const dasarImages: Record<number, string> = {
   2:  "https://drive.google.com/thumbnail?id=1TtDABIRugcMjPYHQTrF-px-dDQbLdMep&sz=w400",
   3:  "https://drive.google.com/thumbnail?id=1yqriGhIiWSbjOi2dJIJUAL62xDZrpaLA&sz=w400",
   9:  "https://drive.google.com/thumbnail?id=1KhnFzUd0gEwKwrczQfayCRJhiU_qUdBB&sz=w400",

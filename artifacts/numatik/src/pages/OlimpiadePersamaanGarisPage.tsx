@@ -989,7 +989,7 @@ const PrismaSegiEnamSVG = () => {
   );
 };
 
-const soalSvgMap: Record<string, JSX.Element> = {
+export const soalSvgMap: Record<string, JSX.Element> = {
   SOAL3: <GrafikSoal3 />,
   SOAL4: <GrafikSoal4 />,
   SOAL16: <GrafikSoal16 />,
@@ -1002,7 +1002,7 @@ const soalSvgMap: Record<string, JSX.Element> = {
   PRISMA_SEGI_ENAM: <PrismaSegiEnamSVG />,
 };
 
-const latihanDasar = [
+export const latihanDasar = [
   { no: 1, soal: "Grafik garis dengan persamaan $2x - y = 3$, x dan y $\\in$ R adalah ...", options: ["SVG:SOAL1A", "SVG:SOAL1B", "SVG:SOAL1C", "SVG:SOAL1D"], jawaban: "A", pembahasan: {
     konsep: "Ubah persamaan ke bentuk $y = mx + c$ untuk menemukan gradien dan titik potong sumbu, lalu cocokkan dengan pilihan grafik.",
     langkah: [

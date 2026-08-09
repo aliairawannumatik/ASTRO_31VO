@@ -1,5 +1,6 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
+import { dasarImages } from "@/pages/OlimpiadeBangunRuangSisiDatarPage";
 
 const materiSections: MateriSection[] = [
   { heading: "A. Kubus", content: `Kubus: bangun ruang berisi 6 sisi berbentuk persegi, 12 rusuk sama panjang, 8 titik sudut.\n\nJika rusuk = s:\n- Luas permukaan = $6s^2$\n- Volume = $s^3$\n- Diagonal ruang = $s\\sqrt{3}$\n- Diagonal sisi = $s\\sqrt{2}$` },
@@ -62,6 +63,7 @@ const BangunRuangSisiDatarPage = () => (
     title="BANGUN RUANG SISI DATAR"
     materiSections={materiSections}
     latihanDasar={latihanDasar}
+    gambarMap={dasarImages}
   />
 );
 

@@ -1,5 +1,6 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
+import { dasarImages } from "@/pages/OlimpiadeStatistikaPage";
 
 const materiSections: MateriSection[] = [
   { heading: "A. Pengertian Statistika", content: `Statistika adalah ilmu yang mempelajari cara pengumpulan, pengolahan, penyajian, dan analisis data.\n\nJenis data:\n- Data kualitatif: bukan berupa angka (warna, jenis kelamin)\n- Data kuantitatif: berupa angka (berat, tinggi, nilai)\n  - Data diskrit: hasil hitungan (jumlah siswa)\n  - Data kontinu: hasil pengukuran (tinggi badan)` },
@@ -31,6 +32,7 @@ const StatistikaPage = () => (
     title="STATISTIKA"
     materiSections={materiSections}
     latihanDasar={latihanDasar}
+    gambarMap={dasarImages}
   />
 );
 
