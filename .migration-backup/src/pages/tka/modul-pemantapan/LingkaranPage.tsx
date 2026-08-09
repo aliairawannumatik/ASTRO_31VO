@@ -9,6 +9,66 @@ const materiSections: MateriSection[] = [
   { heading: "E. Garis Singgung Lingkaran", content: `Garis singgung lingkaran adalah garis yang hanya menyentuh lingkaran di satu titik (titik singgung).\n\nSifat: Garis singgung tegak lurus jari-jari di titik singgung.\n\nDua garis singgung dari titik luar:\n$PT^2 = PO^2 - r^2$\n\nGaris singgung persekutuan luar dua lingkaran:\n$d^2 = p^2 - (R-r)^2$\n\nGaris singgung persekutuan dalam:\n$d^2 = p^2 - (R+r)^2$\n\nDimana $p$ = jarak antar pusat, $R$ = jari-jari besar, $r$ = jari-jari kecil.` },
 ];
 
+// ─── Contoh Soal — TES KEMAMPUAN AKADEMIK · MODUL PEMANTAPAN 2026–2027 ───
+const contohSoal: LatihanSoal[] = [
+  {
+    no: 1, type: "pg",
+    soal: "Keliling lingkaran dengan jari-jari $14$ cm ($\\pi = \\frac{22}{7}$) adalah ...",
+    options: ["A. $44$ cm", "B. $66$ cm", "C. $88$ cm", "D. $176$ cm"],
+    jawaban: "C",
+    pembahasan: "Trik dan Tips:\nGunakan $\\pi=\\frac{22}{7}$ saat jari-jari kelipatan $7$ agar hasil bulat.\n\nStep by Step Penyelesaian:\n$$K=2\\pi r=2\\times\\frac{22}{7}\\times14=88\\text{ cm}$$\n\nJawaban: C",
+  },
+  {
+    no: 2, type: "pgk",
+    soal: "Sebuah lingkaran memiliki diameter $21$ cm ($\\pi = \\frac{22}{7}$). Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Jari-jari lingkaran tersebut adalah $10{,}5$ cm.",
+      "Keliling lingkaran tersebut adalah $66$ cm.",
+      "Luas lingkaran tersebut adalah $346{,}5$ $cm^2$.",
+      "Luas lingkaran tersebut adalah $693$ $cm^2$.",
+    ],
+    jawabanPGK: [0, 1, 2],
+    pembahasan: "Trik dan Tips:\n$r=\\frac{d}{2}$; $K=\\pi d$; $L=\\pi r^2$.\n\nStep by Step Penyelesaian:\n(1) BENAR: $r=21/2=10{,}5$.\n\n(2) BENAR: $K=\\frac{22}{7}\\times21=66$.\n\n(3) BENAR: $L=\\frac{22}{7}\\times10{,}5^2=\\frac{22}{7}\\times110{,}25=346{,}5$.\n\n(4) SALAH: nilai $693$ adalah dua kali luas yang benar.\n\nJawaban: (1), (2), dan (3) BENAR",
+  },
+  {
+    no: 3, type: "pgkbs",
+    soal: "Sebuah juring lingkaran memiliki sudut pusat $90°$ dengan jari-jari $14$ cm ($\\pi = \\frac{22}{7}$). Tentukan kebenaran pernyataan berikut!",
+    pernyataan: [
+      "Luas juring tersebut adalah $154$ $cm^2$.",
+      "Panjang busur juring tersebut adalah $22$ cm.",
+      "Panjang busur juring tersebut adalah $44$ cm.",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "Trik dan Tips:\nUntuk sudut pusat $\\alpha$: $L_{juring}=\\frac{\\alpha}{360°}\\times\\pi r^2$ dan busur $=\\frac{\\alpha}{360°}\\times2\\pi r$.\n\nStep by Step Penyelesaian:\n$L_{juring}=\\frac{90}{360}\\times\\frac{22}{7}\\times196=\\frac{1}{4}\\times616=154$ (BENAR).\n\nBusur $=\\frac{90}{360}\\times2\\times\\frac{22}{7}\\times14=\\frac{1}{4}\\times88=22$ (BENAR).\n\nKarena busur sebenarnya $22$ cm, pernyataan \"$44$ cm\" SALAH.",
+  },
+  {
+    no: 4, type: "pg",
+    soal: "Luas lingkaran dengan jari-jari $7$ cm ($\\pi = \\frac{22}{7}$) adalah ...",
+    options: ["A. $144$ $cm^2$", "B. $154$ $cm^2$", "C. $164$ $cm^2$", "D. $174$ $cm^2$"],
+    jawaban: "B",
+    pembahasan: "Trik dan Tips:\nGunakan $L=\\pi r^2$.\n\nStep by Step Penyelesaian:\n$$L=\\frac{22}{7}\\times7^2=\\frac{22}{7}\\times49=154\\text{ }cm^2$$\n\nJawaban: B",
+  },
+  {
+    no: 5, type: "pg",
+    soal: "Panjang jari-jari lingkaran yang luasnya $616$ $cm^2$ ($\\pi = \\frac{22}{7}$) adalah ...",
+    options: ["A. $12$ cm", "B. $13$ cm", "C. $14$ cm", "D. $16$ cm"],
+    jawaban: "C",
+    pembahasan: "Trik dan Tips:\nDari $L=\\pi r^2$, cari $r^2$ terlebih dahulu lalu akar-kuadratkan.\n\nStep by Step Penyelesaian:\n$$r^2=\\frac{616\\times7}{22}=196 \\Rightarrow r=\\sqrt{196}=14$$\n\nJawaban: C",
+  },
+  {
+    no: 6, type: "pgk",
+    soal: "Dua lingkaran sepusat memiliki jari-jari $7$ cm dan $14$ cm ($\\pi = \\frac{22}{7}$). Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "Luas lingkaran besar adalah $616$ $cm^2$.",
+      "Luas lingkaran kecil adalah $154$ $cm^2$.",
+      "Luas daerah di antara kedua lingkaran adalah $462$ $cm^2$.",
+      "Keliling lingkaran besar sama dengan dua kali keliling lingkaran kecil.",
+    ],
+    jawabanPGK: [0, 1, 2, 3],
+    pembahasan: "Trik dan Tips:\nLuas daerah antar dua lingkaran sepusat $=L_{besar}-L_{kecil}$. Keliling sebanding lurus dengan jari-jari.\n\nStep by Step Penyelesaian:\n(1) BENAR: $\\frac{22}{7}\\times14^2=616$.\n\n(2) BENAR: $\\frac{22}{7}\\times7^2=154$.\n\n(3) BENAR: $616-154=462$.\n\n(4) BENAR: $K_{besar}=88$ cm dan $K_{kecil}=44$ cm, dan $88=2\\times44$.\n\nJawaban: Semua pernyataan BENAR",
+  },
+];
+
 const latihanDasar: LatihanSoal[] = [
   { no: 1, soal: "Perhatikan gambar!\nJika O adalah pusat lingkaran, jika r = 21 cm dan $\\pi = \\frac{22}{7}$, maka luas daerah yang diarsir adalah ...", options: ["A. 77 $cm^2$", "B. 154 $cm^2$", "C. 231 $cm^2$", "D. 308 $cm^2$"] },
   { no: 2, soal: "Perhatikan gambar lingkaran di samping! Jika O pusat lingkaran, dan panjang OP = 21 cm, maka panjang busur kecil PQ adalah.... ($\\pi = \\frac{22}{7}$)\nLuas juring dengan sudut pusat $120^0$ dan panjang jari-jari 7 cm adalah ... ($\\pi = \\frac{22}{7}$)", options: ["A. 77 $cm^2$", "B. 51,33 $cm^2$", "C. 38,50 $cm^2$", "D. 14,67 $cm^2$"] },
@@ -53,6 +113,7 @@ const LingkaranPage = () => (
     title="LINGKARAN"
     materiSections={materiSections}
     latihanDasar={latihanDasar}
+    contohSoal={contohSoal}
   />
 );
 
