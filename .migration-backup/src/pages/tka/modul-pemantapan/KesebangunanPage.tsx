@@ -32,6 +32,66 @@ Syarat dua segitiga kongruen:
   },
 ];
 
+// ─── Contoh Soal — TES KEMAMPUAN AKADEMIK · MODUL PEMANTAPAN 2026–2027 ───
+const contohSoal: LatihanSoal[] = [
+  {
+    no: 1, type: "pg",
+    soal: "Dua segitiga sebangun memiliki perbandingan sisi $3:5$. Jika sisi terpanjang segitiga kecil adalah $12$ cm, maka sisi terpanjang segitiga besar adalah ...",
+    options: ["A. $15$ cm", "B. $18$ cm", "C. $20$ cm", "D. $24$ cm"],
+    jawaban: "C",
+    pembahasan: "Trik dan Tips:\nPada bangun sebangun, semua sisi bersesuaian memiliki rasio yang sama.\n\nStep by Step Penyelesaian:\n$$\\frac{3}{5}=\\frac{12}{x} \\Rightarrow x=\\frac{12\\times5}{3}=20$$\n\nJawaban: C",
+  },
+  {
+    no: 2, type: "pgk",
+    soal: "Segitiga $ABC$ sebangun dengan segitiga $DEF$, dengan $\\frac{AB}{DE}=\\frac{BC}{EF}=\\frac{AC}{DF}=\\frac{2}{3}$. Jika $AB=8$ cm, $BC=10$ cm, dan $AC=12$ cm, perhatikan pernyataan berikut!",
+    pernyataan: [
+      "$DE = 12$ cm.",
+      "$EF = 15$ cm.",
+      "$DF = 18$ cm.",
+      "Perbandingan luas kedua segitiga adalah $4:9$.",
+    ],
+    jawabanPGK: [0, 1, 2, 3],
+    pembahasan: "Trik dan Tips:\nSisi bersesuaian mengikuti rasio kesebangunan; perbandingan luas $=$ kuadrat perbandingan sisi.\n\nStep by Step Penyelesaian:\n(1) BENAR: $DE=AB\\times\\frac{3}{2}=8\\times1{,}5=12$.\n\n(2) BENAR: $EF=10\\times1{,}5=15$.\n\n(3) BENAR: $DF=12\\times1{,}5=18$.\n\n(4) BENAR: $\\left(\\frac{2}{3}\\right)^2=\\frac{4}{9}$.\n\nJawaban: Semua pernyataan BENAR",
+  },
+  {
+    no: 3, type: "pgkbs",
+    soal: "Sebuah pohon menghasilkan bayangan sepanjang $6$ m, sementara sebuah tongkat sepanjang $2$ m yang berdiri tegak di dekatnya menghasilkan bayangan $1{,}5$ m pada saat yang sama. Tentukan kebenaran pernyataan berikut!",
+    pernyataan: [
+      "Tinggi pohon tersebut adalah $8$ meter.",
+      "Perbandingan tinggi pohon dan tongkat sama dengan perbandingan panjang bayangannya.",
+      "Jika bayangan tongkat menjadi $3$ m, maka bayangan pohon menjadi $10$ m.",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "Trik dan Tips:\nGunakan kesebangunan segitiga bayangan: $\\frac{tinggi\\ pohon}{bayangan\\ pohon}=\\frac{tinggi\\ tongkat}{bayangan\\ tongkat}$.\n\nStep by Step Penyelesaian:\n$\\frac{t}{6}=\\frac{2}{1{,}5} \\Rightarrow t=6\\times\\frac{2}{1{,}5}=8$ (BENAR).\n\nPrinsip kesebangunan menyatakan hal tersebut (BENAR).\n\nBila bayangan tongkat menjadi $3$ m, bayangan pohon $=3\\times\\frac{8}{2}=12$ m, bukan $10$ m (SALAH).",
+  },
+  {
+    no: 4, type: "pg",
+    soal: "Dua segitiga dikatakan kongruen jika memenuhi salah satu syarat berikut, KECUALI ...",
+    options: ["A. Sisi-Sisi-Sisi (S-S-S)", "B. Sisi-Sudut-Sisi (S-Sd-S)", "C. Sisi-Sisi-Sudut (S-S-Sd)", "D. Sudut-Sisi-Sudut (Sd-S-Sd)"],
+    jawaban: "C",
+    pembahasan: "Trik dan Tips:\nSyarat kekongruenan segitiga yang valid: SSS, SAS (Sisi-Sudut-Sisi), dan ASA (Sudut-Sisi-Sudut). SSA (Sisi-Sisi-Sudut) BUKAN syarat yang valid karena bisa menghasilkan dua segitiga berbeda (kasus ambigu).\n\nStep by Step Penyelesaian:\nDari keempat pilihan, hanya Sisi-Sisi-Sudut yang tidak menjamin kekongruenan.\n\nJawaban: C",
+  },
+  {
+    no: 5, type: "pg",
+    soal: "Trapesium $ABCD$ dengan $AB \\parallel CD$, $AB = 16$ cm dan $CD = 8$ cm. Titik $E$ dan $F$ berturut-turut adalah titik tengah $AD$ dan $BC$. Panjang $EF$ adalah ...",
+    options: ["A. $10$ cm", "B. $11$ cm", "C. $12$ cm", "D. $13$ cm"],
+    jawaban: "C",
+    pembahasan: "Trik dan Tips:\nGaris yang menghubungkan titik tengah kedua kaki trapesium (garis tengah) sama dengan setengah jumlah sisi sejajarnya.\n\nStep by Step Penyelesaian:\n$$EF=\\frac{1}{2}(AB+CD)=\\frac{1}{2}(16+8)=12$$\n\nJawaban: C",
+  },
+  {
+    no: 6, type: "pgk",
+    soal: "Segitiga $PQR$ kongruen dengan segitiga $STU$ ($PQR \\cong STU$) dengan korespondensi $P \\leftrightarrow S$, $Q \\leftrightarrow T$, $R \\leftrightarrow U$. Perhatikan pernyataan berikut!",
+    pernyataan: [
+      "$PQ = ST$.",
+      "$\\angle Q = \\angle T$.",
+      "Luas kedua segitiga tersebut sama.",
+      "Keliling kedua segitiga tersebut bisa berbeda.",
+    ],
+    jawabanPGK: [0, 1, 2],
+    pembahasan: "Trik dan Tips:\nDua bangun kongruen memiliki bentuk dan ukuran identik: semua sisi dan sudut bersesuaian sama besar, sehingga luas dan keliling juga sama.\n\nStep by Step Penyelesaian:\n(1) BENAR: sisi bersesuaian pada bangun kongruen sama panjang.\n\n(2) BENAR: sudut bersesuaian sama besar.\n\n(3) BENAR: konsekuensi langsung dari kekongruenan.\n\n(4) SALAH: keliling kedua segitiga kongruen HARUS sama, tidak boleh berbeda.\n\nJawaban: (1), (2), dan (3) BENAR",
+  },
+];
+
 const latihanDasar: LatihanSoal[] = [
   {
     no: 1,
@@ -194,6 +254,7 @@ const KesebangunanPage = () => (
     title="KESEBANGUNAN DAN KEKONGRUENAN"
     materiSections={materiSections}
     latihanDasar={latihanDasar}
+    contohSoal={contohSoal}
   />
 );
 
