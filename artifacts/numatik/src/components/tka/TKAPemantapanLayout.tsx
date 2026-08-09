@@ -7,6 +7,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
+import { AsyncImage } from '@/components/ui/async-image';
 
 export interface MateriSection {
   heading: string;
@@ -50,7 +51,27 @@ interface Props {
   gambarMap?: Record<number, React.ReactNode>;
 }
 
+const isImageUrl = (value: string) => {
+  const trimmed = value.trim();
+  if (!/^https?:\/\//i.test(trimmed)) return false;
+  return /\.(png|jpe?g|webp|gif|svg)(?:[?#].*)?$/i.test(trimmed)
+    || /blob\.vusercontent\.net|images\.|image\.|imgur\.com|cloudinary\.com|unsplash\.com|googleusercontent\.com/i.test(trimmed);
+};
+
 const renderWithLatex = (text: string) => {
+  const trimmed = text.trim();
+  if (isImageUrl(trimmed)) {
+    return (
+      <AsyncImage
+        src={trimmed}
+        alt="Gambar materi atau soal"
+        wrapperClassName="my-3 mx-auto max-w-xl rounded-xl"
+        className="max-h-[420px] w-full object-contain rounded-xl bg-white p-2"
+        showSkeleton
+      />
+    );
+  }
+
   const parts = text.split(/(\$[^$]+\$)/g);
   return parts.map((part, index) => {
     if (part.startsWith('$') && part.endsWith('$')) {
@@ -342,7 +363,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                           const sizeClass = imgMatch[2] === 'small' ? 'max-w-[160px]' : 'max-w-sm w-full';
                           return (
                             <div key={i} className="my-3 flex justify-center">
-                              <img src={imgMatch[1]} alt="Gambar materi" className={`${sizeClass} rounded-xl shadow-lg`} />
+                              <AsyncImage src={imgMatch[1].trim()} alt="Gambar materi" wrapperClassName={`${sizeClass} rounded-xl shadow-lg`} className="w-full rounded-xl" />
                             </div>
                           );
                         }
@@ -732,7 +753,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                               const sizeClass = imgMatch[2] === 'small' ? 'max-w-[160px]' : 'max-w-sm w-full';
                               return (
                                 <div key={lineIdx} className="my-2 flex justify-center">
-                                  <img src={imgMatch[1]} alt={`Soal ${soal.no}`} className={`${sizeClass} rounded-xl`} />
+                                  <AsyncImage src={imgMatch[1].trim()} alt={`Soal ${soal.no}`} wrapperClassName={`${sizeClass} rounded-xl`} className="w-full rounded-xl" />
                                 </div>
                               );
                             }
@@ -863,7 +884,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                                 const pipeIdx = opt.indexOf('|');
                                 const isImg = pipeIdx !== -1 && (opt[pipeIdx + 1] === '/' || opt.slice(pipeIdx + 1, pipeIdx + 5) === 'http');
                                 if (isImg) {
-                                  return <img src={opt.slice(pipeIdx + 1)} alt={`Pilihan ${letter}`} className="max-w-[140px] w-full bg-white rounded p-1" />;
+                                  return <AsyncImage src={opt.slice(pipeIdx + 1).trim()} alt={`Pilihan ${letter}`} wrapperClassName="max-w-[140px] w-full" className="w-full rounded bg-white p-1" />;
                                 }
                                 return <span className="leading-snug">{optionSvgMap?.[opt] ?? renderWithLatex(opt.replace(/^[A-E]\.\s*/, ''))}</span>;
                               })()}
