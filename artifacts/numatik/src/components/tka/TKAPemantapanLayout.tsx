@@ -51,10 +51,28 @@ interface Props {
   gambarMap?: Record<number, React.ReactNode>;
 }
 
+const getGoogleDriveFileId = (value: string) => {
+  try {
+    const url = new URL(value.trim());
+    if (!/(^|\.)drive\.google\.com$|(^|\.)docs\.google\.com$/i.test(url.hostname)) return null;
+    const pathId = url.pathname.match(/\/file\/d\/([^/]+)/i)?.[1];
+    return pathId ?? url.searchParams.get("id");
+  } catch {
+    return null;
+  }
+};
+
+const normalizeImageUrl = (value: string) => {
+  const trimmed = value.trim();
+  const driveId = getGoogleDriveFileId(trimmed);
+  return driveId ? `https://drive.google.com/uc?export=view&id=${encodeURIComponent(driveId)}` : trimmed;
+};
+
 const isImageUrl = (value: string) => {
   const trimmed = value.trim();
   if (!/^https?:\/\//i.test(trimmed)) return false;
-  return /\.(png|jpe?g|webp|gif|svg)(?:[?#].*)?$/i.test(trimmed)
+  return Boolean(getGoogleDriveFileId(trimmed))
+    || /\.(png|jpe?g|webp|gif|svg)(?:[?#].*)?$/i.test(trimmed)
     || /blob\.vusercontent\.net|images\.|image\.|imgur\.com|cloudinary\.com|unsplash\.com|googleusercontent\.com/i.test(trimmed);
 };
 
@@ -63,7 +81,7 @@ const renderWithLatex = (text: string) => {
   if (isImageUrl(trimmed)) {
     return (
       <AsyncImage
-        src={trimmed}
+        src={normalizeImageUrl(trimmed)}
         alt="Gambar materi atau soal"
         wrapperClassName="my-3 mx-auto max-w-xl rounded-xl"
         className="max-h-[420px] w-full object-contain rounded-xl bg-white p-2"
@@ -363,7 +381,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                           const sizeClass = imgMatch[2] === 'small' ? 'max-w-[160px]' : 'max-w-sm w-full';
                           return (
                             <div key={i} className="my-3 flex justify-center">
-                              <AsyncImage src={imgMatch[1].trim()} alt="Gambar materi" wrapperClassName={`${sizeClass} rounded-xl shadow-lg`} className="w-full rounded-xl" />
+                              <AsyncImage src={normalizeImageUrl(imgMatch[1])} alt="Gambar materi" wrapperClassName={`${sizeClass} rounded-xl shadow-lg`} className="w-full rounded-xl" />
                             </div>
                           );
                         }
@@ -753,7 +771,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                               const sizeClass = imgMatch[2] === 'small' ? 'max-w-[160px]' : 'max-w-sm w-full';
                               return (
                                 <div key={lineIdx} className="my-2 flex justify-center">
-                                  <AsyncImage src={imgMatch[1].trim()} alt={`Soal ${soal.no}`} wrapperClassName={`${sizeClass} rounded-xl`} className="w-full rounded-xl" />
+                                  <AsyncImage src={normalizeImageUrl(imgMatch[1])} alt={`Soal ${soal.no}`} wrapperClassName={`${sizeClass} rounded-xl`} className="w-full rounded-xl" />
                                 </div>
                               );
                             }
@@ -884,7 +902,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                                 const pipeIdx = opt.indexOf('|');
                                 const isImg = pipeIdx !== -1 && (opt[pipeIdx + 1] === '/' || opt.slice(pipeIdx + 1, pipeIdx + 5) === 'http');
                                 if (isImg) {
-                                  return <AsyncImage src={opt.slice(pipeIdx + 1).trim()} alt={`Pilihan ${letter}`} wrapperClassName="max-w-[140px] w-full" className="w-full rounded bg-white p-1" />;
+                                  return <AsyncImage src={normalizeImageUrl(opt.slice(pipeIdx + 1))} alt={`Pilihan ${letter}`} wrapperClassName="max-w-[140px] w-full" className="w-full rounded bg-white p-1" />;
                                 }
                                 return <span className="leading-snug">{optionSvgMap?.[opt] ?? renderWithLatex(opt.replace(/^[A-E]\.\s*/, ''))}</span>;
                               })()}
