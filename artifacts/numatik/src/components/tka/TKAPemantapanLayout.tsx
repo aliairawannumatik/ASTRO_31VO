@@ -235,76 +235,27 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
 
       <div className="relative z-10 max-w-3xl w-full px-4 pt-8 pb-14">
 
-        {/* ── Header ── */}
-        <div className="relative mb-8">
-          <div className="absolute inset-0 rounded-2xl blur-2xl opacity-30"
-            style={{ background: "radial-gradient(ellipse at 50% 0%, #6366f1 0%, transparent 70%)" }} />
-          <div className="relative rounded-2xl overflow-hidden border border-indigo-500/30"
-            style={isWhite ? {
-              background: "linear-gradient(to right, #2196f3, #00bcd4)",
-              borderColor: "rgba(33,150,243,0.4)",
-            } : { background: "linear-gradient(135deg, rgba(99,102,241,0.18) 0%, rgba(139,92,246,0.12) 50%, rgba(15,12,41,0.9) 100%)" }}>
-            <div className="absolute top-0 left-0 right-0 h-px"
-              style={{ background: "linear-gradient(90deg, transparent, rgba(167,139,250,0.6), transparent)" }} />
-
+        {/* ── Header: shared Bilangan Bulat design ── */}
+        <div className="relative mb-6">
+          {theme === "dark" && <div className="absolute inset-0 rounded-2xl blur-2xl opacity-30" style={{ background: "radial-gradient(ellipse at 50% 0%, #6366f1 0%, transparent 70%)" }} />}
+          <div className="relative rounded-2xl overflow-hidden border" style={{ background: isWhite ? "linear-gradient(to right, #2196f3, #00bcd4)" : "linear-gradient(135deg, rgba(99,102,241,0.18) 0%, rgba(139,92,246,0.12) 50%, rgba(15,12,41,0.9) 100%)", borderColor: isWhite ? "rgba(33,150,243,0.4)" : "rgba(99,102,241,0.3)" }}>
+            {theme === "dark" && <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(167,139,250,0.6), transparent)" }} />}
             <div className="px-6 py-6 flex flex-col items-center text-center">
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-                  style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.4), rgba(139,92,246,0.2))", border: "1px solid rgba(167,139,250,0.35)" }}>
-                  <BookMarked className="w-4.5 h-4.5 text-violet-300" />
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: isWhite ? "rgba(255,255,255,0.2)" : "linear-gradient(135deg, rgba(99,102,241,0.4), rgba(139,92,246,0.2))", border: isWhite ? "1px solid rgba(255,255,255,0.4)" : "1px solid rgba(167,139,250,0.35)" }}>
+                  <BookMarked className="w-[18px] h-[18px] text-white" />
                 </div>
-                <span className="font-body text-[10px] font-bold tracking-[0.2em] uppercase text-violet-400/70">
-                  MODUL PEMANTAPAN TKA MATEMATIKA
-                </span>
+                <span className="font-body text-[10px] font-bold tracking-[0.2em] uppercase" style={{ color: isWhite ? "#fff" : "rgba(167,139,250,0.7)" }}>MODUL PEMANTAPAN TKA MATEMATIKA</span>
               </div>
-
-              <h1 className="font-display text-xl md:text-2xl font-bold mb-1 leading-tight"
-                style={{ textShadow: "0 0 40px rgba(167,139,250,0.5)", color: "#ffffff" }}>
-                {title}
-              </h1>
-
-              <div className="flex gap-2 flex-wrap justify-center mb-0">
-                <span className="text-[10px] font-body px-3 py-1 rounded-full border font-semibold"
-                  style={{ background: "rgba(99,102,241,0.15)", borderColor: "rgba(99,102,241,0.35)", color: "#a5b4fc" }}>
-                  📖 {materiSections.length} Materi
-                </span>
-                {contohSoal && contohSoal.length > 0 && (
-                  <span className="text-[10px] font-body px-3 py-1 rounded-full border font-semibold"
-                    style={{ background: "rgba(16,185,129,0.15)", borderColor: "rgba(16,185,129,0.35)", color: "#6ee7b7" }}>
-                    📚 {contohSoal.length} Contoh Soal
-                  </span>
-                )}
-                <span className="text-[10px] font-body px-3 py-1 rounded-full border font-semibold"
-                  style={{ background: "rgba(139,92,246,0.15)", borderColor: "rgba(139,92,246,0.35)", color: "#c4b5fd" }}>
-                  ✏️ {latihanDasar.length} Soal Latihan
-                </span>
+              <h1 className="font-display text-xl md:text-2xl font-bold mb-1 leading-tight" style={{ color: "#ffffff", textShadow: isWhite ? "0 1px 4px rgba(0,0,0,0.3)" : "0 0 40px rgba(167,139,250,0.5)" }}>{title}</h1>
+              <p className="font-body text-[11px] mb-4" style={{ color: isWhite ? "rgba(255,255,255,0.95)" : "rgba(167,139,250,0.5)" }}>Matematika Kelas 7 SMP/MTs · TA 2026–2027</p>
+              <div className="flex gap-2 flex-wrap justify-center mb-3">
+                {[{ label: "📘 Ringkasan Materi" }, ...(contohSoal?.length ? [{ label: "📚 Contoh Soal" }] : []), { label: "✏️ Latihan Soal" }].map((item) => <span key={item.label} className="text-[10px] font-body px-3 py-1.5 rounded-lg border font-bold" style={{ background: "rgba(255,255,255,0.18)", borderColor: "rgba(255,255,255,0.35)", color: "#fff" }}>{item.label}</span>)}
               </div>
-
-              {/* ── Type legend ── */}
-              <div className="mt-3 flex gap-2 flex-wrap justify-center">
-                {Object.values(TYPE_BADGE).map(b => (
-                  <span key={b.label} className={`text-[9px] font-body px-2.5 py-0.5 rounded-full border font-semibold ${b.color}`}
-                    style={{ background: b.bg, borderColor: b.border }}>
-                    {b.label}
-                  </span>
-                ))}
-              </div>
+              <div className="flex gap-2 flex-wrap justify-center">{Object.values(TYPE_BADGE).map(b => <span key={b.label} className="text-[9px] font-body px-2.5 py-0.5 rounded-full border font-semibold" style={{ background: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.35)", color: "#fff" }}>{b.label}</span>)}</div>
             </div>
-
-            {/* ── Author strip ── */}
-            <div className="px-6 py-3 flex items-center justify-center gap-2 border-t"
-              style={isWhite ? {
-                borderColor: "rgba(255,255,255,0.35)",
-                background: "rgba(0,0,0,0.12)",
-              } : {
-                borderColor: "rgba(167,139,250,0.2)",
-                background: "rgba(99,102,241,0.08)",
-              }}>
-              <PenLine className="w-3.5 h-3.5 shrink-0" style={{ color: isWhite ? "rgba(255,255,255,0.8)" : "#a5b4fc" }} />
-              <span className="font-body text-sm font-semibold tracking-wide"
-                style={{ color: isWhite ? "#ffffff" : "#c4b5fd" }}>
-                oleh Irawan Sutiawan, M.Pd
-              </span>
+            <div className="px-6 py-3 flex items-center justify-center gap-2 border-t" style={{ borderColor: isWhite ? "rgba(255,255,255,0.35)" : "rgba(167,139,250,0.2)", background: isWhite ? "rgba(0,0,0,0.12)" : "rgba(99,102,241,0.08)" }}>
+              <PenLine className="w-3.5 h-3.5 shrink-0" style={{ color: isWhite ? "rgba(255,255,255,0.85)" : "#a5b4fc" }} /><span className="font-body text-sm font-semibold tracking-wide" style={{ color: isWhite ? "#fff" : "#c4b5fd" }}>oleh Irawan Sutiawan, M.Pd</span>
             </div>
           </div>
         </div>
