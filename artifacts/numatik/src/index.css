@@ -88,6 +88,62 @@
 
 /* ── Theme-aware overrides for hardcoded legacy components ── */
 
+/* Buku Animasi Matematik submateri: keep the light themes readable without
+   changing the space theme (data-theme="dark"). */
+[data-theme="light"] .animation-submaterial-route,
+[data-theme="white"] .animation-submaterial-route,
+[data-theme="forest"] .animation-submaterial-route,
+[data-theme="sunset"] .animation-submaterial-route {
+  color: var(--text-primary);
+  background: var(--bg-primary);
+}
+
+[data-theme="light"] .animation-submaterial-route [class*="bg-slate-9"],
+[data-theme="light"] .animation-submaterial-route [class*="bg-gray-9"],
+[data-theme="light"] .animation-submaterial-route [class*="bg-zinc-9"],
+[data-theme="white"] .animation-submaterial-route [class*="bg-slate-9"],
+[data-theme="white"] .animation-submaterial-route [class*="bg-gray-9"],
+[data-theme="white"] .animation-submaterial-route [class*="bg-zinc-9"],
+[data-theme="forest"] .animation-submaterial-route [class*="bg-slate-9"],
+[data-theme="forest"] .animation-submaterial-route [class*="bg-gray-9"],
+[data-theme="forest"] .animation-submaterial-route [class*="bg-zinc-9"],
+[data-theme="sunset"] .animation-submaterial-route [class*="bg-slate-9"],
+[data-theme="sunset"] .animation-submaterial-route [class*="bg-gray-9"],
+[data-theme="sunset"] .animation-submaterial-route [class*="bg-zinc-9"] {
+  background-color: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .animation-submaterial-route [class*="bg-black"],
+[data-theme="white"] .animation-submaterial-route [class*="bg-black"],
+[data-theme="forest"] .animation-submaterial-route [class*="bg-black"],
+[data-theme="sunset"] .animation-submaterial-route [class*="bg-black"] {
+  background-color: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .animation-submaterial-route [class*="text-white"],
+[data-theme="white"] .animation-submaterial-route [class*="text-white"],
+[data-theme="forest"] .animation-submaterial-route [class*="text-white"],
+[data-theme="sunset"] .animation-submaterial-route [class*="text-white"] {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .animation-submaterial-route [class*="text-slate-3"],
+[data-theme="light"] .animation-submaterial-route [class*="text-gray-3"],
+[data-theme="light"] .animation-submaterial-route [class*="text-zinc-3"],
+[data-theme="white"] .animation-submaterial-route [class*="text-slate-3"],
+[data-theme="white"] .animation-submaterial-route [class*="text-gray-3"],
+[data-theme="white"] .animation-submaterial-route [class*="text-zinc-3"],
+[data-theme="forest"] .animation-submaterial-route [class*="text-slate-3"],
+[data-theme="forest"] .animation-submaterial-route [class*="text-gray-3"],
+[data-theme="forest"] .animation-submaterial-route [class*="text-zinc-3"],
+[data-theme="sunset"] .animation-submaterial-route [class*="text-slate-3"],
+[data-theme="sunset"] .animation-submaterial-route [class*="text-gray-3"],
+[data-theme="sunset"] .animation-submaterial-route [class*="text-zinc-3"] {
+  color: var(--text-secondary) !important;
+}
+
 /* 1. Override hardcoded text-white class for non-dark themes */
 [data-theme="light"] .text-white,
 [data-theme="white"] .text-white,
@@ -1774,7 +1830,7 @@
 /* ════════════════════════════════════════════════
    THEME WHITE — SVG ICONS, GRADIENTS & IMAGES
    Extra fixes so nothing is invisible on pure white
-   ════════════════════════════════════════════════ */
+   ════════��═══════════════════════════════════════ */
 
 /* ── SVG fill/stroke white → dark navy (white fills are invisible on white bg) ── */
 .light-mode .fill-white   { fill: #0f172a !important; }
