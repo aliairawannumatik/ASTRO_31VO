@@ -1,5 +1,6 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
+import { getTkaContohSoal } from "@/data/tkaContohSoal";
 
 const materiSections: MateriSection[] = [
   { heading: "A. Translasi (Pergeseran)", content: `Translasi $T\\begin{pmatrix}a\\\\b\\end{pmatrix}$ menggeser titik $(x, y)$ menjadi $(x+a, y+b)$.\n\nJika titik $P(x, y)$ ditranslasi oleh $T\\begin{pmatrix}a\\\\b\\end{pmatrix}$ maka bayangan $P' = (x+a, y+b)$.` },
@@ -37,8 +38,9 @@ const latihanDasar: LatihanSoal[] = [
 const TransformasiPage = () => (
   <TKAPemantapanLayout
     title="TRANSFORMASI GEOMETRI"
-    materiSections={materiSections}
-    latihanDasar={latihanDasar}
+  materiSections={materiSections}
+  contohSoal={getTkaContohSoal("transformasi-geometri")}
+  latihanDasar={latihanDasar}
   />
 );
 
