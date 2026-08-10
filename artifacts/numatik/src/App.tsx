@@ -935,6 +935,7 @@ const AppInner = () => {
     <>
       <ScrollToTop />
       <Suspense fallback={<PageLoader />}>
+        <div className={/^\/materi-matematika\/kelas-[789](?:\/.*)?$/.test(pathname) ? "animation-submaterial-route" : undefined}>
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/menu" element={<MenuPage />} />
@@ -1753,6 +1754,7 @@ const AppInner = () => {
 
           <Route path="*" element={<NotFound />} />
         </Routes>
+        </div>
       </Suspense>
     </>
   );
