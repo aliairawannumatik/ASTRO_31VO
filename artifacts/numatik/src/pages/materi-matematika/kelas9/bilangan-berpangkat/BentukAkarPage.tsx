@@ -536,7 +536,7 @@ const translations = {
     perhatikan: "観察：",
     langkah: "ステップ",
     nilai: "値",
-    akar_bertingkat: "二重根号",
+    akar_bertingkat: "二重��号",
     dengan: "ただし",
   },
 };
@@ -962,6 +962,7 @@ const BentukAkarPage = () => {
                       {t.k5_konj} <InlineMath math="(\sqrt{a} + \sqrt{b})" /> {t.k5_konj2} <InlineMath math="(\sqrt{a} + \sqrt{b})" /> {t.k5_konj3} <InlineMath math="(\sqrt{a} - \sqrt{b})" />
                     </p>
                     <BlockMath math="\frac{c}{\sqrt{a} + \sqrt{b}} \times \frac{\sqrt{a} - \sqrt{b}}{\sqrt{a} - \sqrt{b}} = \frac{c(\sqrt{a} - \sqrt{b})}{a - b}" />
+                    <BlockMath math="\frac{c}{\sqrt{a} - \sqrt{b}} \times \frac{\sqrt{a} + \sqrt{b}}{\sqrt{a} + \sqrt{b}} = \frac{c(\sqrt{a} + \sqrt{b})}{a - b}" />
                   </div>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">

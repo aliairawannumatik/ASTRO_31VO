@@ -46,14 +46,14 @@ const questions: Q[] = [
   Qn(1, "Pengertian, Akar Pangkat Tiga & Bentuk Paling Sederhana – Dasar/ANBK", {
     type: "mixed",
     parts: [
-      { label: "a.", math: "\\sqrt{49} = \\ldots" },
-      { label: "b.", math: "\\sqrt{\\frac{25}{9}} = \\ldots" },
-      { label: "c.", math: "\\sqrt[3]{64} = \\ldots" },
-      { label: "d.", math: "\\sqrt[5]{32} = \\ldots" },
-      { label: "e.", text: "Luas sebuah ubin berbentuk persegi adalah 49 cm². Berapa panjang sisi ubin tersebut?" },
-      { label: "f.", text: "Sebuah akuarium berbentuk kubus memiliki volume 64 liter. Berapa panjang sisi akuarium tersebut?" },
-      { label: "g.", math: "\\sqrt{1{,}44} = \\ldots" },
-      { label: "h.", math: "\\sqrt{0{,}25} = \\ldots" },
+      { label: "a.", math: "16^{\\frac{1}{2}} = \\ldots" },
+      { label: "b.", math: "27^{\\frac{2}{3}} = \\ldots" },
+      { label: "c.", math: "81^{\\frac{3}{4}} = \\ldots" },
+      { label: "d.", math: "32^{\\frac{3}{5}} = \\ldots" },
+      { label: "e.", math: "\\sqrt{16} = \\ldots^{\\frac{1}{2}}" },
+      { label: "f.", math: "\\sqrt[3]{x^5} = \\ldots^{\\frac{\\ldots}{\\ldots}}" },
+      { label: "g.", math: "\\sqrt[4]{a^7} = \\ldots^{\\frac{\\ldots}{\\ldots}}" },
+      { label: "h.", math: "\\sqrt[5]{m^3} = \\ldots^{\\frac{\\ldots}{\\ldots}}" },
     ],
   }),
   Qn(2, "Menyederhanakan Bentuk Akar – UN/ANBK/TKA", {
@@ -99,22 +99,7 @@ const questions: Q[] = [
       { label: "h.", text: "Sebuah balok memiliki panjang 4√5 cm, lebar 2√5 cm, dan tinggi √5 cm. Hitung volume balok tersebut!" },
     ],
   }),
-  Qn(5, "Operasi Campuran Bilangan Akar – UN/ANBK/TKA", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "(\\sqrt{12} \\times \\sqrt{3}) + (\\sqrt{2} \\times \\sqrt{50}) = \\ldots" },
-      { label: "b.", math: "(\\sqrt{50} \\div \\sqrt{2}) + (\\sqrt{75} \\div \\sqrt{3}) = \\ldots" },
-      { label: "c.", math: "(\\sqrt{48} \\div \\sqrt{3}) + (\\sqrt{2} \\times \\sqrt{8}) = \\ldots" },
-      { label: "d.", math: "3\\sqrt{2} + (\\sqrt{2} \\times \\sqrt{8}) - \\sqrt{18} = \\ldots" },
-      { label: "e.", math: "(\\sqrt{6} \\times \\sqrt{24}) - (\\sqrt{2} \\times \\sqrt{50}) = \\ldots" },
-      { label: "f.", math: "(\\sqrt{100} \\div \\sqrt{4}) + (\\sqrt{3} \\times \\sqrt{27}) = \\ldots" },
-      { label: "g.", math: "(2\\sqrt{3} \\times \\sqrt{12}) - (\\sqrt{5} \\times \\sqrt{20}) + (\\sqrt{2} \\times \\sqrt{8}) = \\ldots" },
-      { label: "h.", math: "(\\sqrt{18} + \\sqrt{2}) \\times \\sqrt{2} = \\ldots" },
-      { label: "i.", math: "(\\sqrt{6} \\times \\sqrt{6}) \\div (\\sqrt{2} \\times \\sqrt{2}) = \\ldots" },
-      { label: "j.", math: "\\sqrt{2} \\times \\sqrt{18} \\div (\\sqrt{3} \\times \\sqrt{3}) + \\sqrt{5} \\times \\sqrt{5} = \\ldots" },
-    ],
-  }),
-  Qn(6, "Perkalian & Distribusi Bentuk Akar – UN/ANBK", {
+  Qn(5, "Perkalian & Distribusi Bentuk Akar – UN/ANBK", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\sqrt{2}(\\sqrt{8}+\\sqrt{2}) = \\ldots" },
@@ -126,7 +111,7 @@ const questions: Q[] = [
       { label: "g.", math: "(\\sqrt{5}+2)^2 = \\ldots" },
     ],
   }),
-  Qn(7, "Merasionalkan Penyebut & Operasi Campuran – UN/ANBK/TKA", {
+  Qn(6, "Merasionalkan Penyebut & Operasi Campuran – UN/ANBK/TKA", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{6}{\\sqrt{3}} = \\ldots" },
@@ -140,7 +125,7 @@ const questions: Q[] = [
       { label: "i.", math: "\\frac{2\\sqrt{5}+\\sqrt{10}}{\\sqrt{5}} = \\ldots" },
     ],
   }),
-  Qn(8, "Merasionalkan Penyebut Binomial & Tingkat Lanjut – UN/TKA", {
+  Qn(7, "Merasionalkan Penyebut Binomial & Tingkat Lanjut – UN/TKA", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{4}{3-\\sqrt{5}} = \\ldots" },
