@@ -39,6 +39,8 @@ const routes: Record<string, string> = {
   "Kesebangunan & Kekongruenan": "/tka/modul-pemantapan/kesebangunan",
   "Transformasi Geometri": "/tka/modul-pemantapan/transformasi-geometri",
   "Bangun Ruang Sisi Lengkung": "/tka/modul-pemantapan/bangun-ruang-sisi-lengkung",
+  "Persamaan Garis": "/tka/modul-pemantapan/persamaan-garis",
+  "Koordinat Kartesius": "/tka/modul-pemantapan/koordinat-cartesius",
   "Statistika": "/tka/modul-pemantapan/statistika",
   "Peluang": "/tka/modul-pemantapan/peluang",
 };

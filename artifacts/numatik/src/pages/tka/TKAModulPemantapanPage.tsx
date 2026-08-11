@@ -27,6 +27,8 @@ const routes: Record<string, string> = {
   "Bangun Ruang Sisi Lengkung": "/tka/modul-pemantapan/bangun-ruang-sisi-lengkung",
   "Statistika": "/tka/modul-pemantapan/statistika",
   "Peluang": "/tka/modul-pemantapan/peluang",
+  "Persamaan Garis": "/tka/modul-pemantapan/persamaan-garis",
+  "Koordinat Kartesius": "/tka/modul-pemantapan/koordinat-cartesius",
 };
 
 
@@ -54,6 +56,8 @@ const allTopics: Topic[] = [
   { name: "Bangun Ruang Sisi Lengkung", emoji: "⬤" },
   { name: "Statistika", emoji: "📉" },
   { name: "Peluang", emoji: "🎲" },
+  { name: "Persamaan Garis", emoji: "📈" },
+  { name: "Koordinat Kartesius", emoji: "⊹" },
 ];
 
 const TKAModulPemantapanPage = () => {
@@ -94,7 +98,7 @@ const TKAModulPemantapanPage = () => {
 
           <div className="flex flex-wrap items-center justify-center gap-2">
             {[
-              { v: "21", l: "Topik", c: "rgba(34,211,238,0.12)", bc: "rgba(34,211,238,0.3)", tc: "#67e8f9" },
+              { v: "23", l: "Topik", c: "rgba(34,211,238,0.12)", bc: "rgba(34,211,238,0.3)", tc: "#67e8f9" },
               { v: "3", l: "Jenjang Kelas", c: "rgba(167,139,250,0.12)", bc: "rgba(167,139,250,0.3)", tc: "#c4b5fd" },
               { v: "TKA", l: "Siap Ujian", c: "rgba(34,197,94,0.1)", bc: "rgba(34,197,94,0.3)", tc: "#86efac" },
             ].map(({ v, l, c, bc, tc }) => (

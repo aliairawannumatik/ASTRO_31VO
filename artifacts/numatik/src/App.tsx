@@ -249,6 +249,8 @@ const TKAPemantapanKesebangunanPage = lazy(() => import("./pages/tka/modul-peman
 const TKAPemantapanTransformasiPage = lazy(() => import("./pages/tka/modul-pemantapan/TransformasiPage"));
 const TKAPemantapanStatistikaPage = lazy(() => import("./pages/tka/modul-pemantapan/StatistikaPage"));
 const TKAPemantapanPeluangPage = lazy(() => import("./pages/tka/modul-pemantapan/PeluangPage"));
+const TKAPemantapanPersamaanGarisPage = lazy(() => import("./pages/tka/modul-pemantapan/PersamaanGarisPage"));
+const TKAPemantapanKoordinatCartesiusPage = lazy(() => import("./pages/tka/modul-pemantapan/KoordinatCartesiusPage"));
 const PapanPeringkatPage = lazy(() => import("./pages/PapanPeringkatPage"));
 const BankSoalPage = lazy(() => import("./pages/BankSoalPage"));
 const BankSoalBilanganBulatPage = lazy(() => import("./pages/bank-soal/BilanganBulatPage"));
@@ -1176,6 +1178,8 @@ const AppInner = () => {
           <Route path="/tka/modul-pemantapan/transformasi-geometri" element={<TKAPemantapanTransformasiPage />} />
           <Route path="/tka/modul-pemantapan/statistika" element={<TKAPemantapanStatistikaPage />} />
           <Route path="/tka/modul-pemantapan/peluang" element={<TKAPemantapanPeluangPage />} />
+          <Route path="/tka/modul-pemantapan/persamaan-garis" element={<TKAPemantapanPersamaanGarisPage />} />
+          <Route path="/tka/modul-pemantapan/koordinat-cartesius" element={<TKAPemantapanKoordinatCartesiusPage />} />
           <Route path="/papan-peringkat" element={<PapanPeringkatPage />} />
           <Route path="/bank-soal" element={<BankSoalPage />} />
           <Route path="/bank-soal/bilangan-bulat" element={<BankSoalBilanganBulatPage />} />
