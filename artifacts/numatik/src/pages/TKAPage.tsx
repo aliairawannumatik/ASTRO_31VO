@@ -30,9 +30,7 @@ const routes: Record<string, string> = {
   "Garis dan Sudut": "/tka/modul-pemantapan/garis-sudut",
   "Segitiga & Segiempat": "/tka/modul-pemantapan/segitiga-segiempat",
   "Pola Bilangan": "/tka/modul-pemantapan/pola-bilangan",
-  "Koordinat Kartesius": "/tka/modul-pemantapan/koordinat-cartesius",
   "Relasi dan Fungsi": "/tka/modul-pemantapan/relasi-fungsi",
-  "Persamaan Garis": "/tka/modul-pemantapan/persamaan-garis",
   "Sistem Persamaan Linear Dua Variabel": "/tka/modul-pemantapan/spldv",
   "Teorema Pythagoras": "/tka/modul-pemantapan/teorema-pythagoras",
   "Lingkaran": "/tka/modul-pemantapan/lingkaran",
@@ -41,6 +39,8 @@ const routes: Record<string, string> = {
   "Kesebangunan & Kekongruenan": "/tka/modul-pemantapan/kesebangunan",
   "Transformasi Geometri": "/tka/modul-pemantapan/transformasi-geometri",
   "Bangun Ruang Sisi Lengkung": "/tka/modul-pemantapan/bangun-ruang-sisi-lengkung",
+  "Persamaan Garis": "/tka/modul-pemantapan/persamaan-garis",
+  "Koordinat Kartesius": "/tka/modul-pemantapan/koordinat-cartesius",
   "Statistika": "/tka/modul-pemantapan/statistika",
   "Peluang": "/tka/modul-pemantapan/peluang",
 };

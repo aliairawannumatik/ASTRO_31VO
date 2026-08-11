@@ -1,6 +1,5 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
-import { getTkaContohSoal } from "@/data/tkaContohSoal";
 
 const materiSections: MateriSection[] = [
   { heading: "A. Sistem Koordinat Kartesius", content: `Sistem koordinat kartesius memposisikan titik dengan acuan sumbu-x (mendatar) dan sumbu-y (tegak) yang saling tegak lurus.\n\n- Sumbu X: ke kanan positif, ke kiri negatif\n- Sumbu Y: ke atas positif, ke bawah negatif\n- Titik potong = titik asal O(0, 0)\n- Koordinat titik ditulis (x, y)\n  - x = absis (jarak dari sumbu-Y)\n  - y = ordinat (jarak dari sumbu-X)` },
@@ -43,8 +42,7 @@ const KoordinatCartesiusPage = () => (
   <TKAPemantapanLayout
     title="KOORDINAT KARTESIUS"
     materiSections={materiSections}
-    contohSoal={getTkaContohSoal("koordinat-kartesius")}
-  latihanDasar={latihanDasar}
+    latihanDasar={latihanDasar}
   />
 );
 
