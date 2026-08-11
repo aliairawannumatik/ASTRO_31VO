@@ -11,7 +11,7 @@ const routes: Record<string, string> = {
   "Perbandingan": "/tka/modul-pemantapan/perbandingan",
   "Bilangan Berpangkat dan Irasional": "/tka/modul-pemantapan/bilangan-berpangkat-irasional",
   "Aritmetika Sosial": "/tka/modul-pemantapan/aritmetika-sosial",
-  "PLSV dan PTLSV": "/tka/modul-pemantapan/plsv",
+  "Persamaan dan Pertidaksamaan Linear Satu Variabel": "/tka/modul-pemantapan/plsv",
   "Sistem Persamaan Linear Dua Variabel": "/tka/modul-pemantapan/spldv",
   "Bentuk Aljabar": "/tka/modul-pemantapan/aljabar",
   "Himpunan": "/tka/modul-pemantapan/himpunan",
@@ -21,6 +21,7 @@ const routes: Record<string, string> = {
   "Teorema Pythagoras": "/tka/modul-pemantapan/teorema-pythagoras",
   "Segitiga dan Segiempat": "/tka/modul-pemantapan/segitiga-segiempat",
   "Lingkaran": "/tka/modul-pemantapan/lingkaran",
+  "Koordinat Kartesius": "/tka/modul-pemantapan/koordinat-cartesius",
   "Kesebangunan dan Kekongruenan": "/tka/modul-pemantapan/kesebangunan",
   "Transformasi Geometri": "/tka/modul-pemantapan/transformasi-geometri",
   "Bangun Ruang Sisi Datar": "/tka/modul-pemantapan/bangun-ruang-sisi-datar",
@@ -28,7 +29,6 @@ const routes: Record<string, string> = {
   "Statistika": "/tka/modul-pemantapan/statistika",
   "Peluang": "/tka/modul-pemantapan/peluang",
   "Persamaan Garis": "/tka/modul-pemantapan/persamaan-garis",
-  "Koordinat Kartesius": "/tka/modul-pemantapan/koordinat-cartesius",
 };
 
 
@@ -40,7 +40,7 @@ const allTopics: Topic[] = [
   { name: "Perbandingan", emoji: "∶" },
   { name: "Bilangan Berpangkat dan Irasional", emoji: "√" },
   { name: "Aritmetika Sosial", emoji: "💰" },
-  { name: "PLSV dan PTLSV", emoji: "=" },
+  { name: "Persamaan dan Pertidaksamaan Linear Satu Variabel", emoji: "=" },
   { name: "Sistem Persamaan Linear Dua Variabel", emoji: "xy" },
   { name: "Bentuk Aljabar", emoji: "𝑥" },
   { name: "Himpunan", emoji: "⊂" },
@@ -50,6 +50,7 @@ const allTopics: Topic[] = [
   { name: "Teorema Pythagoras", emoji: "△" },
   { name: "Segitiga dan Segiempat", emoji: "◻" },
   { name: "Lingkaran", emoji: "○" },
+  { name: "Koordinat Kartesius", emoji: "⊹" },
   { name: "Kesebangunan dan Kekongruenan", emoji: "≅" },
   { name: "Transformasi Geometri", emoji: "↻" },
   { name: "Bangun Ruang Sisi Datar", emoji: "⬡" },
@@ -57,7 +58,6 @@ const allTopics: Topic[] = [
   { name: "Statistika", emoji: "📉" },
   { name: "Peluang", emoji: "🎲" },
   { name: "Persamaan Garis", emoji: "📈" },
-  { name: "Koordinat Kartesius", emoji: "⊹" },
 ];
 
 const TKAModulPemantapanPage = () => {

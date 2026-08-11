@@ -136,6 +136,7 @@ const TYPE_BADGE: Record<string, { label: string; color: string; bg: string; bor
 const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materiSections, latihanDasar, contohSoal, soalSvgMap, optionSvgMap, gambarMap }: Props) => {
   const navigate = useNavigate();
   const { theme } = useTheme();
+  const isLightTheme = theme !== "dark" && theme !== "ocean";
   const isWhite = theme === "white";
   const [activeTab, setActiveTab] = useState<"materi" | "contoh" | "dasar">("materi");
   /* PG & PGK: stores selected letter (A/B/C/D) per soal.no */
@@ -583,9 +584,9 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                     {/* ── Pembahasan — always visible ── */}
                     {soal.pembahasan && (
                       <div className="mx-4 mb-4 rounded-xl p-4"
-                        style={isWhite ? {
-                          background: "rgba(16,185,129,0.06)",
-                          border: "1px solid rgba(16,185,129,0.25)",
+                        style={isLightTheme ? {
+                          background: "#ecfdf5",
+                          border: "1px solid #86efac",
                         } : {
                           background: "linear-gradient(135deg, rgba(16,185,129,0.08), rgba(5,150,105,0.05))",
                           border: "1px solid rgba(16,185,129,0.2)",
@@ -595,14 +596,14 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                           <span className="font-display text-[10px] font-bold tracking-widest uppercase text-emerald-400/80">Pembahasan</span>
                         </div>
                         <div className="font-body text-xs leading-relaxed whitespace-pre-wrap"
-                          style={{ color: isWhite ? "#065f46" : "rgba(255,255,255,0.75)" }}>
+                          style={{ color: isLightTheme ? "#14532d" : "rgba(255,255,255,0.75)" }}>
                           {soal.pembahasan.split('\n').map((line, i) => (
                             <span key={i}>{i > 0 && <br />}{renderWithLatex(line)}</span>
                           ))}
                         </div>
                         {(soal.jawaban || soal.jawabanBS) && (
                           <div className="mt-2.5 flex items-center gap-2 flex-wrap">
-                            <span className="text-[10px] font-body text-white/40">Kunci jawaban:</span>
+                            <span className="text-[10px] font-body" style={{ color: isLightTheme ? "#166534" : "rgba(255,255,255,0.4)" }}>Kunci jawaban:</span>
                             {soal.jawaban && (
                               <span className="font-display text-xs font-bold px-2.5 py-0.5 rounded-lg text-green-300"
                                 style={{ background: "rgba(34,197,94,0.15)", border: "1px solid rgba(34,197,94,0.3)" }}>
@@ -1035,7 +1036,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                         </div>
                         {(soal.jawaban || soal.jawabanBS) && (
                           <div className="mt-2.5 flex items-center gap-2 flex-wrap">
-                            <span className="text-[10px] font-body text-white/40">Kunci jawaban:</span>
+                            <span className="text-[10px] font-body" style={{ color: isLightTheme ? "#166534" : "rgba(255,255,255,0.4)" }}>Kunci jawaban:</span>
                             {soal.jawaban && (
                               <span className="font-display text-xs font-bold px-2.5 py-0.5 rounded-lg text-green-300"
                                 style={{ background: "rgba(34,197,94,0.15)", border: "1px solid rgba(34,197,94,0.3)" }}>
