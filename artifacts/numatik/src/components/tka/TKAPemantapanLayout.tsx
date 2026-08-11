@@ -212,6 +212,15 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
     });
   };
 
+  const handleClosePembahasan = (soalNo: number) => {
+    playPopSound();
+    setRevealedAnswers(prev => {
+      const next = new Set(prev);
+      next.delete(soalNo);
+      return next;
+    });
+  };
+
   const isCorrectForSoal = (s: LatihanSoal): boolean => {
     if (!revealedAnswers.has(s.no)) return false;
     if (s.type === "pgkbs") {
@@ -973,29 +982,25 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                       </div>
                     )}
 
-                    {/* ── Action row ── */}
-                    <div className="px-5 pb-4 flex items-center justify-between gap-3">
-                      {!isRevealed ? (
-                        <button
-                          onClick={() => handleReveal(soal.no)}
-                          disabled={!hasAnswered}
-                          className="font-display text-xs px-4 py-2 rounded-lg cursor-pointer transition-all duration-200 font-bold"
-                          style={hasAnswered ? {
-                            background: "linear-gradient(135deg, rgba(99,102,241,0.7), rgba(139,92,246,0.5))",
-                            color: "var(--text-primary)",
-                            border: "1px solid rgba(167,139,250,0.4)",
-                            boxShadow: "0 2px 10px rgba(99,102,241,0.3)",
-                            cursor: "pointer",
-                          } : {
-                            background: "var(--btn-bg)",
-                            color: "var(--text-secondary)",
-                            border: "1px solid var(--border)",
-                            cursor: "not-allowed",
-                          }}>
-                          Cek Jawaban
-                        </button>
-                      ) : (
-                        <div className="flex items-center gap-2">
+                    {/* ── Action row: follows Bilangan Bulat's always-available explanation toggle ── */}
+                    <div className="px-5 pb-4 flex flex-col gap-2">
+                      <button
+                        onClick={() => isRevealed ? handleClosePembahasan(soal.no) : handleReveal(soal.no)}
+                        className="mt-1 w-full py-2 rounded-lg text-xs font-body font-semibold transition-all border cursor-pointer"
+                        style={isLightTheme ? {
+                          borderColor: "#fbbf24",
+                          color: "#b45309",
+                          background: "#ffffff",
+                        } : {
+                          borderColor: "rgba(245,158,11,0.4)",
+                          color: "#fcd34d",
+                          background: "rgba(245,158,11,0.08)",
+                        }}
+                      >
+                        {isRevealed ? "▲ Tutup Pembahasan" : "▼ Lihat Pembahasan"}
+                      </button>
+                      {isRevealed && hasAnswered && (
+                        <div className="flex items-center justify-center gap-2">
                           {isCorrect ? (
                             <span className="flex items-center gap-1.5 text-xs font-bold text-green-400 font-display">
                               <CheckCircle2 className="w-4 h-4" /> Semua Benar!
@@ -1006,15 +1011,6 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                             </span>
                           )}
                         </div>
-                      )}
-
-                      {isRevealed && (
-                        <button
-                          onClick={() => handleHide(soal.no)}
-                          className="font-body text-[11px] text-white/30 hover:text-white/60 transition-colors cursor-pointer"
-                        >
-                          Coba Lagi
-                        </button>
                       )}
                     </div>
 
