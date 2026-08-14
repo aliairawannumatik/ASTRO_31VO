@@ -43,6 +43,7 @@
     "ai": "NUMATIK AI",
     "lkpd": "LKPD",
     "olympiad": "OLIMPIADE",
+    "kokurikuler": "KOKURIKULER",
     "calculator": "KALKULATOR",
     "fastCalc": "HITUNG CEPAT",
     "academic": "TES AKADEMIK",
@@ -92,6 +93,10 @@
     "olympiad": {
       "label": "OLIMPIADE MATEMATIKA",
       "desc": "Untuk yang suka tantangan"
+    },
+    "kokurikuler": {
+      "label": "KOKURIKULER",
+      "desc": "Proyek matematika kreatif untuk siswa"
     },
     "fastCalc": {
       "label": "MENGHITUNG CEPAT",

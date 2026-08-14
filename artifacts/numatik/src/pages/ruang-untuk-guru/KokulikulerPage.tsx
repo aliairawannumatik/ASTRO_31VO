@@ -403,6 +403,30 @@ const AKTIVITAS_KELAS8: AktivitasKokulikuler[] = [
     indikator: "Peserta didik dapat menyelesaikan minimal 50% soal olimpiade dan menjelaskan strategi untuk satu soal sulit.",
   },
   {
+    id: "8-9",
+    judul: "Jaring-Jaring Bangun Ruang dari Karton",
+    materi: "Bangun Ruang Sisi Datar",
+    semester: 2,
+    jenis: "Proyek",
+    waktu: "3 pertemuan",
+    deskripsi: "Peserta didik merancang, menggambar, memotong, dan merakit jaring-jaring kubus, balok, atau prisma dari karton/duplex untuk memahami hubungan antara bangun datar dan bangun ruang.",
+    tujuan: [
+      "Mengidentifikasi sisi, rusuk, dan titik sudut bangun ruang sisi datar",
+      "Menghubungkan jaring-jaring dengan bentuk bangun ruangnya",
+      "Melatih ketelitian mengukur, memotong, melipat, dan merekatkan karton",
+    ],
+    langkah: [
+      "Pilih satu model: kubus, balok, atau prisma segitiga, lalu tentukan ukurannya",
+      "Gambar jaring-jaring pada karton/duplex menggunakan penggaris dan pensil; tambahkan lidah lem 1–2 cm",
+      "Periksa kembali jumlah sisi, ukuran sisi yang sama, dan garis lipatan sebelum memotong",
+      "Potong pola dengan gunting atau cutter secara hati-hati di bawah pengawasan guru",
+      "Lipat semua garis dan rekatkan lidah lem hingga membentuk bangun ruang yang kokoh",
+      "Beri label pada sisi, rusuk, dan titik sudut, lalu presentasikan proses serta perhitungannya",
+    ],
+    alat: ["Karton/duplex bekas", "Penggaris dan pensil", "Gunting atau cutter", "Lem", "Pensil warna/spidol"],
+    indikator: "Peserta didik menghasilkan jaring-jaring yang dapat dirakit menjadi bangun ruang sisi datar dengan ukuran tepat dan menjelaskan hubungan luas jaring-jaring dengan luas permukaan.",
+  },
+  {
     id: "8-8",
     judul: "Pola Fibonacci: Eksplorasi Barisan Ajaib",
     materi: "Pola Bilangan",
@@ -801,6 +825,27 @@ const KokulikulerPage = () => {
                 {/* Expanded Detail */}
                 {isOpen && (
                   <div className="border-t border-white/10 px-5 py-5 space-y-5">
+                    {akt.id === "8-9" && (
+                      <div className="rounded-xl border border-cyan-400/20 bg-cyan-950/20 p-4">
+                        <p className="mb-3 text-xs font-bold uppercase tracking-wider text-cyan-300">Contoh SVG Jaring-Jaring Kubus</p>
+                        <svg viewBox="0 0 520 200" role="img" aria-label="Jaring-jaring kubus berbentuk enam persegi" className="h-auto w-full max-w-xl mx-auto">
+                          <g fill="rgba(34,211,238,0.12)" stroke="#67e8f9" strokeWidth="2">
+                            <rect x="190" y="55" width="70" height="70" />
+                            <rect x="120" y="55" width="70" height="70" />
+                            <rect x="260" y="55" width="70" height="70" />
+                            <rect x="330" y="55" width="70" height="70" />
+                            <rect x="190" y="0" width="70" height="55" />
+                            <rect x="190" y="125" width="70" height="70" />
+                          </g>
+                          <g fill="#a5f3fc" fontSize="12" fontFamily="sans-serif" textAnchor="middle">
+                            <text x="225" y="95">1</text><text x="155" y="95">2</text><text x="295" y="95">3</text>
+                            <text x="365" y="95">4</text><text x="225" y="30">5</text><text x="225" y="165">6</text>
+                          </g>
+                          <path d="M185 55h-8M335 55h8M190 50v-8M190 130v8M260 50v-8M260 130v8" stroke="#fbbf24" strokeDasharray="4 4" />
+                        </svg>
+                        <p className="mt-2 text-center text-[11px] text-cyan-100/70">Garis biru = batas sisi, garis putus-putus kuning = contoh garis lipatan.</p>
+                      </div>
+                    )}
                     {/* Tujuan */}
                     <div>
                       <div className="flex items-center gap-2 mb-2">

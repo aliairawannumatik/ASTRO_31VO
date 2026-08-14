@@ -93,6 +93,7 @@ const MenuPage = () => {
     { key: "ai",          icon: Bot,            path: "/chat-ai" },
     { key: "lkpd",        icon: ClipboardCheck, path: "/lkpd" },
     { key: "olympiad",    icon: Trophy,         path: "/olimpiade" },
+    { key: "kokurikuler", icon: GraduationCap,  path: "/ruang-untuk-guru/kokulikuler" },
     { key: "calculator",  icon: Calculator,     path: "/kalkulator-scientific" },
     { key: "fastCalc",    icon: Zap,            path: "/menghitung-cepat" },
     { key: "conversion",  icon: ArrowLeftRight, path: "/konversi-satuan" },
