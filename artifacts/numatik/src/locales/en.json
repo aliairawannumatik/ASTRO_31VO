@@ -44,6 +44,7 @@
     "lkpd": "WORKSHEET",
     "olympiad": "OLYMPIAD",
     "kokurikuler": "CO-CURRICULAR",
+    "ujiMandiri": "SELF ASSESSMENT",
     "calculator": "CALCULATOR",
     "fastCalc": "FAST CALC",
     "academic": "ACADEMIC TEST",
@@ -97,6 +98,10 @@
     "kokurikuler": {
       "label": "CO-CURRICULAR",
       "desc": "Creative mathematics projects for students"
+    },
+    "ujiMandiri": {
+      "label": "SELF ASSESSMENT",
+      "desc": "Check your mathematics level"
     },
     "fastCalc": {
       "label": "FAST CALCULATION",
@@ -5045,7 +5050,7 @@
           "partC": "Find x, then y."
         },
         "q7": {
-          "title": "Elimination — Fractions",
+          "title": "Elimination �� Fractions",
           "partA": "Multiply the first equation by 6 and the second equation by 12.",
           "partB": "Solve using elimination."
         },

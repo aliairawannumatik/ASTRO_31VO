@@ -17,7 +17,9 @@ import PageLoader from "@/components/PageLoader";
 
 // ── Lazy-loaded pages ──────────────────────────────────────────────────────
 const WelcomePage = lazy(() => import("./pages/WelcomePage"));
-const MenuPage = lazy(() => import("./pages/MenuPage"));
+  const MenuPage = lazy(() => import("./pages/MenuPage"));
+  const UjiMandiriPage = lazy(() => import("./pages/UjiMandiriPage"));
+
 const LKPDPage = lazy(() => import("./pages/LKPDPage"));
 const LKPDMenuPage = lazy(() => import("./pages/LKPDMenuPage"));
 const LKPDKelas7Page = lazy(() => import("./pages/LKPDKelasPage").then(m => ({ default: m.LKPDKelas7Page })));
@@ -935,6 +937,7 @@ const AppInner = () => {
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/menu" element={<MenuPage />} />
+  <Route path="/uji-mandiri" element={<UjiMandiriPage />} />
           <Route path="/lkpd" element={<LKPDMenuPage />} />
           <Route path="/lkpd/kelas-7" element={<LKPDKelas7Page />} />
           <Route path="/lkpd/kelas-8" element={<LKPDKelas8Page />} />
