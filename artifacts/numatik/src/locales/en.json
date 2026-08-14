@@ -43,6 +43,7 @@
     "ai": "NUMATIK AI",
     "lkpd": "WORKSHEET",
     "olympiad": "OLYMPIAD",
+    "kokurikuler": "CO-CURRICULAR",
     "calculator": "CALCULATOR",
     "fastCalc": "FAST CALC",
     "academic": "ACADEMIC TEST",
@@ -92,6 +93,10 @@
     "olympiad": {
       "label": "MATH OLYMPIAD",
       "desc": "For those who love challenges"
+    },
+    "kokurikuler": {
+      "label": "CO-CURRICULAR",
+      "desc": "Creative mathematics projects for students"
     },
     "fastCalc": {
       "label": "FAST CALCULATION",
