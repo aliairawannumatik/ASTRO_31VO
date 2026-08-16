@@ -173,6 +173,7 @@ const BilanganBulatPage = () => {
 
   // ── telaah soal wrapper (display num separate from internal qn offset) ─
   const TelaahSoal = ({ num, tipe, children }: { num: number; tipe: "PGS" | "MCMA" | "BS"; children: React.ReactNode }) => {
+    if ([1, 4, 5].includes(num)) return null;
     const tipeColor =
       tipe === "PGS"  ? (isDark ? "bg-sky-500/20 text-sky-300 border-sky-500/40"       : "bg-sky-100 text-sky-700 border-sky-300") :
       tipe === "MCMA" ? (isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/40"  : "bg-amber-100 text-amber-700 border-amber-300") :
@@ -201,6 +202,7 @@ const BilanganBulatPage = () => {
 
   // ── question wrapper ─────────────────────────────────────────────────
   const Soal = ({ n, tipe, children }: { n: number; tipe: "PGS" | "MCMA" | "BS"; children: React.ReactNode }) => {
+    if ([3, 6, 13, 14, 15, 16, 17, 23, 24].includes(n)) return null;
     const tipeColor =
       tipe === "PGS"  ? (isDark ? "bg-sky-500/20 text-sky-300 border-sky-500/40"       : "bg-sky-100 text-sky-700 border-sky-300") :
       tipe === "MCMA" ? (isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/40"  : "bg-amber-100 text-amber-700 border-amber-300") :
@@ -1004,6 +1006,42 @@ const BilanganBulatPage = () => {
               </div>
             </TelaahSoal>
 
+            <TelaahSoal num={8} tipe="BS">
+              <p className={qText}>Siti memasukkan air hangat bersuhu <InlineMath math="30°C" /> ke kulkas pukul 14.00. Tentukan Benar atau Salah!</p>
+              <TFTable qn={58} rows={[
+                { key: "a", text: <span>Suhu turun <InlineMath math="3°C" /> tiap 2 jam, sehingga pukul 18.00 menjadi <InlineMath math="24°C" />.</span>, correct: "Benar" },
+                { key: "b", text: <span>Dalam 5 jam suhu berkurang <InlineMath math="8°C" />, sehingga pukul 19.00 menjadi <InlineMath math="22°C" />.</span>, correct: "Benar" },
+                { key: "c", text: <span>Suhu turun <InlineMath math="2°C" /> tiap jam sampai pukul 20.00, sehingga suhunya <InlineMath math="16°C" />.</span>, correct: "Benar" },
+              ]} />
+            </TelaahSoal>
+            <TelaahSoal num={9} tipe="MCMA">
+              <p className={qText}>Diberikan <InlineMath math="14^2-4^2" />, <InlineMath math="10^2+44" />, dan <InlineMath math="12\times9" />. Faktor persekutuan ketiganya adalah ....</p>
+              <MCMA qn={59} items={[
+                { text: <InlineMath math="2\times3" />, benar: true }, { text: <InlineMath math="2^2\times3" />, benar: true },
+                { text: <InlineMath math="3" />, benar: true }, { text: <InlineMath math="2^3" />, benar: false },
+              ]} />
+            </TelaahSoal>
+            <TelaahSoal num={10} tipe="PGS">
+              <p className={qText}>Andi membeli bola basket Rp150.000, 2 celana training Rp90.000 per buah, dan 2 kaos Rp75.000 per buah. Setiap pembelian 5 barang gratis 1 barang termurah. Total setelah promo adalah ....</p>
+              <MCQ qn={60} correct={1} options={["A. Rp405.000", "B. Rp425.000", "C. Rp480.000", "D. Rp505.000"]} />
+            </TelaahSoal>
+            <TelaahSoal num={11} tipe="MCMA">
+              <p className={qText}>Pada layanan Samsat, Eko sudah selesai cek fisik pada menit ke-5. Rina dan Gilang mengantre setelahnya. Pernyataan yang pasti benar adalah ....</p>
+              <MCMA qn={61} items={[
+                { text: "Eko selesai pembayaran sebelum Rina memulai cek fisik.", benar: true },
+                { text: "Rina memulai pembayaran sebelum Gilang memulai pendaftaran.", benar: true },
+                { text: "Gilang mencetak STNK setelah Eko mengambil plat.", benar: true },
+                { text: "Total waktu kurang dari 60 menit.", benar: false },
+              ]} />
+            </TelaahSoal>
+            <TelaahSoal num={12} tipe="MCMA">
+              <p className={qText}>Harga Pertamax Rp13.850 per liter. Pak Anton membeli <InlineMath math="18{,}2" /> liter. Estimasi yang tepat adalah ....</p>
+              <MCMA qn={62} items={[
+                { text: "Total biaya kurang dari Rp270.000,00", benar: true }, { text: "Total biaya lebih dari Rp230.000,00", benar: true },
+                { text: <span>Estimasi dapat dihitung dengan <InlineMath math="18\times Rp14.000" /></span>, benar: true }, { text: "Nilainya mendekati Rp300.000,00", benar: false },
+              ]} />
+            </TelaahSoal>
+
           </div>
         )}
 
@@ -1643,28 +1681,28 @@ const BilanganBulatPage = () => {
           {/* ══ SOAL 22 — MCMA ══ */}
           <Soal n={22} tipe="MCMA">
             <p className={qText}>
-              Empat gelas diberi nama W, X, Y, dan Z. Suhu air di dalam masing-masing gelas adalah: gelas W = <InlineMath math="18°C" />, gelas X = <InlineMath math="25°C" />, gelas Y = <InlineMath math="-4°C" />, gelas Z = <InlineMath math="7°C" />. Pilihlah semua pernyataan yang <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>BENAR</span>!
+              Empat gelas diberi nama W, X, Y, dan Z. Suhu air di dalam masing-masing gelas adalah: gelas W = <InlineMath math="18°C" />, gelas X = <InlineMath math="-25°C" />, gelas Y = <InlineMath math="-4°C" />, gelas Z = <InlineMath math="7°C" />. Pilihlah semua pernyataan yang <span className={`font-bold ${isDark ? "text-amber-300" : "text-amber-600"}`}>BENAR</span>!
             </p>
             <p className={`${hint} ${isDark ? "text-amber-300" : "text-amber-600"}`}>Jawaban benar lebih dari satu.</p>
             <MCMA qn={22} items={[
-              { text: <span>(1) Gelas dengan suhu air terendah adalah gelas Y.</span>, benar: true },
-              { text: <span>(2) Selisih suhu gelas X dan gelas Y adalah <InlineMath math="29°C" />.</span>, benar: true },
-              { text: <span>(3) Urutan suhu dari terendah ke tertinggi adalah Z, Y, W, X.</span>, benar: false },
-              { text: <span>(4) Suhu rata-rata keempat gelas adalah <InlineMath math="11{,}5°C" />.</span>, benar: true },
+              { text: <span>(1) Gelas dengan suhu air terendah adalah gelas X.</span>, benar: true },
+              { text: <span>(2) Selisih suhu gelas X dan gelas Y adalah <InlineMath math="21°C" />.</span>, benar: true },
+              { text: <span>(3) Urutan suhu dari terendah ke tertinggi adalah X, Y, Z, W.</span>, benar: true },
+              { text: <span>(4) Suhu rata-rata keempat gelas adalah <InlineMath math="-1°C" />.</span>, benar: false },
             ]} />
             <PembahasanBtn n={22} />
             {expandedPembahasan.has(22) && (
               <div className="mt-3 space-y-2">
-                <PBJawaban>Pernyataan (1), (2), dan (4) benar</PBJawaban>
+                <PBJawaban>Pernyataan (1), (2), dan (3) benar</PBJawaban>
                 <PBKonsep>
-                  <p>Baca data tiap gelas: Y = −4°C terendah, X = 25°C tertinggi.</p>
+                  <p>Baca data tiap gelas: X = −25°C terendah, W = 18°C tertinggi.</p>
                   <p>Selisih suhu = suhu besar − suhu kecil. Hati-hati tanda negatif.</p>
                 </PBKonsep>
                 <PBSteps>
-                  <S n={1}><p>(1) Y = −4°C → nilai terkecil → <span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>BENAR ✓</span></p></S>
-                  <S n={2}><p>(2) X − Y = <InlineMath math="25 - (-4) = 29°C" /> → <span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>BENAR ✓</span></p></S>
-                  <S n={3}><p>(3) Urutan seharusnya Y(−4), Z(7), W(18), X(25) → bukan Z, Y, W, X → <span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>SALAH ✗</span></p></S>
-                  <S n={4}><p>(4) Rata-rata: <InlineMath math="\frac{18+25+(-4)+7}{4}=\frac{46}{4}=11{,}5°C" /> → <span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>BENAR ✓</span></p></S>
+                  <S n={1}><p>(1) X = −25°C → nilai terkecil → <span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>BENAR ✓</span></p></S>
+                  <S n={2}><p>(2) Y − X = <InlineMath math="-4 - (-25) = 21°C" /> → <span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>BENAR ✓</span></p></S>
+                  <S n={3}><p>(3) Urutan seharusnya X(−25), Y(−4), Z(7), W(18) → <span className={`font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>BENAR ✓</span></p></S>
+                  <S n={4}><p>(4) Rata-rata: <InlineMath math="\frac{-25+(-4)+7+18}{4}=\frac{-4}{4}=-1°C" /> → <span className={`font-bold ${isDark ? "text-red-300" : "text-red-600"}`}>SALAH ✗</span></p></S>
                 </PBSteps>
               </div>
             )}
@@ -1887,6 +1925,44 @@ const BilanganBulatPage = () => {
                 </PBSteps>
               </div>
             )}
+          </Soal>
+
+          <Soal n={31} tipe="MCMA">
+            <p className={qText}>Harga beras Rp19.750 per kg. Pemilik warung membeli <InlineMath math="12{,}3" /> kg. Estimasi yang tepat adalah ....</p>
+            <MCMA qn={31} items={[
+              { text: "Total biaya kurang dari Rp260.000,00", benar: true }, { text: "Total biaya lebih dari Rp220.000,00", benar: true },
+              { text: <span>Estimasi: <InlineMath math="12\times Rp20.000" /></span>, benar: true }, { text: "Nilainya mendekati Rp300.000,00", benar: false },
+            ]} />
+          </Soal>
+          <Soal n={32} tipe="MCMA">
+            <p className={qText}>Diberikan tiga bilangan <InlineMath math="14^2-4^2" />, <InlineMath math="10^2+44" />, dan <InlineMath math="12\times9" />. Faktor persekutuan ketiganya adalah ....</p>
+            <MCMA qn={32} items={[
+              { text: <InlineMath math="2\times3" />, benar: true }, { text: <InlineMath math="2\times3^2" />, benar: true },
+              { text: <InlineMath math="3^2" />, benar: true }, { text: <InlineMath math="2^2\times3" />, benar: true },
+            ]} />
+          </Soal>
+          <Soal n={33} tipe="MCMA">
+            <p className={qText}>Bayu selesai cek fisik pada menit ke-6. Dita dan Farhan mengantre berikutnya di Samsat dengan total layanan 20 menit per orang. Pernyataan yang pasti benar adalah ....</p>
+            <MCMA qn={33} items={[
+              { text: "Bayu selesai pembayaran sebelum Dita memulai cek fisik.", benar: true },
+              { text: "Dita memulai pembayaran sebelum Farhan memulai pendaftaran.", benar: true },
+              { text: "Farhan mencetak STNK setelah Bayu mengambil plat.", benar: true },
+              { text: "Total waktu kurang dari 60 menit.", benar: false },
+            ]} />
+          </Soal>
+          <Soal n={34} tipe="MCMA">
+            <p className={qText}>Harga alat tulis Rian: Rp5.000, Rp10.000, Rp7.000, Rp15.000, Rp20.000, dan Rp25.000. Setiap 5 barang gratis 1 barang termurah. Pernyataan yang benar adalah ....</p>
+            <MCMA qn={34} items={[
+              { text: "Barang gratis adalah pensil 2B.", benar: true }, { text: "Total pembayaran adalah Rp72.000,00.", benar: false },
+              { text: "Total harga sebelum promo Rp82.000,00.", benar: true }, { text: "Total setelah promo Rp77.000,00.", benar: true },
+            ]} />
+          </Soal>
+          <Soal n={35} tipe="MCMA">
+            <p className={qText}>Pilih semua estimasi yang benar untuk pembelian <InlineMath math="12{,}3" /> kg beras seharga Rp19.750 per kg.</p>
+            <MCMA qn={35} items={[
+              { text: "Biaya lebih dari Rp220.000,00", benar: true }, { text: "Biaya kurang dari Rp260.000,00", benar: true },
+              { text: <span><InlineMath math="12\times Rp20.000" /> adalah estimasi yang masuk akal.</span>, benar: true }, { text: "Biaya mendekati Rp300.000,00", benar: false },
+            ]} />
           </Soal>
 
         </div>}{/* end soal-soal */}
