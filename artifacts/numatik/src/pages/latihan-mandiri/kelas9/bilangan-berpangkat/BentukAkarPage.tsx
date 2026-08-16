@@ -43,7 +43,7 @@ const RationalizeSVG = () => (
 );
 
 const questions: Q[] = [
-  Qn(1, "Pengertian, Akar Pangkat Tiga & Bentuk Paling Sederhana – Dasar/ANBK", {
+  Qn(1, "1a–d Ubahlah ke Bentuk Akar · 1e–h Ubahlah ke Bentuk Pangkat Pecahan", {
     type: "mixed",
     parts: [
       { label: "a.", math: "16^{\\frac{1}{2}} = \\ldots" },
@@ -65,8 +65,6 @@ const questions: Q[] = [
       { label: "d.", math: "\\sqrt{75} = \\ldots" },
       { label: "e.", math: "\\sqrt{80} = \\ldots" },
       { label: "f.", math: "\\sqrt{108} = \\ldots" },
-      { label: "g.", text: "Sebuah persegi panjang memiliki panjang √3 cm dan lebar √12 cm. Hitung luas persegi panjang tersebut dalam bentuk paling sederhana!" },
-      { label: "h.", text: "Sebuah segitiga memiliki alas √6 cm dan tinggi √8 cm. Tentukan luas segitiganya dalam bentuk akar paling sederhana!" },
       { label: "i.", text: "Seorang tukang lantai memesan ubin persegi dengan luas 27 cm². Berapa panjang sisi ubin dalam bentuk akar paling sederhana?" },
       { label: "j.", text: "Jarak dua kota di peta adalah √75 km. Sederhanakan jarak tersebut ke bentuk akar yang paling sederhana!" },
     ],
@@ -84,6 +82,8 @@ const questions: Q[] = [
       { label: "h.", math: "2\\sqrt{12} + 3\\sqrt{27} = \\ldots" },
       { label: "i.", text: "Panjang dua tali masing-masing 3√2 m dan 5√2 m disambung. Berapa total panjang kedua tali?" },
       { label: "j.", text: "Dua rel kereta masing-masing sepanjang 2√8 m dan √32 m. Berapa total panjangnya dalam bentuk akar paling sederhana?" },
+      { label: "k.", text: "Sebuah persegi panjang memiliki panjang √3 cm dan lebar √12 cm. Hitung luas persegi panjang tersebut dalam bentuk paling sederhana!" },
+      { label: "l.", text: "Sebuah segitiga memiliki alas √6 cm dan tinggi √8 cm. Tentukan luas segitiganya dalam bentuk akar paling sederhana!" },
     ],
   }),
   Qn(4, "Perkalian & Pembagian Bentuk Akar – UN/ANBK/TKA", {
@@ -95,20 +95,11 @@ const questions: Q[] = [
       { label: "d.", math: "3\\sqrt{3} \\times 2\\sqrt{6} = \\ldots" },
       { label: "e.", math: "\\frac{\\sqrt{50}}{\\sqrt{2}} = \\ldots" },
       { label: "f.", math: "\\frac{4\\sqrt{15}}{2\\sqrt{5}} = \\ldots" },
-      { label: "g.", text: "Luas persegi panjang = √3 × √12 cm². Hitung luasnya!" },
-      { label: "h.", text: "Sebuah balok memiliki panjang 4√5 cm, lebar 2√5 cm, dan tinggi √5 cm. Hitung volume balok tersebut!" },
-    ],
-  }),
-  Qn(5, "Perkalian & Distribusi Bentuk Akar – UN/ANBK", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\sqrt{2}(\\sqrt{8}+\\sqrt{2}) = \\ldots" },
-      { label: "b.", math: "(\\sqrt{3}+1)(\\sqrt{3}-1) = \\ldots" },
-      { label: "c.", math: "(\\sqrt{10}+\\sqrt{6})(\\sqrt{10}-\\sqrt{6}) = \\ldots" },
-      { label: "d.", math: "(2+\\sqrt{3})(2-\\sqrt{3}) = \\ldots" },
-      { label: "e.", math: "(2+\\sqrt{3})(3+\\sqrt{3}) = \\ldots" },
-      { label: "f.", math: "(3\\sqrt{2}-1)^2 = \\ldots" },
-      { label: "g.", math: "(\\sqrt{5}+2)^2 = \\ldots" },
+      { label: "g.", math: "\\sqrt{2}(\\sqrt{8}+\\sqrt{2}) = \\ldots" },
+      { label: "h.", math: "(2+\\sqrt{3})(2-\\sqrt{3}) = \\ldots" },
+      { label: "i.", math: "(2+\\sqrt{3})(3+\\sqrt{3}) = \\ldots" },
+      { label: "j.", math: "(3\\sqrt{2}-1)^2 = \\ldots" },
+      { label: "k.", math: "(\\sqrt{5}+2)^2 = \\ldots" },
     ],
   }),
   Qn(6, "Merasionalkan Penyebut & Operasi Campuran – UN/ANBK/TKA", {
@@ -120,8 +111,6 @@ const questions: Q[] = [
       { label: "d.", math: "\\frac{3\\sqrt{5}}{\\sqrt{15}} = \\ldots" },
       { label: "e.", math: "\\frac{\\sqrt{18}+\\sqrt{8}}{\\sqrt{2}} = \\ldots" },
       { label: "f.", math: "\\frac{\\sqrt{27}-\\sqrt{12}}{\\sqrt{3}} = \\ldots" },
-      { label: "g.", math: "\\sqrt{\\dfrac{6}{10}} = \\ldots" },
-      { label: "h.", math: "\\frac{\\sqrt{3}+\\sqrt{6}}{\\sqrt{3}} = \\ldots" },
       { label: "i.", math: "\\frac{2\\sqrt{5}+\\sqrt{10}}{\\sqrt{5}} = \\ldots" },
     ],
   }),
@@ -160,7 +149,7 @@ const BentukAkarPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bilangan Berpangkat · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 rounded-lg px-4 py-2">
-            <span className="text-amber-400 text-xs font-bold">📋 8 {t('practice.suffixSoal')}</span>
+            <span className="text-amber-400 text-xs font-bold">📋 6 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
