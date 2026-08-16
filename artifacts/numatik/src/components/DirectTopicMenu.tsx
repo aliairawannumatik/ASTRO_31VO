@@ -6,7 +6,7 @@ import { BookOpen, Gamepad2, ClipboardList } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
 
-type MenuKind = "materi" | "latihan" | "game";
+type MenuKind = "materi" | "latihan" | "game" | "lkpd";
 
 const topics = [
   [7, "Bilangan Bulat", "bilangan-bulat"], [7, "Bilangan Rasional / Pecahan", "bilangan-rasional"], [7, "Aljabar", "aljabar"], [7, "PLSV dan PtLSV", "plsv-ptlsv"], [7, "Perbandingan", "perbandingan"], [7, "Aritmetika Sosial", "aritmetika-sosial"], [7, "Garis dan Sudut", "garis-dan-sudut"], [7, "Segitiga dan Segiempat", "segitiga-dan-segiempat"], [7, "Himpunan", "himpunan"],
@@ -18,9 +18,9 @@ export default function DirectTopicMenu({ kind }: { kind: MenuKind }) {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const light = theme === "light";
-  const base = kind === "materi" ? "/materi-matematika" : kind === "latihan" ? "/latihan-mandiri" : "/math-game-arena";
-  const Icon = kind === "materi" ? BookOpen : kind === "latihan" ? ClipboardList : Gamepad2;
-  const title = kind === "materi" ? "BUKU ANIMASI MATEMATIKA" : kind === "latihan" ? "TUGAS-LATIHAN MANDIRI" : "MATH GAME ARENA";
+  const base = kind === "materi" ? "/materi-matematika" : kind === "latihan" ? "/latihan-mandiri" : kind === "game" ? "/math-game-arena" : "/lkpd";
+  const Icon = kind === "materi" ? BookOpen : kind === "latihan" ? ClipboardList : kind === "game" ? Gamepad2 : ClipboardList;
+  const title = kind === "materi" ? "BUKU ANIMASI MATEMATIKA" : kind === "latihan" ? "TUGAS-LATIHAN MANDIRI" : kind === "game" ? "MATH GAME ARENA" : "LKPD";
   return <div className={`relative min-h-screen flex flex-col items-center overflow-hidden ${light && kind === "game" ? "gradient-snow" : "gradient-space"}`}>
     {light && kind === "game" ? <Snowfall /> : <Starfield />}
     <PageNavigation prevPath="/menu" />
