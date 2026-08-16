@@ -44,6 +44,7 @@
     "lkpd": "LKPD",
     "olympiad": "OLIMPIADE",
     "kokurikuler": "KOKURIKULER",
+    "ujiMandiri": "UJI MANDIRI",
     "calculator": "KALKULATOR",
     "fastCalc": "HITUNG CEPAT",
     "academic": "TES AKADEMIK",
@@ -97,6 +98,10 @@
     "kokurikuler": {
       "label": "KOKURIKULER",
       "desc": "Proyek matematika kreatif untuk siswa"
+    },
+    "ujiMandiri": {
+      "label": "UJI MANDIRI",
+      "desc": "Cek level matematikamu"
     },
     "fastCalc": {
       "label": "MENGHITUNG CEPAT",
@@ -5323,7 +5328,7 @@
         },
         "q8": {
           "title": "Diketahui Persamaan Garis, Pilih Grafik yang Tepat",
-          "content": "Diketahui persamaan garis y = 2x − 4. Manakah grafik di bawah ini yang tepat menggambarkan persamaan garis tersebut?",
+          "content": "Diketahui persamaan garis y = 2x �� 4. Manakah grafik di bawah ini yang tepat menggambarkan persamaan garis tersebut?",
           "pHint": "Substitusikan x = 0 dan y = 0 ke persamaan y = 2x − 4 untuk menemukan titik potong sumbu-y dan sumbu-x, lalu cocokkan dengan grafik yang benar."
         },
         "q9": {

@@ -94,6 +94,7 @@ const MenuPage = () => {
     { key: "lkpd",        icon: ClipboardCheck, path: "/lkpd" },
     { key: "olympiad",    icon: Trophy,         path: "/olimpiade" },
     { key: "kokurikuler", icon: GraduationCap,  path: "/ruang-untuk-guru/kokulikuler" },
+    { key: "ujiMandiri",  icon: ClipboardCheck, path: "/uji-mandiri" },
     { key: "calculator",  icon: Calculator,     path: "/kalkulator-scientific" },
     { key: "fastCalc",    icon: Zap,            path: "/menghitung-cepat" },
     { key: "conversion",  icon: ArrowLeftRight, path: "/konversi-satuan" },
