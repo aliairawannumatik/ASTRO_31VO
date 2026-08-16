@@ -19,7 +19,6 @@ const questions: Q[] = [
       { label: "b.", math: "15 \\times 10^3 \\text{ — apakah ini notasi ilmiah yang valid? Perbaiki jika salah.}" },
       { label: "c.", text: "0,00045 × 10² — apakah ini notasi ilmiah yang valid? Perbaiki jika salah!" },
       { label: "d.", text: "Jarak Bumi ke Matahari adalah 150.000.000 km. Seorang siswa menulisnya sebagai 150 × 10⁶. Apakah penulisan ini valid sebagai notasi ilmiah? Jelaskan dan perbaiki!" },
-      { label: "e.", text: "Massa sebuah elektron adalah sekitar 0,00000000000000000000000000000091 kg. Tuliskan perkiraan nilainya dalam notasi ilmiah yang valid!" },
     ],
   }),
   Qn(2, "Mengubah ke Notasi Ilmiah & Memperbaiki Notasi – UN/ANBK/TKA", {
@@ -28,10 +27,10 @@ const questions: Q[] = [
     parts: [
       { label: "a.", math: "43.000.000.000 = \\ldots" },
       { label: "b.", math: "986.000 = \\ldots" },
-      { label: "c.", math: "0{,}0035 = \\ldots" },
+      { label: "c.", math: "49.999 = \\ldots" },
       { label: "d.", math: "0{,}0000004523 = \\ldots" },
       { label: "e.", math: "25 \\times 10^4 = \\ldots" },
-      { label: "f.", math: "0{,}35 \\times 10^7 = \\ldots" },
+      { label: "f.", math: "0{,}007777 = \\ldots" },
       { label: "g.", math: "120 \\times 10^{-3} = \\ldots" },
     ],
   }),
@@ -51,20 +50,14 @@ const questions: Q[] = [
     type: "mixed",
     content: "Sederhanakan dan ubahlah ke bentuk notasi ilmiah!",
     parts: [
-      { label: "a.", math: "(3 \\times 10^4)(2 \\times 10^5) = 6 \\times 10^9" },
       { label: "b.", math: "(4 \\times 10^3)(5 \\times 10^6) = \\ldots" },
       { label: "c.", math: "(2{,}5 \\times 10^7)(4 \\times 10^3) = \\ldots" },
       { label: "d.", math: "\\frac{8 \\times 10^9}{4 \\times 10^3} = 2 \\times 10^6" },
-      { label: "e.", math: "\\frac{6 \\times 10^{12}}{3 \\times 10^5} = \\ldots" },
       { label: "f.", math: "\\frac{9 \\times 10^8}{3 \\times 10^{-2}} = \\ldots" },
-      { label: "g.", math: "3 \\times 10^5 + 2 \\times 10^5 = 5 \\times 10^5" },
       { label: "h.", math: "4{,}2 \\times 10^6 + 3{,}8 \\times 10^6 = \\ldots" },
       { label: "i.", math: "5 \\times 10^4 + 3 \\times 10^3 = 5 \\times 10^4 + 0{,}3 \\times 10^4 = \\ldots" },
       { label: "j.", math: "7 \\times 10^8 - 3 \\times 10^8 = \\ldots" },
-      { label: "k.", math: "9{,}5 \\times 10^5 - 4{,}5 \\times 10^5 = \\ldots" },
-      { label: "l.", math: "6 \\times 10^7 - 4 \\times 10^6 = \\ldots" },
-      { label: "m.", text: "Populasi bakteri di hari pertama = 3 × 10⁶ sel, di hari kedua bertambah 2 × 10⁶ sel. Berapa total populasi dalam notasi ilmiah?" },
-      { label: "n.", text: "Dana awal proyek = 9,5 × 10⁸ rupiah, digunakan 4,5 × 10⁸ rupiah. Berapa sisa dana dalam notasi ilmiah?" },
+
     ],
   }),
 ];
