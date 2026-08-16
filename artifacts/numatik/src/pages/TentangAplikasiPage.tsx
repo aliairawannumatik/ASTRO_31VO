@@ -96,7 +96,7 @@ const TentangAplikasiPage = () => {
               <div className="flex-1">
                 <p className="font-display text-xs font-bold tracking-widest uppercase text-cyan-400 mb-0.5">{t("tentang.versionLabel")}</p>
                 <p className="font-display text-lg font-black text-white">
-                  NUMATIK <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">v1.7</span>
+                  NUMATIK <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">v1.8</span>
                 </p>
                 <p className="text-white/50 font-body text-xs mt-0.5">{t("tentang.versionUpdateNote")}</p>
               </div>

@@ -496,7 +496,7 @@ const translations = {
     dan: "と",
     jika: "もし",
     maka: "なら",
-    langkah: "ステッ��",
+    langkah: "ステッ���",
     nilai: "値",
     tentukan: "求めよ",
     ubah: "変換",
@@ -1036,7 +1036,7 @@ const NotasiIlmiahPage = () => {
                     {language === "en" ? "🌟 CALCULATION: Distance light travels in 1 year" : language === "ja" ? "🌟 計算：光が1年間で進む距離" : "🌟 PERHITUNGAN: Jarak yang ditempuh cahaya dalam 1 tahun"}
                   </p>
                   <div className="space-y-2 font-body text-xs text-white/70">
-                    <p>{language === "en" ? "1 year = 365 days × 24 hours × 3600 seconds:" : language === "ja" ? "1年 = 365日 × 24時間 × 3600秒：" : "1 tahun = 365 hari × 24 jam × 3600 detik:"}</p>
+                    <p>{language === "en" ? "1 year = " : language === "ja" ? "1年 = " : "1 tahun = "}<InlineMath math="365\\times24\\times3600" /> {language === "en" ? "seconds:" : language === "ja" ? "秒：" : "detik:"}</p>
                     <Dark>
                       {/* KaTeX fix: \text{ detik} → \,\mathrm{s} and \text{ meter} → \,\mathrm{m} */}
                       <BlockMath math="365 \times 86400 = 31.536.000 \approx 3{,}1536 \times 10^7\,\mathrm{s}" />

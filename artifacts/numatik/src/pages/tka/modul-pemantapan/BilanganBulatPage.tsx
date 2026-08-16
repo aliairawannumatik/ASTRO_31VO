@@ -186,12 +186,13 @@ const BilanganBulatPage = () => {
       tipe === "PGS"  ? "Pilihan Ganda" :
       tipe === "MCMA" ? "Multiple Choice – lebih dari 1 jawaban" :
                         "Pernyataan Benar / Salah";
+    const telaahOrder: Record<number, number> = { 3: 1, 10: 2, 2: 3, 6: 4, 7: 5, 8: 6, 9: 7, 11: 8, 12: 9 };
     return (
-      <div className={`rounded-xl p-5 ${
+      <div style={{ order: telaahOrder[num] ?? 99 }} className={`rounded-xl p-5 ${
         isDark ? "bg-card/70 backdrop-blur border border-border" : "bg-white border border-gray-200 shadow-sm"
       }`}>
         <div className="flex items-center gap-2 mb-3">
-          <span className="bg-emerald-500/20 text-emerald-400 font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">{num}</span>
+          <span className="bg-emerald-500/20 text-emerald-400 font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">{telaahOrder[num] ?? num}</span>
           <span className={`text-[10px] font-body font-bold rounded-full px-2.5 py-0.5 border ${tipeColor}`}>{tipeBadge}</span>
           <span className={`text-[9px] font-body ${isDark ? "text-white/35" : "text-gray-400"}`}>{tipeLabel}</span>
         </div>
@@ -202,7 +203,7 @@ const BilanganBulatPage = () => {
 
   // ── question wrapper ─────────────────────────────────────────────────
   const Soal = ({ n, tipe, children }: { n: number; tipe: "PGS" | "MCMA" | "BS"; children: React.ReactNode }) => {
-    if ([3, 6, 13, 14, 15, 16, 17, 23, 24].includes(n)) return null;
+    if ([3, 6, 9, 11, 13, 14, 15, 16, 17, 19, 23, 24, 34, 35].includes(n)) return null;
     const tipeColor =
       tipe === "PGS"  ? (isDark ? "bg-sky-500/20 text-sky-300 border-sky-500/40"       : "bg-sky-100 text-sky-700 border-sky-300") :
       tipe === "MCMA" ? (isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/40"  : "bg-amber-100 text-amber-700 border-amber-300") :
