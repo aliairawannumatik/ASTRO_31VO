@@ -96,13 +96,12 @@ const questions: Q[] = [
       { label: "e.", math: "\\frac{\\sqrt{50}}{\\sqrt{2}} = \\ldots" },
       { label: "f.", math: "\\frac{4\\sqrt{15}}{2\\sqrt{5}} = \\ldots" },
       { label: "g.", math: "\\sqrt{2}(\\sqrt{8}+\\sqrt{2}) = \\ldots" },
-      { label: "h.", math: "(2+\\sqrt{3})(2-\\sqrt{3}) = \\ldots" },
       { label: "i.", math: "(2+\\sqrt{3})(3+\\sqrt{3}) = \\ldots" },
       { label: "j.", math: "(3\\sqrt{2}-1)^2 = \\ldots" },
       { label: "k.", math: "(\\sqrt{5}+2)^2 = \\ldots" },
     ],
   }),
-  Qn(6, "Merasionalkan Penyebut & Operasi Campuran – UN/ANBK/TKA", {
+  Qn(5, "Merasionalkan Penyebut & Operasi Campuran – UN/ANBK/TKA", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{6}{\\sqrt{3}} = \\ldots" },
@@ -114,7 +113,7 @@ const questions: Q[] = [
       { label: "i.", math: "\\frac{2\\sqrt{5}+\\sqrt{10}}{\\sqrt{5}} = \\ldots" },
     ],
   }),
-  Qn(7, "Merasionalkan Penyebut Binomial & Tingkat Lanjut – UN/TKA", {
+  Qn(6, "Merasionalkan Penyebut Binomial & Tingkat Lanjut – UN/TKA", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{4}{3-\\sqrt{5}} = \\ldots" },

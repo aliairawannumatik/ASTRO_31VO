@@ -47,7 +47,7 @@ const questions: Q[] = [
       { label: "f.", text: "Ukuran sebuah atom hidrogen adalah 1,2 × 10⁻¹⁰ m. Tuliskan dalam bentuk biasa!" },
     ],
   }),
-  Qn(4, "Perkalian & Pembagian Notasi Ilmiah – UN/ANBK", {
+  Qn(4, "Perkalian, Pembagian, Penjumlahan & Pengurangan Notasi Ilmiah – UN/ANBK/TKA", {
     type: "mixed",
     content: "Sederhanakan dan ubahlah ke bentuk notasi ilmiah!",
     parts: [
@@ -57,20 +57,14 @@ const questions: Q[] = [
       { label: "d.", math: "\\frac{8 \\times 10^9}{4 \\times 10^3} = 2 \\times 10^6" },
       { label: "e.", math: "\\frac{6 \\times 10^{12}}{3 \\times 10^5} = \\ldots" },
       { label: "f.", math: "\\frac{9 \\times 10^8}{3 \\times 10^{-2}} = \\ldots" },
-    ],
-  }),
-  Qn(5, "Penjumlahan & Pengurangan Notasi Ilmiah – UN/TKA", {
-    type: "mixed",
-    content: "Sederhanakan dan ubahlah ke bentuk notasi ilmiah!",
-    parts: [
-      { label: "a.", math: "3 \\times 10^5 + 2 \\times 10^5 = 5 \\times 10^5" },
-      { label: "b.", math: "4{,}2 \\times 10^6 + 3{,}8 \\times 10^6 = \\ldots" },
-      { label: "c.", math: "5 \\times 10^4 + 3 \\times 10^3 = 5 \\times 10^4 + 0{,}3 \\times 10^4 = \\ldots" },
-      { label: "d.", math: "7 \\times 10^8 - 3 \\times 10^8 = \\ldots" },
-      { label: "e.", math: "9{,}5 \\times 10^5 - 4{,}5 \\times 10^5 = \\ldots" },
-      { label: "f.", math: "6 \\times 10^7 - 4 \\times 10^6 = \\ldots" },
-      { label: "g.", text: "Populasi bakteri di hari pertama = 3 × 10⁶ sel, di hari kedua bertambah 2 × 10⁶ sel. Berapa total populasi dalam notasi ilmiah?" },
-      { label: "h.", text: "Dana awal proyek = 9,5 × 10⁸ rupiah, digunakan 4,5 × 10⁸ rupiah. Berapa sisa dana dalam notasi ilmiah?" },
+      { label: "g.", math: "3 \\times 10^5 + 2 \\times 10^5 = 5 \\times 10^5" },
+      { label: "h.", math: "4{,}2 \\times 10^6 + 3{,}8 \\times 10^6 = \\ldots" },
+      { label: "i.", math: "5 \\times 10^4 + 3 \\times 10^3 = 5 \\times 10^4 + 0{,}3 \\times 10^4 = \\ldots" },
+      { label: "j.", math: "7 \\times 10^8 - 3 \\times 10^8 = \\ldots" },
+      { label: "k.", math: "9{,}5 \\times 10^5 - 4{,}5 \\times 10^5 = \\ldots" },
+      { label: "l.", math: "6 \\times 10^7 - 4 \\times 10^6 = \\ldots" },
+      { label: "m.", text: "Populasi bakteri di hari pertama = 3 × 10⁶ sel, di hari kedua bertambah 2 × 10⁶ sel. Berapa total populasi dalam notasi ilmiah?" },
+      { label: "n.", text: "Dana awal proyek = 9,5 × 10⁸ rupiah, digunakan 4,5 × 10⁸ rupiah. Berapa sisa dana dalam notasi ilmiah?" },
     ],
   }),
 ];

@@ -794,8 +794,13 @@ const NotasiIlmiahPage = () => {
                     {t.k2_intro} <strong className="text-purple-300">{t.k2_intro2}</strong>{t.k2_intro3}
                   </p>
                   <div className="bg-slate-900/50 rounded-lg p-4 border-l-4 border-purple-500">
-                    <p className="font-body text-xs font-semibold text-purple-300 mb-2">{t.k2_rule1}</p>
-                    <ol className="space-y-2 font-body text-sm text-white/80 list-decimal list-inside">
+  <p className="font-body text-xs font-semibold text-purple-300 mb-2">{t.k2_rule1}</p>
+  <div className="mb-3 rounded-lg border border-cyan-400/30 bg-cyan-400/10 p-3 font-body text-sm text-white/80">
+    <p className="font-semibold text-cyan-300">Pembulatan digit notasi ilmiah</p>
+    <p className="mt-1">Jika digit berikutnya lebih dari atau sama dengan 5, digit yang dipertahankan bertambah 1 ke kiri. Jika digit berikutnya kurang dari 5, digit sebelumnya tetap.</p>
+    <p className="mt-1 text-cyan-200">Contoh: <InlineMath math="3{,}4567\\times10^5\\approx3{,}46\\times10^5" /> karena 6 ≥ 5, sedangkan <InlineMath math="3{,}4547\\times10^5\\approx3{,}45\\times10^5" /> karena 4 &lt; 5.</p>
+  </div>
+  <ol className="space-y-2 font-body text-sm text-white/80 list-decimal list-inside">
                       <li>{t.k2_r1_1} <InlineMath math="a" />.</li>
                       <li>{t.k2_r1_2} <InlineMath math="|n|" />.</li>
                       <li>{t.k2_r1_3} <strong className="text-green-300">{t.k2_r1_3b}</strong> {t.k2_r1_3c} <strong className="text-red-400">{t.k2_r1_3d}</strong> {t.k2_r1_3e}</li>
