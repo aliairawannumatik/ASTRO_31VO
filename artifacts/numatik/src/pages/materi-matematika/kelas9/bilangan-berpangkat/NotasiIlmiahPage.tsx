@@ -496,7 +496,7 @@ const translations = {
     dan: "と",
     jika: "もし",
     maka: "なら",
-    langkah: "ステップ",
+    langkah: "ステッ��",
     nilai: "値",
     tentukan: "求めよ",
     ubah: "変換",
@@ -521,17 +521,14 @@ const NotasiIlmiahPage = () => {
   const isOpen = (id: string) => expandedSections.includes(id);
 
   const SectionHeader = ({
-    id, icon, iconColor, title,
+    id: _id, icon, iconColor, title,
   }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
-    <button onClick={() => toggleSection(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+    <div className="w-full flex items-center px-5 py-4 text-left">
       <div className="flex items-center gap-3">
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {isOpen(id)
-        ? <ChevronUp className="w-5 h-5 text-primary" />
-        : <ChevronDown className="w-5 h-5 text-primary" />}
-    </button>
+    </div>
   );
 
   const diffCfg = (level: "easy" | "med" | "hard") => ({
@@ -797,7 +794,11 @@ const NotasiIlmiahPage = () => {
   <p className="font-body text-xs font-semibold text-purple-300 mb-2">{t.k2_rule1}</p>
   <div className="mb-3 rounded-lg border border-cyan-400/30 bg-cyan-400/10 p-3 font-body text-sm text-white/80">
     <p className="font-semibold text-cyan-300">Pembulatan digit notasi ilmiah</p>
-    <p className="mt-1">Jika digit berikutnya lebih dari atau sama dengan 5, digit yang dipertahankan bertambah 1 ke kiri. Jika digit berikutnya kurang dari 5, digit sebelumnya tetap.</p>
+    <div className="mt-2 grid gap-2 sm:grid-cols-2">
+      <div className="rounded-md border border-emerald-400/40 bg-emerald-400/10 p-2 font-bold text-emerald-300">DIGIT ≥ 5 → BERTAMBAH 1 KE KIRI</div>
+      <div className="rounded-md border border-amber-400/40 bg-amber-400/10 p-2 font-bold text-amber-300">DIGIT &lt; 5 → TETAP / TIDAK BERTAMBAH</div>
+    </div>
+    <p className="mt-2">Jika digit berikutnya lebih dari atau sama dengan 5, digit yang dipertahankan bertambah 1 ke kiri. Jika digit berikutnya kurang dari 5, digit sebelumnya tetap.</p>
     <p className="mt-1 text-cyan-200">Contoh: <InlineMath math="3{,}4567\\times10^5\\approx3{,}46\\times10^5" /> karena 6 ≥ 5, sedangkan <InlineMath math="3{,}4547\\times10^5\\approx3{,}45\\times10^5" /> karena 4 &lt; 5.</p>
   </div>
   <ol className="space-y-2 font-body text-sm text-white/80 list-decimal list-inside">
@@ -940,8 +941,8 @@ const NotasiIlmiahPage = () => {
             )}
           </div>
 
-          {/* CONTOH 3 */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+  {/* CONTOH 3 disembunyikan sesuai materi ringkas */}
+  <div className="hidden bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="c3" icon={<Calculator className="w-5 h-5" />} iconColor="text-cyan-400" title={t.sec_c3} />
             {isOpen("c3") && (
               <div className="px-5 pb-5 space-y-6">
