@@ -1,7 +1,8 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
 import { getTkaContohSoal } from "@/data/tkaContohSoal";
-import { dasarImages } from "@/pages/OlimpiadeBangunRuangSisiDatarPage";
+import { latihanDasar as latihanDasarOlimpiade, dasarImages } from "@/pages/OlimpiadeBangunRuangSisiDatarPage";
+import { bangunRuangSisiDatarDasarPembahasan } from "@/data/pembahasan/bangunRuangSisiDatarDasar";
 
 const materiSections: MateriSection[] = [
   { heading: "A. Kubus", content: `Kubus: bangun ruang berisi 6 sisi berbentuk persegi, 12 rusuk sama panjang, 8 titik sudut.\n\nJika rusuk = s:\n- Luas permukaan = $6s^2$\n- Volume = $s^3$\n- Diagonal ruang = $s\\sqrt{3}$\n- Diagonal sisi = $s\\sqrt{2}$` },
@@ -10,7 +11,7 @@ const materiSections: MateriSection[] = [
   { heading: "D. Limas", content: `Limas: bangun ruang dengan satu sisi alas dan sisi tegak berbentuk segitiga bertemu di satu titik (puncak).\n\n- Luas permukaan = $L_{alas} + \\sum L_{sisi\\ tegak}$\n- Volume = $\\frac{1}{3} \\times L_{alas} \\times t$\n\nUntuk limas segi empat beraturan:\n- Tinggi sisi tegak: apotema\n- Luas sisi tegak = $\\frac{1}{2} \\times alas \\times apotema$` },
 ];
 
-const latihanDasar: LatihanSoal[] = [
+const latihanDasarTkaLama: LatihanSoal[] = [
   { no: 1, soal: "Pada rangkaian persegi berikut yang merupakan jaring-jaring kubus adalah ...", options: ["A. Gambar A", "B. Gambar B", "C. Gambar C", "D. Gambar D"] },
   { no: 2, soal: "Perhatikan gambar!\nAgar dapat membentuk balok, persegipanjang yang harus dihilangkan bernomor ....", options: ["A. 5 dan 6", "B. 5 dan 7", "C. 1 dan 7", "D. 1 dan 8"] },
   { no: 3, soal: "Daerah yang diarsir pada gambar disebut ....", options: ["A. Diagonal bidang", "B. Bidang diagonal", "C. Diagonal ruang", "D. Diagonal sisi"] },
@@ -64,8 +65,8 @@ const BangunRuangSisiDatarPage = () => (
     title="BANGUN RUANG SISI DATAR"
     materiSections={materiSections}
     contohSoal={getTkaContohSoal("bangun-ruang-sisi-datar")}
-    latihanDasar={latihanDasar}
-    gambarMap={dasarImages}
+    latihanDasar={latihanDasarOlimpiade.map((soal) => ({ ...soal, pembahasan: bangunRuangSisiDatarDasarPembahasan[soal.no] }))}
+    gambarMap={Object.fromEntries(Object.entries(dasarImages).map(([no, src]) => [Number(no), <img src={src} alt={`Gambar soal ${no}`} className="mx-auto w-full max-w-sm rounded-lg border border-border/40 bg-background p-2" />]))}
   />
 );
 
