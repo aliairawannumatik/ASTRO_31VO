@@ -496,7 +496,7 @@ const translations = {
     dan: "と",
     jika: "もし",
     maka: "なら",
-    langkah: "ステッ���",
+    langkah: "ステッ����",
     nilai: "値",
     tentukan: "求めよ",
     ubah: "変換",
@@ -792,15 +792,6 @@ const NotasiIlmiahPage = () => {
                   </p>
                   <div className="bg-slate-900/50 rounded-lg p-4 border-l-4 border-purple-500">
   <p className="font-body text-xs font-semibold text-purple-300 mb-2">{t.k2_rule1}</p>
-  <div className="mb-3 rounded-lg border border-cyan-400/30 bg-cyan-400/10 p-3 font-body text-sm text-white/80">
-    <p className="font-semibold text-cyan-300">Pembulatan digit notasi ilmiah</p>
-    <div className="mt-2 grid gap-2 sm:grid-cols-2">
-      <div className="rounded-md border border-emerald-400/40 bg-emerald-400/10 p-2 font-bold text-emerald-300">DIGIT ≥ 5 → BERTAMBAH 1 KE KIRI</div>
-      <div className="rounded-md border border-amber-400/40 bg-amber-400/10 p-2 font-bold text-amber-300">DIGIT &lt; 5 → TETAP / TIDAK BERTAMBAH</div>
-    </div>
-    <p className="mt-2">Jika digit berikutnya lebih dari atau sama dengan 5, digit yang dipertahankan bertambah 1 ke kiri. Jika digit berikutnya kurang dari 5, digit sebelumnya tetap.</p>
-    <p className="mt-1 text-cyan-200">Contoh: <InlineMath math="3{,}4567\\times10^5\\approx3{,}46\\times10^5" /> karena 6 ≥ 5, sedangkan <InlineMath math="3{,}4547\\times10^5\\approx3{,}45\\times10^5" /> karena 4 &lt; 5.</p>
-  </div>
   <ol className="space-y-2 font-body text-sm text-white/80 list-decimal list-inside">
                       <li>{t.k2_r1_1} <InlineMath math="a" />.</li>
                       <li>{t.k2_r1_2} <InlineMath math="|n|" />.</li>
@@ -895,15 +886,17 @@ const NotasiIlmiahPage = () => {
                     </Dark>
                   </>}
                 />
+                <div className="hidden">
                 <ExBlock level="hard" n={3}
                   soal={<>{t.c2_hard_q} <InlineMath math="(3{,}2 \times 10^4) \times (2{,}5 \times 10^3)" /> {t.c2_hard_q2}</>}
                   solution={<>
                     <Dark>
                       <BlockMath math="(3{,}2 \times 2{,}5) \times (10^4 \times 10^3) = 8 \times 10^7" />
                     </Dark>
-                    <p><strong className="text-primary">{t.hasil} <InlineMath math="8 \times 10^7" /></strong></p>
+                    <p><strong className="text-primary">{t.hasil} <InlineMath math="8 \\times 10^7" /></strong></p>
                   </>}
                 />
+                </div>
               </div>
             )}
           </div>
@@ -930,6 +923,25 @@ const NotasiIlmiahPage = () => {
                       <p className="font-body text-xs text-white/60 mb-2">{t.k3_add_note}</p>
                       <BlockMath math="(a \times 10^n) \pm (b \times 10^n) = (a \pm b) \times 10^n" />
                     </div>
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-amber-300/30 bg-gradient-to-br from-amber-500/15 via-orange-500/10 to-rose-500/15 p-5 shadow-lg shadow-orange-950/20">
+                  <p className="mb-2 text-center font-display text-xl font-bold text-amber-100 md:text-2xl">DIGIT ≥ 5 → TAMBAH 1 KE KIRI &nbsp; | &nbsp; DIGIT &lt; 5 → TETAP</p>
+                  <p className="mb-4 text-center font-body text-xs uppercase tracking-[0.18em] text-amber-200/75">Pembulatan bilangan dalam notasi ilmiah</p>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div className="rounded-xl border border-white/10 bg-slate-950/30 p-4">
+                      <p className="font-body text-sm leading-6 text-white/80">Contoh: <InlineMath math="12.345.689.000 = 1{,}2345689 \\times 10^{10}" />. Jika dibulatkan dengan 2 angka di belakang koma, pertahankan <InlineMath math="1{,}23" /> dan lihat digit berikutnya, yaitu 4.</p>
+                      <p className="mt-3 font-display text-lg font-bold text-emerald-200"><InlineMath math="1{,}2345689 \\times 10^{10} \\approx 1{,}23 \\times 10^{10}" /></p>
+                    </div>
+                    <div className="rounded-xl border border-white/10 bg-slate-950/30 p-4">
+                      <p className="font-body text-sm leading-6 text-white/80">Digit yang dihilangkan menjadi penentu. Jika digit itu ≥ 5, angka terakhir yang dipertahankan bertambah 1 ke kiri. Jika &lt; 5, angka kiri tetap.</p>
+                      <p className="mt-3 font-body text-sm font-semibold text-yellow-100"><InlineMath math="3{,}4567 \\times 10^5 \\approx 3{,}46 \\times 10^5" /> karena 6 ≥ 5.</p>
+                    </div>
+                  </div>
+                  <div className="mt-4 grid gap-3 md:grid-cols-3">
+                    <div className="rounded-xl bg-cyan-400/10 p-3"><p className="font-display font-bold text-cyan-100">Rangkuman</p><p className="mt-1 font-body text-xs leading-5 text-white/70">Bentuk notasi ilmiah adalah <InlineMath math="a \\times 10^n" /> dengan <InlineMath math="1 \\le a < 10" />.</p></div>
+                    <div className="rounded-xl bg-violet-400/10 p-3"><p className="font-display font-bold text-violet-100">Tips dan trik</p><p className="mt-1 font-body text-xs leading-5 text-white/70">Normalisasi koefisien, tentukan angka yang dipertahankan, lalu periksa satu digit sesudahnya.</p></div>
+                    <div className="rounded-xl bg-emerald-400/10 p-3"><p className="font-display font-bold text-emerald-100">Kesimpulan</p><p className="mt-1 font-body text-xs leading-5 text-white/70">Pembulatan membuat bilangan lebih ringkas tanpa mengubah pendekatan nilainya.</p></div>
                   </div>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">

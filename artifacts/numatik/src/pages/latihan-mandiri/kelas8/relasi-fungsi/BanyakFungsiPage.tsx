@@ -30,10 +30,7 @@ const BanyakFungsiPage = () => {
   const q2textC = t(`${p}.q2.textC`);
   const q3textA = t(`${p}.q3.textA`);
   const q4textB = t(`${p}.q4.textB`);
-  const q4textC = t(`${p}.q4.textC`);
   const q5textC = t(`${p}.q5.textC`);
-  const q6textC1 = t(`${p}.q6.textC1`);
-  const q6textC2 = t(`${p}.q6.textC2`);
 
   const questions: Q[] = [
     Qn(1, t(`${p}.q1.title`), {
@@ -72,7 +69,6 @@ const BanyakFungsiPage = () => {
       parts: [
         { label: "a.", text: t(`${p}.q4.partAText`) },
         { label: "b.", math: `\\text{${q4textB}} = \\ldots` },
-        { label: "c.", math: `\\text{${q4textC}} = \\ldots` },
         { label: "d.", text: t(`${p}.q4.partDText`) },
       ],
     }),
@@ -89,11 +85,7 @@ const BanyakFungsiPage = () => {
     Qn(6, t(`${p}.q6.title`), {
       type: "mixed",
       content: t(`${p}.q6.content`),
-      parts: [
-        { label: "a.", text: t(`${p}.q6.partAText`) },
-        { label: "b.", text: t(`${p}.q6.partBText`) },
-        { label: "c.", math: `\\text{${q6textC1}} = \\ldots \\text{ ${q6textC2}}` },
-      ],
+      parts: [{ label: "a.", text: t(`${p}.q6.partAText`) }],
     }),
   ];
 
