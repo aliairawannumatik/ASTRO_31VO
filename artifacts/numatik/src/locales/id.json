@@ -4684,7 +4684,7 @@
         "tipKorLabel": "Banyak Korespondensi",
         "q1": {
           "title": "Menghitung Banyak Fungsi – Dasar",
-          "content": "Diketahui A = {a, b} dan B = {1, 2, 3}.",
+          "content": "Diketahui A = {p, q} dan B = {1, 2, 3}.",
           "textA": "Banyak fungsi dari A ke B",
           "partBText": "Gambarlah semua fungsi yang mungkin dari A ke B menggunakan diagram panah.",
           "textC": "Banyak fungsi dari B ke A",
@@ -4693,7 +4693,7 @@
         },
         "q2": {
           "title": "Banyak Fungsi – Bilangan Asli dan Ganjil",
-          "content": "Dari himpunan A = {x | x < 4, x ∈ bilangan asli} dan B = {y | 1 ≤ y < 9, y ∈ bilangan ganjil}:",
+          "content": "Dari himpunan A = {x | x < 5, x ∈ bilangan asli} dan B = {y | 1 ≤ y < 7, y ∈ bilangan ganjil}:",
           "partAText": "Tentukan n(A) dan n(B).",
           "textB": "Banyak fungsi dari A ke B",
           "textC": "Banyak fungsi dari B ke A",
@@ -4701,22 +4701,22 @@
         },
         "q3": {
           "title": "Korespondensi Satu-Satu – A = {p, q, r, s}, B = {2, 4, 6, 8}",
-          "content": "Diketahui A = {p, q, r, s} dan B = {2, 4, 6, 8}.",
+          "content": "Diketahui A = {x | 1 ≤ x < 12, x ∈ bilangan genap} dan Q = {y | 1 < y ≤ 4, y ∈ bilangan bulat}.",
           "textA": "Banyak korespondensi satu-satu dari A ke B",
           "partBText": "Gambarlah semua korespondensi satu-satu yang mungkin dari A ke B menggunakan diagram panah.",
           "partCText": "Menurut kamu apakah banyak korespondensi satu-satu dari A ke B dengan B ke A sama atau berbeda? Mengapa?"
         },
         "q4": {
           "title": "Soal UN – Menentukan Banyak Pemetaan",
-          "content": "Dari himpunan P = {x | 1 ≤ x ≤ 4, x ∈ bilangan bulat} dan Q = {y | 1 ≤ y ≤ 3, y ∈ bilangan bulat}:",
+          "content": "Dari himpunan P = {x | 1 ≤ x < 17, x ∈ bilangan prima} dan Q = {y | 2 ≤ y < 14, y ∈ bilangan genap}:",
           "partAText": "Tentukan n(P) dan n(Q).",
           "textB": "Banyak fungsi dari P ke Q",
           "textC": "Banyak fungsi dari Q ke P",
           "partDText": "Apakah bisa dibentuk korespondensi satu-satu antara P dan Q? Jelaskan."
         },
         "q5": {
-          "title": "Korespondensi Satu-Satu – Bilangan Prima dan Genap",
-          "content": "Dari himpunan P = {x | 1 ≤ x < 13, x ∈ bilangan prima} dan Q = {y | 2 ≤ y < 12, y ∈ bilangan genap}:",
+          "title": "Korespondensi Satu-Satu – Analogi Hotel",
+          "content": "Sebuah hotel memiliki 6 kamar dan 6 tamu. Setiap tamu menempati tepat satu kamar dan setiap kamar dihuni tepat satu tamu.",
           "partAText": "Tentukan n(P) dan n(Q).",
           "partBText": "Apakah syarat korespondensi satu-satu terpenuhi antara P dan Q? Jelaskan.",
           "textC": "Banyak korespondensi satu-satu yang dapat dibuat",
