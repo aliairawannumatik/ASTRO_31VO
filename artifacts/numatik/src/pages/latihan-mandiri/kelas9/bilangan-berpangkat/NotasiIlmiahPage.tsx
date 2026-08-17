@@ -27,8 +27,8 @@ const questions: Q[] = [
     parts: [
       { label: "a.", math: "43.000.000.000 = \\ldots" },
       { label: "b.", math: "986.000 = \\ldots" },
-      { label: "c.", math: "49.999 = \\ldots" },
-      { label: "d.", math: "0{,}0000004523 = \\ldots" },
+      { label: "c.", math: "4567 \\times 10^6 = \\ldots" },
+      { label: "d.", math: "12338 \\times 10^4 = \\ldots" },
       { label: "e.", math: "25 \\times 10^4 = \\ldots" },
       { label: "f.", math: "0{,}007777 = \\ldots" },
       { label: "g.", math: "120 \\times 10^{-3} = \\ldots" },

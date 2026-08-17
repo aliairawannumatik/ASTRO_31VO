@@ -190,51 +190,12 @@ const latihanDasar: LatihanSoal[] = [
   },
 
   // ─── 2 · PGK ──────────────────────────────────────────────────────────────
-  {
-    no: 2,
-    type: "pgk",
-    soal: "Perhatikan pernyataan-pernyataan berikut!",
-    pernyataan: [
-      "$\\dfrac{3}{4} + \\dfrac{2}{3} = \\dfrac{17}{12}$",
-      "$\\dfrac{5}{6} - \\dfrac{3}{4} = \\dfrac{1}{12}$",
-      "$\\dfrac{4}{5} \\times \\dfrac{3}{8} = \\dfrac{3}{10}$",
-      "$\\dfrac{7}{9} \\div \\dfrac{14}{3} = 2$",
-    ],
-    options: [
-      "(1) dan (2)",
-      "(1) dan (3)",
-      "(2) dan (3)",
-      "(1), (2), dan (3)",
-    ],
-    jawaban: "D",
-    pembahasan:
-      "(1) $\\frac{3}{4}+\\frac{2}{3}=\\frac{9}{12}+\\frac{8}{12}=\\frac{17}{12}$ ✓\n" +
-      "(2) $\\frac{5}{6}-\\frac{3}{4}=\\frac{10}{12}-\\frac{9}{12}=\\frac{1}{12}$ ✓\n" +
-      "(3) $\\frac{4}{5}\\times\\frac{3}{8}=\\frac{12}{40}=\\frac{3}{10}$ ✓\n" +
-      "(4) $\\frac{7}{9}\\div\\frac{14}{3}=\\frac{7}{9}\\times\\frac{3}{14}=\\frac{21}{126}=\\frac{1}{6}\\neq2$ ✗\n\n" +
-      "Pernyataan yang benar: (1), (2), dan (3) → D",
-  },
 
   // ─── 3 · PGKBS ────────────────────────────────────────────────────────────
-  {
-    no: 3,
-    type: "pgkbs",
-    soal: "Tentukan benar atau salah setiap pernyataan berikut!",
-    pernyataan: [
-      "$3,5 \\div 1,75 + 60\\% - 2\\frac{1}{2} = 0,1$",
-      "$0,75 = \\dfrac{3}{5}$",
-      "$1\\frac{2}{5} = 140\\%$",
-    ],
-    jawabanBS: ["B", "S", "B"],
-    pembahasan:
-      "(1) $3,5\\div1,75=2$; $\\quad 2+0,6-2,5=0,1$ ✓ BENAR\n" +
-      "(2) $0,75=\\frac{75}{100}=\\frac{3}{4}\\neq\\frac{3}{5}$ ✗ SALAH\n" +
-      "(3) $1\\frac{2}{5}=\\frac{7}{5}=1,4=140\\%$ ✓ BENAR",
-  },
 
   // ─── 4 · PG ───────────────────────────────────────────────────────────────
   {
-    no: 4,
+    no: 2,
     type: "pg",
     soal: "Urutan bilangan dari terkecil ke terbesar dari $0,6$ ; $55\\%$ ; $\\dfrac{2}{3}$ ; $0,54$ adalah ...",
     options: [
@@ -253,7 +214,7 @@ const latihanDasar: LatihanSoal[] = [
 
   // ─── 5 · PGK ──────────────────────────────────────────────────────────────
   {
-    no: 5,
+    no: 3,
     type: "pgk",
     soal: "Perhatikan pernyataan-pernyataan berikut!",
     pernyataan: [
@@ -278,25 +239,10 @@ const latihanDasar: LatihanSoal[] = [
   },
 
   // ─── 6 · PGKBS ────────────────────────────────────────────────────────────
-  {
-    no: 6,
-    type: "pgkbs",
-    soal: "Tentukan benar atau salah setiap pernyataan berikut!",
-    pernyataan: [
-      "$\\dfrac{1}{1-\\dfrac{3}{11}} = \\dfrac{11}{8}$",
-      "$\\dfrac{1}{1-\\dfrac{3}{11}} + \\dfrac{1}{2} = \\dfrac{15}{8}$",
-      "$\\dfrac{3}{1-\\dfrac{1}{4}} = 5$",
-    ],
-    jawabanBS: ["B", "B", "S"],
-    pembahasan:
-      "(1) $1-\\frac{3}{11}=\\frac{8}{11}$, maka $\\frac{1}{\\frac{8}{11}}=\\frac{11}{8}$ ✓ BENAR\n" +
-      "(2) $\\frac{11}{8}+\\frac{1}{2}=\\frac{11}{8}+\\frac{4}{8}=\\frac{15}{8}$ ✓ BENAR\n" +
-      "(3) $1-\\frac{1}{4}=\\frac{3}{4}$, maka $\\frac{3}{\\frac{3}{4}}=3\\times\\frac{4}{3}=4\\neq5$ ✗ SALAH",
-  },
 
   // ─── 7 · PG ───────────────────────────────────────────────────────────────
   {
-    no: 7,
+    no: 4,
     type: "pg",
     soal: "Hasil dari $\\dfrac{\\dfrac{2}{1} - \\dfrac{3}{4}}{\\dfrac{1}{1} + \\dfrac{4}{2}}$ adalah ...",
     options: [
@@ -314,7 +260,7 @@ const latihanDasar: LatihanSoal[] = [
 
   // ─── 8 · PGK ──────────────────────────────────────────────────────────────
   {
-    no: 8,
+    no: 5,
     type: "pgk",
     soal: "Pak Hari mempunyai sejumlah uang. Seperlimanya untuk membeli kaos, duapertiganya untuk membeli baju, dan sisanya Rp60.000,00 untuk membeli topi.\nPerhatikan pernyataan-pernyataan berikut!",
     pernyataan: [
@@ -340,7 +286,7 @@ const latihanDasar: LatihanSoal[] = [
 
   // ─── 9 · PGKBS ────────────────────────────────────────────────────────────
   {
-    no: 9,
+    no: 6,
     type: "pgkbs",
     soal: "Ibu membeli gula $6\\frac{2}{3}$ kg. Di rumah masih ada $10\\frac{5}{6}$ kg. Semua gula dimasukkan ke kantong plastik masing-masing $1\\frac{3}{4}$ kg.\nTentukan benar atau salah setiap pernyataan berikut!",
     pernyataan: [
@@ -357,7 +303,7 @@ const latihanDasar: LatihanSoal[] = [
 
   // ─── 10 · PG ──────────────────────────────────────────────────────────────
   {
-    no: 10,
+    no: 7,
     type: "pg",
     soal: "Pada kegiatan sosial diterima terigu sebanyak $21\\frac{3}{4}$ kg dan $23\\frac{1}{4}$ kg. Setiap warga menerima $2\\frac{1}{2}$ kg. Banyak warga yang menerima terigu tersebut adalah ...",
     options: ["21 orang", "20 orang", "18 orang", "15 orang"],
@@ -370,197 +316,26 @@ const latihanDasar: LatihanSoal[] = [
   },
 
   // ─── 11 · PGK ─────────────────────────────────────────────────────────────
-  {
-    no: 11,
-    type: "pgk",
-    soal: "Jamie membeli $6\\frac{2}{5}$ lot saham dengan harga total Rp7.200.000,00.\nPerhatikan pernyataan-pernyataan berikut!",
-    pernyataan: [
-      "$6\\frac{2}{5}$ lot $= \\dfrac{32}{5}$ lot dalam bentuk pecahan biasa",
-      "Harga 1 lot saham adalah Rp1.125.000,00",
-      "Harga 2 lot saham adalah Rp2.500.000,00",
-      "Jika Jamie menjual 3 lot dengan harga yang sama, ia mendapat Rp3.375.000,00",
-    ],
-    options: [
-      "(1) dan (2)",
-      "(2) dan (4)",
-      "(1), (2), dan (4)",
-      "(1), (2), (3), dan (4)",
-    ],
-    jawaban: "C",
-    pembahasan:
-      "(1) $6\\frac{2}{5}=\\frac{30+2}{5}=\\frac{32}{5}$ ✓\n" +
-      "(2) $7.200.000\\div\\frac{32}{5}=7.200.000\\times\\frac{5}{32}=1.125.000$ ✓\n" +
-      "(3) $2\\times1.125.000=2.250.000\\neq2.500.000$ ✗\n" +
-      "(4) $3\\times1.125.000=3.375.000$ ✓\n\n" +
-      "Pernyataan yang benar: (1), (2), dan (4) → C",
-  },
 
   // ─── 12 · PGKBS ───────────────────────────────────────────────────────────
-  {
-    no: 12,
-    type: "pgkbs",
-    soal: "Husein dapat mengecat tembok dalam 3 hari. Amir dalam 6 hari.\nTentukan benar atau salah setiap pernyataan berikut!",
-    pernyataan: [
-      "Kecepatan kerja bersama Husein dan Amir adalah $\\dfrac{1}{2}$ pekerjaan/hari",
-      "Jika bekerja bersama, pengecatan selesai dalam 2 hari",
-      "Amir dapat menyelesaikan $\\dfrac{3}{4}$ pekerjaan dalam 4 hari",
-    ],
-    jawabanBS: ["B", "B", "S"],
-    pembahasan:
-      "(1) $\\frac{1}{3}+\\frac{1}{6}=\\frac{2}{6}+\\frac{1}{6}=\\frac{3}{6}=\\frac{1}{2}$ ✓ BENAR\n" +
-      "(2) Waktu $=\\frac{1}{\\frac{1}{2}}=2$ hari ✓ BENAR\n" +
-      "(3) Amir: $\\frac{1}{6}\\times4=\\frac{4}{6}=\\frac{2}{3}\\neq\\frac{3}{4}$ ✗ SALAH",
-  },
 
   // ─── 13 · PG ──────────────────────────────────────────────────────────────
-  {
-    no: 13,
-    type: "pg",
-    soal: "Anida dapat menyelesaikan 1 stel seragam dalam 9 jam, Anisa dalam 6 jam. Waktu yang dibutuhkan Anida dan Anisa bekerja bersama-sama adalah ...",
-    options: [
-      "3 jam 30 menit",
-      "3 jam 36 menit",
-      "7 jam 30 menit",
-      "7 jam 50 menit",
-    ],
-    jawaban: "B",
-    pembahasan:
-      "Kecepatan bersama:\n" +
-      "$\\frac{1}{9}+\\frac{1}{6}=\\frac{2}{18}+\\frac{3}{18}=\\frac{5}{18}$ seragam/jam\n\n" +
-      "Waktu $=\\dfrac{18}{5}=3\\frac{3}{5}$ jam\n\n" +
-      "$\\frac{3}{5}\\times60=36$ menit\n\n" +
-      "Jadi: 3 jam 36 menit → B",
-  },
 
   // ─── 14 · PGK ─────────────────────────────────────────────────────────────
-  {
-    no: 14,
-    type: "pgk",
-    soal: "Pompa A mengisi kolam penuh dalam 3 jam, Pompa B dalam 4 jam, Pompa C dalam 6 jam.\nPerhatikan pernyataan-pernyataan berikut!",
-    pernyataan: [
-      "Kecepatan pengisian Pompa A adalah $\\dfrac{1}{3}$ kolam per jam",
-      "Kecepatan ketiga pompa bersama-sama adalah $\\dfrac{3}{4}$ kolam per jam",
-      "Jika ketiga pompa bekerja bersama, waktu yang diperlukan adalah $1\\dfrac{1}{3}$ jam",
-      "Waktu yang diperlukan ketiga pompa bersama adalah 1 jam 30 menit",
-    ],
-    options: [
-      "(1) dan (2)",
-      "(2) dan (3)",
-      "(1) dan (3)",
-      "(1), (2), dan (3)",
-    ],
-    jawaban: "D",
-    pembahasan:
-      "(1) $\\frac{1}{3}$ kolam/jam ✓\n" +
-      "(2) $\\frac{1}{3}+\\frac{1}{4}+\\frac{1}{6}=\\frac{4+3+2}{12}=\\frac{9}{12}=\\frac{3}{4}$ ✓\n" +
-      "(3) Waktu $=\\frac{1}{\\frac{3}{4}}=\\frac{4}{3}=1\\frac{1}{3}$ jam ✓\n" +
-      "(4) $1\\frac{1}{3}$ jam $=1$ jam $20$ menit $\\neq1$ jam 30 menit ✗\n\n" +
-      "Pernyataan yang benar: (1), (2), dan (3) → D",
-  },
 
   // ─── 15 · PGKBS ───────────────────────────────────────────────────────────
-  {
-    no: 15,
-    type: "pgkbs",
-    soal: "Tentukan benar atau salah setiap pernyataan berikut!",
-    pernyataan: [
-      "$0,\\overline{36} = \\dfrac{4}{11}$",
-      "Jika $0,\\overline{36}=\\dfrac{a}{b}$ (bentuk paling sederhana), maka $a+b=14$",
-      "$0,\\overline{6} = \\dfrac{2}{3}$",
-    ],
-    jawabanBS: ["B", "S", "B"],
-    pembahasan:
-      "(1) $0,\\overline{36}=\\frac{36}{99}=\\frac{4}{11}$ ✓ BENAR\n" +
-      "(2) $a=4,\\ b=11$, maka $a+b=15\\neq14$ ✗ SALAH\n" +
-      "(3) $0,\\overline{6}=\\frac{6}{9}=\\frac{2}{3}$ ✓ BENAR",
-  },
 
   // ─── 16 · PG ──────────────────────────────────────────────────────────────
-  {
-    no: 16,
-    type: "pg",
-    soal: "Jika $P = 0,\\overline{123}$, maka bentuk pecahan paling sederhana dari $P$ adalah ...",
-    options: [
-      "$\\dfrac{123}{999}$",
-      "$\\dfrac{41}{333}$",
-      "$\\dfrac{41}{999}$",
-      "$\\dfrac{123}{333}$",
-    ],
-    jawaban: "B",
-    pembahasan:
-      "Misalkan $P=0,\\overline{123}=0,123123...$\n" +
-      "$1000P=123,123123...$\n" +
-      "$1000P-P=123 \\Rightarrow 999P=123$\n" +
-      "$P=\\dfrac{123}{999}$\n\n" +
-      "Sederhanakan: $\\gcd(123,999)=3$\n" +
-      "$P=\\dfrac{123\\div3}{999\\div3}=\\dfrac{41}{333}$ → B",
-  },
 
   // ─── 17 · PGK ─────────────────────────────────────────────────────────────
-  {
-    no: 17,
-    type: "pgk",
-    soal: "Perhatikan pernyataan-pernyataan berikut tentang $\\left(1-\\dfrac{1}{2}\\right)\\left(1-\\dfrac{1}{3}\\right)\\cdots\\left(1-\\dfrac{1}{n}\\right)$!",
-    pernyataan: [
-      "Setiap faktor ke-$k$ dapat ditulis sebagai $\\dfrac{k-1}{k}$",
-      "$\\left(1-\\dfrac{1}{2}\\right)\\left(1-\\dfrac{1}{3}\\right)\\left(1-\\dfrac{1}{4}\\right) = \\dfrac{1}{4}$",
-      "$\\left(1-\\dfrac{1}{2}\\right)\\left(1-\\dfrac{1}{3}\\right)\\cdots\\left(1-\\dfrac{1}{2026}\\right) = \\dfrac{1}{2026}$",
-      "$\\left(1-\\dfrac{1}{2}\\right)\\left(1-\\dfrac{1}{3}\\right)\\cdots\\left(1-\\dfrac{1}{10}\\right) = \\dfrac{1}{5}$",
-    ],
-    options: [
-      "(1) dan (2)",
-      "(2) dan (3)",
-      "(1) dan (3)",
-      "(1), (2), dan (3)",
-    ],
-    jawaban: "D",
-    pembahasan:
-      "(1) $1-\\frac{1}{k}=\\frac{k-1}{k}$ ✓\n" +
-      "(2) $\\frac{1}{2}\\times\\frac{2}{3}\\times\\frac{3}{4}=\\frac{1\\cdot2\\cdot3}{2\\cdot3\\cdot4}=\\frac{6}{24}=\\frac{1}{4}$ ✓\n" +
-      "(3) Hasil teleskopik: $\\frac{1}{2}\\times\\frac{2}{3}\\times\\cdots\\times\\frac{2025}{2026}=\\frac{1}{2026}$ ✓\n" +
-      "(4) $\\frac{1}{2}\\times\\frac{2}{3}\\times\\cdots\\times\\frac{9}{10}=\\frac{1}{10}\\neq\\frac{1}{5}$ ✗\n\n" +
-      "Pernyataan yang benar: (1), (2), dan (3) → D",
-  },
 
   // ─── 18 · PGKBS ───────────────────────────────────────────────────────────
-  {
-    no: 18,
-    type: "pgkbs",
-    soal: "Diketahui $x = 3 + \\dfrac{2}{3+\\dfrac{2}{3+\\dfrac{2}{\\ddots}}}$ (pecahan kontinu berulang tak berhingga).\nTentukan benar atau salah setiap pernyataan berikut!",
-    pernyataan: [
-      "Persamaan yang terbentuk adalah $x^2 - 3x - 2 = 0$",
-      "Nilai positif $x$ yang memenuhi adalah $\\dfrac{3+\\sqrt{17}}{2}$",
-      "$x^2 - 3x = 4$",
-    ],
-    jawabanBS: ["B", "B", "S"],
-    pembahasan:
-      "Karena pola berulang, ganti bagian dalam dengan $x$:\n" +
-      "$x=3+\\frac{2}{x}\\Rightarrow x^2=3x+2\\Rightarrow x^2-3x-2=0$ ✓ (1) BENAR\n\n" +
-      "Rumus kuadrat: $x=\\dfrac{3\\pm\\sqrt{9+8}}{2}=\\dfrac{3\\pm\\sqrt{17}}{2}$\n" +
-      "Nilai positif: $x=\\dfrac{3+\\sqrt{17}}{2}$ ✓ (2) BENAR\n\n" +
-      "Dari $x^2-3x-2=0$: $x^2-3x=2\\neq4$ ✗ (3) SALAH",
-  },
 
   // ─── 19 · PG ──────────────────────────────────────────────────────────────
-  {
-    no: 19,
-    type: "pg",
-    soal: "Jumlah semua bilangan bulat $n$ sehingga $\\dfrac{n+5}{n-2}$ merupakan bilangan bulat adalah ...",
-    options: ["4", "6", "8", "12"],
-    jawaban: "C",
-    pembahasan:
-      "Tulis ulang:\n" +
-      "$\\dfrac{n+5}{n-2}=\\dfrac{(n-2)+7}{n-2}=1+\\dfrac{7}{n-2}$\n\n" +
-      "Agar hasilnya bilangan bulat, $(n-2)$ harus membagi habis 7.\n" +
-      "Faktor dari $7$: $\\pm1,\\ \\pm7$\n\n" +
-      "$n-2\\in\\{-7,\\ -1,\\ 1,\\ 7\\}$\n" +
-      "$n\\in\\{-5,\\ 1,\\ 3,\\ 9\\}$\n\n" +
-      "Jumlah: $(-5)+1+3+9=8$ → C",
-  },
 
   // ─── 20 · PG ──────────────────────────────────────────────────────────────
   {
-    no: 20,
+    no: 8,
     type: "pg",
     soal: "Dina akan mengemas tepung beras ke dalam kantong plastik berukuran $\\dfrac{1}{2}\\text{ kg}$ dan $\\dfrac{1}{4}\\text{ kg}$. Berat tepung beras yang akan dikemas adalah $24{,}3\\text{ kg}$. Kemasan $\\dfrac{1}{2}\\text{ kg}$ akan digunakan terlebih dahulu. Berat sisa tepung beras yang tidak dapat dikemas sesuai ukuran kantong adalah ....",
     options: [
@@ -584,7 +359,7 @@ const latihanDasar: LatihanSoal[] = [
 
   // ─── 21 · PGKBS ───────────────────────────────────────────────────────────
   {
-    no: 21,
+    no: 9,
     type: "pgkbs",
     soal: "Diketahui sekarung kedelai dengan berat $36\\text{ kg}$. Kedelai tersebut akan dijual dalam kemasan plastik kecil. Tentukan Benar atau Salah untuk setiap pernyataan berikut.",
     pernyataan: [
@@ -602,7 +377,7 @@ const latihanDasar: LatihanSoal[] = [
 
   // ─── 22 · PG (estimasi) ────────────────────────────────────────────────────
   {
-    no: 22,
+    no: 10,
     type: "pg",
     soal: "Diketahui operasi bilangan $4{,}2 \\times 19{,}7 + 13{,}81 - 32{,}47 = m$. Perkiraan hasil dari $(m - 20)$ adalah ....",
     options: ["A. 20", "B. 40", "C. 80", "D. 100"],
@@ -618,7 +393,7 @@ const latihanDasar: LatihanSoal[] = [
 
   // ─── 23 · PG (urutan → kode) ───────────────────────────────────────────────
   {
-    no: 23,
+    no: 11,
     type: "pg",
     soal: "Diketahui kode warna menggunakan huruf yang nilainya disusun dari terbesar ke terkecil. Huruf beserta nilainya: $B = \\dfrac{3}{5}$; $I = 0{,}48$; $R = \\dfrac{1}{3}$; $U = 7\\%$. Kode warna tersebut adalah ....",
     options: ["A. BIRU", "B. RUBI", "C. UBIR", "D. IURB"],
@@ -635,7 +410,7 @@ const latihanDasar: LatihanSoal[] = [
 
   // ─── 24 · PG ──────────────────────────────────────────────────────────────
   {
-    no: 24,
+    no: 12,
     type: "pg",
     soal: "Hasil dari $\\dfrac{2}{5} \\times \\dfrac{5}{6} - \\dfrac{3}{4} \\div \\dfrac{9}{2}$ adalah ....",
     options: [
@@ -657,7 +432,7 @@ const latihanDasar: LatihanSoal[] = [
   // ─── 25 & 26 · Konteks Kaveling ────────────────────────────────────────────
   // ─── 25 · PGKBS ───────────────────────────────────────────────────────────
   {
-    no: 25,
+    no: 13,
     type: "pgkbs",
     soal: `Perhatikan teks berikut untuk menjawab soal nomor 25 dan 26.
 
@@ -680,35 +455,10 @@ Berdasarkan teks tersebut, tentukan Benar atau Salah untuk setiap pernyataan ber
   },
 
   // ─── 26 · PGK ─────────────────────────────────────────────────────────────
-  {
-    no: 26,
-    type: "pgk",
-    soal: "Berdasarkan teks Tanah Kaveling (soal 25), pilihlah semua jawaban yang benar. Jawaban benar lebih dari satu.",
-    pernyataan: [
-      "Luas setiap kaveling adalah $\\dfrac{1}{100}$ dari luas total tanah.",
-      "Luas kaveling bernomor kurang dari 4 (nomor 1, 2, 3) adalah $\\dfrac{3}{100}$ dari luas total tanah.",
-      "Luas 5 kaveling bernomor terakhir adalah $\\dfrac{1}{20}$ dari luas total tanah.",
-      "Luas 4 kaveling bernomor pertama adalah $\\dfrac{1}{20}$ dari luas total tanah.",
-    ],
-    options: [
-      "(1), (2), dan (3)",
-      "(1), (3), dan (4)",
-      "(2) dan (3)",
-      "(1), (2), (3), dan (4)",
-    ],
-    jawaban: "A",
-    pembahasan:
-      "Luas total: $80 \\times 40 = 3200\\text{ m}^2$; luas setiap kaveling: $8 \\times 4 = 32\\text{ m}^2$\n\n" +
-      "(1) $\\dfrac{32}{3200} = \\dfrac{1}{100}$ ✓ BENAR\n\n" +
-      "(2) 3 kaveling (no. 1–3): $3 \\times 32 = 96\\text{ m}^2$; $\\dfrac{96}{3200} = \\dfrac{3}{100}$ ✓ BENAR\n\n" +
-      "(3) 5 kaveling terakhir (no. 96–100): $5 \\times 32 = 160\\text{ m}^2$; $\\dfrac{160}{3200} = \\dfrac{1}{20}$ ✓ BENAR\n\n" +
-      "(4) 4 kaveling pertama (no. 1–4): $4 \\times 32 = 128\\text{ m}^2$; $\\dfrac{128}{3200} = \\dfrac{1}{25} \\neq \\dfrac{1}{20}$ ✗ SALAH\n\n" +
-      "Jawaban: (1), (2), dan (3) → A",
-  },
 
   // ─── 27 · PGK ─────────────────────────────────────────────────────────────
   {
-    no: 27,
+    no: 14,
     type: "pgk",
     soal: "Perhatikan perhitungan bilangan pecahan berikut.\n$P = \\dfrac{4}{7} \\div \\dfrac{8}{21}, \\quad Q = \\dfrac{3}{8} \\times \\dfrac{4}{15}, \\quad R = \\dfrac{7}{12} + \\dfrac{5}{6}, \\quad S = \\dfrac{11}{12} - \\dfrac{5}{6}$\nBerdasarkan informasi tersebut, pilihlah semua jawaban yang benar. Jawaban benar lebih dari satu.",
     pernyataan: [
@@ -734,42 +484,10 @@ Berdasarkan teks tersebut, tentukan Benar atau Salah untuk setiap pernyataan ber
 
   // ─── 28 & 29 · Konteks Persediaan Beras ────────────────────────────────────
   // ─── 28 · PGK ─────────────────────────────────────────────────────────────
-  {
-    no: 28,
-    type: "pgk",
-    soal: `Perhatikan teks berikut untuk menjawab soal nomor 28 dan 29.
-
-Persediaan Beras Bu Kartika
-Bu Kartika membeli sekarung beras dengan berat $\\dfrac{1}{4}$ kuintal di Toko Sinar. Toko Sinar menjual beras seharga Rp1.200.000 per kuintal. Beras tersebut merupakan persediaan harian keluarga sebagai bahan makanan pokok.
-
-Suatu hari, Bu Kartika akan mengadakan acara syukuran di rumahnya. Ia memasak nasi sebagai hidangan utama untuk 75 tamu yang diundang, dengan perkiraan setiap tamu membutuhkan $0{,}12\\text{ kg}$ beras. Bu Kartika membeli beras tambahan di Toko Sinar dengan jenis dan harga yang sama.
-
-Berdasarkan teks tersebut, pilihlah semua jawaban yang benar. Jawaban benar lebih dari satu.`,
-    pernyataan: [
-      "Jika Bu Kartika memasak $1\\dfrac{1}{4}\\text{ kg}$ beras setiap hari, persediaan beras akan habis dalam 20 hari.",
-      "Jika Bu Kartika memasak $2\\dfrac{1}{2}\\text{ kg}$ beras setiap hari, persediaan beras akan habis dalam 8 hari.",
-      "Jika Bu Kartika memasak $\\dfrac{5}{3}\\text{ kg}$ beras setiap hari, persediaan beras akan habis dalam 15 hari.",
-      "Jika Bu Kartika memasak $2\\dfrac{3}{4}\\text{ kg}$ beras setiap hari, persediaan beras akan habis dalam 10 hari.",
-    ],
-    options: [
-      "(1) dan (3)",
-      "(2) dan (4)",
-      "(1) dan (4)",
-      "(1), (2), dan (3)",
-    ],
-    jawaban: "A",
-    pembahasan:
-      "Persediaan beras: $\\frac{1}{4}$ kuintal $= \\frac{1}{4} \\times 100 = 25\\text{ kg}$\n\n" +
-      "(1) $1\\frac{1}{4} \\times 20 = \\frac{5}{4} \\times 20 = 25\\text{ kg}$ ✓ BENAR\n\n" +
-      "(2) $2\\frac{1}{2} \\times 8 = \\frac{5}{2} \\times 8 = 20\\text{ kg} \\neq 25\\text{ kg}$ ✗ SALAH\n\n" +
-      "(3) $\\frac{5}{3} \\times 15 = \\frac{75}{3} = 25\\text{ kg}$ ✓ BENAR\n\n" +
-      "(4) $2\\frac{3}{4} \\times 10 = \\frac{11}{4} \\times 10 = 27{,}5\\text{ kg} \\neq 25\\text{ kg}$ ✗ SALAH\n\n" +
-      "Jawaban: (1) dan (3) → A",
-  },
 
   // ─── 29 · PG ──────────────────────────────────────────────────────────────
   {
-    no: 29,
+    no: 15,
     type: "pg",
     soal: "Berdasarkan teks Persediaan Beras Bu Kartika (soal 28), biaya pembelian beras tambahan untuk acara syukuran adalah ....",
     options: [

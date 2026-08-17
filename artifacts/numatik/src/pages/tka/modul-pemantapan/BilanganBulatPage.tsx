@@ -204,6 +204,7 @@ const BilanganBulatPage = () => {
   // ── question wrapper ─────────────────────────────────────────────────
   const Soal = ({ n, tipe, children }: { n: number; tipe: "PGS" | "MCMA" | "BS"; children: React.ReactNode }) => {
     if ([3, 6, 9, 11, 13, 14, 15, 16, 17, 19, 23, 24, 34, 35].includes(n)) return null;
+    const displayNumber = n > 4 ? n - 1 : n;
     const tipeColor =
       tipe === "PGS"  ? (isDark ? "bg-sky-500/20 text-sky-300 border-sky-500/40"       : "bg-sky-100 text-sky-700 border-sky-300") :
       tipe === "MCMA" ? (isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/40"  : "bg-amber-100 text-amber-700 border-amber-300") :
@@ -221,7 +222,7 @@ const BilanganBulatPage = () => {
         isDark ? "bg-card/70 backdrop-blur border border-border" : "bg-white border border-gray-200 shadow-sm"
       }`}>
         <div className="flex items-center gap-2 mb-3">
-          <span className="bg-amber-500/20 text-amber-400 font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">{n}</span>
+          <span className="bg-amber-500/20 text-amber-400 font-display font-bold text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0">{displayNumber}</span>
           <span className={`text-[10px] font-body font-bold rounded-full px-2.5 py-0.5 border ${tipeColor}`}>{tipeBadge}</span>
           <span className={`text-[9px] font-body ${isDark ? "text-white/35" : "text-gray-400"}`}>{tipeLabel}</span>
         </div>
@@ -1141,33 +1142,6 @@ const BilanganBulatPage = () => {
           </Soal>
 
           {/* ══ SOAL 4 — PGS ══ */}
-          <Soal n={4} tipe="PGS">
-            <p className={qText}>
-              Suhu di puncak gunung adalah <InlineMath math="-4°C" />. Suhu di kaki gunung <InlineMath math="23°C" /> lebih tinggi dari suhu di puncak. Suhu di kaki gunung adalah ....
-            </p>
-            <MCQ qn={4} correct={2} options={[
-              <span key="a">A. <InlineMath math="-27°C" /></span>,
-              <span key="b">B. <InlineMath math="-19°C" /></span>,
-              <span key="c">C. <InlineMath math="19°C" /></span>,
-              <span key="d">D. <InlineMath math="27°C" /></span>,
-            ]} />
-            <PembahasanBtn n={4} />
-            {expandedPembahasan.has(4) && (
-              <div className="mt-3 space-y-2">
-                <PBJawaban>C. 19°C</PBJawaban>
-                <PBKonsep>
-                  <p>"Lebih tinggi" dalam konteks suhu berarti <span className="font-bold">ditambah (+)</span>.</p>
-                  <p>"Lebih rendah" berarti dikurangi (−).</p>
-                  <p className={`text-[10px] italic ${isDark?"text-violet-300/70":"text-violet-500"}`}>💡 Trik: ubah kata soal ke operasi matematika terlebih dahulu.</p>
-                </PBKonsep>
-                <PBSteps>
-                  <S n={1}><p>Suhu puncak = <InlineMath math="-4°C" /></p></S>
-                  <S n={2}><p>Kaki gunung <InlineMath math="23°C" /> lebih tinggi: <InlineMath math="-4 + 23" /></p></S>
-                  <S n={3}><div><BlockMath math="-4 + 23 = 19°C" /></div></S>
-                </PBSteps>
-              </div>
-            )}
-          </Soal>
 
           {/* ══ SOAL 5 — MCMA ══ */}
           <Soal n={5} tipe="MCMA">
