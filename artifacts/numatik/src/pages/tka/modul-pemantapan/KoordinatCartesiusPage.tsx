@@ -1,6 +1,8 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
 import { getTkaContohSoal } from "@/data/tkaContohSoal";
+import { latihanDasar as latihanOlimpiade } from "@/pages/OlimpiadeKoordinatCartesiusPage";
+import { koordinatKartesiusOlimpiadePembahasan } from "@/data/pembahasan/koordinatKartesiusOlimpiade";
 
 const materiSections: MateriSection[] = [
   { heading: "A. Sistem Koordinat Kartesius", content: `Sistem koordinat kartesius memposisikan titik dengan acuan sumbu-x (mendatar) dan sumbu-y (tegak) yang saling tegak lurus.\n\n- Sumbu X: ke kanan positif, ke kiri negatif\n- Sumbu Y: ke atas positif, ke bawah negatif\n- Titik potong = titik asal O(0, 0)\n- Koordinat titik ditulis (x, y)\n  - x = absis (jarak dari sumbu-Y)\n  - y = ordinat (jarak dari sumbu-X)` },
@@ -11,7 +13,7 @@ const materiSections: MateriSection[] = [
   { heading: "F. Posisi Relatif", content: `Posisi relatif titik $T(x_2, y_2)$ terhadap titik acuan $D(x_1, y_1)$:\n\n$T_D = (x_2 - x_1,\\ y_2 - y_1)$` },
 ];
 
-const latihanDasar: LatihanSoal[] = [
+const latihanDasarTkaLama: LatihanSoal[] = [
   { no: 1, soal: "Perhatikan titik-titik pada koordinat kartesius berikut.\nTitik yang berkoordinat (1, 3) adalah.....", options: ["A. titik A", "B. titik B", "C. titik C", "D. titik D"] },
   { no: 2, soal: "Perhatikan gambar berikut. Koordinat titik Q adalah....", options: ["A. $(3, 1)$", "B. $(3, -1)$", "C. $(1, 3)$", "D. $(-1, 3)$"] },
   { no: 3, soal: "Perhatikan gambar di samping!\nKoordinat-koordinat di bawah ini yang sesuai dengan gambar adalah....", options: ["A. $A(-2, -4)$", "B. $B(5, 4)$", "C. $C(-2, 6)$", "D. $D(1, -4)$"] },
@@ -44,7 +46,7 @@ const KoordinatCartesiusPage = () => (
     title="KOORDINAT KARTESIUS"
     materiSections={materiSections}
     contohSoal={getTkaContohSoal("koordinat-kartesius")}
-    latihanDasar={latihanDasar}
+    latihanDasar={latihanOlimpiade.map((soal) => ({ ...soal, pembahasan: koordinatKartesiusOlimpiadePembahasan[soal.no] ? JSON.stringify(koordinatKartesiusOlimpiadePembahasan[soal.no]) : "" }))}
   />
 );
 

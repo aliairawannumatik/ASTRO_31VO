@@ -1,6 +1,7 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
 import { getTkaContohSoal } from "@/data/tkaContohSoal";
+import { latihanDasar as latihanOlimpiade, kesDasarImages } from "@/pages/OlimpiadeKesebangunanPage";
 
 const materiSections: MateriSection[] = [
   {
@@ -33,7 +34,7 @@ Syarat dua segitiga kongruen:
   },
 ];
 
-const latihanDasar: LatihanSoal[] = [
+const latihanDasarTkaLama: LatihanSoal[] = [
   {
     no: 1,
     soal: "Perhatikan gambar bangun-bangun berikut:\n(i) Dua buah persegi\n(ii) Dua buah persegi panjang\n(iii) Dua buah segitiga sama sisi\n(iv) Dua buah belah ketupat\n\nPasangan bangun di samping yang pasti sebangun adalah ...",
@@ -195,7 +196,8 @@ const KesebangunanPage = () => (
     title="KESEBANGUNAN DAN KEKONGRUENAN"
   materiSections={materiSections}
   contohSoal={getTkaContohSoal("kesebangunan")}
-  latihanDasar={latihanDasar}
+  latihanDasar={latihanOlimpiade.map((soal) => ({ ...soal, pembahasan: typeof soal.pembahasan === "string" ? soal.pembahasan : String(soal.pembahasan ?? "") }))}
+  gambarMap={Object.fromEntries(Object.entries(kesDasarImages).map(([no, src]) => [Number(no), <img src={src} alt={`Gambar soal ${no}`} className="mx-auto w-full max-w-sm rounded-lg border border-border/40 bg-background p-2" />]))}
   />
 );
 
