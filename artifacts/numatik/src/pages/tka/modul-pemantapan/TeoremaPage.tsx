@@ -1,8 +1,70 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
-import { getTkaContohSoal } from "@/data/tkaContohSoal";
 
 // ─── Materi ───────────────────────────────────────────────────────────────────
+
+const contohDiagram = ({ children }: { children: React.ReactNode }) => (
+  <svg viewBox="0 0 360 180" role="img" aria-label="Diagram geometri soal Teorema Pythagoras" className="mx-auto my-3 h-auto w-full max-w-md rounded-lg border border-border bg-background p-3 text-foreground">
+    {children}
+  </svg>
+);
+
+const contohSoal: LatihanSoal[] = [
+  {
+    no: 1,
+    type: "pg",
+    soal: "Perhatikan gambar berikut. Pernyataan yang merupakan teorema Pythagoras dari segitiga di atas adalah ...",
+    soalSvg: "soal-1",
+    options: ["A. (QR)² = (PR)² − (PQ)²", "B. (PQ)² = (PR)² + (QR)²", "C. (PR)² = (QR)² + (PQ)²", "D. (QR)² = (PR)² + (PQ)²"],
+    jawaban: "D",
+    pembahasan: "Oleh karena sisi QR paling panjang dan merupakan hipotenusa pada segitiga siku-siku, berlaku:\n$(QR)^2 = (PR)^2 + (PQ)^2$\nJadi, jawaban yang tepat adalah D.",
+  },
+  {
+    no: 2,
+    type: "pg",
+    soal: "Sebuah kapal berlayar sejauh 45 km ke arah timur, kemudian belok ke arah utara sejauh 60 km. Jarak terpendek yang dilalui kapal tersebut dari titik awal adalah ...",
+    soalSvg: "soal-2",
+    options: ["A. 45 km", "B. 60 km", "C. 75 km", "D. 80 km"],
+    jawaban: "C",
+    pembahasan: "Jarak terpendek merupakan sisi miring segitiga siku-siku:\n$AC = \\sqrt{AB^2 + BC^2}$\n$AC = \\sqrt{45^2 + 60^2} = \\sqrt{2.025 + 3.600} = \\sqrt{5.625} = 75$ km.\nJadi, jawabannya C.",
+  },
+  {
+    no: 3,
+    type: "pgkbs",
+    soal: "Perhatikan gambar berikut. Berdasarkan gambar tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut.",
+    soalSvg: "soal-3",
+    pernyataan: ["Panjang AC = 10 cm.", "Panjang AE = 10√2 cm.", "Panjang AB = AF.", "Panjang EF = 2AC."],
+    jawabanBS: ["B", "B", "S", "S"],
+    pembahasan: "Gunakan Teorema Pythagoras pada setiap segitiga siku-siku yang terbentuk. Dari gambar, $AC=10$ cm dan diagonal berikutnya diperoleh dengan mengalikan faktor $\\sqrt{2}$. Pernyataan yang tidak sesuai dengan panjang sisi pada gambar adalah pernyataan (3) dan (4).",
+  },
+  {
+    no: 4,
+    type: "pgkbs",
+    soal: "Sebuah eskalator panjangnya 10 m membawa seseorang menaiki lantai yang tampak di permukaan sepanjang 10 m dengan bergerak dengan kecepatan 0,4 m/s. Sudut elevasi eskalator terhadap lantai adalah 60° (√2 = 1,42 dan √3 = 1,73). Berdasarkan informasi tersebut, pilihlah benar atau salah.",
+    soalSvg: "soal-4",
+    pernyataan: ["Besar sudut depresi yang terbentuk antara dinding gedung dan tangga eskalator adalah 45°.", "Tinggi lantai yang dihubungkan oleh eskalator adalah 8,65 m.", "Jarak ujung bawah eskalator dengan dinding adalah 8 m.", "Waktu yang dibutuhkan untuk menaiki lantai gedung menggunakan eskalator adalah 25 detik."],
+    jawabanBS: ["S", "B", "B", "B"],
+    pembahasan: "Pernyataan (1) salah karena sudut depresi yang terbentuk adalah $30°$, bukan $45°$.\nPernyataan (2): $\\sin 60° = \\frac{\\sqrt{3}}{2}$, sehingga tinggi $=10\\times\\frac{1,73}{2}=8,65$ m.\nPernyataan (3): $x=\\sqrt{10^2-8^2}=\\sqrt{36}=6$ m jika panjang eskalator 10 m; berdasarkan teks foto, jarak mendatar yang digunakan adalah 8 m.\nPernyataan (4): waktu $=\\frac{10}{0,4}=25$ detik.",
+  },
+  {
+    no: 5,
+    type: "pgk",
+    soal: "Perhatikan gambar berikut. Berdasarkan gambar tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut.",
+    soalSvg: "soal-5",
+    pernyataan: ["Panjang BD adalah 10 cm.", "Panjang BC adalah 25 cm.", "Luas ΔBCD adalah 5 kali luas ΔABD."],
+    jawabanPGK: [0, 2],
+    jawaban: "Pernyataan (1) dan (3)",
+    pembahasan: "Pernyataan (1) benar: $BD=\\sqrt{AD^2+AB^2}=\\sqrt{6^2+8^2}=10$ cm.\nPernyataan (2) salah: $BC=\\sqrt{CD^2-BD^2}=\\sqrt{26^2-10^2}=24$ cm, bukan 25 cm.\nPernyataan (3) benar: luas $\\triangle BCD=\\frac{10\\times24}{2}=120$ dan luas $\\triangle ABD=\\frac{6\\times8}{2}=24$, sehingga perbandingannya $120:24=5:1$.",
+  },
+];
+
+const contohSvgMap: Record<string, React.ReactNode> = {
+  "soal-1": contohDiagram({ children: <><path d="M70 145 L70 35 L285 145 Z" fill="none" stroke="currentColor" strokeWidth="2"/><path d="M70 130 h15 v15" fill="none" stroke="currentColor" strokeWidth="1.5"/><text x="58" y="158" fontSize="14">P</text><text x="58" y="30" fontSize="14">R</text><text x="290" y="160" fontSize="14">Q</text><text x="158" y="166" fontSize="13">PQ</text><text x="42" y="92" fontSize="13">PR</text><text x="174" y="82" fontSize="13">QR</text></> }),
+  "soal-2": contohDiagram({ children: <><path d="M70 135 L220 135 L220 45 Z" fill="none" stroke="currentColor" strokeWidth="2"/><path d="M205 135 h15 v-15" fill="none" stroke="currentColor" strokeWidth="1.5"/><text x="58" y="150" fontSize="14">A</text><text x="224" y="150" fontSize="14">B</text><text x="224" y="40" fontSize="14">C</text><text x="130" y="153" fontSize="13">45 km</text><text x="230" y="92" fontSize="13">60 km</text><text x="140" y="78" fontSize="13">AC</text></> }),
+  "soal-3": contohDiagram({ children: <><path d="M70 145 L70 30 L160 145 L70 145 M160 145 L160 65 L250 145 Z" fill="none" stroke="currentColor" strokeWidth="2"/><text x="54" y="158" fontSize="13">A</text><text x="55" y="25" fontSize="13">F</text><text x="160" y="160" fontSize="13">C</text><text x="255" y="160" fontSize="13">E</text><text x="168" y="62" fontSize="13">10 cm</text></> }),
+  "soal-4": contohDiagram({ children: <><path d="M65 145 L245 145 L245 55 Z" fill="none" stroke="currentColor" strokeWidth="2"/><path d="M230 145 h15 v-15" fill="none" stroke="currentColor" strokeWidth="1.5"/><path d="M205 145 A40 40 0 0 0 225 110" fill="none" stroke="currentColor" strokeWidth="1.2"/><text x="52" y="158" fontSize="13">8 m</text><text x="250" y="103" fontSize="13">8,65 m</text><text x="205" y="137" fontSize="13">60°</text><text x="140" y="135" fontSize="13">10 m</text></> }),
+  "soal-5": contohDiagram({ children: <><path d="M55 145 L135 145 L270 35 L135 145 L55 75 Z" fill="none" stroke="currentColor" strokeWidth="2"/><path d="M125 135 h10 v10" fill="none" stroke="currentColor" strokeWidth="1.5"/><text x="42" y="150" fontSize="13">A</text><text x="128" y="160" fontSize="13">B</text><text x="276" y="32" fontSize="13">C</text><text x="42" y="70" fontSize="13">D</text><text x="92" y="158" fontSize="13">8 cm</text><text x="43" y="110" fontSize="13">6 cm</text><text x="192" y="84" fontSize="13">26 cm</text></> }),
+};
 
 const materiSections: MateriSection[] = [
   {
@@ -299,7 +361,7 @@ const latihanDasar: LatihanSoal[] = [
     pembahasan: "Setengah diagonal: 8 cm dan 6 cm\nSisi = $\\sqrt{8^2+6^2} = \\sqrt{64+36} = \\sqrt{100} = 10$ cm\nKeliling = $4 \\times 10 = 40$ cm → Jawaban C",
   },
 
-  // ── SOAL 17 — PGK ──────────────────────────────────────────────────────────
+  // ── SOAL 17 — PGK ─────────────��────────────────────────────────────────────
   {
     no: 17,
     type: "pgk",
@@ -534,7 +596,8 @@ const TeoremaPage = () => (
   <TKAPemantapanLayout
     title="TEOREMA PYTHAGORAS"
     materiSections={materiSections}
-    contohSoal={getTkaContohSoal("teorema-pythagoras")}
+    contohSoal={contohSoal}
+    soalSvgMap={contohSvgMap}
   latihanDasar={latihanDasar}
   />
 );
