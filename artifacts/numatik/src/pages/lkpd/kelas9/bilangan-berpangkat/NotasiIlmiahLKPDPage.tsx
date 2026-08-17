@@ -347,39 +347,6 @@ const practiceItems: PracticeItem[] = [
   },
 ];
 
-const roundingLesson = (
-  <section className="mb-6 overflow-hidden rounded-3xl border border-amber-200/30 bg-gradient-to-br from-amber-500/15 via-orange-500/10 to-rose-500/15 p-5 md:p-7 backdrop-blur">
-    <div className="mb-5 flex items-start gap-3">
-      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-amber-300/20 font-display text-xl font-bold text-amber-100">≈</div>
-      <div>
-        <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-amber-200/80">Sub-Bab 3 · Operasi pada Notasi Ilmiah</p>
-        <h2 className="font-display text-xl font-bold text-amber-50 md:text-2xl">Membulatkan Bilangan dalam Notasi Ilmiah</h2>
-      </div>
-    </div>
-    <div className="rounded-2xl border border-amber-100/20 bg-slate-950/35 p-4 text-center md:p-6">
-      <p className="mb-3 font-body text-sm text-white/70">Rumus cepat pembulatan</p>
-      <p className="font-display text-lg font-bold text-amber-100 md:text-2xl">DIGIT ≥ 5 → angka kiri + 1 &nbsp; | &nbsp; DIGIT &lt; 5 → tetap</p>
-    </div>
-    <div className="mt-5 grid gap-4 md:grid-cols-2">
-      <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-        <h3 className="mb-2 font-display text-base font-bold text-cyan-100">Contoh langkah demi langkah</h3>
-        <p className="font-body text-sm leading-6 text-white/80">12.345.689.000 = 1,2345689 × 10¹⁰. Dibulatkan menjadi 2 angka di belakang koma, pertahankan 1,23. Digit berikutnya adalah 4, sehingga tidak menambah angka 3.</p>
-        <p className="mt-3 font-display text-lg font-bold text-emerald-200">1,2345689 × 10¹⁰ ≈ 1,23 × 10¹⁰</p>
-      </div>
-      <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-        <h3 className="mb-2 font-display text-base font-bold text-fuchsia-100">Jika digit berikutnya ≥ 5</h3>
-        <p className="font-body text-sm leading-6 text-white/80">Naikkan angka terakhir yang dipertahankan satu tingkat ke kiri. Jika digit berikutnya &lt; 5, hapus digit setelahnya tanpa mengubah angka yang dipertahankan.</p>
-        <p className="mt-3 font-body text-sm font-semibold text-yellow-100">Contoh: 3,4567 × 10⁵ ≈ 3,46 × 10⁵ karena 6 ≥ 5.</p>
-      </div>
-    </div>
-    <div className="mt-5 grid gap-4 md:grid-cols-3">
-      <div className="rounded-2xl bg-cyan-400/10 p-4"><h3 className="font-display font-bold text-cyan-100">Rangkuman</h3><p className="mt-2 font-body text-sm leading-6 text-white/75">Notasi ilmiah berbentuk a × 10ⁿ dengan 1 ≤ a &lt; 10. Pangkat menunjukkan banyak pergeseran koma.</p></div>
-      <div className="rounded-2xl bg-violet-400/10 p-4"><h3 className="font-display font-bold text-violet-100">Tips dan trik</h3><p className="mt-2 font-body text-sm leading-6 text-white/75">Normalisasi koefisien dulu, tentukan banyak angka yang dipertahankan, lalu lihat tepat satu digit sesudahnya.</p></div>
-      <div className="rounded-2xl bg-emerald-400/10 p-4"><h3 className="font-display font-bold text-emerald-100">Kesimpulan</h3><p className="mt-2 font-body text-sm leading-6 text-white/75">Pembulatan membuat hasil lebih ringkas tetapi tetap mendekati nilai asli. Aturan digit 5 adalah kuncinya.</p></div>
-    </div>
-  </section>
-);
-
 const NotasiIlmiahLKPDPage = () => (
   <InteractiveLKPD
     badgeText="LKPD · Kelas 9 · Bab Bilangan Berpangkat"
@@ -389,7 +356,6 @@ const NotasiIlmiahLKPDPage = () => (
     guidedIntro="Jawab soal-soal berurutan. Setiap jawabanmu menuntun pada aturan notasi ilmiah."
     guidedItems={guidedItems}
     summaryCards={summaryCards}
-    midSlot={roundingLesson}
     games={games}
     practiceIntro="Asah pemahamanmu tentang notasi ilmiah dengan latihan berikut!"
     practiceItems={practiceItems}

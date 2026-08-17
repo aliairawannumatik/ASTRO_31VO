@@ -227,14 +227,14 @@ const guidedItems: GuidedItem[] = [
   {
     id: "g8",
     label:
-      "Diketahui A = {p, q} dan B = {1, 2, 3}. Banyaknya fungsi yang mungkin dari A ke B adalah …",
+      "Diketahui A = {1, 2, 3} dan B = {a, b}. Banyaknya fungsi yang mungkin dari A ke B adalah …",
     kind: "choice",
 options: ["6", "8", "9", "12"],
-  correctIndex: 2,
+  correctIndex: 1,
   discussion: [
   "Rumus banyak fungsi dari A ke B = n(B) pangkat n(A).",
-  "n(B)^n(A) = 3² = 9.",
-  "Setiap dari 2 anggota A punya 3 pilihan di B → 3 × 3 = 9.",
+  "n(B)^n(A) = 2³ = 8.",
+  "Setiap dari 3 anggota A punya 2 pilihan di B → 2 × 2 × 2 = 8.",
     ],
   },
   {
