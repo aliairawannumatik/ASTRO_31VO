@@ -32,6 +32,8 @@ const questions: Q[] = [
       { label: "e.", math: "25 \\times 10^4 = \\ldots" },
       { label: "f.", math: "0{,}007777 = \\ldots" },
       { label: "g.", math: "120 \\times 10^{-3} = \\ldots" },
+      { label: "h.", math: "0{,}0000000765 = \\ldots" },
+      { label: "i.", math: "0{,}0001234 = \\ldots" },
     ],
   }),
   Qn(3, "Mengubah dari Notasi Ilmiah – UN/ANBK/TKA", {
@@ -50,13 +52,12 @@ const questions: Q[] = [
     type: "mixed",
     content: "Sederhanakan dan ubahlah ke bentuk notasi ilmiah!",
     parts: [
-      { label: "b.", math: "(4 \\times 10^3)(5 \\times 10^6) = \\ldots" },
-      { label: "c.", math: "(2{,}5 \\times 10^7)(4 \\times 10^3) = \\ldots" },
-      { label: "d.", math: "\\frac{8 \\times 10^9}{4 \\times 10^3} = 2 \\times 10^6" },
-      { label: "f.", math: "\\frac{9 \\times 10^8}{3 \\times 10^{-2}} = \\ldots" },
-      { label: "h.", math: "4{,}2 \\times 10^6 + 3{,}8 \\times 10^6 = \\ldots" },
-      { label: "i.", math: "5 \\times 10^4 + 3 \\times 10^3 = 5 \\times 10^4 + 0{,}3 \\times 10^4 = \\ldots" },
-      { label: "j.", math: "7 \\times 10^8 - 3 \\times 10^8 = \\ldots" },
+      { label: "a.", math: "(4 \\times 10^3)(5 \\times 10^6) = \\ldots" },
+      { label: "b.", math: "(2{,}5 \\times 10^7)(4 \\times 10^3) = \\ldots" },
+      { label: "c.", math: "\\frac{8 \\times 10^9}{4 \\times 10^3} = 2 \\times 10^6" },
+      { label: "d.", math: "\\frac{9 \\times 10^8}{3 \\times 10^{-2}} = \\ldots" },
+      { label: "e.", math: "4{,}2 \\times 10^6 + 3{,}8 \\times 10^6 = \\ldots" },
+      { label: "f.", math: "5 \\times 10^4 + 3 \\times 10^3 = 5 \\times 10^4 + 0{,}3 \\times 10^4 = \\ldots" },
 
     ],
   }),

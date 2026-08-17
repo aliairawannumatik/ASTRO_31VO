@@ -282,6 +282,24 @@ const LuasSegiempatLatihanPage = () => {
               </p>
             </Q>
           </Section>
+
+          <Section title="Diketahui Luas, Tentukan Unsur Bangun" color="#facc15">
+            <Q no={16} badge="Persegi" badgeColor="#facc15">
+              <p>Diketahui luas sebuah persegi adalah <InlineMath math="196\text{ cm}^2" />. Tentukan panjang sisinya.</p>
+            </Q>
+            <Q no={17} badge="Persegi Panjang" badgeColor="#facc15">
+              <p>Sebuah persegi panjang memiliki luas <InlineMath math="360\text{ cm}^2" /> dan panjang <InlineMath math="24\text{ cm}" />. Tentukan lebarnya.</p>
+            </Q>
+            <Q no={18} badge="Jajargenjang" badgeColor="#facc15">
+              <p>Luas jajargenjang adalah <InlineMath math="240\text{ cm}^2" /> dan panjang alasnya <InlineMath math="20\text{ cm}" />. Tentukan tingginya.</p>
+            </Q>
+            <Q no={19} badge="Trapesium" badgeColor="#facc15">
+              <p>Sebuah trapesium memiliki luas <InlineMath math="180\text{ cm}^2" />, sisi sejajar masing-masing <InlineMath math="10\text{ cm}" /> dan <InlineMath math="20\text{ cm}" />. Tentukan tingginya.</p>
+            </Q>
+            <Q no={20} badge="Belah Ketupat dan Layang-layang" badgeColor="#facc15">
+              <p>Luas sebuah belah ketupat adalah <InlineMath math="216\text{ cm}^2" /> dan salah satu diagonalnya <InlineMath math="18\text{ cm}" />. Tentukan diagonal lainnya. Kemudian, sebutkan unsur-unsur yang diperlukan untuk menentukan luas layang-layang.</p>
+            </Q>
+          </Section>
         </div>
 
         <div className="mt-10 text-center">
