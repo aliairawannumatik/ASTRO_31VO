@@ -14,7 +14,7 @@ export const dasarImages: Record<number, string> = {
   13: "https://drive.google.com/thumbnail?id=1lvt_8S3sZ1GRMIPjjbLxTmaG86AyvZDY&sz=w400",
 };
 
-const olimpiadeImages: Record<number, string[]> = {
+export const olimpiadeImages: Record<number, string[]> = {
   15: ["https://drive.google.com/thumbnail?id=1lqWo5Cc9vHSSHC-WHLnX0ON8F3ylqlkr&sz=w400"],
   18: ["/images/image_1777276668610.png", "/images/image_1777276672599.png"],
   21: ["https://drive.google.com/thumbnail?id=1ixB2VPBj9P1vqB4CHDCPhAOkUsU_8wTO&sz=w400"],

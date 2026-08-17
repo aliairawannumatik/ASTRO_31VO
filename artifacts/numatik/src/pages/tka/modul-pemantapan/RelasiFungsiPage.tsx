@@ -37,7 +37,9 @@ const latihanDasarItems: LatihanSoal[] = [
   { no: 25, soal: "Diketahui fungsi $f(5) = 16$, maka nilai $f(2)$ jika $2f(x) = f(x+1)$ adalah...", options: ["A. 1", "B. 2", "C. 5", "D. 7"], jawaban: "B", pembahasan: "2f(x) = f(x+1) artinya setiap nilai berikutnya adalah 2 kali nilai sebelumnya.\nf(5) = 16\nf(5) = 2·f(4) → f(4) = f(5)/2 = 8\nf(4) = 2·f(3) → f(3) = 8/2 = 4\nf(3) = 2·f(2) → f(2) = 4/2 = 2 → Jawaban B" },
 ]; 
 
-const latihanDasar: LatihanSoal[] = latihanDasarItems.map((item, index) => ({ ...item, no: index + 1 }));
+const latihanDasar: LatihanSoal[] = latihanDasarItems
+  .filter((item) => item.no !== 5)
+  .map((item, index) => ({ ...item, no: index + 1 }));
 
 const RelasiFungsiPage = () => (
   <TKAPemantapanLayout
