@@ -191,7 +191,7 @@ interface Soal {
 }
 
 // ─── Data Latihan Dasar ───────────────────────────────────────────────────────
-const latihanDasar: Soal[] = [
+export const latihanDasar: Soal[] = [
   {
     no: 1,
     soal: "Diketahui\nS = {x | x < 15, x $\\in$ bilangan asli}\nP = {x | 2 $\\leq$ x < 10, x $\\in$ bilangan prima}\nQ = {x | 2 < x $\\leq$ 10, x $\\in$ bilangan genap}\nDiagram Venn yang menyatakan hubungan di atas adalah ...",

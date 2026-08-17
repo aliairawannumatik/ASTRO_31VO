@@ -1092,7 +1092,7 @@ Sampel: Sebagian dari populasi yang diambil untuk diteliti. Sampel harus represe
   },
 ];
 
-const latihanDasar = [
+export const latihanDasar = [
   { no: 1, soal: "Diketahui data berikut: 85, 90, 70, 80, 70, 65, 80, 85, 70, 80, 95, 70. Modus dan median data tersebut berturut-turut adalah ...", options: ["A. 65 dan 80", "B. 70 dan 80", "C. 75 dan 70", "D. 80 dan 75"] },
   { no: 2, soal: "Median dan mean dari data: 5, 5, 7, 3, 2, 5, 6, 9, 7, 10, 7, 7 berturut-turut adalah ...", options: ["A. 5,5 dan 6,1", "B. 5,5 dan 7,0", "C. 6,5 dan 6,1", "D. 6,5 dan 7,0"] },
   { no: 3, soal: "Nilai matematika siswa disajikan dalam tabel berikut:\nNilai: 4, 5, 6, 7, 8, 9, 10\nBanyak siswa: 2, 4, 5, 5, 9, 3, 4\nMedian dari data di atas adalah ...", options: ["A. 6,5", "B. 7,0", "C. 7,5", "D. 8,0"] },
