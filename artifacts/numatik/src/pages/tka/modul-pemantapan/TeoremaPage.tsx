@@ -1,5 +1,7 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
+import { latihanDasar as latihanDasarOlimpiade, latihanDasarGambarMap } from "@/pages/OlimpiadeTeoremaPage";
+import { teoremaPythagorasDasarPembahasan } from "@/data/pembahasan/teoremaPythagorasDasar";
 
 // ─── Materi ───────────────────────────────────────────────────────────────────
 
@@ -120,7 +122,7 @@ Pada segitiga siku-siku sama kaki dengan sudut $45°$, $45°$, dan $90°$:
 // ─── Latihan Soal — 30 soal merata: 10 PG · 10 PGK · 10 PGKBS ──────────────
 // Pola susunan: PG (ganjil/1,4,7,...) · PGK (2,5,8,...) · PGKBS (3,6,9,...)
 
-const latihanDasar: LatihanSoal[] = [
+const latihanDasarTkaLama: LatihanSoal[] = [
   // ── SOAL 1 — PG ────────────────────────────────────────────────────────────
   {
     no: 1,
@@ -598,7 +600,11 @@ const TeoremaPage = () => (
     materiSections={materiSections}
     contohSoal={contohSoal}
     soalSvgMap={contohSvgMap}
-  latihanDasar={latihanDasar}
+  latihanDasar={latihanDasarOlimpiade.map((soal) => ({
+    ...soal,
+    pembahasan: teoremaPythagorasDasarPembahasan[soal.no],
+  }))}
+  gambarMap={latihanDasarGambarMap}
   />
 );
 

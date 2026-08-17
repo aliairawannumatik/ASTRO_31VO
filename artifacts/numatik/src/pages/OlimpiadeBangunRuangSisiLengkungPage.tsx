@@ -316,7 +316,7 @@ const ShapeSection = ({ shape }: { shape: typeof shapes[0] }) => {
   );
 };
 
-/* ══════════════════════��═══════════════════════
+/* ═════════════════���════��═══════════════════════
    DATA
 ══════════════════════════════════════════════ */
 const shapes = [
@@ -417,7 +417,7 @@ const shapes = [
   },
 ];
 
-const latihanDasar = [
+export const latihanDasar = [
   { no: 1, soal: "Banyak rusuk pada tabung adalah ...", options: ["A. Tidak ada", "B. 1 buah", "C. 2 buah", "D. 4 buah"] },
   { no: 2, soal: "Banyak sisi pada bola adalah ...", options: ["A. 4 buah", "B. 3 buah", "C. 2 buah", "D. 1 buah"] },
   { no: 3, soal: "Nomor yang menunjukkan rusuk pada kerucut berikut adalah ...", options: ["A. 1", "B. 2", "C. 3", "D. 4"] },

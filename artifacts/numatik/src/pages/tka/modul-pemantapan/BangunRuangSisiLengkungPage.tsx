@@ -1,7 +1,8 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
 import { getTkaContohSoal } from "@/data/tkaContohSoal";
-import { brslDasarImages } from "@/pages/OlimpiadeBangunRuangSisiLengkungPage";
+import { latihanDasar as latihanDasarOlimpiade, brslDasarImages } from "@/pages/OlimpiadeBangunRuangSisiLengkungPage";
+import { brslDasarPembahasan } from "@/data/pembahasan/brslDasar";
 
 const materiSections: MateriSection[] = [
   { heading: "A. Tabung (Silinder)", content: `Tabung: bangun ruang dengan dua sisi alas dan tutup berbentuk lingkaran, sisi selimut berbentuk persegi panjang.\n\nJika jari-jari = r dan tinggi = t:\n- Luas selimut = $2\\pi rt$\n- Luas permukaan = $2\\pi r(r + t)$\n- Volume = $\\pi r^2 t$` },
@@ -10,7 +11,7 @@ const materiSections: MateriSection[] = [
   { heading: "D. Perbandingan Volume", content: `Tabung : Kerucut : Bola\nDengan r dan t yang sama:\n$V_{tabung} : V_{kerucut} : V_{bola} = 3 : 1 : 2$\n\n(Catatan: r dan t/d harus sesuai)` },
 ];
 
-const latihanDasar: LatihanSoal[] = [
+const latihanDasarTkaLama: LatihanSoal[] = [
   { no: 1, soal: "Banyak rusuk pada tabung adalah ...", options: ["A. Tidak ada", "B. 1 buah", "C. 2 buah", "D. 4 buah"] },
   { no: 2, soal: "Banyak sisi pada bola adalah ...", options: ["A. 4 buah", "B. 3 buah", "C. 2 buah", "D. 1 buah"] },
   { no: 3, soal: "Nomor yang menunjukkan rusuk pada kerucut berikut adalah ...", options: ["A. 1", "B. 2", "C. 3", "D. 4"] },
@@ -63,8 +64,8 @@ const BangunRuangSisiLengkungPage = () => (
     title="BANGUN RUANG SISI LENGKUNG"
   materiSections={materiSections}
   contohSoal={getTkaContohSoal("bangun-ruang-sisi-lengkung")}
-  latihanDasar={latihanDasar}
-    gambarMap={brslDasarImages}
+  latihanDasar={latihanDasarOlimpiade.map((soal) => ({ ...soal, pembahasan: brslDasarPembahasan[soal.no] }))}
+    gambarMap={Object.fromEntries(Object.entries(brslDasarImages).map(([no, src]) => [Number(no), <img src={src} alt={`Gambar soal ${no}`} className="mx-auto w-full max-w-sm rounded-lg border border-border/40 bg-background p-2" />]))}
   />
 );
 

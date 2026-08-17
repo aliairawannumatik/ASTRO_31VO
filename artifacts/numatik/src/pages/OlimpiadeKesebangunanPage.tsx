@@ -21,7 +21,7 @@ const kesOlimpiadeImages: Record<number, string> = {
   17: "https://drive.google.com/thumbnail?id=1w1wcWrReTboJVqtl59ZRB1bOnbuXGi4S&sz=w400",
 };
 
-const kesDasarImages: Record<number, string> = {
+export const kesDasarImages: Record<number, string> = {
   3: "https://drive.google.com/thumbnail?id=1ZP5r-eDLDKqa_q-Vl_VgLnSSXb_6Fw_V&sz=w400",
   4: "https://drive.google.com/thumbnail?id=1ROQpFuAJ_OJmnYkdpUHsdDrW-rgtSeEh&sz=w400",
   6: "https://drive.google.com/thumbnail?id=1WjJCZ5nKRuOb0gnNyrISrI2d5NP6Egh9&sz=w400",
@@ -100,7 +100,7 @@ Syarat dua segitiga kongruen:
   ]
 };
 
-const latihanDasar = [
+export const latihanDasar = [
   {
     no: 1,
     soal: "Perhatikan gambar bangun-bangun berikut:\n(i) Dua buah persegi\n(ii) Dua buah persegi panjang\n(iii) Dua buah segitiga sama sisi\n(iv) Dua buah belah ketupat\n\nPasangan bangun di samping yang pasti sebangun adalah ...",

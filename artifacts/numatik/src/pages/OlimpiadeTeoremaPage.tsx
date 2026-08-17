@@ -919,7 +919,7 @@ Pada segitiga siku-siku sama kaki dengan sudut $45°$, $45°$, dan $90°$:
   ]
 };
 
-const latihanDasar = [
+export const latihanDasar = [
   { no: 1, soal: "Diketahui ukuran segitiga:\ni. 1 cm, 1 cm, 1 cm\nii. 8 cm, 10 cm, 18 cm\niii. 12 cm, 21 cm, 8 cm\niv. 5 cm, 12 cm, 15 cm\nYang dapat membentuk suatu segitiga adalah ....", options: ["A. i dan iii", "B. iii dan iv", "C. i, iii dan iv", "D. i dan iv"] },
   { no: 2, soal: "Diketahui ukuran berikut:\ni. 2 cm, 2 cm, 2 cm\nii. 6 cm, 8 cm, 14 cm\niii. 7 cm, 15 cm, 25 cm\niv. 5 cm, 12 cm, 15 cm\nYang merupakan sisi pada segitiga adalah ..", options: ["A. i dan ii", "B. i dan iv", "C. ii dan iv", "D. iv saja"] },
   { no: 3, soal: "Perhatikan gambar! Dari pernyataan berikut yang benar adalah ....", options: ["A. $p = \\sqrt{r^2 + q^2}$", "B. $q = \\sqrt{r^2 - p^2}$", "C. $p = \\sqrt{q^2 - r^2}$", "D. $q = \\sqrt{r^2 + p^2}$"] },
@@ -1202,6 +1202,35 @@ const latihanOlimpiade = [
   { no: 12, soal: "OSN Matematika 2023 Tingkat Kota\nDiketahui segitiga ABC dengan panjang sisi AB = 20 cm. Titik P berada pada sisi AB sehingga AP = BP = CP. Luas daerah segitiga APC adalah 30 cm$^2$. Jika jarak titik P ke sisi BC adalah d cm, maka nilai terbesar dari $d^2$ yang mungkin adalah ...", options: [] },
   { no: 13, soal: "OSN Matematika 2026 Tingkat Kota\nABCD adalah sebuah persegi panjang akan dilipat sesuai garis putus-putus. Diketahui $\\angle PQC = 30°$ dan $BC = 9$ cm. Panjang $PQ$ adalah ....", options: ["A. 12 cm", "B. 15 cm", "C. $6\\sqrt{3}$ cm", "D. $9\\sqrt{3}$ cm"] },
 ];
+
+const latihanDiagramSvg = (kind: "kite" | "house" | "fold" | "triangle" | "trapezoid") => (
+  <svg viewBox="0 0 320 190" role="img" aria-label="Gambar geometri latihan Teorema Pythagoras" className="mx-auto w-full max-w-sm rounded-lg border border-border/40 bg-white/5 p-2">
+    {kind === "kite" && <><path d="M160 18 L265 92 L160 170 L55 92 Z" fill="none" stroke="#22d3ee" strokeWidth="2"/><path d="M160 18 L160 170 M55 92 L265 92" stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="5 4"/><text x="153" y="13" fill="#38bdf8" fontSize="13">A</text><text x="270" y="96" fill="#38bdf8" fontSize="13">B</text><text x="153" y="184" fill="#38bdf8" fontSize="13">C</text><text x="38" y="96" fill="#38bdf8" fontSize="13">D</text></>}
+    {kind === "house" && <><path d="M55 155 L55 85 L160 25 L265 85 L265 155 Z" fill="none" stroke="#22d3ee" strokeWidth="2"/><path d="M55 85 H265 M160 25 V155" stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="5 4"/><text x="42" y="170" fill="#38bdf8" fontSize="13">A</text><text x="268" y="170" fill="#38bdf8" fontSize="13">B</text><text x="268" y="82" fill="#38bdf8" fontSize="13">C</text><text x="153" y="20" fill="#38bdf8" fontSize="13">D</text><text x="137" y="175" fill="#fbbf24" fontSize="12">15 cm</text></>}
+    {kind === "fold" && <><rect x="55" y="35" width="210" height="120" fill="none" stroke="#22d3ee" strokeWidth="2"/><path d="M55 155 L160 35 L265 155 M160 35 V155" fill="none" stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="5 4"/><text x="145" y="28" fill="#38bdf8" fontSize="13">P</text><text x="42" y="170" fill="#38bdf8" fontSize="13">A</text><text x="267" y="170" fill="#38bdf8" fontSize="13">D</text><text x="210" y="100" fill="#fbbf24" fontSize="12">30°</text></>}
+    {kind === "triangle" && <><path d="M65 150 L65 42 L255 150 Z" fill="none" stroke="#22d3ee" strokeWidth="2"/><path d="M65 135 h15 v15" fill="none" stroke="#22d3ee" strokeWidth="1.5"/><text x="50" y="164" fill="#38bdf8" fontSize="13">A</text><text x="50" y="38" fill="#38bdf8" fontSize="13">B</text><text x="260" y="164" fill="#38bdf8" fontSize="13">C</text><text x="145" y="164" fill="#fbbf24" fontSize="12">150 m</text><text x="38" y="98" fill="#fbbf24" fontSize="12">150 m</text></>}
+    {kind === "trapezoid" && <><path d="M65 145 L105 45 L240 45 L270 145 Z" fill="none" stroke="#22d3ee" strokeWidth="2"/><path d="M105 45 V145" stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="5 4"/><text x="52" y="160" fill="#38bdf8" fontSize="13">A</text><text x="95" y="38" fill="#38bdf8" fontSize="13">B</text><text x="242" y="38" fill="#38bdf8" fontSize="13">C</text><text x="274" y="160" fill="#38bdf8" fontSize="13">D</text></>}
+  </svg>
+);
+
+export const latihanDasarGambarMap: Record<number, React.ReactNode> = {
+  10: latihanDiagramSvg("trapezoid"),
+  13: <PersegiPanjangLipatSVG />,
+  18: latihanDiagramSvg("triangle"),
+  20: latihanDiagramSvg("house"),
+  21: latihanDiagramSvg("house"),
+  3: <SegitigaPQRSVG />,
+  4: <SegitigaABC182430SVG />,
+  5: <SegitigaABD72425SVG />,
+  6: <SegitigaCABD9_15_41_SVG />,
+  7: <Soal7ABCDESVG />,
+  11: <TabelSegitiga11 />,
+  15: <SegitigaXSVG />,
+  23: <LayangLayangABCDSVG />,
+  24: <JajargenjangABCDSVG />,
+  27: <SegitigaPQR30SVG />,
+  29: <Soal29ABCDSVG />,
+};
 
 const OlimpiadeTeoremaPage = () => {
   const navigate = useNavigate();
