@@ -418,7 +418,7 @@ const translations = {
     c1_hard_s2: "指数が同じ場合",
     c1_hard_s2b: "、係数を比べる：2.9 < 3.2。",
     sec_k2: "📘 第2節：科学的記数法の書き方のルール",
-    k2_intro: "科学的記数法の主なプロセスは2つ：通常の数を科学的記数法に変換すること、またその逆。鍵は",
+    k2_intro: "科学的記数法の主なプロセスは2つ：通常の数を科学的記数法に変換すること、���たその逆。鍵は",
     k2_intro2: "小数点の移動回数を数える",
     k2_intro3: "こと。",
     k2_rule1: "📌 ルール1 — 通常の数 → 科学的記数法",
@@ -721,6 +721,14 @@ const NotasiIlmiahPage = () => {
                     <strong>{t.tip_k1}</strong> {t.tip_k1b} <em>{t.tip_k1c}</em> {t.tip_k1d} <em>{t.tip_k1e}</em> {t.tip_k1f}
                   </p>
                 </div>
+                <div className="rounded-lg border border-cyan-400/40 bg-cyan-500/10 p-4">
+                  <p className="font-body text-sm font-semibold text-cyan-200">Tips penting untuk menentukan tanda pangkat</p>
+                  <div className="mt-2 grid gap-3 md:grid-cols-2">
+                    <p className="font-body text-sm leading-relaxed text-white/80">Angka besar ditulis dalam bentuk <InlineMath math="a \times 10^n" /> dengan <InlineMath math="n > 0" />.</p>
+                    <p className="font-body text-sm leading-relaxed text-white/80">Angka kecil ditulis dalam bentuk <InlineMath math="a \times 10^{-n}" /> dengan <InlineMath math="n > 0" />.</p>
+                  </div>
+                  <p className="mt-2 font-body text-xs text-cyan-100/75">Selalu pastikan koefisien memenuhi <InlineMath math="1 \\le a < 10" />.</p>
+                </div>
               </div>
             )}
           </div>
@@ -893,12 +901,28 @@ const NotasiIlmiahPage = () => {
                     <Dark>
                       <BlockMath math="(3{,}2 \times 2{,}5) \times (10^4 \times 10^3) = 8 \times 10^7" />
                     </Dark>
-                    <p><strong className="text-primary">{t.hasil} <InlineMath math="8 \\times 10^7" /></strong></p>
+                    <p><strong className="text-primary">{t.hasil} <InlineMath math="8 \times 10^7" /></strong></p>
                   </>}
                 />
                 </div>
               </div>
             )}
+          </div>
+
+          {/* PEMBULATAN NOTASI ILMIAH */}
+          <div className="rounded-2xl border border-amber-300/30 bg-gradient-to-br from-amber-500/15 via-orange-500/10 to-rose-500/15 p-5 shadow-lg shadow-orange-950/20">
+            <p className="mb-2 text-center font-display text-xl font-bold text-amber-100 md:text-2xl">DIGIT ≥ 5 → TAMBAH 1 KE KIRI &nbsp; | &nbsp; DIGIT &lt; 5 → TETAP</p>
+            <p className="mb-4 text-center font-body text-xs uppercase tracking-[0.18em] text-amber-200/75">Pembulatan bilangan dalam notasi ilmiah</p>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="rounded-xl border border-white/10 bg-slate-950/30 p-4">
+                <p className="font-body text-sm leading-6 text-white/80">Contoh: <InlineMath math="12.345.689.000 = 1{,}2345689 \times 10^{10}" />. Jika dibulatkan dengan 2 angka di belakang koma, pertahankan <InlineMath math="1{,}23" /> dan lihat digit berikutnya, yaitu 4.</p>
+                <p className="mt-3 font-display text-lg font-bold text-emerald-200"><InlineMath math="1{,}2345689 \times 10^{10} \approx 1{,}23 \times 10^{10}" /></p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-slate-950/30 p-4">
+                <p className="font-body text-sm leading-6 text-white/80">Digit yang dihilangkan menjadi penentu. Jika digit itu ≥ 5, angka terakhir yang dipertahankan bertambah 1 ke kiri. Jika &lt; 5, angka kiri tetap.</p>
+                <p className="mt-3 font-body text-sm font-semibold text-yellow-100"><InlineMath math="3{,}4567 \times 10^5 \approx 3{,}46 \times 10^5" /> karena 6 ≥ 5.</p>
+              </div>
+            </div>
           </div>
 
           {/* SUB-BAB 3: OPERASI */}
@@ -925,73 +949,11 @@ const NotasiIlmiahPage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="rounded-2xl border border-amber-300/30 bg-gradient-to-br from-amber-500/15 via-orange-500/10 to-rose-500/15 p-5 shadow-lg shadow-orange-950/20">
-                  <p className="mb-2 text-center font-display text-xl font-bold text-amber-100 md:text-2xl">DIGIT ≥ 5 → TAMBAH 1 KE KIRI &nbsp; | &nbsp; DIGIT &lt; 5 → TETAP</p>
-                  <p className="mb-4 text-center font-body text-xs uppercase tracking-[0.18em] text-amber-200/75">Pembulatan bilangan dalam notasi ilmiah</p>
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <div className="rounded-xl border border-white/10 bg-slate-950/30 p-4">
-                      <p className="font-body text-sm leading-6 text-white/80">Contoh: <InlineMath math="12.345.689.000 = 1{,}2345689 \\times 10^{10}" />. Jika dibulatkan dengan 2 angka di belakang koma, pertahankan <InlineMath math="1{,}23" /> dan lihat digit berikutnya, yaitu 4.</p>
-                      <p className="mt-3 font-display text-lg font-bold text-emerald-200"><InlineMath math="1{,}2345689 \\times 10^{10} \\approx 1{,}23 \\times 10^{10}" /></p>
-                    </div>
-                    <div className="rounded-xl border border-white/10 bg-slate-950/30 p-4">
-                      <p className="font-body text-sm leading-6 text-white/80">Digit yang dihilangkan menjadi penentu. Jika digit itu ≥ 5, angka terakhir yang dipertahankan bertambah 1 ke kiri. Jika &lt; 5, angka kiri tetap.</p>
-                      <p className="mt-3 font-body text-sm font-semibold text-yellow-100"><InlineMath math="3{,}4567 \\times 10^5 \\approx 3{,}46 \\times 10^5" /> karena 6 ≥ 5.</p>
-                    </div>
-                  </div>
-                  <div className="mt-4 grid gap-3 md:grid-cols-3">
-                    <div className="rounded-xl bg-cyan-400/10 p-3"><p className="font-display font-bold text-cyan-100">Rangkuman</p><p className="mt-1 font-body text-xs leading-5 text-white/70">Bentuk notasi ilmiah adalah <InlineMath math="a \\times 10^n" /> dengan <InlineMath math="1 \\le a < 10" />.</p></div>
-                    <div className="rounded-xl bg-violet-400/10 p-3"><p className="font-display font-bold text-violet-100">Tips dan trik</p><p className="mt-1 font-body text-xs leading-5 text-white/70">Normalisasi koefisien, tentukan angka yang dipertahankan, lalu periksa satu digit sesudahnya.</p></div>
-                    <div className="rounded-xl bg-emerald-400/10 p-3"><p className="font-display font-bold text-emerald-100">Kesimpulan</p><p className="mt-1 font-body text-xs leading-5 text-white/70">Pembulatan membuat bilangan lebih ringkas tanpa mengubah pendekatan nilainya.</p></div>
-                  </div>
-                </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-yellow-200">
                     <strong>{t.tip_k3}</strong> {t.tip_k3b} <InlineMath math="1 \leq |a| < 10" />{t.tip_k3c}
                   </p>
                 </div>
-              </div>
-            )}
-          </div>
-
-  {/* CONTOH 3 disembunyikan sesuai materi ringkas */}
-  <div className="hidden bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="c3" icon={<Calculator className="w-5 h-5" />} iconColor="text-cyan-400" title={t.sec_c3} />
-            {isOpen("c3") && (
-              <div className="px-5 pb-5 space-y-6">
-                <ExBlock level="easy" n={1}
-                  soal={<>{t.c3_easy_q} <InlineMath math="(6 \times 10^5) \div (2 \times 10^2)" /></>}
-                  solution={<>
-                    <Dark>
-                      <BlockMath math="\frac{6 \times 10^5}{2 \times 10^2} = \frac{6}{2} \times 10^{5-2} = 3 \times 10^3 = 3.000" />
-                    </Dark>
-                  </>}
-                />
-                <ExBlock level="med" n={2}
-                  soal={<>{t.c3_med_q} <InlineMath math="(3 \times 10^4) + (5 \times 10^3)" /></>}
-                  solution={<>
-                    <p><strong>{t.step} 1:</strong> {t.c3_hard_s1}</p>
-                    <Dark><BlockMath math="5 \times 10^3 = 0{,}5 \times 10^4" /></Dark>
-                    <p><strong>{t.step} 2:</strong> {t.c3_hard_s2}</p>
-                    <Dark><BlockMath math="(3 + 0{,}5) \times 10^4 = 3{,}5 \times 10^4" /></Dark>
-                  </>}
-                />
-                <ExBlock level="hard" n={3}
-                  soal={<>
-                    {t.c3_hard_q} <InlineMath math="8{,}4 \times 10^{24}" /> {t.c3_hard_q2} <InlineMath math="2{,}1 \times 10^{22}" /> {t.c3_hard_q3}
-                  </>}
-                  solution={<>
-                    <p><strong>{t.step} 1:</strong> {t.c3_hard_s1}</p>
-                    <Dark>
-                      {/* KaTeX fix: replace \text{ kg} with \,\mathrm{kg} */}
-                      <BlockMath math="2{,}1 \times 10^{22} = 0{,}021 \times 10^{24}" />
-                    </Dark>
-                    <p><strong>{t.step} 2:</strong> {t.c3_hard_s2}</p>
-                    <Dark>
-                      <BlockMath math="(8{,}4 + 0{,}021) \times 10^{24} = 8{,}421 \times 10^{24}\,\mathrm{kg}" />
-                    </Dark>
-                    <p><strong className="text-primary">{t.hasil} <InlineMath math="8{,}421 \times 10^{24}\,\mathrm{kg}" /></strong></p>
-                  </>}
-                />
               </div>
             )}
           </div>
@@ -1016,17 +978,17 @@ const NotasiIlmiahPage = () => {
                       {
                         icon: "⚡",
                         label: language === "en" ? "Speed of light" : language === "ja" ? "光速" : "Kecepatan cahaya",
-                        val: "3 \\times 10^8 \\,\\mathrm{m/s}",
+                        val: "3 \times 10^8 \\,\\mathrm{m/s}",
                       },
                       {
                         icon: "🌍",
                         label: language === "en" ? "Earth's mass" : language === "ja" ? "地球の質量" : "Massa Bumi",
-                        val: "5{,}97 \\times 10^{24} \\,\\mathrm{kg}",
+                        val: "5{,}97 \times 10^{24} \\,\\mathrm{kg}",
                       },
                       {
                         icon: "🦠",
                         label: language === "en" ? "Bacteria size" : language === "ja" ? "細菌のサイズ" : "Ukuran bakteri",
-                        val: "1 \\times 10^{-6} \\,\\mathrm{m}",
+                        val: "1 \times 10^{-6} \\,\\mathrm{m}",
                       },
                       {
                         icon: "💾",
@@ -1048,7 +1010,7 @@ const NotasiIlmiahPage = () => {
                     {language === "en" ? "🌟 CALCULATION: Distance light travels in 1 year" : language === "ja" ? "🌟 計算：光が1年間で進む距離" : "🌟 PERHITUNGAN: Jarak yang ditempuh cahaya dalam 1 tahun"}
                   </p>
                   <div className="space-y-2 font-body text-xs text-white/70">
-                    <p>{language === "en" ? "1 year = " : language === "ja" ? "1年 = " : "1 tahun = "}<InlineMath math="365\\times24\\times3600" /> {language === "en" ? "seconds:" : language === "ja" ? "秒：" : "detik:"}</p>
+                    <p>{language === "en" ? "1 year = " : language === "ja" ? "1年 = " : "1 tahun = "}<InlineMath math="365\times24\times3600" /> {language === "en" ? "seconds:" : language === "ja" ? "秒：" : "detik:"}</p>
                     <Dark>
                       {/* KaTeX fix: \text{ detik} → \,\mathrm{s} and \text{ meter} → \,\mathrm{m} */}
                       <BlockMath math="365 \times 86400 = 31.536.000 \approx 3{,}1536 \times 10^7\,\mathrm{s}" />
@@ -1068,6 +1030,29 @@ const NotasiIlmiahPage = () => {
                 </div>
               </div>
             )}
+          </div>
+
+          {/* RANGKUMAN DAN TIPS AKHIR */}
+          <div className="rounded-2xl border border-primary/30 bg-primary/10 p-5">
+            <h2 className="font-display text-2xl font-bold text-primary">Rangkuman dan Tips-Trik Notasi Ilmiah</h2>
+            <div className="mt-4 grid gap-4 md:grid-cols-2">
+              <div className="rounded-xl border border-white/10 bg-slate-900/40 p-4">
+                <h3 className="font-display font-bold text-cyan-200">Rangkuman</h3>
+                <ul className="mt-2 list-disc space-y-2 pl-5 font-body text-sm leading-relaxed text-white/80">
+                  <li>Bentuk umum notasi ilmiah adalah <InlineMath math="a \times 10^n" /> dengan <InlineMath math="1 \\le a < 10" />.</li>
+                  <li>Bilangan besar memiliki pangkat positif, sedangkan bilangan kecil memiliki pangkat negatif.</li>
+                  <li>Pada perkalian, koefisien dikalikan dan pangkat dijumlahkan; pada pembagian, pangkat dikurangkan.</li>
+                </ul>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-slate-900/40 p-4">
+                <h3 className="font-display font-bold text-amber-200">Tips dan trik</h3>
+                <ul className="mt-2 list-disc space-y-2 pl-5 font-body text-sm leading-relaxed text-white/80">
+                  <li>Hitung perpindahan koma dengan teliti untuk menentukan besar dan tanda pangkat.</li>
+                  <li>Normalisasi kembali koefisien jika hasil operasi belum berada antara 1 dan 10.</li>
+                  <li>Saat membulatkan, lihat satu digit setelah angka terakhir: digit ≥ 5 naik 1, digit &lt; 5 tetap.</li>
+                </ul>
+              </div>
+            </div>
           </div>
 
         </div>
