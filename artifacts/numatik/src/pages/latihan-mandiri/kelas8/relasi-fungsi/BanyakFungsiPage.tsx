@@ -82,6 +82,11 @@ const BanyakFungsiPage = () => {
         { label: "d.", text: t(`${p}.q5.partDText`) },
       ],
     }),
+    Qn(6, t(`${p}.q6.title`), {
+      type: "mixed",
+      content: t(`${p}.q6.content`),
+      parts: [{ label: "a.", text: t(`${p}.q6.partAText`) }],
+    }),
   ];
 
   return (
@@ -99,7 +104,7 @@ const BanyakFungsiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">{t(`${p}.grade`)} · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 5 {t('practice.suffixSoal')}</span>
+            <span className="text-orange-400 text-xs font-bold">📋 6 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>

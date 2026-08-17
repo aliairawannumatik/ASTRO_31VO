@@ -4701,7 +4701,7 @@
         },
         "q3": {
           "title": "Korespondensi Satu-Satu",
-          "content": "Tentukan banyak korespondensi satu-satu dari A ke B.",
+          "content": "Diketahui P = {x | 1 ≤ x < 12, x ∈ bilangan genap} dan Q = {y | 1 < y ≤ 4, y ∈ bilangan bulat}.",
           "textA": "Banyak korespondensi satu-satu dari A ke B",
           "partBText": "Gambarlah semua korespondensi satu-satu yang mungkin dari A ke B menggunakan diagram panah.",
           "partCText": "Menurut kamu apakah banyak korespondensi satu-satu dari A ke B dengan B ke A sama atau berbeda? Mengapa?"
@@ -4720,6 +4720,11 @@
           "partBText": "Apakah syarat korespondensi satu-satu terpenuhi antara P dan Q? Jelaskan.",
           "textC": "Banyak korespondensi satu-satu yang dapat dibuat",
           "partDText": "Apakah banyak korespondensi satu-satu dari P ke Q sama dengan dari Q ke P? Mengapa?"
+        },
+        "q6": {
+          "title": "Analogi Korespondensi Satu-Satu",
+          "content": "Sebuah hotel memiliki 6 kamar dan 6 tamu. Setiap tamu menempati tepat satu kamar dan setiap kamar dihuni tepat satu tamu.",
+          "partAText": "Banyak cara menempati kamar = …"
         },
         "grade": "Kelas 8 · Relasi dan Fungsi",
         "backToTopic": "Relasi dan Fungsi"
