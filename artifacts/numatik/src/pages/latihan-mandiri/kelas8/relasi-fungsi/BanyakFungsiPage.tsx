@@ -30,10 +30,7 @@ const BanyakFungsiPage = () => {
   const q2textC = t(`${p}.q2.textC`);
   const q3textA = t(`${p}.q3.textA`);
   const q4textB = t(`${p}.q4.textB`);
-  const q4textC = t(`${p}.q4.textC`);
   const q5textC = t(`${p}.q5.textC`);
-  const q6textC1 = t(`${p}.q6.textC1`);
-  const q6textC2 = t(`${p}.q6.textC2`);
 
   const questions: Q[] = [
     Qn(1, t(`${p}.q1.title`), {
@@ -72,7 +69,6 @@ const BanyakFungsiPage = () => {
       parts: [
         { label: "a.", text: t(`${p}.q4.partAText`) },
         { label: "b.", math: `\\text{${q4textB}} = \\ldots` },
-        { label: "c.", math: `\\text{${q4textC}} = \\ldots` },
         { label: "d.", text: t(`${p}.q4.partDText`) },
       ],
     }),
@@ -84,15 +80,6 @@ const BanyakFungsiPage = () => {
         { label: "b.", text: t(`${p}.q5.partBText`) },
         { label: "c.", math: `\\text{${q5textC}} = \\ldots` },
         { label: "d.", text: t(`${p}.q5.partDText`) },
-      ],
-    }),
-    Qn(6, t(`${p}.q6.title`), {
-      type: "mixed",
-      content: t(`${p}.q6.content`),
-      parts: [
-        { label: "a.", text: t(`${p}.q6.partAText`) },
-        { label: "b.", text: t(`${p}.q6.partBText`) },
-        { label: "c.", math: `\\text{${q6textC1}} = \\ldots \\text{ ${q6textC2}}` },
       ],
     }),
   ];
@@ -112,7 +99,7 @@ const BanyakFungsiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">{t(`${p}.grade`)} · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 6 {t('practice.suffixSoal')}</span>
+            <span className="text-orange-400 text-xs font-bold">📋 5 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>

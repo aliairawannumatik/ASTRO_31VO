@@ -4700,8 +4700,8 @@
           "partDText": "Apakah bisa dibentuk korespondensi satu-satu antara A dan B? Jelaskan."
         },
         "q3": {
-          "title": "Korespondensi Satu-Satu – A = {p, q, r, s}, B = {2, 4, 6, 8}",
-          "content": "Diketahui A = {x | 1 ≤ x < 12, x ∈ bilangan genap} dan Q = {y | 1 < y ≤ 4, y ∈ bilangan bulat}.",
+          "title": "Korespondensi Satu-Satu",
+          "content": "Tentukan banyak korespondensi satu-satu dari A ke B.",
           "textA": "Banyak korespondensi satu-satu dari A ke B",
           "partBText": "Gambarlah semua korespondensi satu-satu yang mungkin dari A ke B menggunakan diagram panah.",
           "partCText": "Menurut kamu apakah banyak korespondensi satu-satu dari A ke B dengan B ke A sama atau berbeda? Mengapa?"
@@ -4710,8 +4710,7 @@
           "title": "Soal UN – Menentukan Banyak Pemetaan",
           "content": "Dari himpunan P = {x | 1 ≤ x < 17, x ∈ bilangan prima} dan Q = {y | 2 ≤ y < 14, y ∈ bilangan genap}:",
           "partAText": "Tentukan n(P) dan n(Q).",
-          "textB": "Banyak fungsi dari P ke Q",
-          "textC": "Banyak fungsi dari Q ke P",
+          "textB": "Tentukan banyak korespondensi 1-1 dari P ke Q",
           "partDText": "Apakah bisa dibentuk korespondensi satu-satu antara P dan Q? Jelaskan."
         },
         "q5": {
@@ -4721,14 +4720,6 @@
           "partBText": "Apakah syarat korespondensi satu-satu terpenuhi antara P dan Q? Jelaskan.",
           "textC": "Banyak korespondensi satu-satu yang dapat dibuat",
           "partDText": "Apakah banyak korespondensi satu-satu dari P ke Q sama dengan dari Q ke P? Mengapa?"
-        },
-        "q6": {
-          "title": "Korespondensi – Analogi Nyata",
-          "content": "Sebuah hotel memiliki 10 kamar dan 10 tamu. Setiap tamu menempati tepat satu kamar dan setiap kamar dihuni tepat satu tamu.",
-          "partAText": "Nyatakan situasi ini dalam bentuk fungsi matematika.",
-          "partBText": "Apakah ini merupakan korespondensi satu-satu? Jelaskan.",
-          "textC1": "Banyak cara menempati kamar",
-          "textC2": "(tulis jawaban dalam bentuk faktorial)"
         },
         "grade": "Kelas 8 · Relasi dan Fungsi",
         "backToTopic": "Relasi dan Fungsi"
