@@ -12,7 +12,7 @@ const materiSections: MateriSection[] = [
 
 const latihanDasar: LatihanSoal[] = olimpiadeHimpunan.map((item) => ({
   no: item.no,
-  soal: item.soal,
+  soal: item.soal.replace(/\[IMAGE\]/g, () => item.image ? `[IMAGE:${item.image}]` : ""),
   image: item.image,
   options: item.options,
   jawaban: item.jawaban,

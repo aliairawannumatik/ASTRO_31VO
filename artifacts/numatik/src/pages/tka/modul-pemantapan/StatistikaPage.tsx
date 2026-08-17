@@ -1,7 +1,7 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
 import { getTkaContohSoal } from "@/data/tkaContohSoal";
-import { latihanDasar as olimpiadeStatistika, dasarImages, olimpiadeImages } from "@/pages/OlimpiadeStatistikaPage";
+import { latihanDasar as olimpiadeStatistika } from "@/pages/OlimpiadeStatistikaPage";
 
 const materiSections: MateriSection[] = [
   { heading: "A. Pengertian Statistika", content: `Statistika adalah ilmu yang mempelajari cara pengumpulan, pengolahan, penyajian, dan analisis data.\n\nJenis data:\n- Data kualitatif: bukan berupa angka (warna, jenis kelamin)\n- Data kuantitatif: berupa angka (berat, tinggi, nilai)\n  - Data diskrit: hasil hitungan (jumlah siswa)\n  - Data kontinu: hasil pengukuran (tinggi badan)` },
@@ -12,11 +12,7 @@ const materiSections: MateriSection[] = [
 
 const latihanDasar: LatihanSoal[] = olimpiadeStatistika.map((item) => ({
   no: item.no,
-  soal: [
-    item.soal,
-    ...(dasarImages[item.no] ? [`[IMAGE:${dasarImages[item.no]}]`] : []),
-    ...(olimpiadeImages[item.no] ?? []).map((src) => `[IMAGE:${src}]`),
-  ].join("\n"),
+  soal: item.soal.replace(/\[IMAGE\]/g, () => item.image ? `[IMAGE:${item.image}]` : ""),
   image: item.image,
   options: item.options,
   jawaban: item.jawaban,
@@ -28,8 +24,7 @@ const StatistikaPage = () => (
     title="STATISTIKA"
   materiSections={materiSections}
   contohSoal={getTkaContohSoal("statistika")}
-  latihanDasar={latihanDasar}
-    gambarMap={dasarImages}
+    latihanDasar={latihanDasar}
   />
 );
 
