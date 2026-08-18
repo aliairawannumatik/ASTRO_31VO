@@ -787,35 +787,8 @@ const BilanganBulatPage = () => {
               </p>
             </div>
 
-            {/* ══ TELAAH 1 — PGS ══ */}
-            <TelaahSoal num={1} tipe="PGS">
-              <p className={qText}>
-                Perhatikan garis bilangan berikut. Garis bilangan dimulai dari 0, dilanjutkan ke kanan sejauh 9 satuan, kemudian ke kiri sejauh 13 satuan.
-                Operasi bilangan bulat yang digambarkan pada garis bilangan tersebut adalah ....
-              </p>
-              <MCQ qn={51} correct={2} options={[
-                <span key="a">A. <InlineMath math="-9 - 4 = -4" /></span>,
-                <span key="b">B. <InlineMath math="-4 - 2 = -4" /></span>,
-                <span key="c">C. <InlineMath math="9 - 13 = -4" /></span>,
-                <span key="d">D. <InlineMath math="9 - 4 = 5" /></span>,
-              ]} />
-              <div className="mt-3 space-y-2">
-                <PBJawaban>C. 9 − 13 = −4</PBJawaban>
-                <PBKonsep>
-                  <p>Garis bilangan dimulai dari 0, lalu ke kanan 9 satuan (posisi 9), kemudian ke kiri 13 satuan.</p>
-                  <p>Gerakan ke kanan = penjumlahan (+), gerakan ke kiri = pengurangan (−).</p>
-                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: perhatikan arah panah dari titik awal sampai titik akhir, bukan hanya titik akhirnya.</p>
-                </PBKonsep>
-                <PBSteps>
-                  <S n={1}><p>Mulai dari 0, ke kanan 9 satuan → posisi 9.</p></S>
-                  <S n={2}><p>Dari posisi 9, ke kiri 13 satuan → posisi <InlineMath math="9 - 13 = -4" />.</p></S>
-                  <S n={3}><p>Titik akhir di −4 pada garis bilangan. Operasi yang digambarkan: <InlineMath math="9 - 13 = -4" /> ✓</p></S>
-                </PBSteps>
-              </div>
-            </TelaahSoal>
-
-            {/* ══ TELAAH 2 — MCMA ══ */}
-            <TelaahSoal num={2} tipe="MCMA">
+            {/* ══ TELAAH 1 — MCMA ══ */}
+            <TelaahSoal num={1} tipe="MCMA">
               <p className={qText}>
                 Diketahui bilangan <InlineMath math="a = -4" />, <InlineMath math="b = 7" />, dan <InlineMath math="c = -9" />.
                 Berdasarkan informasi tersebut, pilihlah semua jawaban yang benar. Jawaban benar lebih dari satu.
@@ -842,89 +815,8 @@ const BilanganBulatPage = () => {
               </div>
             </TelaahSoal>
 
-            {/* ══ TELAAH 3 — MCMA ══ */}
-            <TelaahSoal num={3} tipe="MCMA">
-              <p className={qText}>
-                Dalam suatu kompetisi futsal, skor yang diperoleh tim adalah: menang = 3 poin, seri = 1 poin, dan kalah = 0 poin.
-                Tabel berikut menunjukkan hasil pertandingan dari empat tim dalam kompetisi tersebut.
-              </p>
-              <div className="overflow-x-auto mb-3">
-                <table className={`w-full text-xs font-body border-collapse rounded-lg overflow-hidden`}>
-                  <thead>
-                    <tr className={isDark ? "bg-white/10" : "bg-gray-100"}>
-                      {["Nama Tim","Main","Menang","Kalah","Seri","Selisih Gol"].map(h => (
-                        <th key={h} className={`border px-2 py-2 text-center ${isDark ? "border-white/20 text-white" : "border-gray-300 text-gray-700"}`}>{h}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {[
-                      ["Elang Merah","3","2","0","1","3"],
-                      ["Singa Biru","3","1","0","2","2"],
-                      ["Merpati Hijau","3","0","1","2","−1"],
-                      ["Kancil Emas","3","0","2","1","−4"],
-                    ].map((row,i) => (
-                      <tr key={i} className={i%2===0 ? (isDark?"bg-white/3":"bg-gray-50") : ""}>
-                        {row.map((cell,j) => (
-                          <td key={j} className={`border px-2 py-2 text-center ${isDark ? "border-white/10 text-white/80" : "border-gray-200 text-gray-700"} ${j===0?"text-left font-semibold":""}`}>{cell}</td>
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <p className={`font-body text-xs mb-3 ${isDark ? "text-white/60" : "text-gray-500"}`}>
-                Dua tim dengan skor poin tertinggi akan bertanding untuk memperebutkan juara 1. Pilihlah semua jawaban yang benar.
-              </p>
-              <p className={`${hint} ${isDark ? "text-amber-300" : "text-amber-600"}`}>Jawaban benar lebih dari satu.</p>
-              <MCMA qn={53} items={[
-                { text: "Jumlah skor yang diperoleh tim Elang Merah adalah 7.", benar: true },
-                { text: "Jumlah skor yang diperoleh tim Singa Biru adalah 6.", benar: false },
-                { text: "Jumlah skor tim Merpati Hijau dan Kancil Emas adalah sama, yaitu 1.", benar: false },
-                { text: "Tim Elang Merah dan tim Singa Biru akan bertanding memperebutkan juara 1.", benar: true },
-              ]} />
-              <div className="mt-3 space-y-2">
-                <PBJawaban>Pernyataan (1) dan (4) benar</PBJawaban>
-                <PBKonsep>
-                  <p>Skor total = (Menang × 3) + (Kalah × 0) + (Seri × 1)</p>
-                  <p>Dua tim dengan total skor tertinggi maju ke final memperebutkan juara 1.</p>
-                </PBKonsep>
-                <PBSteps>
-                  <S n={1}><p>Elang Merah: <InlineMath math="(2\times3)+(0\times0)+(1\times1)=6+0+1=7" /> → <span className={`font-bold ${isDark?"text-green-300":"text-green-700"}`}>BENAR ✓</span></p></S>
-                  <S n={2}><p>Singa Biru: <InlineMath math="(1\times3)+(0\times0)+(2\times1)=3+0+2=5" /> → bukan 6 → <span className={`font-bold ${isDark?"text-red-300":"text-red-600"}`}>SALAH ✗</span></p></S>
-                  <S n={3}><p>Merpati Hijau: <InlineMath math="(0\times3)+(1\times0)+(2\times1)=2" />, Kancil Emas: <InlineMath math="(0\times3)+(2\times0)+(1\times1)=1" /> → tidak sama → <span className={`font-bold ${isDark?"text-red-300":"text-red-600"}`}>SALAH ✗</span></p></S>
-                  <S n={4}><p>Skor tertinggi: Elang Merah (7) dan Singa Biru (5) → maju ke final → <span className={`font-bold ${isDark?"text-green-300":"text-green-700"}`}>BENAR ✓</span></p></S>
-                </PBSteps>
-              </div>
-            </TelaahSoal>
-
-            {/* ══ TELAAH 4 — PGS ══ */}
-            <TelaahSoal num={4} tipe="PGS">
-              <p className={qText}>
-                Diketahui <InlineMath math="-2 \times (5 + a) - 18 : 3 = 4" />. Nilai <InlineMath math="a" /> adalah ....
-              </p>
-              <MCQ qn={54} correct={0} options={[
-                "A. −10", "B. −7", "C. −3", "D. 2"
-              ]} />
-              <div className="mt-3 space-y-2">
-                <PBJawaban>A. −10</PBJawaban>
-                <PBKonsep>
-                  <p>Selesaikan urutan operasi: dahulukan tanda kurung, lalu bagi, kemudian kerjakan persamaan.</p>
-                  <p>Isolasi variabel <InlineMath math="a" /> langkah demi langkah.</p>
-                  <p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>💡 Trik: hitung dulu bagian yang tidak mengandung variabel, baru isolasi variabel-nya.</p>
-                </PBKonsep>
-                <PBSteps>
-                  <S n={1}><p>Hitung bagian pembagian terlebih dahulu: <InlineMath math="18 : 3 = 6" /></p></S>
-                  <S n={2}><p>Persamaan menjadi: <InlineMath math="-2 \times (5+a) - 6 = 4" /></p></S>
-                  <S n={3}><p>Pindahkan: <InlineMath math="-2 \times (5+a) = 4 + 6 = 10" /></p></S>
-                  <S n={4}><p>Bagi kedua ruas: <InlineMath math="5 + a = 10 \div (-2) = -5" /></p></S>
-                  <S n={5}><div><BlockMath math="a = -5 - 5 = -10" /></div></S>
-                </PBSteps>
-              </div>
-            </TelaahSoal>
-
-            {/* ══ TELAAH 5 — BS ══ */}
-            <TelaahSoal num={5} tipe="BS">
+            {/* ══ TELAAH 2 — BS ══ */}
+            <TelaahSoal num={2} tipe="BS">
               <p className={qText}>
                 Sebuah termometer menunjukkan suhu ruangan sebesar <span className={`font-bold ${isDark?"text-amber-300":"text-amber-600"}`}>31°C</span> pada pukul 15.00.
                 Perubahan waktu akan memengaruhi besar suhu ruangan.
@@ -951,8 +843,8 @@ const BilanganBulatPage = () => {
               </div>
             </TelaahSoal>
 
-            {/* ══ TELAAH 6 — PGS ══ */}
-            <TelaahSoal num={6} tipe="PGS">
+            {/* ══ TELAAH 4 — PGS ══ */}
+            <TelaahSoal num={3} tipe="PGS">
               <p className={qText}>
                 Faktorisasi prima dari 1.350 adalah ....
               </p>
@@ -979,8 +871,8 @@ const BilanganBulatPage = () => {
               </div>
             </TelaahSoal>
 
-            {/* ══ TELAAH 7 — PGS ══ */}
-            <TelaahSoal num={7} tipe="PGS">
+            {/* ══ TELAAH 3 — PGS ══ */}
+            <TelaahSoal num={4} tipe="PGS">
               <p className={qText}>
                 Pak Budi akan membeli 3 lusin botol minuman untuk hadiah kepada para peserta. Ia menghubungi toko untuk menanyakan harganya.
                 Harga sebuah botol minuman adalah Rp4.900. Tanpa menggunakan kalkulator, Pak Budi ingin menyiapkan uang agar tidak kurang.
@@ -1006,7 +898,7 @@ const BilanganBulatPage = () => {
               </div>
             </TelaahSoal>
 
-            <TelaahSoal num={8} tipe="MCMA">
+            <TelaahSoal num={5} tipe="MCMA">
               <p className={qText}>Diberikan <InlineMath math="14^2-4^2" />, <InlineMath math="10^2+44" />, dan <InlineMath math="12\times9" />. Faktor persekutuan ketiganya adalah ....</p>
               <MCMA qn={59} items={[
                 { text: <InlineMath math="2\times3" />, benar: true }, { text: <InlineMath math="2^2\times3" />, benar: true },
@@ -1018,7 +910,7 @@ const BilanganBulatPage = () => {
                 <PBSteps><S n={1}><p><InlineMath math="14^2-4^2=(14-4)(14+4)=10×18=180" />.</p></S><S n={2}><p><InlineMath math="10^2+44=100+44=144" /> dan <InlineMath math="12×9=108" />.</p></S><S n={3}><p><InlineMath math="FPB(180,144,108)=36=2^2×3^2" />.</p></S><S n={4}><p>Bilangan 3, 6, dan 12 membagi 36; sedangkan 8 tidak membagi 36. Jadi pilihan (1), (2), dan (3) benar.</p></S></PBSteps>
               </div>
             </TelaahSoal>
-            <TelaahSoal num={9} tipe="MCMA">
+            <TelaahSoal num={6} tipe="MCMA">
               <p className={qText}>Harga Pertamax Rp13.850 per liter. Pak Anton membeli <InlineMath math="18{,}2" /> liter. Estimasi yang tepat adalah ....</p>
               <MCMA qn={62} items={[
                 { text: "Total biaya kurang dari Rp270.000,00", benar: true }, { text: "Total biaya lebih dari Rp230.000,00", benar: true },
