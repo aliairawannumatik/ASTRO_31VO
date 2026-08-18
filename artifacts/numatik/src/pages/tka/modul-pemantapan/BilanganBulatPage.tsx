@@ -173,7 +173,6 @@ const BilanganBulatPage = () => {
 
   // ── telaah soal wrapper (display num separate from internal qn offset) ─
   const TelaahSoal = ({ num, tipe, children }: { num: number; tipe: "PGS" | "MCMA" | "BS"; children: React.ReactNode }) => {
-    if ([1, 4, 5].includes(num)) return null;
     const tipeColor =
       tipe === "PGS"  ? (isDark ? "bg-sky-500/20 text-sky-300 border-sky-500/40"       : "bg-sky-100 text-sky-700 border-sky-300") :
       tipe === "MCMA" ? (isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/40"  : "bg-amber-100 text-amber-700 border-amber-300") :
@@ -204,7 +203,8 @@ const BilanganBulatPage = () => {
   // ── question wrapper ─────────────────────────────────────────────────
   const Soal = ({ n, tipe, children }: { n: number; tipe: "PGS" | "MCMA" | "BS"; children: React.ReactNode }) => {
     if ([3, 6, 9, 11, 13, 14, 15, 16, 17, 19, 23, 24, 34, 35].includes(n)) return null;
-    const displayNumber = n > 4 ? n - 1 : n;
+    const visibleQuestionNumbers = [1, 2, 5, 7, 8, 10, 12, 18, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33];
+    const displayNumber = visibleQuestionNumbers.indexOf(n) + 1;
     const tipeColor =
       tipe === "PGS"  ? (isDark ? "bg-sky-500/20 text-sky-300 border-sky-500/40"       : "bg-sky-100 text-sky-700 border-sky-300") :
       tipe === "MCMA" ? (isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/40"  : "bg-amber-100 text-amber-700 border-amber-300") :
@@ -1008,12 +1008,16 @@ const BilanganBulatPage = () => {
               </div>
             </TelaahSoal>
 
-            <TelaahSoal num={8} tipe="BS">
-              <p className={qText}>Siti memasukkan air hangat bersuhu <InlineMath math="30°C" /> ke kulkas pukul 14.00. Tentukan Benar atau Salah!</p>
-              <TFTable qn={58} rows={[
-                { key: "a", text: <span>Suhu turun <InlineMath math="3°C" /> tiap 2 jam, sehingga pukul 18.00 menjadi <InlineMath math="24°C" />.</span>, correct: "Benar" },
-                { key: "b", text: <span>Dalam 5 jam suhu berkurang <InlineMath math="8°C" />, sehingga pukul 19.00 menjadi <InlineMath math="22°C" />.</span>, correct: "Benar" },
-                { key: "c", text: <span>Suhu turun <InlineMath math="2°C" /> tiap jam sampai pukul 20.00, sehingga suhunya <InlineMath math="16°C" />.</span>, correct: "Benar" },
+            <TelaahSoal num={8} tipe="MCMA">
+              <p className={qText}>Studi Kasus Alur Pelayanan Samsat</p>
+              <p className={qText}>Pada layanan Samsat, Eko mulai melakukan proses cek fisik tepat pada pukul 10.00 dan selesai pada menit ke-15 (pukul 10.15). Rina dan Gilang tiba di tempat dan mengantre di urutan berikutnya secara berurutan seperti pada gambar berikut.</p>
+              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_t240pht240pht240-Ou6kHKZ6k4MuYgOyQso54uE3ThnsI4.jpg" alt="Ilustrasi alur pelayanan Samsat dari cek fisik hingga pengambilan plat nomor" className="w-full rounded-xl border border-sky-200 my-3" />
+              <p className={qText}>Berdasarkan ilustrasi alur pelayanan dan ketentuan durasi di atas, tentukan pernyataan yang PASTI BENAR! (Pilih lebih dari satu jawaban)</p>
+              <MCMA qn={58} items={[
+                { text: "Eko menyelesaikan seluruh rangkaian proses layanan hingga mengambil plat nomor pada pukul 10.35.", benar: true },
+                { text: "Rina baru dapat memulai pemrosesan Tahap 2 (Pembayaran) pada pukul 10.25, tepat ketika Eko selesai melakukan pembayaran.", benar: true },
+                { text: "Gilang dapat menyelesaikan pencetakan STNK sebelum Eko mengambil plat nomor.", benar: false },
+                { text: "Gilang baru bisa memulai cek fisik pada pukul 10.15.", benar: true },
               ]} />
             </TelaahSoal>
             <TelaahSoal num={9} tipe="MCMA">
