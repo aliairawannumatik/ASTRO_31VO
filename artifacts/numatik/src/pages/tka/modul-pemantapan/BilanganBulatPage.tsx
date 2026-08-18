@@ -202,9 +202,7 @@ const BilanganBulatPage = () => {
 
   // ── question wrapper ─────────────────────────────────────────────────
   const Soal = ({ n, tipe, children }: { n: number; tipe: "PGS" | "MCMA" | "BS"; children: React.ReactNode }) => {
-    if ([3, 6, 9, 11, 13, 14, 15, 16, 17, 19, 23, 24, 34, 35].includes(n)) return null;
-    const visibleQuestionNumbers = [1, 2, 5, 7, 8, 10, 12, 18, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33];
-    const displayNumber = visibleQuestionNumbers.indexOf(n) + 1;
+  const displayNumber = n;
     const tipeColor =
       tipe === "PGS"  ? (isDark ? "bg-sky-500/20 text-sky-300 border-sky-500/40"       : "bg-sky-100 text-sky-700 border-sky-300") :
       tipe === "MCMA" ? (isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/40"  : "bg-amber-100 text-amber-700 border-amber-300") :
@@ -1009,19 +1007,6 @@ const BilanganBulatPage = () => {
             </TelaahSoal>
 
             <TelaahSoal num={8} tipe="MCMA">
-              <p className={qText}>Studi Kasus Alur Pelayanan Samsat</p>
-              <p className={qText}>Pada layanan Samsat, Eko mulai melakukan proses cek fisik tepat pada pukul 10.00 dan selesai pada menit ke-15 (pukul 10.15). Rina dan Gilang tiba di tempat dan mengantre di urutan berikutnya secara berurutan seperti pada gambar berikut.</p>
-              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_t240pht240pht240-Ou6kHKZ6k4MuYgOyQso54uE3ThnsI4.jpg" alt="Ilustrasi alur pelayanan Samsat dari cek fisik hingga pengambilan plat nomor" className="w-full rounded-xl border border-sky-200 my-3" />
-              <p className={qText}>Berdasarkan ilustrasi alur pelayanan dan ketentuan durasi di atas, tentukan pernyataan yang PASTI BENAR! (Pilih lebih dari satu jawaban)</p>
-              <MCMA qn={58} items={[
-                { text: "Eko menyelesaikan seluruh rangkaian proses layanan hingga mengambil plat nomor pada pukul 10.35.", benar: true },
-                { text: "Rina baru dapat memulai pemrosesan Tahap 2 (Pembayaran) pada pukul 10.25, tepat ketika Eko selesai melakukan pembayaran.", benar: true },
-                { text: "Gilang dapat menyelesaikan pencetakan STNK sebelum Eko mengambil plat nomor.", benar: false },
-                { text: "Gilang baru bisa memulai cek fisik pada pukul 10.15.", benar: true },
-              ]} />
-              <div className="mt-3 space-y-2"><PBJawaban>Pernyataan (1), (2), dan (4) benar</PBJawaban><PBKonsep><p>Setiap tahap berlangsung berurutan selama 15, 10, 5, dan 5 menit. Peserta berikutnya baru dapat memakai tahap yang sama setelah peserta sebelumnya selesai.</p><p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>Trik: tambahkan durasi pada pukul mulai dan perhatikan batas antrean tiap tahap.</p></PBKonsep><PBSteps><S n={1}><p>Eko: cek fisik 10.00–10.15, pembayaran 10.15–10.25, cetak STNK 10.25–10.30, ambil plat 10.30–10.35. Jadi (1) benar.</p></S><S n={2}><p>Rina mulai pembayaran pada 10.25 setelah Eko selesai pembayaran. Jadi (2) benar.</p></S><S n={3}><p>Gilang baru mulai cek fisik pada 10.15. Jadi (4) benar, sedangkan (3) tidak pasti benar karena Gilang masih menunggu tahap sebelumnya.</p></S></PBSteps></div>
-            </TelaahSoal>
-            <TelaahSoal num={9} tipe="MCMA">
               <p className={qText}>Diberikan <InlineMath math="14^2-4^2" />, <InlineMath math="10^2+44" />, dan <InlineMath math="12\times9" />. Faktor persekutuan ketiganya adalah ....</p>
               <MCMA qn={59} items={[
                 { text: <InlineMath math="2\times3" />, benar: true }, { text: <InlineMath math="2^2\times3" />, benar: true },
@@ -1033,26 +1018,7 @@ const BilanganBulatPage = () => {
                 <PBSteps><S n={1}><p><InlineMath math="14^2-4^2=(14-4)(14+4)=10×18=180" />.</p></S><S n={2}><p><InlineMath math="10^2+44=100+44=144" /> dan <InlineMath math="12×9=108" />.</p></S><S n={3}><p><InlineMath math="FPB(180,144,108)=36=2^2×3^2" />.</p></S><S n={4}><p>Bilangan 3, 6, dan 12 membagi 36; sedangkan 8 tidak membagi 36. Jadi pilihan (1), (2), dan (3) benar.</p></S></PBSteps>
               </div>
             </TelaahSoal>
-            <TelaahSoal num={10} tipe="PGS">
-              <p className={qText}>Andi membeli bola basket Rp150.000, 2 celana training Rp90.000 per buah, dan 2 kaos Rp75.000 per buah. Setiap pembelian 5 barang gratis 1 barang termurah. Total setelah promo adalah ....</p>
-              <MCQ qn={60} correct={0} options={["A. Rp405.000", "B. Rp425.000", "C. Rp480.000", "D. Rp505.000"]} />
-              <div className="mt-3 space-y-2">
-                <PBJawaban>A. Rp405.000</PBJawaban>
-                <PBKonsep><p>Hitung total harga, kemudian kurangi harga satu barang termurah karena promo gratis 1 barang setelah membeli 5 barang.</p><p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>Trik: hitung jumlah barang dan urutkan harga dari yang termurah.</p></PBKonsep>
-                <PBSteps><S n={1}><p>Jumlah barang = <InlineMath math="1+2+2=5" />.</p></S><S n={2}><p>Total sebelum promo = <InlineMath math="150.000+2(90.000)+2(75.000)=480.000" />.</p></S><S n={3}><p>Barang termurah berharga Rp75.000, sehingga total setelah promo = <InlineMath math="480.000-75.000=405.000" />.</p></S></PBSteps>
-              </div>
-            </TelaahSoal>
-            <TelaahSoal num={11} tipe="MCMA">
-              <p className={qText}>Pada layanan Samsat, Eko sudah selesai cek fisik pada menit ke-5. Rina dan Gilang mengantre setelahnya. Pernyataan yang pasti benar adalah ....</p>
-              <MCMA qn={61} items={[
-                { text: "Eko selesai pembayaran sebelum Rina memulai cek fisik.", benar: true },
-                { text: "Rina memulai pembayaran sebelum Gilang memulai pendaftaran.", benar: true },
-                { text: "Gilang mencetak STNK setelah Eko mengambil plat.", benar: true },
-                { text: "Total waktu kurang dari 60 menit.", benar: false },
-              ]} />
-              <div className="mt-3 space-y-2"><PBJawaban>Pernyataan (1), (2), dan (3) benar</PBJawaban><PBKonsep><p>Gunakan urutan antrean dan durasi setiap tahap. Peserta yang datang lebih dahulu menyelesaikan tahap berikutnya lebih dahulu.</p><p className={`text-[10px] italic ${isDark ? "text-violet-300/70" : "text-violet-500"}`}>Trik: buat garis waktu untuk setiap peserta.</p></PBKonsep><PBSteps><S n={1}><p>Eko selesai cek fisik pada menit ke-5, lalu melanjutkan pembayaran sebelum Rina.</p></S><S n={2}><p>Rina berada di depan Gilang, sehingga Rina memulai pembayaran sebelum Gilang memulai pendaftaran.</p></S><S n={3}><p>Gilang berada paling belakang, sehingga pencetakan STNK-nya terjadi setelah Eko mengambil plat.</p></S><S n={4}><p>Urutan waktu menunjukkan durasi keseluruhan tidak kurang dari 60 menit. Jadi (1), (2), dan (3) benar.</p></S></PBSteps></div>
-            </TelaahSoal>
-            <TelaahSoal num={12} tipe="MCMA">
+            <TelaahSoal num={9} tipe="MCMA">
               <p className={qText}>Harga Pertamax Rp13.850 per liter. Pak Anton membeli <InlineMath math="18{,}2" /> liter. Estimasi yang tepat adalah ....</p>
               <MCMA qn={62} items={[
                 { text: "Total biaya kurang dari Rp270.000,00", benar: true }, { text: "Total biaya lebih dari Rp230.000,00", benar: true },
